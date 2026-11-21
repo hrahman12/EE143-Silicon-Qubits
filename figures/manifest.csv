@@ -1,0 +1,40 @@
+id,slide,file,source_key,figure,url,licence,credit_line
+F1,1,F1_stock2024_fig1_2x2.png,Stock2024,Fig. 1a-c,https://doi.org/10.1002/adma.202312282 (PMC11475292),CC BY 4.0,"Reproduced from Stock et al., Adv. Mater. 36, 2312282 (2024), CC BY 4.0"
+F1,27,F1_stock2024_fig1_4x4.png,Stock2024,Fig. 1g-i,https://doi.org/10.1002/adma.202312282 (PMC11475292),CC BY 4.0,"Reproduced from Stock et al., Adv. Mater. 36, 2312282 (2024) Fig. 1g-i, CC BY 4.0"
+F2,10,F2_stock2024_fig3_ae.png,Stock2024,"Fig. 3a,e",https://doi.org/10.1002/adma.202312282 (PMC11475292),CC BY 4.0,"Reproduced from Stock et al., Adv. Mater. 36, 2312282 (2024) Fig. 3, CC BY 4.0"
+F2,17,F2_stock2024_fig3_stats.png,Stock2024,Fig. 3l,https://doi.org/10.1002/adma.202312282 (PMC11475292),CC BY 4.0,"Stock et al., Adv. Mater. 36, 2312282 (2024) Fig. 3l, CC BY 4.0"
+F3,17,F3_schofield2025_s41_fig1.png,Schofield2025,§4.1 Fig. 1,https://doi.org/10.1088/2399-1984/ada901 (arXiv:2501.04535v2),CC BY 4.0,"Reproduced from Schofield et al., Nano Futures 9, 012001 (2025) §4.1 Fig. 1, CC BY 4.0"
+F4,9,F4_schofield2025_s22_line.jpg,Schofield2025,"§2.2 Fig. 1a (Lyding, unpublished)",https://doi.org/10.1088/2399-1984/ada901 (arXiv:2501.04535v2),CC BY 4.0,"Reproduced from Schofield et al., Nano Futures 9, 012001 (2025) §2.2 Fig. 1 (Lyding, unpublished), CC BY 4.0"
+F5,4,F5_schofield2025_s32_fig1.png,Schofield2025,"§3.2 Fig. 1 (panels after its refs [4],[5])",https://doi.org/10.1088/2399-1984/ada901 (arXiv:2501.04535v2),CC BY 4.0,"Reproduced from Schofield et al., Nano Futures 9, 012001 (2025) §3.2 Fig. 1, CC BY 4.0"
+F6,22,F6_schofield2025_s53_fig1_sem.jpg,Schofield2025 (adapted from Tseng2023),§5.3 Fig. 1,https://doi.org/10.1088/2399-1984/ada901 (arXiv:2501.04535v2),CC BY 4.0,"Schofield2025 §5.3 Fig. 1 (adapted from Tseng2023), CC BY 4.0"
+F7,5,F7_schofield2025_s24_fig2.jpg,Schofield2025,§2.4 Fig. 2,https://doi.org/10.1088/2399-1984/ada901 (arXiv:2501.04535v2),CC BY 4.0,"Reproduced from Schofield et al., Nano Futures 9, 012001 (2025) §2.4 Fig. 2, CC BY 4.0"
+F8,22,F8_constantinou2024_fig5.png,Constantinou2024,Fig. 5,https://doi.org/10.1038/s41467-024-44790-6 (PMC10808421),CC BY 4.0,"Reproduced from Constantinou et al., Nat. Commun. 15, 694 (2024) Fig. 5, CC BY 4.0"
+F9,14,F9_constantinou2023_fig2.jpg,Constantinou2023,Fig. 2,https://doi.org/10.1002/advs.202302101 (PMC10520640),CC BY 4.0,"Reproduced from Constantinou et al., Adv. Sci. 10, 2302101 (2023) Fig. 2, CC BY 4.0"
+F10,13,F10_danna2023_fig2_maps.jpg,DAnna2023,Fig. 2a-c,https://doi.org/10.1002/aelm.202201212 (UCL Discovery 10167842),CC BY 4.0,"Reproduced from D'Anna et al., Adv. Electron. Mater. 9, 2201212 (2023) Fig. 2, CC BY 4.0"
+F11,11,F11_stock2020_fig3_ad.png,Stock2020,Fig. 3a-d,https://doi.org/10.1021/acsnano.9b08943 (PMC7146850),CC BY (ACS AuthorChoice CC-BY; confirmed in article XML),"Reproduced from Stock et al., ACS Nano 14, 3316 (2020) Fig. 3, CC BY 4.0"
+F11,12,F11_stock2020_fig4_sims.png,Stock2020,Fig. 4e,https://doi.org/10.1021/acsnano.9b08943 (PMC7146850),CC BY (ACS AuthorChoice CC-BY),"Stock et al., ACS Nano 14, 3316 (2020) Fig. 4e, CC BY 4.0"
+F11,14,F11_stock2020_fig4_transport.png,Stock2020,"Fig. 4f,g",https://doi.org/10.1021/acsnano.9b08943 (PMC7146850),CC BY (ACS AuthorChoice CC-BY),"Reproduced from Stock et al., ACS Nano 14, 3316 (2020) Fig. 4f,g, CC BY 4.0"
+F12,18,F12_hofmann2023_fig1a.jpg,Hofmann2023,Fig. 1a,https://doi.org/10.1002/anie.202213982 (PMC10108107),CC BY 4.0,"Hofmann et al., Angew. Chem. Int. Ed. 62, e202213982 (2023) Fig. 1a, CC BY 4.0"
+F12b,18,F12b_lundgren2023_fig1.jpg,Lundgren2023,Fig. 1,https://doi.org/10.1021/acs.jpcc.3c03916 (PMC10461293),CC BY 4.0,"Lundgren et al., J. Phys. Chem. C 127, 16433 (2023), CC BY 4.0"
+F13,19,F13_thorvaldson2025_fig4b.png,Thorvaldson2025,Fig. 4b,https://doi.org/10.1038/s41565-024-01853-5 (PMC12014505),CC BY 4.0,"Reproduced from Thorvaldson et al., Nat. Nanotechnol. 20, 472 (2025) Fig. 4b, CC BY 4.0"
+F14,19,F14_edlbauer2025_fig1ab.png,Edlbauer2025,"Fig. 1a,b",https://doi.org/10.1038/s41586-025-09827-w (PMC12711558),CC BY 4.0,"Reproduced from Edlbauer et al., Nature 648, 569 (2025) Fig. 1a,b, CC BY 4.0"
+F15,20,F15_wang2022_fig1.jpg,Wang2022,Fig. 1,https://doi.org/10.1038/s41467-022-34220-w (PMC9652469),CC BY 4.0,"Reproduced from Wang et al., Nat. Commun. 13, 6824 (2022) Fig. 1, CC BY 4.0"
+O1,2,O1_kane_crosssection.png,Kane1998; Schofield2025 §3.2,,, original work (this project),original (Schematic after Kane1998)
+O2,8,O2_surface_H.png,geometry only,,, original work (this project),original 3D render
+O2,9,O2_surface_window.png,"Stock2024 (window sizes, litho params)",,, original work (this project),original 3D render
+O2,10,O2_surface_dose.png,Stock2020 (dissociation),,, original work (this project),original 3D render
+O2,(spare),O2_surface_incorp.png,Stock2020; Stock2024,,, original work (this project),"original 3D render, not used on a slide"
+O3,7,icon_*.png,process flow,,, original work (this project),original icons (+ native shapes)
+O4,8-13,xsec_prep/litho/dose/incorp/cap/contact.png,Stock2020; Stock2024; DAnna2023,,, original work (this project),original cross-sections with fixed legend
+O5,12,O5_overgrowth_program.png,Oberbeck2002; Stock2020,,, original work (this project),original schematic
+O6,16,native chart,Stock2024 (0.7^n); our model (0.97^n),,, original work (this project),native pptx line chart
+O7,5,native table,"Schofield2025 §1, §2.4; Stock2024",,, original work (this project),native table (gate-defined dots column omitted: no sourced cells)
+O8,21,native chart,"Schofield2025 §2.2, §5.4",,, original work (this project),native pptx log bar chart
+O9,"3, 25",native shapes,paper tables,,, original work (this project),native timeline
+O-levels,4,O_levels_4state.png,"Schofield2025 §1, §3.2",,, original work (this project),original schematic
+O-poisson,5,native chart,our calc. of Schofield2025's 36%,,, original work (this project),native pptx column chart
+O-mc,16,O_montecarlo_4x4.png,our model (Stock2024 p values),,, original work (this project),"original simulation, labelled not data"
+O-landmark,15,O_landmark2003.png; O_landmark2012.png,Schofield2003; Fuechsle2012,,, original work (this project),original (Schematic after)
+O-proto,23,O_prototype3d.png,our design (Stock2024 layout),,, original work (this project),original concept render
+O-yield3d,23,O_yield_surface3d.png,our model,,, original work (this project),original 3D surface
+O-thermal,24,native chart,Stock2020; Stock2024; Oberbeck2002,,, original work (this project),native pptx bar chart

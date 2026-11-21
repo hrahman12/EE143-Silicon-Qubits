@@ -1,0 +1,197 @@
+
+JOURNAL INFORMATION
+==============================
+NLM Title Abbreviation: Angew Chem Int Ed Engl
+Journal ID: Angew Chem Int Ed Engl
+NLM Journal ID: 0370543
+Journal ID: ANIE
+
+Angewandte Chemie (International Ed. in English)
+
+ISSN: 1433-7851
+EISSN: 1521-3773
+
+ARTICLE INFORMATION
+==============================
+PMCID: PMC10108107
+PMID: 36484458
+DOI: 10.1002/anie.202213982
+Article ID: ANIE202213982
+Article version: 1
+Subjects: Research Article, Research Articles, Atomic‐scale Qubits
+
+Room Temperature Incorporation of Arsenic Atoms into the Germanium (001) Surface**
+
+Hofmann Emily V. S. http://orcid.org/0000-0002-1826-5280 1 2 3
+Stock Taylor J. Z. 1 2
+Warschkow Oliver 1
+Conybeare Rebecca 1 4
+Curson Neil J. http://orcid.org/0000-0002-5661-0559 1 2
+Schofield Steven R. http://orcid.org/0000-0002-0727-3015 1 4 s.schofield@ucl.ac.uk
+
+1 London Centre for Nanotechnology University College London London WC1H 0AH UK
+2 Department of Electronic and Electrical Engineering University College London London WC1E 6BT UK
+3 IHP Leibniz-Institut für Innovative Mikroelektronik Im Technologiepark 25 15236 Frankfurt (Oder) Germany
+4 Department of Physics and Astronomy University College London London WC1E 6BT UK
+Electronic publication date: 2023 Jan 10
+Print publication date: 2023 Feb 6
+Volume: 62
+Issue: 7
+Electronic Location ID: e202213982
+Received 2022 Sep 21
+Copyright: © 2022 The Authors. Angewandte Chemie International Edition published by Wiley-VCH GmbH
+License: This is an open access article under the terms of the http://creativecommons.org/licenses/by/4.0/ License, which permits use, distribution and reproduction in any medium, provided the original work is properly cited.
+License URL: https://creativecommons.org/licenses/by/4.0/
+
+Keywords: Atomic-Manipulation, Donor, Precursor, Semiconductor, Stm
+
+Funding: Engineering and Physical Sciences Research Council 10.13039/501100000266 EP/M009564/1
+Figure count: 5
+Table count: 1
+Reference count: 38
+Page count: 7
+
+source-schema-version-number: 2.0
+cover-date: February 6, 2023
+details-of-publishers-convertor: Converter:WILEY_ML3GV2_TO_JATSPMC version:6.2.7 mode:remove_FC converted:17.04.2023
+
+E. V. S. Hofmann , T. J. Z. Stock , O. Warschkow , R. Conybeare , N. J. Curson , S. R. Schofield , Angew. Chem. Int. Ed. 2023, 62, e202213982; Angew. Chem. 2023, 135, e202213982.10.1002/anie.202213982 PMC10108107 36484458
+
+** A previous version of this manuscript has been deposited on a preprint server (https://doi.org/10.48550/arXiv.2203.08769).
+
+==============================
+Abstract
+
+Germanium has emerged as an exceptionally promising material for spintronics and quantum information applications, with significant fundamental advantages over silicon. However, efforts to create atomic‐scale devices using donor atoms as qubits have largely focused on phosphorus in silicon. Positioning phosphorus in silicon with atomic‐scale precision requires a thermal incorporation anneal, but the low success rate for this step has been shown to be a fundamental limitation prohibiting the scale‐up to large‐scale devices. Here, we present a comprehensive study of arsine (AsH3) on the germanium (001) surface. We show that, unlike any previously studied dopant precursor on silicon or germanium, arsenic atoms fully incorporate into substitutional surface lattice sites at room temperature. Our results pave the way for the next generation of atomic‐scale donor devices combining the superior electronic properties of germanium with the enhanced properties of arsine/germanium chemistry that promises scale‐up to large numbers of deterministically placed qubits.
+
+We report the discovery that arsenic atoms incorporate substitutionally into the (001) surface of germanium at room temperature when the surface is exposed to arsine (AsH3). We observe several types of incorporated arsenic structures that differ only in the locations of the three adsorbed hydrogen atoms. Arsenic incorporation causes germanium ad‐atoms to be released onto the surface. These results provide a path toward atomic‐scale dopant devices in germanium with clear advantages over silicon.
+
+Introduction
+
+Germanium is experiencing a strong resurgence of interest for the fabrication of (opto)‐electronic, spintronic, and quantum technological devices.[ 1 , 2 ] Compared to silicon, germanium has a higher electron mobility, [3] stronger spin‐orbit coupling, [4] larger Bohr radius, [4] larger Stark effect, [5] and is relatively insensitive to exchange coupling oscillations.[ 6 , 7 ] In addition, germanium can be made free of nuclear spin by isotopic enrichment, [8] donors in germanium have long coherence times,[ 9 , 10 ] and germanium is already used in high‐performance electronics.
+
+Electron spins localized on donor atoms in semiconductors form excellent two‐level quantum systems (qubits). [11] Assembling individual donors to form devices requires the positioning of potentially thousands of donors with atomic‐scale precision. [12] This necessitates a detailed understanding of the chemical processes involved, and the ability to produce substitutional donor atoms at atomically precise locations with extremely high fidelity. The most successful approach to date is phosphorus in silicon using phosphine (PH3) as the donor precursor, and an atomically‐patterned hydrogen resist.[ 13 , 14 , 15 ] Among the many devices that have been fabricated using this technique are the celebrated single‐atom transistor, [16] and a few donor device where two‐qubit operations were demonstrated via exchange coupling. [17]
+
+A critical step in the scale‐up to large numbers of donor qubits is incorporating the donor atoms into the surface layer. [13] For all of the systems investigated to date—phosphine on silicon[ 13 , 18 ] and germanium, [19] and arsine (AsH3) on silicon [20] —a thermal anneal is required to achieve this surface incorporation. However, this anneal can also provide an opportunity for the donor species to desorb. The probability of successfully incorporating phosphorus into silicon using a hydrogen resist was studied by two independent groups and determined to be P incorp.≈70 %.[ 21 , 22 ] Since the probability for successfully fabricating N qubits scales as (P incorp.) N , this means that even for a modest 50 qubit device, the success rate using phosphorus in silicon can be anticipated to be as low as 1 in 108.
+
+Here, we show that at room temperature, arsenic atoms fully incorporate into the germanium surface layer from adsorbed arsine molecules. Remarkably, and unlike all previously studied systems, no thermal anneal is required for the incorporation of arsenic into germanium. Thus, the donor incorporation probability is unity, suggesting that arsine on germanium offers a path to the creation of large‐scale quantum devices consisting of many thousands of donors.
+
+Results and Discussion
+
+Figure 1a shows an overview STM image of a Ge(001) surface dosed with arsine at room temperature. Rows of germanium dimers run horizontally across the image and form either a buckled c(4×2) configuration or a more symmetric appearing 2×1 configuration. [23] Features related to arsine dosing are highlighted by boxes. These features appear different from defects observed on the clean surface and from common surface contaminants, and are only ever seen after we expose the Ge(001) surface to arsine. The brightest features that we observe present a single protrusion on top of a dimer row and in the position mid‐way between two neighbouring dimers (Figure 1b). This feature does not conform to any of the anticipated arsine adsorbate [AsH x +(3− x)H] configurations[ 14 , 15 , 19 , 20 ] (see Supporting Information), but is an excellent match to a germanium ad‐dimer in a “B” site configuration[ 24 , 25 ] (Figure 1c).
+
+Figure 1 a) Overview STM image of arsine (AsH3) on Ge(001) at room temperature. b), c) Germanium B‐site ad‐dimer image and schematic. d), e) STM image and schematic of an m1 feature. f) Images of t1 feature that is three dimers wide and spans two dimer rows. g) STM image of a h1 feature. h)–m) five images of the same region of the surface where one feature undergoes transitions between h1, h2, h3, g1, and t1 features, and n)–s) the corresponding structural schematics. Calculated DFT energies are quoted for each structure. Orange circles on panels (n)–(s) provide a guide to the eye to highlight the location of the brightly‐imaging portions of the STM images. STM image parameters: all images −1.5 V, 200 pA. Image (a) z‐range 190 pm, images (b)–(m) z‐range 140 pm; the colour scheme is shown top right. (a) 30×22 nm2, (b), (f), (g) 5.7×3.8 nm2, (d) 6.9×3.8 nm2, (h)–(m) 8.0×6.1 nm2.
+
+Moreover, we occasionally observe these features shifting position on the surface (see white and black arrows on Figures 1j–m), which is another known characteristic of germanium ad‐dimers at room temperature.[ 24 , 25 , 26 ] The existence of germanium ad‐dimers implies that arsenic atoms have incorporated into the surface from the adsorbed arsine molecules, displacing germanium atoms onto the surface in the process.
+
+We next turn our attention to the most abundant feature after arsine dosing: this feature appears as two adjacent dark dimers, and two examples are highlighted in Figure 1d. Close inspection reveals that this feature is not perfectly symmetric, but instead it appears slightly less dark in one corner. We assign this feature to a fully dissociated arsine molecule, resulting in a surface‐incorporated arsenic atom and three adsorbed hydrogen atoms forming a hydrogen‐terminated arsenic‐germanium heterodimer (As−Ge−H) and a germanium monohydride dimer (H−Ge−Ge−H). This structure is illustrated in Figure 1e and we label it m1. This feature images less brightly than the surrounding clean germanium dimers due to the absence of the germanium dimer π‐bonds caused by the adsorption of the three hydrogen atoms, and the formation of a lone pair on the arsenic atom. The slightly less‐dark site in one corner of the feature can be attributed to the arsenic atom.
+
+In Figures 1f, g we highlight two other arsine features that we label t1 and h1. Both features are three dimers wide. The t1 feature exhibits a complicated appearance and spans two dimer rows (Figure 1f), while the h1 feature exhibits a single dark dimer adjacent to two protrusions positioned asymmetrically about the dimer row (Figure 1g). We observe transitions between these, and several other three‐dimer wide features, as shown in Figures 1h–m. By analogy with the m1 feature, we readily assign the h1 feature to a hydrogen‐terminated arsenic‐germanium heterodimer (As−Ge−H) and two adsorbed hydrogen atoms; however, in this case, the two hydrogen atoms are adsorbed to the ends of two neighbouring dimers to form two germanium hemihydride dimers (Ge−Ge−H), rather than to a single dimer as was the case for m1. The two protrusions observed in the STM image are produced by the two clean germanium atoms of the hemihydride dimers, as highlighted by the orange circles in structural schematic in Figure 1n.
+
+In the next image, Figure 1i, one of the two asymmetric protrusions has changed from the top of the dimer row to the bottom. We attribute this change to one hydrogen atom moving from one side of the germanium dimer to the other, as illustrated by structure h2 in Figure 1p. Similarly, in Figure 1j we see that the second asymmetric protrusion has now also changed sides, which can be attributed to the second hydrogen moving to the other side of its germanium dimer as shown in structure h3 (Figure 1q).
+
+The subsequent transition, observed in Figure 1k is, at first consideration, rather unexpected. Here the two protrusions of the two clean germanium atoms of the hemihydride dimers of structure h3 merge together to form a single protrusion. We explain this change as being caused by the capture of a single germanium monomer at the clean germanium ends of the two hemihydride dimers in an end‐bridge bonding configuration, as shown schematically in Figure 1r and labelled g1.
+
+Figure 1m shows the final transition in the set, where the feature has now become the two‐dimer row spanning feature t1 already mentioned (Figure 1f). Here, it appears that the protrusion produced by the monomer of the g1 feature observed in Figure 1k has increased in size and intensity, and that our feature has now locally pinned a phason defect (i.e., a defect where two neighbouring dimers become statically buckled in the same direction[ 27 , 28 ]) on the adjacent dimer row. However, we do not expect the spontaneous local pinning of a phason except at very low temperatures[ 28 , 29 ] Thus, we propose a chemical origin for this pinning, specifically the capture of a second germanium monomer to form a dimer‐trough bridging germanium dimer, as shown in Figure 1s. This structure explains both the enlargement of the protrusion at the site of the monomer in structure g1, and the dimer pinning that causes the phason‐like defect. We further note that the appearance of the trough‐bridging dimer of this feature very closely matches that observed in germanium deposition experiments.[ 24 , 25 ]
+
+The transitions h3→g1 and g1→t1 involve the dynamic capture of germanium monomers. These monomers are bound in g1 or t1 features but are occasionally able to overcome the diffusion barriers at room temperature to leave one feature and be captured at another. Two examples of such transitions where we identify both the source and the destination of a transiting germanium monomer are shown in Figure 2. Figure 2a shows an STM image where a t1 and g1 feature are separated by a space of three dimers in the horizontal direction, and a single germanium dimer row in the vertical direction, as illustrated in Figure 2c. Figure 2b shows a subsequent image of the same area of the surface, where we see the t1 feature has become a g1 feature and vice versa, mediated by the exchange of a germanium monomer between them. We observed this exchange several times back and forth in successive STM images, confirming the reversibility of these transitions. Another example of such an exchange is shown in Figures 2d,e. These observations demonstrate that germanium monomers are highly mobile along the direction of the dimer rows at room temperature in agreement with previous reports;[ 24 , 25 , 30 ] and that monomer capture at a g1 site (to convert it to t1) occurs where the g1 feature exists on the neighbouring row with its monomer directed toward the row on which the mobile monomer is diffusing.
+
+Figure 2 Exchange of a germanium monomer between two As−Ge−H heterodimer features (t1 and g1). a) STM image where a t1 feature is seen to the centre‐left of the image and a g1 feature is seen centre‐right, as indicated. b) A subsequent STM image of the same region of the surface shown in panel (a); here we see that the t1 feature has changed to g1, and the g1 feature has changed to t1. c) Schematic diagram showing the arrangement and positioning of the t1 and g1 features as they appear in panel (a). d), e) Two successive STM images where another such monomer exchange was observed between t1 and g1 features. Image parameters: a), b), d), e) −1.5 V, 200 pA, z‐range: 140 pm, a), b) 8×5 nm2, d), e) 21×5 nm2.
+
+We gain further insight into the dynamics of the surface by counting the feature transitions between successive STM images. Table 1 shows a count of transitions observed within a 50×50 nm2 scan over a period of 12 hours. There is a strong symmetry to the table about the diagonal, as expected for reversible transitions. The largest number of transitions, 56 % of the total number of observed transitions (129 out of 231), involve the shifting of hydrogen atoms across the dimer row to cause transitions among h1, h2, and h3 features. The next largest category are the monomer exchange transitions g1↔t1, which account for 35 % of the total. Transitions between h1–h3 and g1 were relatively rare, accounting for 9 % of all transitions; this demonstrates that most monomer transitions are exchanges between dimer t1 and monomer g1 configurations. No transitions were observed between the h1–h3 and t1 structures, which can be understood since the g1 structure is intermediate between h1–h3 and t1. Also notable is the absence of transitions g1↔g1 or t1↔t1: experimentally these would appear as a mirror symmetry transition about the dimer row, but such transitions are extremely unlikely given our structural assignments.
+
+Table 1 Transitions between features in successive STM images over a 12‐hour period. The average time between images was 9 minutes, and the imaging parameters were −1.5 V, 200 pA. We group h1 and h3 into a single feature classification since experimentally it can be very difficult to delineate between them; transitions between h1 and h3 involve the shifting of both hydrogen atoms of the two hemihydride dimers to the opposite side of the dimer row. Similarly, we note that an alternate configuration of structure h2 exists, where the positions of the two hydrogen atoms are reversed to the opposite side of the dimer row, and we denote this configuration h2 ✶ (see Supporting Information Figure S1).
+
+Wiley‐VCH GmbH
+
+We support these compelling experimental observations with DFT calculated formation energies. We calculate each of the experimentally observed structures and find that the formation energies for h1–h3 are all equal at −2.8 eV, and structure g1 is nearly equal at −2.9 eV. The closeness of these energies suggests the possibility of reversible transitions between these structures, exactly of the sort that we have already described above. Structure m1 is slightly more stable at −3.1 eV. In addition, we have calculated the energies for a wide range of AsH x +(3− x)H adsorption configurations; the most stable of these are an AsH+2 H configuration that we label e1 (see Supporting Information Figure S1) and an As+3 H configuration that we label f1; both have formation energies of −2.2 eV. Thus, we see there is a large energy gain (0.6 eV) for the incorporation of arsenic into the top surface layer, and a very large overall energy gain for surface incorporation (≈3 eV) compared to arsine in the gas phase. These large energy gains are the driving force underpinning the surface incorporation of arsenic into Ge(001) at room temperature.
+
+As a further confirmation of our interpretation, we check that the densities of ejected germanium and incorporated arsenic are equal. Feature t1 is one of the most common features that we observe and this accounts for 30±11 % of all arsenic‐germanium heterodimer features (m1, h1–h3, g1, and t1) that we observe. The g1 features occur less frequently, accounting for 9±4% of heterodimer features, while the number of B site germanium ad‐dimers is equivalent to 15±5% of the number of heterodimer features. Thus, noting that each t1 and ad‐dimer feature contains two germanium atoms, we account for 99±35 % of the germanium atoms ejected onto the surface results from the incorporation of arsenic.
+
+The above time resolved STM images examining individual chemical and physical processes and their statistical analysis present compelling evidence for the correctness of the structural interpretations of the features that we presented in Figure 1. Here we present further confirmation of these assignments by also examining changes to the surface at elevated temperatures.
+
+Figure 3a shows an image of a dosed surface after annealing to 140 °C. Almost all the room temperature features have disappeared, except the m1 features. In their place, we find small, isolated patches of epitaxial germanium (Figure 3b), and features that appear as two dark dimers separated by a single clean germanium dimer (Figure 3c). The presence of epitaxial germanium is evidence that the 140 °C anneal provides sufficient energy for dimer diffusion and the formation of small epitaxial islands, consistent with previous reports.[ 31 , 32 ]
+
+Figure 3 a) STM image of arsine dosed Ge(001) after annealing to 140 °C. b) Epitaxial germanium. c) m2 feature. d) Schematic of a h2 feature highlighting the conversion to e) an m1 feature, and f) a m2 feature. g) Plot of the feature count of all h1, h2, h3, g1, and t1 features, m1 features, and m2 features as a function of temperature up to 300 °C. Image parameters: a), b) 29×25 nm2, c) 6×4 nm2, a), b), c) −1.5 V, 200 pA. z‐range: a) 190 pm, b) 280 pm, c) 110 pm.
+
+The absence of all h1–h3 features demonstrates that this temperature is sufficient for isolated hydrogen atoms in hemihydride (Ge−Ge−H) configurations to shift from one dimer to the next. If we consider the h2 structure, illustrated in Figure 3d, we see two possibilities for such shifts indicated by the red and blue arrows, resulting in the conversion to an m1 feature (Figure 3e) or to a new structure, m2, shown schematically in Figure 3f. This structure (m2) has a Ge−As−H heterodimer and a single monohydride dimer, making it chemically similar to the m1 feature; however, in this case there is a single clean germanium dimer that separates the heterodimer and the monohydride dimer. The m2 structure has precisely the characteristics of the new features observed in our STM images after 140 °C annealing (Figure 3c), i.e., two dark dimers separated by a clean germanium dimer.
+
+Our DFT calculated energy for the m2 structure is −3.1 eV, which is the same as the m1 feature. Thus, the m1 and m2 features are both 0.3 eV more stable than any of the h1–h3 features; this means the reverse barrier for conversion of m1 and m2 back to h1–h3 is necessarily 0.3 eV larger than the forward barrier to form m1 and m2, explaining the conversion of the h1–h3 structures into m1 and m2.
+
+In Figure 3g we show a plot of the density of features between room temperature and 300 °C. We have grouped the features h1–h3, g1, and t1 into a single curve and plot m1 and m2 separately. The m1 features are the most common feature on the room temperature surface, accounting for 37±8% of all As−Ge−H features. After the first anneal (140 °C) we see the number of h1–h3, g1, and t1 features has fallen almost to zero, while there has been a rise in m1 features and a dramatic rise in m2 features. Upon annealing to higher temperatures up to 300 °C we see the gradual disappearance of both m1 and m2 from the surface, which can be understood as the process where the hydrogen begins to diffuse away from the m1 and m2 features to form isolated monohydride dimers, leaving hydrogen‐free arsenic‐germanium heterodimers (As−Ge), as discussed below.
+
+Figure 4a shows an STM image of the surface after annealing to 250 °C. In this image we no longer see any of the features from either the room temperature or the 140 °C annealed surface. Instead, we see features that appear to be a single dark dimer, highlighted in Figure 4c, and features that look like a single dimer that is strongly buckled, as highlighted in Figure 4d. These features are readily identifiable as monohydride dimers, and hydrogen‐free arsenic‐germanium heterodimers, respectively.[ 20 , 33 ]
+
+Figure 4 STM images of the arsine dosed Ge(001) surface after annealing to a) 250 °C and b) 420 °C. Boxes on panel (a) highlight a monohydride dimer and arsenic‐germanium heterodimer, respectively. c) Structure and STM image of a monohydride dimer. d) Structure and STM image of a hydrogen‐free arsenic‐germanium heterodimer. e) Plot of the feature count of all hydrogen‐terminated As−Ge−H heterodimer features (i.e., h1–h3, g1, t1, m1, and m2), mono‐ hydride features, and hydrogen‐free As−Ge heterodimers features up to 800 °C. The dashed line shows the total arsenic coverage estimated by the addition of the As−Ge−H and As−Ge lines. Image parameters: a), b) 27×19 nm2, c), d) 3×4 nm2. a), c), d) −1.5 V, 200 pA. b) −1.5 V, 200 pA. Z‐range: a), c), d) 120 pm, b) 190 pm.
+
+Figure 4b shows an STM image of the surface after annealing to 420 °C, and here we find the only surviving features are hydrogen‐free arsenic‐germanium heterodimers. The absence of hydrogen from this surface is consistent with the known desorption temperature of hydrogen from the monohydride phase on Ge(001) of 330 °C. [34]
+
+We show in Figure 4e another plot of the density of features (c.f. Figure 3f) on the surface as a function of anneal temperature up to 800 °C. Here, we group together all of the observed incorporated arsenic features, i.e., h1–h3, m1, m2, g1, t1, into a single curve. We also plot the density of hydrogen‐free arsenic‐germanium heterodimers (As−Ge) and monohydride dimers (H−Ge−Ge−H). The density of the h1–h3, m1, m2, g1, t1 arsenic features diminishes rapidly as we anneal the surface to above 200 °C. Concomitant with their decrease is a rapid rise in the density of bare As−Ge heterodimers and isolated monohydride, as expected. The ratio of hydrogen to arsenic in the range 250–300 °C is equal to the expected stoichiometric ratio of 3 : 1 to within our experimental uncertainties (accounting for two hydrogen atoms per monohydride). The dashed line indicates the total arsenic coverage, estimated by the addition of the h1–h3, m1, m2, g1, t1 and the As−Ge heterodimer features. This is likely an underestimate of the total arsenic coverage at the low temperature anneals since we have counted all single‐dimer dark features as monohydride dimers (H−Ge−Ge−H), but some fraction of these may be isolated hydrogen‐terminated As−Ge−H heterodimers. There is a slight systematic reduction in arsenic coverage for temperatures up to 500 °C, and dramatic reduction at our highest anneal temperature of 800 °C. The low temperature arsenic decrease can be attributed to arsenic diffusion into the bulk[ 20 , 35 , 36 ] (even arsenic in the second layer beneath the surface will not appear in our measurement) while above 500 °C we anticipate also arsenic desorption from the surface in the form of As2 molecules, as is known to occur for desorption of P2 molecules from the silicon (001) surface between 670 and 820 °C. [37] We note in regards to fabrication of quantum devices, no thermal annealing is required until after the incorporated arsenic atoms are encapsulated by at least a locking layer of germanium epitaxial overgrowth, [20] such that no arsenic desorption will occur, and the overgrowth temperature will need to be optimised in order to limit any diffusion of the arsenic donors during encapsulation and recrystallisation.
+
+Our results show arsine on germanium represents a marked departure from all previously studied donor precursors on silicon and germanium. In all previously studied systems an incorporation anneal (typically 350 °C) is required in order for the donor atoms to adopt substitutional lattice sites in the surface.[ 13 , 20 , 38 ] However, this anneal is highly undesirable as it provides a route for the desorption of the donors from the surface, and presents a major obstacle to the scale up to large‐scale quantum technological devices.[ 21 , 22 ] Arsine on germanium solves this problem, since the donor atoms are completely substitutionally incorporated into the surface spontaneously upon adsorption at room temperature, and no incorporation anneal is required.
+
+Furthermore, we note that the incorporation of arsenic is rapid. We have performed arsine dosing in situ, allowing us to restart imaging <15 minutes after arsine exposure. We have not observed evidence for arsenic in any configuration other than As−Ge−H heterodimers. Moreover, in all cases, each As−Ge−H heterodimer is accompanied by two additional hydrogen atoms in the form of either a monohydride dimer, or two hemihydride dimers. This suggests that arsine dissociates and incorporates immediately on adsorption, without any surface diffusion. Thus, it can be anticipated that arsine will fully dissociate and incorporate into suitably defined lithographic patches with extremely high fidelity, as required for the fabrication of large‐scale quantum technological devices, e.g., those involving large numbers of qubits.
+
+Conclusion
+
+We have presented a comprehensive understanding of the incorporation of arsenic into the germanium (001) surface due to the exposure to arsine at room temperature. This was achieved by providing excellent matches between the features we observe in our atomic‐resolution STM data and the structures we calculated to be the most thermodynamically stable. The transitions between the observed structures and the frequencies with which they occur are naturally explained by our structural assignments and are consistent with the underlying surface chemistry. We have demonstrated that arsine fully dissociates on the germanium (001) surface at room temperature and results in the substitutional incorporation of arsenic into the surface layer. Our results are extremely significant in the context of atomic‐scale donor device fabrication as they suggest a solution to the donor incorporation probability problem that currently severely limits the scale‐up of phosphorus in silicon devices to large numbers of qubits. The next step toward conclusively demonstrating this is the spatially controlled incorporation of arsenic within lithographic patches and this is the subject of ongoing work in our laboratory.
+
+Conflict of interest
+
+The authors declare no conflict of interest.
+
+1 Supporting information
+
+As a service to our authors and readers, this journal provides supporting information supplied by the authors. Such materials are peer reviewed and may be re‐organized for online delivery, but are not copy‐edited or typeset. Technical support issues arising from supporting information (other than missing files) should be addressed to the authors.
+
+Supporting Information
+
+Click here for additional data file.
+
+Acknowledgments
+
+This project has been supported by the EPSRC project Atomically Deterministic Doping and Readout For Semiconductor Solotronics (EP/M009564/1). E.V.S.H. was partly supported by the EPSRC Centre for Doctoral Training in Advanced Characterisation of Materials (EP/L015277/1), and IHP Leibniz‐Institut für Innovative Mikroelektronik. R.C. was supported by the EPSRC and SFI Centre for Doctoral Training in Advanced Characterisation of Materials (EP/L015277/1). T.J.Z.S. was partly supported by the JSPS/ESPRC core‐to‐core scheme under project Defect Functionalized Sustainable Energy Materials: From Design to Device Application (EP/R034540/1). S.R.S. acknowledges the use of the UCL Myriad High Performance Computing Facility (Myriad@UCL).
+
+Data Availability Statement
+
+The data that support the findings of this study are available from the corresponding author upon reasonable request.
+
+
+1 G. Scappucci , C. Kloeffel , F. A. Zwanenburg , D. Loss , M. Myronov , J. J. Zhang , S. De Franceschi , G. Katsaros , M. Veldhorst , Nat. Rev. Mater. 2021, 6, 926–943.
+2 N. W. Hendrickx , W. I. Lawrie , M. Russ , F. van Riggelen , S. L. de Snoo , R. N. Schouten , A. Sammak , G. Scappucci , M. Veldhorst , Nature 2021, 591, 580–585.33762771 10.1038/s41586-021-03332-6
+3 M. L. Lee , E. A. Fitzgerald , M. T. Bulsara , M. T. Currie , A. Lochtefeld , J. Appl. Phys. 2005, 97, 011101.
+4 L. Liu , Phys. Rev. 1962, 126, 1317–1328.
+5 A. J. Sigillito , A. M. Tyryshkin , J. W. Beeman , E. E. Haller , K. M. Itoh , S. A. Lyon , Phys. Rev. B 2016, 94, 125204.10.1103/PhysRevLett.115.247601 26705654
+6 G. Pica , B. W. Lovett , Phys. Rev. B 2016, 94, 205309.
+7 B. Koiller , X. Hu , S. Das Sarma , B. Koiller , Phys. Rev. Lett. 2002, 88, 027903.11801039 10.1103/PhysRevLett.88.027903
+8 K. Itoh , E. E. Haller , W. L. Hansen , J. W. Farmer , V. I. Ozhogin , A. Rudnev , A. Tikhomirov , J. Mater. Res. 1993, 8, 1341–1347.
+9 A. M. Tyryshkin , S. Tojo , J. J. Morton , H. Riemann , N. V. Abrosimov , P. Becker , H. J. Pohl , T. Schenkel , M. L. Thewalt , K. M. Itoh , S. A. Lyon , Nat. Mater. 2012, 11, 143–147.10.1038/nmat3182 22138791
+10 A. J. Sigillito , R. M. Jock , A. M. Tyryshkin , J. W. Beeman , E. E. Haller , K. M. Itoh , S. A. Lyon , Phys. Rev. Lett. 2015, 115, 247601.26705654 10.1103/PhysRevLett.115.247601
+11 J. T. Muhonen , J. P. Dehollain , A. Laucht , F. E. Hudson , R. Kalra , T. Sekiguchi , K. M. Itoh , D. N. Jamieson , J. C. McCallum , A. S. Dzurak , A. Morello , Nat. Nanotechnol. 2014, 9, 986–991.25305745 10.1038/nnano.2014.211
+12 N. P. de Leon , K. M. Itoh , D. Kim , K. K. Mehta , T. E. Northup , H. Paik , B. S. Palmer , N. Samarth , S. Sangtawesin , D. W. Steuerman , Science 2021, 372, 253.10.1126/science.abb2823 33859004
+13 S. R. Schofield , N. J. Curson , M. Y. Simmons , F. J. Ruess , T. Hallam , L. Oberbeck , R. G. Clark , Phys. Rev. Lett. 2003, 91, 136104.14525322 10.1103/PhysRevLett.91.136104
+14 S. R. Schofield , N. J. Curson , O. Warschkow , N. A. Marks , H. F. Wilson , M. Y. Simmons , P. V. Smith , M. W. Radny , D. R. McKenzie , R. G. Clark , J. Phys. Chem. B 2006, 110, 3173–3179.16494325 10.1021/jp054646v
+15 O. Warschkow , N. J. Curson , S. R. Schofield , N. A. Marks , H. F. Wilson , M. W. Radny , P. V. Smith , T. C. G. Reusch , D. R. McKenzie , M. Y. Simmons , J. Chem. Phys. 2016, 144, 014705.26747816 10.1063/1.4939124
+16 M. Fuechsle , J. A. Miwa , S. Mahapatra , H. Ryu , S. Lee , O. Warschkow , L. C. L. Hollenberg , G. Klimeck , M. Y. Simmons , Nat. Nanotechnol. 2012, 7, 242–246.22343383 10.1038/nnano.2012.21
+17 Y. He , S. K. Gorman , D. Keith , L. Kranz , J. G. Keizer , M. Y. Simmons , Nature 2019, 571, 371–375.31316197 10.1038/s41586-019-1381-2
+18 J. M. Bennett , O. Warschkow , N. A. Marks , D. R. McKenzie , Phys. Rev. B 2009, 79, 165311.
+19 G. Scappucci , O. Warschkow , G. Capellini , W. Klesse , D. R. McKenzie , M. Y. Simmons , Phys. Rev. Lett. 2012, 109, 076101.23006385 10.1103/PhysRevLett.109.076101
+20 T. J. Stock , O. Warschkow , P. C. Constantinou , J. Li , S. Fearn , E. Crane , E. V. Hofmann , A. K“olker , D. R. Mckenzie , S. R. Schofield , N. J. Curson , ACS Nano 2020, 14, 3316–3327.32142256 10.1021/acsnano.9b08943 PMC7146850
+21 J. A. Ivie , Q. Campbell , J. C. Koepke , M. I. Brickson , P. A. Schultz , R. P. Muller , A. M. Mounce , D. R. Ward , M. S. Carroll , E. Bussmann , A. D. Baczewski , S. Misra , Phys. Rev. Appl. 2021, 16, 054037.
+22 M. Fu“chsle, PhD thesis, University of New South Wales, 2011.
+23 H. J. Zandvliet , Phys. Rep. 2003, 388, 1–40.
+24 H. J. Zandvliet , T. M. Galea , E. Zoethout , B. Poelsema , Phys. Rev. Lett. 2000, 84, 1523–1526.11017558 10.1103/PhysRevLett.84.1523
+25 E. Zoethout , H. Zandvliet , W. Wulfhekel , G. Rosenfeld , B. Poelsema , Phys. Rev. B 1998, 58, 16167–16171.
+26 J. Huijben , A. Van Houselt , H. J. Zandvliet , B. Poelsema , Phys. Rev. B 2006, 73, 2005–2007.
+27 A. Van Houselt , R. Van Gastel , B. Poelsema , H. J. Zandvliet , Phys. Rev. Lett. 2006, 97, 266104.17280433 10.1103/PhysRevLett.97.266104
+28 A. Sweetman , S. Jarvis , R. Danza , J. Bamidele , S. Gangopadhyay , G. A. Shaw , L. Kantorovich , P. Moriarty , Phys. Rev. Lett. 2011, 106, 136101.21517399 10.1103/PhysRevLett.106.136101
+29 A. Saedi , B. Poelsema , H. J. W. Zandvliet , Phys. Rev. B 2009, 79, 153402.
+30 B. S. Swartzentruber , Phys. Rev. B 1997, 55, 1322–1325.
+31 M. Li , E. I. Altman , Phys. Rev. B 2002, 66, 115313.
+32 G. Scappucci , G. Capellini , W. C. T. Lee , M. Y. Simmons , Nanotechnology 2009, 20, 495302.19893153 10.1088/0957-4484/20/49/495302
+33 N. J. Curson , S. R. Schofield , M. Y. Simmons , L. Oberbeck , J. L. O'Brien , R. G. Clark , Phys. Rev. B 2004, 69, 195303.
+34 S. Shimokawa , A. Namiki , M. N. Gamo , T. Ando , J. Chem. Phys. 2000, 113, 6916–6925.
+35 S. Solmi , D. Nobili , J. Appl. Phys. 1998, 83, 2484–2490.
+36 J. L. Pitters , P. G. Piva , R. A. Wolkow , J. Vac. Sci. Technol. B 2012, 30, 021806.
+37 J. M. Bennett , O. Warschkow , N. A. Marks , D. R. McKenzie , Phys. Rev. B 2010, 82, 235417.
+38 G. Scappucci , G. Capellini , B. Johnston , W. M. Klesse , J. A. Miwa , M. Y. Simmons , Nano Lett. 2011, 11, 2272–2279.21553900 10.1021/nl200449v

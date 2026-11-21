@@ -1,0 +1,1342 @@
+
+<!DOCTYPE article
+  PUBLIC "-//NLM//DTD JATS (Z39.96) Journal Archiving and Interchange DTD with MathML3 v1.4 20241031//EN" "JATS-archivearticle1-4-mathml3.dtd">
+<article id="adma202312282" xml:lang="en" article-type="research-article" dtd-version="1.4"><processing-meta base-tagset="archiving" mathml-version="3.0" table-model="xhtml" tagset-family="jats"><restricted-by>pmc</restricted-by></processing-meta><front><journal-meta><journal-id journal-id-type="nlm-ta">Adv Mater</journal-id><journal-id journal-id-type="iso-abbrev">Adv Mater</journal-id><journal-id journal-id-type="pmc-domain-id">379</journal-id><journal-id journal-id-type="pmc-domain">blackwellopen</journal-id><journal-id journal-id-type="nlm-id">9885358</journal-id><journal-id journal-id-type="publisher-id">ADMA</journal-id><journal-title-group><journal-title>Advanced Materials (Deerfield Beach, Fla.)</journal-title></journal-title-group><issn pub-type="ppub">0935-9648</issn><issn pub-type="epub">1521-4095</issn><custom-meta-group><custom-meta><meta-name>pmc-is-collection-domain</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-collection-title</meta-name><meta-value>Wiley Open Access Collection</meta-value></custom-meta></custom-meta-group></journal-meta><article-meta><article-id pub-id-type="pmcid">PMC11475292</article-id><article-id pub-id-type="pmcid-ver">PMC11475292.1</article-id><article-id pub-id-type="pmcaid">11475292</article-id><article-id pub-id-type="pmcaiid">11475292</article-id><article-id pub-id-type="pmid">38380859</article-id><article-id pub-id-type="doi">10.1002/adma.202312282</article-id><article-id pub-id-type="publisher-id">ADMA202312282</article-id><article-version article-version-type="pmc-version">1</article-version><article-categories><subj-group subj-group-type="overline"><subject>Research Article</subject></subj-group><subj-group subj-group-type="heading"><subject>Research Articles</subject></subj-group></article-categories><title-group><article-title>Single‐Atom Control of Arsenic Incorporation in Silicon for High‐Yield Artificial Lattice Fabrication</article-title></title-group><contrib-group><contrib id="adma202312282-cr-0001" contrib-type="author" corresp="yes"><name name-style="western"><surname>Stock</surname><given-names initials="TJZ">Taylor J. Z.</given-names></name><contrib-id contrib-id-type="orcid" authenticated="false">https://orcid.org/0000-0003-4164-362X</contrib-id><xref rid="adma202312282-aff-0001" ref-type="aff">
+<sup>1</sup>
+</xref><xref rid="adma202312282-aff-0002" ref-type="aff">
+<sup>2</sup>
+</xref><address><email>t.stock@ucl.ac.uk</email></address></contrib><contrib id="adma202312282-cr-0002" contrib-type="author"><name name-style="western"><surname>Warschkow</surname><given-names initials="O">Oliver</given-names></name><contrib-id contrib-id-type="orcid" authenticated="false">https://orcid.org/0000-0002-5311-5739</contrib-id><xref rid="adma202312282-aff-0001" ref-type="aff">
+<sup>1</sup>
+</xref></contrib><contrib id="adma202312282-cr-0003" contrib-type="author"><name name-style="western"><surname>Constantinou</surname><given-names initials="PC">Procopios C.</given-names></name><contrib-id contrib-id-type="orcid" authenticated="false">https://orcid.org/0000-0001-9769-9345</contrib-id><xref rid="adma202312282-aff-0001" ref-type="aff">
+<sup>1</sup>
+</xref></contrib><contrib id="adma202312282-cr-0004" contrib-type="author"><name name-style="western"><surname>Bowler</surname><given-names initials="DR">David R.</given-names></name><xref rid="adma202312282-aff-0001" ref-type="aff">
+<sup>1</sup>
+</xref><xref rid="adma202312282-aff-0003" ref-type="aff">
+<sup>3</sup>
+</xref></contrib><contrib id="adma202312282-cr-0005" contrib-type="author"><name name-style="western"><surname>Schofield</surname><given-names initials="SR">Steven R.</given-names></name><contrib-id contrib-id-type="orcid" authenticated="false">https://orcid.org/0000-0002-0727-3015</contrib-id><xref rid="adma202312282-aff-0001" ref-type="aff">
+<sup>1</sup>
+</xref><xref rid="adma202312282-aff-0003" ref-type="aff">
+<sup>3</sup>
+</xref></contrib><contrib id="adma202312282-cr-0006" contrib-type="author" corresp="yes"><name name-style="western"><surname>Curson</surname><given-names initials="NJ">Neil J.</given-names></name><contrib-id contrib-id-type="orcid" authenticated="false">https://orcid.org/0000-0002-5661-0559</contrib-id><xref rid="adma202312282-aff-0001" ref-type="aff">
+<sup>1</sup>
+</xref><xref rid="adma202312282-aff-0002" ref-type="aff">
+<sup>2</sup>
+</xref><address><email>n.curson@ucl.ac.uk</email></address></contrib></contrib-group><aff id="adma202312282-aff-0001">
+<label>
+<sup>1</sup>
+</label>
+<named-content content-type="organisation-division">London Centre for Nanotechnology</named-content>
+<institution>University College London</institution>
+<named-content content-type="street">17‐19 Gordon Street</named-content>
+<city>London</city>
+<postal-code>WC1H 0AH</postal-code>
+<country country="GB">UK</country>
+</aff><aff id="adma202312282-aff-0002">
+<label>
+<sup>2</sup>
+</label>
+<named-content content-type="organisation-division">Department of Electronic and Electrical Engineering</named-content>
+<institution>University College London</institution>
+<city>London</city>
+<postal-code>WC1E 7JE</postal-code>
+<country country="GB">UK</country>
+</aff><aff id="adma202312282-aff-0003">
+<label>
+<sup>3</sup>
+</label>
+<named-content content-type="organisation-division">Department of Physics and Astronomy</named-content>
+<institution>University College London</institution>
+<city>London</city>
+<postal-code>WC1E 6BT</postal-code>
+<country country="GB">UK</country>
+</aff><author-notes><corresp id="correspondenceTo">
+<label>*</label>E‐mail: <email>t.stock@ucl.ac.uk</email>; <email>n.curson@ucl.ac.uk</email>
+<break/>
+</corresp></author-notes><pub-date pub-type="epub"><day>22</day><month>3</month><year>2024</year></pub-date><pub-date pub-type="ppub"><day>13</day><month>6</month><year>2024</year></pub-date><volume>36</volume><issue seq="750">24</issue><issue-id pub-id-type="pmc-issue-id">472808</issue-id><issue-id pub-id-type="doi">10.1002/adma.v36.24</issue-id><elocation-id>2312282</elocation-id><history><date date-type="rev-recd"><day>29</day><month>1</month><year>2024</year></date><date date-type="received"><day>16</day><month>11</month><year>2023</year></date></history><pub-history><event event-type="pmc-release"><date><day>15</day><month>10</month><year>2024</year></date></event><event event-type="pmc-live"><date><day>16</day><month>10</month><year>2024</year></date></event><event event-type="pmc-last-change"><date iso-8601-date="2026-09-22 12:54:06.807"><day>22</day><month>09</month><year>2026</year></date></event></pub-history><permissions><copyright-statement content-type="article-copyright">© 2024 The Authors. Advanced Materials published by Wiley‐VCH GmbH</copyright-statement><license><ali:license_ref xmlns:ali="http://www.niso.org/schemas/ali/1.0/" specific-use="textmining" content-type="ccbylicense">https://creativecommons.org/licenses/by/4.0/</ali:license_ref><license-p>This is an open access article under the terms of the <ext-link xmlns:xlink="http://www.w3.org/1999/xlink" ext-link-type="uri" xlink:href="https://creativecommons.org/licenses/by/4.0/">http://creativecommons.org/licenses/by/4.0/</ext-link> License, which permits use, distribution and reproduction in any medium, provided the original work is properly cited.</license-p></license></permissions><self-uri xmlns:xlink="http://www.w3.org/1999/xlink" content-type="pmc-pdf" xlink:href="ADMA-36-2312282.pdf"/><self-uri xmlns:xlink="http://www.w3.org/1999/xlink" content-type="pdf" xlink:href="file:ADMA-36-2312282.pdf"/><abstract><title>Abstract</title><p>Artificial lattices constructed from individual dopant atoms within a semiconductor crystal hold promise to provide novel materials with tailored electronic, magnetic, and optical properties. These custom‐engineered lattices are anticipated to enable new, fundamental discoveries in condensed matter physics and lead to the creation of new semiconductor technologies including analog quantum simulators and universal solid‐state quantum computers. This work reports precise and repeatable, substitutional incorporation of single arsenic atoms into a silicon lattice. A combination of scanning tunneling microscopy hydrogen resist lithography and a detailed statistical exploration of the chemistry of arsine on the hydrogen‐terminated silicon (001) surface are employed to show that single arsenic dopants can be deterministically placed within four silicon lattice sites and incorporated with 97 ± 2% yield. These findings bring closer to the ultimate frontier in semiconductor technology: the deterministic assembly of atomically precise dopant and qubit arrays at arbitrarily large scales.</p></abstract><abstract id="adma202312282-abs-0001" abstract-type="graphical"><p>Single arsenic atoms are deterministically incorporated into a silicon lattice with up to 100% yield. This is achieved using arsine gas as a precursor to arsenic incorporation via scanning tunneling microscopy hydrogen resist lithography. A detailed understanding of the surface chemistry of arsine on lithographically patterned hydrogen‐terminated Si(001) underpins the fabrication of a 2 × 2 single‐atom arsenic artificial lattice.
+<boxed-text position="anchor" content-type="graphic" orientation="portrait"><graphic xmlns:xlink="http://www.w3.org/1999/xlink" position="anchor" id="jats-graphic-1" orientation="portrait" xlink:href="ADMA-36-2312282-g003.jpg"/></boxed-text>
+</p></abstract><kwd-group kwd-group-type="author-generated"><kwd id="adma202312282-kwd-0001">arsenic</kwd><kwd id="adma202312282-kwd-0002">artificial‐lattice</kwd><kwd id="adma202312282-kwd-0003">atomic‐precision</kwd><kwd id="adma202312282-kwd-0004">dopant</kwd><kwd id="adma202312282-kwd-0005">lithography</kwd><kwd id="adma202312282-kwd-0006">scanning tunneling microscopy</kwd><kwd id="adma202312282-kwd-0007">silicon</kwd></kwd-group><funding-group><award-group id="funding-0001"><funding-source><institution-wrap><institution>Engineering and Physical Sciences Research Council
+</institution><institution-id institution-id-type="doi">10.13039/501100000266</institution-id></institution-wrap></funding-source><award-id>EP/M009564/1</award-id><award-id>EP/R034540/1</award-id><award-id>EP/V027700/1</award-id><award-id>EP/W000520/1</award-id></award-group><award-group id="funding-0002"><funding-source>EPSRC Centre for Doctoral Training in Advanced Characterisation of Materials</funding-source><award-id>EP/L015277/1</award-id></award-group><award-group id="funding-0003"><funding-source><institution-wrap><institution>Innovate UK
+</institution><institution-id institution-id-type="doi">10.13039/501100006041</institution-id></institution-wrap></funding-source><award-id>UKRI/75574</award-id></award-group></funding-group><counts><fig-count count="4"/><table-count count="1"/><page-count count="11"/><word-count count="8800"/></counts><custom-meta-group><custom-meta><meta-name>pmc-status-qastatus</meta-name><meta-value>0</meta-value></custom-meta><custom-meta><meta-name>pmc-status-live</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-status-embargo</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-status-released</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-open-access</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-olf</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-manuscript</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-legally-suppressed</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-has-pdf</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-has-supplement</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-pdf-only</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-suppress-copyright</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-is-real-version</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-is-scanned-article</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-preprint</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-in-epmc</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-license-ref</meta-name><meta-value>CC BY</meta-value></custom-meta><custom-meta><meta-name>source-schema-version-number</meta-name><meta-value>2.0</meta-value></custom-meta><custom-meta><meta-name>cover-date</meta-name><meta-value>June 13, 2024</meta-value></custom-meta><custom-meta><meta-name>details-of-publishers-convertor</meta-name><meta-value>Converter:WILEY_ML3GV2_TO_JATSPMC version:6.4.9 mode:remove_FC converted:15.10.2024</meta-value></custom-meta></custom-meta-group></article-meta><notes><p content-type="self-citation">
+<mixed-citation publication-type="journal" id="adma202312282-cit-0044">
+<string-name name-style="western">
+<given-names>T. J. Z.</given-names>
+<surname>Stock</surname>
+</string-name>, <string-name name-style="western">
+<given-names>O.</given-names>
+<surname>Warschkow</surname>
+</string-name>, <string-name name-style="western">
+<given-names>P. C.</given-names>
+<surname>Constantinou</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D. R.</given-names>
+<surname>Bowler</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S. R.</given-names>
+<surname>Schofield</surname>
+</string-name>, <string-name name-style="western">
+<given-names>N. J.</given-names>
+<surname>Curson</surname>
+</string-name>, <article-title>Single‐Atom Control of Arsenic Incorporation in Silicon for High‐Yield Artificial Lattice Fabrication</article-title>. <source>Adv. Mater.</source>
+<year>2024</year>, <volume>36</volume>, <elocation-id>2312282</elocation-id>. <pub-id pub-id-type="doi">10.1002/adma.202312282</pub-id>
+<pub-id pub-id-type="pmcid">PMC11475292</pub-id><pub-id pub-id-type="pmid">38380859</pub-id></mixed-citation>
+</p></notes></front><body><sec id="adma202312282-sec-0010"><label>1</label><title>Introduction</title><p>Semiconductor device manufacturing is steadily approaching the ultimate frontier of miniaturization: device engineering with single‐atom precision. The development of tools for deterministic and repeatable positioning of single dopant atoms in semiconductors will afford tremendous opportunities, opening the door to completely new types of engineered quantum materials and devices. The fabrication of artificial solid‐state dopant lattices will enable the engineering of customized electronic band structures and topological states. This will unlock new avenues in condensed matter physics, not only allowing us to probe Mott–Hubbard metal‐insulator transitions,<sup>[</sup>
+<xref rid="adma202312282-bib-0001" ref-type="bibr">
+<sup>1</sup>
+</xref>
+<sup>]</sup> understand the influence of disorder on electron localization as per the scaling theory of localization,<sup>[</sup>
+<xref rid="adma202312282-bib-0002" ref-type="bibr">
+<sup>2</sup>
+</xref>
+<sup>]</sup> and explore the attributes of topological insulators as explained by the Su–Schrieffer–Heeger model,<sup>[</sup>
+<xref rid="adma202312282-bib-0003" ref-type="bibr">
+<sup>3</sup>
+</xref>
+<sup>]</sup> but also to uncover previously unseen phenomena and advance our fundamental understanding in these areas. Moreover, the ability to fabricate large‐scale artificial atomic arrays of dopant atoms in silicon will provide the building blocks for transformational quantum information technologies including analog quantum simulators<sup>[</sup>
+<xref rid="adma202312282-bib-0004" ref-type="bibr">
+<sup>4</sup>
+</xref>
+<sup>]</sup> and universal quantum computers.<sup>[</sup>
+<xref rid="adma202312282-bib-0005" ref-type="bibr">
+<sup>5</sup>
+</xref>, <xref rid="adma202312282-bib-0006" ref-type="bibr">
+<sup>6</sup>
+</xref>, <xref rid="adma202312282-bib-0007" ref-type="bibr">
+<sup>7</sup>
+</xref>
+<sup>]</sup>
+</p><p>The most precise technique for the deterministic placement of individual dopant atoms in silicon is scanning tunneling microscopy (STM)‐based hydrogen resist lithography (HRL).<sup>[</sup>
+<xref rid="adma202312282-bib-0008" ref-type="bibr">
+<sup>8</sup>
+</xref>, <xref rid="adma202312282-bib-0009" ref-type="bibr">
+<sup>9</sup>
+</xref>, <xref rid="adma202312282-bib-0010" ref-type="bibr">
+<sup>10</sup>
+</xref>, <xref rid="adma202312282-bib-0011" ref-type="bibr">
+<sup>11</sup>
+</xref>, <xref rid="adma202312282-bib-0012" ref-type="bibr">
+<sup>12</sup>
+</xref>
+<sup>]</sup> HRL uses an STM tip to pattern an inert hydrogen monolayer on the silicon surface with single‐atom precision, producing a chemically‐sensitive mask to spatially confine the adsorption and reaction of gas‐phase dopant precursor molecules to nearly exact surface lattice sites (&lt;1 nm precision). A low‐temperature thermal anneal is then used to incorporate the dopant atoms into substitutional lattice sites of the surface, and subsequent epitaxial overgrowth with silicon completes the process of deterministic substitutional dopant atom patterning for atomic‐scale device fabrication.<sup>[</sup>
+<xref rid="adma202312282-bib-0013" ref-type="bibr">
+<sup>13</sup>
+</xref>, <xref rid="adma202312282-bib-0014" ref-type="bibr">
+<sup>14</sup>
+</xref>, <xref rid="adma202312282-bib-0015" ref-type="bibr">
+<sup>15</sup>
+</xref>, <xref rid="adma202312282-bib-0016" ref-type="bibr">
+<sup>16</sup>
+</xref>
+<sup>]</sup> This method of dopant atom positioning in silicon offers a precision that is at least an order of magnitude greater than that of its closest competitor, single ion implantation.<sup>[</sup>
+<xref rid="adma202312282-bib-0017" ref-type="bibr">
+<sup>17</sup>
+</xref>, <xref rid="adma202312282-bib-0018" ref-type="bibr">
+<sup>18</sup>
+</xref>
+<sup>]</sup>
+</p><p>Using HRL with phosphine (PH<sub>3</sub>) as the dopant precursor molecule, multiple research groups have successfully fabricated single and few dopant‐atom quantum electronic devices including single‐atom, single‐electron transistors,<sup>[</sup>
+<xref rid="adma202312282-bib-0019" ref-type="bibr">
+<sup>19</sup>
+</xref>, <xref rid="adma202312282-bib-0020" ref-type="bibr">
+<sup>20</sup>
+</xref>, <xref rid="adma202312282-bib-0021" ref-type="bibr">
+<sup>21</sup>
+</xref>
+<sup>]</sup> an electron‐spin based, two‐qubit quantum logic gate,<sup>[</sup>
+<xref rid="adma202312282-bib-0022" ref-type="bibr">
+<sup>22</sup>
+</xref>
+<sup>]</sup> and 1D and 2D artificial lattices.<sup>[</sup>
+<xref rid="adma202312282-bib-0023" ref-type="bibr">
+<sup>23</sup>
+</xref>, <xref rid="adma202312282-bib-0024" ref-type="bibr">
+<sup>24</sup>
+</xref>
+<sup>]</sup> Despite these achievements, there are fundamental limitations to the precision and scalability of the deterministic placement of phosphorus dopants in silicon by HRL. These limitations are inherent to the interaction chemistry of phosphine with the Si(001) surface. Consequently, the only devices fabricated, to date, utilizing single‐dopant precision for the active components are the single‐atom transistors,<sup>[</sup>
+<xref rid="adma202312282-bib-0019" ref-type="bibr">
+<sup>19</sup>
+</xref>, <xref rid="adma202312282-bib-0020" ref-type="bibr">
+<sup>20</sup>
+</xref>, <xref rid="adma202312282-bib-0021" ref-type="bibr">
+<sup>21</sup>
+</xref>
+<sup>]</sup> while all multi‐component devices have instead used non‐uniform small clusters of phosphorus atoms.<sup>[</sup>
+<xref rid="adma202312282-bib-0015" ref-type="bibr">
+<sup>15</sup>
+</xref>, <xref rid="adma202312282-bib-0022" ref-type="bibr">
+<sup>22</sup>
+</xref>, <xref rid="adma202312282-bib-0023" ref-type="bibr">
+<sup>23</sup>
+</xref>
+<sup>]</sup>
+</p><p>The placement of a single phosphorus atom from a phosphine molecule using HRL fabrication requires the removal of a minimum of six hydrogen atoms from the hydrogen‐terminated Si(001) surface, exposing three adjacent pairs of silicon lattice sites. This six‐site‐sized adsorption window, in an otherwise hydrogen‐terminated silicon surface, is the smallest‐sized adsorption window that allows the covalent adsorption of the phosphine molecule, and its subsequent full dissociation to leave one phosphorus atom and three hydrogen atoms individually bonded to the surface.<sup>[</sup>
+<xref rid="adma202312282-bib-0019" ref-type="bibr">
+<sup>19</sup>
+</xref>
+<sup>]</sup> Full dissociation of phosphine is a prerequisite for phosphorus atom incorporation, however, it has been shown that the success rate of single phosphorus atom surface incorporation resulting from the thermal annealing of phosphine adsorbed in idealized six‐site windows is less than 70%.<sup>[</sup>
+<xref rid="adma202312282-bib-0025" ref-type="bibr">
+<sup>25</sup>
+</xref>, <xref rid="adma202312282-bib-0026" ref-type="bibr">
+<sup>26</sup>
+</xref>
+<sup>]</sup> This low yield presents a serious limitation on scaling up to large numbers of deterministically positioned dopant atoms. To highlight the magnitude of this problem, consider that the fabrication yield (<italic toggle="yes">P</italic>) for placement of single phosphorus atoms reduces exponentially with the total number of single atoms being incorporated (<italic toggle="yes">n</italic>), as <italic toggle="yes">P</italic> = 0.7<italic toggle="yes">
+<sup>n</sup>
+</italic>. For example, the probability of successfully creating a 16‐element single phosphorus‐atom array is 0.7<sup>16</sup>, that is, less than 0.4%. While ongoing work seeks to improve the single phosphorus atom yield from phosphine, for example by employing secondary lithography stages to fully dissociate the PH<sub>3</sub> molecules<sup>[</sup>
+<xref rid="adma202312282-bib-0027" ref-type="bibr">
+<sup>27</sup>
+</xref>
+<sup>]</sup> or controlling precursor partial pressure<sup>[</sup>
+<xref rid="adma202312282-bib-0026" ref-type="bibr">
+<sup>26</sup>
+</xref>
+<sup>]</sup> or substrate temperature<sup>[</sup>
+<xref rid="adma202312282-bib-0028" ref-type="bibr">
+<sup>28</sup>
+</xref>
+<sup>]</sup> to control PH<sub>3</sub> adsorption densities, the simpler solution to the problem presented here is the introduction of an alternative dopant and precursor species that provide a higher single atom yield without requiring additional fabrication procedures or control parameters.</p><p>In the present work, we demonstrate that arsenic atom placement using arsine (AsH<sub>3</sub>) as a precursor overcomes the low‐yield limitation of phosphine and phosphorus. We show that for arsine, a four‐site adsorption window is sufficient and optimal for high‐yield single‐atom arsenic incorporation and results in a deterministic incorporation probability of 97 ± 2%, using a single‐stage fabrication cycle. Furthermore, we show that unique to arsine, an iterative patterning cycle can be introduced to maintain a high yield of single arsenic donor incorporation in silicon while allowing for a further reduction in the size of the adsorption window, thus increasing the placement precision. These findings provide a pathway to the manufacturing scale‐up of silicon quantum materials and devices based on the deterministic positioning of large numbers of single dopant atoms and the construction of artificial solid‐state atomic lattices.</p></sec><sec id="adma202312282-sec-0020"><label>2</label><title>Results and Discussion</title><p>In the following three results sections, we demonstrate that single arsine molecules can be reliably adsorbed through appropriately sized HRL adsorption windows and that the arsenic atom from any single, partially dissociated arsine molecule can be reliably incorporated into the silicon lattice at the adsorption window site upon annealing. In this way, we show that arsine is notably different from phosphine where phosphorous incorporation can only be achieved if a phosphine molecule fully dissociates within the adsorption window. For phosphine, a minimum 6‐silicon atom‐sized window is required, which allows for routine adsorption of multiple molecules and a 30% chance that all adsorbed phosphine will desorb during the incorporation anneal, leaving behind no phosphorus.</p><p>We begin this demonstration, in Section <xref rid="adma202312282-sec-0030" ref-type="sec">2.1</xref>, with examples of imperfect artificial lattice fabrication that immediately illustrate the above properties of arsine in application. In Section <xref rid="adma202312282-sec-0040" ref-type="sec">2.2</xref>, we then demonstrate arsenic incorporation from isolated arsine fragments, and finally, in Section <xref rid="adma202312282-sec-0050" ref-type="sec">2.3</xref>, we explore the effect of controlling the adsorption window size and demonstrate statistically that a symmetric, four‐dangling bond adsorption window is the appropriate size to ensure reliable single arsine molecule adsorption and thus reliable single arsenic atom incorporation.</p><sec id="adma202312282-sec-0030"><label>2.1</label><title>Fabrication of Atomic Arrays Using Arsine and a Hydrogen Resist on Silicon</title><p>The unique and opportune properties of arsine adsorption and arsenic incorporation through HRL adsorption windows on silicon are illustrated in <bold>Figure</bold>
+<xref rid="adma202312282-fig-0001" ref-type="fig">
+<bold>1</bold>
+</xref>. Here we show three examples of the deterministic positioning of arrays of single arsenic atoms into Si(001): a 2 × 2 array (Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1a,c</xref>); a 7 × 1 chain (Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1d,e</xref>); and a 4 × 4 array (Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1f–i</xref>), each with a pitch of ≈12 Si(001) surface lattice vectors, or 4.6 nm. The hydrogen‐terminated Si(001) surface consists of rows of paired silicon atoms (dimers) with one hydrogen atom bonded to each silicon. These rows are visible as vertical lines in Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1a–c,g–i</xref>, and horizontal lines in Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1d,e</xref>. Silicon atoms at the surface that do not have a terminating hydrogen atom, such as those within the lithographically patterned adsorption windows, appear bright in the images due to the existence of broken, or “dangling” bonds (DBs) whose orbital energy lies closer to the Fermi level and therefore make a stronger contribution to the STM tunneling current than the adjacent hydrogen‐terminated silicon atoms.</p><fig position="float" fig-type="Figure" id="adma202312282-fig-0001" orientation="portrait"><label>Figure 1</label><caption><p>Artificial lattice fabrication on Si(001) using HRL for deterministic single arsenic atom incorporation: Three examples of single‐atom arsenic arrays in silicon, selectively imaged during the three‐step fabrication process: step 1) STM lithography on hydrogen resist; 2) room temperature AsH<sub>3</sub> adsorption; 3) thermal anneal for substitutional arsenic incorporation. Panels a–c) show all three steps for a 2 × 2 array, repeated images are annotated with lithographic results on the left and surface defects on the right. Labeled features: 1DB = silicon dangling bond, 2DB = dangling bond dimer, <italic toggle="yes">n</italic>DB = lithographic DB patch (<italic toggle="yes">n</italic> = 2 to 8), DV = silicon dimer vacancy, ad‐Si = silicon adatom, Si‐H = hydrogen‐terminated silicon atom. Panels d,e) show lithography and adsorption of a 1 × 7 chain. Labeled features: spurious DB (1DB), lithography sites (<italic toggle="yes">n</italic>DB), and five AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> adsorbates (type A, B, C, D, and E features). At the bottom of panel e) proposed structures of the five AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> adsorbates are shown below the corresponding feature in the labeled STM image. Panel g) shows lithography and f,h) incorporation of a 4 × 4 atomic array within a gated source‐drain tunnel device. The 15 nm inset of panel (f) shows detail of the bottom gate edge; ejected ad‐Si dimer rows, perpendicular to dimer rows on the substrate, indicate saturation doping of the large area electrodes. In panels g–i), array elements are labeled a1‐through‐d4 using column/row labels. Arsenic atom locations inferred from reaction products in image (h) are mapped in (i). Imaging parameters: a) −2 V, 40 pA; b,c) −2 V, 100 pA; d,e) −2 V, 60 pA; f–h) −2 V, 40 pA. False color scales: a) −200‐+400 pm; b) −100‐+250 pm, c) −75‐+200, f–h) = 100‐+200 pm. Lithography parameters: 3.5 V, 3000 pA, 50 nm s<sup>−1</sup>. AsH<sub>3</sub> dosing: 5 × 10<sup>−9</sup> mbar × 10 min. Incorporation anneal: 350 °C × 1 min.</p></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" position="anchor" id="jats-graphic-3" orientation="portrait" xlink:href="ADMA-36-2312282-g001.jpg"/></fig><p>The sequence of images in Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1a–c</xref> shows the construction of a 2 × 2 arsenic atom array in three stages (see labels above left‐hand images). 1) Hydrogen lithography: Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1a</xref> shows hydrogen desorption to create a 2 × 2 array of adsorption windows, each consisting of <italic toggle="yes">n</italic> DBs (2 &lt; <italic toggle="yes">n</italic> &lt; 8) and therefore labeled <italic toggle="yes">n</italic>DB. It is notable that the lower‐left corner window extends across two dimer rows, while the other three sites are all on a single dimer row. 2) Arsine dosing: Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1b</xref> shows the same surface after arsine gas exposure (3 Langmuir) to produce covalently attached AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> adsorbates (<italic toggle="yes">x</italic> = 0, 1, or 2, discussed further below). The presence of the AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> adsorbates is revealed by the fact that all four adsorption windows have changed appearance, leaving a new prominent single‐lobed protrusion at each location. The adsorption window in the lower‐left corner, the largest of the four, now features two such protrusions, indicating two different AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> adsorbates are attached within the windowed area, one of which we identify as AsH<sub>2</sub> (see more below). 3) Arsenic thermal incorporation: Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1c</xref> shows the substitutional incorporation of arsenic into the silicon surface via thermal annealing. This produces arsenic‐silicon heterodimers (As‐Si) in the surface and ejected silicon ad‐atoms on the surface (ad‐Si). The four small protrusions that each occur on one‐half of individual silicon dimers in Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1c</xref> are readily identified as As‐Si features by comparison with the STM data of low‐density incorporated arsenic in previous work on Si:As delta layers.<sup>[</sup>
+<xref rid="adma202312282-bib-0029" ref-type="bibr">
+<sup>29</sup>
+</xref>
+<sup>]</sup> Comparing the lattice sites of these As‐Si features with respect to the location of the preceding AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> fragments, we note that while 3‐of‐4 As‐Si remains at the site of delivery, the fourth example in the upper left corner appears to have shifted downward by 1 lattice spacing, this is understood to be representative of a general trend in the spatial precision of the incorporation which is found to occasionally extend up to 1 lattice spacing beyond the delivery site, in either direction. The silicon ad‐atoms, on the other hand, are known to assume multiple thermally stable structures,<sup>[</sup>
+<xref rid="adma202312282-bib-0030" ref-type="bibr">
+<sup>30</sup>
+</xref>
+<sup>]</sup> including silicon ad‐dimers formed via surface diffusion of ad‐atoms,<sup>[</sup>
+<xref rid="adma202312282-bib-0031" ref-type="bibr">
+<sup>31</sup>
+</xref>, <xref rid="adma202312282-bib-0032" ref-type="bibr">
+<sup>32</sup>
+</xref>
+<sup>]</sup> and can consequently appear with different heights in the STM images, as in Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1c</xref>.<sup>[</sup>
+<xref rid="adma202312282-bib-0029" ref-type="bibr">
+<sup>29</sup>
+</xref>, <xref rid="adma202312282-bib-0030" ref-type="bibr">
+<sup>30</sup>
+</xref>, <xref rid="adma202312282-bib-0031" ref-type="bibr">
+<sup>31</sup>
+</xref>
+<sup>]</sup>
+</p><p>Alongside the intentionally fabricated adsorption windows, there are also a variety of native surface defects present on the surface, and spurious hydrogen desorption sites. Spurious desorption sites are the result of imperfect hydrogen termination at the sample preparation stage and/or random hydrogen desorption events during surface imaging and hydrogen desorption lithography.<sup>[</sup>
+<xref rid="adma202312282-bib-0033" ref-type="bibr">
+<sup>33</sup>
+</xref>
+<sup>]</sup> In order to clearly delineate the intentional adsorption windows from the spurious sites and other surface defects, the STM images in Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1a–c</xref> are duplicated to the right of the original image, allowing us to also follow the behavior of the defect sites through each stage of fabrication.</p><p>In the right‐hand image of Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1a</xref>, we highlight a native silicon dimer vacancy (DV), and two spurious desorption sites: one single dangling bond (1DB) and a dangling bond pair (2DB). After arsine exposure (Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1b</xref>), we see that the stray 2DB site now also features a protrusion that we attribute to an AsH<sub>2</sub> fragment, while the 1DB defect has disappeared, that is, re‐terminated with hydrogen. After the thermal incorporation anneal (1 min at 350 °C), we see that the AsH<sub>2</sub> at the 2DB site is replaced by a silicon ad‐atom, indirect evidence that the arsenic atom has incorporated at this site,<sup>[</sup>
+<xref rid="adma202312282-bib-0026" ref-type="bibr">
+<sup>26</sup>
+</xref>, <xref rid="adma202312282-bib-0027" ref-type="bibr">
+<sup>27</sup>
+</xref>
+<sup>]</sup> but is obscured by the ad‐atom. Additionally, in the post‐anneal image, we find that the DV has disappeared, leaving an intact dimer row. We suggest this is also due to the presence of ejected silicon, and that two diffusing silicon ad‐atoms have settled in the vacancy, filling it in.</p><p>Considering the arsine dosing stage, shown in Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1b</xref>, we find that collectively the adsorption behaviors of both the patterned <italic toggle="yes">n</italic>DB sites and the spurious 1DB and 2DB sites are representative of the following general reaction trends: upon exposure to arsine gas 1DBs re‐terminate with hydrogen, 2DBs frequently adsorb a single AsH<sub>2</sub> species, and larger <italic toggle="yes">n</italic>DB windows adsorb one or two AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> species depending on the size of the adsorption window. We quantify these trends statistically in detail in Sections <xref rid="adma202312282-sec-0040" ref-type="sec">2.2</xref> and <xref rid="adma202312282-sec-0050" ref-type="sec">2.3</xref>.</p><p>Next, in Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1d,e</xref>, we show the hydrogen desorption and arsine adsorption stages of the fabrication of a 1D seven‐element chain. The seven patterned adsorption windows shown in Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1d</xref> are labeled <italic toggle="yes">n</italic>DB, 2DB, 4DB, or 6DB, while three spurious single‐dangling bond sites are labeled 1DB. The same area of the surface, after AsH<sub>3</sub> dosing, is shown in Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1e</xref>. Consistent with the adsorption trends stated above, the 1DB sites are all re‐terminated with hydrogen after AsH<sub>3</sub> exposure and all seven lithographic windows feature one or two AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> adsorbates. The varied sizes and shapes of the adsorption windows in this chain result in the formation of five characteristic AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> adsorption feature types, which we label A, B, C, D, and E (Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1e</xref>). We assign the type‐A and type‐B features to two variants of an AsH<sub>2</sub> adsorption configuration: in the case of the type‐A feature, the AsH<sub>2</sub> occupies a dimer‐end position and the feature is therefore asymmetric about the dimer row, while in the type‐B feature, we suggest that the AsH<sub>2</sub> is bridge bonded across a silicon dimer and the feature is thus symmetric about the dimer row. The type‐C feature is an AsH+2H configuration where the AsH fragment is bound symmetrically across one dimer, while the two dissociated hydrogen atoms passivate the neighboring dimer. The type‐D and type‐E features are assigned to two variants of an As+3H configuration that only occur at sites large enough to accommodate the full dissociation of the molecule. The proposed structures for each feature type are illustrated directly below each labeled example in the STM image in Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1e</xref> (see Figure <xref rid="adma202312282-supitem-0001" ref-type="supplementary-material">S1</xref>, Supporting Information, for more details). This varied set of adsorbate products demonstrates how the size and shape of the adsorption windows critically affect the dissociation path and final room‐temperature stable adsorbate configuration. The exact structural arrangements of each feature type are not assigned here with absolute certainty but are offered as probable arrangements for the adsorbed molecules in the increasingly dissociated states that result from adsorption in successively larger adsorption windows. As discussed further below, a more uniform set of adsorption windows and adsorption products is desirable for device fabrication.</p><p>In Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1f–h</xref> we present STM images of the fabrication of a 16‐element 4 × 4 single dopant atom array. Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1g</xref> shows the hydrogen lithography stage and the resulting 4 × 4 array of <italic toggle="yes">n</italic>DB adsorption windows. The array columns and rows are labeled a, b, c, d and 1,2,3,4, respectively, for position identification. Of these 16 <italic toggle="yes">n</italic>DB windows, six are contained within single silicon dimer rows (b2, b3, c3, c4, d2, d3), six extend across two dimer rows (a1, a2, b1, c1, c2, d1), and three across three rows (a3, b4, d4). The final remaining element (a4) is of considerably greater height than all the other lithographic array elements because it is a pre‐existing point contaminant. As such, we exclude element a4 from the array statistics. There are also several spurious 1DB sites present in addition to the lithographic adsorption windows.</p><p>Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1h</xref> shows the same area after arsine dosing and the incorporation anneal at 350 °C. Single As‐Si heterodimers can be observed in the five array sites a1, b1, c1, c2, c3; double As‐Si heterodimers in the two array sites a3, d3; isolated ad‐Si atoms in the five array sites a2, b2, b3, b4, d4; and ad‐Si clusters in the two array sites c4, d1. The remaining two sites, a4 and d2, feature unidentified contaminants. As mentioned above, the unidentified feature at a4 was present before hydrogen lithography, while the unidentified feature at d2 appeared only after processing. Specifically, feature d2 appeared after AsH<sub>3</sub> dosing, and remained unchanged following the incorporation anneal. This feature is not only occasionally detected following AsH<sub>3</sub> dosing in our experiments but is also occasionally observed on hydrogen‐terminated Si(001) that has not been exposed to AsH<sub>3</sub>. We therefore attribute this adsorbate to a background gas contaminant, which can be removed through careful preparation.</p><p>When fabricating artificial arrays using HRL, confirmation of dopant atom incorporation can be inferred from the reaction products imaged at each adsorption site following incorporation anneal. In order to quantify the success rate of arsenic incorporation, we apply similar criteria to those used to assess phosphorus incorporation from phosphine in recent work by Ivie et al. and Wyrick et al.<sup>[</sup>
+<xref rid="adma202312282-bib-0026" ref-type="bibr">
+<sup>26</sup>
+</xref>, <xref rid="adma202312282-bib-0027" ref-type="bibr">
+<sup>27</sup>
+</xref>
+<sup>]</sup> If an As‐Si heterodimer is directly imaged at the location of the adsorption window, it is certain that arsenic incorporation has occurred at the site. If an ad‐Si is imaged at the location of the adsorption window, it is assumed that arsenic incorporation has occurred at the site but is not directly visible due to the obscuring ad‐Si. It is further assumed that no arsenic incorporation has occurred at sites of unidentified contaminants or hydrogen re‐terminated sites. Based on this analysis, as shown in Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1i</xref>, we infer that 10 out of the 16 intended array sites contain single arsenic atoms. Two further sites contain one or more As atoms and the remaining 4 sites either contain more than one arsenic atom or an unidentified feature. Excluding site a4, which does not contribute to the adsorption/incorporation statistic, this tally of 10 to 12 single atoms across 15 array elements represents a compounded single‐dopant‐atom placement success rate of up to 80%. This result, using non‐ideal‐sized adsorption windows, already offers a 10% plus improvement over the incorporation success rate expected for phosphorus, assuming perfect six‐site adsorption windows.<sup>[</sup>
+<xref rid="adma202312282-bib-0025" ref-type="bibr">
+<sup>25</sup>
+</xref>, <xref rid="adma202312282-bib-0026" ref-type="bibr">
+<sup>26</sup>
+</xref>
+<sup>]</sup> Considering the final lattice positions of the incorporated arsenic atoms in this demonstration array, it is noted that the As‐Si features occasionally appear to move beyond the lithographically defined adsorption sites. This is attributed to the size of the adsorption windows being large enough to accommodate more than one adsorbate, and therefore a multiplicity of reactions possible during the incorporation anneal. Without STM data of the adsorption stage for this array, it is not possible to quantify the exact spatial precision of each deterministic incorporation. However, below we show that by controlling the adsorption window size, which controls the spatial precision, further dramatic improvements to the single arsenic atom incorporation rate can be achieved.</p><p>Finally, Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1f</xref> shows a larger area image with the 4 × 4 array at the center. Also visible in this larger area image are four regions where we have incorporated many arsenic atoms into much larger rectangular adsorption windows near the 4 × 4 array. These extended and metallically doped regions would form the source, drain, and gate electrodes, as indicated, for inclusion of the 4 × 4 array in a field‐effect device architecture. Arsenic incorporation into these extended regions is confirmed by the characteristic appearance of ejected silicon ad‐dimer features within these areas, as seen in the 15 × 15 nm inset image showing detail of the top edge of the bottom gate electrode. The density of ejected silicon within these large area patterned electrodes is similar to that found in a previous study of delta‐doped arsenic layers in silicon also formed using an arsine precursor gas, and these patterned electrodes are therefore expected to be metallically doped, with similar values of mobility, carrier density, and sheet resistance to those found in the delta‐layer study.<sup>[</sup>
+<xref rid="adma202312282-bib-0029" ref-type="bibr">
+<sup>29</sup>
+</xref>
+<sup>]</sup> Similar device structures have been fabricated using phosphorus in silicon (for a 3 × 3 array of dopant clusters)<sup>[</sup>
+<xref rid="adma202312282-bib-0024" ref-type="bibr">
+<sup>24</sup>
+</xref>
+<sup>]</sup> and we present this here as a proof‐of‐principle of the fabrication of such a device using only arsenic in silicon, with metallic doped arsenic sheets for electrodes and single arsenic dopants as the array elements.<sup>[</sup>
+<xref rid="adma202312282-bib-0029" ref-type="bibr">
+<sup>29</sup>
+</xref>
+<sup>]</sup>
+</p></sec><sec id="adma202312282-sec-0040"><label>2.2</label><title>Adsorption and Incorporation of Arsenic at Thermally Generated Dangling Bonds</title><p>In the following two sections, we present a statistical analysis of arsine adsorption and incorporation events at hydrogen resist windows of one to six DB in extent. We have prepared a large statistical distribution of 1DB and 2DB windows via thermal desorption by annealing hydrogen‐terminated surfaces above 325 °C.<sup>[</sup>
+<xref rid="adma202312282-bib-0034" ref-type="bibr">
+<sup>34</sup>
+</xref>
+<sup>]</sup> An example surface is shown in <bold>Figure</bold>
+<xref rid="adma202312282-fig-0002" ref-type="fig">
+<bold>2</bold>a</xref>. Here, multiple DB sites are indicated with arrows, and three examples (two 1DB and one 2DB) are marked with colored boxes and shown enlarged in highlighted panels alongside structural models below the main image. Figure <xref rid="adma202312282-fig-0002" ref-type="fig">2b</xref> shows the same surface area as Figure <xref rid="adma202312282-fig-0002" ref-type="fig">2a</xref> after room temperature saturation with arsine. After arsine exposure, all of the 1DB and 2DB sites either exhibit an adsorbed AsH<sub>2</sub> or have been re‐terminated by hydrogen (occasional adsorption of contaminants not associated with AsH<sub>3</sub> are excluded from the statistics, an example is shown labeled “X” in Figure <xref rid="adma202312282-fig-0002" ref-type="fig">2a,b</xref>).</p><fig position="float" fig-type="Figure" id="adma202312282-fig-0002" orientation="portrait"><label>Figure 2</label><caption><p>Arsine adsorption and arsenic incorporation through thermally generated dangling bond sites in the hydrogen resist: a) STM image of hydrogen‐terminated Si(001) containing a distribution of single (1DB) and dimer (2DB) dangling bond sites. Three highlight panels show two 1DBs identified by their asymmetric appearance, and one 2DB which is symmetric about the dimer row axis. b) The same surface after saturation with AsH<sub>3</sub>. 1DB sites are re‐terminated with H or adsorbed with a type‐A feature (AsH<sub>2</sub> dimer‐end structure). 2DBs are re‐terminated or adsorbed with a type‐A or type‐B (AsH<sub>2</sub> dimer‐bridge) feature. DBs may also infrequently adsorb non‐arsenic contaminants labeled as X. c) The same surface following a 350 °C incorporation anneal. H‐terminated DBs are unchanged and both type‐A and type‐B features are converted to As‐Si heterodimers. Imaging parameters: a–c) −2.1 V, 20 pA. False color scales: main −225‐+200 pm; insets −100‐+225 pm. AsH<sub>3</sub> dosing: 5 × 10<sup>−9</sup> mbar × 10 min. Incorporation anneal: 350 °C × 2 min.</p></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" position="anchor" id="jats-graphic-5" orientation="portrait" xlink:href="ADMA-36-2312282-g002.jpg"/></fig><p>At the 1DB adsorption windows, we observe only two outcomes: 1) re‐termination by a hydrogen atom, or 2) adsorption of AsH<sub>2</sub> to form an asymmetric type‐A feature. From a total count of 286 1DB sites, we find 89 ± 2% have undergone re‐termination with a hydrogen atom and 10 ± 2% of 1DB sites have an adsorbed AsH<sub>2</sub> fragment. <bold>Table</bold>
+<xref rid="adma202312282-tbl-0001" ref-type="table">
+<bold>1</bold>
+</xref> also indicates a minute, but non‐zero count of type‐B features adsorbed at 1DB sites, however these anomalous occurrences (two within the entire data set) likely result from undetected conversion of 1DB to 2DB sites prior to AsH<sub>3</sub> exposure; type‐B features are not expected to adsorb at 1DB sites. A full elucidation of the adsorption mechanisms for 1DB sites is outside the scope of this work, but we propose that our observations can be explained by the surface diffusion of AsH<sub>2</sub> in a physisorbed state, along the hydrogen‐terminated dimer rows, following the dissociative attachment of a hydrogen atom to a 1DB site. Such a process would result in the hydrogen re‐termination of a first 1DB site and the formation of a chemisorbed AsH<sub>2</sub> fragment as a type‐A feature at a nearby, second 1DB site. We note that an analogous mechanism has recently been proposed for similar observations of hydrogen and non‐local OH adsorption at DB sites in the dissociative attachment of H<sub>2</sub>O to partially‐terminated Si(001) surfaces.<sup>[</sup>
+<xref rid="adma202312282-bib-0035" ref-type="bibr">
+<sup>35</sup>
+</xref>
+<sup>]</sup>
+</p><table-wrap position="float" id="adma202312282-tbl-0001" content-type="Table" orientation="portrait"><label>Table 1</label><caption><p>Reaction products of AsH<sub>3</sub> molecules at single (1DB) and dimer (2DB) dangling bond sites on hydrogen‐terminated Si(001).</p></caption><table frame="hsides" rules="groups"><col align="left" span="1"/><col align="center" span="1"/><col align="center" span="1"/><col align="center" span="1"/><thead><tr style="border-bottom:solid 1px #000000"><th align="left" rowspan="1" colspan="1">Reactive site</th><th align="center" rowspan="1" colspan="1">Adsorbate type</th><th align="center" rowspan="1" colspan="1">Probability</th><th align="center" rowspan="1" colspan="1">As incorporation probability (if AsH<sub>2</sub> adsorbed)</th></tr></thead><tbody><tr><td align="left" rowspan="1" colspan="1">1DB (single dangling bond)</td><td align="center" rowspan="1" colspan="1">H (re‐termination)</td><td align="center" rowspan="1" colspan="1">89 ± 2%</td><td align="center" rowspan="1" colspan="1">N/A</td></tr><tr><td align="left" rowspan="1" colspan="1">1DB</td><td align="center" rowspan="1" colspan="1">Type‐A (dimer‐end AsH<sub>2</sub>)</td><td align="center" rowspan="1" colspan="1">10 ± 2%</td><td align="center" rowspan="1" colspan="1">92 ± 6%</td></tr><tr><td align="left" rowspan="1" colspan="1">1DB</td><td align="center" rowspan="1" colspan="1">Type‐B (dimer‐bridge AsH<sub>2</sub>)</td><td align="center" rowspan="1" colspan="1">0.6 ± 0.6%</td><td align="center" rowspan="1" colspan="1">N/A</td></tr><tr><td align="left" rowspan="1" colspan="1">2DB (dimer dangling bond)</td><td align="center" rowspan="1" colspan="1">2H (re‐termination)</td><td align="center" rowspan="1" colspan="1">26 ± 5%</td><td align="center" rowspan="1" colspan="1">N/A</td></tr><tr><td align="left" rowspan="1" colspan="1">2DB</td><td align="center" rowspan="1" colspan="1">Type‐A (dimer‐end AsH<sub>2</sub>+H)</td><td align="center" rowspan="1" colspan="1">57 ± 10%</td><td align="center" rowspan="1" colspan="1">94 ± 3%</td></tr><tr><td align="left" rowspan="1" colspan="1">2DB</td><td align="center" rowspan="1" colspan="1">Type‐B (dimer‐bridge AsH<sub>2</sub>)</td><td align="center" rowspan="1" colspan="1">17 ± 10%</td><td align="center" rowspan="1" colspan="1">94 ± 3%</td></tr></tbody></table><permissions><copyright-holder>John Wiley &amp; Sons, Ltd.</copyright-holder></permissions></table-wrap><p>At 2DB sites, we find three outcomes: 1) an asymmetric AsH<sub>2</sub> type‐A feature; 2) a symmetric AsH<sub>2</sub> type‐B feature; and 3) hydrogen re‐termination. Following a statistical analysis of 92 2DB sites, we find 57 ± 10% of them contain a type‐A feature after saturation arsine exposure, 17 ± 10% contain a type‐B feature, and the remaining 26 ± 5% of 2DB sites are found to re‐terminate with hydrogen. The formation of the type‐A feature can be understood as resulting from the dissociative attachment of a single AsH<sub>3</sub> molecule, with the AsH<sub>2</sub> fragment attaching at one end of the dimer and the hydrogen atom at the other. The formation of the type‐B feature, where an AsH<sub>2</sub> fragment bonds symmetrically across a single dimer, can be explained by the surface diffusion of physisorbed AsH<sub>2</sub> fragments resulting from AsH<sub>3</sub> dissociation and hydrogen re‐termination at 1DB sites as discussed above. While alternative explanations are possible, the observation of the type‐B features at 2DB sites adds further support to the proposed mechanism involving diffusive physisorbed AsH<sub>2</sub> fragments. Finally, we suggest re‐termination of 2DBs with hydrogen results from two sequential H‐transfer reactions from two AsH<sub>3</sub> molecules to each of the dangling bonds in the 2DB structure.</p><p>Figure <xref rid="adma202312282-fig-0002" ref-type="fig">2c</xref> shows the same surface after a ≈350 °C incorporation anneal. We find that sites adsorbed with type‐A or type‐B features both result in the incorporation of single arsenic atoms, as evidenced by the appearance of either an As‐Si heterodimer or an ejected ad‐Si atom. This is further confirmation of our assignments of the type‐A and type‐B features and an indicator that arsine is an efficient dopant precursor. To quantify this efficiency, we have analyzed arsenic incorporation at a combined 156 1DB and 2DB sites, and the results are presented in Table <xref rid="adma202312282-tbl-0001" ref-type="table">1</xref>. We find a very high probability, 94 ± 3%, for arsenic incorporation at 2DB sites, once an AsH<sub>2</sub> fragment has adsorbed. In contrast, phosphine also adsorbs at 2DB sites as PH<sub>2</sub> in an analogous type‐A feature, but shows no significant incorporation following thermal anneal,<sup>[</sup>
+<xref rid="adma202312282-bib-0027" ref-type="bibr">
+<sup>27</sup>
+</xref>
+<sup>]</sup> and all PH<sub>2</sub> fragments are expected to desorb when annealed above 360 °C.<sup>[</sup>
+<xref rid="adma202312282-bib-0036" ref-type="bibr">
+<sup>36</sup>
+</xref>
+<sup>]</sup> If we include the adsorption stage as well as the thermal incorporation stage, the arsenic incorporation success rate at 2DB sites drops to 70 ± 21%, however, the failure mechanism is the re‐termination of the 2DB with hydrogen during the arsine exposure, such that the 2DB site can be rewritten lithographically and the dose‐anneal steps repeated. In this way, iterative lithography/dose cycles can lead to a single arsenic atom placement success rate approaching 100% at 2DB sites.</p><p>The overall incorporation probability of arsenic at 1DB sites, including both the dosing and annealing stages, is 10 ± 3% (note the N/A entry for incorporation probability of type‐B features at 1DB reflects an absence of incorporation data for the anomalous type‐B adsorption at 1DB sites mentioned above). This value of 10 ± 3% is too low to be useful for device fabrication while significant enough to be a potential nuisance. An obvious mitigation of this nuisance is the reduction of the substrate temperature during hydrogen termination to produce a surface with a low enough density of 1DB sites (and no or few 2DBs),<sup>[</sup>
+<xref rid="adma202312282-bib-0037" ref-type="bibr">
+<sup>37</sup>
+</xref>
+<sup>]</sup> such that spurious arsenic incorporation through ≈10% of the sites poses no detriment to device fabrication. Taking the 4 × 4 array of Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1g</xref> as an example, complete avoidance of spurious arsenic incorporation within the active device area of 625 nm<sup>2</sup> (5 nm array pitch plus 5 nm border) would permit a maximum density of spurious arsenic incorporation of 0.0016 nm<sup>−2</sup>. Given the expectation of a ≈90% re‐termination rate for 1DB sites upon exposure to AsH<sub>3</sub>, the maximum permissible density of 1DBs prior to AsH<sub>3</sub> exposure would then be 0.016 nm<sup>−2</sup>. 1DB densities of half this maximum permissible value are routinely achieved using standard hydrogen termination parameters, as demonstrated in Figure <xref rid="adma202312282-fig-0002" ref-type="fig">2a</xref>, which shows a hydrogen‐terminated surface with a DB density of ≈0.008 nm<sup>−2</sup>. Beyond this simplest mitigation of spurious arsenic incorporation, it has also recently been demonstrated that non‐contact AFM can be used to re‐terminate individual 1DBs, eliminating the adsorption site altogether.<sup>[</sup>
+<xref rid="adma202312282-bib-0038" ref-type="bibr">
+<sup>38</sup>
+</xref>
+<sup>]</sup> Another possible approach is to anneal the hydrogen‐terminated surface allowing 1DB sites to diffuse and pair up in the more thermodynamically stable 2DBs.<sup>[</sup>
+<xref rid="adma202312282-bib-0039" ref-type="bibr">
+<sup>39</sup>
+</xref>
+<sup>]</sup> Prior to arsine dosing, this surface can first be exposed to phosphine, effectively plugging all 2DB sites with PH<sub>2</sub> adsorbates that will eventually desorb during the incorporation anneal. By employing such mitigations, arsenic incorporation through 1DB and 2DB sites can be utilized, as needed, for the incorporation of single atoms with extreme spatial precision, albeit in an iterative fabrication cycle. Alternatively, we now present further results showing how arsenic incorporation using a single fabrication cycle can be improved to 97 ± 2% by using adsorption windows larger than 2DB.</p></sec><sec id="adma202312282-sec-0050"><label>2.3</label><title>Adsorption and Incorporation of Arsenic at Lithographic Windows in the Hydrogen Resist</title><p>
+<bold>Figure</bold>
+<xref rid="adma202312282-fig-0003" ref-type="fig">
+<bold>3</bold>a</xref> shows an STM image of a patterned 10 × 10 array of adsorption windows. While it is possible to use feedback‐controlled lithography to produce extended hydrogen resist patterns with single atom precision,<sup>[</sup>
+<xref rid="adma202312282-bib-0040" ref-type="bibr">
+<sup>40</sup>
+</xref>, <xref rid="adma202312282-bib-0041" ref-type="bibr">
+<sup>41</sup>
+</xref>, <xref rid="adma202312282-bib-0042" ref-type="bibr">
+<sup>42</sup>
+</xref>
+<sup>]</sup> these 100 lithographic sites were patterned without feedback control so as to rapidly produce adsorption windows of various sizes, <italic toggle="yes">n</italic>DB where <italic toggle="yes">n</italic> ranges from 2 to 10, and various shapes, spanning one to three silicon dimer rows. Within this distribution, there are 6 2DB, 14 4DB, and 8 6DB sites, all of which are confined to single‐dimer rows. These 2DB, 4DB, and 6DB sites are highlighted in Figure <xref rid="adma202312282-fig-0003" ref-type="fig">3a</xref> by dotted, dashed, and solid outlined circles, respectively; an example of each is shown at higher resolution with accompanying structural diagrams in Figure <xref rid="adma202312282-fig-0003" ref-type="fig">3b–d</xref>. In Figure <xref rid="adma202312282-fig-0003" ref-type="fig">3e</xref>, we show the same 10 × 10 array following a saturation dose of arsine and see that all DBs on the surface have been replaced by AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> adsorbates or re‐terminating hydrogen. Close examination of the 100 array sites reveals multiple examples of the five feature types (A, B, C, D, and E) discussed above in the seven‐element chain example (Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1d</xref>), and no other AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> adsorbate feature types. Figure <xref rid="adma202312282-fig-0003" ref-type="fig">3f–h</xref> shows enlargements of the adsorbates highlighted in Figure <xref rid="adma202312282-fig-0003" ref-type="fig">3b–d</xref>.</p><fig position="float" fig-type="Figure" id="adma202312282-fig-0003" orientation="portrait"><label>Figure 3</label><caption><p>Arsine adsorption and arsenic incorporation through lithographically patterned windows in a hydrogen resist: a) STM image of a 10 × 10 array of <italic toggle="yes">n</italic>DB windows (<italic toggle="yes">n</italic> = 2 to 10) in a hydrogen monolayer on Si(001). Windows of size <italic toggle="yes">n</italic> = 2, 4, and 6 are highlighted by dotted, dashed, and solid bordered circles, respectively. Windows outlined in black circles are displayed in detail in panels (b–d) alongside corresponding structural diagrams. e) Image of the patterned area from a) following saturation AsH<sub>3</sub> exposure. All <italic toggle="yes">n</italic>DB sites are replaced with AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> adsorbates (<italic toggle="yes">x</italic> = 0, 1, or 2) or are re‐terminated. f–h) Show the same three array elements from (d), (c), and (d) now filled with the adsorbates shown structurally in the accompanying diagrams. i) Adsorption statistics of the thermal 1 and 2 DB sites from Section <xref rid="adma202312282-sec-0040" ref-type="sec">2.2</xref> combined with results from the 2, 4, and 6 DB lithographic sites, showing distributions of feature types A–E from Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1e. j,k</xref>) Show a six‐element array in which all AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> adsorbates incorporate, as confirmed by the presence of As‐Si, ad‐Si (either dimer‐bridge “b‐Si” or end‐bridge “e‐Si”) at the site of adsorption. l) Collected incorporation statistics of AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> types A–E following 350 °C incorporation anneal. Numbers in square brackets below histogram columns indicate total counts per species. Imagining parameters: a–h) −2 V, 60 pA, j,k) −2 V, 100 pA. Lithography parameters: 3.5 V, 3000 pA, 50 nm s<sup>−1</sup>. AsH<sub>3</sub> dosing: 5 × 10<sup>−9</sup> mbar × 10 min. Incorporation anneal: 350 °C × 1 min.</p></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" position="anchor" id="jats-graphic-7" orientation="portrait" xlink:href="ADMA-36-2312282-g004.jpg"/></fig><p>As with the thermally generated 2DB adsorption sites discussed in Figure <xref rid="adma202312282-fig-0002" ref-type="fig">2</xref>, we find all 2DB sites in the 10 × 10 array result in type‐A or type‐B AsH<sub>2</sub> adsorption, or hydrogen re‐termination with probabilities also in agreement with the thermal desorption experiment data. An example of type‐A feature formation at a 2DB site is shown in Figure <xref rid="adma202312282-fig-0003" ref-type="fig">3b,f</xref>.</p><p>At high symmetry 4DB sites, such as that highlighted in Figure <xref rid="adma202312282-fig-0003" ref-type="fig">3c</xref>, we observe a preference for the formation of a type‐C feature (Figure <xref rid="adma202312282-fig-0003" ref-type="fig">3g</xref>). As described above, the type‐C feature is an AsH fragment in a dimer‐bridge configuration. It presents a protrusion that is symmetric about the dimer row, similar to the type‐B feature that is a centered AsH<sub>2</sub> fragment; however, the type‐C feature images are both wider and brighter than the type‐B feature. This structure can form at the 4DB sites when an AsH<sub>3</sub> sheds two of three H atoms to re‐terminate one dimer of the 4DB, and the remaining AsH moiety bridge‐bonds across the second (see schematic, Figure <xref rid="adma202312282-fig-0003" ref-type="fig">3g</xref>). This type‐C feature is never observed to form at 1DB or 2DB adsorption windows but is found to form at 18 of the total 24 measured 4DB adsorption windows (75%), following exposure to arsine. In addition to the type‐C feature, 4DB sites are also found to occasionally adsorb single type‐A or type‐B AsH<sub>2</sub> + H features, or type‐D or type‐E As + 3H adsorbates, with probabilities of 17% and 8%, respectively. Importantly, the 4DB sites are never observed to contain more than one AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> fragment, nor do any fully re‐terminate with four hydrogen atoms. All 4DB sites adsorb exclusively a single AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> fragment, that is, from our statistics of 24 4DB sites, we find 100% adsorption probability for a single AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> species, precisely what is required for scale‐up to large‐scale donor array fabrication.</p><p>At the locations of high symmetry 6DB adsorption windows (three contiguous 2DB sites as in Figure <xref rid="adma202312282-fig-0003" ref-type="fig">3d</xref>), the preferred adsorbate structure is a pair of adsorbed AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> fragments: a type‐A feature and a type‐C feature, located on neighboring dimers, as shown in Figure <xref rid="adma202312282-fig-0003" ref-type="fig">3h</xref>. This AsH<sub>3</sub> adsorption structure is detected at 12 out of 19 exposed 6DB windows (63%). The remaining 37% of the 6DBs exhibit the adsorption of lone type‐D or type‐E features (21%), type‐C features (11%) or, type‐A or type‐B features (5%). As with the 4DB, 6DB windows are always observed with at least one AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> adsorbate after saturation arsine exposure.</p><p>The above adsorption behavior of AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> fragments at 1DB, 2DB, 4DB, and 6DB adsorption windows is summarized in Figure <xref rid="adma202312282-fig-0003" ref-type="fig">3i</xref>. Here, data from lithographically prepared sites are presented together with those from thermally generated 1 and 2 DB sites. The resulting adsorption probability histogram demonstrates a result of critical importance for single‐atom arsenic patterning. We find that 4DB lithographic windows are the optimal size for reliable single arsine molecule adsorption, guaranteeing the adsorption of exactly one AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> fragment. 1DB and 2DB windows are too small and routinely suffer complete re‐termination. This excludes the use of these sites for single‐atom patterning in a single process‐step sequence. In contrast, 6DB windows are sufficiently large that they preferentially adsorb two AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> fragments, rendering them incompatible with single‐atom patterning (although nevertheless useful for the type of donor cluster fabrication that has been utilized in phosphorus in silicon devices such as two‐qubit gates).<sup>[</sup>
+<xref rid="adma202312282-bib-0022" ref-type="bibr">
+<sup>22</sup>
+</xref>, <xref rid="adma202312282-bib-0043" ref-type="bibr">
+<sup>43</sup>
+</xref>
+<sup>]</sup> The 4DB window does not completely re‐terminate nor does it adsorb more than one AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> fragment. The 4DB is, therefore, the perfect‐sized lithographic window for reliable single arsine molecule adsorption.</p><p>We next turn our attention to the statistics of arsenic atom incorporation from the various AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> adsorbates. Figure <xref rid="adma202312282-fig-0003" ref-type="fig">3j</xref> shows an example where nine AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> fragments have been adsorbed at the locations of six lithographic adsorption windows. These fragments are isolated or clustered and are identified as five type‐A or type‐B, two type‐D or type‐E features, and two type‐C. Figure <xref rid="adma202312282-fig-0003" ref-type="fig">3k</xref> shows the same surface following a ≈350 °C incorporation anneal. All nine adsorbates are replaced by visible As‐Si, or on‐site ad‐Si, confirming arsenic incorporation at each site. Including the examples found in Figure <xref rid="adma202312282-fig-0003" ref-type="fig">3j,k</xref>, we have assessed a combined total of 206 instances of isolated type A, B, C, D, and E features after thermal annealing to 350 °C (see Supporting Information), applying the same incorporation assessment same criteria discussed earlier and previously applied to phosphorus.<sup>[</sup>
+<xref rid="adma202312282-bib-0026" ref-type="bibr">
+<sup>26</sup>
+</xref>, <xref rid="adma202312282-bib-0027" ref-type="bibr">
+<sup>27</sup>
+</xref>
+<sup>]</sup> The results of this analysis are summarized in the histogram in Figure <xref rid="adma202312282-fig-0003" ref-type="fig">3</xref>, panel l. We find that type‐C features provide single incorporated arsenic atoms with unity yield, and the remaining four features types (A, B, D, and E) with near unity Without this result, atomic‐scale donor device scale‐up using arsenic dopants would not be possible.</p><p>The last column of the histogram in Figure <xref rid="adma202312282-fig-0003" ref-type="fig">3</xref>, panel l, shows the combined arsenic incorporation statistics for all five feature types where each species is weighted by its probability of adsorption at a 4DB site. From this result, we expect that when any 4DB window in a hydrogen resist on Si(001) is exposed to a saturating dose of arsine and annealed to 350 °C the result will be the incorporation of a single arsenic atom with a yield of 97 ± 2%. This is an exceptionally high incorporation yield. Furthermore, while the uncertainty of this value results from the occurrence of dangling bonds at the adsorption sites following the incorporation anneal, the 1% incorporation failure results exclusively from the re‐termination of the adsorption site with hydrogen, and not from the unintentional incorporation of more than one arsenic atom. This result represents a pathway to atomically precise patterning of large numbers of single arsenic atoms in a silicon lattice.</p><p>The preceding demonstration that arsine can overcome the shortcomings of phosphine with respect to single‐atom yield (≈70% with 1‐in‐6 site precision for PH<sub>3</sub>) raises an important question. Why does arsine outperform phosphine in this manner? It is known that when a PH<sub>2</sub> fragment, adsorbed at a 2DB site, is annealed to ≈360 °C, it will recombine with hydrogen and desorb as PH<sub>3</sub>.<sup>[</sup>
+<xref rid="adma202312282-bib-0036" ref-type="bibr">
+<sup>36</sup>
+</xref>
+<sup>]</sup> In contrast, we have shown here that an AsH<sub>2</sub> fragment will not desorb when annealed but instead is incorporated into the Si(001) surface. We propose the following explanation of this fundamental difference between the behavior of phosphine and arsine. For any adsorbed AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> fragment to produce an incorporated arsenic atom, it must first dissociate all its remaining hydrogen atoms to the surface; this requires available reactive surface sites. We suggest that a 350–380 °C anneal is insufficient to excite recombinative desorption of arsine but is sufficient to produce additional dangling bond sites immediately at the location of an AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> adsorbate. At this temperature the hydrogen resist atoms become mobile,<sup>[</sup>
+<xref rid="adma202312282-bib-0039" ref-type="bibr">
+<sup>39</sup>
+</xref>
+<sup>]</sup> and diffusion or desorption of hydrogen from the resist can deliver additional reactive silicon sites (i.e., DBs) allowing an AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> adsorbate to completely dissociate. That is, arsine desorption has a higher activation barrier than that of DB diffusion or H<sub>2</sub> desorption, whereas the reverse is true for PH<sub>3</sub>. Given this proposed incorporation mechanism for arsenic from arsine, it is possible to address the spatial precision of arsenic incorporation and the occasional movement of the incorporated dopant beyond the adsorption site, as seen in Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1c</xref>. While the arsenic atom in an adsorbed AsH<sub>x</sub> fragment will bind to a silicon atom within a defined adsorption window, an extra DB site delivered to the edge of an adsorption window, thus permitting full dissociation, can effectively extend the window by one dimer in either direction along the dimer row. That is, the resulting incorporation window is assumed to extend at most by one lattice spacing in either direction beyond the original adsorption window. This occasional extension of the incorporation site beyond the adsorption site (only seen for one atom in the 2 × 2 dopant array of Figure <xref rid="adma202312282-fig-0001" ref-type="fig">1</xref>) is the price paid for reliable single‐atom incorporation via this technique.</p><p>Due to the fortuitous surface chemistry that we have described in detail, arsenic‐in‐silicon is found to be the first material system offering full control of single dopant atom incorporation. The technical difficulty of this feat is reflected in the fact that our 2 × 2 array is the first ever atomic precision array built from single dopant atoms in silicon. Our comprehensive experiments not only demonstrate that scaling such arrays to large numbers is possible but our results also provide a guide to the surface chemistries that should be sought in other candidate combinations of precursors, resists, and substrates that are capable of being similarly controlled. Using this guidance, additional material systems may be added to an expanding technology exceeding the precision of all other semiconductor doping techniques and offering the capability to produce artificial lattices that meet the demanding requirements of designer quantum materials and solid‐state quantum information devices. This marked improvement promises a substantial leap for device scale‐up, opening the door for large‐scale assembly of atomically precise, single‐dopant‐atom arrays and advancing quantum materials and devices fabricated from the bottom up.</p></sec></sec><sec id="adma202312282-sec-0060"><label>3</label><title>Conclusion</title><p>We have demonstrated that by combining arsine with HRL it is possible to achieve controlled positioning of single arsenic atoms into the Si(001) surface lattice with a nominal spatial precision of 1‐in‐4 (up to a possible 1‐in‐8) lattice sites and a single atom yield of 97 ± 2%. This remarkable success rate can be achieved in a single lithography/dose/anneal cycle. The successful implementation of these findings for single‐atom precision device fabrication requires only a well‐prepared (i.e., low DB density) surface, a high‐purity precursor gas, and a well‐controlled STM lithography procedure capable of reliable removal of exactly four hydrogen atoms in a 2 × 2, double‐dimer formation, as can be achieved through feedback‐controlled lithography.<sup>[</sup>
+<xref rid="adma202312282-bib-0040" ref-type="bibr">
+<sup>40</sup>
+</xref>, <xref rid="adma202312282-bib-0041" ref-type="bibr">
+<sup>41</sup>
+</xref>, <xref rid="adma202312282-bib-0042" ref-type="bibr">
+<sup>42</sup>
+</xref>
+<sup>]</sup> By introducing an iterative lithography/dose cycle it should be possible to achieve incorporation through smaller lithographic windows containing only a single silicon dimer as well as single atom yields of up to 100%.</p></sec><sec id="adma202312282-sec-0070"><label>4</label><title>Experimental Section</title><sec id="adma202312282-sec-0100"><title>Experimental Methods</title><p>All STM imaging was performed using a ScientaOmicron VT‐STM operated at room temperature and a base pressure of 3 × 10<sup>−11</sup> mbar. STM tips were prepared by mechanical cutting of Pt‐Ir (90:10) wire. Si(001) substrates were n‐type, arsenic doped, with a nominal resistivity of 15 Ohm cm. Prior to UHV processing, substrates were patterned with 300 nm deep, dry etched, fiducial markers, allowing for alignment to the HRL patterns in subsequent process steps. Clean silicon surfaces were prepared using a standard direct current heating recipe with a 600 °C × 8‐h outgas, followed by multiple ≈1200 °C flash anneals, in a preparation chamber with a base pressure of 2 × 10<sup>−10</sup> mbar. Surfaces were hydrogen terminated by exposure to an atomic hydrogen beam, generated by thermally cracking of H<sub>2</sub> gas in a Tektra H‐flux Atomic Hydrogen Source, using an H<sub>2</sub> partial pressure of 5 × 10<sup>−7</sup> mbar, and a substrate temperature of 320 °C maintained by direct current heating. All STM lithography was performed at a tip‐sample bias of +4 V, a tunnel current setpoint of 3.5 nA, and a write speed of 50 nm s<sup>−1</sup>. Sample temperatures were monitored using an Impact IR IGA 50‐LO optical pyrometer, with an estimated measurement uncertainty of ±20 °C. Total and partial pressures were measured using Bayard–Alpert ionization gauges and an SRS RGA100 quadrupole mass spectrometer.</p></sec><sec id="adma202312282-sec-0110"><title>Statistical Analysis</title><p>Statistical data presented in Table <xref rid="adma202312282-tbl-0001" ref-type="table">1</xref> and Figure <xref rid="adma202312282-fig-0003" ref-type="fig">3i,l</xref> are measured in three adsorption experiments and two incorporation experiments. Before analysis, adsorption data was sorted to exclude any contaminated sites, post AsH<sub>3</sub> exposure. Incorporation data was sorted to exclude AsH<italic toggle="yes">
+<sub>x</sub>
+</italic> adsorbates positioned within one silicon dimer of a defect or another adsorbate, pre‐anneal. Samples sizes for AsH<sub>3</sub> adsorption at 1DB, 2DB, 4DB, and 6DB were <italic toggle="yes">n</italic> = 286, 92 (= 85 + 6 + 2), 24 (= 11 + 13), and 19 (= 10 + 9), respectively, and for incorporation anneals of type‐A/B, type‐C, and type‐D/E were <italic toggle="yes">n</italic> = 166 (= 156 + 10), 20 and 20, respectively, where values in parenthesis indicate the sample size split across more than one experiment, where applicable. For data sets with large random spatial distributions (i.e., adsorption and incorporation at 1DB and 2DB) corresponding STM images were divided into quadrants and averaged; standard deviations of the averaged values were presented as corresponding uncertainties (see Table <xref rid="adma202312282-tbl-0001" ref-type="table">1</xref> for results). All other measured values are presented as simple cumulative totals across all relevant experiments, and the quoted uncertainties derive exclusively from the indeterminate experimental results (i.e., a DB appearance following anneal can obscure an As‐Si or lack thereof).</p></sec></sec><sec sec-type="COI-statement" id="adma202312282-sec-0130"><title>Conflict of Interest</title><p>The authors declare no conflict of interest.</p></sec><sec sec-type="supplementary-material"><title>Supporting information</title><supplementary-material id="adma202312282-supitem-0001" position="float" content-type="local-data" orientation="portrait"><caption><p>Supporting Information</p></caption><media xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="ADMA-36-2312282-s001.pdf" position="float" orientation="portrait"/></supplementary-material></sec></body><back><ack id="adma202312282-sec-0120"><title>Acknowledgements</title><p>The project was financially supported by the Engineering and Physical Sciences Research Council (EPSRC) [grant numbers EP/M009564/1, EP/R034540/1, EP/V027700/1, and EP/W000520/1] and Innovate UK [grant number UKRI/75574]. P.C.C. was partly supported by the EPSRC Centre for Doctoral Training in Advanced Characterisation of Materials [grant number EP/L015277/1] and by the Paul Scherrer Institute.</p></ack><sec sec-type="data-availability" id="adma202312282-sec-0150"><title>Data Availability Statement</title><p>The data that support the findings of this study are openly available on zenodo.org at <ext-link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://doi.org/10.5281/zenodo.10013591" ext-link-type="uri" specific-use="dataset is-supplemented-by">https://doi.org/10.5281/zenodo.10013591</ext-link>, reference number 10013591.</p></sec><ref-list id="adma202312282-bibl-0001"><ref id="adma202312282-bib-0001"><label>1</label><mixed-citation publication-type="journal" id="adma202312282-cit-0001">
+<string-name name-style="western">
+<given-names>M.</given-names>
+<surname>Imada</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A.</given-names>
+<surname>Fujimori</surname>
+</string-name>, <string-name name-style="western">
+<given-names>Y.</given-names>
+<surname>Tokura</surname>
+</string-name>, <source>Rev. Mod. Phys.</source>
+<year>1998</year>, <volume>70</volume>, <fpage>1039</fpage>.</mixed-citation></ref><ref id="adma202312282-bib-0002"><label>2</label><mixed-citation publication-type="journal" id="adma202312282-cit-0002">
+<string-name name-style="western">
+<given-names>E.</given-names>
+<surname>Abrahams</surname>
+</string-name>, <string-name name-style="western">
+<given-names>P. W.</given-names>
+<surname>Anderson</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D. C.</given-names>
+<surname>Licciardello</surname>
+</string-name>, <string-name name-style="western">
+<given-names>T. V.</given-names>
+<surname>Ramakrishnan</surname>
+</string-name>, <source>Phys. Rev. Lett.</source>
+<year>1979</year>, <volume>42</volume>, <fpage>673</fpage>.</mixed-citation></ref><ref id="adma202312282-bib-0003"><label>3</label><mixed-citation publication-type="journal" id="adma202312282-cit-0003">
+<string-name name-style="western">
+<given-names>W. P.</given-names>
+<surname>Su</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. R.</given-names>
+<surname>Schrieffer</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A. J.</given-names>
+<surname>Heeger</surname>
+</string-name>, <source>Phys. Rev. Lett.</source>
+<year>1979</year>, <volume>42</volume>, <fpage>1698</fpage>.</mixed-citation></ref><ref id="adma202312282-bib-0004"><label>4</label><mixed-citation publication-type="journal" id="adma202312282-cit-0004">
+<string-name name-style="western">
+<given-names>N. H.</given-names>
+<surname>Le</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A. J.</given-names>
+<surname>Fisher</surname>
+</string-name>, <string-name name-style="western">
+<given-names>E.</given-names>
+<surname>Ginossar</surname>
+</string-name>, <source>Phys. Rev. B</source>
+<year>2017</year>, <volume>96</volume>, <elocation-id>245406</elocation-id>.</mixed-citation></ref><ref id="adma202312282-bib-0005"><label>5</label><mixed-citation publication-type="journal" id="adma202312282-cit-0005">
+<string-name name-style="western">
+<given-names>B. E.</given-names>
+<surname>Kane</surname>
+</string-name>, <source>Nature</source>
+<year>1998</year>, <volume>393</volume>, <fpage>133</fpage>.</mixed-citation></ref><ref id="adma202312282-bib-0006"><label>6</label><mixed-citation publication-type="journal" id="adma202312282-cit-0006">
+<string-name name-style="western">
+<given-names>A. M.</given-names>
+<surname>Stoneham</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A. J.</given-names>
+<surname>Fisher</surname>
+</string-name>, <string-name name-style="western">
+<given-names>P. T.</given-names>
+<surname>Greenland</surname>
+</string-name>, <source>J. Phys.: Condens. Matter</source>
+<year>2003</year>, <volume>15</volume>, <fpage>L447</fpage>.</mixed-citation></ref><ref id="adma202312282-bib-0007"><label>7</label><mixed-citation publication-type="journal" id="adma202312282-cit-0007">
+<string-name name-style="western">
+<given-names>C. D.</given-names>
+<surname>Hill</surname>
+</string-name>, <string-name name-style="western">
+<given-names>E.</given-names>
+<surname>Peretz</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S. J.</given-names>
+<surname>Hile</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. G.</given-names>
+<surname>House</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M.</given-names>
+<surname>Fuechsle</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S.</given-names>
+<surname>Rogge</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. Y.</given-names>
+<surname>Simmons</surname>
+</string-name>, <string-name name-style="western">
+<given-names>L. C. L.</given-names>
+<surname>Hollenberg</surname>
+</string-name>, <source>Sci. Adv.</source>
+<year>2015</year>, <volume>1</volume>, <elocation-id>e150070</elocation-id>.<pub-id pub-id-type="doi" assigning-authority="pmc">10.1126/sciadv.1500707</pub-id><pub-id pub-id-type="pmcid">PMC4646824</pub-id><pub-id pub-id-type="pmid">26601310</pub-id></mixed-citation></ref><ref id="adma202312282-bib-0008"><label>8</label><mixed-citation publication-type="journal" id="adma202312282-cit-0008">
+<string-name name-style="western">
+<given-names>J. W.</given-names>
+<surname>Lyding</surname>
+</string-name>, <string-name name-style="western">
+<given-names>T. C.</given-names>
+<surname>Shen</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. S.</given-names>
+<surname>Hubacek</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. R.</given-names>
+<surname>Tucker</surname>
+</string-name>, <string-name name-style="western">
+<given-names>G. C.</given-names>
+<surname>Abeln</surname>
+</string-name>, <source>Appl. Phys. Lett.</source>
+<year>1994</year>, <volume>64</volume>, <fpage>2010</fpage>.</mixed-citation></ref><ref id="adma202312282-bib-0009"><label>9</label><mixed-citation publication-type="journal" id="adma202312282-cit-0009">
+<string-name name-style="western">
+<given-names>J. R.</given-names>
+<surname>Tucker</surname>
+</string-name>, <string-name name-style="western">
+<given-names>T. C.</given-names>
+<surname>Shen</surname>
+</string-name>, <source>Solid State Electron.</source>
+<year>1998</year>, <volume>42</volume>, <fpage>1061</fpage>.</mixed-citation></ref><ref id="adma202312282-bib-0010"><label>10</label><mixed-citation publication-type="journal" id="adma202312282-cit-0010">
+<string-name name-style="western">
+<given-names>S. R.</given-names>
+<surname>Schofield</surname>
+</string-name>, <string-name name-style="western">
+<given-names>N. J.</given-names>
+<surname>Curson</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. Y.</given-names>
+<surname>Simmons</surname>
+</string-name>, <string-name name-style="western">
+<given-names>F. J.</given-names>
+<surname>Rueß</surname>
+</string-name>, <string-name name-style="western">
+<given-names>T.</given-names>
+<surname>Hallam</surname>
+</string-name>, <string-name name-style="western">
+<given-names>L.</given-names>
+<surname>Oberbeck</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R. G.</given-names>
+<surname>Clark</surname>
+</string-name>, <source>Phys. Rev. Lett.</source>
+<year>2003</year>, <volume>91</volume>, <elocation-id>136104</elocation-id>.<pub-id pub-id-type="pmid">14525322</pub-id>
+<pub-id pub-id-type="doi" assigning-authority="pmc">10.1103/PhysRevLett.91.136104</pub-id></mixed-citation></ref><ref id="adma202312282-bib-0011"><label>11</label><mixed-citation publication-type="journal" id="adma202312282-cit-0011">
+<string-name name-style="western">
+<given-names>F. J.</given-names>
+<surname>Ruess</surname>
+</string-name>, <string-name name-style="western">
+<given-names>L.</given-names>
+<surname>Oberbeck</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. Y.</given-names>
+<surname>Simmons</surname>
+</string-name>, <string-name name-style="western">
+<given-names>K. E. J.</given-names>
+<surname>Goh</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A. R.</given-names>
+<surname>Hamilton</surname>
+</string-name>, <string-name name-style="western">
+<given-names>T.</given-names>
+<surname>Hallam</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S. R.</given-names>
+<surname>Schofield</surname>
+</string-name>, <string-name name-style="western">
+<given-names>N. J.</given-names>
+<surname>Curson</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R. G.</given-names>
+<surname>Clark</surname>
+</string-name>, <source>Nano Lett.</source>
+<year>2004</year>, <volume>4</volume>, <fpage>1969</fpage>.</mixed-citation></ref><ref id="adma202312282-bib-0012"><label>12</label><mixed-citation publication-type="journal" id="adma202312282-cit-0012">
+<string-name name-style="western">
+<given-names>J. N.</given-names>
+<surname>Randall</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. W.</given-names>
+<surname>Lyding</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S.</given-names>
+<surname>Schmucker</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. R.</given-names>
+<surname>Von Ehr</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J.</given-names>
+<surname>Ballard</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R.</given-names>
+<surname>Saini</surname>
+</string-name>, <string-name name-style="western">
+<given-names>H.</given-names>
+<surname>Xu</surname>
+</string-name>, <string-name name-style="western">
+<given-names>Y.</given-names>
+<surname>Ding</surname>
+</string-name>, <source>J. Vac. Sci. Technol., B</source>
+<year>2009</year>, <volume>27</volume>, <fpage>2764</fpage>.</mixed-citation></ref><ref id="adma202312282-bib-0013"><label>13</label><mixed-citation publication-type="journal" id="adma202312282-cit-0013">
+<string-name name-style="western">
+<given-names>F. J.</given-names>
+<surname>Rueß</surname>
+</string-name>, <string-name name-style="western">
+<given-names>W.</given-names>
+<surname>Pok</surname>
+</string-name>, <string-name name-style="western">
+<given-names>T. C. G.</given-names>
+<surname>Reusch</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. J.</given-names>
+<surname>Butcher</surname>
+</string-name>, <string-name name-style="western">
+<given-names>K. E. J.</given-names>
+<surname>Goh</surname>
+</string-name>, <string-name name-style="western">
+<given-names>L.</given-names>
+<surname>Oberbeck</surname>
+</string-name>, <string-name name-style="western">
+<given-names>G.</given-names>
+<surname>Scappucci</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A. R.</given-names>
+<surname>Hamilton</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. Y.</given-names>
+<surname>Simmons</surname>
+</string-name>, <source>Small</source>
+<year>2007</year>, <volume>3</volume>, <fpage>563</fpage>.<pub-id pub-id-type="pmid">17340667</pub-id>
+<pub-id pub-id-type="doi" assigning-authority="pmc">10.1002/smll.200600680</pub-id></mixed-citation></ref><ref id="adma202312282-bib-0014"><label>14</label><mixed-citation publication-type="journal" id="adma202312282-cit-0014">
+<string-name name-style="western">
+<given-names>A.</given-names>
+<surname>Fuhrer</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M.</given-names>
+<surname>Füchsle</surname>
+</string-name>, <string-name name-style="western">
+<given-names>T. C. G.</given-names>
+<surname>Reusch</surname>
+</string-name>, <string-name name-style="western">
+<given-names>B.</given-names>
+<surname>Weber</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. Y.</given-names>
+<surname>Simmons</surname>
+</string-name>, <source>Nano Lett.</source>
+<year>2009</year>, <volume>9</volume>, <fpage>707</fpage>.<pub-id pub-id-type="pmid">19119868</pub-id>
+<pub-id pub-id-type="doi" assigning-authority="pmc">10.1021/nl803196f</pub-id></mixed-citation></ref><ref id="adma202312282-bib-0015"><label>15</label><mixed-citation publication-type="journal" id="adma202312282-cit-0015">
+<string-name name-style="western">
+<given-names>X.</given-names>
+<surname>Wang</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J.</given-names>
+<surname>Wyrick</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R. V.</given-names>
+<surname>Kashid</surname>
+</string-name>, <string-name name-style="western">
+<given-names>P.</given-names>
+<surname>Namboodiri</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S. W.</given-names>
+<surname>Schmucker</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A.</given-names>
+<surname>Murphy</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. D.</given-names>
+<surname>Stewart</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R. M.</given-names>
+<surname>Silver</surname>
+</string-name>, <source>Commun. Phys.</source>
+<year>2020</year>, <volume>3</volume>, <fpage>82</fpage>.<pub-id pub-id-type="doi" assigning-authority="pmc">10.1038/s42005-020-0343-1</pub-id><pub-id pub-id-type="pmcid">PMC11771142</pub-id><pub-id pub-id-type="pmid">39871831</pub-id></mixed-citation></ref><ref id="adma202312282-bib-0016"><label>16</label><mixed-citation publication-type="journal" id="adma202312282-cit-0016">
+<string-name name-style="western">
+<given-names>E.</given-names>
+<surname>Bussmann</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R. E.</given-names>
+<surname>Butera</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. H. G.</given-names>
+<surname>Owen</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. N.</given-names>
+<surname>Randall</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S. M.</given-names>
+<surname>Rinaldi</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A. D.</given-names>
+<surname>Baczewski</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S.</given-names>
+<surname>Misra</surname>
+</string-name>, <source>MRS Bull.</source>
+<year>2021</year>, <volume>46</volume>, <fpage>607</fpage>.</mixed-citation></ref><ref id="adma202312282-bib-0017"><label>17</label><mixed-citation publication-type="journal" id="adma202312282-cit-0017">
+<string-name name-style="western">
+<given-names>N.</given-names>
+<surname>Cassidy</surname>
+</string-name>, <string-name name-style="western">
+<given-names>P.</given-names>
+<surname>Blenkinsopp</surname>
+</string-name>, <string-name name-style="western">
+<given-names>I.</given-names>
+<surname>Brown</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R. J.</given-names>
+<surname>Curry</surname>
+</string-name>, <string-name name-style="western">
+<given-names>B. N.</given-names>
+<surname>Murdin</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R.</given-names>
+<surname>Webb</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D.</given-names>
+<surname>Cox</surname>
+</string-name>, <source>Phys. Status Solidi</source>
+<year>2021</year>, <volume>218</volume>, <elocation-id>2170010</elocation-id>.</mixed-citation></ref><ref id="adma202312282-bib-0018"><label>18</label><mixed-citation publication-type="journal" id="adma202312282-cit-0018">
+<string-name name-style="western">
+<given-names>A. M.</given-names>
+<surname>Jakob</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S. G.</given-names>
+<surname>Robson</surname>
+</string-name>, <string-name name-style="western">
+<given-names>V.</given-names>
+<surname>Schmitt</surname>
+</string-name>, <string-name name-style="western">
+<given-names>V.</given-names>
+<surname>Mourik</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M.</given-names>
+<surname>Posselt</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D.</given-names>
+<surname>Spemann</surname>
+</string-name>, <string-name name-style="western">
+<given-names>B. C.</given-names>
+<surname>Johnson</surname>
+</string-name>, <string-name name-style="western">
+<given-names>H. R.</given-names>
+<surname>Firgau</surname>
+</string-name>, <string-name name-style="western">
+<given-names>E.</given-names>
+<surname>Mayes</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. C.</given-names>
+<surname>Mccallum</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A.</given-names>
+<surname>Morello</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D. N.</given-names>
+<surname>Jamieson</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A. M.</given-names>
+<surname>Jakob</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S. G.</given-names>
+<surname>Robson</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D.</given-names>
+<surname>Spemann</surname>
+</string-name>, <string-name name-style="western">
+<given-names>B. C.</given-names>
+<surname>Johnson</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. C.</given-names>
+<surname>Mccallum</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D. N.</given-names>
+<surname>Jamieson</surname>
+</string-name>, <string-name name-style="western">
+<given-names>V.</given-names>
+<surname>Schmitt</surname>
+</string-name>, <string-name name-style="western">
+<given-names>V.</given-names>
+<surname>Mourik</surname>
+</string-name>, <string-name name-style="western">
+<given-names>H. R.</given-names>
+<surname>Firgau</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A.</given-names>
+<surname>Morello</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M.</given-names>
+<surname>Posselt</surname>
+</string-name>, <string-name name-style="western">
+<given-names>H.‐Z.</given-names>
+<surname>Dresden‐Rossendorf</surname>
+</string-name>, <string-name name-style="western">
+<given-names>E.</given-names>
+<surname>Mayes</surname>
+</string-name>, <source>Adv. Mater.</source>
+<year>2022</year>, <volume>34</volume>, <elocation-id>2103235</elocation-id>.<pub-id pub-id-type="pmid">34632636</pub-id>
+<pub-id pub-id-type="doi" assigning-authority="pmc">10.1002/adma.202103235</pub-id><pub-id pub-id-type="pmcid">PMC11468509</pub-id></mixed-citation></ref><ref id="adma202312282-bib-0019"><label>19</label><mixed-citation publication-type="journal" id="adma202312282-cit-0019">
+<string-name name-style="western">
+<given-names>M.</given-names>
+<surname>Fuechsle</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. A.</given-names>
+<surname>Miwa</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S.</given-names>
+<surname>Mahapatra</surname>
+</string-name>, <string-name name-style="western">
+<given-names>H.</given-names>
+<surname>Ryu</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S.</given-names>
+<surname>Lee</surname>
+</string-name>, <string-name name-style="western">
+<given-names>O.</given-names>
+<surname>Warschkow</surname>
+</string-name>, <string-name name-style="western">
+<given-names>L. C. L.</given-names>
+<surname>Hollenberg</surname>
+</string-name>, <string-name name-style="western">
+<given-names>G.</given-names>
+<surname>Klimeck</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. Y.</given-names>
+<surname>Simmons</surname>
+</string-name>, <source>Nat. Nanotechnol.</source>
+<year>2012</year>, <volume>7</volume>, <fpage>242</fpage>.<pub-id pub-id-type="pmid">22343383</pub-id>
+<pub-id pub-id-type="doi" assigning-authority="pmc">10.1038/nnano.2012.21</pub-id></mixed-citation></ref><ref id="adma202312282-bib-0020"><label>20</label><mixed-citation publication-type="journal" id="adma202312282-cit-0020">
+<string-name name-style="western">
+<given-names>M.</given-names>
+<surname>Koch</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. G.</given-names>
+<surname>Keizer</surname>
+</string-name>, <string-name name-style="western">
+<given-names>P.</given-names>
+<surname>Pakkiam</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D.</given-names>
+<surname>Keith</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. G.</given-names>
+<surname>House</surname>
+</string-name>, <string-name name-style="western">
+<given-names>E.</given-names>
+<surname>Peretz</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. Y.</given-names>
+<surname>Simmons</surname>
+</string-name>, <source>Nat. Nanotechnol.</source>
+<year>2019</year>, <volume>14</volume>, <fpage>137</fpage>.<pub-id pub-id-type="pmid">30617309</pub-id>
+<pub-id pub-id-type="doi" assigning-authority="pmc">10.1038/s41565-018-0338-1</pub-id></mixed-citation></ref><ref id="adma202312282-bib-0021"><label>21</label><mixed-citation publication-type="journal" id="adma202312282-cit-0021">
+<string-name name-style="western">
+<given-names>J.</given-names>
+<surname>Wyrick</surname>
+</string-name>, <string-name name-style="western">
+<given-names>X.</given-names>
+<surname>Wang</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R. V.</given-names>
+<surname>Kashid</surname>
+</string-name>, <string-name name-style="western">
+<given-names>P.</given-names>
+<surname>Namboodiri</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S. W.</given-names>
+<surname>Schmucker</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. A.</given-names>
+<surname>Hagmann</surname>
+</string-name>, <string-name name-style="western">
+<given-names>K.</given-names>
+<surname>Liu</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. D.</given-names>
+<surname>Stewart</surname>
+</string-name>, <string-name name-style="western">
+<given-names>C. A.</given-names>
+<surname>Richter</surname>
+</string-name>, <string-name name-style="western">
+<given-names>G. W.</given-names>
+<surname>Bryant</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R. M.</given-names>
+<surname>Silver</surname>
+</string-name>, <source>Adv. Funct. Mater.</source>
+<year>2019</year>, <volume>29</volume>, <elocation-id>1903475</elocation-id>.</mixed-citation></ref><ref id="adma202312282-bib-0022"><label>22</label><mixed-citation publication-type="journal" id="adma202312282-cit-0022">
+<string-name name-style="western">
+<given-names>Y.</given-names>
+<surname>He</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S. K.</given-names>
+<surname>Gorman</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D.</given-names>
+<surname>Keith</surname>
+</string-name>, <string-name name-style="western">
+<given-names>L.</given-names>
+<surname>Kranz</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. G.</given-names>
+<surname>Keizer</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. Y.</given-names>
+<surname>Simmons</surname>
+</string-name>, <source>Nature</source>
+<year>2019</year>, <volume>571</volume>, <fpage>371</fpage>.<pub-id pub-id-type="pmid">31316197</pub-id>
+<pub-id pub-id-type="doi" assigning-authority="pmc">10.1038/s41586-019-1381-2</pub-id></mixed-citation></ref><ref id="adma202312282-bib-0023"><label>23</label><mixed-citation publication-type="journal" id="adma202312282-cit-0023">
+<string-name name-style="western">
+<given-names>M.</given-names>
+<surname>Kiczynski</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S. K.</given-names>
+<surname>Gorman</surname>
+</string-name>, <string-name name-style="western">
+<given-names>H.</given-names>
+<surname>Geng</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. B.</given-names>
+<surname>Donnelly</surname>
+</string-name>, <string-name name-style="western">
+<given-names>Y.</given-names>
+<surname>Chung</surname>
+</string-name>, <string-name name-style="western">
+<given-names>Y.</given-names>
+<surname>He</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. G.</given-names>
+<surname>Keizer</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. Y.</given-names>
+<surname>Simmons</surname>
+</string-name>, <source>Nature</source>
+<year>2022</year>, <volume>606</volume>, <fpage>694</fpage>.<pub-id pub-id-type="pmid">35732762</pub-id>
+<pub-id pub-id-type="doi" assigning-authority="pmc">10.1038/s41586-022-04706-0</pub-id><pub-id pub-id-type="pmcid">PMC9217742</pub-id></mixed-citation></ref><ref id="adma202312282-bib-0024"><label>24</label><mixed-citation publication-type="journal" id="adma202312282-cit-0024">
+<string-name name-style="western">
+<given-names>X.</given-names>
+<surname>Wang</surname>
+</string-name>, <string-name name-style="western">
+<given-names>E.</given-names>
+<surname>Khatami</surname>
+</string-name>, <string-name name-style="western">
+<given-names>F.</given-names>
+<surname>Fei</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J.</given-names>
+<surname>Wyrick</surname>
+</string-name>, <string-name name-style="western">
+<given-names>P.</given-names>
+<surname>Namboodiri</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R.</given-names>
+<surname>Kashid</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A. F.</given-names>
+<surname>Rigosi</surname>
+</string-name>, <string-name name-style="western">
+<given-names>G.</given-names>
+<surname>Bryant</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R.</given-names>
+<surname>Silver</surname>
+</string-name>, <source>Nat. Commun.</source>
+<year>2022</year>, <volume>13</volume>, <fpage>6824</fpage>.<pub-id pub-id-type="pmid">36369280</pub-id>
+<pub-id pub-id-type="doi" assigning-authority="pmc">10.1038/s41467-022-34220-w</pub-id><pub-id pub-id-type="pmcid">PMC9652469</pub-id></mixed-citation></ref><ref id="adma202312282-bib-0025"><label>25</label><mixed-citation publication-type="book" id="adma202312282-cit-0025">
+<string-name name-style="western">
+<given-names>M.</given-names>
+<surname>Füchsle</surname>
+</string-name>, <source>Precision Few‐Electron Silicon Quantum Dots</source>, <publisher-name>University of New South Wales</publisher-name>, <publisher-loc>Sydney, Australia</publisher-loc>
+<year>2011</year>.</mixed-citation></ref><ref id="adma202312282-bib-0026"><label>26</label><mixed-citation publication-type="journal" id="adma202312282-cit-0026">
+<string-name name-style="western">
+<given-names>J. A.</given-names>
+<surname>Ivie</surname>
+</string-name>, <string-name name-style="western">
+<given-names>Q.</given-names>
+<surname>Campbell</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. C.</given-names>
+<surname>Koepke</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. I.</given-names>
+<surname>Brickson</surname>
+</string-name>, <string-name name-style="western">
+<given-names>P. A.</given-names>
+<surname>Schultz</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R. P.</given-names>
+<surname>Muller</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A. M.</given-names>
+<surname>Mounce</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D. R.</given-names>
+<surname>Ward</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. S.</given-names>
+<surname>Carroll</surname>
+</string-name>, <string-name name-style="western">
+<given-names>E.</given-names>
+<surname>Bussmann</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A. D.</given-names>
+<surname>Baczewski</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S.</given-names>
+<surname>Misra</surname>
+</string-name>, <source>Phys. Rev. Appl.</source>
+<year>2021</year>, <volume>10</volume>, <elocation-id>54037</elocation-id>.</mixed-citation></ref><ref id="adma202312282-bib-0027"><label>27</label><mixed-citation publication-type="journal" id="adma202312282-cit-0027">
+<string-name name-style="western">
+<given-names>J.</given-names>
+<surname>Wyrick</surname>
+</string-name>, <string-name name-style="western">
+<given-names>X.</given-names>
+<surname>Wang</surname>
+</string-name>, <string-name name-style="western">
+<given-names>P.</given-names>
+<surname>Namboodiri</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R. V.</given-names>
+<surname>Kashid</surname>
+</string-name>, <string-name name-style="western">
+<given-names>F.</given-names>
+<surname>Fei</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J.</given-names>
+<surname>Fox</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R.</given-names>
+<surname>Silver</surname>
+</string-name>, <source>ACS Nano</source>
+<year>2022</year>, <volume>16</volume>, <elocation-id>19114</elocation-id>.<pub-id pub-id-type="pmid">36317737</pub-id>
+<pub-id pub-id-type="doi" assigning-authority="pmc">10.1021/acsnano.2c08162</pub-id></mixed-citation></ref><ref id="adma202312282-bib-0028"><label>28</label><mixed-citation publication-type="miscellaneous" id="adma202312282-cit-0028">
+<string-name name-style="western">
+<given-names>M.</given-names>
+<surname>Simmons</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J.</given-names>
+<surname>Keizer</surname>
+</string-name>, <article-title>
+US11227768B2
+</article-title>
+<year>2022</year>.</mixed-citation></ref><ref id="adma202312282-bib-0029"><label>29</label><mixed-citation publication-type="journal" id="adma202312282-cit-0029">
+<string-name name-style="western">
+<given-names>T. J. Z.</given-names>
+<surname>Stock</surname>
+</string-name>, <string-name name-style="western">
+<given-names>O.</given-names>
+<surname>Warschkow</surname>
+</string-name>, <string-name name-style="western">
+<given-names>P. C.</given-names>
+<surname>Constantinou</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J.</given-names>
+<surname>Li</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S.</given-names>
+<surname>Fearn</surname>
+</string-name>, <string-name name-style="western">
+<given-names>E.</given-names>
+<surname>Crane</surname>
+</string-name>, <string-name name-style="western">
+<given-names>E. V. S.</given-names>
+<surname>Hofmann</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A.</given-names>
+<surname>Kölker</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D. R.</given-names>
+<surname>Mckenzie</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S. R.</given-names>
+<surname>Schofield</surname>
+</string-name>, <string-name name-style="western">
+<given-names>N. J.</given-names>
+<surname>Curson</surname>
+</string-name>, <source>ACS Nano</source>
+<year>2020</year>, <volume>14</volume>, <fpage>3316</fpage>.<pub-id pub-id-type="pmid">32142256</pub-id>
+<pub-id pub-id-type="doi" assigning-authority="pmc">10.1021/acsnano.9b08943</pub-id><pub-id pub-id-type="pmcid">PMC7146850</pub-id></mixed-citation></ref><ref id="adma202312282-bib-0030"><label>30</label><mixed-citation publication-type="journal" id="adma202312282-cit-0030">
+<string-name name-style="western">
+<given-names>H.</given-names>
+<surname>Kajiyama</surname>
+</string-name>, <string-name name-style="western">
+<given-names>Y.</given-names>
+<surname>Suwa</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S.</given-names>
+<surname>Heike</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M.</given-names>
+<surname>Fujimori</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J.</given-names>
+<surname>Nara</surname>
+</string-name>, <string-name name-style="western">
+<given-names>T.</given-names>
+<surname>Ohno</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S.</given-names>
+<surname>Matsuura</surname>
+</string-name>, <string-name name-style="western">
+<given-names>T.</given-names>
+<surname>Hitosugi</surname>
+</string-name>, <string-name name-style="western">
+<given-names>T.</given-names>
+<surname>Hashizume</surname>
+</string-name>, <source>J. Phys. Soc. Jpn.</source>
+<year>2005</year>, <volume>74</volume>, <fpage>389</fpage>.</mixed-citation></ref><ref id="adma202312282-bib-0031"><label>31</label><mixed-citation publication-type="journal" id="adma202312282-cit-0031">
+<string-name name-style="western">
+<given-names>N. J.</given-names>
+<surname>Curson</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S. R.</given-names>
+<surname>Schofield</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. Y.</given-names>
+<surname>Simmons</surname>
+</string-name>, <string-name name-style="western">
+<given-names>L.</given-names>
+<surname>Oberbeck</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. L.</given-names>
+<surname>O'Brien</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R. G.</given-names>
+<surname>Clark</surname>
+</string-name>, <source>Phys. Rev. B</source>
+<year>2004</year>, <volume>69</volume>, <elocation-id>195303</elocation-id>.</mixed-citation></ref><ref id="adma202312282-bib-0032"><label>32</label><mixed-citation publication-type="journal" id="adma202312282-cit-0032">
+<string-name name-style="western">
+<given-names>J.</given-names>
+<surname>Nara</surname>
+</string-name>, <string-name name-style="western">
+<given-names>H.</given-names>
+<surname>Kajiyama</surname>
+</string-name>, <string-name name-style="western">
+<given-names>T.</given-names>
+<surname>Hashizume</surname>
+</string-name>, <string-name name-style="western">
+<given-names>Y.</given-names>
+<surname>Suwa</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S.</given-names>
+<surname>Heike</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S.</given-names>
+<surname>Matsuura</surname>
+</string-name>, <string-name name-style="western">
+<given-names>T.</given-names>
+<surname>Hitosugi</surname>
+</string-name>, <string-name name-style="western">
+<given-names>T.</given-names>
+<surname>Ohno</surname>
+</string-name>, <source>Phys. Rev. Lett.</source>
+<year>2008</year>, <volume>100</volume>, <elocation-id>026102</elocation-id>.<pub-id pub-id-type="pmid">18232888</pub-id>
+<pub-id pub-id-type="doi" assigning-authority="pmc">10.1103/PhysRevLett.100.026102</pub-id></mixed-citation></ref><ref id="adma202312282-bib-0033"><label>33</label><mixed-citation publication-type="journal" id="adma202312282-cit-0033">
+<string-name name-style="western">
+<given-names>J. B.</given-names>
+<surname>Ballard</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. H. G.</given-names>
+<surname>Owen</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. D.</given-names>
+<surname>Alexander</surname>
+</string-name>, <string-name name-style="western">
+<given-names>W. R.</given-names>
+<surname>Owen</surname>
+</string-name>, <string-name name-style="western">
+<given-names>E.</given-names>
+<surname>Fuchs</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. N.</given-names>
+<surname>Randall</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R. C.</given-names>
+<surname>Longo</surname>
+</string-name>, <string-name name-style="western">
+<given-names>K.</given-names>
+<surname>Cho</surname>
+</string-name>, <source>J. Vac. Sci. Technol., B</source>
+<year>2014</year>, <volume>32</volume>, <elocation-id>021805</elocation-id>.</mixed-citation></ref><ref id="adma202312282-bib-0034"><label>34</label><mixed-citation publication-type="journal" id="adma202312282-cit-0034">
+<string-name name-style="western">
+<given-names>M.</given-names>
+<surname>Dürr</surname>
+</string-name>, <string-name name-style="western">
+<given-names>U.</given-names>
+<surname>Höfer</surname>
+</string-name>, <source>Prog. Surf. Sci.</source>
+<year>2013</year>, <volume>88</volume>, <fpage>61</fpage>.</mixed-citation></ref><ref id="adma202312282-bib-0035"><label>35</label><mixed-citation publication-type="journal" id="adma202312282-cit-0035">
+<string-name name-style="western">
+<given-names>C.‐Y.</given-names>
+<surname>Chang</surname>
+</string-name>, <string-name name-style="western">
+<given-names>C.‐Y.</given-names>
+<surname>Lin</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D.‐S.</given-names>
+<surname>Lin</surname>
+</string-name>, <source>J. Phys.: Condens. Matter</source>
+<year>2021</year>, <volume>33</volume>, <elocation-id>404004</elocation-id>.<pub-id pub-id-type="doi" assigning-authority="pmc">10.1088/1361-648X/ac14f7</pub-id><pub-id pub-id-type="pmid">34265758</pub-id></mixed-citation></ref><ref id="adma202312282-bib-0036"><label>36</label><mixed-citation publication-type="journal" id="adma202312282-cit-0036">
+<string-name name-style="western">
+<given-names>H. F.</given-names>
+<surname>Wilson</surname>
+</string-name>, <string-name name-style="western">
+<given-names>O.</given-names>
+<surname>Warschkow</surname>
+</string-name>, <string-name name-style="western">
+<given-names>N. A.</given-names>
+<surname>Marks</surname>
+</string-name>, <string-name name-style="western">
+<given-names>N. J.</given-names>
+<surname>Curson</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S. R.</given-names>
+<surname>Schofield</surname>
+</string-name>, <string-name name-style="western">
+<given-names>T. C. G.</given-names>
+<surname>Reusch</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. W.</given-names>
+<surname>Radny</surname>
+</string-name>, <string-name name-style="western">
+<given-names>P. V.</given-names>
+<surname>Smith</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D. R.</given-names>
+<surname>McKenzie</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. Y.</given-names>
+<surname>Simmons</surname>
+</string-name>, <source>Phys. Rev. B: Condens. Matter Mater. Phys.</source>
+<year>2006</year>, <volume>74</volume>, <fpage>656</fpage>.</mixed-citation></ref><ref id="adma202312282-bib-0037"><label>37</label><mixed-citation publication-type="journal" id="adma202312282-cit-0037">
+<string-name name-style="western">
+<given-names>A. J.</given-names>
+<surname>Mayne</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D.</given-names>
+<surname>Riedel</surname>
+</string-name>, <string-name name-style="western">
+<given-names>G.</given-names>
+<surname>Comtet</surname>
+</string-name>, <string-name name-style="western">
+<given-names>G.</given-names>
+<surname>Dujardin</surname>
+</string-name>, <source>Prog. Surf. Sci.</source>
+<year>2006</year>, <volume>81</volume>, <fpage>1</fpage>.</mixed-citation></ref><ref id="adma202312282-bib-0038"><label>38</label><mixed-citation publication-type="journal" id="adma202312282-cit-0038">
+<string-name name-style="western">
+<given-names>T. R.</given-names>
+<surname>Huff</surname>
+</string-name>, <string-name name-style="western">
+<given-names>H.</given-names>
+<surname>Labidi</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M.</given-names>
+<surname>Rashidi</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M.</given-names>
+<surname>Koleini</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R.</given-names>
+<surname>Achal</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. H.</given-names>
+<surname>Salomons</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R. A.</given-names>
+<surname>Wolkow</surname>
+</string-name>, <source>ACS Nano</source>
+<year>2017</year>, <volume>11</volume>, <fpage>8636</fpage>.<pub-id pub-id-type="pmid">28719182</pub-id>
+<pub-id pub-id-type="doi" assigning-authority="pmc">10.1021/acsnano.7b04238</pub-id></mixed-citation></ref><ref id="adma202312282-bib-0039"><label>39</label><mixed-citation publication-type="journal" id="adma202312282-cit-0039">
+<string-name name-style="western">
+<given-names>J. J.</given-names>
+<surname>Boland</surname>
+</string-name>, <source>J. Vac. Sci. Technol., A</source>
+<year>1992</year>, <volume>10</volume>, <fpage>2458</fpage>.</mixed-citation></ref><ref id="adma202312282-bib-0040"><label>40</label><mixed-citation publication-type="journal" id="adma202312282-cit-0040">
+<string-name name-style="western">
+<given-names>M.</given-names>
+<surname>Møller</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S. P.</given-names>
+<surname>Jarvis</surname>
+</string-name>, <string-name name-style="western">
+<given-names>L.</given-names>
+<surname>Guérinet</surname>
+</string-name>, <string-name name-style="western">
+<given-names>P.</given-names>
+<surname>Sharp</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R.</given-names>
+<surname>Woolley</surname>
+</string-name>, <string-name name-style="western">
+<given-names>P.</given-names>
+<surname>Rahe</surname>
+</string-name>, <string-name name-style="western">
+<given-names>P.</given-names>
+<surname>Moriarty</surname>
+</string-name>, <source>Nanotechnology</source>
+<year>2017</year>, <volume>28</volume>, <elocation-id>075302</elocation-id>.<pub-id pub-id-type="pmid">28074783</pub-id>
+<pub-id pub-id-type="doi" assigning-authority="pmc">10.1088/1361-6528/28/7/075302</pub-id></mixed-citation></ref><ref id="adma202312282-bib-0041"><label>41</label><mixed-citation publication-type="journal" id="adma202312282-cit-0041">
+<string-name name-style="western">
+<given-names>R.</given-names>
+<surname>Achal</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M.</given-names>
+<surname>Rashidi</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J.</given-names>
+<surname>Croshaw</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D.</given-names>
+<surname>Churchill</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M.</given-names>
+<surname>Taucer</surname>
+</string-name>, <string-name name-style="western">
+<given-names>T.</given-names>
+<surname>Huff</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M.</given-names>
+<surname>Cloutier</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J.</given-names>
+<surname>Pitters</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R. A.</given-names>
+<surname>Wolkow</surname>
+</string-name>, <source>Nat. Commun.</source>
+<year>2018</year>, <volume>9</volume>, <fpage>2778</fpage>.<pub-id pub-id-type="pmid">30038236</pub-id>
+<pub-id pub-id-type="doi" assigning-authority="pmc">10.1038/s41467-018-05171-y</pub-id><pub-id pub-id-type="pmcid">PMC6056515</pub-id></mixed-citation></ref><ref id="adma202312282-bib-0042"><label>42</label><mixed-citation publication-type="journal" id="adma202312282-cit-0042">
+<string-name name-style="western">
+<given-names>H.</given-names>
+<surname>Alemansour</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S. O. R.</given-names>
+<surname>Moheimani</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. H. G.</given-names>
+<surname>Owen</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. N.</given-names>
+<surname>Randall</surname>
+</string-name>, <string-name name-style="western">
+<given-names>E.</given-names>
+<surname>Fuchs</surname>
+</string-name>, <source>J. Vac. Sci. Technol., B</source>
+<year>2020</year>, <volume>38</volume>, <elocation-id>040601</elocation-id>.</mixed-citation></ref><ref id="adma202312282-bib-0043"><label>43</label><mixed-citation publication-type="journal" id="adma202312282-cit-0043">
+<string-name name-style="western">
+<given-names>L.</given-names>
+<surname>Kranz</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S.</given-names>
+<surname>Roche</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S. K.</given-names>
+<surname>Gorman</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. G.</given-names>
+<surname>Keizer</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. Y.</given-names>
+<surname>Simmons</surname>
+</string-name>, <source>Phys. Rev. Appl.</source>
+<year>2023</year>, <volume>19</volume>, <elocation-id>024068</elocation-id>.</mixed-citation></ref></ref-list></back></article>

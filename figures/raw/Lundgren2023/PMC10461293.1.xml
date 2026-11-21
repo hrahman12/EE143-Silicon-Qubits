@@ -1,0 +1,697 @@
+
+<!DOCTYPE article
+  PUBLIC "-//NLM//DTD JATS (Z39.96) Journal Archiving and Interchange DTD with MathML3 v1.4 20241031//EN" "JATS-archivearticle1-4-mathml3.dtd">
+<article xml:lang="EN" article-type="research-article" dtd-version="1.4"><processing-meta base-tagset="archiving" mathml-version="3.0" table-model="xhtml" tagset-family="jats"><restricted-by>pmc</restricted-by></processing-meta><front><journal-meta><journal-id journal-id-type="nlm-ta">J Phys Chem C Nanomater Interfaces</journal-id><journal-id journal-id-type="iso-abbrev">J Phys Chem C Nanomater Interfaces</journal-id><journal-id journal-id-type="pmc-domain-id">822</journal-id><journal-id journal-id-type="pmc-domain">acssd</journal-id><journal-id journal-id-type="nlm-id">101299949</journal-id><journal-id journal-id-type="publisher-id">jy</journal-id><journal-title-group><journal-title>The Journal of Physical Chemistry. C, Nanomaterials and Interfaces</journal-title></journal-title-group><issn pub-type="ppub">1932-7447</issn><issn pub-type="epub">1932-7455</issn><custom-meta-group><custom-meta><meta-name>pmc-is-collection-domain</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-collection-title</meta-name><meta-value>ACS AuthorChoice</meta-value></custom-meta></custom-meta-group></journal-meta><article-meta><article-id pub-id-type="pmcid">PMC10461293</article-id><article-id pub-id-type="pmcid-ver">PMC10461293.1</article-id><article-id pub-id-type="pmcaid">10461293</article-id><article-id pub-id-type="pmcaiid">10461293</article-id><article-id pub-id-type="pmid">37646007</article-id><article-id pub-id-type="doi">10.1021/acs.jpcc.3c03916</article-id><article-version article-version-type="pmc-version">1</article-version><article-categories><subj-group><subject>Article</subject></subj-group></article-categories><title-group><article-title>Adsorption and
+Thermal Decomposition of Triphenyl
+Bismuth on Silicon (001)</article-title></title-group><contrib-group><contrib contrib-type="author" id="ath1"><name name-style="western"><surname>Lundgren</surname><given-names initials="EAS">Eric A.
+S.</given-names></name><xref rid="aff1" ref-type="aff">†</xref><xref rid="aff2" ref-type="aff">‡</xref></contrib><contrib contrib-type="author" id="ath2"><name name-style="western"><surname>Byron</surname><given-names initials="C">Carly</given-names></name><xref rid="aff3" ref-type="aff">§</xref><xref rid="notes2" ref-type="notes">¶</xref></contrib><contrib contrib-type="author" id="ath3"><contrib-id contrib-id-type="orcid" authenticated="true">https://orcid.org/0000-0001-9769-9345</contrib-id><name name-style="western"><surname>Constantinou</surname><given-names initials="P">Procopios</given-names></name><xref rid="aff1" ref-type="aff">†</xref><xref rid="aff2" ref-type="aff">‡</xref><xref rid="aff4" ref-type="aff">∥</xref></contrib><contrib contrib-type="author" id="ath4"><contrib-id contrib-id-type="orcid" authenticated="true">https://orcid.org/0000-0003-4164-362X</contrib-id><name name-style="western"><surname>Stock</surname><given-names initials="TJZ">Taylor J. Z.</given-names></name><xref rid="aff1" ref-type="aff">†</xref><xref rid="aff5" ref-type="aff">⊥</xref></contrib><contrib contrib-type="author" id="ath5"><contrib-id contrib-id-type="orcid" authenticated="true">https://orcid.org/0000-0002-5661-0559</contrib-id><name name-style="western"><surname>Curson</surname><given-names initials="NJ">Neil J.</given-names></name><xref rid="aff1" ref-type="aff">†</xref><xref rid="aff5" ref-type="aff">⊥</xref></contrib><contrib contrib-type="author" id="ath6"><name name-style="western"><surname>Thomsen</surname><given-names initials="L">Lars</given-names></name><xref rid="aff6" ref-type="aff">#</xref></contrib><contrib contrib-type="author" id="ath7"><name name-style="western"><surname>Warschkow</surname><given-names initials="O">Oliver</given-names></name><xref rid="aff1" ref-type="aff">†</xref></contrib><contrib contrib-type="author" corresp="yes" id="ath8"><contrib-id contrib-id-type="orcid" authenticated="true">https://orcid.org/0000-0002-6646-3310</contrib-id><name name-style="western"><surname>Teplyakov</surname><given-names initials="AV">Andrew V.</given-names></name><xref rid="cor1" ref-type="other">*</xref><xref rid="aff3" ref-type="aff">§</xref></contrib><contrib contrib-type="author" corresp="yes" id="ath9"><contrib-id contrib-id-type="orcid" authenticated="true">https://orcid.org/0000-0002-0727-3015</contrib-id><name name-style="western"><surname>Schofield</surname><given-names initials="SR">Steven R.</given-names></name><xref rid="cor2" ref-type="other">*</xref><xref rid="aff1" ref-type="aff">†</xref><xref rid="aff2" ref-type="aff">‡</xref></contrib><aff id="aff1"><label>†</label>London
+Centre for Nanotechnology, <institution>University College
+London</institution>, WC1H 0AH London, <country>U.K.</country></aff><aff id="aff2"><label>‡</label>Department
+of Physics and Astronomy, <institution>University College
+London</institution>, WC1E 6BT London, <country>U.K.</country></aff><aff id="aff3"><label>§</label>Department
+of Chemistry and Biochemistry, <institution>University
+of Delaware</institution>, Newark, Delaware 19716, <country>United States</country></aff><aff id="aff4"><label>∥</label><institution>Paul
+Scherrer Institute</institution>, 5232 Villigen, <country>Switzerland</country></aff><aff id="aff5"><label>⊥</label>Department
+of Electronic and Electrical Engineering, <institution>University College London</institution>, WC1E 7JE London, <country>U.K.</country></aff><aff id="aff6"><label>#</label><institution>Australian
+Synchrotron, ANSTO</institution>, Clayton, Victoria 3168, <country>Australia</country></aff></contrib-group><author-notes><corresp id="cor1"><label>*</label>Email: <email>andrewt@udel.edu</email>.</corresp><corresp id="cor2"><label>*</label>Email: <email>s.schofield@ucl.ac.uk</email>.</corresp></author-notes><pub-date pub-type="epub"><day>14</day><month>08</month><year>2023</year></pub-date><pub-date pub-type="collection"><day>24</day><month>08</month><year>2023</year></pub-date><volume>127</volume><issue>33</issue><issue-id pub-id-type="pmc-issue-id">444144</issue-id><fpage>16433</fpage><lpage>16441</lpage><history><date date-type="received"><day>11</day><month>06</month><year>2023</year></date><date date-type="rev-recd"><day>28</day><month>07</month><year>2023</year></date></history><pub-history><event event-type="pmc-release"><date><day>28</day><month>08</month><year>2023</year></date></event><event event-type="pmc-live"><date><day>29</day><month>08</month><year>2023</year></date></event><event event-type="pmc-last-change"><date iso-8601-date="2023-08-30 11:25:20.073"><day>30</day><month>08</month><year>2023</year></date></event></pub-history><permissions><copyright-statement>© 2023 American Chemical Society</copyright-statement><copyright-year>2023</copyright-year><copyright-holder>American Chemical Society</copyright-holder><license><ali:license_ref xmlns:ali="http://www.niso.org/schemas/ali/1.0/" specific-use="textmining" content-type="ccbylicense">https://creativecommons.org/licenses/by/4.0/</ali:license_ref><license-p>Permits the broadest form of re-use including for commercial purposes, provided that author attribution and integrity are maintained (<ext-link xmlns:xlink="http://www.w3.org/1999/xlink" ext-link-type="uri" xlink:href="https://creativecommons.org/licenses/by/4.0/">https://creativecommons.org/licenses/by/4.0/</ext-link>).</license-p></license></permissions><self-uri xmlns:xlink="http://www.w3.org/1999/xlink" content-type="pmc-pdf" xlink:href="jp3c03916.pdf"/><abstract><p content-type="toc-graphic"><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="ab-tgr1" position="float" orientation="portrait" xlink:href="jp3c03916_0006.jpg"/></p><p>We investigate the adsorption and
+thermal decomposition
+of triphenyl
+bismuth (TPB) on the silicon (001) surface using atomic-resolution
+scanning tunneling microscopy, synchrotron-based X-ray photoelectron
+spectroscopy, and density functional theory calculations. Our results
+show that the adsorption of TPB at room temperature creates both bismuth–silicon
+and phenyl–silicon bonds. Annealing above room temperature
+leads to increased chemical interactions between the phenyl groups
+and the silicon surface, followed by phenyl detachment and bismuth
+subsurface migration. The thermal decomposition of the carbon fragments
+leads to the formation of silicon carbide at the surface. This chemical
+understanding of the process allows for controlled bismuth introduction
+into the near surface of silicon and opens pathways for ultra-shallow
+doping approaches.</p></abstract><funding-group><award-group><funding-source><institution-wrap><institution>Division of Civil, Mechanical and Manufacturing Innovation</institution><institution-id institution-id-type="doi">10.13039/100000147</institution-id></institution-wrap></funding-source><award-id>CMMI 2035154</award-id></award-group></funding-group><funding-group><award-group><funding-source><institution-wrap><institution>Engineering and Physical Sciences Research Council</institution><institution-id institution-id-type="doi">10.13039/501100000266</institution-id></institution-wrap></funding-source><award-id>EP/R034540/1</award-id></award-group></funding-group><funding-group><award-group><funding-source><institution-wrap><institution>Engineering and Physical Sciences Research Council</institution><institution-id institution-id-type="doi">10.13039/501100000266</institution-id></institution-wrap></funding-source><award-id>EP/L015277/1</award-id></award-group></funding-group><funding-group><award-group><funding-source><institution-wrap><institution>Engineering and Physical Sciences Research Council</institution><institution-id institution-id-type="doi">10.13039/501100000266</institution-id></institution-wrap></funding-source><award-id>EP/L002140/1</award-id></award-group></funding-group><funding-group><award-group><funding-source><institution-wrap><institution>Division of Chemistry</institution><institution-id institution-id-type="doi">10.13039/100000165</institution-id></institution-wrap></funding-source><award-id>CHE 1057374</award-id></award-group></funding-group><custom-meta-group><custom-meta><meta-name>pmc-status-qastatus</meta-name><meta-value>0</meta-value></custom-meta><custom-meta><meta-name>pmc-status-live</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-status-embargo</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-status-released</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-open-access</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-olf</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-manuscript</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-legally-suppressed</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-has-pdf</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-has-supplement</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-pdf-only</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-suppress-copyright</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-is-real-version</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-is-scanned-article</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-preprint</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-in-epmc</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-license-ref</meta-name><meta-value>CC BY</meta-value></custom-meta><custom-meta><meta-name>document-id-old-9</meta-name><meta-value>jp3c03916</meta-value></custom-meta><custom-meta><meta-name>document-id-new-14</meta-name><meta-value>jp3c03916</meta-value></custom-meta><custom-meta><meta-name>ccc-price</meta-name><meta-value/></custom-meta></custom-meta-group></article-meta><notes id="spn1"><title>Special Issue</title><p>Published
+as part of <italic toggle="yes">The Journal of Physical Chemistry C</italic><ext-link xmlns:xlink="http://www.w3.org/1999/xlink" ext-link-type="uri" xlink:href="https://pubs.acs.org/page/virtual-collections.html?journal=jpccck&amp;ref=feature">virtual special issue</ext-link> “Krishnan Raghavachari Festschrift”.</p></notes></front><body><sec id="sec1"><title>Introduction</title><p>A thorough understanding
+of the chemisorption
+and dissociation
+of precursor molecules on semiconductor surfaces is crucial for precisely
+controlling the selective incorporation of dopant atoms and the fabrication
+of ultra-shallow doping profiles in semiconductors. Existing methods
+for introducing large dopants, like bismuth, typically involve the
+thermal diffusion of the dopants from a layer of solid material deposited
+on the surface,<sup><xref ref-type="bibr" rid="ref1">1</xref>,<xref ref-type="bibr" rid="ref2">2</xref></sup> or the kinetic implantation of
+dopants into the substrate.<sup><xref ref-type="bibr" rid="ref3">3</xref></sup> However, new
+applications in microphotonics<sup><xref ref-type="bibr" rid="ref4">4</xref></sup> and spintronics<sup><xref ref-type="bibr" rid="ref5">5</xref></sup> have highlighted the need for more precise control
+over the concentration and location of bismuth atoms in target substrates,
+as well as a deeper understanding of the quantum mechanical properties
+of bismuth-doped semiconductors, particularly silicon.<sup><xref ref-type="bibr" rid="ref6">6</xref>−<xref ref-type="bibr" rid="ref8">8</xref></sup> While there has been progress toward the deterministic control of
+bismuth ion implantation into silicon,<sup><xref ref-type="bibr" rid="ref9">9</xref></sup> such approaches are unlikely to achieve the sub-nanometer precision
+that has been demonstrated (both in-plane and out-of-plane) using
+chemical doping methods for dopants, such as phosphorus, arsenic,
+and boron.<sup><xref ref-type="bibr" rid="ref10">10</xref>−<xref ref-type="bibr" rid="ref12">12</xref></sup></p><p>In this article, we explore the potential of
+using the adsorption
+and thermal transformation of triphenyl bismuth [Bi(C<sub>6</sub>H<sub>5</sub>)<sub>3</sub>, or TPB] on the silicon (001) surface to control
+the introduction of bismuth into silicon crystals. TPB is a carbon-based
+bismuth precursor and as such this work is complementary to our recent
+investigation of the chlorine-based bismuth precursor, bismuth trichloride
+(BiCl<sub>3</sub>),<sup><xref ref-type="bibr" rid="ref13">13</xref></sup> and other recent
+efforts to evaluate carbon-based precursors for aluminum (trimethyl
+aluminum and triethyl aluminum).<sup><xref ref-type="bibr" rid="ref14">14</xref></sup> Using
+atomic-resolution scanning tunneling microscopy (STM), synchrotron-based
+X-ray photoelectron spectroscopy (XPS), and density functional theory
+(DFT) calculations, we show that TPB adsorption at room temperature
+leads to molecular adsorption via Si–Bi and Si–C bonding,
+and dissociative adsorption involving the cleaving of a bismuth–phenyl
+bond. Upon annealing above room temperature, we find complete phenyl
+detachment at around 140 °C, while bismuth migration into the
+bulk occurs at higher temperatures of around 360 °C. We observe
+a 4 × 4 reconstruction, characteristic of silicon-carbide formation,<sup><xref ref-type="bibr" rid="ref15">15</xref></sup> after annealing to 580 °C. Thus, TPB dosing
+and surface annealing results in the incorporation and diffusion of
+bismuth into silicon, presenting a method for the ultra-shallow (nanometer)
+doping of silicon with bismuth. Despite the fact that this approach
+introduces carbon impurities onto the surface, it may still prove
+practical for certain applications because bismuth migrates subsurface
+while the carbon impurities can be removed from the topmost layer
+using chemical or physical treatments; e.g., prior work has shown
+that surface carbon can be removed from Si(001) via oxidation combined
+with chemical etching<sup><xref ref-type="bibr" rid="ref16">16</xref>,<xref ref-type="bibr" rid="ref17">17</xref></sup> or direct physical removal via
+ion sputtering.<sup><xref ref-type="bibr" rid="ref18">18</xref></sup> Additionally, it is worth
+noting that ref (<xref ref-type="bibr" rid="ref16">16</xref>) provides a detailed exploration of removing carbon above shallow
+doping layers, complete with electrical transport measurements that
+affirm the doping layer’s integrity post carbon removal.</p></sec><sec id="sec2"><title>Methods</title><p>XPS measurements were performed at the soft
+X-ray (SXR) beamline
+of the Australian Synchrotron<sup><xref ref-type="bibr" rid="ref19">19</xref></sup> in an ultrahigh
+vacuum (UHV) chamber with a background pressure better than 2 ×
+10<sup>–10</sup> mbar. We used a photon energy of 1500 eV,
+with a pass energy of 10 eV. The positions of the features observed
+were calibrated against the 84.0 eV peak of Au 4f(7/2). The CasaXPS
+software<sup><xref ref-type="bibr" rid="ref20">20</xref></sup> was used to analyze the raw
+data and the peaks were fitted with a Shirley background and a Gaussian–Lorentzian
+(70:30) mix.</p><p>We obtained atomic resolution STM images at a temperature
+of 78
+kelvin using a commercial Scienta Omicron Low-Temperature STM (LT-STM)
+in a UHV chamber with background pressure better than 2 × 10<sup>–10</sup> mbar. For the STM probe, we used chemically etched
+tungsten tips.</p><p>Silicon (001) samples (0.04–0.06 Ω
+cm, Sb-doped; Virginia
+Semiconductor Inc.) were degassed at 550 °C overnight, then flash
+annealed to 1200 °C for 10 s to produce an atomically clean Si(001)
+surface. Triphenyl bismuth (ChemCruz SC-280160, purity ≥98%)
+was evaporated onto the clean Si(001) surface using an organic material
+effusion cell (MBE-komponenten GmbH), with the TPB source heated to
+80 °C and the silicon substrate held at room temperature. The
+chamber background pressure during TPB evaporation was 2 × 10<sup>–9</sup> mbar.</p><p>During sample preparation, the temperature
+of the samples was monitored
+using an infrared pyrometer for values above 300 °C. For temperatures
+ranging between room temperature and 300 °C, we estimated the
+measurements using a linear extrapolation of the heating power supplied
+by direct current. This approach allowed us to maintain consistent
+and accurate temperature control throughout our experiments.</p><p>We have performed a DFT survey of possible adsorption structures.
+Our calculations were performed using the hybrid exact-exchange functional
+B3LYP,<sup><xref ref-type="bibr" rid="ref21">21</xref>,<xref ref-type="bibr" rid="ref22">22</xref></sup> the core-pseudopotential LANL2DZ basis set,<sup><xref ref-type="bibr" rid="ref23">23</xref></sup> and the Gaussian 16 software.<sup><xref ref-type="bibr" rid="ref24">24</xref></sup> The LANL2DZ basis set was chosen for its balance of computational
+efficiency and accuracy, suitable for our aim of exploring a range
+of possible adsorption structures. Larger basis sets or additional
+refinements such as zero-point energy corrections (such as those we
+have employed when studying a smaller bismuth compound on Si(001)<sup><xref ref-type="bibr" rid="ref13">13</xref></sup>) while potentially providing more precise results,
+would significantly increase the computational cost and time. In the
+context of this study, where our aim was to explore a broad range
+of possible adsorption structures rather than definitively assign
+structures to experimental observations, we deemed the use of the
+LANL2DZ basis set to be a suitable and pragmatic approach. We note
+that the LANL2DZ basis set, with its inherent pseudopotential, is
+suitable for calculations involving bismuth-containing compounds due
+to its ability to account for relativistic effects. A cluster model
+of Si<sub>49</sub>H<sub>40</sub> was employed to depict the Si(001)
+surface (refer to <ext-link xmlns:xlink="http://www.w3.org/1999/xlink" ext-link-type="uri" xlink:href="https://pubs.acs.org/doi/suppl/10.1021/acs.jpcc.3c03916/suppl_file/jp3c03916_si_001.pdf">Supporting Information</ext-link> Figure S2). The chemical termination for all silicon atoms, excluding
+the surface dimer atoms, consists of 40 hydrogen atoms. To simulate
+the strain imposed by the neighboring surface and bulk atoms of an
+extended surface, these hydrogen atoms terminating the cluster were
+maintained in fixed positions during geometry optimization. Adsorption
+energies, denoted as <italic toggle="yes">E</italic><sub>ads</sub>, are calculated
+in relation to both the clean Si(001) surface and a gaseous TPB molecule<disp-formula id="eq1"><graphic xmlns:xlink="http://www.w3.org/1999/xlink" position="anchor" orientation="portrait" xlink:href="jp3c03916_m001.jpg"/><label>1</label></disp-formula>where <italic toggle="yes">E</italic><sub>tot</sub>(cluster
++ molecule) is the total energy of the silicon cluster with an adsorbed
+molecule, <italic toggle="yes">E</italic><sub>tot</sub>(cluster) is the total energy
+of a bare silicon surface cluster, and <italic toggle="yes">E</italic><sub>tot</sub>(molecule) is the total energy of the gas phase molecule.</p></sec><sec id="sec3"><title>Results
+and Discussion</title><sec id="sec3.1"><title>TPB Room-Temperature Adsorption</title><p>Triphenyl bismuth is
+an organometallic compound consisting of a central bismuth atom bonded
+to three phenyl rings. A chemical structure model and a ball and stick
+model of the molecule are shown in <xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>a. An STM image, acquired at 78 K, of a Si(001)
+surface after exposure to a sub-monolayer coverage of TPB at room
+temperature is shown in <xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>b. The Si(001) surface consists of rows of buckled dimers
+in a <italic toggle="yes">c</italic>(4 × 2) periodicity; these dimer rows
+run horizontally in <xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>b and their periodicity is evident by a zig-zagged appearance.<sup><xref ref-type="bibr" rid="ref25">25</xref></sup> We see a variety of dark depressions and bright
+protrusions on the surface. The dark depressions are a combination
+of vacancy defects and C-defects<sup><xref ref-type="bibr" rid="ref26">26</xref></sup> that
+were present on the surface prior to exposure to TPB.</p><fig id="fig1" position="float" orientation="portrait"><label>Figure 1</label><caption><p>(a) Chemical schematic
+and ball and stick model of triphenyl bismuth
+(TPB). (b) STM image of a Si(001) surface exposed to submonolayer
+coverage of TPB (1 s exposure). (c–h) Individual features attributable
+to TPB adsorption (see text for description). (i,j) Bi–Bi ad-dimers
+perpendicular and parallel to the dimer row direction, respectively.
+(k,l) Features attributable to phenyl/benzene and biphenyl adsorption.
+Most of the features in panels (c–l) can be found in the overview
+image in panel (b), and these have been indicated by labeled white
+squares. See also <ext-link xmlns:xlink="http://www.w3.org/1999/xlink" ext-link-type="uri" xlink:href="https://pubs.acs.org/doi/suppl/10.1021/acs.jpcc.3c03916/suppl_file/jp3c03916_si_001.pdf">Supporting Information</ext-link>, Figure S1 that shows images at different TPB coverages. Image parameters:
+−2 V, 50 pA, and <italic toggle="yes">z</italic>-range 180 pm. (b–l)
+4 × 4 nm<sup>2</sup>, 78 K.</p></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="gr1" position="float" orientation="portrait" xlink:href="jp3c03916_0002.jpg"/></fig><p>The various bright protrusions seen throughout
+the image (<xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>b) were not present
+before exposure to TPB and can therefore be attributed to the adsorption
+of TPB. <xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>c–l
+provides high-resolution images of the 10 different types of protrusion
+features that we observe, which represent the most common motifs observed
+in our study. The first three of these, as shown in <xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>c–e, and labeled M1,
+M2, and M3, respectively, each present three bright lobes clustered
+together within a diameter of ∼1 nm. Comparison to the threefold
+symmetric structure and dimensions of TPB (<xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>a) suggests that these features can be attributed
+to molecularly adsorbed TPB in different bonding configurations on
+the Si(001) surface. We note that several structures appear to show
+bonding across the dimer rows. This suggests that the adsorption reaction
+has occurred not solely within a single dimer
+row, but that part of the adsorption has occurred across the trough
+between dimer rows, a phenomenon that, though less common, is known
+and has been reported in literature.<sup><xref ref-type="bibr" rid="ref27">27</xref>,<xref ref-type="bibr" rid="ref28">28</xref></sup></p><p>The
+features shown in <xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>f,g (labeled D1 and D1*) also present a cluster of
+three protrusions. However, in these cases, two of the protrusions
+are close together, while the third protrusion is spatially separated
+by a distance ≥1 nm. The separation of the third protrusion
+means that these features cannot be attributed to molecularly adsorbed
+TPB. Instead, we propose that these features are produced by the dissociative
+adsorption of TPB, where one of the phenyl rings has dissociated from
+the main fragment and has become directly attached to a nearby silicon
+dimer. We classify all such features as D1, and the superscript star
+in the label of <xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>g is meant to convey that the location of the third protrusion can
+vary slightly within this classification.</p><p>Another feature is
+shown in <xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>h,
+which we label D2. Unlike the features discussed
+so far, the D2 feature has only two protrusions. Given the general
+similarities in its appearance to the D1 features and the above discussion,
+we suggest that this feature might be assigned to a TPB fragment where
+one phenyl ring has been dissociated, but where the dissociated phenyl
+ring is not located close to the adsorbing fragment.</p><p>We also
+find two types of large and bright protrusion features,
+as shown in <xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>i,j. These are consistent with surface bismuth ad-dimers.<sup><xref ref-type="bibr" rid="ref29">29</xref>,<xref ref-type="bibr" rid="ref30">30</xref></sup> Bismuth ad-dimers on the Si(001) surface have been reported after
+exposing a clean Si(001) surface to the evaporated elemental bismuth,
+and also after exposing a clean Si(001) surface to molecular bismuth
+chloride (BiCl<sub>3</sub>).<sup><xref ref-type="bibr" rid="ref13">13</xref></sup> In both
+cases, bismuth ad-atoms form on the surface and rapidly diffuse at
+room temperature until two bismuth ad-atoms meet and pair up to form
+a bismuth ad-dimer. The barriers for bismuth diffusion and the pairing
+of two bismuth ad-atoms to form an ad-dimer have been shown by previous
+DFT calculations to be less than 0.44 eV, and these processes, therefore,
+occur rapidly at room temperature.<sup><xref ref-type="bibr" rid="ref13">13</xref>,<xref ref-type="bibr" rid="ref31">31</xref></sup> The bismuth
+ad-dimers are thermally stable at room temperature and do not diffuse
+on the time scale of a typical STM experiment. The two bismuth ad-dimers
+shown in <xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>i,j
+correspond to configurations where the ad-dimers are on top of the
+dimer row and aligned parallel (<xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>i) and perpendicular (<xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>j) to the dimer rows. The presence of bismuth
+ad-dimers on the surface suggests that a small fraction of TPB adsorption
+results in bismuth detachment from the phenyl groups even at room
+temperature.</p><p><xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>k,l shows
+smaller protrusions that by comparison with the literature we attribute
+to adsorbed phenyl/benzene and bi-phenyl, respectively.<sup><xref ref-type="bibr" rid="ref32">32</xref>−<xref ref-type="bibr" rid="ref34">34</xref></sup> The existence of these features on the surface provides an explanation
+for the missing phenyl ring from structure D2 and the two bismuth
+ad-dimer features AD1 and AD2.</p><p>We have also observed the TPB
+exposed Si(001) surface as a function
+of the exposure time. <ext-link xmlns:xlink="http://www.w3.org/1999/xlink" ext-link-type="uri" xlink:href="https://pubs.acs.org/doi/suppl/10.1021/acs.jpcc.3c03916/suppl_file/jp3c03916_si_001.pdf">Supporting Information</ext-link>, Figure S1 shows a sequence of STM images highlighting how the TPB
+adsorbed surface changes as a function of TPB exposure time from 1
+to 60 s. We also plot in <ext-link xmlns:xlink="http://www.w3.org/1999/xlink" ext-link-type="uri" xlink:href="https://pubs.acs.org/doi/suppl/10.1021/acs.jpcc.3c03916/suppl_file/jp3c03916_si_001.pdf">Supporting Information</ext-link>, Figure S1f, the number of TPB-related features counted within a
+2500 nm area of the surface for each exposure and show that it increases
+linearly for low coverages up to an exposure time of about 20 s. For
+longer exposure times up to 60 s, the rate at which new features appear
+becomes slower. No evidence of multilayer formation was observed.
+Thus, the STM data suggests that TPB molecules initially adsorb easily
+to the surface but steric hindrance slows the rate of adsorption of
+additional TPB molecules and the formation of new TPB-related features
+at higher coverages within the conditions used in this work.</p></sec><sec id="sec3.2"><title>Density
+Functional Theory Modeling</title><p>To better understand
+the adsorption of TPB on Si(001), we have performed a DFT calculation
+survey of configurations involving attachment of TPB to Si(001) in
+various states of Si–Bi and Si–C bonding and phenyl
+dissociation. The large size of the TPB molecule leads to a very large
+number of possible adsorption configurations with respect to the surface
+lattice, and the flexibility of the molecule and possibilities for
+phenyl dissociation further increases the configuration space of possible
+adsorption structures. As such, a definitive assignment of a structure
+to every feature observed by STM is not practical. Instead, we focus
+here on presenting an overview of the basic types of bonding we anticipate
+in the adsorption structures. <xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref> shows the geometry-optimized structures for four different
+main possible configurations of TPB on the Si(001) surface. In <xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref>a, we show a datively
+bonded TPB molecule attached to the surface through a single Bi–Si
+bond. With a shallow binding energy of −0.6 eV, this configuration
+is likely to be unstable with respect to the formation of additional
+Si–C bonds. However, it illustrates how the molecule may first
+attach to the surface in the case where it lands with the Bi atom
+closest to the surface.</p><fig id="fig2" position="float" orientation="portrait"><label>Figure 2</label><caption><p>Density functional theory (DFT) geometry optimized
+structures for
+different adsorption and dissociation configurations of TPB on Si(001).
+(a) Datively bonded TPB attached to the surface via only the single
+dative Bi–Si bond; (−0.6 eV). (b) TPB molecule attached
+to the Si(001) surface via only one of its phenyl rings, which is
+bonded in the tight-bridge geometry known from the adsorption of benzene
+to Si(001). There is no Bi–Si bond in this structure; (−1.4
+eV). (c) Dissociated TPB molecule consisting of two fragments. One
+fragment is bonded via both a Bi–Si bond and two C–Si
+bonds of one phenyl ring in a butterfly configuration. The second
+fragment is one phenyl ring that is bonded to the neighboring dimer
+row; (−4.1 eV). (d) Similar to (c), but now the first fragment
+is attached via both of its phenyl rings; (−4.4 eV).</p></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="gr2" position="float" orientation="portrait" xlink:href="jp3c03916_0003.jpg"/></fig><p>The shape of the TPB molecule makes it more likely
+that the adsorbate
+will interact with the surface first via a phenyl group and in this
+case, we can anticipate the formation of Si–C bonds analogous
+to the bonding of benzene to Si(001).<sup><xref ref-type="bibr" rid="ref32">32</xref></sup><xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref>b depicts
+one such possibility, where a TPB molecule is bonded to the Si(001)
+surface via one of its phenyl rings in a tight-bridge geometry.<sup><xref ref-type="bibr" rid="ref32">32</xref></sup> The pair of Si–C covalent bonds produces
+a binding energy for this structure of −1.4 eV. However, as
+with the dative bonded structure in 2a, it is likely that this structure
+will further stabilize via the formation of additional bonds to the
+surface, given the large size and flexibility of TPB.</p><p><xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref>c,d shows
+examples of more complex bonding involving the formation of both Si–Bi
+and Si–C bonds and also the dissociation of phenyl rings away
+from the initial adsorbate. In <xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref>c, one fragment is bonded to the surface via a Bi–Si
+bond and two C–Si bonds of a phenyl ring in a butterfly configuration,
+while the second fragment, consisting of a single phenyl ring, is
+bonded to a neighboring silicon dimer row (−4.1 eV). <xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref>d is similar to <xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref>c, but with the first
+fragment attached to the surface via both of its phenyl rings (−4.4
+eV). Such configurations, or closely related variations of them, are
+likely candidates to explain the features observed in our STM images;
+in particular, the structure shown in <xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref>d bears striking similarity to the M3 STM
+image feature shown in <xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>e and the structure shown in <xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref>c, or a closely related variation, might
+reasonably explain features such as those shown in <xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>f,g.</p><p>The large size and
+many degrees of freedom of the TPB molecule prohibit
+an exhaustive DFT investigation of its bonding configurations and
+reaction pathways on Si(001) at this time. For example, we have not
+considered structures involving deprotonation of the phenyl rings
+because we are not aware of any examples where such deprotonation
+reactions from phenyl ring structures have been definitively shown
+to explain experimental observations of metalorganic or organic phenyl-containing
+adsorbates on Si(001).<sup><xref ref-type="bibr" rid="ref35">35</xref></sup> However, we note
+that some DFT modeling has suggested beta hydrogen dissociation may
+explain STM observed biphenyl adsorption configurations on Si(001)<sup><xref ref-type="bibr" rid="ref36">36</xref></sup> and as such the many adsorption configurations
+involving beta hydrogen desorption may be of interest for future work.</p><p>Nevertheless, <ext-link xmlns:xlink="http://www.w3.org/1999/xlink" ext-link-type="uri" xlink:href="https://pubs.acs.org/doi/suppl/10.1021/acs.jpcc.3c03916/suppl_file/jp3c03916_si_001.pdf">Supporting Information</ext-link>, Figures S2–S27 present a wide range of representative structures
+that we have investigated in this work. These structures we group
+into four broad categories, ordered via increasing stability: dative
+bonding only; dative bonding plus phenyl bonding or phenyl bonding
+only; dative bonding plus phenyl dissociation; and dative and phenyl
+bonding with also phenyl dissociation. The computational results presented
+here are consistent with the interpretation of molecularly and dissociatively
+adsorbed TPB leading to the structures we observe on the room-temperature
+dosed Si(001) surface. In future work, following extensive analysis
+of all possible surface reaction pathways, simulated STM images based
+on DFT results could be beneficial for providing additional insights
+into the complex adsorption configurations.</p></sec><sec id="sec3.3"><title>Thermal Transformations
+of TPB Followed by STM</title><p>To further
+confirm our interpretation of the room-temperature data and to investigate
+the incorporation of bismuth into the surface, we have studied the
+TPB-dosed Si(001) surface as a function of annealing temperature.
+A clean Si(001) surface was exposed to TPB for 1 s and then annealed
+for 5 min at consecutively higher temperatures. After each anneal,
+the sample was cooled to 78 K and imaged with STM. Images of the surface
+after dosing at room temperature and subsequent annealing to 40, 140,
+360, and 580 °C are shown in <xref rid="fig3" ref-type="fig">Figure <xref rid="fig3" ref-type="fig">3</xref></xref>a–e. <xref rid="fig3" ref-type="fig">Figure <xref rid="fig3" ref-type="fig">3</xref></xref>f shows a graph where we have counted all
+the features that occur on the room-temperature dosed surface and
+plot how the number of these features changes with each anneal.</p><fig id="fig3" position="float" orientation="portrait"><label>Figure 3</label><caption><p>STM images
+of a Si(001) surface that was exposed to TPB for 1 s
+at room temperature and subsequently annealed to successively higher
+temperatures. (a) Room-temperature exposure to TPB. The inset shows
+a higher resolution image of an area containing an M1 and M3 feature,
+two adsorbed benzene, and a single Bi–Bi ad-dimer. (b–e)
+after annealing to 40, 140, 360, and 580 °C, respectively. Insets
+show enlargements of certain regions of the surfaces as indicated.
+(f) Plot of the feature count vs temperature. Some of the features
+have been grouped into categories: molecular (M1, M2, and M3) and
+dissociated (D1 and D2).</p></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="gr3" position="float" orientation="portrait" xlink:href="jp3c03916_0004.jpg"/></fig><p>Significant changes are
+observed after each successive
+anneal.
+The room-temperature surface (<xref rid="fig3" ref-type="fig">Figure <xref rid="fig3" ref-type="fig">3</xref></xref>a) displays the characteristics already described in <xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>b, with the molecularly
+adsorbed TPB features M1, M2, and M3 being dominant. After annealing
+to 40 °C (<xref rid="fig3" ref-type="fig">Figure <xref rid="fig3" ref-type="fig">3</xref></xref>b), the dissociated features D1 and D2 become the most common, although
+there still exists a significant number of undissociated M1, M2, and
+M3 features. We also see an increase in the number of Bi–Bi
+ad-dimers and isolated phenyl groups. After annealing to 140 °C,
+the most common features on the surface are Bi–Bi ad-dimers,
+and the second most common features are attributed to dissociated
+carbon species, benzene/phenyl and biphenyl; the number of adsorbed
+and dissociated TPB (M1, M2, M3, D1, and D2) are noticeably reduced
+at this temperature. Other than these changes in the relative abundance
+of each type of feature, there are no other qualitative changes to
+the surface observed following annealing up to 140 °C. Thus,
+the changes we observe after annealing to 40 and 140 °C are consistent
+with our interpretation that features observed in the room-temperature
+dosed STM images are the result of thermally activated surface dissociation
+of TPB.</p><p>In contrast, the surface is strongly modified from its
+room-temperature
+appearance after annealing to 360 °C. The adsorbate features
+observed at the lower temperatures are almost completely absent. In
+their place, we find a surface that exhibits short zig-zagged row
+protrusions running perpendicular to the underlying dimer row direction
+and an increase in the density of surface vacancy defects that have
+also begun to align into short defect chains. This is a common feature
+of the Si(001) surface dosed with phosphine and arsine and subsequently
+annealed;<sup><xref ref-type="bibr" rid="ref11">11</xref>,<xref ref-type="bibr" rid="ref28">28</xref></sup> the dopant atoms are incorporated into the
+top layer of the silicon crystal and silicon atoms are ejected onto
+the surface in the process. These ejected silicon atoms diffuse and
+nucleate to form short epitaxial chains.<sup><xref ref-type="bibr" rid="ref11">11</xref>,<xref ref-type="bibr" rid="ref28">28</xref></sup> Thus, the zig-zagged rows can be readily attributed to epitaxial
+silicon dimer rows and their appearance on the surface after annealing
+to 360 °C is a strong indicator that bismuth atoms have incorporated
+into the Si(001) surface,<sup><xref ref-type="bibr" rid="ref11">11</xref>,<xref ref-type="bibr" rid="ref28">28</xref></sup> ejecting silicon atoms
+onto the surface in the process.</p><p>Upon annealing to 580 °C,
+we observe that the short defect
+chains present on the surface after annealing to 360 °C have
+significantly enlarged and become aligned, resembling the initial
+formation of a 2 × <italic toggle="yes">n</italic> reconstruction known to
+occur due to surface strain relaxation after trace metal contamination
+of silicon.<sup><xref ref-type="bibr" rid="ref37">37</xref>,<xref ref-type="bibr" rid="ref38">38</xref></sup> Previous studies of Si(001) surfaces
+exposed to bismuth through evaporation and subsequently annealed to
+500 °C also reported the observation of a 2 × <italic toggle="yes">n</italic> surface reconstruction using low energy electron diffraction measurements.<sup><xref ref-type="bibr" rid="ref39">39</xref></sup> Moreover, similar defect chains have been reported
+in degenerate phosphorus-doped Si(001) samples, which could only be
+removed through extended annealing to deplete phosphorus atoms from
+the near-surface region.<sup><xref ref-type="bibr" rid="ref40">40</xref></sup> These findings
+suggest that annealing to 580 °C leads to the diffusion of bismuth
+beneath the surface, and the resulting strain relaxation at the surface
+is facilitated by the formation of defect chains in a pattern similar
+to the initial stages of formation of a 2 × <italic toggle="yes">n</italic> surface reconstruction.</p><p>In addition to the extended defect
+chains, we detect small regions
+of a 4 × 4 reconstruction on our 580 °C annealed surface.
+It is known that a 4 × 4 reconstruction can form due to both
+bismuth<sup><xref ref-type="bibr" rid="ref41">41</xref></sup> and carbon<sup><xref ref-type="bibr" rid="ref42">42</xref></sup> impurity contamination after annealing to approximately
+600 °C. Thus, while we cannot definitively attribute the 4 ×
+4 reconstruction entirely to either bismuth or carbon contamination,
+the absence of any other features attributable to carbon on the surface
+suggests that the dominant factor in the 4 × 4 reconstructed
+regions is carbon contamination.</p></sec><sec id="sec3.4"><title>Thermal Transformations
+of TPB Followed by XPS</title><p>We can
+gain further chemical insights into the surface structures using XPS.
+For XPS analysis, we have exposed the sample to TPB for 15 s in order
+to have a coverage that is low enough for the surface to exhibit sub-monolayer
+coverage while also providing a good signal-to-noise ratio for XPS
+measurements. Although the coverage in this set of investigations
+is necessarily higher than in the STM work presented above, the chemical
+transformations at this submonolayer coverage are expected to follow
+the same overall trends as observed in STM measurements. <xref rid="fig4" ref-type="fig">Figure <xref rid="fig4" ref-type="fig">4</xref></xref> summarizes the temperature-dependent
+XPS investigations of this sample. The C1s spectra are shown in <xref rid="fig4" ref-type="fig">Figure <xref rid="fig4" ref-type="fig">4</xref></xref>a. Each spectrum
+was acquired at room temperature after the sample was annealed to
+the temperature indicated on the plot. <xref rid="fig4" ref-type="fig">Figure <xref rid="fig4" ref-type="fig">4</xref></xref>b shows a plot of the relative intensities
+of each C 1s peak as a function of temperature between room temperature
+and 600 °C. We fit these spectra with two main components at
+284.4 and 284.8 eV, a much smaller peak at 285.4 eV, and two additional
+features at 283.5 and 282.8 eV, which can only be clearly observed
+at higher temperatures. These peaks clearly fall into the same energy
+range as has been observed earlier following deposition of other carbon-containing
+compounds on Si(001), e.g., acetophenone<sup><xref ref-type="bibr" rid="ref43">43</xref></sup> and C<sub>60</sub> on Si(001).<sup><xref ref-type="bibr" rid="ref44">44</xref></sup> These
+binding energy values are also very similar to observations of C–C,
+C=C, and C–Si peaks with the XPS reported previously.<sup><xref ref-type="bibr" rid="ref45">45</xref></sup> As the substrate is annealed to successively
+higher temperatures, we find the 284.4 eV peak, associated with Si–C
+bonds, grows at the expense of the 284.8 eV peak. The emergence of
+two additional peaks at 283.5 and 282.8 eV is recorded starting at
+the 366 °C anneal, and these continue to increase in intensity
+up to our hottest anneal (600 °C).</p><fig id="fig4" position="float" orientation="portrait"><label>Figure 4</label><caption><p>XPS measurements of Si(001)
+surfaces exposed to TPB for 15 s and
+then subsequently annealed to 75, 220, 366, 482, and 600 °C,
+as indicated. (a) C 1s spectra have been fit with peaks at 282.8,
+283.5, 284.4, 284.8, and 285.4 eV. (c) Bi 4f spectra have been fit
+with peaks at 157.5 and 158.0 eV. (b,d) Plots of the variation of
+the peak areas with anneal temperature. The total area is also shown.</p></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="gr4" position="float" orientation="portrait" xlink:href="jp3c03916_0005.jpg"/></fig><p>The Bi 4f spectra after each successive anneal
+are also recorded
+and are shown in <xref rid="fig4" ref-type="fig">Figure <xref rid="fig4" ref-type="fig">4</xref></xref>c. The relative intensities of the observed peaks are plotted in <xref rid="fig4" ref-type="fig">Figure <xref rid="fig4" ref-type="fig">4</xref></xref>d. In this case,
+only two peaks corresponding to the Bi 4f7/2 are observed at 157.5
+and 158.0 eV (as well as their spin–orbit split counterparts).
+We find the two peaks have approximately equal intensities at room
+temperature. The 158.0 eV peak deceases in intensity nearly to zero
+when the sample is annealed up to 220 °C, while over the same
+temperature range, the 157.5 eV peak increases. Above 220 °C,
+the 157.5 eV peak also decreases in intensity and nearly completely
+disappears at our highest annealing temperature of 600 °C.</p><p>We further confirm the assignment of these XPS spectra with the
+aid of the DFT computational results shown in <xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref>, which indicates the main types of substrate–surface
+interactions that are anticipated. For these configurations, the expected
+positions of the C 1s features were predicted using Koopmans’
+theorem. These values were calibrated by comparing the predicted and
+experimentally recorded positions of C 1s features for benzene using
+the same computational methods as for the structures investigated.
+The average position for the C 1s in benzene was set to 284.6 eV.
+This calibration resulted in an adjustment of 7.5 eV for the structures
+presented in <xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref>. This approach has been well documented to provide a reliable comparison
+between computed and experimental energies of core level energy levels
+in light elements and has performed especially well for N 1s and C
+1s comparison.<sup><xref ref-type="bibr" rid="ref45">45</xref>−<xref ref-type="bibr" rid="ref48">48</xref></sup> Intriguingly, the majority of the C 1s features expected from the
+initially formed structures, which are predominantly associated with
+carbon–carbon and carbon–bismuth interactions, are computationally
+forecasted to appear around 284.6 eV. Meanwhile, features that represent
+a variety of C–Si bond configurations are anticipated to be
+centered at approximately 0.2–0.3 eV lower binding energy.
+This appears to indicate that the features grouped around the 284.8
+eV peak and around the 284.4 eV peak correspond to carbon–carbon
+(or unperturbed carbon–bismuth) bonds and C–Si bonds,
+respectively. However, not all C–Si bonds fit neatly into these
+classes. In particular, in a dissociated phenyl group adsorbed on
+a surface via a C–Si bond, the observed features are predicted
+to be notably different for the top three carbon atoms compared to
+the rest of the molecule. Correspondingly, we assign the small feature
+observed around 285.4 eV to the signature of an intact phenyl ring
+bound directly to the surface following C–Bi bond dissociation.</p><p>If the feature at 284.4 eV represents a combination of various
+surface-bound (C–Si) carbon species, such as for example the
+carbon atoms in butterfly and pedestal surface bound configurations,
+it would be expected to increase in intensity as the surface annealing
+temperature is increased. This is indeed the case. As the surface
+temperature increases, this feature becomes dominant all the way up
+to the annealing temperature of 482 °C. This observation is consistent
+with the assumption that more and more surface bound (C–Si)
+structures are formed and that these structures are more thermodynamically
+stable than the products of initial attachment. Concurrently with
+this increase, the features corresponding to structures with relatively
+unperturbed C–C and C–Bi configurations (284.8 eV) decrease
+in intensity.</p><p>At high annealing temperatures (≥366 °C),
+features
+at 283.5 and 282.8 eV appear, suggesting the formation of very tightly
+surface-bound carbon structures and silicon carbide.<sup><xref ref-type="bibr" rid="ref49">49</xref></sup> Importantly, within our uncertainty estimates, the total
+intensity of the carbon signal does not change with temperature, meaning
+that within this temperature range, all carbon atoms remain on the
+surface of the crystal up to 600 °C.</p><p>The temperature-dependent
+analysis of Bi 4f spectra provides further
+insights into the TPB chemistry. Bismuth 4f features at 158.0 eV quickly
+disappear upon annealing. Combined with the C 1s changes noted above,
+we propose that this feature represents Bi atoms that are not directly
+connected to the surface. In other words, carbon scaffolds separate
+the Bi atoms in these structures from the silicon surface. As the
+surface is annealed, these structures transform into the more stable
+ones, with a Bi atom in direct contact with the surface. The spectroscopic
+signature of these structures is a dominant feature at 157.5 eV, which
+remains positioned at this binding energy at higher annealing temperatures
+as well. The combined intensity of these two peaks remains the same
+within our error of measurement, up to the annealing temperatures
+above 482 °C, where the overall bismuth signal decreases, which
+appears to correspond to the diffusion of Bi into the subsurface,
+exactly as suggested by our STM data. It is unlikely that bismuth
+sublimes at such low temperatures; e.g., it is known that phosphorus
+desorbs from Si(001) as P<sub>2</sub> at a temperature of around 800
+°C, or slightly lower at very high coverages.<sup><xref ref-type="bibr" rid="ref50">50</xref>−<xref ref-type="bibr" rid="ref52">52</xref></sup></p></sec></sec><sec id="sec4"><title>Conclusions</title><p>We have investigated the adsorption and
+thermal decomposition of
+triphenyl bismuth (TPB) on the silicon (001) surface, combining atomic
+resolution STM, synchrotron-based XPS, and DFT calculations. Our findings
+reveal that TPB adsorption at room temperature results in the formation
+of both bismuth–silicon and carbon–silicon bonds and
+that the adsorption is partially dissociative. Annealing at increased
+temperatures leads to complete phenyl detachment, subsurface migration
+of bismuth atoms, and eventually the formation of a 4 × 4 surface
+reconstruction ascribed to be due to the surface carbon. This work
+highlights the potential of using TPB dosing and surface annealing
+for the ultra-shallow doping of silicon with bismuth, a technique
+with possible applications in microphotonics and spintronics. While
+carbon impurities are introduced to the surface, it is worth noting
+that these impurities can be removed via chemical treatment or sputtering.
+The insights gained from this investigation contribute significantly
+to the understanding of chemisorption and dissociation processes on
+semiconductor surfaces.</p></sec></body><back><notes id="notes1" notes-type="si"><title>Supporting Information Available</title><p>The Supporting Information is
+available free of charge at <ext-link xmlns:xlink="http://www.w3.org/1999/xlink" ext-link-type="uri" xlink:href="https://pubs.acs.org/doi/10.1021/acs.jpcc.3c03916?goto=supporting-info">https://pubs.acs.org/doi/10.1021/acs.jpcc.3c03916</ext-link>.<list id="silist" list-type="simple"><list-item><p>Three-dimensional
+model of the cluster used in DFT calculations,
+binding energy plot for all structures calculated, ball and stick
+figures for all structures calculated, and XYZ structure files for
+the optimized geometries of all structures (<ext-link xmlns:xlink="http://www.w3.org/1999/xlink" ext-link-type="uri" xlink:href="https://pubs.acs.org/doi/suppl/10.1021/acs.jpcc.3c03916/suppl_file/jp3c03916_si_001.pdf">PDF</ext-link>)</p></list-item></list></p></notes><sec sec-type="supplementary-material"><title>Supplementary Material</title><supplementary-material content-type="local-data" id="sifile1" position="float" orientation="portrait"><media xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="jp3c03916_si_001.pdf" position="float" orientation="portrait"><caption><p>jp3c03916_si_001.pdf</p></caption></media></supplementary-material></sec><notes notes-type="" id="notes2"><title>Author Present Address</title><p><sup>¶</sup> Chemical
+Sciences and Engineering Division, Argonne National Laboratory,
+Lemont, Illinois 60439, United States</p></notes><notes notes-type="COI-statement" id="NOTES-d14e781-autogenerated"><p>The authors declare no
+competing financial interest.</p></notes><ack><title>Acknowledgments</title><p>We
+thank David Bowler for valuable discussions.
+E.A.S.L. and P.C. were supported through studentships in the EPSRC
+Centre for Doctoral Training in Advanced Characterization of Materials
+(EP/L015277/1). We acknowledge funding provided by EPSRC (EP/L002140/1)
+and the National Science Foundation (CHE-1057374 and CMMI-2035154).
+Part of this research was undertaken at the soft X-ray (SXR) beamline
+of the Australian Synchrotron, part of ANSTO. XPS peak fitting was
+performed using CasaXPS 2.3.16 (<uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.casaxps.com/">http://www.casaxps.com/</uri>). MarvinSketch 21.14.0 (2021) was used
+for drawing chemical structures (<uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.chemaxon.com">http://www.chemaxon.com</uri>).” T.J.Z.S. was partly supported
+by the JSPS/ESPRC core-to-core scheme under project Defect Functionalized
+Sustainable Energy Materials: From Design to Device Application (EP/R034540/1).
+S.R.S. acknowledges the use of the UCL Myriad High Performance Computing
+Facility (Myriad@UCL).</p></ack><ref-list><title>References</title><ref id="ref1"><mixed-citation publication-type="journal" id="cit1"><name name-style="western"><surname>Riemann</surname><given-names>H.</given-names></name>; <name name-style="western"><surname>Abrosimov</surname><given-names>N.</given-names></name>; <name name-style="western"><surname>Noetzel</surname><given-names>N.</given-names></name>
+<article-title>Doping of Silicon Crystals with Bi
+and other Volatile Elements by the Pedestal Growth Technique</article-title>. <source>ECS Trans.</source>
+<year>2006</year>, <volume>3</volume>, <fpage>1209</fpage><pub-id pub-id-type="doi">10.1149/ma2006-02/25/1209</pub-id>.</mixed-citation></ref><ref id="ref2"><mixed-citation publication-type="patent" id="cit2"><person-group person-group-type="allauthors"><name name-style="western"><surname>Clark</surname><given-names>R. D.</given-names></name></person-group><article-title>Method for
+Forming Ultra-Shallow Doping Regions by Solid Phase Diffusion</article-title>. U.S. Patent <patent>US13/077,721</patent>, <year>2011</year>.</mixed-citation></ref><ref id="ref3"><mixed-citation publication-type="journal" id="cit3"><name name-style="western"><surname>Abramof</surname><given-names>E.</given-names></name>; <name name-style="western"><surname>Ferreira da Silva</surname><given-names>a.</given-names></name>; <name name-style="western"><surname>Sernelius</surname><given-names>B. E.</given-names></name>; <name name-style="western"><surname>de Souza</surname><given-names>J. P.</given-names></name>; <name name-style="western"><surname>Boudinov</surname><given-names>H.</given-names></name>
+<article-title>Transport
+properties of silicon implanted with bismuth</article-title>. <source>Phys. Rev. B</source>
+<year>1997</year>, <volume>55</volume>, <fpage>9584</fpage>–<lpage>9589</lpage>. <pub-id pub-id-type="doi">10.1103/physrevb.55.9584</pub-id>.</mixed-citation></ref><ref id="ref4"><mixed-citation publication-type="journal" id="cit4"><name name-style="western"><surname>Scarangella</surname><given-names>A.</given-names></name>; <name name-style="western"><surname>Reitano</surname><given-names>R.</given-names></name>; <name name-style="western"><surname>Priolo</surname><given-names>F.</given-names></name>; <name name-style="western"><surname>Miritello</surname><given-names>M.</given-names></name>
+<article-title>Bismuth doping
+of silicon compatible thin films for telecommunications and visible
+light emitting devices</article-title>. <source>Mater. Sci. Semicond.
+Process.</source>
+<year>2019</year>, <volume>92</volume>, <fpage>47</fpage>–<lpage>57</lpage>. <pub-id pub-id-type="doi">10.1016/j.mssp.2018.04.017</pub-id>.</mixed-citation></ref><ref id="ref5"><mixed-citation publication-type="journal" id="cit5"><name name-style="western"><surname>Morley</surname><given-names>G. W.</given-names></name>; <name name-style="western"><surname>Warner</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Stoneham</surname><given-names>A. M.</given-names></name>; <name name-style="western"><surname>Greenland</surname><given-names>P. T.</given-names></name>; <name name-style="western"><surname>van Tol</surname><given-names>J.</given-names></name>; <name name-style="western"><surname>Kay</surname><given-names>C. W. M.</given-names></name>; <name name-style="western"><surname>Aeppli</surname><given-names>G.</given-names></name>
+<article-title>The initialization
+and manipulation of quantum information stored in silicon by bismuth
+dopants</article-title>. <source>Nat. Mater.</source>
+<year>2010</year>, <volume>9</volume>, <fpage>725</fpage>–<lpage>729</lpage>. <pub-id pub-id-type="doi">10.1038/nmat2828</pub-id>.<pub-id pub-id-type="pmid">20711180</pub-id></mixed-citation></ref><ref id="ref6"><mixed-citation publication-type="journal" id="cit6"><name name-style="western"><surname>Morley</surname><given-names>G. W.</given-names></name>; <name name-style="western"><surname>Lueders</surname><given-names>P.</given-names></name>; <name name-style="western"><surname>Hamed Mohammady</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Balian</surname><given-names>S. J.</given-names></name>; <name name-style="western"><surname>Aeppli</surname><given-names>G.</given-names></name>; <name name-style="western"><surname>Kay</surname><given-names>C. W.</given-names></name>; <name name-style="western"><surname>Witzel</surname><given-names>W. M.</given-names></name>; <name name-style="western"><surname>Jeschke</surname><given-names>G.</given-names></name>; <name name-style="western"><surname>Monteiro</surname><given-names>T. S.</given-names></name>
+<article-title>Quantum
+control of hybrid nuclear-electronic qubits</article-title>. <source>Nat. Mater.</source>
+<year>2012</year>, <volume>12</volume>, <fpage>103</fpage>–<lpage>107</lpage>. <pub-id pub-id-type="doi">10.1038/nmat3499</pub-id>.<pub-id pub-id-type="pmid">23202370</pub-id></mixed-citation></ref><ref id="ref7"><mixed-citation publication-type="journal" id="cit7"><name name-style="western"><surname>Weis</surname><given-names>C. D.</given-names></name>; <name name-style="western"><surname>Lo</surname><given-names>C. C.</given-names></name>; <name name-style="western"><surname>Lang</surname><given-names>V.</given-names></name>; <name name-style="western"><surname>Tyryshkin</surname><given-names>A. M.</given-names></name>; <name name-style="western"><surname>George</surname><given-names>R. E.</given-names></name>; <name name-style="western"><surname>Yu</surname><given-names>K. M.</given-names></name>; <name name-style="western"><surname>Bokor</surname><given-names>J.</given-names></name>; <name name-style="western"><surname>Lyon</surname><given-names>S. A.</given-names></name>; <name name-style="western"><surname>Morton</surname><given-names>J. J.</given-names></name>; <name name-style="western"><surname>Schenkel</surname><given-names>T.</given-names></name>
+<article-title>Electrical activation
+and electron
+spin resonance measurements of implanted bismuth in isotopically enriched
+silicon-28</article-title>. <source>Appl. Phys. Lett.</source>
+<year>2012</year>, <volume>100</volume>, <fpage>172104</fpage><pub-id pub-id-type="doi">10.1063/1.4704561</pub-id>.</mixed-citation></ref><ref id="ref8"><mixed-citation publication-type="journal" id="cit8"><name name-style="western"><surname>Rortais</surname><given-names>F.</given-names></name>; <name name-style="western"><surname>Lee</surname><given-names>S.</given-names></name>; <name name-style="western"><surname>Ohshima</surname><given-names>R.</given-names></name>; <name name-style="western"><surname>Dushenko</surname><given-names>S.</given-names></name>; <name name-style="western"><surname>Ando</surname><given-names>Y.</given-names></name>; <name name-style="western"><surname>Shiraishi</surname><given-names>M.</given-names></name>
+<article-title>Spin-orbit
+coupling induced by bismuth doping in silicon thin films</article-title>. <source>Appl. Phys. Lett.</source>
+<year>2018</year>, <volume>113</volume>, <fpage>122408</fpage><pub-id pub-id-type="doi">10.1063/1.5046781</pub-id>.</mixed-citation></ref><ref id="ref9"><mixed-citation publication-type="journal" id="cit9"><name name-style="western"><surname>Cassidy</surname><given-names>N.</given-names></name>; <name name-style="western"><surname>Blenkinsopp</surname><given-names>P.</given-names></name>; <name name-style="western"><surname>Brown</surname><given-names>I.</given-names></name>; <name name-style="western"><surname>Curry</surname><given-names>R. J.</given-names></name>; <name name-style="western"><surname>Murdin</surname><given-names>B. N.</given-names></name>; <name name-style="western"><surname>Webb</surname><given-names>R.</given-names></name>; <name name-style="western"><surname>Cox</surname><given-names>D.</given-names></name>
+<article-title>Single Ion Implantation of Bismuth</article-title>. <source>Phys. Status
+Solidi A</source>
+<year>2021</year>, <volume>218</volume>, <fpage>2000237</fpage><pub-id pub-id-type="doi">10.1002/pssa.202000237</pub-id>.</mixed-citation></ref><ref id="ref10"><mixed-citation publication-type="journal" id="cit10"><name name-style="western"><surname>Constantinou</surname><given-names>P.</given-names></name>; <name name-style="western"><surname>Stock</surname><given-names>T. J. Z.</given-names></name>; <name name-style="western"><surname>Crane</surname><given-names>E.</given-names></name>; <name name-style="western"><surname>Kölker</surname><given-names>A.</given-names></name>; <name name-style="western"><surname>van Loon</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Li</surname><given-names>J.</given-names></name>; <name name-style="western"><surname>Fearn</surname><given-names>S.</given-names></name>; <name name-style="western"><surname>Bornemann</surname><given-names>H.</given-names></name>; <name name-style="western"><surname>D’Anna</surname><given-names>N.</given-names></name>; <name name-style="western"><surname>Fisher</surname><given-names>A.</given-names></name>; et al. <article-title>Momentum space imaging
+of ultra-thin electron liquids in δ-doped silicon</article-title>. <source>Adv. Sci.</source>
+<year>2023</year>, <fpage>2302101</fpage><pub-id pub-id-type="doi">10.1002/advs.202302101</pub-id>.<pub-id pub-id-type="pmcid">PMC10520640</pub-id><pub-id pub-id-type="pmid">37469010</pub-id></mixed-citation><note><p>Accepted</p></note></ref><ref id="ref11"><mixed-citation publication-type="journal" id="cit11"><name name-style="western"><surname>Schofield</surname><given-names>S. R.</given-names></name>; <name name-style="western"><surname>Curson</surname><given-names>N. J.</given-names></name>; <name name-style="western"><surname>Simmons</surname><given-names>M. Y.</given-names></name>; <name name-style="western"><surname>Rueß</surname><given-names>F. J.</given-names></name>; <name name-style="western"><surname>Hallam</surname><given-names>T.</given-names></name>; <name name-style="western"><surname>Oberbeck</surname><given-names>L.</given-names></name>; <name name-style="western"><surname>Clark</surname><given-names>R. G.</given-names></name>
+<article-title>Atomically
+Precise
+Placement of Single Dopants in Si</article-title>. <source>Phys. Rev.
+Lett.</source>
+<year>2003</year>, <volume>91</volume>, <fpage>136104</fpage><pub-id pub-id-type="doi">10.1103/physrevlett.91.136104</pub-id>.<pub-id pub-id-type="pmid">14525322</pub-id></mixed-citation></ref><ref id="ref12"><mixed-citation publication-type="journal" id="cit12"><name name-style="western"><surname>Škereň</surname><given-names>T.</given-names></name>; <name name-style="western"><surname>Köster</surname><given-names>S. A.</given-names></name>; <name name-style="western"><surname>Douhard</surname><given-names>B.</given-names></name>; <name name-style="western"><surname>Fleischmann</surname><given-names>C.</given-names></name>; <name name-style="western"><surname>Fuhrer</surname><given-names>A.</given-names></name>
+<article-title>Bipolar device fabrication
+using a scanning tunnelling
+microscope</article-title>. <source>Nat. Electron.</source>
+<year>2020</year>, <volume>3</volume>, <fpage>524</fpage>–<lpage>530</lpage>. <pub-id pub-id-type="doi">10.1038/s41928-020-0445-5</pub-id>.</mixed-citation></ref><ref id="ref13"><mixed-citation publication-type="journal" id="cit13"><name name-style="western"><surname>Lundgren</surname><given-names>E. A. S.</given-names></name>; <name name-style="western"><surname>Conybeare</surname><given-names>R.</given-names></name>; <name name-style="western"><surname>Stock</surname><given-names>T. J. Z.</given-names></name>; <name name-style="western"><surname>Curson</surname><given-names>N. J.</given-names></name>; <name name-style="western"><surname>Warschkow</surname><given-names>O.</given-names></name>; <name name-style="western"><surname>Schofield</surname><given-names>S. R.</given-names></name>
+<article-title>Bismuth trichloride as a molecular
+precursor for silicon
+doping</article-title>. <source>Appl. Phys. Lett.</source>
+<year>2023</year>, <volume>122</volume>, <fpage>151601</fpage><pub-id pub-id-type="doi">10.1063/5.0145772</pub-id>.</mixed-citation></ref><ref id="ref14"><mixed-citation publication-type="journal" id="cit14"><name name-style="western"><surname>Owen</surname><given-names>J. H.</given-names></name>; <name name-style="western"><surname>Campbell</surname><given-names>Q.</given-names></name>; <name name-style="western"><surname>Santini</surname><given-names>R.</given-names></name>; <name name-style="western"><surname>Ivie</surname><given-names>J. A.</given-names></name>; <name name-style="western"><surname>Baczewski</surname><given-names>A. D.</given-names></name>; <name name-style="western"><surname>Schmucker</surname><given-names>S. W.</given-names></name>; <name name-style="western"><surname>Bussmann</surname><given-names>E.</given-names></name>; <name name-style="western"><surname>Misra</surname><given-names>S.</given-names></name>; <name name-style="western"><surname>Randall</surname><given-names>J. N.</given-names></name>
+<article-title>Al-alkyls
+as acceptor dopant precursors for atomic-scale devices</article-title>. <source>J. Phys. Condens. Matter</source>
+<year>2021</year>, <volume>33</volume>, <fpage>464001</fpage><pub-id pub-id-type="doi">10.1088/1361-648x/ac1ddf</pub-id>.<pub-id pub-id-type="pmid">34399418</pub-id></mixed-citation></ref><ref id="ref15"><mixed-citation publication-type="journal" id="cit15"><name name-style="western"><surname>Jemander</surname><given-names>S. T.</given-names></name>; <name name-style="western"><surname>Zhang</surname><given-names>H. M.</given-names></name>; <name name-style="western"><surname>Uhrberg</surname><given-names>R. I. G.</given-names></name>; <name name-style="western"><surname>Hansson</surname><given-names>G. V.</given-names></name>
+<article-title>STM study of the
+C-induced Si(100)-c(4 × 4) reconstruction</article-title>. <source>Phys. Rev. B</source>
+<year>2002</year>, <volume>65</volume>, <fpage>115321</fpage><pub-id pub-id-type="doi">10.1103/physrevb.65.115321</pub-id>.</mixed-citation></ref><ref id="ref16"><mixed-citation publication-type="journal" id="cit16"><name name-style="western"><surname>Chang</surname><given-names>S.</given-names></name>; <name name-style="western"><surname>Zhang</surname><given-names>C.</given-names></name>; <name name-style="western"><surname>Li</surname><given-names>K.</given-names></name>; <name name-style="western"><surname>Dan</surname><given-names>Y.</given-names></name>
+<article-title>De-carbonization of
+self-assembled molecular monolayers doping in silicon</article-title>. <source>AIP Adv.</source>
+<year>2022</year>, <volume>12</volume>, <fpage>095122</fpage><pub-id pub-id-type="doi">10.1063/5.0119494</pub-id>.</mixed-citation></ref><ref id="ref17"><mixed-citation publication-type="journal" id="cit17"><name name-style="western"><surname>Aliev</surname><given-names>V. S.</given-names></name>; <name name-style="western"><surname>Baklanov</surname><given-names>M. R.</given-names></name>; <name name-style="western"><surname>Bukhtiyarov</surname><given-names>V. I.</given-names></name>
+<article-title>Silicon
+surface cleaning using XeF<sub>2</sub> gas treatment</article-title>. <source>Appl. Surf. Sci.</source>
+<year>1995</year>, <volume>90</volume>, <fpage>191</fpage>–<lpage>194</lpage>. <pub-id pub-id-type="doi">10.1016/0169-4332(95)00072-0</pub-id>.</mixed-citation></ref><ref id="ref18"><mixed-citation publication-type="journal" id="cit18"><name name-style="western"><surname>Kim</surname><given-names>J.</given-names></name>; <name name-style="western"><surname>Ji</surname><given-names>J.-Y.</given-names></name>; <name name-style="western"><surname>Kline</surname><given-names>J.</given-names></name>; <name name-style="western"><surname>Tucker</surname><given-names>J. R.</given-names></name>; <name name-style="western"><surname>Shen</surname><given-names>T.-C.</given-names></name>
+<article-title>Preparation
+of atomically clean and flat Si(100) surfaces by low-energy ion sputtering
+and low-temperature annealing</article-title>. <source>Appl. Surf. Sci.</source>
+<year>2003</year>, <volume>220</volume>, <fpage>293</fpage>–<lpage>297</lpage>. <pub-id pub-id-type="doi">10.1016/s0169-4332(03)00826-2</pub-id>.</mixed-citation></ref><ref id="ref19"><mixed-citation publication-type="journal" id="cit19"><name name-style="western"><surname>Cowie</surname><given-names>B. C. C.</given-names></name>; <name name-style="western"><surname>Tadich</surname><given-names>A.</given-names></name>; <name name-style="western"><surname>Thomsen</surname><given-names>L.</given-names></name>
+<article-title>The Current
+Performance of the Wide
+Range (90-2500 eV) Soft X-ray Beamline at the Australian Synchrotron</article-title>. <source>AIP Conf. Proc.</source>
+<year>2010</year>, <volume>1234</volume>, <fpage>307</fpage>–<lpage>310</lpage>. <pub-id pub-id-type="doi">10.1063/1.3463197</pub-id>.</mixed-citation></ref><ref id="ref20"><mixed-citation publication-type="journal" id="cit20"><name name-style="western"><surname>Fairley</surname><given-names>N.</given-names></name>; <name name-style="western"><surname>Fernandez</surname><given-names>V.</given-names></name>; <name name-style="western"><surname>Richard-Plouet</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Guillot-Deudon</surname><given-names>C.</given-names></name>; <name name-style="western"><surname>Walton</surname><given-names>J.</given-names></name>; <name name-style="western"><surname>Smith</surname><given-names>E.</given-names></name>; <name name-style="western"><surname>Flahaut</surname><given-names>D.</given-names></name>; <name name-style="western"><surname>Greiner</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Biesinger</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Tougaard</surname><given-names>S.</given-names></name>; et al. <article-title>Systematic and collaborative
+approach to problem solving using X-ray photoelectron spectroscopy</article-title>. <source>Appl. Surf. Sci. Adv.</source>
+<year>2021</year>, <volume>5</volume>, <fpage>100112</fpage><pub-id pub-id-type="doi">10.1016/j.apsadv.2021.100112</pub-id>.</mixed-citation></ref><ref id="ref21"><mixed-citation publication-type="journal" id="cit21"><name name-style="western"><surname>Becke</surname><given-names>A. D.</given-names></name>
+<article-title>Density-functional
+exchange-energy approximation with correct asymptotic behavior</article-title>. <source>Phys. Rev. A</source>
+<year>1988</year>, <volume>38</volume>, <fpage>3098</fpage>–<lpage>3100</lpage>. <pub-id pub-id-type="doi">10.1103/physreva.38.3098</pub-id>.<pub-id pub-id-type="pmid">9900728</pub-id></mixed-citation></ref><ref id="ref22"><mixed-citation publication-type="journal" id="cit22"><name name-style="western"><surname>Lee</surname><given-names>C.</given-names></name>; <name name-style="western"><surname>Yang</surname><given-names>W.</given-names></name>; <name name-style="western"><surname>Parr</surname><given-names>R. G.</given-names></name>
+<article-title>Development
+of the Colle-Salvetti
+correlation-energy formula into a functional of the electron density</article-title>. <source>Phys. Rev. B</source>
+<year>1988</year>, <volume>37</volume>, <fpage>785</fpage>–<lpage>789</lpage>. <pub-id pub-id-type="doi">10.1103/physrevb.37.785</pub-id>.<pub-id pub-id-type="pmid">9944570</pub-id></mixed-citation></ref><ref id="ref23"><mixed-citation publication-type="journal" id="cit23"><name name-style="western"><surname>Wadt</surname><given-names>W. R.</given-names></name>; <name name-style="western"><surname>Hay</surname><given-names>P. J.</given-names></name>
+<article-title>Ab initio effective
+core potentials for molecular calculations.
+Potentials for main group elements Na to Bi</article-title>. <source>J. Chem. Phys.</source>
+<year>1985</year>, <volume>82</volume>, <fpage>284</fpage>–<lpage>298</lpage>. <pub-id pub-id-type="doi">10.1063/1.448800</pub-id>.</mixed-citation></ref><ref id="ref24"><mixed-citation publication-type="computer-program" id="cit24"><person-group person-group-type="allauthors"><name name-style="western"><surname>Frisch</surname><given-names>M. J.</given-names></name>; <name name-style="western"><surname>Trucks</surname><given-names>G. W.</given-names></name>; <name name-style="western"><surname>Schlegel</surname><given-names>H. B.</given-names></name>; <name name-style="western"><surname>Scuseria</surname><given-names>G. E.</given-names></name>; <name name-style="western"><surname>Robb</surname><given-names>M. A.</given-names></name>; <name name-style="western"><surname>Cheeseman</surname><given-names>J. R.</given-names></name>; <name name-style="western"><surname>Scalmani</surname><given-names>G.</given-names></name>; <name name-style="western"><surname>Barone</surname><given-names>V.</given-names></name>; <name name-style="western"><surname>Petersson</surname><given-names>G. A.</given-names></name>; <name name-style="western"><surname>Nakatsuji</surname><given-names>H.</given-names></name></person-group>; <etal/><source>Gaussian
+16</source>. Revision C.01; <publisher-name>Gaussian, Inc.</publisher-name>, <year>2016</year>.</mixed-citation></ref><ref id="ref25"><mixed-citation publication-type="journal" id="cit25"><name name-style="western"><surname>Wolkow</surname><given-names>R.
+A.</given-names></name>
+<article-title>Direct
+observation of an increase in buckled dimers on Si(001) at low temperature</article-title>. <source>Phys. Rev. Lett.</source>
+<year>1992</year>, <volume>68</volume>, <fpage>2636</fpage>–<lpage>2639</lpage>. <pub-id pub-id-type="doi">10.1103/physrevlett.68.2636</pub-id>.<pub-id pub-id-type="pmid">10045449</pub-id></mixed-citation></ref><ref id="ref26"><mixed-citation publication-type="journal" id="cit26"><name name-style="western"><surname>Hamers</surname><given-names>R. J.</given-names></name>; <name name-style="western"><surname>Wang</surname><given-names>Y.</given-names></name>
+<article-title>Atomically-Resolved Studies of the Chemistry and Bonding at Silicon
+Surfaces</article-title>. <source>Chem. Rev.</source>
+<year>1996</year>, <volume>96</volume>, <fpage>1261</fpage>–<lpage>1290</lpage>. <pub-id pub-id-type="doi">10.1021/cr950213k</pub-id>.<pub-id pub-id-type="pmid">11848789</pub-id></mixed-citation></ref><ref id="ref27"><mixed-citation publication-type="journal" id="cit27"><name name-style="western"><surname>Warschkow</surname><given-names>O.</given-names></name>; <name name-style="western"><surname>Curson</surname><given-names>N. J.</given-names></name>; <name name-style="western"><surname>Schofield</surname><given-names>S. R.</given-names></name>; <name name-style="western"><surname>Marks</surname><given-names>N. A.</given-names></name>; <name name-style="western"><surname>Wilson</surname><given-names>H. F.</given-names></name>; <name name-style="western"><surname>Radny</surname><given-names>M. W.</given-names></name>; <name name-style="western"><surname>Smith</surname><given-names>P. V.</given-names></name>; <name name-style="western"><surname>Reusch</surname><given-names>T. C. G.</given-names></name>; <name name-style="western"><surname>McKenzie</surname><given-names>D. R.</given-names></name>; <name name-style="western"><surname>Simmons</surname><given-names>M. Y.</given-names></name>
+<article-title>Reaction paths of phosphine dissociation on silicon
+(001)</article-title>. <source>J. Chem. Phys.</source>
+<year>2016</year>, <volume>144</volume>, <fpage>014705</fpage><pub-id pub-id-type="doi">10.1063/1.4939124</pub-id>.<pub-id pub-id-type="pmid">26747816</pub-id></mixed-citation></ref><ref id="ref28"><mixed-citation publication-type="journal" id="cit28"><name name-style="western"><surname>Stock</surname><given-names>T. J.</given-names></name>; <name name-style="western"><surname>Warschkow</surname><given-names>O.</given-names></name>; <name name-style="western"><surname>Constantinou</surname><given-names>P. C.</given-names></name>; <name name-style="western"><surname>Li</surname><given-names>J.</given-names></name>; <name name-style="western"><surname>Fearn</surname><given-names>S.</given-names></name>; <name name-style="western"><surname>Crane</surname><given-names>E.</given-names></name>; <name name-style="western"><surname>Hofmann</surname><given-names>E. V.</given-names></name>; <name name-style="western"><surname>Kölker</surname><given-names>A.</given-names></name>; <name name-style="western"><surname>Mckenzie</surname><given-names>D. R.</given-names></name>; <name name-style="western"><surname>Schofield</surname><given-names>S. R.</given-names></name>; et al. <article-title>Atomic-Scale Patterning
+of Arsenic in Silicon by Scanning Tunneling Microscopy</article-title>. <source>ACS Nano</source>
+<year>2020</year>, <volume>14</volume>, <fpage>3316</fpage>–<lpage>3327</lpage>. <pub-id pub-id-type="doi">10.1021/acsnano.9b08943</pub-id>.<pub-id pub-id-type="pmid">32142256</pub-id><pub-id pub-id-type="pmcid">PMC7146850</pub-id></mixed-citation></ref><ref id="ref29"><mixed-citation publication-type="journal" id="cit29"><name name-style="western"><surname>Noh</surname><given-names>H. P.</given-names></name>; <name name-style="western"><surname>Park</surname><given-names>C.</given-names></name>; <name name-style="western"><surname>Jeon</surname><given-names>D.</given-names></name>; <name name-style="western"><surname>Cho</surname><given-names>K.</given-names></name>; <name name-style="western"><surname>Hashizume</surname><given-names>T.</given-names></name>; <name name-style="western"><surname>Kuk</surname><given-names>Y.</given-names></name>; <name name-style="western"><surname>Sakurai</surname><given-names>T.</given-names></name>
+<article-title>Adsorption of Bi on
+Si(001) surface: An atomic view</article-title>. <source>J. Vac. Sci.
+Technol. B</source>
+<year>1994</year>, <volume>12</volume>, <fpage>2097</fpage>–<lpage>2099</lpage>. <pub-id pub-id-type="doi">10.1116/1.587714</pub-id>.</mixed-citation></ref><ref id="ref30"><mixed-citation publication-type="journal" id="cit30"><name name-style="western"><surname>Franklin</surname><given-names>G. E.</given-names></name>; <name name-style="western"><surname>Tang</surname><given-names>S.</given-names></name>; <name name-style="western"><surname>Woicik</surname><given-names>J. C.</given-names></name>; <name name-style="western"><surname>Bedzyk</surname><given-names>M. J.</given-names></name>; <name name-style="western"><surname>Freeman</surname><given-names>A. J.</given-names></name>; <name name-style="western"><surname>Golovchenko</surname><given-names>J. A.</given-names></name>
+<article-title>High-resolution
+structural study of Bi on Si(001)</article-title>. <source>Phys. Rev.
+B</source>
+<year>1995</year>, <volume>52</volume>, <fpage>5515</fpage>–<lpage>R5518</lpage>. <pub-id pub-id-type="doi">10.1103/physrevb.52.r5515</pub-id>.<pub-id pub-id-type="pmid">9981818</pub-id></mixed-citation></ref><ref id="ref31"><mixed-citation publication-type="journal" id="cit31"><name name-style="western"><surname>Kirkham</surname><given-names>C. J.</given-names></name>; <name name-style="western"><surname>Brázdová</surname><given-names>V.</given-names></name>; <name name-style="western"><surname>Bowler</surname><given-names>D. R.</given-names></name>
+<article-title>Bi on the Si(001)
+surface</article-title>. <source>Phys. Rev. B</source>
+<year>2012</year>, <volume>86</volume>, <fpage>035328</fpage><pub-id pub-id-type="doi">10.1103/physrevb.86.035328</pub-id>.</mixed-citation></ref><ref id="ref32"><mixed-citation publication-type="journal" id="cit32"><name name-style="western"><surname>Wolkow</surname><given-names>R. A.</given-names></name>
+<article-title>CONTROLLED
+MOLECULAR ADSORPTION ON SILICON: Laying a Foundation for Molecular
+Devices</article-title>. <source>Annu. Rev. Phys. Chem.</source>
+<year>1999</year>, <volume>50</volume>, <fpage>413</fpage>–<lpage>441</lpage>. <pub-id pub-id-type="doi">10.1146/annurev.physchem.50.1.413</pub-id>.<pub-id pub-id-type="pmid">15012418</pub-id></mixed-citation></ref><ref id="ref33"><mixed-citation publication-type="journal" id="cit33"><name name-style="western"><surname>Hofer</surname><given-names>W. A.</given-names></name>; <name name-style="western"><surname>Fisher</surname><given-names>A. J.</given-names></name>; <name name-style="western"><surname>Lopinski</surname><given-names>G. P.</given-names></name>; <name name-style="western"><surname>Wolkow</surname><given-names>R. A.</given-names></name>
+<article-title>Adsorption of benzene
+on Si(100)-(2 × 1): Adsorption energies and STM image analysis
+by ab initio methods</article-title>. <source>Phys. Rev. B</source>
+<year>2001</year>, <volume>63</volume>, <fpage>085314</fpage><pub-id pub-id-type="doi">10.1103/physrevb.63.085314</pub-id>.</mixed-citation></ref><ref id="ref34"><mixed-citation publication-type="journal" id="cit34"><name name-style="western"><surname>Mayne</surname><given-names>A. J.</given-names></name>; <name name-style="western"><surname>Lastapis</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Baffou</surname><given-names>G.</given-names></name>; <name name-style="western"><surname>Soukiassian</surname><given-names>L.</given-names></name>; <name name-style="western"><surname>Comtet</surname><given-names>G.</given-names></name>; <name name-style="western"><surname>Hellner</surname><given-names>L.</given-names></name>; <name name-style="western"><surname>Dujardin</surname><given-names>G.</given-names></name>
+<article-title>Chemisorbed bistable
+molecule: Biphenyl on Si(100)-2 × 1</article-title>. <source>Phys.
+Rev. B</source>
+<year>2004</year>, <volume>69</volume>, <fpage>045409</fpage><pub-id pub-id-type="doi">10.1103/physrevb.69.045409</pub-id>.</mixed-citation></ref><ref id="ref35"><mixed-citation publication-type="journal" id="cit35"><name name-style="western"><surname>Leftwich</surname><given-names>T.</given-names></name>; <name name-style="western"><surname>Teplyakov</surname><given-names>A. V.</given-names></name>
+<article-title>Chemical
+manipulation of multifunctional hydrocarbons
+on silicon surfaces</article-title>. <source>Surf. Sci. Rep.</source>
+<year>2007</year>, <volume>63</volume>, <fpage>1</fpage>–<lpage>71</lpage>. <pub-id pub-id-type="doi">10.1016/j.surfrep.2007.08.001</pub-id>.</mixed-citation></ref><ref id="ref36"><mixed-citation publication-type="journal" id="cit36"><name name-style="western"><surname>Mamatkulov</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Stauffer</surname><given-names>L.</given-names></name>; <name name-style="western"><surname>Minot</surname><given-names>C.</given-names></name>; <name name-style="western"><surname>Sonnet</surname><given-names>P.</given-names></name>
+<article-title>Ab initio study of
+biphenyl chemisorption on Si(001): Configurational stability</article-title>. <source>Phys. Rev. B: Condens. Matter Mater. Phys.</source>
+<year>2006</year>, <volume>73</volume>, <fpage>035321</fpage><pub-id pub-id-type="doi">10.1103/physrevb.73.035321</pub-id>.</mixed-citation></ref><ref id="ref37"><mixed-citation publication-type="journal" id="cit37"><name name-style="western"><surname>Koo</surname><given-names>J.-y.</given-names></name>; <name name-style="western"><surname>Yi</surname><given-names>J.-y.</given-names></name>; <name name-style="western"><surname>Hwang</surname><given-names>C.</given-names></name>; <name name-style="western"><surname>Kim</surname><given-names>D.-h.</given-names></name>; <name name-style="western"><surname>Lee</surname><given-names>S.</given-names></name>; <name name-style="western"><surname>Shin</surname><given-names>D. H.</given-names></name>
+<article-title>Dimer-vacancy
+defects on the Si(001)-2×1 and the
+Ni-contaminated Si(001)-2×<italic toggle="yes">n</italic>surfaces</article-title>. <source>Phys. Rev. B</source>
+<year>1995</year>, <volume>52</volume>, <fpage>17269</fpage>–<lpage>17274</lpage>. <pub-id pub-id-type="doi">10.1103/physrevb.52.17269</pub-id>.<pub-id pub-id-type="pmid">9981157</pub-id></mixed-citation></ref><ref id="ref38"><mixed-citation publication-type="journal" id="cit38"><name name-style="western"><surname>Komeda</surname><given-names>T.</given-names></name>; <name name-style="western"><surname>Nishioka</surname><given-names>Y.</given-names></name>
+<article-title>Comb-shape step formation
+on Si(001)-2 × 1 surface</article-title>. <source>Appl. Surf. Sci.</source>
+<year>1997</year>, <volume>117–118</volume>, <fpage>20</fpage>–<lpage>25</lpage>. <pub-id pub-id-type="doi">10.1016/s0169-4332(97)80045-1</pub-id>.</mixed-citation></ref><ref id="ref39"><mixed-citation publication-type="journal" id="cit39"><name name-style="western"><surname>Shimomura</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Miki</surname><given-names>K.</given-names></name>; <name name-style="western"><surname>Abukawa</surname><given-names>T.</given-names></name>; <name name-style="western"><surname>Kono</surname><given-names>S.</given-names></name>
+<article-title>Structures of the ‘nanowire’
+and 2 × n of Bi/Si(001)</article-title>. <source>Surf. Sci.</source>
+<year>2000</year>, <volume>447</volume>, <fpage>L169</fpage>–<lpage>L174</lpage>. <pub-id pub-id-type="doi">10.1016/s0039-6028(99)01206-6</pub-id>.</mixed-citation></ref><ref id="ref40"><mixed-citation publication-type="journal" id="cit40"><name name-style="western"><surname>Brown</surname><given-names>G.</given-names></name>; <name name-style="western"><surname>Uberuaga</surname><given-names>B.</given-names></name>; <name name-style="western"><surname>Grube</surname><given-names>H.</given-names></name>; <name name-style="western"><surname>Hawley</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Schofield</surname><given-names>S. R.</given-names></name>; <name name-style="western"><surname>Curson</surname><given-names>N. J.</given-names></name>; <name name-style="western"><surname>Simmons</surname><given-names>M. Y.</given-names></name>; <name name-style="western"><surname>Clark</surname><given-names>R.</given-names></name>
+<article-title>Observation of substitutional
+and interstitial phosphorus on clean Si(100)-(2 × 1) with scanning
+tunneling microscopy</article-title>. <source>Phys. Rev. B</source>
+<year>2005</year>, <volume>72</volume>, <fpage>195323</fpage><pub-id pub-id-type="doi">10.1103/physrevb.72.195323</pub-id>.</mixed-citation></ref><ref id="ref41"><mixed-citation publication-type="journal" id="cit41"><name name-style="western"><surname>Miki</surname><given-names>K.</given-names></name>; <name name-style="western"><surname>Owen</surname><given-names>J. H.</given-names></name>; <name name-style="western"><surname>Bowler</surname><given-names>D. R.</given-names></name>; <name name-style="western"><surname>Briggs</surname><given-names>G. A.</given-names></name>; <name name-style="western"><surname>Sakamoto</surname><given-names>K.</given-names></name>
+<article-title>Bismuth-induced
+structures on Si(001) surfaces</article-title>. <source>Surf. Sci.</source>
+<year>1999</year>, <volume>421</volume>, <fpage>397</fpage>–<lpage>418</lpage>. <pub-id pub-id-type="doi">10.1016/s0039-6028(98)00870-x</pub-id>.</mixed-citation></ref><ref id="ref42"><mixed-citation publication-type="journal" id="cit42"><name name-style="western"><surname>Nörenberg</surname><given-names>H.</given-names></name>; <name name-style="western"><surname>Briggs</surname><given-names>G. A. D.</given-names></name>
+<article-title>The Si(001) c(4
+× 4) surface reconstruction: a
+comprehensive experimental study</article-title>. <source>Surf. Sci.</source>
+<year>1999</year>, <volume>430</volume>, <fpage>154</fpage>–<lpage>164</lpage>. <pub-id pub-id-type="doi">10.1016/s0039-6028(99)00430-6</pub-id>.</mixed-citation></ref><ref id="ref43"><mixed-citation publication-type="journal" id="cit43"><name name-style="western"><surname>O’Donnell</surname><given-names>K. M.</given-names></name>; <name name-style="western"><surname>Warschkow</surname><given-names>O.</given-names></name>; <name name-style="western"><surname>Suleman</surname><given-names>A.</given-names></name>; <name name-style="western"><surname>Fahy</surname><given-names>A.</given-names></name>; <name name-style="western"><surname>Thomsen</surname><given-names>L.</given-names></name>; <name name-style="western"><surname>Schofield</surname><given-names>S. R.</given-names></name>
+<article-title>Manipulating
+the orientation of an organic adsorbate
+on silicon : a NEXAFS study of acetophenone on Si(001)</article-title>. <source>J. Phys.: Condens. Matter</source>
+<year>2015</year>, <volume>27</volume>, <fpage>054002</fpage><pub-id pub-id-type="doi">10.1088/0953-8984/27/5/054002</pub-id>.<pub-id pub-id-type="pmid">25414086</pub-id></mixed-citation></ref><ref id="ref44"><mixed-citation publication-type="journal" id="cit44"><name name-style="western"><surname>Cheng</surname><given-names>C.-P.</given-names></name>; <name name-style="western"><surname>Pi</surname><given-names>T.-W.</given-names></name>; <name name-style="western"><surname>Ouyang</surname><given-names>C.-P.</given-names></name>; <name name-style="western"><surname>Wen</surname><given-names>J.-F.</given-names></name>
+<article-title>Chemisorption of
+C<sub>60</sub> on the Si(001)-2 × 1 surface at room temperature</article-title>. <source>J. Vac. Sci. Technol. B</source>
+<year>2005</year>, <volume>23</volume>, <fpage>1018</fpage>–<lpage>1023</lpage>. <pub-id pub-id-type="doi">10.1116/1.1924608</pub-id>.</mixed-citation></ref><ref id="ref45"><mixed-citation publication-type="journal" id="cit45"><name name-style="western"><surname>O’Donnell</surname><given-names>K. M.</given-names></name>; <name name-style="western"><surname>Byron</surname><given-names>C.</given-names></name>; <name name-style="western"><surname>Moore</surname><given-names>G.</given-names></name>; <name name-style="western"><surname>Thomsen</surname><given-names>L.</given-names></name>; <name name-style="western"><surname>Warschkow</surname><given-names>O.</given-names></name>; <name name-style="western"><surname>Teplyakov</surname><given-names>A.</given-names></name>; <name name-style="western"><surname>Schofield</surname><given-names>S. R.</given-names></name>
+<article-title>Dissociation of CH<sub>3</sub>-O
+as a Driving Force for Methoxyacetophenone Adsorption on Si(001)</article-title>. <source>J. Phys. Chem. C</source>
+<year>2019</year>, <volume>123</volume>, <fpage>22239</fpage>–<lpage>22249</lpage>. <pub-id pub-id-type="doi">10.1021/acs.jpcc.9b04954</pub-id>.</mixed-citation></ref><ref id="ref46"><mixed-citation publication-type="journal" id="cit46"><name name-style="western"><surname>Leftwich</surname><given-names>T. R.</given-names></name>; <name name-style="western"><surname>Teplyakov</surname><given-names>A. V.</given-names></name>
+<article-title>Calibration of computationally predicted N 1s binding
+energies by comparison with X-ray photoelectron spectroscopy measurements</article-title>. <source>J. Electron Spectrosc. Relat. Phenom.</source>
+<year>2009</year>, <volume>175</volume>, <fpage>31</fpage>–<lpage>40</lpage>. <pub-id pub-id-type="doi">10.1016/j.elspec.2009.07.002</pub-id>.</mixed-citation></ref><ref id="ref47"><mixed-citation publication-type="journal" id="cit47"><name name-style="western"><surname>Zhao</surname><given-names>J.</given-names></name>; <name name-style="western"><surname>Gao</surname><given-names>F.</given-names></name>; <name name-style="western"><surname>Pujari</surname><given-names>S. P.</given-names></name>; <name name-style="western"><surname>Zuilhof</surname><given-names>H.</given-names></name>; <name name-style="western"><surname>Teplyakov</surname><given-names>A. V.</given-names></name>
+<article-title>Universal
+Calibration of Computationally Predicted N 1s Binding Energies for
+Interpretation of XPS Experimental Measurements</article-title>. <source>Langmuir</source>
+<year>2017</year>, <volume>33</volume>, <fpage>10792</fpage>–<lpage>10799</lpage>. <pub-id pub-id-type="doi">10.1021/acs.langmuir.7b02301</pub-id>.<pub-id pub-id-type="pmid">28921989</pub-id><pub-id pub-id-type="pmcid">PMC5702496</pub-id></mixed-citation></ref><ref id="ref48"><mixed-citation publication-type="journal" id="cit48"><name name-style="western"><surname>Giesbers</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Marcelis</surname><given-names>A. T.</given-names></name>; <name name-style="western"><surname>Zuilhof</surname><given-names>H.</given-names></name>
+<article-title>Simulation
+of XPS C1s spectra of
+organic monolayers by quantum chemical methods</article-title>. <source>Langmuir</source>
+<year>2013</year>, <volume>29</volume>, <fpage>4782</fpage>–<lpage>4788</lpage>. <pub-id pub-id-type="doi">10.1021/la400445s</pub-id>.<pub-id pub-id-type="pmid">23548381</pub-id></mixed-citation></ref><ref id="ref49"><mixed-citation publication-type="journal" id="cit49"><name name-style="western"><surname>Liu</surname><given-names>H.</given-names></name>; <name name-style="western"><surname>Hamers</surname><given-names>R. J.</given-names></name>
+<article-title>An X-ray photoelectron
+spectroscopy study of the bonding
+of unsaturated organic molecules to the Si(001) surface</article-title>. <source>Surf. Sci.</source>
+<year>1998</year>, <volume>416</volume>, <fpage>354</fpage>–<lpage>362</lpage>. <pub-id pub-id-type="doi">10.1016/s0039-6028(98)00507-x</pub-id>.</mixed-citation></ref><ref id="ref50"><mixed-citation publication-type="journal" id="cit50"><name name-style="western"><surname>Hirose</surname><given-names>F.</given-names></name>; <name name-style="western"><surname>Sakamoto</surname><given-names>H.</given-names></name>
+<article-title>Thermal desorption
+of surface phosphorus on Si(100)
+surfaces</article-title>. <source>Surf. Sci.</source>
+<year>1999</year>, <volume>430</volume>, <fpage>L540</fpage>–<lpage>L545</lpage>. <pub-id pub-id-type="doi">10.1016/s0039-6028(99)00412-4</pub-id>.</mixed-citation></ref><ref id="ref51"><mixed-citation publication-type="journal" id="cit51"><name name-style="western"><surname>Jacobson</surname><given-names>M. L.</given-names></name>; <name name-style="western"><surname>Chiu</surname><given-names>M. C.</given-names></name>; <name name-style="western"><surname>Crowell</surname><given-names>J. E.</given-names></name>
+<article-title>P<sub>2</sub> desorption
+from phosphine
+decomposition on Si(100) surfaces</article-title>. <source>Langmuir</source>
+<year>1998</year>, <volume>14</volume>, <fpage>1428</fpage>–<lpage>1434</lpage>. <pub-id pub-id-type="doi">10.1021/la970795w</pub-id>.</mixed-citation></ref><ref id="ref52"><mixed-citation publication-type="journal" id="cit52"><name name-style="western"><surname>Wilson</surname><given-names>H. F.</given-names></name>; <name name-style="western"><surname>Warschkow</surname><given-names>O.</given-names></name>; <name name-style="western"><surname>Marks</surname><given-names>N. A.</given-names></name>; <name name-style="western"><surname>Curson</surname><given-names>N. J.</given-names></name>; <name name-style="western"><surname>Schofield</surname><given-names>S. R.</given-names></name>; <name name-style="western"><surname>Reusch</surname><given-names>T. C. G.</given-names></name>; <name name-style="western"><surname>Radny</surname><given-names>M. W.</given-names></name>; <name name-style="western"><surname>Smith</surname><given-names>P. V.</given-names></name>; <name name-style="western"><surname>McKenzie</surname><given-names>D. R.</given-names></name>; <name name-style="western"><surname>Simmons</surname><given-names>M. Y.</given-names></name>
+<article-title>Thermal dissociation and desorption of PH<sub>3</sub> on Si(001): A reinterpretation of spectroscopic data</article-title>. <source>Phys. Rev. B</source>
+<year>2006</year>, <volume>74</volume>, <fpage>195310</fpage><pub-id pub-id-type="doi">10.1103/physrevb.74.195310</pub-id>.</mixed-citation></ref></ref-list></back></article>

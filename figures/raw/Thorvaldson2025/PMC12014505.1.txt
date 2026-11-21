@@ -1,0 +1,259 @@
+
+JOURNAL INFORMATION
+==============================
+NLM Title Abbreviation: Nat Nanotechnol
+Journal ID: Nat Nanotechnol
+NLM Journal ID: 101283273
+
+Nature Nanotechnology
+
+ISSN: 1748-3387
+EISSN: 1748-3395
+
+ARTICLE INFORMATION
+==============================
+PMCID: PMC12014505
+PMID: 39979400
+DOI: 10.1038/s41565-024-01853-5
+Article ID: 1853
+Article version: 1
+Subjects: Article
+
+Grover’s algorithm in a four-qubit silicon processor above the fault-tolerant threshold
+
+http://orcid.org/0009-0007-0761-2738 Thorvaldson I. 1 2
+http://orcid.org/0009-0004-3125-1627 Poulos D. 1
+Moehle C. M. 1
+http://orcid.org/0009-0004-1412-5274 Misha S. H. 1
+http://orcid.org/0000-0002-0236-3265 Edlbauer H. 1
+http://orcid.org/0009-0009-1796-7422 Reiner J. 1
+Geng H. 1
+http://orcid.org/0000-0002-5231-1965 Voisin B. 1
+http://orcid.org/0009-0004-3131-4990 Jones M. T. 1
+http://orcid.org/0000-0002-2788-0306 Donnelly M. B. 1 2
+Peña L. F. 1
+Hill C. D. 1 2
+http://orcid.org/0000-0002-8838-7523 Myers C. R. 1
+http://orcid.org/0000-0001-5341-4774 Keizer J. G. 1 2
+http://orcid.org/0000-0003-1347-9535 Chung Y. 1
+http://orcid.org/0000-0002-9385-5766 Gorman S. K. 1 2
+Kranz L. 1 2
+http://orcid.org/0000-0002-6422-5888 Simmons M. Y. michelle.simmons@unsw.edu.au
+1 2
+1 https://ror.org/03r8z3t63 grid.1005.4 0000 0004 4902 0432 Silicon Quantum Computing Pty Ltd, UNSW Sydney, Sydney, New South Wales Australia
+2 https://ror.org/03r8z3t63 grid.1005.4 0000 0004 4902 0432 Centre of Excellence for Quantum Computation and Communication Technology, UNSW Sydney, Sydney, New South Wales Australia
+Electronic publication date: 2025 Feb 20
+Print publication date: 2025
+Volume: 20
+Issue: 4
+First page: 472
+Last page: 477
+Received 2024 May 5; Accepted 2024 Dec 20
+Copyright: © The Author(s) 2025, corrected publication 2025
+Copyright year: 2025
+License: Open Access This article is licensed under a Creative Commons Attribution 4.0 International License, which permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source, provide a link to the Creative Commons licence, and indicate if changes were made. The images or other third party material in this article are included in the article’s Creative Commons licence, unless indicated otherwise in a credit line to the material. If material is not included in the article’s Creative Commons licence and your intended use is not permitted by statutory regulation or exceeds the permitted use, you will need to obtain permission directly from the copyright holder. To view a copy of this licence, visit http://creativecommons.org/licenses/by/4.0/.
+License URL: https://creativecommons.org/licenses/by/4.0/
+
+Keywords: Qubits, Quantum dots, Quantum information
+issue-copyright-statement: © Springer Nature Limited 2025
+
+==============================
+Spin qubits in silicon are strong contenders for the realization of a practical quantum computer, having demonstrated single- and two-qubit gates with fidelities above the fault-tolerant threshold, and entanglement of three qubits. However, maintaining high-fidelity operations while increasing the qubit count remains challenging and therefore only two-qubit algorithms have been executed. Here we utilize a four-qubit silicon processor with all control fidelities above the fault-tolerant threshold and demonstrate a three-qubit Grover’s search algorithm with a ~95% probability of finding the marked state. Our processor is made of three phosphorus atoms precision-patterned into isotopically pure silicon, which localise one electron. The long coherence times of the qubits enable single-qubit fidelities above 99.9% for all qubits. Moreover, the efficient single-pulse multi-qubit operations enabled by the electron–nuclear hyperfine interaction facilitate controlled-Z gates between all pairs of nuclear spins with fidelities above 99% when using the electron as an ancilla. These control fidelities, combined with high-fidelity non-demolition readout of all nuclear spins, allow the creation of a three-qubit Greenberger–Horne–Zeilinger state with 96.2% fidelity. Looking ahead, coupling neighbouring nuclear spin registers, as the one shown here, via electron–electron exchange may enable larger, fault-tolerant quantum processors.
+
+A four-qubit processor of three phosphorus nuclear spins and an electron spin in silicon enables the implementation of a three-qubit Grover’s search algorithm with 95% fidelity. The implementation is based on an advanced multi-qubit gate with single-qubit gate fidelities above 99.9% and two-qubit gate fidelities above 99%.
+
+Main
+
+Spin qubits in silicon hold great promise for the realization of large-scale quantum computers owing to their long coherence times, compatibility with advanced manufacturing technology and the possibility to operate at elevated (~1 K) temperatures1–4. However, correcting for unavoidable errors requires large numbers of qubits with sufficient quality. The well-known surface code5,6 demands that the fidelity of every qubit operation within these multi-qubit processors (initialization, readout and single- and two-qubit control) is above a threshold of approximately 99%. Although high-fidelity initialization, readout and single- and two-qubit gates have been demonstrated in gate-defined quantum dots7–14, combining all of these operations within a single multi-qubit device remains challenging. Reports on the successful implementation of multi-qubit algorithms therefore remain scarce (see Supplementary Table 1 in Supplementary Section I). First results on two-qubit algorithms15,16 have recently been followed by the implementation of quantum algorithms in two-qubit processors with single- and two-qubit gate fidelities above 99% (refs. 11,12). While coherent operations have been demonstrated in larger processors (three to six qubits)17–19, only a three-qubit phase-flip quantum error correction code has been executed for devices in which just single-qubit gate fidelities were reported above the fault-tolerant threshold20,21.
+
+Phosphorus (31P) atom qubits in silicon (Si) have a number of unique and beneficial properties that can help overcome the challenges of implementing multi-qubit algorithms. The strong natural confinement of atom-based processors allows the exploitation of the hyperfine interaction between the phosphorus nuclear spins and the bound electron spin. This allows individual qubit addressability22,23, while also providing all-to-all qubit connectivity in the form of efficient multi-qubit gates. The latter leverages the fact that a single gate on the electron spin can entangle multiple nuclear spins. This reduces the number of operations needed to execute quantum algorithms. In addition, the nuclear spins have long coherence times24 and can be read out with high fidelity via the process of quantum non-demolition readout25. Phosphorus atom qubits in silicon have been realized using ion implantation with high-fidelity single- and two-qubit gate operations and the recent demonstration of entanglement between two nuclear spins and one electron spin23,26. Scaling to larger error-corrected architectures requires precision control over the placement of the phosphorus atom qubits, which can be achieved by scanning tunnelling microscopy (STM) lithography27,28.
+
+Here, we demonstrate full coherent control over a precision-manufactured four-qubit processor in Si defined by three phosphorus nuclear spin qubits and one electron spin qubit. We achieve single-qubit gate fidelities for all four individual qubits of (99.94 ± 0.01)%, (99.98 ± 0.01)%, (99.95 ± 0.01)% and (99.95 ± 0.01)%. In addition, we demonstrate two-qubit controlled-Z (CZ) gates between all pairs of nuclear spins with fidelities of (99.65 ± 0.35)%, (99.49 ± 0.39)% and (99.32 ± 0.22)%, as well as readout of all nuclear spin qubits with a fidelity above 99% after post-selection. We exploit these high-fidelity (>99%) operations, all achieved within the same device, and the all-to-all qubit connectivity in the processor to produce Bell states and a three-qubit Greenberger–Horne–Zeilinger (GHZ) state with fidelities above 96%. Finally, we benchmark our four-qubit processor by executing a Grover’s search algorithm on the three nuclear spin qubits with a (94.57 ± 2.63)% average success probability of finding the marked state compared with the ideal algorithm fidelity. This constitutes one of the most successful implementations of this algorithm in any qubit platform so far.
+
+Single-qubit operations
+
+The multi-qubit processor studied in this work is formed by patterning three 31P atoms into isotopically purified 28Si with atomic precision using STM hydrogen lithography, as previously described for the same device by Reiner et. al.28. Highly phosphorus-doped silicon in-plane gates allow control of the electrostatic environment of the P atoms (highlighted in red in the schematic illustration of the device in Fig. 1a, top). An electron can be loaded onto the P atoms from a nearby, tunnel-coupled single-electron transistor (SET, yellow) that also serves as a charge sensor. To control the nuclear spins (basis states ⇓, ⇑) and the electron spin (basis states ↓, ↑), a broadband antenna (grey) is placed on top of the device, delivering the radiofrequency and microwave signals for nuclear magnetic resonance (NMR) and for electron spin resonance (ESR), respectively. An artistic impression of the four-qubit processor is shown in Fig. 1a (bottom), where the electron wave function (yellow) spreads over the three P atoms (blue, green and red) that are embedded in the silicon crystal. Henceforth, we use label 0 for the electron spin qubit and labels 1, 2 and 3 for the nuclear spin qubits (blue, green and red, respectively).Fig. 1 Single-qubit operations in the four-qubit processor.
+
+a, Top: a schematic illustration of the device consisting of in-plane gates (red), a SET charge sensor (yellow) and an antenna (light-grey wire). By applying an alternating current Iac through the antenna, an alternating magnetic field Bac is produced, enabling magnetic control. Bottom: an artistic impression of the three phosphorus atoms (blue, green and red) incorporated into the silicon crystal. The attracted electron wave function is depicted in yellow. The three nuclear spins and the electron spin define the four-qubit quantum processor. b, Measured ESR spectrum displaying eight resonance frequencies (bottom), each corresponding to a different nuclear spin configuration (top; see energy level diagram). Lighter colours indicate higher resonance frequency. c, Measured NMR spectrum (bottom) showing all six electron spin state-controlled peaks (top; see energy level diagram). Lighter colours correspond to transitions with electron-↑, and darker colours to electron-↓. d, RB decay curves for all four qubits, annotated with the corresponding average physical gate fidelity calculated from the measured Clifford fidelity and the error obtained from the fit. All single-qubit control fidelities surpass 99.9% fidelity.
+
+Electron spin initialization and readout is performed via a ramped technique29 at a dilution refrigerator base temperature of 15 mK, with an applied magnetic field of 1.45 T. Quantum non-demolition readout of the nuclear spins is achieved with fidelities above 99% after post-selection as shown in Supplementary Section II with nuclear spin initialization shown in Supplementary Section III.
+
+When an electron is loaded onto the multi-nuclear spin register, the electron spin interacts with all the nuclear spins through the contact hyperfine interaction, causing the ESR frequency to depend on the state of each of the nuclear spins. Figure 1b (bottom) shows an ESR spectrum with eight resonance peaks, where each peak corresponds to a different configuration of the nuclear spins (for the energy level diagram, see Fig. 1b, top). From the ESR peak separations, we find hyperfine interaction strengths of A1 = 6 MHz, A2 = 68 MHz and A3 = 103 MHz. The presence of the hyperfine interaction also allows each nuclear spin to be addressed separately, with the NMR frequency depending on the targeted nuclear spin and the state of the electron spin. An NMR spectrum displaying all six expected peaks is shown in Fig. 1c (bottom; for the energy level diagram, see Fig. 1c, top).
+
+Having established full individual addressability of the electron spin and the three nuclear spins, we measure the dephasing time of each qubit using a Ramsey experiment. We find T2*=28.1μs for the electron spin and 1.26 ms, 0.49 ms and 0.60 ms for nuclear spins 1, 2 and 3, respectively (Supplementary Section IV). To measure the dephasing time of the electron spin, we initialize all nuclear spins into the ⇓⇓⇓ state before applying the ESR pulses conditional on that nuclear spin configuration (for all other nuclear spin configurations we find similar T2* values; Supplementary Section IV). Based on these dephasing times, Rabi dephasing times and the Rabi frequencies (also shown in Supplementary Section IV), we obtain qubit quality factors Q=T2*fRabi of 4.82, 14.14, 11.84 and 18.86, as well as gate quality factors of Q=T2RabifRabi of 34, 797, 84 and 69, for the electron spin, nuclear spin 1, nuclear spin 2 and nuclear spin 3, respectively.
+
+Next, we characterize the control fidelity of all single-qubit operations by means of randomized benchmarking (RB). We achieve physical gate fidelities, Fi, above 99.9% for all four qubits (i = 0, 1, 2 or 3) as displayed in Fig. 1d. RB for the electron spin is performed with the nuclear spins initialized into the ⇓⇓⇓ state (all other nuclear spin configurations also yield fidelities above 99.9%; Supplementary Section V), while RB for the nuclear spins is performed with the electron spin initialized into the ↓ state. With high-fidelity nuclear spin readout and all single-qubit gate fidelities surpassing the fault-tolerant threshold, we proceed to create entanglement between the nuclear spins.
+
+Two- and three-qubit entanglement
+
+To entangle two of the nuclear spins, we exploit the hyperfine interaction between the electron spin and each of the nuclear spins. Here, simply by enacting a 2π rotation of the electron spin conditional on the configuration of the nuclear spins, we implement a geometric CZ gate between the nuclear spins23,30. To illustrate this, starting with the control nuclear spin in state ⇓, the target nuclear spin in (⇓+⇑)/2 and the third nuclear spin in ⇓, an ESR 2π pulse conditional on ⇓⇓⇓ flips the target nuclear spin by 180° around the z axis of its Bloch sphere. If, however, the control state was in state ⇑, the same ESR pulse would not affect the target nuclear spin. To implement this gate irrespective of the state of the third nuclear spin, an additional ESR 2π pulse conditional on ⇓⇓⇑ can be applied, creating a two-qubit CZ gate. Inserting the two ESR pulses in between a −π/2 rotation and a π/2 rotation of the target nuclear spin results in a nuclear controlled-NOT gate.
+
+We use this gate to create all of the four Bell states, Φ±=(⇓⇓±⇑⇑)/2, Ψ±=(⇓⇑±⇑⇓)/2, for each pair of nuclear spins (see Fig. 2a for the circuit diagram for nuclear spins 1 and 2). At the end of each measurement, we perform full-basis quantum state tomography (QST) to reconstruct the density matrix, ρij, and obtain the corresponding Bell state fidelity from FBSij=ψ∣ρij∣ψ, where ψ is the target Bell state and i, j = 1, 2 or 3 label the nuclear spins (Supplementary Section VI). Figure 2b–d shows the reconstructed density matrices for Φ+ for each pair of nuclear spins, with the Bell state fidelities listed in the tables above with state preparation and measurement (SPAM) errors included. The density matrices for Φ− and Ψ± are shown in Supplementary Section VII. We achieve average Bell state fidelities of FBS12=(97.5±0.3)%, FBS13=(97.7±0.4)% and FBS23=(96.8±0.4)% for the three pairs of nuclear spins, among the highest fidelities that have been reported for spin qubits in Si (refs. 13,31).Fig. 2 Bell state tomography and two-qubit RB.
+
+a, The circuit diagram used to construct the Bell states for nuclear spins 1 and 2. The table presents the input states corresponding to the final Bell state. b–d, Fidelities for all Bell states and reconstructed density matrices for Φ+ obtained from full-basis QST, for all pairs of nuclear spins. The errors are obtained from Monte Carlo bootstrap resampling and represent 1σ from the mean. The graphs show nuclear spins 1 and 2 (b), nuclear spins 1 and 3 (c) and nuclear spins 2 and 3 (d) (see schematics). In the reconstructed density matrices, the filled bars represent experimental amplitudes, while the open bars indicate the amplitudes for an ideal Φ+ state. e–g, Two-qubit RB (orange) and two-qubit interleaved RB (purple), for all pairs of nuclear spins, corresponding to the same pairs of spins studied in b (e), c (f) and d (g). The physical CZ gate fidelites (FCZ12, FCZ13 and FCZ23) are calculated from the non-interleaved reference Clifford fidelities (FC,ref12, FC,ref13 and FC,ref23) and the interleaved Clifford fidelities (obtained from the fits to the purple data points). The errors are obtained from the least-square fits at a level of 1 s.d. The physical CZ gate fidelities for all pairs of nuclear spins are above the fault-tolerant threshold. Avg., average.
+
+Bell state fidelities are affected by SPAM errors, single- and two-qubit gate errors, and errors that occur when qubits idle. To independently quantify the fidelity of the CZ gate, we perform two-qubit RB and two-qubit interleaved RB with the CZ gate as the interleaved gate (Supplementary Section VIII). As shown in Fig. 2e–g, we find CZ gate fidelities of FCZ12=(99.65±0.35)%, FCZ13=(99.49±0.39)% and FCZ23=(99.32±0.22)% for the three pairs of nuclear spins. In Supplementary Section IX, we show that the residual infidelities of the CZ gates can be explained by quasistatic variation in the electron energy splitting, which has been drastically reduced in this device by using isotopically pure silicon-28 material grown at low temperature using molecular beam epitaxy28. Two-qubit gate fidelities above the fault-tolerant threshold remain scarce in Si spin qubits and have only recently been reported8,11–14,23.
+
+As a final demonstration of our ability to create entangled states, we entangle all three nuclear spins to create a GHZ state using the circuit in Fig. 3a. The reconstructed density matrix obtained from full-basis QST is shown in Fig. 3b. We achieve a fidelity of FGHZ123=(96.2±0.5)% (including SPAM errors), among the highest GHZ state fidelities reported for semiconductor spin qubits so far (see Supplementary Table 1 in Supplementary Section I).Fig. 3 Three-qubit GHZ state tomography.
+
+a, The circuit diagram used to construct the GHZ state. b, The reconstructed density matrix of the GHZ state and corresponding state fidelity (FGHZ123=(96.2±0.5)%) as obtained from full-basis QST. The error is obtained from Monte Carlo bootstrap resampling and represents 1 s.d. from the mean. The filled bars represent experimental amplitudes, while the open bars represent amplitudes of an ideal GHZ state.
+
+Grover’s search algorithm
+
+Finally, we benchmark our four-qubit quantum processor by executing the well-known Grover’s search algorithm32, using the corresponding circuit shown in Fig. 4a. In general, this algorithm finds a specific bit string, xm, in the domain x of a function f, where f is defined such that it gives f(xm) = 1 and f(xi) = 0 for all other xi ≠ xm. In our case, the domain consists of the eight binary values {000, 001, …, 111}, which correspond to the eight possible nuclear spin states {⇓⇓⇓,⇓⇓⇑,…,⇑⇑⇑}. Grover’s algorithm works by accessing f with a unitary operator (called oracle), Uxm, which performs the action Uxmx=(−1)f(x)x. That is, the searched-for state (xm) is marked with a negative phase, while all other states are left unchanged. Taking advantage of the all-to-all connectivity in our processor, this oracle operation can be performed on the three nuclear spins by applying a single 2π rotation of the electron spin at the ESR frequency corresponding to xm (highlighted in red in the circuit diagram in Fig. 4a). To find the marked state with high probability, the Grover iteration consisting of the oracle and the Grover diffusion operator (highlighted in blue in the circuit diagram and implementing the unitary 2I⊗3−(++)⊗3) must be applied multiple times. Note that the Grover diffusion operator also benefits from all-to-all connectivity, requiring only a single entangling gate. For n = 3 qubits, the optimal number of repetitions is r = 2, which can be found using r=argmaxrsin2(2r+1)arcsin2−n, where argmax takes the earliest local maximum33.Fig. 4 Three-qubit Grover’s algorithm.
+
+a, The circuit diagram implementing Grover’s algorithm on three nuclear spins. The oracle is highlighted in red (here marking the ⇓⇓⇓ state), and the Grover diffusion operator is highlighted in blue. b, The measurement result when using ⇓⇓⇓ as the marked state and performing r = 2 Grover iterations. c, The measurement result when marking the states ⇓⇓⇑ and ⇑⇑⇓, and performing r = 1 Grover iteration. For both b and c, the filled bars represent experimental probabilities, while the open bars represent the ideal performance of Grover’s algorithm if implemented on a quantum device with no errors.
+
+In Fig. 4b, we demonstrate the final measurement outcome of Grover’s algorithm executed on the three nuclear spins when using ⇓⇓⇓ as the marked state. The algorithm finds this state with a probability of 93.46%, which corresponds to 98.87% of the ideal probability (94.53%) of finding the marked state with r = 2 Grover iterations. We also run the algorithm for all other marked states (Supplementary Section X) and find an average probability of (89.40 ± 2.49)% of finding the marked state, which corresponds to (94.57 ± 2.63)% of the ideal value. The uncertainties represent 1 s.d. from the mean taken over all marked states. This average fidelity is in good agreement with the predicted fidelity based on considering all the errors during qubit operations characterized in this work, as shown in Supplementary Section XI. In addition, we show that the algorithm can be run with two marked states using r = 1, which we would expect to achieve a success probability of 100%. Here, we achieve a probability of 96.36% to find the two marked states (Fig. 4c). These results represent one of the most successful implementations of Grover’s algorithm among any qubit platform so far (Supplementary Section XII).
+
+Conclusions
+
+We have shown full coherent control in a four-qubit silicon processor consisting of three nuclear spins and one electron spin. The all-to-all qubit connectivity along with the long coherence times of the spin qubits allowed us to obtain control fidelities above the fault-tolerant threshold and to successfully execute a three-qubit Grover’s search algorithm with high accuracy.
+
+Although in this work we used the electron spin to provide connectivity and to efficiently implement multi-qubit gates, it can also be used to couple neighbouring nuclear spin registers via the electron–electron exchange interaction. Exciting progress has been made in this direction34–36, and we anticipate the advent of quantum processors consisting of multiple connected registers in the near future. At the same time, as the placement precision of the STM approaches the atomic limit37–39, we anticipate future generations of devices with precisely engineered hyperfine interactions and tunnel couplings.
+
+Methods
+
+Fabrication
+
+The device was fabricated using hydrogen STM lithography on a silicon chip with a 45 nm layer of isotopically purified silicon-28 (~200 ppm of residual Si-29 atoms). This epitaxial buffer layer decouples the device from the nuclear spin bath of the natural silicon substrate. After patterning the device, the sample is dosed with phosphine gas, followed by an incorporation anneal at 350 °C for 60 s to incorporate P atoms into the silicon crystal lattice. A 45 nm epitaxial layer of Si-28 is then grown at 250 °C and at a rate of 0.15 nm min−1 to ensure high-quality epitaxy. The buffer layer separates the qubits from any charged defects on the silicon surface and, together with the encapsulation layer, provides a monolithic qubit environment with minimal levels of spin and charge noise40. An STM image of the device is shown in fig. 1c,d in ref. 28, where the same device as studied in this work was also studied.
+
+Statistics and reproducibility
+
+No statistical method was used to predetermine sample size. No data were excluded from the analyses. The experiments were not randomized. The investigators were not blinded to allocation during experiments and outcome assessment.
+
+Online content
+
+Any methods, additional references, Nature Portfolio reporting summaries, source data, extended data, supplementary information, acknowledgements, peer review information; details of author contributions and competing interests; and statements of data and code availability are available at 10.1038/s41565-024-01853-5.
+
+Supplementary information
+
+Supplementary Information Supplementary Sections I–XII, including Supplementary Figs. 1–6 and Supplementary Tables 1–4.
+
+Supplementary information
+
+The online version contains supplementary material available at 10.1038/s41565-024-01853-5.
+
+Acknowledgements
+
+The research outlined in this Article, as performed by all authors, was conducted and supported by Silicon Quantum Computing Pty Ltd (ACN 619 102 608), Australian Research Council Centre of Excellence for Quantum Computation and Communication Technology (project number CE170100012). M.Y.S. acknowledges an Australian Research Council Laureate Fellowship. We acknowledge the Field Programmable Gate Array (FPGA) measurement hardware deployment and support from A. Bridger, V. Bardell, D. Antliff, C. Brown and A. Sutherland. We acknowledge the measurement software deployment and support from R. Buckland, S. Findlay, O. Gorman and O. Cowan.
+
+Author contributions
+
+S.H.M., J.R. and Y.C. fabricated the device under the supervision of J.G.K.; I.T., D.P. and C.M.M. measured the device under the supervision of S.K.G. and L.K.; I.T., D.P., C.M.M. and M.B.D. analysed the data; H.E., H.G., B.V., M.T.J. and L.F.P. contributed to optimizing fabrication, measurements or the experimental setup; C.D.H. and C.R.M. assisted with the algorithm design; The manuscript was written by C.M.M., I.T., L.K., S.K.G. and M.Y.S. with input from all authors; M.Y.S. supervised the overall project.
+
+Peer review
+
+Peer review information
+
+Nature Nanotechnology thanks John Nichol and the other, anonymous, reviewer(s) for their contribution to the peer review of this work.
+
+Funding
+
+Open access funding provided through UNSW Library.
+
+Data availability
+
+The raw data used in this Article are available via Zenodo at 10.5281/zenodo.14214375 (ref. 41).
+
+Code availability
+
+The code used to analyse the data and produce the figures in this Article is available via Zenodo at 10.5281/zenodo.14214375 (ref. 41).
+
+Competing interests
+
+M.Y.S. is a director of the company Silicon Quantum Computing Pty Ltd. I.T., D.P., C.M.M., S.H.M., H.E., J.R., H.G., B.V., M.T.J., M.B.D., L.F.P., C.D.H., C.R.M., J.G.K., Y.C., S.K.G., L.K. and M.Y.S. (all authors) declare equity interest in Silicon Quantum Computing Pty Ltd.
+
+Publisher’s note Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.
+
+These authors contributed equally: I. Thorvaldson, D. Poulos, C. M. Moehle.
+
+These authors jointly supervised this work: S. K. Gorman, L. Kranz.
+
+Change history
+
+2/24/2025
+
+In the version of the article initially published, the abstract was an earlier, incorrect version which has now been reworded for clarity. The changes are made in the HTML and PDF versions of the article.
+
+
+References
+
+1. Vandersypen LMK Interfacing spin qubits in quantum dots and donors—hot, dense, and coherent npj Quant. Inf. 2017 3 34 10.1038/s41534-017-0038-y
+Vandersypen, L. M. K. et al. Interfacing spin qubits in quantum dots and donors—hot, dense, and coherent. npj Quant. Inf. 3, 34 (2017).
+2. Gonzalez-Zalba MF Scaling silicon-based quantum computing using cmos technology Nat. Electron. 2021 4 872 884 10.1038/s41928-021-00681-y
+Gonzalez-Zalba, M. F. et al. Scaling silicon-based quantum computing using cmos technology. Nat. Electron. 4, 872–884 (2021).
+3. Chatterjee A Semiconductor qubits in practice Nat. Rev. Phys. 2021 3 157 177 10.1038/s42254-021-00283-9
+Chatterjee, A. et al. Semiconductor qubits in practice. Nat. Rev. Phys. 3, 157–177 (2021).
+4. Burkard G Ladd TD Pan A Nichol JM Petta JR Semiconductor spin qubits Rev. Mod. Phys. 2023 95 025003 10.1103/RevModPhys.95.025003
+Burkard, G., Ladd, T. D., Pan, A., Nichol, J. M. & Petta, J. R. Semiconductor spin qubits. Rev. Mod. Phys. 95, 025003 (2023).
+5. Raussendorf R Harrington J Fault-tolerant quantum computation with high threshold in two dimensions Phys. Rev. Lett. 2007 98 190504 10.1103/PhysRevLett.98.190504 17677613
+Raussendorf, R. & Harrington, J. Fault-tolerant quantum computation with high threshold in two dimensions. Phys. Rev. Lett. 98, 190504 (2007).17677613 10.1103/PhysRevLett.98.190504
+6. Fowler AG Mariantoni M Martinis JM Cleland AN Surface codes: towards practical large-scale quantum computation Phys. Rev. A 2012 86 032324 10.1103/PhysRevA.86.032324
+Fowler, A. G., Mariantoni, M., Martinis, J. M. & Cleland, A. N. Surface codes: towards practical large-scale quantum computation. Phys. Rev. A 86, 032324 (2012).
+7. Takeda K Rapid single-shot parity spin readout in a silicon double quantum dot with fidelity exceeding 99% npj Quant. Inf. 2024 10 22 10.1038/s41534-024-00813-0
+Takeda, K. et al. Rapid single-shot parity spin readout in a silicon double quantum dot with fidelity exceeding 99%. npj Quant. Inf. 10, 22 (2024).
+8. Huang JY High-fidelity spin qubit operation and algorithmic initialization above 1 K Nature 2024 627 772 777 10.1038/s41586-024-07160-2 38538941 PMC10972758
+Huang, J. Y. et al. High-fidelity spin qubit operation and algorithmic initialization above 1 K. Nature 627, 772–777 (2024).38538941 10.1038/s41586-024-07160-2 PMC10972758
+9. Yoneda J A quantum-dot spin qubit with coherence limited by charge noise and fidelity higher than 99.9% Nat. Nanotechnol. 2018 13 102 106 10.1038/s41565-017-0014-x 29255292
+Yoneda, J. et al. A quantum-dot spin qubit with coherence limited by charge noise and fidelity higher than 99.9%. Nat. Nanotechnol. 13, 102–106 (2018).29255292 10.1038/s41565-017-0014-x
+10. Yang CH Silicon qubit fidelities approaching incoherent noise limits via pulse engineering Nat. Electron. 2019 2 151 158 10.1038/s41928-019-0234-1
+Yang, C. H. et al. Silicon qubit fidelities approaching incoherent noise limits via pulse engineering. Nat. Electron. 2, 151–158 (2019).
+11. Xue X Quantum logic with spin qubits crossing the surface code threshold Nature 2022 601 343 347 10.1038/s41586-021-04273-w 35046604 PMC8770146
+Xue, X. et al. Quantum logic with spin qubits crossing the surface code threshold. Nature 601, 343–347 (2022).35046604 10.1038/s41586-021-04273-w PMC8770146
+12. Noiri A Fast universal quantum gate above the fault-tolerance threshold in silicon Nature 2022 601 338 342 10.1038/s41586-021-04182-y 35046603
+Noiri, A. et al. Fast universal quantum gate above the fault-tolerance threshold in silicon. Nature 601, 338–342 (2022).35046603 10.1038/s41586-021-04182-y
+13. Mills AR Two-qubit silicon quantum processor with operation fidelity exceeding 99% Sci. Adv. 2022 8 eabn5130 10.1126/sciadv.abn5130 35385308 PMC8986105
+Mills, A. R. et al. Two-qubit silicon quantum processor with operation fidelity exceeding 99%. Sci. Adv. 8, eabn5130 (2022).35385308 10.1126/sciadv.abn5130 PMC8986105
+14. Wu Y-H Hamiltonian phase error in resonantly driven CNOT gate above the fault-tolerant threshold npj Quant. Inf. 2024 10 8 10.1038/s41534-023-00802-9
+Wu, Y.-H. et al. Hamiltonian phase error in resonantly driven CNOT gate above the fault-tolerant threshold. npj Quant. Inf. 10, 8 (2024).
+15. Watson TF A programmable two-qubit quantum processor in silicon Nature 2018 555 633 637 10.1038/nature25766 29443962
+Watson, T. F. et al. A programmable two-qubit quantum processor in silicon. Nature 555, 633–637 (2018).29443962 10.1038/nature25766
+16. Xue X Cmos-based cryogenic control of silicon quantum circuits Nature 2021 593 205 210 10.1038/s41586-021-03469-4 33981049
+Xue, X. et al. Cmos-based cryogenic control of silicon quantum circuits. Nature 593, 205–210 (2021).33981049 10.1038/s41586-021-03469-4
+17. Takeda K Quantum tomography of an entangled three-qubit state in silicon Nat. Nanotechnol. 2021 16 965 969 10.1038/s41565-021-00925-0 34099899
+Takeda, K. et al. Quantum tomography of an entangled three-qubit state in silicon. Nat. Nanotechnol. 16, 965–969 (2021).34099899 10.1038/s41565-021-00925-0
+18. Hendrickx NW A four-qubit germanium quantum processor Nature 2021 591 580 585 10.1038/s41586-021-03332-6 33762771
+Hendrickx, N. W. et al. A four-qubit germanium quantum processor. Nature 591, 580–585 (2021).33762771 10.1038/s41586-021-03332-6
+19. Philips SGJ Universal control of a six-qubit quantum processor in silicon Nature 2022 609 919 924 10.1038/s41586-022-05117-x 36171383 PMC9519456
+Philips, S. G. J. et al. Universal control of a six-qubit quantum processor in silicon. Nature 609, 919–924 (2022).36171383 10.1038/s41586-022-05117-x PMC9519456
+20. Takeda K Noiri A Nakajima T Kobayashi T Tarucha S Quantum error correction with silicon spin qubits Nature 2022 608 682 686 10.1038/s41586-022-04986-6 36002485 PMC9402442
+Takeda, K., Noiri, A., Nakajima, T., Kobayashi, T. & Tarucha, S. Quantum error correction with silicon spin qubits. Nature 608, 682–686 (2022).36002485 10.1038/s41586-022-04986-6 PMC9402442
+21. van Riggelen F Phase flip code with semiconductor spin qubits npj Quant. Inf. 2022 8 124 10.1038/s41534-022-00639-8
+van Riggelen, F. et al. Phase flip code with semiconductor spin qubits. npj Quant. Inf. 8, 124 (2022).
+22. Hile SJ Addressable electron spin resonance using donors and donor molecules in silicon Sci. Adv. 2018 4 eaaq1459 10.1126/sciadv.aaq1459 30027114 PMC6044739
+Hile, S. J. et al. Addressable electron spin resonance using donors and donor molecules in silicon. Sci. Adv. 4, eaaq1459 (2018).30027114 10.1126/sciadv.aaq1459 PMC6044739
+23. Mądzik MT Precision tomography of a three-qubit donor quantum processor in silicon Nature 2022 601 348 353 10.1038/s41586-021-04292-7 35046601
+Mądzik, M. T. et al. Precision tomography of a three-qubit donor quantum processor in silicon. Nature 601, 348–353 (2022).35046601 10.1038/s41586-021-04292-7
+24. Muhonen JT Storing quantum information for 30 seconds in a nanoelectronic device Nat. Nanotechnol. 2014 9 986 991 10.1038/nnano.2014.211 25305745
+Muhonen, J. T. et al. Storing quantum information for 30 seconds in a nanoelectronic device. Nat. Nanotechnol. 9, 986–991 (2014).25305745 10.1038/nnano.2014.211
+25. Pla JJ High-fidelity readout and control of a nuclear spin qubit in silicon Nature 2013 496 334 338 10.1038/nature12011 23598342
+Pla, J. J. et al. High-fidelity readout and control of a nuclear spin qubit in silicon. Nature 496, 334–338 (2013).23598342 10.1038/nature12011
+26. Muhonen JT Quantifying the quantum gate fidelity of single-atom spin qubits in silicon by randomized benchmarking J. Phys. Condens. Matter 2015 27 154205 10.1088/0953-8984/27/15/154205 25783435
+Muhonen, J. T. et al. Quantifying the quantum gate fidelity of single-atom spin qubits in silicon by randomized benchmarking. J. Phys. Condens. Matter 27, 154205 (2015).25783435 10.1088/0953-8984/27/15/154205
+27. Fuechsle M A single-atom transistor Nat. Nanotechnol. 2012 7 242 246 10.1038/nnano.2012.21 22343383
+Fuechsle, M. et al. A single-atom transistor. Nat. Nanotechnol. 7, 242–246 (2012).22343383 10.1038/nnano.2012.21
+28. Reiner J High-fidelity initialization and control of electron and nuclear spins in a four-qubit register Nat. Nanotechnol. 2024 19 605 611 10.1038/s41565-023-01596-9 38326467 PMC11106007
+Reiner, J. et al. High-fidelity initialization and control of electron and nuclear spins in a four-qubit register. Nat. Nanotechnol. 19, 605–611 (2024).38326467 10.1038/s41565-023-01596-9 PMC11106007
+29. Keith D Ramped measurement technique for robust high-fidelity spin qubit readout Sci. Adv. 2022 8 eabq0455 10.1126/sciadv.abq0455 36070386 PMC9451149
+Keith, D. et al. Ramped measurement technique for robust high-fidelity spin qubit readout. Sci. Adv. 8, eabq0455 (2022).36070386 10.1126/sciadv.abq0455 PMC9451149
+30. Waldherr G Quantum error correction in a solid-state hybrid spin register Nature 2014 506 204 207 10.1038/nature12919 24476818
+Waldherr, G. et al. Quantum error correction in a solid-state hybrid spin register. Nature 506, 204–207 (2014).24476818 10.1038/nature12919
+31. Dehollain JP Bell’s inequality violation with spins in silicon Nat. Nanotechnol. 2016 11 242 246 10.1038/nnano.2015.262 26571006
+Dehollain, J. P. et al. Bell’s inequality violation with spins in silicon. Nat. Nanotechnol. 11, 242–246 (2016).26571006 10.1038/nnano.2015.262
+32. Grover, L. K. A fast quantum mechanical algorithm for database search. In Proc. Twenty-Eighth Annual ACM Symposium on Theory of Computing 212–219 (Association for Computing Machinery, 1996).
+33. Boyer M Brassard G Høyer P Tapp A Tight bounds on quantum searching Fortschr. Phys. 1998 46 493 505 10.1002/(SICI)1521-3978(199806)46:4/5<493::AID-PROP493>3.0.CO;2-P
+Boyer, M., Brassard, G., Høyer, P. & Tapp, A. Tight bounds on quantum searching. Fortschr. Phys. 46, 493–505 (1998).
+34. He Y A two-qubit gate between phosphorus donor electrons in silicon Nature 2019 571 371 375 10.1038/s41586-019-1381-2 31316197
+He, Y. et al. A two-qubit gate between phosphorus donor electrons in silicon. Nature 571, 371–375 (2019).31316197 10.1038/s41586-019-1381-2
+35. Mądzik MT Conditional quantum operation of two exchange-coupled single-donor spin qubits in a MOS-compatible silicon device Nat. Commun. 2021 12 181 10.1038/s41467-020-20424-5 33420013 PMC7794236
+Mądzik, M. T. et al. Conditional quantum operation of two exchange-coupled single-donor spin qubits in a MOS-compatible silicon device. Nat. Commun. 12, 181 (2021).33420013 10.1038/s41467-020-20424-5 PMC7794236
+36. Stemp, H. G. et al. Tomography of entangling two-qubit logic operations in exchange-coupled donor electron spin qubits. Nat. Commun. 15, 8415 (2024).10.1038/s41467-024-52795-4 PMC11438976 39341831
+37. Simmons, M. & Keizer, J. A method for selective incorporation of dopant atoms in a semiconductive surface. Patent WO2019210370A1 (2019).
+38. Ivie JA Impact of incorporation kinetics on device fabrication with atomic precision Phys. Rev. Appl. 2021 16 054037 10.1103/PhysRevApplied.16.054037
+Ivie, J. A. et al. Impact of incorporation kinetics on device fabrication with atomic precision. Phys. Rev. Appl. 16, 054037 (2021).
+39. Wyrick J Enhanced atomic precision fabrication by adsorption of phosphine into engineered dangling bonds on H–Si using STM and DFT ACS Nano 2022 16 19114 19123 10.1021/acsnano.2c08162 36317737
+Wyrick, J. et al. Enhanced atomic precision fabrication by adsorption of phosphine into engineered dangling bonds on H–Si using STM and DFT. ACS Nano 16, 19114–19123 (2022).36317737 10.1021/acsnano.2c08162
+40. Kranz L Exploiting a single-crystal environment to minimize the charge noise on qubits in silicon Adv. Mater. 2020 32 2003361 10.1002/adma.202003361 32830388
+Kranz, L. et al. Exploiting a single-crystal environment to minimize the charge noise on qubits in silicon. Adv. Mater. 32, 2003361 (2020).10.1002/adma.202003361 32830388
+41. Thorvaldson, I. & Moehle, C. Raw data and analysis scripts underlying the publication “Grover’s algorithm in a four-qubit silicon processor above the fault-tolerant threshold”. Zenodo10.5281/zenodo.14214375 (2024).10.1038/s41565-024-01853-5 PMC12014505 39979400

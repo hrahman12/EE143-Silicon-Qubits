@@ -1,0 +1,953 @@
+
+<!DOCTYPE article
+  PUBLIC "-//NLM//DTD JATS (Z39.96) Journal Archiving and Interchange DTD with MathML3 v1.4 20241031//EN" "JATS-archivearticle1-4-mathml3.dtd">
+<article id="anie202213982" xml:lang="en" article-type="research-article" dtd-version="1.4"><processing-meta base-tagset="archiving" mathml-version="3.0" table-model="xhtml" tagset-family="jats"><restricted-by>pmc</restricted-by></processing-meta><front><journal-meta><journal-id journal-id-type="nlm-ta">Angew Chem Int Ed Engl</journal-id><journal-id journal-id-type="iso-abbrev">Angew Chem Int Ed Engl</journal-id><journal-id journal-id-type="pmc-domain-id">379</journal-id><journal-id journal-id-type="pmc-domain">blackwellopen</journal-id><journal-id journal-id-type="nlm-id">0370543</journal-id><journal-id journal-id-type="publisher-id">ANIE</journal-id><journal-title-group><journal-title>Angewandte Chemie (International Ed. in English)</journal-title></journal-title-group><issn pub-type="ppub">1433-7851</issn><issn pub-type="epub">1521-3773</issn><custom-meta-group><custom-meta><meta-name>pmc-is-collection-domain</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-collection-title</meta-name><meta-value>Wiley Open Access Collection</meta-value></custom-meta></custom-meta-group></journal-meta><article-meta><article-id pub-id-type="pmcid">PMC10108107</article-id><article-id pub-id-type="pmcid-ver">PMC10108107.1</article-id><article-id pub-id-type="pmcaid">10108107</article-id><article-id pub-id-type="pmcaiid">10108107</article-id><article-id pub-id-type="pmid">36484458</article-id><article-id pub-id-type="doi">10.1002/anie.202213982</article-id><article-id pub-id-type="publisher-id">ANIE202213982</article-id><article-version article-version-type="pmc-version">1</article-version><article-categories><subj-group subj-group-type="overline"><subject>Research Article</subject></subj-group><subj-group subj-group-type="heading"><subject>Research Articles</subject><subj-group subj-group-type="heading"><subject>Atomic‐scale Qubits</subject></subj-group></subj-group></article-categories><title-group><article-title>Room Temperature Incorporation of Arsenic Atoms into the Germanium (001) Surface<xref rid="anie202213982-note-1001" ref-type="fn">**</xref>
+</article-title></title-group><contrib-group><contrib id="anie202213982-cr-0001" contrib-type="author"><name name-style="western"><surname>Hofmann</surname><given-names initials="EVS">Emily V. S.</given-names></name><contrib-id contrib-id-type="orcid" authenticated="false">http://orcid.org/0000-0002-1826-5280</contrib-id><xref rid="anie202213982-aff-0001" ref-type="aff">
+<sup>1</sup>
+</xref><xref rid="anie202213982-aff-0002" ref-type="aff">
+<sup>2</sup>
+</xref><xref rid="anie202213982-aff-0003" ref-type="aff">
+<sup>3</sup>
+</xref></contrib><contrib id="anie202213982-cr-0002" contrib-type="author"><name name-style="western"><surname>Stock</surname><given-names initials="TJZ">Taylor J. Z.</given-names></name><xref rid="anie202213982-aff-0001" ref-type="aff">
+<sup>1</sup>
+</xref><xref rid="anie202213982-aff-0002" ref-type="aff">
+<sup>2</sup>
+</xref></contrib><contrib id="anie202213982-cr-0003" contrib-type="author"><name name-style="western"><surname>Warschkow</surname><given-names initials="O">Oliver</given-names></name><xref rid="anie202213982-aff-0001" ref-type="aff">
+<sup>1</sup>
+</xref></contrib><contrib id="anie202213982-cr-0004" contrib-type="author"><name name-style="western"><surname>Conybeare</surname><given-names initials="R">Rebecca</given-names></name><xref rid="anie202213982-aff-0001" ref-type="aff">
+<sup>1</sup>
+</xref><xref rid="anie202213982-aff-0004" ref-type="aff">
+<sup>4</sup>
+</xref></contrib><contrib id="anie202213982-cr-0005" contrib-type="author"><name name-style="western"><surname>Curson</surname><given-names initials="NJ">Neil J.</given-names></name><contrib-id contrib-id-type="orcid" authenticated="false">http://orcid.org/0000-0002-5661-0559</contrib-id><xref rid="anie202213982-aff-0001" ref-type="aff">
+<sup>1</sup>
+</xref><xref rid="anie202213982-aff-0002" ref-type="aff">
+<sup>2</sup>
+</xref></contrib><contrib id="anie202213982-cr-0006" contrib-type="author" corresp="yes"><name name-style="western"><surname>Schofield</surname><given-names initials="SR">Steven R.</given-names></name><contrib-id contrib-id-type="orcid" authenticated="false">http://orcid.org/0000-0002-0727-3015</contrib-id><xref rid="anie202213982-aff-0001" ref-type="aff">
+<sup>1</sup>
+</xref><xref rid="anie202213982-aff-0004" ref-type="aff">
+<sup>4</sup>
+</xref><address><email>s.schofield@ucl.ac.uk</email></address></contrib></contrib-group><aff id="anie202213982-aff-0001">
+<label>
+<sup>1</sup>
+</label>
+<named-content content-type="organisation-division">London Centre for Nanotechnology</named-content>
+<institution>University College London</institution>
+<city>London</city>
+<postal-code>WC1H 0AH</postal-code>
+<country country="GB">UK</country>
+</aff><aff id="anie202213982-aff-0002">
+<label>
+<sup>2</sup>
+</label>
+<named-content content-type="organisation-division">Department of Electronic and Electrical Engineering</named-content>
+<institution>University College London</institution>
+<city>London</city>
+<postal-code>WC1E 6BT</postal-code>
+<country country="GB">UK</country>
+</aff><aff id="anie202213982-aff-0003">
+<label>
+<sup>3</sup>
+</label>
+<institution>IHP Leibniz-Institut für Innovative Mikroelektronik</institution>
+<named-content content-type="street">Im Technologiepark 25</named-content>
+<postal-code>15236</postal-code>
+<city>Frankfurt (Oder)</city>
+<country country="DE">Germany</country>
+</aff><aff id="anie202213982-aff-0004">
+<label>
+<sup>4</sup>
+</label>
+<named-content content-type="organisation-division">Department of Physics and Astronomy</named-content>
+<institution>University College London</institution>
+<city>London</city>
+<postal-code>WC1E 6BT</postal-code>
+<country country="GB">UK</country>
+</aff><pub-date pub-type="epub"><day>10</day><month>1</month><year>2023</year></pub-date><pub-date pub-type="ppub"><day>06</day><month>2</month><year>2023</year></pub-date><volume>62</volume><issue seq="2470">7</issue><issue-id pub-id-type="pmc-issue-id">433603</issue-id><issue-id pub-id-type="doi">10.1002/anie.v62.7</issue-id><elocation-id>e202213982</elocation-id><history><date date-type="received"><day>21</day><month>9</month><year>2022</year></date></history><pub-history><event event-type="pmc-release"><date><day>17</day><month>04</month><year>2023</year></date></event><event event-type="pmc-live"><date><day>18</day><month>04</month><year>2023</year></date></event><event event-type="pmc-last-change"><date iso-8601-date="2023-04-18 03:10:12.287"><day>18</day><month>04</month><year>2023</year></date></event></pub-history><permissions><copyright-statement content-type="article-copyright">© 2022 The Authors. Angewandte Chemie International Edition published by Wiley-VCH GmbH</copyright-statement><license><ali:license_ref xmlns:ali="http://www.niso.org/schemas/ali/1.0/" specific-use="textmining" content-type="ccbylicense">https://creativecommons.org/licenses/by/4.0/</ali:license_ref><license-p>This is an open access article under the terms of the <ext-link xmlns:xlink="http://www.w3.org/1999/xlink" ext-link-type="uri" xlink:href="https://creativecommons.org/licenses/by/4.0/">http://creativecommons.org/licenses/by/4.0/</ext-link> License, which permits use, distribution and reproduction in any medium, provided the original work is properly cited.</license-p></license></permissions><self-uri xmlns:xlink="http://www.w3.org/1999/xlink" content-type="pmc-pdf" xlink:href="ANIE-62-0.pdf"/><self-uri xmlns:xlink="http://www.w3.org/1999/xlink" content-type="pdf" xlink:href="file:ANIE-62-0.pdf"/><abstract><title>Abstract</title><p>Germanium has emerged as an exceptionally promising material for spintronics and quantum information applications, with significant fundamental advantages over silicon. However, efforts to create atomic‐scale devices using donor atoms as qubits have largely focused on phosphorus in silicon. Positioning phosphorus in silicon with atomic‐scale precision requires a thermal incorporation anneal, but the low success rate for this step has been shown to be a fundamental limitation prohibiting the scale‐up to large‐scale devices. Here, we present a comprehensive study of arsine (AsH<sub>3</sub>) on the germanium (001) surface. We show that, unlike any previously studied dopant precursor on silicon or germanium, arsenic atoms fully incorporate into substitutional surface lattice sites at room temperature. Our results pave the way for the next generation of atomic‐scale donor devices combining the superior electronic properties of germanium with the enhanced properties of arsine/germanium chemistry that promises scale‐up to large numbers of deterministically placed qubits.</p></abstract><abstract abstract-type="graphical"><p>We report the discovery that arsenic atoms incorporate substitutionally into the (001) surface of germanium at room temperature when the surface is exposed to arsine (AsH<sub>3</sub>). We observe several types of incorporated arsenic structures that differ only in the locations of the three adsorbed hydrogen atoms. Arsenic incorporation causes germanium ad‐atoms to be released onto the surface. These results provide a path toward atomic‐scale dopant devices in germanium with clear advantages over silicon.<boxed-text position="anchor" content-type="graphic" orientation="portrait"><graphic xmlns:xlink="http://www.w3.org/1999/xlink" position="anchor" id="jats-graphic-1" orientation="portrait" xlink:href="ANIE-62-0-g004.jpg"/></boxed-text>
+</p></abstract><kwd-group kwd-group-type="author-generated"><kwd id="anie202213982-kwd-0001">Atomic-Manipulation</kwd><kwd id="anie202213982-kwd-0002">Donor</kwd><kwd id="anie202213982-kwd-0003">Precursor</kwd><kwd id="anie202213982-kwd-0004">Semiconductor</kwd><kwd id="anie202213982-kwd-0005">Stm</kwd></kwd-group><funding-group><award-group id="funding-0001"><funding-source><institution-wrap><institution>Engineering and Physical Sciences Research Council
+</institution><institution-id institution-id-type="doi">10.13039/501100000266</institution-id></institution-wrap></funding-source><award-id>EP/M009564/1</award-id></award-group></funding-group><counts><fig-count count="5"/><table-count count="1"/><ref-count count="38"/><page-count count="7"/><word-count count="0"/></counts><custom-meta-group><custom-meta><meta-name>pmc-status-qastatus</meta-name><meta-value>0</meta-value></custom-meta><custom-meta><meta-name>pmc-status-live</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-status-embargo</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-status-released</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-open-access</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-olf</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-manuscript</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-legally-suppressed</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-has-pdf</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-has-supplement</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-pdf-only</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-suppress-copyright</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-is-real-version</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-is-scanned-article</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-preprint</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-in-epmc</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-license-ref</meta-name><meta-value>CC BY</meta-value></custom-meta><custom-meta><meta-name>source-schema-version-number</meta-name><meta-value>2.0</meta-value></custom-meta><custom-meta><meta-name>cover-date</meta-name><meta-value>February 6, 2023</meta-value></custom-meta><custom-meta><meta-name>details-of-publishers-convertor</meta-name><meta-value>Converter:WILEY_ML3GV2_TO_JATSPMC version:6.2.7 mode:remove_FC converted:17.04.2023</meta-value></custom-meta></custom-meta-group></article-meta><notes><p content-type="self-citation">
+<mixed-citation publication-type="journal" id="anie202213982-self">
+<string-name name-style="western">
+<given-names>E. V. S.</given-names>
+<surname>Hofmann</surname>
+</string-name>, <string-name name-style="western">
+<given-names>T. J. Z.</given-names>
+<surname>Stock</surname>
+</string-name>, <string-name name-style="western">
+<given-names>O.</given-names>
+<surname>Warschkow</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R.</given-names>
+<surname>Conybeare</surname>
+</string-name>, <string-name name-style="western">
+<given-names>N. J.</given-names>
+<surname>Curson</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S. R.</given-names>
+<surname>Schofield</surname>
+</string-name>, <source>Angew. Chem. Int. Ed.</source>
+<year>2023</year>, <volume>62</volume>, <elocation-id>e202213982</elocation-id>; <italic toggle="yes">Angew. Chem.</italic>
+<bold>2023</bold>, <italic toggle="yes">135</italic>, e202213982.<pub-id pub-id-type="doi" assigning-authority="pmc">10.1002/anie.202213982</pub-id><pub-id pub-id-type="pmcid">PMC10108107</pub-id><pub-id pub-id-type="pmid">36484458</pub-id></mixed-citation>
+</p><fn-group id="anie202213982-ntgp-0004"><fn id="anie202213982-note-1001"><label>**</label><p>A previous version of this manuscript has been deposited on a preprint server (<ext-link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://doi.org/10.48550/arXiv.2203.08769" ext-link-type="uri">https://doi.org/10.48550/arXiv.2203.08769</ext-link>).</p></fn></fn-group></notes></front><body><sec id="anie202213982-sec-0001"><title>Introduction</title><p>Germanium is experiencing a strong resurgence of interest for the fabrication of (opto)‐electronic, spintronic, and quantum technological devices.[<xref rid="anie202213982-bib-0001" ref-type="bibr">
+<sup>1</sup>
+</xref>, <xref rid="anie202213982-bib-0002" ref-type="bibr">
+<sup>2</sup>
+</xref>] Compared to silicon, germanium has a higher electron mobility,<xref rid="anie202213982-bib-0003" ref-type="bibr">
+<sup>[3]</sup>
+</xref> stronger spin‐orbit coupling,<xref rid="anie202213982-bib-0004" ref-type="bibr">
+<sup>[4]</sup>
+</xref> larger Bohr radius,<xref rid="anie202213982-bib-0004" ref-type="bibr">
+<sup>[4]</sup>
+</xref> larger Stark effect,<xref rid="anie202213982-bib-0005" ref-type="bibr">
+<sup>[5]</sup>
+</xref> and is relatively insensitive to exchange coupling oscillations.[<xref rid="anie202213982-bib-0006" ref-type="bibr">
+<sup>6</sup>
+</xref>, <xref rid="anie202213982-bib-0007" ref-type="bibr">
+<sup>7</sup>
+</xref>] In addition, germanium can be made free of nuclear spin by isotopic enrichment,<xref rid="anie202213982-bib-0008" ref-type="bibr">
+<sup>[8]</sup>
+</xref> donors in germanium have long coherence times,[<xref rid="anie202213982-bib-0009" ref-type="bibr">
+<sup>9</sup>
+</xref>, <xref rid="anie202213982-bib-0010" ref-type="bibr">
+<sup>10</sup>
+</xref>] and germanium is already used in high‐performance electronics.</p><p>Electron spins localized on donor atoms in semiconductors form excellent two‐level quantum systems (qubits).<xref rid="anie202213982-bib-0011" ref-type="bibr">
+<sup>[11]</sup>
+</xref> Assembling individual donors to form devices requires the positioning of potentially thousands of donors with atomic‐scale precision.<xref rid="anie202213982-bib-0012" ref-type="bibr">
+<sup>[12]</sup>
+</xref> This necessitates a detailed understanding of the chemical processes involved, and the ability to produce substitutional donor atoms at atomically precise locations with extremely high fidelity. The most successful approach to date is phosphorus in silicon using phosphine (PH<sub>3</sub>) as the donor precursor, and an atomically‐patterned hydrogen resist.[<xref rid="anie202213982-bib-0013" ref-type="bibr">
+<sup>13</sup>
+</xref>, <xref rid="anie202213982-bib-0014" ref-type="bibr">
+<sup>14</sup>
+</xref>, <xref rid="anie202213982-bib-0015" ref-type="bibr">
+<sup>15</sup>
+</xref>] Among the many devices that have been fabricated using this technique are the celebrated single‐atom transistor,<xref rid="anie202213982-bib-0016" ref-type="bibr">
+<sup>[16]</sup>
+</xref> and a few donor device where two‐qubit operations were demonstrated via exchange coupling.<xref rid="anie202213982-bib-0017" ref-type="bibr">
+<sup>[17]</sup>
+</xref>
+</p><p>A critical step in the scale‐up to large numbers of donor qubits is incorporating the donor atoms into the surface layer.<xref rid="anie202213982-bib-0013" ref-type="bibr">
+<sup>[13]</sup>
+</xref> For all of the systems investigated to date—phosphine on silicon[<xref rid="anie202213982-bib-0013" ref-type="bibr">
+<sup>13</sup>
+</xref>, <xref rid="anie202213982-bib-0018" ref-type="bibr">
+<sup>18</sup>
+</xref>] and germanium,<xref rid="anie202213982-bib-0019" ref-type="bibr">
+<sup>[19]</sup>
+</xref> and arsine (AsH<sub>3</sub>) on silicon<xref rid="anie202213982-bib-0020" ref-type="bibr">
+<sup>[20]</sup>
+</xref>—a thermal anneal is required to achieve this surface incorporation. However, this anneal can also provide an opportunity for the donor species to desorb. The probability of successfully incorporating phosphorus into silicon using a hydrogen resist was studied by two independent groups and determined to be <italic toggle="yes">P</italic>
+<sub>incorp.</sub>≈70 %.[<xref rid="anie202213982-bib-0021" ref-type="bibr">
+<sup>21</sup>
+</xref>, <xref rid="anie202213982-bib-0022" ref-type="bibr">
+<sup>22</sup>
+</xref>] Since the probability for successfully fabricating <italic toggle="yes">N</italic> qubits scales as (<italic toggle="yes">P</italic>
+<sub>incorp.</sub>)<sup>
+<italic toggle="yes">N</italic>
+</sup>, this means that even for a modest 50 qubit device, the success rate using phosphorus in silicon can be anticipated to be as low as 1 in 10<sup>8</sup>.</p><p>Here, we show that at room temperature, arsenic atoms fully incorporate into the germanium surface layer from adsorbed arsine molecules. Remarkably, and unlike all previously studied systems, no thermal anneal is required for the incorporation of arsenic into germanium. Thus, the donor incorporation probability is unity, suggesting that arsine on germanium offers a path to the creation of large‐scale quantum devices consisting of many thousands of donors.</p></sec><sec id="anie202213982-sec-0002"><title>Results and Discussion</title><p>Figure <xref rid="anie202213982-fig-0001" ref-type="fig">1a</xref> shows an overview STM image of a Ge(001) surface dosed with arsine at room temperature. Rows of germanium dimers run horizontally across the image and form either a buckled c(4×2) configuration or a more symmetric appearing 2×1 configuration.<xref rid="anie202213982-bib-0023" ref-type="bibr">
+<sup>[23]</sup>
+</xref> Features related to arsine dosing are highlighted by boxes. These features appear different from defects observed on the clean surface and from common surface contaminants, and are only ever seen after we expose the Ge(001) surface to arsine. The brightest features that we observe present a single protrusion on top of a dimer row and in the position mid‐way between two neighbouring dimers (Figure <xref rid="anie202213982-fig-0001" ref-type="fig">1b</xref>). This feature does not conform to any of the anticipated arsine adsorbate [AsH<sub>
+<italic toggle="yes">x</italic>
+</sub>+(3− <italic toggle="yes">x</italic>)H] configurations[<xref rid="anie202213982-bib-0014" ref-type="bibr">
+<sup>14</sup>
+</xref>, <xref rid="anie202213982-bib-0015" ref-type="bibr">
+<sup>15</sup>
+</xref>, <xref rid="anie202213982-bib-0019" ref-type="bibr">
+<sup>19</sup>
+</xref>, <xref rid="anie202213982-bib-0020" ref-type="bibr">
+<sup>20</sup>
+</xref>] (see Supporting Information), but is an excellent match to a germanium ad‐dimer in a “B” site configuration[<xref rid="anie202213982-bib-0024" ref-type="bibr">
+<sup>24</sup>
+</xref>, <xref rid="anie202213982-bib-0025" ref-type="bibr">
+<sup>25</sup>
+</xref>] (Figure <xref rid="anie202213982-fig-0001" ref-type="fig">1c</xref>).
+</p><fig position="float" fig-type="Figure" id="anie202213982-fig-0001" orientation="portrait"><label>Figure 1</label><caption><p>a) Overview STM image of arsine (AsH<sub>3</sub>) on Ge(001) at room temperature. b), c) Germanium B‐site ad‐dimer image and schematic. d), e) STM image and schematic of an m1 feature. f) Images of t1 feature that is three dimers wide and spans two dimer rows. g) STM image of a h1 feature. h)–m) five images of the same region of the surface where one feature undergoes transitions between h1, h2, h3, g1, and t1 features, and n)–s) the corresponding structural schematics. Calculated DFT energies are quoted for each structure. Orange circles on panels (n)–(s) provide a guide to the eye to highlight the location of the brightly‐imaging portions of the STM images. STM image parameters: all images −1.5 V, 200 pA. Image (a) z‐range 190 pm, images (b)–(m) z‐range 140 pm; the colour scheme is shown top right. (a) 30×22 nm<sup>2</sup>, (b), (f), (g) 5.7×3.8 nm<sup>2</sup>, (d) 6.9×3.8 nm<sup>2</sup>, (h)–(m) 8.0×6.1 nm<sup>2</sup>.</p></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" position="anchor" id="jats-graphic-3" orientation="portrait" xlink:href="ANIE-62-0-g005.jpg"/></fig><p>Moreover, we occasionally observe these features shifting position on the surface (see white and black arrows on Figures <xref rid="anie202213982-fig-0001" ref-type="fig">1j</xref>–<xref rid="anie202213982-fig-0001" ref-type="fig">m</xref>), which is another known characteristic of germanium ad‐dimers at room temperature.[<xref rid="anie202213982-bib-0024" ref-type="bibr">
+<sup>24</sup>
+</xref>, <xref rid="anie202213982-bib-0025" ref-type="bibr">
+<sup>25</sup>
+</xref>, <xref rid="anie202213982-bib-0026" ref-type="bibr">
+<sup>26</sup>
+</xref>] The existence of germanium ad‐dimers implies that arsenic atoms have incorporated into the surface from the adsorbed arsine molecules, displacing germanium atoms onto the surface in the process.</p><p>We next turn our attention to the most abundant feature after arsine dosing: this feature appears as two adjacent dark dimers, and two examples are highlighted in Figure <xref rid="anie202213982-fig-0001" ref-type="fig">1d</xref>. Close inspection reveals that this feature is not perfectly symmetric, but instead it appears slightly less dark in one corner. We assign this feature to a fully dissociated arsine molecule, resulting in a surface‐incorporated arsenic atom and three adsorbed hydrogen atoms forming a hydrogen‐terminated arsenic‐germanium heterodimer (As−Ge−H) and a germanium monohydride dimer (H−Ge−Ge−H). This structure is illustrated in Figure <xref rid="anie202213982-fig-0001" ref-type="fig">1e</xref> and we label it m1. This feature images less brightly than the surrounding clean germanium dimers due to the absence of the germanium dimer π‐bonds caused by the adsorption of the three hydrogen atoms, and the formation of a lone pair on the arsenic atom. The slightly less‐dark site in one corner of the feature can be attributed to the arsenic atom.</p><p>In Figures <xref rid="anie202213982-fig-0001" ref-type="fig">1f</xref>, <xref rid="anie202213982-fig-0001" ref-type="fig">g</xref> we highlight two other arsine features that we label t1 and h1. Both features are three dimers wide. The t1 feature exhibits a complicated appearance and spans two dimer rows (Figure <xref rid="anie202213982-fig-0001" ref-type="fig">1f</xref>), while the h1 feature exhibits a single dark dimer adjacent to two protrusions positioned asymmetrically about the dimer row (Figure <xref rid="anie202213982-fig-0001" ref-type="fig">1g</xref>). We observe transitions between these, and several other three‐dimer wide features, as shown in Figures <xref rid="anie202213982-fig-0001" ref-type="fig">1h</xref>–<xref rid="anie202213982-fig-0001" ref-type="fig">m</xref>. By analogy with the m1 feature, we readily assign the h1 feature to a hydrogen‐terminated arsenic‐germanium heterodimer (As−Ge−H) and two adsorbed hydrogen atoms; however, in this case, the two hydrogen atoms are adsorbed to the ends of two neighbouring dimers to form two germanium hemihydride dimers (Ge−Ge−H), rather than to a single dimer as was the case for m1. The two protrusions observed in the STM image are produced by the two clean germanium atoms of the hemihydride dimers, as highlighted by the orange circles in structural schematic in Figure <xref rid="anie202213982-fig-0001" ref-type="fig">1n</xref>.</p><p>In the next image, Figure <xref rid="anie202213982-fig-0001" ref-type="fig">1i</xref>, one of the two asymmetric protrusions has changed from the top of the dimer row to the bottom. We attribute this change to one hydrogen atom moving from one side of the germanium dimer to the other, as illustrated by structure h2 in Figure <xref rid="anie202213982-fig-0001" ref-type="fig">1p</xref>. Similarly, in Figure <xref rid="anie202213982-fig-0001" ref-type="fig">1j</xref> we see that the second asymmetric protrusion has now also changed sides, which can be attributed to the second hydrogen moving to the other side of its germanium dimer as shown in structure h3 (Figure <xref rid="anie202213982-fig-0001" ref-type="fig">1q</xref>).</p><p>The subsequent transition, observed in Figure <xref rid="anie202213982-fig-0001" ref-type="fig">1k</xref> is, at first consideration, rather unexpected. Here the two protrusions of the two clean germanium atoms of the hemihydride dimers of structure h3 merge together to form a single protrusion. We explain this change as being caused by the capture of a single germanium monomer at the clean germanium ends of the two hemihydride dimers in an end‐bridge bonding configuration, as shown schematically in Figure <xref rid="anie202213982-fig-0001" ref-type="fig">1r</xref> and labelled g1.</p><p>Figure <xref rid="anie202213982-fig-0001" ref-type="fig">1m</xref> shows the final transition in the set, where the feature has now become the two‐dimer row spanning feature t1 already mentioned (Figure <xref rid="anie202213982-fig-0001" ref-type="fig">1f</xref>). Here, it appears that the protrusion produced by the monomer of the g1 feature observed in Figure <xref rid="anie202213982-fig-0001" ref-type="fig">1k</xref> has increased in size and intensity, and that our feature has now locally pinned a phason defect (i.e., a defect where two neighbouring dimers become statically buckled in the same direction[<xref rid="anie202213982-bib-0027" ref-type="bibr">
+<sup>27</sup>
+</xref>, <xref rid="anie202213982-bib-0028" ref-type="bibr">
+<sup>28</sup>
+</xref>]) on the adjacent dimer row. However, we do not expect the spontaneous local pinning of a phason except at very low temperatures[<xref rid="anie202213982-bib-0028" ref-type="bibr">
+<sup>28</sup>
+</xref>, <xref rid="anie202213982-bib-0029" ref-type="bibr">
+<sup>29</sup>
+</xref>] Thus, we propose a chemical origin for this pinning, specifically the capture of a second germanium monomer to form a dimer‐trough bridging germanium dimer, as shown in Figure <xref rid="anie202213982-fig-0001" ref-type="fig">1s</xref>. This structure explains both the enlargement of the protrusion at the site of the monomer in structure g1, and the dimer pinning that causes the phason‐like defect. We further note that the appearance of the trough‐bridging dimer of this feature very closely matches that observed in germanium deposition experiments.[<xref rid="anie202213982-bib-0024" ref-type="bibr">
+<sup>24</sup>
+</xref>, <xref rid="anie202213982-bib-0025" ref-type="bibr">
+<sup>25</sup>
+</xref>]</p><p>The transitions h3→g1 and g1→t1 involve the dynamic capture of germanium monomers. These monomers are bound in g1 or t1 features but are occasionally able to overcome the diffusion barriers at room temperature to leave one feature and be captured at another. Two examples of such transitions where we identify both the source and the destination of a transiting germanium monomer are shown in Figure <xref rid="anie202213982-fig-0002" ref-type="fig">2</xref>. Figure <xref rid="anie202213982-fig-0002" ref-type="fig">2a</xref> shows an STM image where a t1 and g1 feature are separated by a space of three dimers in the horizontal direction, and a single germanium dimer row in the vertical direction, as illustrated in Figure <xref rid="anie202213982-fig-0002" ref-type="fig">2c</xref>. Figure <xref rid="anie202213982-fig-0002" ref-type="fig">2b</xref> shows a subsequent image of the same area of the surface, where we see the t1 feature has become a g1 feature and vice versa, mediated by the exchange of a germanium monomer between them. We observed this exchange several times back and forth in successive STM images, confirming the reversibility of these transitions. Another example of such an exchange is shown in Figures <xref rid="anie202213982-fig-0002" ref-type="fig">2d</xref>,<xref rid="anie202213982-fig-0002" ref-type="fig">e</xref>. These observations demonstrate that germanium monomers are highly mobile along the direction of the dimer rows at room temperature in agreement with previous reports;[<xref rid="anie202213982-bib-0024" ref-type="bibr">
+<sup>24</sup>
+</xref>, <xref rid="anie202213982-bib-0025" ref-type="bibr">
+<sup>25</sup>
+</xref>, <xref rid="anie202213982-bib-0030" ref-type="bibr">
+<sup>30</sup>
+</xref>] and that monomer capture at a g1 site (to convert it to t1) occurs where the g1 feature exists on the neighbouring row with its monomer directed toward the row on which the mobile monomer is diffusing.
+</p><fig position="float" fig-type="Figure" id="anie202213982-fig-0002" orientation="portrait"><label>Figure 2</label><caption><p>Exchange of a germanium monomer between two As−Ge−H heterodimer features (t1 and g1). a) STM image where a t1 feature is seen to the centre‐left of the image and a g1 feature is seen centre‐right, as indicated. b) A subsequent STM image of the same region of the surface shown in panel (a); here we see that the t1 feature has changed to g1, and the g1 feature has changed to t1. c) Schematic diagram showing the arrangement and positioning of the t1 and g1 features as they appear in panel (a). d), e) Two successive STM images where another such monomer exchange was observed between t1 and g1 features. Image parameters: a), b), d), e) −1.5 V, 200 pA, z‐range: 140 pm, a), b) 8×5 nm<sup>2</sup>, d), e) 21×5 nm<sup>2</sup>.</p></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" position="anchor" id="jats-graphic-5" orientation="portrait" xlink:href="ANIE-62-0-g001.jpg"/></fig><p>We gain further insight into the dynamics of the surface by counting the feature transitions between successive STM images. Table <xref rid="anie202213982-tbl-0001" ref-type="table">1</xref> shows a count of transitions observed within a 50×50 nm<sup>2</sup> scan over a period of 12 hours. There is a strong symmetry to the table about the diagonal, as expected for reversible transitions. The largest number of transitions, 56 % of the total number of observed transitions (129 out of 231), involve the shifting of hydrogen atoms across the dimer row to cause transitions among h1, h2, and h3 features. The next largest category are the monomer exchange transitions g1↔t1, which account for 35 % of the total. Transitions between h1–h3 and g1 were relatively rare, accounting for 9 % of all transitions; this demonstrates that most monomer transitions are exchanges between dimer t1 and monomer g1 configurations. No transitions were observed between the h1–h3 and t1 structures, which can be understood since the g1 structure is intermediate between h1–h3 and t1. Also notable is the absence of transitions g1↔g1 or t1↔t1: experimentally these would appear as a mirror symmetry transition about the dimer row, but such transitions are extremely unlikely given our structural assignments.
+</p><table-wrap position="float" id="anie202213982-tbl-0001" content-type="Table" orientation="portrait"><label>Table 1</label><caption><p>Transitions between features in successive STM images over a 12‐hour period. The average time between images was 9 minutes, and the imaging parameters were −1.5 V, 200 pA. We group h1 and h3 into a single feature classification since experimentally it can be very difficult to delineate between them; transitions between h1 and h3 involve the shifting of both hydrogen atoms of the two hemihydride dimers to the opposite side of the dimer row. Similarly, we note that an alternate configuration of structure h2 exists, where the positions of the two hydrogen atoms are reversed to the opposite side of the dimer row, and we denote this configuration h2<sup>
+<italic toggle="yes">✶</italic>
+</sup> (see Supporting Information Figure S1).</p></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" position="anchor" id="jats-graphic-7" orientation="portrait" xlink:href="ANIE-62-0-g002.jpg"/><permissions><copyright-holder>Wiley‐VCH GmbH</copyright-holder></permissions></table-wrap><p>We support these compelling experimental observations with DFT calculated formation energies. We calculate each of the experimentally observed structures and find that the formation energies for h1–h3 are all equal at −2.8 eV, and structure g1 is nearly equal at −2.9 eV. The closeness of these energies suggests the possibility of reversible transitions between these structures, exactly of the sort that we have already described above. Structure m1 is slightly more stable at −3.1 eV. In addition, we have calculated the energies for a wide range of AsH<sub>
+<italic toggle="yes">x</italic>
+</sub>+(3− <italic toggle="yes">x</italic>)H adsorption configurations; the most stable of these are an AsH+2 H configuration that we label e1 (see Supporting Information Figure S1) and an As+3 H configuration that we label f1; both have formation energies of −2.2 eV. Thus, we see there is a large energy gain (0.6 eV) for the incorporation of arsenic into the top surface layer, and a very large overall energy gain for surface incorporation (≈3 eV) compared to arsine in the gas phase. These large energy gains are the driving force underpinning the surface incorporation of arsenic into Ge(001) at room temperature.</p><p>As a further confirmation of our interpretation, we check that the densities of ejected germanium and incorporated arsenic are equal. Feature t1 is one of the most common features that we observe and this accounts for 30±11 % of all arsenic‐germanium heterodimer features (m1, h1–h3, g1, and t1) that we observe. The g1 features occur less frequently, accounting for 9±4% of heterodimer features, while the number of B site germanium ad‐dimers is equivalent to 15±5% of the number of heterodimer features. Thus, noting that each t1 and ad‐dimer feature contains two germanium atoms, we account for 99±35 % of the germanium atoms ejected onto the surface results from the incorporation of arsenic.</p><p>The above time resolved STM images examining individual chemical and physical processes and their statistical analysis present compelling evidence for the correctness of the structural interpretations of the features that we presented in Figure <xref rid="anie202213982-fig-0001" ref-type="fig">1</xref>. Here we present further confirmation of these assignments by also examining changes to the surface at elevated temperatures.</p><p>Figure <xref rid="anie202213982-fig-0003" ref-type="fig">3a</xref> shows an image of a dosed surface after annealing to 140 °C. Almost all the room temperature features have disappeared, except the m1 features. In their place, we find small, isolated patches of epitaxial germanium (Figure <xref rid="anie202213982-fig-0003" ref-type="fig">3b</xref>), and features that appear as two dark dimers separated by a single clean germanium dimer (Figure <xref rid="anie202213982-fig-0003" ref-type="fig">3c</xref>). The presence of epitaxial germanium is evidence that the 140 °C anneal provides sufficient energy for dimer diffusion and the formation of small epitaxial islands, consistent with previous reports.[<xref rid="anie202213982-bib-0031" ref-type="bibr">
+<sup>31</sup>
+</xref>, <xref rid="anie202213982-bib-0032" ref-type="bibr">
+<sup>32</sup>
+</xref>]
+</p><fig position="float" fig-type="Figure" id="anie202213982-fig-0003" orientation="portrait"><label>Figure 3</label><caption><p>a) STM image of arsine dosed Ge(001) after annealing to 140 °C. b) Epitaxial germanium. c) m2 feature. d) Schematic of a h2 feature highlighting the conversion to e) an m1 feature, and f) a m2 feature. g) Plot of the feature count of all h1, h2, h3, g1, and t1 features, m1 features, and m2 features as a function of temperature up to 300 °C. Image parameters: a), b) 29×25 nm<sup>2</sup>, c) 6×4 nm<sup>2</sup>, a), b), c) −1.5 V, 200 pA. z‐range: a) 190 pm, b) 280 pm, c) 110 pm.</p></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" position="anchor" id="jats-graphic-9" orientation="portrait" xlink:href="ANIE-62-0-g003.jpg"/></fig><p>The absence of all h1–h3 features demonstrates that this temperature is sufficient for isolated hydrogen atoms in hemihydride (Ge−Ge−H) configurations to shift from one dimer to the next. If we consider the h2 structure, illustrated in Figure <xref rid="anie202213982-fig-0003" ref-type="fig">3d</xref>, we see two possibilities for such shifts indicated by the red and blue arrows, resulting in the conversion to an m1 feature (Figure <xref rid="anie202213982-fig-0003" ref-type="fig">3e</xref>) or to a new structure, m2, shown schematically in Figure <xref rid="anie202213982-fig-0003" ref-type="fig">3f</xref>. This structure (m2) has a Ge−As−H heterodimer and a single monohydride dimer, making it chemically similar to the m1 feature; however, in this case there is a single clean germanium dimer that separates the heterodimer and the monohydride dimer. The m2 structure has precisely the characteristics of the new features observed in our STM images after 140 °C annealing (Figure <xref rid="anie202213982-fig-0003" ref-type="fig">3c</xref>), i.e., two dark dimers separated by a clean germanium dimer.</p><p>Our DFT calculated energy for the m2 structure is −3.1 eV, which is the same as the m1 feature. Thus, the m1 and m2 features are both 0.3 eV more stable than any of the h1–h3 features; this means the reverse barrier for conversion of m1 and m2 back to h1–h3 is necessarily 0.3 eV larger than the forward barrier to form m1 and m2, explaining the conversion of the h1–h3 structures into m1 and m2.</p><p>In Figure <xref rid="anie202213982-fig-0003" ref-type="fig">3g</xref> we show a plot of the density of features between room temperature and 300 °C. We have grouped the features h1–h3, g1, and t1 into a single curve and plot m1 and m2 separately. The m1 features are the most common feature on the room temperature surface, accounting for 37±8% of all As−Ge−H features. After the first anneal (140 °C) we see the number of h1–h3, g1, and t1 features has fallen almost to zero, while there has been a rise in m1 features and a dramatic rise in m2 features. Upon annealing to higher temperatures up to 300 °C we see the gradual disappearance of both m1 and m2 from the surface, which can be understood as the process where the hydrogen begins to diffuse away from the m1 and m2 features to form isolated monohydride dimers, leaving hydrogen‐free arsenic‐germanium heterodimers (As−Ge), as discussed below.</p><p>Figure <xref rid="anie202213982-fig-0004" ref-type="fig">4a</xref> shows an STM image of the surface after annealing to 250 °C. In this image we no longer see any of the features from either the room temperature or the 140 °C annealed surface. Instead, we see features that appear to be a single dark dimer, highlighted in Figure <xref rid="anie202213982-fig-0004" ref-type="fig">4c</xref>, and features that look like a single dimer that is strongly buckled, as highlighted in Figure <xref rid="anie202213982-fig-0004" ref-type="fig">4d</xref>. These features are readily identifiable as monohydride dimers, and hydrogen‐free arsenic‐germanium heterodimers, respectively.[<xref rid="anie202213982-bib-0020" ref-type="bibr">
+<sup>20</sup>
+</xref>, <xref rid="anie202213982-bib-0033" ref-type="bibr">
+<sup>33</sup>
+</xref>]
+</p><fig position="float" fig-type="Figure" id="anie202213982-fig-0004" orientation="portrait"><label>Figure 4</label><caption><p>STM images of the arsine dosed Ge(001) surface after annealing to a) 250 °C and b) 420 °C. Boxes on panel (a) highlight a monohydride dimer and arsenic‐germanium heterodimer, respectively. c) Structure and STM image of a monohydride dimer. d) Structure and STM image of a hydrogen‐free arsenic‐germanium heterodimer. e) Plot of the feature count of all hydrogen‐terminated As−Ge−H heterodimer features (i.e., h1–h3, g1, t1, m1, and m2), mono‐ hydride features, and hydrogen‐free As−Ge heterodimers features up to 800 °C. The dashed line shows the total arsenic coverage estimated by the addition of the As−Ge−H and As−Ge lines. Image parameters: a), b) 27×19 nm<sup>2</sup>, c), d) 3×4 nm<sup>2</sup>. a), c), d) −1.5 V, 200 pA. b) −1.5 V, 200 pA. Z‐range: a), c), d) 120 pm, b) 190 pm.</p></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" position="anchor" id="jats-graphic-11" orientation="portrait" xlink:href="ANIE-62-0-g006.jpg"/></fig><p>Figure <xref rid="anie202213982-fig-0004" ref-type="fig">4b</xref> shows an STM image of the surface after annealing to 420 °C, and here we find the only surviving features are hydrogen‐free arsenic‐germanium heterodimers. The absence of hydrogen from this surface is consistent with the known desorption temperature of hydrogen from the monohydride phase on Ge(001) of 330 °C.<xref rid="anie202213982-bib-0034" ref-type="bibr">
+<sup>[34]</sup>
+</xref>
+</p><p>We show in Figure <xref rid="anie202213982-fig-0004" ref-type="fig">4e</xref> another plot of the density of features (c.f. Figure <xref rid="anie202213982-fig-0003" ref-type="fig">3f</xref>) on the surface as a function of anneal temperature up to 800 °C. Here, we group together all of the observed incorporated arsenic features, i.e., h1–h3, m1, m2, g1, t1, into a single curve. We also plot the density of hydrogen‐free arsenic‐germanium heterodimers (As−Ge) and monohydride dimers (H−Ge−Ge−H). The density of the h1–h3, m1, m2, g1, t1 arsenic features diminishes rapidly as we anneal the surface to above 200 °C. Concomitant with their decrease is a rapid rise in the density of bare As−Ge heterodimers and isolated monohydride, as expected. The ratio of hydrogen to arsenic in the range 250–300 °C is equal to the expected stoichiometric ratio of 3 : 1 to within our experimental uncertainties (accounting for two hydrogen atoms per monohydride). The dashed line indicates the total arsenic coverage, estimated by the addition of the h1–h3, m1, m2, g1, t1 and the As−Ge heterodimer features. This is likely an underestimate of the total arsenic coverage at the low temperature anneals since we have counted all single‐dimer dark features as monohydride dimers (H−Ge−Ge−H), but some fraction of these may be isolated hydrogen‐terminated As−Ge−H heterodimers. There is a slight systematic reduction in arsenic coverage for temperatures up to 500 °C, and dramatic reduction at our highest anneal temperature of 800 °C. The low temperature arsenic decrease can be attributed to arsenic diffusion into the bulk[<xref rid="anie202213982-bib-0020" ref-type="bibr">
+<sup>20</sup>
+</xref>, <xref rid="anie202213982-bib-0035" ref-type="bibr">
+<sup>35</sup>
+</xref>, <xref rid="anie202213982-bib-0036" ref-type="bibr">
+<sup>36</sup>
+</xref>] (even arsenic in the second layer beneath the surface will not appear in our measurement) while above 500 °C we anticipate also arsenic desorption from the surface in the form of As<sub>2</sub> molecules, as is known to occur for desorption of P<sub>2</sub> molecules from the silicon (001) surface between 670 and 820 °C.<xref rid="anie202213982-bib-0037" ref-type="bibr">
+<sup>[37]</sup>
+</xref> We note in regards to fabrication of quantum devices, no thermal annealing is required until <italic toggle="yes">after</italic> the incorporated arsenic atoms are encapsulated by at least a locking layer of germanium epitaxial overgrowth,<xref rid="anie202213982-bib-0020" ref-type="bibr">
+<sup>[20]</sup>
+</xref> such that no arsenic desorption will occur, and the overgrowth temperature will need to be optimised in order to limit any diffusion of the arsenic donors during encapsulation and recrystallisation.</p><p>Our results show arsine on germanium represents a marked departure from all previously studied donor precursors on silicon and germanium. In all previously studied systems an incorporation anneal (typically 350 °C) is required in order for the donor atoms to adopt substitutional lattice sites in the surface.[<xref rid="anie202213982-bib-0013" ref-type="bibr">
+<sup>13</sup>
+</xref>, <xref rid="anie202213982-bib-0020" ref-type="bibr">
+<sup>20</sup>
+</xref>, <xref rid="anie202213982-bib-0038" ref-type="bibr">
+<sup>38</sup>
+</xref>] However, this anneal is highly undesirable as it provides a route for the desorption of the donors from the surface, and presents a major obstacle to the scale up to large‐scale quantum technological devices.[<xref rid="anie202213982-bib-0021" ref-type="bibr">
+<sup>21</sup>
+</xref>, <xref rid="anie202213982-bib-0022" ref-type="bibr">
+<sup>22</sup>
+</xref>] Arsine on germanium solves this problem, since the donor atoms are completely substitutionally incorporated into the surface spontaneously upon adsorption at room temperature, and no incorporation anneal is required.</p><p>Furthermore, we note that the incorporation of arsenic is <italic toggle="yes">rapid</italic>. We have performed arsine dosing in situ, allowing us to restart imaging <italic toggle="yes">&lt;</italic>15 minutes after arsine exposure. We have not observed evidence for arsenic in any configuration other than As−Ge−H heterodimers. Moreover, in all cases, each As−Ge−H heterodimer is accompanied by two additional hydrogen atoms in the form of either a monohydride dimer, or two hemihydride dimers. This suggests that arsine dissociates and incorporates immediately on adsorption, without any surface diffusion. Thus, it can be anticipated that arsine will fully dissociate and incorporate into suitably defined lithographic patches with extremely high fidelity, as required for the fabrication of large‐scale quantum technological devices, e.g., those involving large numbers of qubits.</p></sec><sec id="anie202213982-sec-0003"><title>Conclusion</title><p>We have presented a comprehensive understanding of the incorporation of arsenic into the germanium (001) surface due to the exposure to arsine at room temperature. This was achieved by providing excellent matches between the features we observe in our atomic‐resolution STM data and the structures we calculated to be the most thermodynamically stable. The transitions between the observed structures and the frequencies with which they occur are naturally explained by our structural assignments and are consistent with the underlying surface chemistry. We have demonstrated that arsine fully dissociates on the germanium (001) surface at room temperature and results in the substitutional incorporation of arsenic into the surface layer. Our results are extremely significant in the context of atomic‐scale donor device fabrication as they suggest a solution to the donor incorporation probability problem that currently severely limits the scale‐up of phosphorus in silicon devices to large numbers of qubits. The next step toward conclusively demonstrating this is the spatially controlled incorporation of arsenic within lithographic patches and this is the subject of ongoing work in our laboratory.</p></sec><sec sec-type="COI-statement" id="anie202213982-sec-0005"><title>Conflict of interest</title><p>The authors declare no conflict of interest.</p></sec><sec id="anie202213982-sec-0006"><label>1</label></sec><sec sec-type="supplementary-material"><title>Supporting information</title><supplementary-material position="float" content-type="local-data" orientation="portrait"><p>As a service to our authors and readers, this journal provides supporting information supplied by the authors. Such materials are peer reviewed and may be re‐organized for online delivery, but are not copy‐edited or typeset. Technical support issues arising from supporting information (other than missing files) should be addressed to the authors.</p></supplementary-material><supplementary-material position="float" content-type="local-data" orientation="portrait"><caption><p>Supporting Information</p></caption><media xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="ANIE-62-0-s001.pdf" position="float" orientation="portrait"><caption><p>Click here for additional data file.</p></caption></media></supplementary-material></sec></body><back><ack id="anie202213982-sec-0004"><title>Acknowledgments</title><p>This project has been supported by the EPSRC project Atomically Deterministic Doping and Readout For Semiconductor Solotronics (EP/M009564/1). E.V.S.H. was partly supported by the EPSRC Centre for Doctoral Training in Advanced Characterisation of Materials (EP/L015277/1), and IHP Leibniz‐Institut für Innovative Mikroelektronik. R.C. was supported by the EPSRC and SFI Centre for Doctoral Training in Advanced Characterisation of Materials (EP/L015277/1). T.J.Z.S. was partly supported by the JSPS/ESPRC core‐to‐core scheme under project Defect Functionalized Sustainable Energy Materials: From Design to Device Application (EP/R034540/1). S.R.S. acknowledges the use of the UCL Myriad High Performance Computing Facility (Myriad@UCL).</p></ack><sec sec-type="data-availability" id="anie202213982-sec-0000"><title>Data Availability Statement</title><p>The data that support the findings of this study are available from the corresponding author upon reasonable request.</p></sec><ref-list><ref id="anie202213982-bib-0001"><label>1</label><mixed-citation publication-type="journal" id="anie202213982-cit-0001">
+<string-name name-style="western">
+<given-names>G.</given-names>
+<surname>Scappucci</surname>
+</string-name>, <string-name name-style="western">
+<given-names>C.</given-names>
+<surname>Kloeffel</surname>
+</string-name>, <string-name name-style="western">
+<given-names>F. A.</given-names>
+<surname>Zwanenburg</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D.</given-names>
+<surname>Loss</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M.</given-names>
+<surname>Myronov</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. J.</given-names>
+<surname>Zhang</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S.</given-names>
+<surname>De Franceschi</surname>
+</string-name>, <string-name name-style="western">
+<given-names>G.</given-names>
+<surname>Katsaros</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M.</given-names>
+<surname>Veldhorst</surname>
+</string-name>, <source>Nat. Rev. Mater.</source>
+<year>2021</year>, <volume>6</volume>, <fpage>926</fpage>–<lpage>943</lpage>.</mixed-citation></ref><ref id="anie202213982-bib-0002"><label>2</label><mixed-citation publication-type="journal" id="anie202213982-cit-0002">
+<string-name name-style="western">
+<given-names>N. W.</given-names>
+<surname>Hendrickx</surname>
+</string-name>, <string-name name-style="western">
+<given-names>W. I.</given-names>
+<surname>Lawrie</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M.</given-names>
+<surname>Russ</surname>
+</string-name>, <string-name name-style="western">
+<given-names>F.</given-names>
+<surname>van Riggelen</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S. L.</given-names>
+<surname>de Snoo</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R. N.</given-names>
+<surname>Schouten</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A.</given-names>
+<surname>Sammak</surname>
+</string-name>, <string-name name-style="western">
+<given-names>G.</given-names>
+<surname>Scappucci</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M.</given-names>
+<surname>Veldhorst</surname>
+</string-name>, <source>Nature</source>
+<year>2021</year>, <volume>591</volume>, <fpage>580</fpage>–<lpage>585</lpage>.<pub-id pub-id-type="pmid">33762771</pub-id><pub-id pub-id-type="doi" assigning-authority="pmc">10.1038/s41586-021-03332-6</pub-id></mixed-citation></ref><ref id="anie202213982-bib-0003"><label>3</label><mixed-citation publication-type="journal" id="anie202213982-cit-0003">
+<string-name name-style="western">
+<given-names>M. L.</given-names>
+<surname>Lee</surname>
+</string-name>, <string-name name-style="western">
+<given-names>E. A.</given-names>
+<surname>Fitzgerald</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. T.</given-names>
+<surname>Bulsara</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. T.</given-names>
+<surname>Currie</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A.</given-names>
+<surname>Lochtefeld</surname>
+</string-name>, <source>J. Appl. Phys.</source>
+<year>2005</year>, <volume>97</volume>, <elocation-id>011101</elocation-id>.</mixed-citation></ref><ref id="anie202213982-bib-0004"><label>4</label><mixed-citation publication-type="journal" id="anie202213982-cit-0004">
+<string-name name-style="western">
+<given-names>L.</given-names>
+<surname>Liu</surname>
+</string-name>, <source>Phys. Rev.</source>
+<year>1962</year>, <volume>126</volume>, <fpage>1317</fpage>–<lpage>1328</lpage>.</mixed-citation></ref><ref id="anie202213982-bib-0005"><label>5</label><mixed-citation publication-type="journal" id="anie202213982-cit-0005">
+<string-name name-style="western">
+<given-names>A. J.</given-names>
+<surname>Sigillito</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A. M.</given-names>
+<surname>Tyryshkin</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. W.</given-names>
+<surname>Beeman</surname>
+</string-name>, <string-name name-style="western">
+<given-names>E. E.</given-names>
+<surname>Haller</surname>
+</string-name>, <string-name name-style="western">
+<given-names>K. M.</given-names>
+<surname>Itoh</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S. A.</given-names>
+<surname>Lyon</surname>
+</string-name>, <source>Phys. Rev. B</source>
+<year>2016</year>, <volume>94</volume>, <elocation-id>125204</elocation-id>.<pub-id pub-id-type="doi" assigning-authority="pmc">10.1103/PhysRevLett.115.247601</pub-id><pub-id pub-id-type="pmid">26705654</pub-id></mixed-citation></ref><ref id="anie202213982-bib-0006"><label>6</label><mixed-citation publication-type="journal" id="anie202213982-cit-0006">
+<string-name name-style="western">
+<given-names>G.</given-names>
+<surname>Pica</surname>
+</string-name>, <string-name name-style="western">
+<given-names>B. W.</given-names>
+<surname>Lovett</surname>
+</string-name>, <source>Phys. Rev. B</source>
+<year>2016</year>, <volume>94</volume>, <elocation-id>205309</elocation-id>.</mixed-citation></ref><ref id="anie202213982-bib-0007"><label>7</label><mixed-citation publication-type="journal" id="anie202213982-cit-0007">
+<string-name name-style="western">
+<given-names>B.</given-names>
+<surname>Koiller</surname>
+</string-name>, <string-name name-style="western">
+<given-names>X.</given-names>
+<surname>Hu</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S.</given-names>
+<surname>Das Sarma</surname>
+</string-name>, <string-name name-style="western">
+<given-names>B.</given-names>
+<surname>Koiller</surname>
+</string-name>, <source>Phys. Rev. Lett.</source>
+<year>2002</year>, <volume>88</volume>, <elocation-id>027903</elocation-id>.<pub-id pub-id-type="pmid">11801039</pub-id><pub-id pub-id-type="doi" assigning-authority="pmc">10.1103/PhysRevLett.88.027903</pub-id></mixed-citation></ref><ref id="anie202213982-bib-0008"><label>8</label><mixed-citation publication-type="journal" id="anie202213982-cit-0008">
+<string-name name-style="western">
+<given-names>K.</given-names>
+<surname>Itoh</surname>
+</string-name>, <string-name name-style="western">
+<given-names>E. E.</given-names>
+<surname>Haller</surname>
+</string-name>, <string-name name-style="western">
+<given-names>W. L.</given-names>
+<surname>Hansen</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. W.</given-names>
+<surname>Farmer</surname>
+</string-name>, <string-name name-style="western">
+<given-names>V. I.</given-names>
+<surname>Ozhogin</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A.</given-names>
+<surname>Rudnev</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A.</given-names>
+<surname>Tikhomirov</surname>
+</string-name>, <source>J. Mater. Res.</source>
+<year>1993</year>, <volume>8</volume>, <fpage>1341</fpage>–<lpage>1347</lpage>.</mixed-citation></ref><ref id="anie202213982-bib-0009"><label>9</label><mixed-citation publication-type="journal" id="anie202213982-cit-0009">
+<string-name name-style="western">
+<given-names>A. M.</given-names>
+<surname>Tyryshkin</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S.</given-names>
+<surname>Tojo</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. J.</given-names>
+<surname>Morton</surname>
+</string-name>, <string-name name-style="western">
+<given-names>H.</given-names>
+<surname>Riemann</surname>
+</string-name>, <string-name name-style="western">
+<given-names>N. V.</given-names>
+<surname>Abrosimov</surname>
+</string-name>, <string-name name-style="western">
+<given-names>P.</given-names>
+<surname>Becker</surname>
+</string-name>, <string-name name-style="western">
+<given-names>H. J.</given-names>
+<surname>Pohl</surname>
+</string-name>, <string-name name-style="western">
+<given-names>T.</given-names>
+<surname>Schenkel</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. L.</given-names>
+<surname>Thewalt</surname>
+</string-name>, <string-name name-style="western">
+<given-names>K. M.</given-names>
+<surname>Itoh</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S. A.</given-names>
+<surname>Lyon</surname>
+</string-name>, <source>Nat. Mater.</source>
+<year>2012</year>, <volume>11</volume>, <fpage>143</fpage>–<lpage>147</lpage>.<pub-id pub-id-type="doi" assigning-authority="pmc">10.1038/nmat3182</pub-id><pub-id pub-id-type="pmid">22138791</pub-id></mixed-citation></ref><ref id="anie202213982-bib-0010"><label>10</label><mixed-citation publication-type="journal" id="anie202213982-cit-0010">
+<string-name name-style="western">
+<given-names>A. J.</given-names>
+<surname>Sigillito</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R. M.</given-names>
+<surname>Jock</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A. M.</given-names>
+<surname>Tyryshkin</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. W.</given-names>
+<surname>Beeman</surname>
+</string-name>, <string-name name-style="western">
+<given-names>E. E.</given-names>
+<surname>Haller</surname>
+</string-name>, <string-name name-style="western">
+<given-names>K. M.</given-names>
+<surname>Itoh</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S. A.</given-names>
+<surname>Lyon</surname>
+</string-name>, <source>Phys. Rev. Lett.</source>
+<year>2015</year>, <volume>115</volume>, <elocation-id>247601</elocation-id>.<pub-id pub-id-type="pmid">26705654</pub-id><pub-id pub-id-type="doi" assigning-authority="pmc">10.1103/PhysRevLett.115.247601</pub-id></mixed-citation></ref><ref id="anie202213982-bib-0011"><label>11</label><mixed-citation publication-type="journal" id="anie202213982-cit-0011">
+<string-name name-style="western">
+<given-names>J. T.</given-names>
+<surname>Muhonen</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. P.</given-names>
+<surname>Dehollain</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A.</given-names>
+<surname>Laucht</surname>
+</string-name>, <string-name name-style="western">
+<given-names>F. E.</given-names>
+<surname>Hudson</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R.</given-names>
+<surname>Kalra</surname>
+</string-name>, <string-name name-style="western">
+<given-names>T.</given-names>
+<surname>Sekiguchi</surname>
+</string-name>, <string-name name-style="western">
+<given-names>K. M.</given-names>
+<surname>Itoh</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D. N.</given-names>
+<surname>Jamieson</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. C.</given-names>
+<surname>McCallum</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A. S.</given-names>
+<surname>Dzurak</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A.</given-names>
+<surname>Morello</surname>
+</string-name>, <source>Nat. Nanotechnol.</source>
+<year>2014</year>, <volume>9</volume>, <fpage>986</fpage>–<lpage>991</lpage>.<pub-id pub-id-type="pmid">25305745</pub-id><pub-id pub-id-type="doi" assigning-authority="pmc">10.1038/nnano.2014.211</pub-id></mixed-citation></ref><ref id="anie202213982-bib-0012"><label>12</label><mixed-citation publication-type="journal" id="anie202213982-cit-0012">
+<string-name name-style="western">
+<given-names>N. P.</given-names>
+<surname>de Leon</surname>
+</string-name>, <string-name name-style="western">
+<given-names>K. M.</given-names>
+<surname>Itoh</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D.</given-names>
+<surname>Kim</surname>
+</string-name>, <string-name name-style="western">
+<given-names>K. K.</given-names>
+<surname>Mehta</surname>
+</string-name>, <string-name name-style="western">
+<given-names>T. E.</given-names>
+<surname>Northup</surname>
+</string-name>, <string-name name-style="western">
+<given-names>H.</given-names>
+<surname>Paik</surname>
+</string-name>, <string-name name-style="western">
+<given-names>B. S.</given-names>
+<surname>Palmer</surname>
+</string-name>, <string-name name-style="western">
+<given-names>N.</given-names>
+<surname>Samarth</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S.</given-names>
+<surname>Sangtawesin</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D. W.</given-names>
+<surname>Steuerman</surname>
+</string-name>, <source>Science</source>
+<year>2021</year>, <volume>372</volume>, <fpage>253</fpage>.<pub-id pub-id-type="doi" assigning-authority="pmc">10.1126/science.abb2823</pub-id><pub-id pub-id-type="pmid">33859004</pub-id></mixed-citation></ref><ref id="anie202213982-bib-0013"><label>13</label><mixed-citation publication-type="journal" id="anie202213982-cit-0013">
+<string-name name-style="western">
+<given-names>S. R.</given-names>
+<surname>Schofield</surname>
+</string-name>, <string-name name-style="western">
+<given-names>N. J.</given-names>
+<surname>Curson</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. Y.</given-names>
+<surname>Simmons</surname>
+</string-name>, <string-name name-style="western">
+<given-names>F. J.</given-names>
+<surname>Ruess</surname>
+</string-name>, <string-name name-style="western">
+<given-names>T.</given-names>
+<surname>Hallam</surname>
+</string-name>, <string-name name-style="western">
+<given-names>L.</given-names>
+<surname>Oberbeck</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R. G.</given-names>
+<surname>Clark</surname>
+</string-name>, <source>Phys. Rev. Lett.</source>
+<year>2003</year>, <volume>91</volume>, <elocation-id>136104</elocation-id>.<pub-id pub-id-type="pmid">14525322</pub-id><pub-id pub-id-type="doi" assigning-authority="pmc">10.1103/PhysRevLett.91.136104</pub-id></mixed-citation></ref><ref id="anie202213982-bib-0014"><label>14</label><mixed-citation publication-type="journal" id="anie202213982-cit-0014">
+<string-name name-style="western">
+<given-names>S. R.</given-names>
+<surname>Schofield</surname>
+</string-name>, <string-name name-style="western">
+<given-names>N. J.</given-names>
+<surname>Curson</surname>
+</string-name>, <string-name name-style="western">
+<given-names>O.</given-names>
+<surname>Warschkow</surname>
+</string-name>, <string-name name-style="western">
+<given-names>N. A.</given-names>
+<surname>Marks</surname>
+</string-name>, <string-name name-style="western">
+<given-names>H. F.</given-names>
+<surname>Wilson</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. Y.</given-names>
+<surname>Simmons</surname>
+</string-name>, <string-name name-style="western">
+<given-names>P. V.</given-names>
+<surname>Smith</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. W.</given-names>
+<surname>Radny</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D. R.</given-names>
+<surname>McKenzie</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R. G.</given-names>
+<surname>Clark</surname>
+</string-name>, <source>J. Phys. Chem. B</source>
+<year>2006</year>, <volume>110</volume>, <fpage>3173</fpage>–<lpage>3179</lpage>.<pub-id pub-id-type="pmid">16494325</pub-id><pub-id pub-id-type="doi" assigning-authority="pmc">10.1021/jp054646v</pub-id></mixed-citation></ref><ref id="anie202213982-bib-0015"><label>15</label><mixed-citation publication-type="journal" id="anie202213982-cit-0015">
+<string-name name-style="western">
+<given-names>O.</given-names>
+<surname>Warschkow</surname>
+</string-name>, <string-name name-style="western">
+<given-names>N. J.</given-names>
+<surname>Curson</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S. R.</given-names>
+<surname>Schofield</surname>
+</string-name>, <string-name name-style="western">
+<given-names>N. A.</given-names>
+<surname>Marks</surname>
+</string-name>, <string-name name-style="western">
+<given-names>H. F.</given-names>
+<surname>Wilson</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. W.</given-names>
+<surname>Radny</surname>
+</string-name>, <string-name name-style="western">
+<given-names>P. V.</given-names>
+<surname>Smith</surname>
+</string-name>, <string-name name-style="western">
+<given-names>T. C. G.</given-names>
+<surname>Reusch</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D. R.</given-names>
+<surname>McKenzie</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. Y.</given-names>
+<surname>Simmons</surname>
+</string-name>, <source>J. Chem. Phys.</source>
+<year>2016</year>, <volume>144</volume>, <elocation-id>014705</elocation-id>.<pub-id pub-id-type="pmid">26747816</pub-id><pub-id pub-id-type="doi" assigning-authority="pmc">10.1063/1.4939124</pub-id></mixed-citation></ref><ref id="anie202213982-bib-0016"><label>16</label><mixed-citation publication-type="journal" id="anie202213982-cit-0016">
+<string-name name-style="western">
+<given-names>M.</given-names>
+<surname>Fuechsle</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. A.</given-names>
+<surname>Miwa</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S.</given-names>
+<surname>Mahapatra</surname>
+</string-name>, <string-name name-style="western">
+<given-names>H.</given-names>
+<surname>Ryu</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S.</given-names>
+<surname>Lee</surname>
+</string-name>, <string-name name-style="western">
+<given-names>O.</given-names>
+<surname>Warschkow</surname>
+</string-name>, <string-name name-style="western">
+<given-names>L. C. L.</given-names>
+<surname>Hollenberg</surname>
+</string-name>, <string-name name-style="western">
+<given-names>G.</given-names>
+<surname>Klimeck</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. Y.</given-names>
+<surname>Simmons</surname>
+</string-name>, <source>Nat. Nanotechnol.</source>
+<year>2012</year>, <volume>7</volume>, <fpage>242</fpage>–<lpage>246</lpage>.<pub-id pub-id-type="pmid">22343383</pub-id><pub-id pub-id-type="doi" assigning-authority="pmc">10.1038/nnano.2012.21</pub-id></mixed-citation></ref><ref id="anie202213982-bib-0017"><label>17</label><mixed-citation publication-type="journal" id="anie202213982-cit-0017">
+<string-name name-style="western">
+<given-names>Y.</given-names>
+<surname>He</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S. K.</given-names>
+<surname>Gorman</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D.</given-names>
+<surname>Keith</surname>
+</string-name>, <string-name name-style="western">
+<given-names>L.</given-names>
+<surname>Kranz</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. G.</given-names>
+<surname>Keizer</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. Y.</given-names>
+<surname>Simmons</surname>
+</string-name>, <source>Nature</source>
+<year>2019</year>, <volume>571</volume>, <fpage>371</fpage>–<lpage>375</lpage>.<pub-id pub-id-type="pmid">31316197</pub-id><pub-id pub-id-type="doi" assigning-authority="pmc">10.1038/s41586-019-1381-2</pub-id></mixed-citation></ref><ref id="anie202213982-bib-0018"><label>18</label><mixed-citation publication-type="journal" id="anie202213982-cit-0018">
+<string-name name-style="western">
+<given-names>J. M.</given-names>
+<surname>Bennett</surname>
+</string-name>, <string-name name-style="western">
+<given-names>O.</given-names>
+<surname>Warschkow</surname>
+</string-name>, <string-name name-style="western">
+<given-names>N. A.</given-names>
+<surname>Marks</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D. R.</given-names>
+<surname>McKenzie</surname>
+</string-name>, <source>Phys. Rev. B</source>
+<year>2009</year>, <volume>79</volume>, <elocation-id>165311</elocation-id>.</mixed-citation></ref><ref id="anie202213982-bib-0019"><label>19</label><mixed-citation publication-type="journal" id="anie202213982-cit-0019">
+<string-name name-style="western">
+<given-names>G.</given-names>
+<surname>Scappucci</surname>
+</string-name>, <string-name name-style="western">
+<given-names>O.</given-names>
+<surname>Warschkow</surname>
+</string-name>, <string-name name-style="western">
+<given-names>G.</given-names>
+<surname>Capellini</surname>
+</string-name>, <string-name name-style="western">
+<given-names>W.</given-names>
+<surname>Klesse</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D. R.</given-names>
+<surname>McKenzie</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. Y.</given-names>
+<surname>Simmons</surname>
+</string-name>, <source>Phys. Rev. Lett.</source>
+<year>2012</year>, <volume>109</volume>, <elocation-id>076101</elocation-id>.<pub-id pub-id-type="pmid">23006385</pub-id><pub-id pub-id-type="doi" assigning-authority="pmc">10.1103/PhysRevLett.109.076101</pub-id></mixed-citation></ref><ref id="anie202213982-bib-0020"><label>20</label><mixed-citation publication-type="journal" id="anie202213982-cit-0020">
+<string-name name-style="western">
+<given-names>T. J.</given-names>
+<surname>Stock</surname>
+</string-name>, <string-name name-style="western">
+<given-names>O.</given-names>
+<surname>Warschkow</surname>
+</string-name>, <string-name name-style="western">
+<given-names>P. C.</given-names>
+<surname>Constantinou</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J.</given-names>
+<surname>Li</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S.</given-names>
+<surname>Fearn</surname>
+</string-name>, <string-name name-style="western">
+<given-names>E.</given-names>
+<surname>Crane</surname>
+</string-name>, <string-name name-style="western">
+<given-names>E. V.</given-names>
+<surname>Hofmann</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A.</given-names>
+<surname>K“olker</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D. R.</given-names>
+<surname>Mckenzie</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S. R.</given-names>
+<surname>Schofield</surname>
+</string-name>, <string-name name-style="western">
+<given-names>N. J.</given-names>
+<surname>Curson</surname>
+</string-name>, <source>ACS Nano</source>
+<year>2020</year>, <volume>14</volume>, <fpage>3316</fpage>–<lpage>3327</lpage>.<pub-id pub-id-type="pmid">32142256</pub-id><pub-id pub-id-type="doi" assigning-authority="pmc">10.1021/acsnano.9b08943</pub-id><pub-id pub-id-type="pmcid">PMC7146850</pub-id></mixed-citation></ref><ref id="anie202213982-bib-0021"><label>21</label><mixed-citation publication-type="journal" id="anie202213982-cit-0021">
+<string-name name-style="western">
+<given-names>J. A.</given-names>
+<surname>Ivie</surname>
+</string-name>, <string-name name-style="western">
+<given-names>Q.</given-names>
+<surname>Campbell</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. C.</given-names>
+<surname>Koepke</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. I.</given-names>
+<surname>Brickson</surname>
+</string-name>, <string-name name-style="western">
+<given-names>P. A.</given-names>
+<surname>Schultz</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R. P.</given-names>
+<surname>Muller</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A. M.</given-names>
+<surname>Mounce</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D. R.</given-names>
+<surname>Ward</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. S.</given-names>
+<surname>Carroll</surname>
+</string-name>, <string-name name-style="western">
+<given-names>E.</given-names>
+<surname>Bussmann</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A. D.</given-names>
+<surname>Baczewski</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S.</given-names>
+<surname>Misra</surname>
+</string-name>, <source>Phys. Rev. Appl.</source>
+<year>2021</year>, <volume>16</volume>, <elocation-id>054037</elocation-id>.</mixed-citation></ref><ref id="anie202213982-bib-0022"><label>22</label><mixed-citation publication-type="miscellaneous" id="anie202213982-cit-0022">M. Fu“chsle, PhD thesis, University of New South Wales, <bold>2011</bold>.</mixed-citation></ref><ref id="anie202213982-bib-0023"><label>23</label><mixed-citation publication-type="journal" id="anie202213982-cit-0023">
+<string-name name-style="western">
+<given-names>H. J.</given-names>
+<surname>Zandvliet</surname>
+</string-name>, <source>Phys. Rep.</source>
+<year>2003</year>, <volume>388</volume>, <fpage>1</fpage>–<lpage>40</lpage>.</mixed-citation></ref><ref id="anie202213982-bib-0024"><label>24</label><mixed-citation publication-type="journal" id="anie202213982-cit-0024">
+<string-name name-style="western">
+<given-names>H. J.</given-names>
+<surname>Zandvliet</surname>
+</string-name>, <string-name name-style="western">
+<given-names>T. M.</given-names>
+<surname>Galea</surname>
+</string-name>, <string-name name-style="western">
+<given-names>E.</given-names>
+<surname>Zoethout</surname>
+</string-name>, <string-name name-style="western">
+<given-names>B.</given-names>
+<surname>Poelsema</surname>
+</string-name>, <source>Phys. Rev. Lett.</source>
+<year>2000</year>, <volume>84</volume>, <fpage>1523</fpage>–<lpage>1526</lpage>.<pub-id pub-id-type="pmid">11017558</pub-id><pub-id pub-id-type="doi" assigning-authority="pmc">10.1103/PhysRevLett.84.1523</pub-id></mixed-citation></ref><ref id="anie202213982-bib-0025"><label>25</label><mixed-citation publication-type="journal" id="anie202213982-cit-0025">
+<string-name name-style="western">
+<given-names>E.</given-names>
+<surname>Zoethout</surname>
+</string-name>, <string-name name-style="western">
+<given-names>H.</given-names>
+<surname>Zandvliet</surname>
+</string-name>, <string-name name-style="western">
+<given-names>W.</given-names>
+<surname>Wulfhekel</surname>
+</string-name>, <string-name name-style="western">
+<given-names>G.</given-names>
+<surname>Rosenfeld</surname>
+</string-name>, <string-name name-style="western">
+<given-names>B.</given-names>
+<surname>Poelsema</surname>
+</string-name>, <source>Phys. Rev. B</source>
+<year>1998</year>, <volume>58</volume>, <fpage>16167</fpage>–<lpage>16171</lpage>.</mixed-citation></ref><ref id="anie202213982-bib-0026"><label>26</label><mixed-citation publication-type="journal" id="anie202213982-cit-0026">
+<string-name name-style="western">
+<given-names>J.</given-names>
+<surname>Huijben</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A.</given-names>
+<surname>Van Houselt</surname>
+</string-name>, <string-name name-style="western">
+<given-names>H. J.</given-names>
+<surname>Zandvliet</surname>
+</string-name>, <string-name name-style="western">
+<given-names>B.</given-names>
+<surname>Poelsema</surname>
+</string-name>, <source>Phys. Rev. B</source>
+<year>2006</year>, <volume>73</volume>, <fpage>2005</fpage>–<lpage>2007</lpage>.</mixed-citation></ref><ref id="anie202213982-bib-0027"><label>27</label><mixed-citation publication-type="journal" id="anie202213982-cit-0027">
+<string-name name-style="western">
+<given-names>A.</given-names>
+<surname>Van Houselt</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R.</given-names>
+<surname>Van Gastel</surname>
+</string-name>, <string-name name-style="western">
+<given-names>B.</given-names>
+<surname>Poelsema</surname>
+</string-name>, <string-name name-style="western">
+<given-names>H. J.</given-names>
+<surname>Zandvliet</surname>
+</string-name>, <source>Phys. Rev. Lett.</source>
+<year>2006</year>, <volume>97</volume>, <elocation-id>266104</elocation-id>.<pub-id pub-id-type="pmid">17280433</pub-id><pub-id pub-id-type="doi" assigning-authority="pmc">10.1103/PhysRevLett.97.266104</pub-id></mixed-citation></ref><ref id="anie202213982-bib-0028"><label>28</label><mixed-citation publication-type="journal" id="anie202213982-cit-0028">
+<string-name name-style="western">
+<given-names>A.</given-names>
+<surname>Sweetman</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S.</given-names>
+<surname>Jarvis</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R.</given-names>
+<surname>Danza</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J.</given-names>
+<surname>Bamidele</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S.</given-names>
+<surname>Gangopadhyay</surname>
+</string-name>, <string-name name-style="western">
+<given-names>G. A.</given-names>
+<surname>Shaw</surname>
+</string-name>, <string-name name-style="western">
+<given-names>L.</given-names>
+<surname>Kantorovich</surname>
+</string-name>, <string-name name-style="western">
+<given-names>P.</given-names>
+<surname>Moriarty</surname>
+</string-name>, <source>Phys. Rev. Lett.</source>
+<year>2011</year>, <volume>106</volume>, <elocation-id>136101</elocation-id>.<pub-id pub-id-type="pmid">21517399</pub-id><pub-id pub-id-type="doi" assigning-authority="pmc">10.1103/PhysRevLett.106.136101</pub-id></mixed-citation></ref><ref id="anie202213982-bib-0029"><label>29</label><mixed-citation publication-type="journal" id="anie202213982-cit-0029">
+<string-name name-style="western">
+<given-names>A.</given-names>
+<surname>Saedi</surname>
+</string-name>, <string-name name-style="western">
+<given-names>B.</given-names>
+<surname>Poelsema</surname>
+</string-name>, <string-name name-style="western">
+<given-names>H. J. W.</given-names>
+<surname>Zandvliet</surname>
+</string-name>, <source>Phys. Rev. B</source>
+<year>2009</year>, <volume>79</volume>, <elocation-id>153402</elocation-id>.</mixed-citation></ref><ref id="anie202213982-bib-0030"><label>30</label><mixed-citation publication-type="journal" id="anie202213982-cit-0030">
+<string-name name-style="western">
+<given-names>B. S.</given-names>
+<surname>Swartzentruber</surname>
+</string-name>, <source>Phys. Rev. B</source>
+<year>1997</year>, <volume>55</volume>, <fpage>1322</fpage>–<lpage>1325</lpage>.</mixed-citation></ref><ref id="anie202213982-bib-0031"><label>31</label><mixed-citation publication-type="journal" id="anie202213982-cit-0031">
+<string-name name-style="western">
+<given-names>M.</given-names>
+<surname>Li</surname>
+</string-name>, <string-name name-style="western">
+<given-names>E. I.</given-names>
+<surname>Altman</surname>
+</string-name>, <source>Phys. Rev. B</source>
+<year>2002</year>, <volume>66</volume>, <elocation-id>115313</elocation-id>.</mixed-citation></ref><ref id="anie202213982-bib-0032"><label>32</label><mixed-citation publication-type="journal" id="anie202213982-cit-0032">
+<string-name name-style="western">
+<given-names>G.</given-names>
+<surname>Scappucci</surname>
+</string-name>, <string-name name-style="western">
+<given-names>G.</given-names>
+<surname>Capellini</surname>
+</string-name>, <string-name name-style="western">
+<given-names>W. C. T.</given-names>
+<surname>Lee</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. Y.</given-names>
+<surname>Simmons</surname>
+</string-name>, <source>Nanotechnology</source>
+<year>2009</year>, <volume>20</volume>, <elocation-id>495302</elocation-id>.<pub-id pub-id-type="pmid">19893153</pub-id><pub-id pub-id-type="doi" assigning-authority="pmc">10.1088/0957-4484/20/49/495302</pub-id></mixed-citation></ref><ref id="anie202213982-bib-0033"><label>33</label><mixed-citation publication-type="journal" id="anie202213982-cit-0033">
+<string-name name-style="western">
+<given-names>N. J.</given-names>
+<surname>Curson</surname>
+</string-name>, <string-name name-style="western">
+<given-names>S. R.</given-names>
+<surname>Schofield</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. Y.</given-names>
+<surname>Simmons</surname>
+</string-name>, <string-name name-style="western">
+<given-names>L.</given-names>
+<surname>Oberbeck</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. L.</given-names>
+<surname>O'Brien</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R. G.</given-names>
+<surname>Clark</surname>
+</string-name>, <source>Phys. Rev. B</source>
+<year>2004</year>, <volume>69</volume>, <elocation-id>195303</elocation-id>.</mixed-citation></ref><ref id="anie202213982-bib-0034"><label>34</label><mixed-citation publication-type="journal" id="anie202213982-cit-0034">
+<string-name name-style="western">
+<given-names>S.</given-names>
+<surname>Shimokawa</surname>
+</string-name>, <string-name name-style="western">
+<given-names>A.</given-names>
+<surname>Namiki</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. N.</given-names>
+<surname>Gamo</surname>
+</string-name>, <string-name name-style="western">
+<given-names>T.</given-names>
+<surname>Ando</surname>
+</string-name>, <source>J. Chem. Phys.</source>
+<year>2000</year>, <volume>113</volume>, <fpage>6916</fpage>–<lpage>6925</lpage>.</mixed-citation></ref><ref id="anie202213982-bib-0035"><label>35</label><mixed-citation publication-type="journal" id="anie202213982-cit-0035">
+<string-name name-style="western">
+<given-names>S.</given-names>
+<surname>Solmi</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D.</given-names>
+<surname>Nobili</surname>
+</string-name>, <source>J. Appl. Phys.</source>
+<year>1998</year>, <volume>83</volume>, <fpage>2484</fpage>–<lpage>2490</lpage>.</mixed-citation></ref><ref id="anie202213982-bib-0036"><label>36</label><mixed-citation publication-type="journal" id="anie202213982-cit-0036">
+<string-name name-style="western">
+<given-names>J. L.</given-names>
+<surname>Pitters</surname>
+</string-name>, <string-name name-style="western">
+<given-names>P. G.</given-names>
+<surname>Piva</surname>
+</string-name>, <string-name name-style="western">
+<given-names>R. A.</given-names>
+<surname>Wolkow</surname>
+</string-name>, <source>J. Vac. Sci. Technol. B</source>
+<year>2012</year>, <volume>30</volume>, <elocation-id>021806</elocation-id>.</mixed-citation></ref><ref id="anie202213982-bib-0037"><label>37</label><mixed-citation publication-type="journal" id="anie202213982-cit-0037">
+<string-name name-style="western">
+<given-names>J. M.</given-names>
+<surname>Bennett</surname>
+</string-name>, <string-name name-style="western">
+<given-names>O.</given-names>
+<surname>Warschkow</surname>
+</string-name>, <string-name name-style="western">
+<given-names>N. A.</given-names>
+<surname>Marks</surname>
+</string-name>, <string-name name-style="western">
+<given-names>D. R.</given-names>
+<surname>McKenzie</surname>
+</string-name>, <source>Phys. Rev. B</source>
+<year>2010</year>, <volume>82</volume>, <elocation-id>235417</elocation-id>.</mixed-citation></ref><ref id="anie202213982-bib-0038"><label>38</label><mixed-citation publication-type="journal" id="anie202213982-cit-0038">
+<string-name name-style="western">
+<given-names>G.</given-names>
+<surname>Scappucci</surname>
+</string-name>, <string-name name-style="western">
+<given-names>G.</given-names>
+<surname>Capellini</surname>
+</string-name>, <string-name name-style="western">
+<given-names>B.</given-names>
+<surname>Johnston</surname>
+</string-name>, <string-name name-style="western">
+<given-names>W. M.</given-names>
+<surname>Klesse</surname>
+</string-name>, <string-name name-style="western">
+<given-names>J. A.</given-names>
+<surname>Miwa</surname>
+</string-name>, <string-name name-style="western">
+<given-names>M. Y.</given-names>
+<surname>Simmons</surname>
+</string-name>, <source>Nano Lett.</source>
+<year>2011</year>, <volume>11</volume>, <fpage>2272</fpage>–<lpage>2279</lpage>.<pub-id pub-id-type="pmid">21553900</pub-id><pub-id pub-id-type="doi" assigning-authority="pmc">10.1021/nl200449v</pub-id></mixed-citation></ref></ref-list></back></article>

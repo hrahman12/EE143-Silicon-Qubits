@@ -1,0 +1,13 @@
+{
+  "name": "atom-by-atom-silicon",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "figures": "python3 figures/src/make_figures.py",
+    "build": "node build_deck.js && zip -dq deck/atom_by_atom_silicon.pptx '*/' ; soffice --headless --convert-to pdf --outdir deck deck/atom_by_atom_silicon.pptx"
+  },
+  "dependencies": {
+    "image-size": "^1.1.1",
+    "pptxgenjs": "^3.12.0"
+  }
+}

@@ -1,0 +1,1005 @@
+
+<!DOCTYPE article
+  PUBLIC "-//NLM//DTD JATS (Z39.96) Journal Archiving and Interchange DTD with MathML3 v1.4 20241031//EN" "JATS-archivearticle1-4-mathml3.dtd">
+<article article-type="research-article" xml:lang="EN" dtd-version="1.4"><front><journal-meta><journal-id journal-id-type="nlm-ta">ACS Nano</journal-id><journal-id journal-id-type="iso-abbrev">ACS Nano</journal-id><journal-id journal-id-type="pmc-domain-id">822</journal-id><journal-id journal-id-type="pmc-domain">acssd</journal-id><journal-id journal-id-type="nlm-id">101313589</journal-id><journal-id journal-id-type="publisher-id">nn</journal-id><journal-title-group><journal-title>ACS Nano</journal-title></journal-title-group><issn pub-type="ppub">1936-0851</issn><issn pub-type="epub">1936-086X</issn><custom-meta-group><custom-meta><meta-name>pmc-is-collection-domain</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-collection-title</meta-name><meta-value>ACS AuthorChoice</meta-value></custom-meta></custom-meta-group></journal-meta><article-meta><article-id pub-id-type="pmcid">PMC7146850</article-id><article-id pub-id-type="pmcid-ver">PMC7146850.1</article-id><article-id pub-id-type="pmcaid">7146850</article-id><article-id pub-id-type="pmcaiid">7146850</article-id><article-id pub-id-type="pmid">32142256</article-id><article-id pub-id-type="doi">10.1021/acsnano.9b08943</article-id><article-version article-version-type="pmc-version">1</article-version><article-categories><subj-group><subject>Article</subject></subj-group></article-categories><title-group><article-title>Atomic-Scale
+Patterning of Arsenic in Silicon by Scanning
+Tunneling Microscopy</article-title></title-group><contrib-group><contrib contrib-type="author" corresp="yes" id="ath1"><name name-style="western"><surname>Stock</surname><given-names initials="TJZ">Taylor J. Z.</given-names></name><xref rid="cor1" ref-type="other">*</xref><xref rid="aff1" ref-type="aff">†</xref></contrib><contrib contrib-type="author" id="ath2"><name name-style="western"><surname>Warschkow</surname><given-names initials="O">Oliver</given-names></name><xref rid="aff2" ref-type="aff">‡</xref></contrib><contrib contrib-type="author" id="ath3"><name name-style="western"><surname>Constantinou</surname><given-names initials="PC">Procopios C.</given-names></name><xref rid="aff1" ref-type="aff">†</xref></contrib><contrib contrib-type="author" id="ath4"><name name-style="western"><surname>Li</surname><given-names initials="J">Juerong</given-names></name><xref rid="aff3" ref-type="aff">§</xref></contrib><contrib contrib-type="author" id="ath5"><name name-style="western"><surname>Fearn</surname><given-names initials="S">Sarah</given-names></name><xref rid="aff1" ref-type="aff">†</xref><xref rid="aff4" ref-type="aff">∥</xref></contrib><contrib contrib-type="author" id="ath6"><name name-style="western"><surname>Crane</surname><given-names initials="E">Eleanor</given-names></name><xref rid="aff1" ref-type="aff">†</xref></contrib><contrib contrib-type="author" id="ath7"><name name-style="western"><surname>Hofmann</surname><given-names initials="EVS">Emily V. S.</given-names></name><xref rid="aff1" ref-type="aff">†</xref><xref rid="aff5" ref-type="aff">⊥</xref></contrib><contrib contrib-type="author" id="ath8"><name name-style="western"><surname>Kölker</surname><given-names initials="A">Alexander</given-names></name><xref rid="aff1" ref-type="aff">†</xref></contrib><contrib contrib-type="author" id="ath9"><name name-style="western"><surname>McKenzie</surname><given-names initials="DR">David R.</given-names></name><xref rid="aff2" ref-type="aff">‡</xref></contrib><contrib contrib-type="author" id="ath10"><name name-style="western"><surname>Schofield</surname><given-names initials="SR">Steven R.</given-names></name><xref rid="aff1" ref-type="aff">†</xref><xref rid="aff6" ref-type="aff">#</xref></contrib><contrib contrib-type="author" corresp="yes" id="ath11"><name name-style="western"><surname>Curson</surname><given-names initials="NJ">Neil J.</given-names></name><xref rid="cor2" ref-type="other">*</xref><xref rid="aff1" ref-type="aff">†</xref><xref rid="aff7" ref-type="aff">∇</xref></contrib><aff id="aff1"><label>†</label>London
+Centre for Nanotechnology, <institution>University College
+London</institution>, London WC1H 0AH, <country>U.K.</country></aff><aff id="aff2"><label>‡</label>Centre
+for Quantum Computation and Communication Technology, School of Physics, <institution>The University of Sydney</institution>, Sydney, NSW 2006, <country>Australia</country></aff><aff id="aff3"><label>§</label>Advanced
+Technology Institute, <institution>University of Surrey</institution>, Guildford GU2 7XH, <country>U.K.</country></aff><aff id="aff4"><label>∥</label>Department
+of Materials, <institution>Imperial College of London</institution>, London SW7 2AZ, <country>U.K.</country></aff><aff id="aff5"><label>⊥</label><institution>IHP
+− Leibniz-Institut für Innovative Mikroelektronik</institution>, Frankfurt (Oder) 15236, <country>Germany</country></aff><aff id="aff6"><label>#</label>Department
+of Physics and Astronomy, <institution>University College
+London</institution>, London WC1E 6BT, <country>U.K.</country></aff><aff id="aff7"><label>∇</label>Department
+of Electronic and Electrical Engineering, <institution>University College London</institution>, London WC1E 7JE, <country>U.K.</country></aff></contrib-group><author-notes><corresp id="cor1"><label>*</label>Email: <email>t.stock@ucl.ac.uk</email>.</corresp><corresp id="cor2"><label>*</label>Email: <email>n.curson@ucl.ac.uk</email>.</corresp></author-notes><pub-date pub-type="epub"><day>06</day><month>03</month><year>2020</year></pub-date><pub-date pub-type="ppub"><day>24</day><month>03</month><year>2020</year></pub-date><volume>14</volume><issue>3</issue><issue-id pub-id-type="pmc-issue-id">355745</issue-id><fpage>3316</fpage><lpage>3327</lpage><history><date date-type="received"><day>11</day><month>11</month><year>2019</year></date><date date-type="accepted"><day>06</day><month>03</month><year>2020</year></date></history><pub-history><event event-type="pmc-release"><date><day>10</day><month>04</month><year>2020</year></date></event><event event-type="pmc-live"><date><day>13</day><month>04</month><year>2020</year></date></event><event event-type="pmc-last-change"><date iso-8601-date="2020-04-14 00:37:04.373"><day>14</day><month>04</month><year>2020</year></date></event></pub-history><permissions><copyright-statement>Copyright © 2020 American Chemical Society</copyright-statement><copyright-year>2020</copyright-year><copyright-holder>American Chemical Society</copyright-holder><license><license-p>This is an open access article published under a Creative Commons Attribution (CC-BY) <ext-link xmlns:xlink="http://www.w3.org/1999/xlink" ext-link-type="uri" xlink:href="http://pubs.acs.org/page/policy/authorchoice_ccby_termsofuse.html">License</ext-link>, which permits unrestricted use, distribution and reproduction in any medium, provided the author and source are cited.</license-p></license></permissions><self-uri xmlns:xlink="http://www.w3.org/1999/xlink" content-type="pmc-pdf" xlink:href="nn9b08943.pdf"/><abstract><p content-type="toc-graphic"><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="ab-tgr1" position="float" orientation="portrait" xlink:href="nn9b08943_0005.jpg"/></p><p>Over
+the past two decades, prototype devices for future classical
+and quantum computing technologies have been fabricated by using scanning
+tunneling microscopy and hydrogen resist lithography to position phosphorus
+atoms in silicon with atomic-scale precision. Despite these successes,
+phosphine remains the only donor precursor molecule to have been demonstrated
+as compatible with the hydrogen resist lithography technique. The
+potential benefits of atomic-scale placement of alternative dopant
+species have, until now, remained unexplored. In this work, we demonstrate
+the successful fabrication of atomic-scale structures of arsenic-in-silicon.
+Using a scanning tunneling microscope tip, we pattern a monolayer
+hydrogen mask to selectively place arsenic atoms on the Si(001) surface
+using arsine as the precursor molecule. We fully elucidate the surface
+chemistry and reaction pathways of arsine on Si(001), revealing significant
+differences to phosphine. We explain how these differences result
+in enhanced surface immobilization and in-plane confinement of arsenic
+compared to phosphorus, and a dose-rate independent arsenic saturation
+density of 0.24 ± 0.04 monolayers. We demonstrate the successful
+encapsulation of arsenic delta-layers using silicon molecular beam
+epitaxy, and find electrical characteristics that are competitive
+with equivalent structures fabricated with phosphorus. Arsenic delta-layers
+are also found to offer confinement as good as similarly prepared
+phosphorus layers, while still retaining &gt;80% carrier activation
+and
+sheet resistances of &lt;2 kΩ/square. These excellent characteristics
+of arsenic represent opportunities to enhance existing capabilities
+of atomic-scale fabrication of dopant structures in silicon, and may
+be important for three-dimensional devices, where vertical control
+of the position of device components is critical.</p></abstract><kwd-group><kwd>scanning tunneling
+microscopy</kwd><kwd>density functional theory</kwd><kwd>atomic fabrication</kwd><kwd>silicon (001)</kwd><kwd>arsenic</kwd><kwd>arsine</kwd><kwd>dopant</kwd></kwd-group><custom-meta-group><custom-meta><meta-name>pmc-status-qastatus</meta-name><meta-value>0</meta-value></custom-meta><custom-meta><meta-name>pmc-status-live</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-status-embargo</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-status-released</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-open-access</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-olf</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-manuscript</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-legally-suppressed</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-has-pdf</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-has-supplement</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-pdf-only</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-suppress-copyright</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-is-real-version</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-is-scanned-article</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-preprint</meta-name><meta-value>no</meta-value></custom-meta><custom-meta><meta-name>pmc-prop-in-epmc</meta-name><meta-value>yes</meta-value></custom-meta><custom-meta><meta-name>document-id-old-9</meta-name><meta-value>nn9b08943</meta-value></custom-meta><custom-meta><meta-name>document-id-new-14</meta-name><meta-value>nn9b08943</meta-value></custom-meta><custom-meta><meta-name>ccc-price</meta-name><meta-value/></custom-meta></custom-meta-group></article-meta></front><body><p id="sec1">Challenges
+associated with the
+continued miniaturization of electronic devices toward the atomic-scale
+limit,<sup><xref ref-type="bibr" rid="ref1">1</xref></sup> and proposals for atomic-scale
+device architectures, <italic toggle="yes">e.g.</italic>, to enable quantum information
+processing,<sup><xref ref-type="bibr" rid="ref2">2</xref></sup> have stimulated renewed interest
+in the investigation of dopant species in silicon. Of particular interest
+are methods for controlling the placement of dopant atoms in silicon
+with atomic-scale precision,<sup><xref ref-type="bibr" rid="ref3">3</xref>,<xref ref-type="bibr" rid="ref4">4</xref></sup> and understanding the
+electronic<sup><xref ref-type="bibr" rid="ref5">5</xref>−<xref ref-type="bibr" rid="ref9">9</xref></sup> and optical<sup><xref ref-type="bibr" rid="ref10">10</xref>−<xref ref-type="bibr" rid="ref12">12</xref></sup> properties of single-atom and few-atom clusters of
+dopants. The atomic-scale control of dopant atoms in silicon using
+scanning tunneling microscopy (STM) has to date focused on phosphorus
+donors, which can be introduced into the silicon matrix using the
+precursor gas, phosphine (PH<sub>3</sub>). The chemical reaction of
+phosphine with the silicon (001) surface has been extensively researched
+and is now understood in exquisite detail.<sup><xref ref-type="bibr" rid="ref13">13</xref></sup> This chemical process can be spatially controlled at the atomic
+scale <italic toggle="yes">via</italic> the use of STM hydrogen-desorption lithography<sup><xref ref-type="bibr" rid="ref14">14</xref></sup> to produce atomically defined patterns of phosphorus
+donors in silicon.<sup><xref ref-type="bibr" rid="ref15">15</xref></sup> This has led to numerous
+exciting advances in our understanding of silicon-based electronic
+devices at the atomic scale,<sup><xref ref-type="bibr" rid="ref16">16</xref>−<xref ref-type="bibr" rid="ref19">19</xref></sup> and is a promising avenue for the use of individual
+donor spins as qubits in a solid state quantum computer.<sup><xref ref-type="bibr" rid="ref20">20</xref>−<xref ref-type="bibr" rid="ref22">22</xref></sup></p><p>Arsenic donors in silicon are particularly interesting, since
+they
+have a lower diffusivity and a higher solid solubility in bulk silicon
+than phosphorus,<sup><xref ref-type="bibr" rid="ref23">23</xref></sup> as well as a higher
+ionization energy in silicon (53.76 meV, compared to 45.59 meV for
+phosphorus),<sup><xref ref-type="bibr" rid="ref24">24</xref></sup> a larger atomic radius (<italic toggle="yes">r</italic><sub>As</sub> = 115 pm, <italic toggle="yes">r</italic><sub>P</sub> =
+100 pm),<sup><xref ref-type="bibr" rid="ref25">25</xref></sup> larger atomic spin–orbit
+interaction (<italic toggle="yes">Z</italic><sub>As</sub> = 33, <italic toggle="yes">Z</italic><sub>P</sub> = 15), and a higher nuclear spin value (<italic toggle="yes">I</italic><sub>As</sub> = 3/2, <italic toggle="yes">I</italic><sub>P</sub> = 1/2) than phosphorus.
+These differing properties present opportunities for atomic-scale
+device designs with advanced functionality, including quantum computation
+schemes based on silicon photonic crystal cavities, which would exploit
+the larger spin–orbit interaction of arsenic,<sup><xref ref-type="bibr" rid="ref26">26</xref></sup> and schemes employing qudits (generalized <italic toggle="yes">d</italic>-dimensional quantum information units) where the 4-state Zeeman
+splitting of the arsenic 3/2 nuclear spin could be utilized as a <italic toggle="yes">d</italic> = 4 qudit.<sup><xref ref-type="bibr" rid="ref27">27</xref>,<xref ref-type="bibr" rid="ref28">28</xref></sup> In this latter case, while arsenic
+nuclear spins can in principle also be operated as 2-state qubits
+with some added complexities,<sup><xref ref-type="bibr" rid="ref29">29</xref></sup> accessing
+the higher dimensionality provided by the 3/2 spin could offer advantages
+over qubit based quantum computation, including simplifications in
+physical implementations of quantum gate structures,<sup><xref ref-type="bibr" rid="ref30">30</xref></sup> and greater efficiency and breadth of quantum simulations.<sup><xref ref-type="bibr" rid="ref31">31</xref></sup> Furthermore, the ability to position multiple
+dopant species in silicon with atomic-scale precision should allow
+independent addressing of each donor species by exploiting the different
+orbital excitation energies, and could thus enable principles of device
+operation such as optically driven silicon-based quantum gates.<sup><xref ref-type="bibr" rid="ref32">32</xref></sup> Thus, the ability to control the reaction of
+arsine (AsH<sub>3</sub>) with Si(001) using STM hydrogen-desorption
+lithography, in an analogous manner to phosphine, presents enormously
+exciting opportunities for atomic-scale electronics.</p><p>Kipp <italic toggle="yes">et al.</italic>(<xref ref-type="bibr" rid="ref33">33</xref>) have
+studied the adsorption of arsine on Si(001) using STM and X-ray photoemission
+spectroscopy and suggest that AsH<sub>3</sub>, adsorbed at room temperature,
+decomposes into AsH + 2H and saturates at an As concentration of ∼20%
+of a silicon monolayer (ML). Several other reports on the surface
+chemistry and growth kinetics of arsenic layers on Si(001) from a
+gas phase arsine precursor<sup><xref ref-type="bibr" rid="ref34">34</xref>−<xref ref-type="bibr" rid="ref38">38</xref></sup> have been primarily concerned with rapid growth rates and elevated
+growth temperatures (&gt;600 °C), which are not compatible with
+the thermal requirements of STM hydrogen-desorption lithography.<sup><xref ref-type="bibr" rid="ref39">39</xref>,<xref ref-type="bibr" rid="ref40">40</xref></sup> In general, however, these reports have established that arsine
+gas phase dosing of Si(001) is self-limiting at an arsenic coverage
+of ∼0.25–1 ML, dependent on the growth temperature,
+and therefore on the degree of H<sub>2</sub> desorption. Previous
+density functional theory (DFT) studies have considered likely dissociation
+configurations of AsH<sub>3</sub>,<sup><xref ref-type="bibr" rid="ref41">41</xref></sup> kinetic
+activation barriers for the removal of the first H atom,<sup><xref ref-type="bibr" rid="ref42">42</xref></sup> and comparative thermodynamic stabilities of
+dissociated AsH<sub>3</sub> and PH<sub>3</sub>.<sup><xref ref-type="bibr" rid="ref43">43</xref></sup></p><p>Here, we present a combined atomic-scale STM and
+DFT investigation
+of the adsorption and thermal decomposition of arsine on Si(001).
+We establish the full chemical pathway of arsine decomposition and
+incorporation of arsenic into the Si(001) surface, and also the spatial
+control of this reaction <italic toggle="yes">via</italic> STM hydrogen-desorption
+lithography. In particular, we demonstrate the following: (1) Individual
+AsH<sub>3</sub> molecules rapidly and fully dissociate on Si(001)
+at room temperature. (2) Arsenic atoms from dissociated AsH<sub>3</sub> molecules incorporate substitutionally into the silicon lattice
+at temperatures below 350 °C, and at all surface coverages. (3)
+Arsine adsorption on Si(001), at room temperature, is self-terminating
+at a saturation coverage of 0.24 ± 0.04 molecules/surface silicon
+atom, independent of gas exposure rate, providing an arsenic coverage
+well above the metal–insulator transition, allowing for STM
+fabrication of metallic interconnects. (4) AsH<sub>3</sub> molecules
+selectively adsorb and dissociate in a STM depassivated region of
+the Si(001)-H surface, while leaving the surrounding H-resist intact;
+subsequent annealing incorporates the arsenic atoms into the top layer
+of the silicon surface, without disturbing the H-resist. (5) Arsenic
+delta-doped layers can be grown by confining the arsenic incorporated
+surface below an epitaxial silicon capping layer, grown <italic toggle="yes">via</italic> temperature-programmed, low temperature epitaxy. (6) Ohmic contacts
+can be made to the buried, and electrically activated, arsenic-doped
+layer by aluminum deposition. Fulfillment of these six criteria satisfies
+the necessary requirements for successful STM fabrication of atomic-scale,
+electrically contacted, arsenic in silicon electronic devices. While
+very recent progress has been made using STM patterning of boron in
+silicon,<sup><xref ref-type="bibr" rid="ref44">44</xref></sup> the present work represents
+the development of the capability to pattern a dopant species, other
+than phosphorus, in silicon, at the atomic scale, using hydrogen-desorption
+lithography. Moreover, this work represents a first step in the development
+of a materials toolbox, where atomic-scale structures can be constructed
+using multiple dopant elements: an important step closer toward the
+emerging field of atomic-scale fabrication and manufacturing.</p><sec id="sec2"><title>Results
+and Discussion</title><sec id="sec2.1"><title>Dissociation of Isolated AsH<sub>3</sub> Molecules</title><p>To ascertain the atomic-scale behavior of the AsH<sub>3</sub>/Si(001)
+adsorption system, we exposed atomically clean Si(001)2 × 1 to
+a low dose of arsine (0.015 L at 5 × 10<sup>−11</sup> mbar)
+at room temperature. An example of the surface observed by STM, immediately
+after dosing, is shown in the filled and empty-state STM images of <xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>a and b. Of the features
+observed, several are readily identified as native Si(001) surface
+defects,<sup><xref ref-type="bibr" rid="ref45">45</xref></sup> such as dimer vacancies (labeled
+DV in <xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>a and
+b) and C-defects (labeled Cd).<sup><xref ref-type="bibr" rid="ref46">46</xref></sup> The new
+features in these images are attributed to the products of AsH<sub>3</sub> dissociation reacting with the surface. These are labeled
+“type-1” and “type-2”. The type-1 features
+are by far the most common, accounting for more than 75% of all AsH<sub>3</sub>-associated features detected at these coverages, and these
+are the principal focus here. The minority type-2 features arise due
+to steric effects, which we briefly discuss below.</p><fig id="fig1" position="float" orientation="portrait"><label>Figure 1</label><caption><p>Adsorption and dissociation
+of single AsH<sub>3</sub> molecules
+on Si(001)2 × 1. (a,b) Filled and empty state STM images of low-coverage
+AsH<sub>3</sub> on Si(001). AsH<sub>3</sub> features are labeled type-1
+and type-2, native surface defects are dimer vacancies (DV), double
+dimer vacancy (2DV), 2 + 1 dimer vacancy complex (2 + 1DV), and C-defect
+(Cd). Sample voltage, <italic toggle="yes">V</italic> = −1.7 V, +1.6 V;
+tunneling current, <italic toggle="yes">I</italic> = 0.10 nA. (c) Filled-state
+STM image of a type-1 feature. Reticle highlights alignment with Si
+dimers. <italic toggle="yes">V</italic> = −1.7 V, <italic toggle="yes">I</italic> = 0.10
+nA. (d) Schematic valence diagram details the inter-row end-bridge
+As + 3H structure of the type-1 feature. Gray shading indicates regions
+imaging bright in STM. (e) Empty-state STM image of a type-1 feature.
+Reticles indicate the positions of Si dimers. <italic toggle="yes">V</italic> =
++1.6 V, <italic toggle="yes">I</italic> = 0.10 nA. (f) Structural schematic of
+inter-row end-bridge As + 3H structure showing the positions of first
+and second layer silicon atoms (black and gray, respectively), and
+the single As (green) and three H atoms (blue) provided by the AsH<sub>3</sub> molecule. (g) Five-step reaction path from molecularly adsorbed
+AsH<sub>3</sub> to the fully dissociated inter-row end-bridge As +
+3H structure. Calculated adsorption energies are provided in brackets
+for each sequential structure. Calculated activation energies, <italic toggle="yes">E</italic><sub>A</sub>, for each step are given above the reaction
+arrows. The STM images are skewed to account for thermal drift and
+rotated ∼45° from the scan direction such that the dimer-rows
+align with the horizontal.</p></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="gr1" position="float" orientation="portrait" xlink:href="nn9b08943_0001.jpg"/></fig><p>High-resolution, filled- and empty-state images of the type-1 feature
+are shown in <xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>c and e, respectively. The type-1 feature is characterized by two
+bright protrusions on two adjacent dimer rows. These protrusions appear
+in both filled and empty states, but differ in their relative brightness.
+Across the dimer rows, <italic toggle="yes">i.e.</italic>, along the vertical axis
+of the images in <xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>c and e, both protrusions are shifted up from the dimer centers,
+toward an upper dimer end. The short vertical lines of the overlaid
+white reticles on the STM images indicate the silicon dimer center
+positions in the horizontal direction. By reference to these reticles,
+we see that the upper row protrusion aligns with the third vertical
+line in from the left, and is thus positioned on top of a single dimer
+end, while the lower-row protrusion is located between the third and
+fourth vertical lines, and thus is positioned between two dimer ends.
+The upper protrusion induces strong dimer pinning, which is apparent
+in the filled state image (<xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>c) as the characteristic zigzag appearance along the
+row.</p><p>We assign the type-1 STM feature to the structure shown
+in <xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>d, which
+we call
+the <italic toggle="yes">inter-row end-bridge As + 3H</italic> configuration. Gray
+highlighting in the schematic indicates sites that appear bright in
+the corresponding filled-state image. These bright sites correspond
+to the bare Si–Si dimers that surround the adsorbate, and to
+the two prominent protrusions of the type-1 feature. The two protrusions
+in the STM images are assigned to the dangling bond end of a Si–Si–H
+hemihydride dimer on the upper row, and a dimer end-bridge arsenic
+atom on the lower row (where the remaining two hydrogen atoms are
+attached to the lower row, directly across from the end-bridge arsenic
+atom). These two sites are both characterized by a single unpaired
+electron, <italic toggle="yes">i.e.</italic>, there are half-filled molecular orbitals
+at these sites that would nominally image brightly in both filled
+and empty state. The two dimer ends opposite the bridging arsenic
+atom appear dark in both the filled and empty state image, which is
+consistent with the electronically saturated, hydrogen-termination
+at these sites.</p><p><xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>g shows
+the proposed reaction pathway giving rise to the inter-row end-bridge
+As + 3H configuration observed as the type-1 feature. This kinetically
+preferred pathway is based on DFT calculations of adsorption energies
+of the various intermediate structures involved and the activation
+energies for each step along the path. Each successive step leads
+to a structure of lower energy, providing the thermodynamic driving
+force toward the final formation of the inter-row end-bridge As +
+3H configuration. The first reaction step, labeled (i) in <xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>g, is the dissociation
+of a datively adsorbed AsH<sub>3</sub> molecule into an AsH<sub>2</sub> + H species by means of an inter-row hydrogen shift. This reaction
+transfers one hydrogen atom to the adjacent dimer row, producing a
+hemihydride dimer. The calculated activation barrier for this reaction
+step is only 0.23 eV, which corresponds to a reaction that is completed
+on a time scale of nanoseconds at room temperature. We note that the
+inter-row hydrogen shift is kinetically preferable to the alternative,
+(and perhaps more intuitive) on-dimer and interdimer hydrogen shifts
+(not shown in <xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>g), which have calculated activation energies of 0.53 and 0.29 eV,
+respectively. The fact that the inter-row H-shift is preferred, correlates
+well with the fact that the type-1 STM feature, contains a hemihydride
+on an adjacent row, and that a majority of adsorbed AsH<sub>3</sub> molecules dissociate by this route.</p><p>The second reaction step,
+labeled (ii) in <xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>g, is also a hydrogen-shift reaction, which
+preferentially occurs in the on-dimer direction to produce a structure
+that we refer to as the dimer-end AsH + 2H structure. The calculated
+activation energy for this reaction is 0.63 eV, corresponding to a
+reaction time scale of milliseconds at room temperature. The alternative
+reaction, in which the hydrogen atom shifts in the interdimer direction
+(not shown in <xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>g), has a slightly larger activation barrier of 0.72 eV, and is thus
+kinetically disfavored. The dimer-end AsH + 2H configuration containing
+a single-valent AsH fragment is a highly transient intermediate corresponding
+to an extremely shallow minimum on the potential energy surface. This
+species near-instantly stabilizes into the end-bridge AsH + 2H species,
+in which the AsH fragment bridges between two dimer-ends, labeled
+(iii) in <xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>g.</p><p>The final reaction step, labeled (iv) in <xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>g, transfers a hydrogen atom from the AsH
+fragment to the silicon dangling bond at the opposite dimer end. This
+reaction produces the inter-row end-bridge As + 3H structure that
+corresponds to the type-1 STM feature. The reaction barrier for this
+final hydrogen-shift is calculated to be 0.89 eV; this is the rate-determining
+activation energy along the full dissociation path. This barrier is
+still low enough such that full dissociation of an adsorbing AsH<sub>3</sub> molecule into inter-row end-bridge As + 3H will be completed
+on a time scale of tens of seconds. Overall, the calculated reaction
+pathway is thus highly consistent with observation of the type-1 STM
+feature as the majority species following AsH<sub>3</sub> chemisorption
+on Si(001).</p><p>Despite the kinetic preference for this dissociation
+pathway, STM
+images also reveal small numbers of a few alternative dissociation
+structures, <italic toggle="yes">e.g.</italic>, the type-2 feature seen in <xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>a,b. These arrangements,
+which are kinetically disfavored on the bare Si(001) surface, are
+thought to result from steric hindrance provided by neighboring AsH<sub>3</sub> adsorbates, or native Si(001) defects. A single example of
+the type-2 feature is shown in <xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>, in the bottom right of panels a and b, and notably
+occurs immediately adjacent a type-1 feature. At this low coverage,
+the type-2 feature comprises roughly 10–15% of the total AsH<sub>3</sub> associated STM features, and corresponds to the intrarow
+end bridge structure, known to be the preferred dissociation configuration
+for PH<sub>3</sub>/Si(001).<sup><xref ref-type="bibr" rid="ref13">13</xref></sup></p><p>It
+is instructive here to briefly compare the dissociation of AsH<sub>3</sub> on silicon to the analogous PH<sub>3</sub>/Si(001) system.
+The primary PH<sub>3</sub> dissociation process at low coverage is
+a progressive sequence of three principal species, namely, PH<sub>2</sub> + H, PH + 2H, and P + 3H.<sup><xref ref-type="bibr" rid="ref47">47</xref></sup> Transitions
+along this sequence occur on a time scale of minutes, making these
+transitions directly observable in room-temperature STM experiments
+(see, <italic toggle="yes">e.g.</italic>, Figure 6 in ref (<xref ref-type="bibr" rid="ref47">47</xref>)). In contrast, full AsH<sub>3</sub> dissociation into the As + 3H species is complete before
+the surface can be imaged by STM after arsine exposure, leaving the
+type-1 STM feature as the single dominant species at low coverage.
+Comparison of our DFT calculations for AsH<sub>3</sub>/Si(001) with
+those reported for phosphine<sup><xref ref-type="bibr" rid="ref13">13</xref></sup> provides
+some insights into how these differences arise. First, hydrogen-shift
+reactions in the arsine pathway are more exothermic and have lower
+activation energies than the corresponding reaction in the phosphine
+pathway. This results in a much faster rate of dissociation for AsH<sub>3</sub>. Second, a characteristic of the phosphine pathway is that
+hydrogen-shift dissociation and PH<sub>2-</sub>-fragment diffusion
+are in close competition; this becomes manifest in the great diversity
+of PH<sub>3</sub> dissociation species formed,<sup><xref ref-type="bibr" rid="ref43">43</xref></sup> and in the observed diffusion of the P atom away from the
+initial adsorption site.<sup><xref ref-type="bibr" rid="ref13">13</xref></sup> This competition
+no longer exists for arsine due to the much reduced hydrogen-shift
+activation barrier. In effect, an adsorbing AsH<sub>3</sub> molecule
+rapidly falls apart where it lands, undergoing minimal rearrangement
+of the fragments. The result is that the arsenic atom does not have
+opportunity to diffuse away from the initial landing site and a single
+structure, namely, the <italic toggle="yes">inter-row end-bridge As + 3H</italic> structure, is formed as the majority species.</p></sec><sec id="sec2.2"><title>Substitutional
+Incorporation of Arsenic Atoms into the Silicon
+Lattice</title><p>Following molecular dissociation of AsH<sub>3</sub> on the Si(001) surface, the next step critical to the STM lithography
+fabrication process, is incorporation of the arsenic atoms into the
+silicon lattice. <xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref>a and b show a clean Si(001) surface exposed to a low dose (0.015
+L) of arsine at room temperature (<xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref>a), and then subsequently annealed to promote
+the incorporation of the arsenic atoms into the surface (<xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref>b). Before annealing,
+the surface exhibits many As + 3H features (type-1), two of which
+have been highlighted by arrows. High-resolution filled- and empty-state
+images of the same surface (inset to <xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref>a) provide a close view of a type-1 feature
+(arrow) and a nearby C-defect. <xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref>b shows the same surface (but a different area) after
+a 1 min thermal anneal at 500 °C. Arrows in <xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref>b highlight examples that,
+by their appearance and by analogy to the behavior of PH<sub>3</sub> on Si(001),<sup><xref ref-type="bibr" rid="ref48">48</xref></sup> we assign to Si–As
+heterodimers formed during the anneal. High-resolution filled and
+empty state images of two such As–Si heterodimers (inset of <xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref>b) reveal an appearance
+that is very similar to that of P–Si heterodimers, confirming
+that arsenic incorporation into the surface has taken place.</p><fig id="fig2" position="float" orientation="portrait"><label>Figure 2</label><caption><p>Substitutional
+incorporation of isolated arsenic atoms into the
+silicon lattice and saturation arsine coverage. (a) STM image of low
+coverage (0.02 adsorbates/nm<sup>2</sup>), room temperature AsH<sub>3</sub> on Si(001). Arrows indicate examples of isolated type-1 AsH<sub>3</sub> features. <italic toggle="yes">V</italic> = −1.7 V, <italic toggle="yes">I</italic> = 0.02 nA. The inset shows filled and empty state images of the
+type-1 feature alongside a C-defect for comparison. (b) Surface from
+panel (a) subsequent to a 500 °C × 1 min anneal. Isolated
+As–Si heterodimers (HD) are observed in the first layer of
+the silicon surface; examples are indicated by white arrows. <italic toggle="yes">V</italic> = −1.6 V, <italic toggle="yes">I</italic> = 0.10 nA. Two examples
+of the As–Si HD are shown in filled and empty states in the
+inset. (c) Kinetic Monte Carlo simulation of total As surface coverage
+and AsH<sub><italic toggle="yes">x</italic></sub> species distribution, as a function
+of arsine partial pressure. (d) STM image of a Si(001) surface following
+a 1.5 L (5 × 10<sup>–9</sup> mbar × 5 min) room temperature,
+arsine exposure. Inset shows a magnified image of the same surface. <italic toggle="yes">V</italic> = −2.0 V, <italic toggle="yes">I</italic> = 0.04 nA. (e) Surface
+from panel (a) subsequent to a 350 °C × 1 min anneal. Inset
+shows ejected silicon dimer chains indicative of arsenic incorporation. <italic toggle="yes">V</italic> = −2.0 V, <italic toggle="yes">I</italic> = 0.05 nA.</p></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="gr2" position="float" orientation="portrait" xlink:href="nn9b08943_0002.jpg"/></fig><p>At the temperature of 500 °C used in the annealing experiment
+above, all hydrogen atoms are expected to desorb from the silicon
+surface, and thus <xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref>b shows a surface completely depleted of hydrogen. At this
+temperature, the substituted silicon atoms, which are ejected from
+the surface as the As–Si dimers are formed, rapidly diffuse
+away from the ejection site and are eventually captured at the existing
+step edges, or newly formed ad-dimer rows.<sup><xref ref-type="bibr" rid="ref49">49</xref></sup> This process of controllably substituting arsenic atoms into the
+silicon lattice is a requirement for compatibility of arsine and arsenic
+with STM hydrogen resist lithography, as substitution of isolated
+dopant atoms is necessary if the dopants are to be activated as electron
+donors in STM fabricated electronic devices.</p></sec><sec id="sec2.3"><title>Saturation Arsine Coverage</title><p>Having resolved the elementary
+AsH<sub>3</sub> single-molecule processes and arsenic surface incorporation
+in the low-coverage regime, we now move on to the saturation-coverage
+regime. High-density regions of arsenic dopants are important for
+STM lithography device fabrication, as these conductive 2D areas serve
+as device interconnects and contacts. <xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref>d shows a large-scale STM image of the Si(001)
+surface dosed to saturation by 1.5 L of arsine. The image shows a
+disordered pattern of protrusions and depressions as expected for
+a surface densely covered with the products of AsH<sub>3</sub> dissociation.</p><p>Hydrogen atoms bonded to Si(001) are immobile at room temperature,
+and in the stable configuration of the inter-row end-bridge As + 3H
+structure, the arsenic atom is locked into place by the three hydrogen
+atoms surrounding it. Activation barrier considerations reveal that
+arsenic incorporation can only take place when the thermal conditions
+are such that hydrogen atoms can diffuse away from the arsenic atom.
+The result of annealing the arsine saturated surface to 350 °C
+for 5 min is shown in the STM images in <xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref>e. That incorporation has occurred is evidenced
+in <xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref>e by the
+bright linear protrusions running perpendicular to the underlying
+dimer rows (also see inset to <xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref>b). These bright linear protrusions correspond to short
+ad-dimer chains, formed from the silicon atoms ejected during arsenic
+incorporation. These ad-dimer chains are a familiar sight from phosphorus
+incorporation experiments in the context of PH<sub>3</sub> lithographic
+fabrication.<sup><xref ref-type="bibr" rid="ref3">3</xref>,<xref ref-type="bibr" rid="ref49">49</xref></sup> Because there is one ejected
+silicon atom for every incorporated arsenic atom, one can interpret
+the density of ejected silicon atoms observed in STM images as a direct
+measure of the density of incorporated arsenic. Using this approach
+we estimate the incorporated arsenic coverage in samples prepared
+by a saturation arsine dose of 1.5 L and thermal anneal of 350 °C
+to be 0.24 ± 0.04 ML.</p><p>We find that this incorporated arsenic
+coverage is independent
+of the arsine saturation dose rate, which is interesting since this
+is not the case for phosphine (discussed further below). Saturation
+dosing at different rates can be achieved by changing the arsine partial
+pressure, with simultaneous adjustment of the total exposure time.
+When the arsine dose rate is varied by decreasing the arsine partial
+pressure from 5 × 10<sup>–9</sup> mbar to 5 × 10<sup>–10</sup> mbar (along with a dose equalizing change in total
+exposure time from 5 to 50 min), the resulting total arsenic coverage
+is found to be constant within measurement error. This dose-rate independent
+saturation arsenic coverage can be explained as follows. (i) At low
+coverages (≲ 2 × 10<sup>12</sup> molecule/cm<sup>2</sup>), AsH<sub>3</sub> moieties dissociate rapidly (∼10 s) and
+completely at random locations. (ii) As the density of surface adsorbates
+increases, the occupied sites begin to sterically hinder the complete
+dissociation of further incoming AsH<sub>3</sub>, resulting in the
+subsequent adsorption of a distribution of partially dissociated AsH<sub><italic toggle="yes">x</italic></sub> moieties—a distribution determined
+by site availability, <italic toggle="yes">not</italic> dissociation rate. (iii)
+Eventually all adsorption sites are blocked and coverage becomes saturated,
+leaving a final surface comprised of all possible AsH<sub><italic toggle="yes">x</italic></sub> moieties.</p><p>The constant incorporated arsenic
+coverage value, measured across
+a range of arsine dose rates, is also found to be consistent with
+predictions from simple kinetic Monte Carlo (KMC) simulations that
+utilize activation energies from our DFT-derived dissociation pathway
+(<xref rid="fig1" ref-type="fig">Figure <xref rid="fig1" ref-type="fig">1</xref></xref>g). The results
+of these simulations are plotted in <xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref>c. Here, we use KMC calculations to determine
+the total arsenic coverage at saturation, for a range of arsine partial
+pressures, spanning five orders of pressure magnitude, in which the
+distribution of AsH<sub><italic toggle="yes">x</italic></sub> fragments is allowed
+to vary. We assume that isolated molecules will dissociate in the
+type-1 structure, with a 2.5 dimer footprint discussed in the Dissociation
+of Isolated AsH<sub>3</sub> Molecules section, but that as the surface
+fills in, and silicon site availability becomes reduced, AsH<sub>3</sub> dissociation will be halted at different stages leaving behind AsH
+and AsH<sub>2</sub> fragments. Although the ratio of As, AsH, and
+AsH<sub>2</sub> varies as a function of partial pressure, the total
+number of arsenic atoms present on the surface remains in the 0.24–0.26
+ML range, and the arsenic surface concentration only increases by
+2–3% as the dose rate is increased across the full range.</p><p>This dose rate independence of arsenic coverage in the saturated
+AsH<sub>3</sub>/Si(001) system is in direct contrast to the PH<sub>3</sub>/Si(001) system, where phosphorus coverage at saturation is
+found to be dose-rate <italic toggle="yes">dependent</italic> at room temperature.<sup><xref ref-type="bibr" rid="ref50">50</xref>−<xref ref-type="bibr" rid="ref52">52</xref></sup> When Si(001) is saturated with PH<sub>3</sub> there is competition
+over available bare surface dimers between the adsorbing PH<sub>3</sub> molecules and the dissociating PH<sub>2</sub> + H species. For AsH<sub>3</sub>, this competition no longer exists, due to a dissociation
+rate that is 3 orders of magnitude more rapid than that of PH<sub>3</sub>. In effect, any adsorbing AsH<sub>3</sub> molecule breaks
+apart on the Si(001) surface to a degree limited only by the availability
+of bare Si dimer sites surrounding the molecule.</p><p>The much more
+rapid dissociation of AsH<sub>3</sub> also manifests
+in a lack of ordering in this system. The saturated surface and magnified
+inset shown in <xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref>d show very little evidence of long- or short-range ordering. This
+is once again in direct contrast to the PH<sub>3</sub>/Si(001) system,
+where PH<sub>2</sub> moieties are found to assemble in small patches
+of local <italic toggle="yes">p</italic>(2 × 2) ordering, with PH moieties
+aligned along Si dimer rows.<sup><xref ref-type="bibr" rid="ref50">50</xref></sup> In the case
+of PH<sub>3</sub>, dissociation and removal of successive H atoms
+from the PH<sub><italic toggle="yes">x</italic></sub> moieties occurs on the time
+scale of minutes, and the moieties survive long enough to undergo
+diffusion from the initial adsorption site to energetically preferred,
+ordered sites. In the AsH<sub>3</sub>/Si(001) system, the H atoms
+are stripped from the molecule much more rapidly, with isolated molecules
+completely dissociating on the time scale of tens of seconds. The
+AsH<sub><italic toggle="yes">x</italic></sub> moieties do not have opportunity
+to diffuse before fully dissociating, and at saturation coverage they
+remain immobilized at the initial, random landing site, producing
+the completely disordered surface shown in <xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref>a.</p></sec><sec id="sec2.4"><title>Adsorption and Incorporation of Arsenic through
+a Hydrogen Resist</title><p>We now demonstrate that the arsine adsorption,
+dissociation, saturation,
+and incorporation on the clean Si(001) surface, as described above,
+is compatible with hydrogen desorption lithography. For compatibility
+with the STM fabrication process, AsH<sub>3</sub> molecules must selectively
+adsorb <italic toggle="yes">only</italic> on depassivated Si(001) regions and not
+on the passivated Si(001):H surface. Furthermore, to allow for maximum
+in-plane confinement and fabrication flexibility, arsenic should also
+incorporate into the silicon lattice at anneal temperatures below
+the onset of H<sub>2</sub> desorption (380 °C). Fulfillment of
+both these requirements is demonstrated in <xref rid="fig3" ref-type="fig">Figure <xref rid="fig3" ref-type="fig">3</xref></xref>. Each panel in this figure corresponds to
+one step in the STM lithography patterned doping process, with the
+corresponding steps indicated by the inset schematics on each STM
+image.</p><fig id="fig3" position="float" orientation="portrait"><label>Figure 3</label><caption><p>Compatibility of AsH<sub>3</sub> adsorption, dissociation, and
+incorporation with STM hydrogen resist lithography. (a–f) Sequential
+STM images of the same 100 × 100 nm area on a Si(001)-H surface
+showing that the H-resist remains intact and free from adsorbates
+throughout each step of the STM lithography process. (a) Clean hydrogen
+terminated Si(001) surface prior to STM lithography or arsine exposure.
+(b) Selected area hydrogen desorption of a 50 × 50 nm square
+(<italic toggle="yes">V</italic> = +7.0 V, <italic toggle="yes">I</italic> = 1 nA, <italic toggle="yes">s</italic> = 100 nm/s). (c) 1.5 L arsine dose results in selective adsorption
+only within the lithographically defined area. (d) 350 °C ×
+1 min anneal, results in incorporation of the adsorbed arsenic atoms
+as evidenced by presence of ejected Si. (e) Enlargement of the upper
+right-hand corner of the patterned square in panel (c). The disordered
+saturation arsenic layer is clearly contained within only the patterned
+region, and there is no adsorption on the resist. (f) Enlargement
+of the upper right-hand corner of the patterned square in panel (d).
+Short Si dimer chains, evidence of arsenic incorporation, are indicated
+by the arrows. The surrounding hydrogen resist remains essentially
+intact with only a small density of additional dangling bonds produced
+by the incorporation anneal. <italic toggle="yes">V</italic> = −2.0 V, <italic toggle="yes">I</italic> = 0.10 nA. (g) Sequential images of hydrogen desorption,
+AsH<sub>3</sub> adsorption, and As incorporation along a line that
+is only 2 Si dimer rows wide. Arrows indicate a silicon dangling bond
+(DB) dimer, an adsorbed/dissociated AsH<sub><italic toggle="yes">x</italic></sub> moiety, and finally ejected silicon (ad-Si).</p></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="gr3" position="float" orientation="portrait" xlink:href="nn9b08943_0003.jpg"/></fig><p>In the first step, a hydrogen passivated Si(001) surface is prepared,
+as shown in <xref rid="fig3" ref-type="fig">Figure <xref rid="fig3" ref-type="fig">3</xref></xref>a. Each silicon atom has one or two hydrogen atoms bonded to it,
+except in a few cases where the hydrogen atom is missing, leaving
+a dangling bond (DB). The DBs have the appearance of bright dots in
+the image and the DB density is &lt;1%. Selective removal of a region
+of the hydrogen “resist” layer is achieved by scanning
+over a 50 × 50 nm region of the surface using an increased bias/current
+of +7.0 V and 1.0 nA, at a tip raster speed of 100 nm/s (<xref rid="fig3" ref-type="fig">Figure <xref rid="fig3" ref-type="fig">3</xref></xref>b). The patterned
+region, in the center of the image, shows the density of bright dots
+now approaches 100% coverage of the surface, indicating that most
+of the hydrogen atoms have been desorbed from the surface, leaving
+behind the bare silicon.</p><p>Dosing the patterned surface of <xref rid="fig3" ref-type="fig">Figure <xref rid="fig3" ref-type="fig">3</xref></xref>b with 1.5 L of arsine
+results in AsH<sub><italic toggle="yes">x</italic></sub> moieties (where <italic toggle="yes">x</italic> = 0–3)
+selectively adsorbing within the patterned area, producing a saturation
+arsenic density of 0.24 ML. An image of this surface is shown in <xref rid="fig3" ref-type="fig">Figure <xref rid="fig3" ref-type="fig">3</xref></xref>c. Following arsine
+dosing, the exposed region of the surface has a different appearance,
+consisting of a high density of features, whose identity is hard to
+distinguish due to their tight and disordered packing. An enlargement
+of the upper right corner of the patterned and dosed area is shown
+in <xref rid="fig3" ref-type="fig">Figure <xref rid="fig3" ref-type="fig">3</xref></xref>e. It is
+clear from these images that arsenic containing molecules from the
+gas phase have attached to the silicon surface where the hydrogen
+resist has been removed, while the resist protects the surface from
+AsH<sub>3</sub> adsorption elsewhere.</p><p>In the final step, shown
+in <xref rid="fig3" ref-type="fig">Figure <xref rid="fig3" ref-type="fig">3</xref></xref>d, annealing
+the surface to 350 °C for 2 min results
+in substitutional incorporation of arsenic and the ejection of silicon
+onto the surface, exclusively within the patterned area. Additional
+bright spots now present in the image outside of the patterned region
+are silicon dangling bonds, introduced in the hydrogen mask by the
+incorporation anneal. Once again, an enlargement of the upper right-hand
+corner of the patterned and dosed area (this time postanneal) is shown
+in <xref rid="fig3" ref-type="fig">Figure <xref rid="fig3" ref-type="fig">3</xref></xref>d. Two examples
+of short dimer chains consisting of ejected silicon atoms are highlighted
+with arrows. Confirmation of the successful execution of this final
+step demonstrates that an arsenic dopant layer can be substitutionally
+incorporated into an arbitrarily defined region of a silicon surface,
+where the shape of the region is defined by the hydrogen desorption
+pattern written by an STM tip.</p><p>Finally, the full patterning
+process is repeated on the atomic
+scale in <xref rid="fig3" ref-type="fig">Figure <xref rid="fig3" ref-type="fig">3</xref></xref>g.
+Here we demonstrate hydrogen desorption, AsH<sub>3</sub> adsorption/dissociation,
+and finally As incorporation along a patterned line of exposed dangling
+bonds only 2 silicon dimer rows wide. Arrows in these three images
+highlight a silicon dangling bond (DB) dimer in the first image, an
+adsorbed AsH<sub><italic toggle="yes">x</italic></sub> moiety in the second, and
+an ejected silicon adatom (ad-Si) adsorbed on the surface. The resulting
+patterned line of incorporated arsenic atoms is at most a few atoms
+wide.</p></sec><sec id="sec2.5"><title>Encapsulation of Arsenic Layers: Low Temperature Silicon Epitaxy</title><p>The final, <italic toggle="yes">in situ</italic>, ultrahigh vacuum step in the
+STM device fabrication is encapsulation with crystalline silicon.
+Once the arsenic atoms are incorporated into the silicon surface through
+a patterned hydrogen resist, the dopant structure must then be buried
+beneath a few nanometers of epitaxial silicon. This protective capping
+layer is grown <italic toggle="yes">via</italic> molecular beam epitaxy, using
+a solid intrinsic silicon sublimation source (SUSI-40, MBE Komponenten
+GmbH).</p><p>The thermal budget of the sample during the epitaxy stage
+is tightly restricted by two competing requirements: (1) dopant segregation
+and diffusion must be minimized so that the substitutional arsenic
+atoms remain in position—demanding a minimization of sample
+temperature; and (2) crystallographic defect formation must be minimized
+to ensure that arsenic donor atoms remain electrically activated—usually
+achieved by elevated temperature overgrowth.<sup><xref ref-type="bibr" rid="ref53">53</xref></sup> In the case of phosphorus, these two requirements can be reasonably
+satisfied by holding the sample temperature constant at 250 °C,
+throughout. In the case of arsenic we find (<italic toggle="yes">via</italic> secondary
+ion mass spectrometry; SIMS) that this approach is inadequate. We
+attribute this to the fact that arsenic is considerably more prone
+to surface segregation.<sup><xref ref-type="bibr" rid="ref54">54</xref></sup> As described
+below, we have determined a variable sample temperature program during
+overgrowth that suppresses arsenic surface segregation during silicon
+epitaxy, allowing for the growth of <italic toggle="yes">both</italic> well confined <italic toggle="yes">and</italic> electrically activated arsenic δ-layers.</p><p>To achieve thermal control of arsenic segregation and diffusion
+during silicon epitaxy, a number of saturation arsenic delta layers
+were overgrown with 15 nm of silicon at a rate of 1 ML/min, using
+different sample temperature programs. Arsenic concentration depth
+profiles were subsequently measured using SIMS, and <xref rid="fig4" ref-type="fig">Figure <xref rid="fig4" ref-type="fig">4</xref></xref> shows SIMS data for four different
+temperature programs as described by the temperature <italic toggle="yes">vs</italic> time insets in each SIMS profile. <xref rid="fig4" ref-type="fig">Figure <xref rid="fig4" ref-type="fig">4</xref></xref>a shows the result of silicon overgrowth
+at a constant sample temperature of 240 °C. This arsenic distribution
+is dominated by a high and narrow peak located at a depth of ∼1
+nm. Beneath this narrow surface peak the arsenic concentration reduces
+to a much lower, but not an insignificant constant level (&gt;1 ×
+10<sup>18</sup> atoms/cm<sup>-3</sup>) before terminating in a slight
+peak at the δ-layer origin depth, 15 nm below the surface. Beyond
+this depth, the arsenic concentration rapidly drops below the instrument’s
+detection limit (1 × 10<sup>18</sup> atoms/cm<sup>3</sup>). From
+this we conclude that the arsenic layer is not effectively buried
+beneath the silicon, but rather, a large percentage of the 0.24 ML
+of arsenic atoms undergo continual cycles of surface segregation, <italic toggle="yes">i.e.</italic>, they exchange positions with newly arrived silicon
+adatoms, and assume energetically preferred positions within the top
+layer.<sup><xref ref-type="bibr" rid="ref55">55</xref>,<xref ref-type="bibr" rid="ref56">56</xref></sup></p><fig id="fig4" position="float" orientation="portrait"><label>Figure 4</label><caption><p>Arsenic δ-layer distribution and electronic
+transport controlled
+through a silicon overgrowth thermal annealing program. (a–e)
+SIMS profiles of five different saturation arsenic δ-layer samples
+overgrown with 15 nm Si, at a deposition rate of 1 ML/min. Sample
+temperature program during silicon epitaxy was modified for each sample
+according to the inset temperature <italic toggle="yes">vs</italic> time profiles.
+(f) δ-Layer mobility and confinement as a function of RTA temperature.
+(g) δ-Layer carrier density and sheet resistance as a function
+of RTA temperature. Error bars in the plots in panels f and g account
+for temperature measurement uncertainty and magnetoresistance curve
+fitting confidence levels as explained in the <ext-link xmlns:xlink="http://www.w3.org/1999/xlink" ext-link-type="uri" xlink:href="http://pubs.acs.org/doi/suppl/10.1021/acsnano.9b08943/suppl_file/nn9b08943_si_001.pdf">Supporting Information</ext-link>, section b.</p></caption><graphic xmlns:xlink="http://www.w3.org/1999/xlink" id="gr4" position="float" orientation="portrait" xlink:href="nn9b08943_0004.jpg"/></fig><p><xref rid="fig4" ref-type="fig">Figure <xref rid="fig4" ref-type="fig">4</xref></xref>b shows
+the arsenic profile for overgrowth at a constant but lower temperature
+of 190 °C. Here we observe a shift in weight from the surface
+to the subsurface arsenic peak, and find that the arsenic concentration
+is no longer uniform in the region between peaks. Below the surface
+peak, it slowly rises to an asymmetric peak at the arsenic origin
+depth of ∼15 nm, before rapidly falling off below the detection
+limit. Segregation is an activated process, and by lowering the constant
+growth temperature the segregation is found to be partially suppressed.</p><p>This arsenic segregation suppression can be further enhanced through
+a greater reduction in substrate temperature during encapsulation. <xref rid="fig4" ref-type="fig">Figure <xref rid="fig4" ref-type="fig">4</xref></xref>c shows the arsenic
+profile resulting from overgrowth at the lowest achievable sample
+temperature given our silicon source–sample geometry. In this
+case, there is no Joule heating of the sample, only the unavoidable
+radiative heating from the silicon MBE source. The substrate begins
+overgrowth at 40 °C increasing to a stable 100 °C after
+the first 12 min of growth (12 ML). From the SIMS profile, we see
+that arsenic surface segregation is highly suppressed in this sample,
+resulting in a very well confined (&lt;2 nm fwhm) and symmetric peak
+(∼ 5 × 10<sup>20</sup> atoms/cm<sup>-3</sup>) located
+at the origin depth of 15 nm. This peak, which falls rapidly to below
+the instrument’s detection limit within 3 nm in either direction,
+represents the <italic toggle="yes">best achievable confinement</italic> of the
+arsenic δ-layer grown in our MBE system. However, due to the
+reduced substrate temperature during overgrowth, and the high concentration
+of arsenic surface atoms, the critical thickness at which the epitaxial
+layer becomes amorphous will also be reduced considerably.<sup><xref ref-type="bibr" rid="ref57">57</xref></sup> At a temperature of 100 °C, and deposition
+rate of 1 ML/min, the critical thickness is expected to reduce below
+2 nm,<sup><xref ref-type="bibr" rid="ref53">53</xref></sup> meaning the upper 13 nm or more
+of silicon will be amorphous, and unsuitable for device encapsulation.</p><p>In order to facilitate suppression of arsenic segregation during
+reduced temperature silicon overgrowth, yet still achieve epitaxy
+and avoid amorphization, we have developed the strategy (adapted from
+a similar concept used first for phosphorus δ-layers in germanium,<sup><xref ref-type="bibr" rid="ref58">58</xref>−<xref ref-type="bibr" rid="ref60">60</xref></sup> and later for phosphorus δ-layers in silicon<sup><xref ref-type="bibr" rid="ref61">61</xref>−<xref ref-type="bibr" rid="ref63">63</xref></sup>) of growing a very thin, reduced temperature “locking layer”
+that is kept below the critical amorphization thickness. With a reduced
+temperature locking layer in place, the substrate is then heated to
+a temperature that can support epitaxial growth for the remainder
+of the overlayer deposition. <xref rid="fig4" ref-type="fig">Figure <xref rid="fig4" ref-type="fig">4</xref></xref>d shows an example of locking layer assisted epitaxial
+growth applied to an arsenic δ-layer. Here the sample is not
+actively heated for the first 10 min (10 ML for a 1 ML/min growth
+rate) after which it is then rapidly heated to 250 °C, and held
+constant for the remaining 230 min of overgrowth. Comparing the SIMS
+profiles of <xref rid="fig4" ref-type="fig">Figure <xref rid="fig4" ref-type="fig">4</xref></xref>c and d, we see that increasing the temperature to 250 °C following
+growth of a 10 ML locking layer, has no detrimental effect on the
+confinement. The locking layer strongly suppresses arsenic surface
+segregation, producing epitaxially capped arsenic δ-layers with
+very tight confinements—confinements which are limited primarily
+by the solid-state diffusivity of arsenic in silicon. It is interesting
+to note here that arsenic has a lower diffusion coefficient than phosphorus
+in bulk silicon.<sup><xref ref-type="bibr" rid="ref23">23</xref></sup> Arsenic structures buried
+in silicon should therefore be less prone to pattern smearing at increased
+processing temperatures compared to phosphorus structures.</p></sec><sec id="sec2.6"><title>Electrical
+Activation and Contacting of Arsenic δ-Layers</title><p>To establish
+full compatibility of arsine and arsenic with the
+STM device fabrication process, the buried arsenic dopant structures
+must be electrically activated and Ohmic contacts achieved with the
+arsenic layer beneath the silicon cap. Satisfaction of this requirement
+has been verified by measurement of linear and symmetric IV curves
+during standard magnetotransport characterization of the arsenic δ-layers.
+As explained in detail in the <ext-link xmlns:xlink="http://www.w3.org/1999/xlink" ext-link-type="uri" xlink:href="http://pubs.acs.org/doi/suppl/10.1021/acsnano.9b08943/suppl_file/nn9b08943_si_001.pdf">Supporting Information</ext-link>, Hall bars were fabricated from locking layer encapsulated arsenic
+δ-layers, and Ohmic contacts achieved through deposition of
+aluminum directly onto the δ-layer edge. We note that phosphorus
+doped, n-type substrates (donor concentration <italic toggle="yes">N</italic><sub>D</sub> = 5 × 10<sup>14</sup> to 5 × 10<sup>15</sup> cm<sup>–3</sup>) are used in this work. This doping level allows
+for direct current sample heating and room temperature STM measurements,
+and does not interfere with the low temperature transport measurements
+of the delta layers.</p><p>In addition to fabricating Ohmic contacts,
+we have also optimized the transport properties of the arsenic δ-layers
+for improved device performance. The optimizations were achieved by
+improving the epitaxial silicon quality and minimizing crystallographic
+defects, resulting in a maximization of carrier density and mobility,
+and a minimization of sheet resistance. Despite the fact that the
+locking layer thickness used is below the critical amorphization limit,
+including this reduced temperature step in the overgrowth is detrimental
+to crystal quality, and thus to the electrical performance of the
+δ-layers. To overcome this issue, we include a rapid thermal
+anneal (RTA) stage in the overgrowth sample temperature program, as
+has been done for phosphorus δ-layers.<sup><xref ref-type="bibr" rid="ref61">61</xref>−<xref ref-type="bibr" rid="ref63">63</xref></sup></p><p><xref rid="fig4" ref-type="fig">Figure <xref rid="fig4" ref-type="fig">4</xref></xref>e shows
+the SIMS profile of an arsenic δ-layer grown using both locking
+layer and RTA stages in the substrate temperature program. The temperature <italic toggle="yes">vs</italic> time profile used here is shown in the inset of <xref rid="fig4" ref-type="fig">Figure <xref rid="fig4" ref-type="fig">4</xref></xref>e. It is similar
+to the profile shown in the inset of <xref rid="fig4" ref-type="fig">Figure <xref rid="fig4" ref-type="fig">4</xref></xref>d, with the exception of the additional 500
+°C × 10 s RTA, occurring between the locking layer growth
+and constant temperature epitaxy stages. Comparing the SIMS profiles
+of <xref rid="fig4" ref-type="fig">Figure <xref rid="fig4" ref-type="fig">4</xref></xref>d and e,
+we find that introduction of this RTA stage is not detrimental to
+the enhanced confinement provided by the locking layer in any significant
+way. The effect of the RTA on transport properties is however significant.</p><p><xref rid="fig4" ref-type="fig">Figure <xref rid="fig4" ref-type="fig">4</xref></xref>f and g
+show the effect of the RTA temperature maximum on δ-layer carrier
+concentration, sheet resistance, mobility, and confinement. The data
+for these figures of merit were obtained from Hall measurements on
+five arsenic δ-layers, with heating profiles identical to that
+of <xref rid="fig4" ref-type="fig">Figure <xref rid="fig4" ref-type="fig">4</xref></xref>e, except
+with each using a different RTA peak value, covering the range from
+250 to 560 °C. For a RTA greater than 500 °C, the electronic
+layer thickness increases beyond 2 nm, while the improvement in sheet
+resistance and mobility has leveled out. For this reason, the RTA
+temperature maximum is considered optimum at ∼500 °C.
+Despite the fact that both the mobility and sheet resistance values
+plateau at 28 ± 1 cm<sup>2</sup>/(V·s), and 1.6 ± 0.1
+kΩ/square, respectively, the carrier density continues increasing
+beyond this optimum RTA temperature. At the highest RTA temperature
+maximum examined, 560 °C, we measure a carrier density of 1.45
+× 10<sup>14</sup> cm<sup>–2</sup>, which corresponds to
+an arsenic donor atom density of only 0.21 ML. Given our estimate
+of arsenic saturation coverage at 0.24 ML, this maximum value represents
+an activation of 88% of the donor atoms. At the optimized RTA temperature
+of 500 °C, this activation percentage is even lower at 81%. Nevertheless,
+this carrier concentration is well above the metal insulator transition,
+and greater than 1/2 of the typical carrier density of 2.4 ×
+10<sup>14</sup> cm<sup>–2</sup> found in phosphorus δ-layers.
+It is not entirely surprising that less than 100% of the arsenic δ-layer
+donor atoms are electrically activated, even at the highest RTA temperature
+used, as arsenic is known to suffer from clustering at high concentrations,<sup><xref ref-type="bibr" rid="ref64">64</xref>,<xref ref-type="bibr" rid="ref65">65</xref></sup> resulting in incomplete activation at concentrations &gt;10<sup>20</sup> cm<sup>–3</sup> (or 2 × 10<sup>13</sup> cm<sup>–2</sup>) in traditional implantation or diffusion doping
+of silicon.<sup><xref ref-type="bibr" rid="ref53">53</xref></sup></p><p>Given the large parameter
+space involved in optimizing arsenic
+δ-layer growth for both confinement and electrical transport,
+there is potentially room for improvement in performance values beyond
+those presented here. However, comparing the figures of merit achieved
+for arsenic δ-layers with those typically achieved for phosphorus
+δ-layers,<sup><xref ref-type="bibr" rid="ref61">61</xref>,<xref ref-type="bibr" rid="ref63">63</xref></sup> we find that they are at most
+a factor of 2 worse, and that arsine and arsenic are 100% compatible
+with atomic-scale STM device fabrication, and therefore represent
+a viable alternative to phosphine and phosphorus.</p></sec></sec><sec id="sec3"><title>Conclusions</title><p>We have demonstrated the full compatibility of arsine as a precursor
+gas for the atomic-scale positioning of arsenic donors in silicon
+using STM-based hydrogen-desorption lithography, and, when combined
+with low temperature silicon epitaxy, the capability to fabricate
+buried, atomic-scale, dopant structures in silicon. Room temperature
+dissociation of arsine on Si(001) differs from the dissociation of
+phosphine on Si(001) in that full dissociation of arsine occurs much
+more rapidly at room temperature. We find also that saturation arsine
+coverage is self-limiting at 24% ML, invariant with dose rate, and
+that monolayer hydrogen termination acts as an effective resist layer
+for the adsorption of arsine on Si(001). We show that arsenic can
+be incorporated in the silicon surface lattice by annealing at 350
+°C. We demonstrate successful low temperature silicon epitaxial
+overgrowth by growing arsenic δ-layers, where segregation was
+suppressed through the use of an unheated, ultrathin, locking layer.
+A rapid thermal anneal stage of 500 C × 10 s immediately following
+locking layer growth improves electronic transport properties resulting
+in 2 nm thick, conductive layers with sheet resistance, and carrier
+concentration of 1.5 kΩ/square, and 1.3 × 10<sup>14</sup> cm<sup>–3</sup>, respectively. It has been a decade and a
+half since phosphorus dopant placement using STM H-lithography was
+first demonstrated, and the work presented here shows that using arsenic
+as the n-type dopant in place of phosphorus is possible. Finally,
+the parameters used for arsenic and for phosphorus device fabrication
+are completely compatible with one another, demonstrating the possibility
+of multispecies dopant devices.</p></sec><sec id="sec4"><title>Experimental
+Methods</title><sec id="sec4.1"><title>Sample Preparation and Scanning Tunneling Microscopy</title><p>Si(001) samples were diced to 2 × 9 mm from a 0.3 mm thick,
+Czochralski grown, bulk phosphorus doped wafer with a resistivity
+of 1–10 Ω·cm. Samples were cleaned ultrasonically <italic toggle="yes">ex situ</italic> in acetone followed by isopropyl alcohol, then thermally
+outgassed <italic toggle="yes">in situ</italic> (base pressure &lt;1 × 10<sup>−10</sup> mbar) for &gt;8 h at 600 °C, and finally flash
+annealed multiple times at 1200 °C, using direct current resistive
+sample heating. Sample temperature was monitored using an infrared
+pyrometer (IMPAC IGA50-LO plus), with a total estimated measurement
+uncertainty of ±30 °C. Silicon epitaxy was performed at
+a base pressure of 1 × 10<sup>−10</sup> mbar, using an
+all silicon, solid sublimation source (SUSI-40, MBE Komponenten GmbH)
+operated at a deposition rate of 1.5 Å/min. During silicon overgrowth,
+sample temperature was indirectly monitoring by measuring sample resistance,
+while the sample was heated using direct current resistive sample
+heating. All scanning tunneling microscopy measurements were performed
+in an Omicron variable temperature series STM at room temperature
+with a base pressure of &lt;5 × 10<sup>−11</sup>mbar.</p></sec><sec id="sec4.2"><title>Density Functional Theory Calculations</title><p>All DFT calculations
+reported here were conducted using the Gaussian 09 software and methods
+of energy computation and geometry optimization implemented therein.<sup><xref ref-type="bibr" rid="ref66">66</xref></sup> We calculate adsorption energies for various
+arsine configurations on the silicon (001) surface using an approach
+that we refer to as the cluster composite model (CCM).<sup><xref ref-type="bibr" rid="ref13">13</xref>,<xref ref-type="bibr" rid="ref67">67</xref></sup> This approach uses the B3LYP hybrid exact-exchange density functional
+and a large 6-311G(2df,2pd) atom-centered basis set, and the Si(001)
+surface is represented using hydrogen-truncated cluster models, such
+as Si<sub>15</sub>H<sub>16</sub> or Si<sub>54</sub>H<sub>44</sub>,
+with correction terms applied to minimize the effects of finite cluster
+size. The CCM approach has an established track record of describing
+the dissociation pathways of small molecules on the Si(001) surface
+and providing an explanation of the adsorbate species observed in
+STM experiments (see, <italic toggle="yes">e.g.</italic>, refs (<xref ref-type="bibr" rid="ref13">13</xref>, <xref ref-type="bibr" rid="ref46">46</xref>, <xref ref-type="bibr" rid="ref68">68</xref>, <xref ref-type="bibr" rid="ref69">69</xref>)) The specific approach used here for the AsH<sub>3</sub>/Si(001) system is exactly the same as in our previous work
+describing the complex dissociation pathways of the analogous PH<sub>3</sub>/Si(001) system,<sup><xref ref-type="bibr" rid="ref13">13</xref></sup> and the reader
+is referred to this article for the full technical details. While
+this approach may be computationally expensive, it has been proven
+for the PH<sub>3</sub> system, and its use here allows direct and
+transparent comparison between the two systems. Reaction step (i)
+in <xref rid="fig2" ref-type="fig">Figure <xref rid="fig2" ref-type="fig">2</xref></xref>g was calculated
+using what is referred to as the 3D2R cluster model in ref (<xref ref-type="bibr" rid="ref13">13</xref>), while reaction steps
+(ii), (iii), and (iv) used the 2D1R cluster model with the hemihydride
+dimer represented by a separate cluster (see eq 5 in ref (<xref ref-type="bibr" rid="ref13">13</xref>)).</p></sec><sec id="sec4.3"><title>Kinetic Monte Carlo Simulations</title><p>KMC methods are explained
+in detail in the <ext-link xmlns:xlink="http://www.w3.org/1999/xlink" ext-link-type="uri" xlink:href="http://pubs.acs.org/doi/suppl/10.1021/acsnano.9b08943/suppl_file/nn9b08943_si_001.pdf">Supporting Information</ext-link>.</p></sec><sec id="sec4.4"><title>Secondary Ion Mass Spectrometry</title><p>Time of flight (ToF)
+SIMS measurements were made using an IONTOF ToF-SIMS<sup><xref ref-type="bibr" rid="ref5">5</xref></sup> system with a 25 keV Bi<sup>+</sup> primary ion beam in
+high current bunch mode (HCBM), and a 500 eV, 35 nA Cs<sup>+</sup> sputter beam. Depth profiles were made with a 300 μm<sup>2</sup> sputter crater, and the analytical region was gated to the central
+50 μm<sup>2</sup> of the sputter region</p></sec><sec id="sec4.5"><title>Hall Bar Fabrication and
+Magnetotransport Measurements</title><p>Arsenic delta layer samples
+were fabricated into 6 terminal Hall
+bars using standard UV photolithography, with electrical contact made <italic toggle="yes">via</italic> aluminum thermally evaporated over the edge of the mesa
+structures. Magnetotransport measurements were made at a temperature
+of 5 K in a Cryogenics Ltd. cryogen free measurement system using
+magnetic fields up to 5 T. Details of these measurements, and quantification
+of the delta layer electrical transport characteristics, are explained
+in detail in the <ext-link xmlns:xlink="http://www.w3.org/1999/xlink" ext-link-type="uri" xlink:href="http://pubs.acs.org/doi/suppl/10.1021/acsnano.9b08943/suppl_file/nn9b08943_si_001.pdf">Supporting Information</ext-link>.</p></sec></sec></body><back><notes id="notes1" notes-type="si"><title>Supporting Information Available</title><p>The Supporting Information is
+available free of charge at <ext-link xmlns:xlink="http://www.w3.org/1999/xlink" ext-link-type="uri" xlink:href="https://pubs.acs.org/doi/10.1021/acsnano.9b08943?goto=supporting-info">https://pubs.acs.org/doi/10.1021/acsnano.9b08943</ext-link>.<list id="silist" list-type="simple"><list-item><p>Kinetic Monte Carlo calculations
+and magnetotransport
+data analysis (<ext-link xmlns:xlink="http://www.w3.org/1999/xlink" ext-link-type="uri" xlink:href="http://pubs.acs.org/doi/suppl/10.1021/acsnano.9b08943/suppl_file/nn9b08943_si_001.pdf">PDF</ext-link>)</p></list-item></list></p></notes><sec sec-type="supplementary-material"><title>Supplementary Material</title><supplementary-material content-type="local-data" id="sifile1" position="float" orientation="portrait"><media xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="nn9b08943_si_001.pdf" position="float" orientation="portrait"><caption><p>nn9b08943_si_001.pdf</p></caption></media></supplementary-material></sec><notes notes-type="COI-statement" id="notes2"><p>The authors
+declare no competing financial interest.</p></notes><notes notes-type="" id="notes-00"><title>Notes</title><p>A preprint
+of this work has been posted: Stock,
+T. J. Z.; Warschkow, O; Constantinou, P. C.; Li, J; Fearn, S; Crane,
+E; Hofmann, E. V. S.; Kölker, A; McKenzie, D. R.; Schofield,
+S. R.; Curson, N. J. Atomic-Scale Patterning of Arsenic in Silicon
+by Scanning Tunneling Microscopy. <italic toggle="yes">arXiv</italic>, October
+15, 2019, 1910.06685 [physics.app-ph]. <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://arxiv.org/abs/1910.06685">https://arxiv.org/abs/1910.06685</uri>.</p></notes><notes notes-type="" id="notes-01"><title>Notes</title><p>All
+data created during this research are
+openly available at <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://doi.org/10.5281/zenodo.3406575">zenodo.org</uri></p></notes><ack><title>Acknowledgments</title><p>This project has been supported by the EPSRC project
+Atomically Deterministic Doping and Readout For Semiconductor Solotronics
+(grant number EP/M009564/1). P.C.C. and E.V.S.H. were partly supported
+by the EPSRC Centre for Doctoral Training in Advanced Characterisation
+of Materials (grant number EP/L015277/1), and also by Paul Scherrer
+Institute and IHP – Leibniz-Institut für Innovative
+Mikroelektronik, respectively. O.W. acknowledges the support of the
+Australian Research Council (ARC) Centre of Excellence for Quantum
+Computation and Communication Technology (project number CE110001027).
+Computing support was provided by the Australian National Computational
+Infrastructure (NCI).</p></ack><ref-list><title>References</title><ref id="ref1"><mixed-citation publication-type="journal" id="cit1"><name name-style="western"><surname>Jehl</surname><given-names>X.</given-names></name>; <name name-style="western"><surname>Niquet</surname><given-names>Y. M.</given-names></name>; <name name-style="western"><surname>Sanquer</surname><given-names>M.</given-names></name>
+<article-title>Single Donor
+Electronics and Quantum
+Functionalities with Advanced CMOS Technology</article-title>. <source>J. Phys.: Condens. Matter</source>
+<year>2016</year>, <volume>28</volume>, <fpage>103001</fpage><pub-id pub-id-type="doi">10.1088/0953-8984/28/10/103001</pub-id>.<pub-id pub-id-type="pmid">26871255</pub-id></mixed-citation></ref><ref id="ref2"><mixed-citation publication-type="journal" id="cit2"><name name-style="western"><surname>Morton</surname><given-names>J. J. L.</given-names></name>; <name name-style="western"><surname>McCamey</surname><given-names>D. R.</given-names></name>; <name name-style="western"><surname>Eriksson</surname><given-names>M. A.</given-names></name>; <name name-style="western"><surname>Lyon</surname><given-names>S. A.</given-names></name>
+<article-title>Embracing the Quantum
+Limit in Silicon Computing</article-title>. <source>Nature</source>
+<year>2011</year>, <volume>479</volume>, <fpage>345</fpage>–<lpage>353</lpage>. <pub-id pub-id-type="doi">10.1038/nature10681</pub-id>.<pub-id pub-id-type="pmid">22094695</pub-id></mixed-citation></ref><ref id="ref3"><mixed-citation publication-type="journal" id="cit3"><name name-style="western"><surname>Schofield</surname><given-names>S. R.</given-names></name>; <name name-style="western"><surname>Curson</surname><given-names>N. J.</given-names></name>; <name name-style="western"><surname>Simmons</surname><given-names>M. Y.</given-names></name>; <name name-style="western"><surname>Rueß</surname><given-names>F. J.</given-names></name>; <name name-style="western"><surname>Hallam</surname><given-names>T.</given-names></name>; <name name-style="western"><surname>Oberbeck</surname><given-names>L.</given-names></name>; <name name-style="western"><surname>Clark</surname><given-names>R. G.</given-names></name>
+<article-title>Atomically
+Precise
+Placement of Single Dopants in Si</article-title>. <source>Phys. Rev.
+Lett.</source>
+<year>2003</year>, <volume>91</volume>, <fpage>136104</fpage><pub-id pub-id-type="doi">10.1103/PhysRevLett.91.136104</pub-id>.<pub-id pub-id-type="pmid">14525322</pub-id></mixed-citation></ref><ref id="ref4"><mixed-citation publication-type="journal" id="cit4"><name name-style="western"><surname>Hudak</surname><given-names>B. M.</given-names></name>; <name name-style="western"><surname>Song</surname><given-names>J.</given-names></name>; <name name-style="western"><surname>Sims</surname><given-names>H.</given-names></name>; <name name-style="western"><surname>Troparevsky</surname><given-names>M. C.</given-names></name>; <name name-style="western"><surname>Humble</surname><given-names>T. S.</given-names></name>; <name name-style="western"><surname>Pantelides</surname><given-names>S. T.</given-names></name>; <name name-style="western"><surname>Snijders</surname><given-names>P. C.</given-names></name>; <name name-style="western"><surname>Lupini</surname><given-names>A. R.</given-names></name>
+<article-title>Directed
+Atom-by-Atom Assembly of Dopants in Silicon</article-title>. <source>ACS Nano</source>
+<year>2018</year>, <volume>12</volume>, <fpage>5873</fpage>–<lpage>5879</lpage>. <pub-id pub-id-type="doi">10.1021/acsnano.8b02001</pub-id>.<pub-id pub-id-type="pmid">29750507</pub-id></mixed-citation></ref><ref id="ref5"><mixed-citation publication-type="journal" id="cit5"><name name-style="western"><surname>Sinthiptharakoon</surname><given-names>K.</given-names></name>; <name name-style="western"><surname>Schofield</surname><given-names>S. R.</given-names></name>; <name name-style="western"><surname>Studer</surname><given-names>P.</given-names></name>; <name name-style="western"><surname>Brázdová</surname><given-names>V.</given-names></name>; <name name-style="western"><surname>Hirjibehedin</surname><given-names>C. F.</given-names></name>; <name name-style="western"><surname>Bowler</surname><given-names>D. R.</given-names></name>; <name name-style="western"><surname>Curson</surname><given-names>N. J.</given-names></name>
+<article-title>Investigating Individual
+Arsenic Dopant Atoms in Silicon Using Low-Temperature Scanning Tunnelling
+Microscopy</article-title>. <source>J. Phys.: Condens. Matter</source>
+<year>2014</year>, <volume>26</volume>, <elocation-id>012001</elocation-id><pub-id pub-id-type="doi">10.1088/0953-8984/26/1/012001</pub-id>.<pub-id pub-id-type="pmid">24304933</pub-id></mixed-citation></ref><ref id="ref6"><mixed-citation publication-type="journal" id="cit6"><name name-style="western"><surname>Salfi</surname><given-names>J.</given-names></name>; <name name-style="western"><surname>Mol</surname><given-names>J. A.</given-names></name>; <name name-style="western"><surname>Rahman</surname><given-names>R.</given-names></name>; <name name-style="western"><surname>Klimeck</surname><given-names>G.</given-names></name>; <name name-style="western"><surname>Simmons</surname><given-names>M. Y.</given-names></name>; <name name-style="western"><surname>Hollenberg</surname><given-names>L. C. L.</given-names></name>; <name name-style="western"><surname>Rogge</surname><given-names>S.</given-names></name>
+<article-title>Spatially Resolving Valley Quantum
+Interference of a Donor in Silicon</article-title>. <source>Nat. Mater.</source>
+<year>2014</year>, <volume>13</volume>, <fpage>605</fpage>–<lpage>610</lpage>. <pub-id pub-id-type="doi">10.1038/nmat3941</pub-id>.<pub-id pub-id-type="pmid">24705384</pub-id></mixed-citation></ref><ref id="ref7"><mixed-citation publication-type="journal" id="cit7"><name name-style="western"><surname>Voisin</surname><given-names>B.</given-names></name>; <name name-style="western"><surname>Salfi</surname><given-names>J.</given-names></name>; <name name-style="western"><surname>Bocquel</surname><given-names>J.</given-names></name>; <name name-style="western"><surname>Rahman</surname><given-names>R.</given-names></name>; <name name-style="western"><surname>Rogge</surname><given-names>S.</given-names></name>
+<article-title>Spatially
+Resolved Resonant Tunneling on Single Atoms in Silicon</article-title>. <source>J. Phys.: Condens. Matter</source>
+<year>2015</year>, <volume>27</volume>, <fpage>154203</fpage><pub-id pub-id-type="doi">10.1088/0953-8984/27/15/154203</pub-id>.<pub-id pub-id-type="pmid">25782866</pub-id></mixed-citation></ref><ref id="ref8"><mixed-citation publication-type="journal" id="cit8"><name name-style="western"><surname>Salfi</surname><given-names>J.</given-names></name>; <name name-style="western"><surname>Mol</surname><given-names>J. A.</given-names></name>; <name name-style="western"><surname>Rahman</surname><given-names>R.</given-names></name>; <name name-style="western"><surname>Klimeck</surname><given-names>G.</given-names></name>; <name name-style="western"><surname>Simmons</surname><given-names>M. Y.</given-names></name>; <name name-style="western"><surname>Hollenberg</surname><given-names>L. C. L.</given-names></name>; <name name-style="western"><surname>Rogge</surname><given-names>S.</given-names></name>
+<article-title>Quantum Simulation of the Hubbard
+Model with Dopant Atoms in Silicon</article-title>. <source>Nat. Commun.</source>
+<year>2016</year>, <volume>7</volume>, <fpage>11342</fpage><pub-id pub-id-type="doi">10.1038/ncomms11342</pub-id>.<pub-id pub-id-type="pmid">27094205</pub-id><pub-id pub-id-type="pmcid">PMC4842981</pub-id></mixed-citation></ref><ref id="ref9"><mixed-citation publication-type="journal" id="cit9"><name name-style="western"><surname>Pierre</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Wacquez</surname><given-names>R.</given-names></name>; <name name-style="western"><surname>Jehl</surname><given-names>X.</given-names></name>; <name name-style="western"><surname>Sanquer</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Vinet</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Cueto</surname><given-names>O.</given-names></name>
+<article-title>Single-Donor Ionization
+Energies in a Nanoscale CMOS Channel</article-title>. <source>Nat. Nanotechnol.</source>
+<year>2010</year>, <volume>5</volume>, <fpage>133</fpage>–<lpage>137</lpage>. <pub-id pub-id-type="doi">10.1038/nnano.2009.373</pub-id>.<pub-id pub-id-type="pmid">19966793</pub-id></mixed-citation></ref><ref id="ref10"><mixed-citation publication-type="journal" id="cit10"><name name-style="western"><surname>Greenland</surname><given-names>P. T.</given-names></name>; <name name-style="western"><surname>Lynch</surname><given-names>S. A.</given-names></name>; <name name-style="western"><surname>Van Der
+Meer</surname><given-names>A. F. G.</given-names></name>; <name name-style="western"><surname>Murdin</surname><given-names>B. N.</given-names></name>; <name name-style="western"><surname>Pidgeon</surname><given-names>C. R.</given-names></name>; <name name-style="western"><surname>Redlich</surname><given-names>B.</given-names></name>; <name name-style="western"><surname>Vinh</surname><given-names>N. Q.</given-names></name>; <name name-style="western"><surname>Aeppli</surname><given-names>G.</given-names></name>
+<article-title>Coherent Control of
+Rydberg States in Silicon</article-title>. <source>Nature</source>
+<year>2010</year>, <volume>465</volume>, <fpage>1057</fpage>–<lpage>1061</lpage>. <pub-id pub-id-type="doi">10.1038/nature09112</pub-id>.<pub-id pub-id-type="pmid">20577211</pub-id></mixed-citation></ref><ref id="ref11"><mixed-citation publication-type="journal" id="cit11"><name name-style="western"><surname>Li</surname><given-names>J.</given-names></name>; <name name-style="western"><surname>Le</surname><given-names>N. H.</given-names></name>; <name name-style="western"><surname>Litvinenko</surname><given-names>K. L.</given-names></name>; <name name-style="western"><surname>Clowes</surname><given-names>S. K.</given-names></name>; <name name-style="western"><surname>Engelkamp</surname><given-names>H.</given-names></name>; <name name-style="western"><surname>Pavlov</surname><given-names>S. G.</given-names></name>; <name name-style="western"><surname>Hübers</surname><given-names>H. W.</given-names></name>; <name name-style="western"><surname>Shuman</surname><given-names>V. B.</given-names></name>; <name name-style="western"><surname>Portsel</surname><given-names>L. D.</given-names></name>; <name name-style="western"><surname>Lodygin</surname><given-names>D. N.</given-names></name>; <name name-style="western"><surname>Astrov</surname><given-names>Y. A.</given-names></name>; <name name-style="western"><surname>Abrosimov</surname><given-names>N. V.</given-names></name>; <name name-style="western"><surname>Pidgeon</surname><given-names>C. R.</given-names></name>; <name name-style="western"><surname>Fisher</surname><given-names>A.</given-names></name>; <name name-style="western"><surname>Zeng</surname><given-names>Z.</given-names></name>; <name name-style="western"><surname>Niquet</surname><given-names>Y. M.</given-names></name>; <name name-style="western"><surname>Murdin</surname><given-names>B. N.</given-names></name>
+<article-title>Radii of Rydberg States of Isolated
+Silicon Donors</article-title>. <source>Phys. Rev. B: Condens. Matter
+Mater. Phys.</source>
+<year>2018</year>, <volume>98</volume>, <elocation-id>085423</elocation-id><pub-id pub-id-type="doi">10.1103/PhysRevB.98.085423</pub-id>.</mixed-citation></ref><ref id="ref12"><mixed-citation publication-type="journal" id="cit12"><name name-style="western"><surname>Moraru</surname><given-names>D.</given-names></name>; <name name-style="western"><surname>Udhiarto</surname><given-names>A.</given-names></name>; <name name-style="western"><surname>Anwar</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Nowak</surname><given-names>R.</given-names></name>; <name name-style="western"><surname>Jablonski</surname><given-names>R.</given-names></name>; <name name-style="western"><surname>Hamid</surname><given-names>E.</given-names></name>; <name name-style="western"><surname>Tarido</surname><given-names>J.</given-names></name>; <name name-style="western"><surname>Mizuno</surname><given-names>T.</given-names></name>; <name name-style="western"><surname>Tabe</surname><given-names>M.</given-names></name>
+<article-title>Atom Devices
+Based on Single Dopants in Silicon Nanostructures</article-title>. <source>Nanoscale Res. Lett.</source>
+<year>2011</year>, <volume>6</volume>, <fpage>479</fpage><pub-id pub-id-type="doi">10.1186/1556-276X-6-479</pub-id>.<pub-id pub-id-type="pmid">21801408</pub-id><pub-id pub-id-type="pmcid">PMC3211992</pub-id></mixed-citation></ref><ref id="ref13"><mixed-citation publication-type="journal" id="cit13"><name name-style="western"><surname>Warschkow</surname><given-names>O.</given-names></name>; <name name-style="western"><surname>Curson</surname><given-names>N. J.</given-names></name>; <name name-style="western"><surname>Schofield</surname><given-names>S. R.</given-names></name>; <name name-style="western"><surname>Marks</surname><given-names>N. A.</given-names></name>; <name name-style="western"><surname>Wilson</surname><given-names>H. F.</given-names></name>; <name name-style="western"><surname>Radny</surname><given-names>M. W.</given-names></name>; <name name-style="western"><surname>Smith</surname><given-names>P. V.</given-names></name>; <name name-style="western"><surname>Reusch</surname><given-names>T. C. G. G.</given-names></name>; <name name-style="western"><surname>McKenzie</surname><given-names>D. R.</given-names></name>; <name name-style="western"><surname>Simmons</surname><given-names>M. Y.</given-names></name>
+<article-title>Reaction Paths of Phosphine Dissociation
+on Silicon (001)</article-title>. <source>J. Chem. Phys.</source>
+<year>2016</year>, <volume>144</volume>, <elocation-id>014705</elocation-id><pub-id pub-id-type="doi">10.1063/1.4939124</pub-id>.<pub-id pub-id-type="pmid">26747816</pub-id></mixed-citation></ref><ref id="ref14"><mixed-citation publication-type="journal" id="cit14"><name name-style="western"><surname>Lyding</surname><given-names>J. W.</given-names></name>; <name name-style="western"><surname>Shen</surname><given-names>T. C.</given-names></name>; <name name-style="western"><surname>Hubacek</surname><given-names>J. S.</given-names></name>; <name name-style="western"><surname>Tucker</surname><given-names>J. R.</given-names></name>; <name name-style="western"><surname>Abeln</surname><given-names>G. C.</given-names></name>
+<article-title>Nanoscale
+Patterning and Oxidation of H-Passivated Si(100)-2 × 1 Surfaces
+with an Ultrahigh Vacuum Scanning Tunneling Microscope</article-title>. <source>Appl. Phys. Lett.</source>
+<year>1994</year>, <volume>64</volume>, <fpage>2010</fpage>–<lpage>2012</lpage>. <pub-id pub-id-type="doi">10.1063/1.111722</pub-id>.</mixed-citation></ref><ref id="ref15"><mixed-citation publication-type="journal" id="cit15"><name name-style="western"><surname>Koch</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Keizer</surname><given-names>J. G.</given-names></name>; <name name-style="western"><surname>Pakkiam</surname><given-names>P.</given-names></name>; <name name-style="western"><surname>Keith</surname><given-names>D.</given-names></name>; <name name-style="western"><surname>House</surname><given-names>M. G.</given-names></name>; <name name-style="western"><surname>Peretz</surname><given-names>E.</given-names></name>; <name name-style="western"><surname>Simmons</surname><given-names>M. Y.</given-names></name>
+<article-title>Spin Read-Out in Atomic Qubits in
+an All-Epitaxial Three-Dimensional Transistor</article-title>. <source>Nat. Nanotechnol.</source>
+<year>2019</year>, <volume>14</volume>, <fpage>137</fpage>–<lpage>140</lpage>. <pub-id pub-id-type="doi">10.1038/s41565-018-0338-1</pub-id>.<pub-id pub-id-type="pmid">30617309</pub-id></mixed-citation></ref><ref id="ref16"><mixed-citation publication-type="journal" id="cit16"><name name-style="western"><surname>Fuechsle</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Miwa</surname><given-names>J. A.</given-names></name>; <name name-style="western"><surname>Mahapatra</surname><given-names>S.</given-names></name>; <name name-style="western"><surname>Ryu</surname><given-names>H.</given-names></name>; <name name-style="western"><surname>Lee</surname><given-names>S.</given-names></name>; <name name-style="western"><surname>Warschkow</surname><given-names>O.</given-names></name>; <name name-style="western"><surname>Hollenberg</surname><given-names>L. C. L.</given-names></name>; <name name-style="western"><surname>Klimeck</surname><given-names>G.</given-names></name>; <name name-style="western"><surname>Simmons</surname><given-names>M. Y.</given-names></name>
+<article-title>A Single-Atom
+Transistor</article-title>. <source>Nat. Nanotechnol.</source>
+<year>2012</year>, <volume>7</volume>, <fpage>242</fpage>–<lpage>246</lpage>. <pub-id pub-id-type="doi">10.1038/nnano.2012.21</pub-id>.<pub-id pub-id-type="pmid">22343383</pub-id></mixed-citation></ref><ref id="ref17"><mixed-citation publication-type="journal" id="cit17"><name name-style="western"><surname>Wyrick</surname><given-names>J.</given-names></name>; <name name-style="western"><surname>Wang</surname><given-names>X.</given-names></name>; <name name-style="western"><surname>Kashid</surname><given-names>R. V.</given-names></name>; <name name-style="western"><surname>Namboodiri</surname><given-names>P.</given-names></name>; <name name-style="western"><surname>Schmucker</surname><given-names>S. W.</given-names></name>; <name name-style="western"><surname>Hagmann</surname><given-names>J. A.</given-names></name>; <name name-style="western"><surname>Liu</surname><given-names>K.</given-names></name>; <name name-style="western"><surname>Stewart</surname><given-names>M. D.</given-names></name>; <name name-style="western"><surname>Richter</surname><given-names>C. A.</given-names></name>; <name name-style="western"><surname>Bryant</surname><given-names>G. W.</given-names></name>; <name name-style="western"><surname>Silver</surname><given-names>R. M.</given-names></name>
+<article-title>Atom-by-Atom
+Fabrication
+of Single and Few Dopant Quantum Devices</article-title>. <source>Adv.
+Funct. Mater.</source>
+<year>2019</year>, <volume>1903475</volume>, <fpage>1903475</fpage><pub-id pub-id-type="doi">10.1002/adfm.201903475</pub-id>.</mixed-citation></ref><ref id="ref18"><mixed-citation publication-type="journal" id="cit18"><name name-style="western"><surname>Hile</surname><given-names>S. J.</given-names></name>; <name name-style="western"><surname>Fricke</surname><given-names>L.</given-names></name>; <name name-style="western"><surname>House</surname><given-names>M. G.</given-names></name>; <name name-style="western"><surname>Peretz</surname><given-names>E.</given-names></name>; <name name-style="western"><surname>Chen</surname><given-names>C. Y.</given-names></name>; <name name-style="western"><surname>Wang</surname><given-names>Y.</given-names></name>; <name name-style="western"><surname>Broome</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Gorman</surname><given-names>S. K.</given-names></name>; <name name-style="western"><surname>Keizer</surname><given-names>J. G.</given-names></name>; <name name-style="western"><surname>Rahman</surname><given-names>R.</given-names></name>; <name name-style="western"><surname>Simmons</surname><given-names>M. Y.</given-names></name>
+<article-title>Addressable Electron Spin Resonance
+Using Donors and Donor Molecules in Silicon</article-title>. <source>Sci. Adv.</source>
+<year>2018</year>, <volume>4</volume>, <elocation-id>eaaq1459</elocation-id><pub-id pub-id-type="doi">10.1126/sciadv.aaq1459</pub-id>.<pub-id pub-id-type="pmid">30027114</pub-id><pub-id pub-id-type="pmcid">PMC6044739</pub-id></mixed-citation></ref><ref id="ref19"><mixed-citation publication-type="journal" id="cit19"><name name-style="western"><surname>He</surname><given-names>Y.</given-names></name>; <name name-style="western"><surname>Gorman</surname><given-names>S. K.</given-names></name>; <name name-style="western"><surname>Keith</surname><given-names>D.</given-names></name>; <name name-style="western"><surname>Kranz</surname><given-names>L.</given-names></name>; <name name-style="western"><surname>Keizer</surname><given-names>J. G.</given-names></name>; <name name-style="western"><surname>Simmons</surname><given-names>M. Y.</given-names></name>
+<article-title>A Two-Qubit Gate between Phosphorus Donor Electrons
+in Silicon</article-title>. <source>Nature</source>
+<year>2019</year>, <volume>571</volume>, <fpage>371</fpage>–<lpage>375</lpage>. <pub-id pub-id-type="doi">10.1038/s41586-019-1381-2</pub-id>.<pub-id pub-id-type="pmid">31316197</pub-id></mixed-citation></ref><ref id="ref20"><mixed-citation publication-type="journal" id="cit20"><name name-style="western"><surname>Kane</surname><given-names>B. E.</given-names></name>
+<article-title>A Silicon-Based
+Nuclear Spin Quantum Computer</article-title>. <source>Nature</source>
+<year>1998</year>, <volume>393</volume>, <fpage>133</fpage>–<lpage>137</lpage>. <pub-id pub-id-type="doi">10.1038/30156</pub-id>.</mixed-citation></ref><ref id="ref21"><mixed-citation publication-type="journal" id="cit21"><name name-style="western"><surname>Morello</surname><given-names>A.</given-names></name>; <name name-style="western"><surname>Escott</surname><given-names>C. C.</given-names></name>; <name name-style="western"><surname>Huebl</surname><given-names>H.</given-names></name>; <name name-style="western"><surname>Willems Van Beveren</surname><given-names>L. H.</given-names></name>; <name name-style="western"><surname>Hollenberg</surname><given-names>L. C. L.</given-names></name>; <name name-style="western"><surname>Jamieson</surname><given-names>D. N.</given-names></name>; <name name-style="western"><surname>Dzurak</surname><given-names>A. S.</given-names></name>; <name name-style="western"><surname>Clark</surname><given-names>R. G.</given-names></name>
+<article-title>Architecture
+for High-Sensitivity Single-Shot Readout and Control of the Electron
+Spin of Individual Donors in Silicon</article-title>. <source>Phys.
+Rev. B: Condens. Matter Mater. Phys.</source>
+<year>2009</year>, <volume>80</volume>, <elocation-id>081307</elocation-id><pub-id pub-id-type="doi">10.1103/PhysRevB.80.081307</pub-id>.</mixed-citation></ref><ref id="ref22"><mixed-citation publication-type="journal" id="cit22"><name name-style="western"><surname>Hill</surname><given-names>C. D.</given-names></name>; <name name-style="western"><surname>Peretz</surname><given-names>E.</given-names></name>; <name name-style="western"><surname>Hile</surname><given-names>S. J.</given-names></name>; <name name-style="western"><surname>House</surname><given-names>M. G.</given-names></name>; <name name-style="western"><surname>Fuechsle</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Rogge</surname><given-names>S.</given-names></name>; <name name-style="western"><surname>Simmons</surname><given-names>M. Y.</given-names></name>; <name name-style="western"><surname>Hollenberg</surname><given-names>L. C. L.</given-names></name>
+<article-title>Quantum
+Computing: A Surface Code Quantum Computer in Silicon</article-title>. <source>Sci. Adv.</source>
+<year>2015</year>, <volume>1</volume>, <fpage>1</fpage>–<lpage>12</lpage>. <pub-id pub-id-type="doi">10.1126/sciadv.1500707</pub-id>.<pub-id pub-id-type="pmcid">PMC4646824</pub-id><pub-id pub-id-type="pmid">26601310</pub-id></mixed-citation></ref><ref id="ref23"><mixed-citation publication-type="journal" id="cit23"><name name-style="western"><surname>Solmi</surname><given-names>S.</given-names></name>; <name name-style="western"><surname>Nobili</surname><given-names>D.</given-names></name>
+<article-title>High Concentration Diffusivity and Clustering of Arsenic
+and Phosphorus in Silicon</article-title>. <source>J. Appl. Phys.</source>
+<year>1998</year>, <volume>83</volume>, <fpage>2484</fpage>–<lpage>2490</lpage>. <pub-id pub-id-type="doi">10.1063/1.367008</pub-id>.</mixed-citation></ref><ref id="ref24"><mixed-citation publication-type="journal" id="cit24"><name name-style="western"><surname>Ramdas</surname><given-names>A. K.</given-names></name>; <name name-style="western"><surname>Rodriguez</surname><given-names>S.</given-names></name>
+<article-title>Spectroscopy
+of the Solid-State Analogues of the Hydrogen
+Atom: Donors and Acceptors in Semiconductors</article-title>. <source>Rep. Prog. Phys.</source>
+<year>1981</year>, <volume>44</volume>, <fpage>1297</fpage>–<lpage>1387</lpage>. <pub-id pub-id-type="doi">10.1088/0034-4885/44/12/002</pub-id>.</mixed-citation></ref><ref id="ref25"><mixed-citation publication-type="journal" id="cit25"><name name-style="western"><surname>Slater</surname><given-names>J. C.</given-names></name>
+<article-title>Atomic
+Radii in Crystals</article-title>. <source>J. Chem. Phys.</source>
+<year>1964</year>, <volume>41</volume>, <fpage>3199</fpage>–<lpage>3204</lpage>. <pub-id pub-id-type="doi">10.1063/1.1725697</pub-id>.</mixed-citation></ref><ref id="ref26"><mixed-citation publication-type="journal" id="cit26"><name name-style="western"><surname>Abanto</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Davidovich</surname><given-names>L.</given-names></name>; <name name-style="western"><surname>Koiller</surname><given-names>B.</given-names></name>; <name name-style="western"><surname>De Matos Filho</surname><given-names>R. L.</given-names></name>
+<article-title>Quantum
+Computation with Doped Silicon Cavities</article-title>. <source>Phys.
+Rev. B: Condens. Matter Mater. Phys.</source>
+<year>2010</year>, <volume>81</volume>, <elocation-id>085325</elocation-id><pub-id pub-id-type="doi">10.1103/PhysRevB.81.085325</pub-id>.</mixed-citation></ref><ref id="ref27"><mixed-citation publication-type="journal" id="cit27"><name name-style="western"><surname>Salvail</surname><given-names>J. Z.</given-names></name>; <name name-style="western"><surname>Dluhy</surname><given-names>P.</given-names></name>; <name name-style="western"><surname>Morse</surname><given-names>K. J.</given-names></name>; <name name-style="western"><surname>Szech</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Saeedi</surname><given-names>K.</given-names></name>; <name name-style="western"><surname>Huber</surname><given-names>J.</given-names></name>; <name name-style="western"><surname>Riemann</surname><given-names>H.</given-names></name>; <name name-style="western"><surname>Abrosimov</surname><given-names>N. V.</given-names></name>; <name name-style="western"><surname>Becker</surname><given-names>P.</given-names></name>; <name name-style="western"><surname>Pohl</surname><given-names>H. J.</given-names></name>; <name name-style="western"><surname>Thewalt</surname><given-names>M. L. W.</given-names></name>
+<article-title>Optically
+Enabled
+Magnetic Resonance Study of As 75 and Sb 121 in Si 28</article-title>. <source>Phys. Rev. B: Condens. Matter Mater. Phys.</source>
+<year>2015</year>, <volume>92</volume>, <fpage>195203</fpage><pub-id pub-id-type="doi">10.1103/PhysRevB.92.195203</pub-id>.</mixed-citation></ref><ref id="ref28"><mixed-citation publication-type="journal" id="cit28"><name name-style="western"><surname>Franke</surname><given-names>D. P.</given-names></name>; <name name-style="western"><surname>Pflüger</surname><given-names>M. P.
+D.</given-names></name>; <name name-style="western"><surname>Itoh</surname><given-names>K. M.</given-names></name>; <name name-style="western"><surname>Brandt</surname><given-names>M. S.</given-names></name>
+<article-title>Multiple-Quantum
+Transitions and Charge-Induced Decoherence of Donor Nuclear Spins
+in Silicon</article-title>. <source>Phys. Rev. Lett.</source>
+<year>2017</year>, <volume>118</volume>, <fpage>246401</fpage><pub-id pub-id-type="doi">10.1103/PhysRevLett.118.246401</pub-id>.<pub-id pub-id-type="pmid">28665647</pub-id></mixed-citation></ref><ref id="ref29"><mixed-citation publication-type="journal" id="cit29"><name name-style="western"><surname>Franke</surname><given-names>D. P.</given-names></name>; <name name-style="western"><surname>Hrubesch</surname><given-names>F. M.</given-names></name>; <name name-style="western"><surname>Künzl</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Becker</surname><given-names>H. W.</given-names></name>; <name name-style="western"><surname>Itoh</surname><given-names>K. M.</given-names></name>; <name name-style="western"><surname>Stutzmann</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Hoehne</surname><given-names>F.</given-names></name>; <name name-style="western"><surname>Dreher</surname><given-names>L.</given-names></name>; <name name-style="western"><surname>Brandt</surname><given-names>M. S.</given-names></name>
+<article-title>Interaction
+of Strain and Nuclear Spins in Silicon: Quadrupolar Effects on Ionized
+Donors</article-title>. <source>Phys. Rev. Lett.</source>
+<year>2015</year>, <pub-id pub-id-type="doi">10.1103/PhysRevLett.115.057601</pub-id>.<pub-id pub-id-type="pmid">26274442</pub-id></mixed-citation></ref><ref id="ref30"><mixed-citation publication-type="journal" id="cit30"><name name-style="western"><surname>Lanyon</surname><given-names>B. P.</given-names></name>; <name name-style="western"><surname>Barbieri</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Almeida</surname><given-names>M. P.</given-names></name>; <name name-style="western"><surname>Jennewein</surname><given-names>T.</given-names></name>; <name name-style="western"><surname>Ralph</surname><given-names>T. C.</given-names></name>; <name name-style="western"><surname>Resch</surname><given-names>K. J.</given-names></name>; <name name-style="western"><surname>Pryde</surname><given-names>G. J.</given-names></name>; <name name-style="western"><surname>O’Brien</surname><given-names>J. L.</given-names></name>; <name name-style="western"><surname>Gilchrist</surname><given-names>A.</given-names></name>; <name name-style="western"><surname>White</surname><given-names>A. G.</given-names></name>
+<article-title>Simplifying Quantum
+Logic Using Higher-Dimensional
+Hilbert Spaces</article-title>. <source>Nat. Phys.</source>
+<year>2009</year>, <volume>5</volume>, <fpage>134</fpage>–<lpage>140</lpage>. <pub-id pub-id-type="doi">10.1038/nphys1150</pub-id>.</mixed-citation></ref><ref id="ref31"><mixed-citation publication-type="journal" id="cit31"><name name-style="western"><surname>Neeley</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Ansmann</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Bialczak</surname><given-names>R. C.</given-names></name>; <name name-style="western"><surname>Hofheinz</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Lucero</surname><given-names>E.</given-names></name>; <name name-style="western"><surname>O’Connell</surname><given-names>A. D.</given-names></name>; <name name-style="western"><surname>Sank</surname><given-names>D.</given-names></name>; <name name-style="western"><surname>Wang</surname><given-names>H.</given-names></name>; <name name-style="western"><surname>Wenner</surname><given-names>J.</given-names></name>; <name name-style="western"><surname>Cleland</surname><given-names>A. N.</given-names></name>; <name name-style="western"><surname>Geller</surname><given-names>M. R.</given-names></name>; <name name-style="western"><surname>Martinis</surname><given-names>J. M.</given-names></name>
+<article-title>Emulation of a Quantum
+Spin with a Superconducting Phase Qudit</article-title>. <source>Science</source>
+<year>2009</year>, <volume>325</volume>, <fpage>722</fpage>–<lpage>725</lpage>. <pub-id pub-id-type="doi">10.1126/science.1173440</pub-id>.<pub-id pub-id-type="pmid">19661423</pub-id></mixed-citation></ref><ref id="ref32"><mixed-citation publication-type="journal" id="cit32"><name name-style="western"><surname>Stoneham</surname><given-names>A. M.</given-names></name>; <name name-style="western"><surname>Fisher</surname><given-names>A. J.</given-names></name>; <name name-style="western"><surname>Greenland</surname><given-names>P. T.</given-names></name>
+<article-title>Optically
+Driven Silicon-Based Quantum
+Gates with Potential for High-Temperature Operation</article-title>. <source>J. Phys.: Condens. Matter</source>
+<year>2003</year>, <volume>15</volume>, <fpage>447</fpage>–<lpage>451</lpage>. <pub-id pub-id-type="doi">10.1088/0953-8984/15/27/102</pub-id>.</mixed-citation></ref><ref id="ref33"><mixed-citation publication-type="journal" id="cit33"><name name-style="western"><surname>Kipp</surname><given-names>L.</given-names></name>; <name name-style="western"><surname>Bringans</surname><given-names>R. D.</given-names></name>; <name name-style="western"><surname>Biegelsen</surname><given-names>D. K.</given-names></name>; <name name-style="western"><surname>Swartz</surname><given-names>L. E.</given-names></name>; <name name-style="western"><surname>Hicks</surname><given-names>R. F.</given-names></name>
+<article-title>Arsine
+Adsorption on Si(100) 2 × 1: A Photoemission and Scanning-Tunneling-Microscopy
+Study</article-title>. <source>Phys. Rev. B: Condens. Matter Mater.
+Phys.</source>
+<year>1994</year>, <volume>50</volume>, <fpage>5448</fpage>–<lpage>5455</lpage>. <pub-id pub-id-type="doi">10.1103/PhysRevB.50.5448</pub-id>.<pub-id pub-id-type="pmid">9976887</pub-id></mixed-citation></ref><ref id="ref34"><mixed-citation publication-type="journal" id="cit34"><name name-style="western"><surname>Tok</surname><given-names>E. S.</given-names></name>; <name name-style="western"><surname>Hartell</surname><given-names>A. D.</given-names></name>; <name name-style="western"><surname>Zhang</surname><given-names>J.</given-names></name>
+<article-title>Kinetics of Si Growth from Hydride
+Precursors on As-Passivated Si(001) Surface</article-title>. <source>Appl. Phys. Lett.</source>
+<year>2001</year>, <volume>78</volume>, <fpage>919</fpage>–<lpage>921</lpage>. <pub-id pub-id-type="doi">10.1063/1.1347396</pub-id>.</mixed-citation></ref><ref id="ref35"><mixed-citation publication-type="journal" id="cit35"><name name-style="western"><surname>Soares</surname><given-names>J. A. N. T.</given-names></name>; <name name-style="western"><surname>Kim</surname><given-names>H.</given-names></name>; <name name-style="western"><surname>Glass</surname><given-names>G.</given-names></name>; <name name-style="western"><surname>Desjardins</surname><given-names>P.</given-names></name>; <name name-style="western"><surname>Greene</surname><given-names>J. E.</given-names></name>
+<article-title>Arsenic-Doped Si(001) Gas-Source Molecular-Beam Epitaxy:
+Growth Kinetics and Transport Properties</article-title>. <source>Appl.
+Phys. Lett.</source>
+<year>1999</year>, <volume>74</volume>, <fpage>1290</fpage>–<lpage>1292</lpage>. <pub-id pub-id-type="doi">10.1063/1.123527</pub-id>.</mixed-citation></ref><ref id="ref36"><mixed-citation publication-type="journal" id="cit36"><name name-style="western"><surname>Cho</surname><given-names>J.</given-names></name>; <name name-style="western"><surname>Ghosh</surname><given-names>M. K.</given-names></name>; <name name-style="western"><surname>Choi</surname><given-names>C. H.</given-names></name>
+<article-title>Adsorption
+Reactions of Trimethylgallium
+and Arsine on H/Si(100)-2 × 1 Surface</article-title>. <source>Bull. Korean Chem. Soc.</source>
+<year>2009</year>, <volume>30</volume>, <fpage>1805</fpage>–<lpage>1810</lpage>. <pub-id pub-id-type="doi">10.5012/bkcs.2009.30.8.1805</pub-id>.</mixed-citation></ref><ref id="ref37"><mixed-citation publication-type="journal" id="cit37"><name name-style="western"><surname>Kim</surname><given-names>H.</given-names></name>; <name name-style="western"><surname>Glass</surname><given-names>G.</given-names></name>; <name name-style="western"><surname>Soares</surname><given-names>J. A. N. T.</given-names></name>; <name name-style="western"><surname>Desjardins</surname><given-names>P.</given-names></name>; <name name-style="western"><surname>Greene</surname><given-names>J. E.</given-names></name>
+<article-title>Arsenic Incorporation during Si(001):As Gas-Source
+Molecular-Beam Epitaxy from Si<sub>2</sub>H<sub>6</sub> and AsH<sub>3</sub>: Effects on Film-Growth Kinetics</article-title>. <source>J.
+Appl. Phys.</source>
+<year>2000</year>, <volume>88</volume>, <fpage>7067</fpage>–<lpage>7078</lpage>. <pub-id pub-id-type="doi">10.1063/1.1324701</pub-id>.</mixed-citation></ref><ref id="ref38"><mixed-citation publication-type="journal" id="cit38"><name name-style="western"><surname>Kim</surname><given-names>H.</given-names></name>; <name name-style="western"><surname>Glass</surname><given-names>G.</given-names></name>; <name name-style="western"><surname>Soares</surname><given-names>J. A. N. T.</given-names></name>; <name name-style="western"><surname>Foo</surname><given-names>Y. L.</given-names></name>; <name name-style="western"><surname>Desjardins</surname><given-names>P.</given-names></name>; <name name-style="western"><surname>Greene</surname><given-names>J. E.</given-names></name>
+<article-title>Temperature-Modulated
+Si(001):As Gas-Source Molecular
+Beam Epitaxy: Growth Kinetics and As Incorporation</article-title>. <source>Appl. Phys. Lett.</source>
+<year>2001</year>, <volume>79</volume>, <fpage>3263</fpage>–<lpage>3265</lpage>. <pub-id pub-id-type="doi">10.1063/1.1415420</pub-id>.</mixed-citation></ref><ref id="ref39"><mixed-citation publication-type="journal" id="cit39"><name name-style="western"><surname>Oberbeck</surname><given-names>L.</given-names></name>; <name name-style="western"><surname>Curson</surname><given-names>N. J.</given-names></name>; <name name-style="western"><surname>Hallam</surname><given-names>T.</given-names></name>; <name name-style="western"><surname>Simmons</surname><given-names>M. Y.</given-names></name>; <name name-style="western"><surname>Bilger</surname><given-names>G.</given-names></name>; <name name-style="western"><surname>Clark</surname><given-names>R. G.</given-names></name>
+<article-title>Measurement of Phosphorus Segregation in Silicon at
+the Atomic Scale Using Scanning Tunneling Microscopy</article-title>. <source>Appl. Phys. Lett.</source>
+<year>2004</year>, <volume>85</volume>, <fpage>1359</fpage>–<lpage>1361</lpage>. <pub-id pub-id-type="doi">10.1063/1.1784881</pub-id>.</mixed-citation></ref><ref id="ref40"><mixed-citation publication-type="journal" id="cit40"><name name-style="western"><surname>Oberbeck</surname><given-names>L.</given-names></name>; <name name-style="western"><surname>Curson</surname><given-names>N. J.</given-names></name>; <name name-style="western"><surname>Simmons</surname><given-names>M. Y.</given-names></name>; <name name-style="western"><surname>Brenner</surname><given-names>R.</given-names></name>; <name name-style="western"><surname>Hamilton</surname><given-names>A. R.</given-names></name>; <name name-style="western"><surname>Schofield</surname><given-names>S. R.</given-names></name>; <name name-style="western"><surname>Clark</surname><given-names>R. G.</given-names></name>
+<article-title>Encapsulation of Phosphorus Dopants
+in Silicon for the Fabrication of a Quantum Computer</article-title>. <source>Appl. Phys. Lett.</source>
+<year>2002</year>, <volume>81</volume>, <fpage>3197</fpage>–<lpage>3199</lpage>. <pub-id pub-id-type="doi">10.1063/1.1516859</pub-id>.</mixed-citation></ref><ref id="ref41"><mixed-citation publication-type="journal" id="cit41"><name name-style="western"><surname>Northrup</surname><given-names>J. E.</given-names></name>
+<article-title>Theoretical
+Studies of Arsine Adsorption on Si(100)</article-title>. <source>Phys.
+Rev. B: Condens. Matter Mater. Phys.</source>
+<year>1995</year>, <volume>51</volume>, <fpage>2218</fpage>–<lpage>2222</lpage>. <pub-id pub-id-type="doi">10.1103/PhysRevB.51.2218</pub-id>.<pub-id pub-id-type="pmid">9978970</pub-id></mixed-citation></ref><ref id="ref42"><mixed-citation publication-type="journal" id="cit42"><name name-style="western"><surname>Miotto</surname><given-names>R.</given-names></name>; <name name-style="western"><surname>Srivastava</surname><given-names>G. P.</given-names></name>; <name name-style="western"><surname>Miwa</surname><given-names>R. H.</given-names></name>; <name name-style="western"><surname>Ferraz</surname><given-names>A. C.</given-names></name>
+<article-title>A Comparative Study
+of Dissociative Adsorption of NH3, PH3, and AsH3 on Si(001)-(2 ×
+1)</article-title>. <source>J. Chem. Phys.</source>
+<year>2001</year>, <volume>114</volume>, <fpage>9549</fpage>–<lpage>9556</lpage>. <pub-id pub-id-type="doi">10.1063/1.1355766</pub-id>.</mixed-citation></ref><ref id="ref43"><mixed-citation publication-type="journal" id="cit43"><name name-style="western"><surname>McDonell</surname><given-names>T. L.</given-names></name>; <name name-style="western"><surname>Marks</surname><given-names>N. A.</given-names></name>; <name name-style="western"><surname>Warschkow</surname><given-names>O.</given-names></name>; <name name-style="western"><surname>Wilson</surname><given-names>H. F.</given-names></name>; <name name-style="western"><surname>Smith</surname><given-names>P. V.</given-names></name>; <name name-style="western"><surname>Radny</surname><given-names>M. W.</given-names></name>
+<article-title>Molecular Dissociation
+of Group-V Hydrides on Si(001)</article-title>. <source>Phys. Rev. B:
+Condens. Matter Mater. Phys.</source>
+<year>2005</year>, <volume>72</volume>, <fpage>193307</fpage><pub-id pub-id-type="doi">10.1103/PhysRevB.72.193307</pub-id>.</mixed-citation></ref><ref id="ref44"><mixed-citation publication-type="weblink" id="cit44"><person-group person-group-type="allauthors"><name name-style="western"><surname>Škereň</surname><given-names>T.</given-names></name>; <name name-style="western"><surname>Köster</surname><given-names>S.</given-names></name>; <name name-style="western"><surname>Douhard</surname><given-names>B.</given-names></name>; <name name-style="western"><surname>Fleischmann</surname><given-names>C.</given-names></name>; <name name-style="western"><surname>Fuhrer</surname><given-names>A.</given-names></name></person-group><article-title>P-Type
+δ-Doping with Diborane on Si(001) for STM Based Dopant Device
+Fabrication</article-title>.<source>arXiv</source><italic toggle="yes">(Condensed
+Matter.Mesoscale and Nanoscale Physics)</italic>,
+December 12, <year>2019</year>, 1912.06188 ver. 1. <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://arxiv.org/abs/1912.06188">https://arxiv.org/abs/1912.06188</uri> (accessed 2019-12-23).</mixed-citation></ref><ref id="ref45"><mixed-citation publication-type="journal" id="cit45"><name name-style="western"><surname>Hamers</surname><given-names>R.
+J.</given-names></name>; <name name-style="western"><surname>Köhler</surname><given-names>U. K.</given-names></name>
+<article-title>Determination
+of the Local Electronic Structure of
+Atomic-Sized Defects on Si(001) by Tunneling Spectroscopy</article-title>. <source>J. Vac. Sci. Technol., A</source>
+<year>1989</year>, <volume>7</volume>, <fpage>2854</fpage>–<lpage>2859</lpage>. <pub-id pub-id-type="doi">10.1116/1.576158</pub-id>.</mixed-citation></ref><ref id="ref46"><mixed-citation publication-type="journal" id="cit46"><name name-style="western"><surname>Warschkow</surname><given-names>O.</given-names></name>; <name name-style="western"><surname>Schofield</surname><given-names>S.</given-names></name>; <name name-style="western"><surname>Marks</surname><given-names>N.</given-names></name>; <name name-style="western"><surname>Radny</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Smith</surname><given-names>P.</given-names></name>; <name name-style="western"><surname>McKenzie</surname><given-names>D.</given-names></name>
+<article-title>Water on Silicon
+(001): C Defects and Initial Steps
+of Surface Oxidation</article-title>. <source>Phys. Rev. B: Condens.
+Matter Mater. Phys.</source>
+<year>2008</year>, <volume>77</volume>, <fpage>201305</fpage><pub-id pub-id-type="doi">10.1103/PhysRevB.77.201305</pub-id>.</mixed-citation></ref><ref id="ref47"><mixed-citation publication-type="journal" id="cit47"><name name-style="western"><surname>Wilson</surname><given-names>H. F.</given-names></name>; <name name-style="western"><surname>Warschkow</surname><given-names>O.</given-names></name>; <name name-style="western"><surname>Marks</surname><given-names>N. A.</given-names></name>; <name name-style="western"><surname>Schofield</surname><given-names>S. R.</given-names></name>; <name name-style="western"><surname>Curson</surname><given-names>N. J.</given-names></name>; <name name-style="western"><surname>Smith</surname><given-names>P. V.</given-names></name>; <name name-style="western"><surname>Radny</surname><given-names>M. W.</given-names></name>; <name name-style="western"><surname>McKenzie</surname><given-names>D. R.</given-names></name>; <name name-style="western"><surname>Simmons</surname><given-names>M. Y.</given-names></name>
+<article-title>Phosphine Dissociation on the Si(001) Surface</article-title>. <source>Phys. Rev. Lett.</source>
+<year>2004</year>, <volume>93</volume>, <fpage>226102</fpage><pub-id pub-id-type="doi">10.1103/PhysRevLett.93.226102</pub-id>.<pub-id pub-id-type="pmid">15601102</pub-id></mixed-citation></ref><ref id="ref48"><mixed-citation publication-type="journal" id="cit48"><name name-style="western"><surname>Curson</surname><given-names>N. J.</given-names></name>; <name name-style="western"><surname>Schofield</surname><given-names>S. R.</given-names></name>; <name name-style="western"><surname>Simmons</surname><given-names>M. Y.</given-names></name>; <name name-style="western"><surname>Oberbeck</surname><given-names>L.</given-names></name>; <name name-style="western"><surname>O’Brien</surname><given-names>J. L.</given-names></name>; <name name-style="western"><surname>Clark</surname><given-names>R. G.</given-names></name>
+<article-title>STM Characterization of the Si-P Heterodimer</article-title>. <source>Phys. Rev. B: Condens. Matter Mater. Phys.</source>
+<year>2004</year>, <volume>69</volume>, <fpage>195303</fpage><pub-id pub-id-type="doi">10.1103/PhysRevB.69.195303</pub-id>.</mixed-citation></ref><ref id="ref49"><mixed-citation publication-type="journal" id="cit49"><name name-style="western"><surname>McKibbin</surname><given-names>S. R.</given-names></name>; <name name-style="western"><surname>Clarke</surname><given-names>W. R.</given-names></name>; <name name-style="western"><surname>Fuhrer</surname><given-names>A.</given-names></name>; <name name-style="western"><surname>Reusch</surname><given-names>T. C. G.</given-names></name>; <name name-style="western"><surname>Simmons</surname><given-names>M. Y.</given-names></name>
+<article-title>Investigating
+the Regrowth Surface of Si:P δ -Layers toward Vertically Stacked
+Three Dimensional Devices</article-title>. <source>Appl. Phys. Lett.</source>
+<year>2009</year>, <volume>95</volume>, <fpage>233111</fpage><pub-id pub-id-type="doi">10.1063/1.3269924</pub-id>.</mixed-citation></ref><ref id="ref50"><mixed-citation publication-type="journal" id="cit50"><name name-style="western"><surname>Schofield</surname><given-names>S. R.</given-names></name>; <name name-style="western"><surname>Curson</surname><given-names>N. J.</given-names></name>; <name name-style="western"><surname>Warschkow</surname><given-names>O.</given-names></name>; <name name-style="western"><surname>Marks</surname><given-names>N. A.</given-names></name>; <name name-style="western"><surname>Wilson</surname><given-names>H. F.</given-names></name>; <name name-style="western"><surname>Simmons</surname><given-names>M. Y.</given-names></name>; <name name-style="western"><surname>Smith</surname><given-names>P. V.</given-names></name>; <name name-style="western"><surname>Radny</surname><given-names>M. W.</given-names></name>; <name name-style="western"><surname>McKenzie</surname><given-names>D. R.</given-names></name>; <name name-style="western"><surname>Clark</surname><given-names>R. G.</given-names></name>
+<article-title>Phosphine Dissociation
+and Diffusion on Si(001) Observed
+at the Atomic Scale</article-title>. <source>J. Phys. Chem. B</source>
+<year>2006</year>, <volume>110</volume>, <fpage>3173</fpage>–<lpage>3179</lpage>. <pub-id pub-id-type="doi">10.1021/jp054646v</pub-id>.<pub-id pub-id-type="pmid">16494325</pub-id></mixed-citation></ref><ref id="ref51"><mixed-citation publication-type="journal" id="cit51"><name name-style="western"><surname>Wilson</surname><given-names>H. F.</given-names></name>; <name name-style="western"><surname>Warschkow</surname><given-names>O.</given-names></name>; <name name-style="western"><surname>Marks</surname><given-names>N. A.</given-names></name>; <name name-style="western"><surname>Curson</surname><given-names>N. J.</given-names></name>; <name name-style="western"><surname>Schofield</surname><given-names>S. R.</given-names></name>; <name name-style="western"><surname>Reusch</surname><given-names>T. C. G.</given-names></name>; <name name-style="western"><surname>Radny</surname><given-names>M. W.</given-names></name>; <name name-style="western"><surname>Smith</surname><given-names>P. V.</given-names></name>; <name name-style="western"><surname>McKenzie</surname><given-names>D. R.</given-names></name>; <name name-style="western"><surname>Simmons</surname><given-names>M. Y.</given-names></name>
+<article-title>Thermal Dissociation and Desorption of PH3 on Si(001):
+A Reinterpretation of Spectroscopic Data</article-title>. <source>Phys.
+Rev. B: Condens. Matter Mater. Phys.</source>
+<year>2006</year>, <volume>74</volume>, <fpage>656</fpage>–<lpage>661</lpage>. <pub-id pub-id-type="doi">10.1103/PhysRevB.74.195310</pub-id>.</mixed-citation></ref><ref id="ref52"><mixed-citation publication-type="journal" id="cit52"><name name-style="western"><surname>Lin</surname><given-names>D. S.</given-names></name>; <name name-style="western"><surname>Ku</surname><given-names>T. S.</given-names></name>; <name name-style="western"><surname>Sheu</surname><given-names>T. J.</given-names></name>
+<article-title>Thermal
+Reactions of Phosphine with
+Si(100): A Combined Photoemission and Scanning-Tunneling-Microscopy
+Study</article-title>. <source>Surf. Sci.</source>
+<year>1999</year>, <volume>424</volume>, <fpage>7</fpage>–<lpage>18</lpage>. <pub-id pub-id-type="doi">10.1016/S0039-6028(98)00943-1</pub-id>.</mixed-citation></ref><ref id="ref53"><mixed-citation publication-type="journal" id="cit53"><name name-style="western"><surname>Liu</surname><given-names>X.</given-names></name>; <name name-style="western"><surname>Tang</surname><given-names>Q.</given-names></name>; <name name-style="western"><surname>Kamins</surname><given-names>T. I.</given-names></name>; <name name-style="western"><surname>Harris</surname><given-names>J. S.</given-names></name>
+<article-title>Heavy Arsenic Doping
+of Silicon by Molecular Beam Epitaxy</article-title>. <source>J. Cryst.
+Growth</source>
+<year>2003</year>, <volume>251</volume>, <fpage>651</fpage>–<lpage>656</lpage>. <pub-id pub-id-type="doi">10.1016/S0022-0248(02)02197-8</pub-id>.</mixed-citation></ref><ref id="ref54"><mixed-citation publication-type="journal" id="cit54"><name name-style="western"><surname>Bashir</surname><given-names>R.</given-names></name>; <name name-style="western"><surname>Kabir</surname><given-names>A. E.</given-names></name>; <name name-style="western"><surname>Westrom</surname><given-names>P.</given-names></name>
+<article-title>Phosphorus and Arsenic Profile Control
+for High Performance Epitaxial Base Bipolar Junction Devices</article-title>. <source>Appl. Phys. Lett.</source>
+<year>1999</year>, <volume>75</volume>, <fpage>796</fpage>–<lpage>798</lpage>. <pub-id pub-id-type="doi">10.1063/1.124516</pub-id>.</mixed-citation></ref><ref id="ref55"><mixed-citation publication-type="journal" id="cit55"><name name-style="western"><surname>Barnett</surname><given-names>S. A.</given-names></name>; <name name-style="western"><surname>Greene</surname><given-names>J. E.</given-names></name>
+<article-title>Si Molecular Beam Epitaxy: A Model for Temperature
+Dependent Incorporation Probabilities and Depth Distributions of Dopants
+Exhibiting Strong Surface Segregation</article-title>. <source>Surf.
+Sci.</source>
+<year>1985</year>, <volume>151</volume>, <fpage>67</fpage>–<lpage>90</lpage>. <pub-id pub-id-type="doi">10.1016/0039-6028(85)90455-8</pub-id>.</mixed-citation></ref><ref id="ref56"><mixed-citation publication-type="journal" id="cit56"><name name-style="western"><surname>Liu</surname><given-names>X.</given-names></name>; <name name-style="western"><surname>Tang</surname><given-names>Q.</given-names></name>; <name name-style="western"><surname>Harris</surname><given-names>J. S.</given-names></name>; <name name-style="western"><surname>Kamins</surname><given-names>T. I.</given-names></name>
+<article-title>Arsenic Surface
+Segregation during <italic toggle="yes">In Situ</italic> Doped Silicon and Si<sub>1-x</sub> Ge<sub>x</sub> Molecular Beam Epitaxy</article-title>. <source>J. Cryst. Growth</source>
+<year>2005</year>, <volume>281</volume>, <fpage>334</fpage>–<lpage>343</lpage>. <pub-id pub-id-type="doi">10.1016/j.jcrysgro.2005.04.066</pub-id>.</mixed-citation></ref><ref id="ref57"><mixed-citation publication-type="journal" id="cit57"><name name-style="western"><surname>Eaglesham</surname><given-names>D. J.</given-names></name>
+<article-title>Semiconductor
+Molecular-Beam Epitaxy at Low Temperatures</article-title>. <source>J. Appl. Phys.</source>
+<year>1995</year>, <volume>77</volume>, <fpage>3597</fpage>–<lpage>3617</lpage>. <pub-id pub-id-type="doi">10.1063/1.358597</pub-id>.</mixed-citation></ref><ref id="ref58"><mixed-citation publication-type="journal" id="cit58"><name name-style="western"><surname>Scappucci</surname><given-names>G.</given-names></name>; <name name-style="western"><surname>Klesse</surname><given-names>W. M.</given-names></name>; <name name-style="western"><surname>Hamilton</surname><given-names>A. R.</given-names></name>; <name name-style="western"><surname>Capellini</surname><given-names>G.</given-names></name>; <name name-style="western"><surname>Jaeger</surname><given-names>D. L.</given-names></name>; <name name-style="western"><surname>Bischof</surname><given-names>M. R.</given-names></name>; <name name-style="western"><surname>Reidy</surname><given-names>R. F.</given-names></name>; <name name-style="western"><surname>Gorman</surname><given-names>B. P.</given-names></name>; <name name-style="western"><surname>Simmons</surname><given-names>M. Y.</given-names></name>
+<article-title>Stacking of 2D Electron Gases in Ge Probed at the Atomic
+Level and Its Correlation to Low-Temperature Magnetotransport</article-title>. <source>Nano Lett.</source>
+<year>2012</year>, <volume>12</volume>, <fpage>4953</fpage>–<lpage>4959</lpage>. <pub-id pub-id-type="doi">10.1021/nl302558b</pub-id>.<pub-id pub-id-type="pmid">22935029</pub-id></mixed-citation></ref><ref id="ref59"><mixed-citation publication-type="journal" id="cit59"><name name-style="western"><surname>Scappucci</surname><given-names>G.</given-names></name>; <name name-style="western"><surname>Capellini</surname><given-names>G.</given-names></name>; <name name-style="western"><surname>Johnston</surname><given-names>B.</given-names></name>; <name name-style="western"><surname>Klesse</surname><given-names>W. M.</given-names></name>; <name name-style="western"><surname>Miwa</surname><given-names>J. A.</given-names></name>; <name name-style="western"><surname>Simmons</surname><given-names>M. Y.</given-names></name>
+<article-title>A Complete Fabrication Route for Atomic-Scale, Donor-Based
+Devices in Single-Crystal Germanium</article-title>. <source>Nano Lett.</source>
+<year>2011</year>, <volume>11</volume>, <fpage>2272</fpage>–<lpage>2279</lpage>. <pub-id pub-id-type="doi">10.1021/nl200449v</pub-id>.<pub-id pub-id-type="pmid">21553900</pub-id></mixed-citation></ref><ref id="ref60"><mixed-citation publication-type="journal" id="cit60"><name name-style="western"><surname>Scappucci</surname><given-names>G.</given-names></name>; <name name-style="western"><surname>Capellini</surname><given-names>G.</given-names></name>; <name name-style="western"><surname>Klesse</surname><given-names>W. M.</given-names></name>; <name name-style="western"><surname>Simmons</surname><given-names>M. Y.</given-names></name>
+<article-title>Dual-Temperature
+Encapsulation of Phosphorus in Germanium δ-layers toward Ultra-Shallow
+Junctions</article-title>. <source>J. Cryst. Growth</source>
+<year>2011</year>, <volume>316</volume>, <fpage>81</fpage>–<lpage>84</lpage>. <pub-id pub-id-type="doi">10.1016/j.jcrysgro.2010.12.046</pub-id>.</mixed-citation></ref><ref id="ref61"><mixed-citation publication-type="journal" id="cit61"><name name-style="western"><surname>Keizer</surname><given-names>J. G.</given-names></name>; <name name-style="western"><surname>Koelling</surname><given-names>S.</given-names></name>; <name name-style="western"><surname>Koenraad</surname><given-names>P. M.</given-names></name>; <name name-style="western"><surname>Simmons</surname><given-names>M. Y.</given-names></name>
+<article-title>Suppressing Segregation
+in Highly Phosphorus Doped Silicon Monolayers</article-title>. <source>ACS Nano</source>
+<year>2015</year>, <volume>9</volume>, <fpage>12537</fpage>–<lpage>12541</lpage>. <pub-id pub-id-type="doi">10.1021/acsnano.5b06299</pub-id>.<pub-id pub-id-type="pmid">26568129</pub-id></mixed-citation></ref><ref id="ref62"><mixed-citation publication-type="journal" id="cit62"><name name-style="western"><surname>Wang</surname><given-names>X.</given-names></name>; <name name-style="western"><surname>Hagmann</surname><given-names>J. A.</given-names></name>; <name name-style="western"><surname>Namboodiri</surname><given-names>P.</given-names></name>; <name name-style="western"><surname>Wyrick</surname><given-names>J.</given-names></name>; <name name-style="western"><surname>Li</surname><given-names>K.</given-names></name>; <name name-style="western"><surname>Murray</surname><given-names>R. E.</given-names></name>; <name name-style="western"><surname>Myers</surname><given-names>A.</given-names></name>; <name name-style="western"><surname>Misenkosen</surname><given-names>F.</given-names></name>; <name name-style="western"><surname>Stewart</surname><given-names>M. D.</given-names></name>; <name name-style="western"><surname>Richter</surname><given-names>C. A.</given-names></name>; <name name-style="western"><surname>Silver</surname><given-names>R. M.</given-names></name>
+<article-title>Quantifying Atom-Scale
+Dopant Movement and Electrical Activation in Si:P Monolayers</article-title>. <source>Nanoscale</source>
+<year>2018</year>, <volume>10</volume>, <fpage>4488</fpage>–<lpage>4499</lpage>. <pub-id pub-id-type="doi">10.1039/C7NR07777G</pub-id>.<pub-id pub-id-type="pmid">29459919</pub-id><pub-id pub-id-type="pmcid">PMC11305481</pub-id></mixed-citation></ref><ref id="ref63"><mixed-citation publication-type="journal" id="cit63"><name name-style="western"><surname>Hagmann</surname><given-names>J. A.</given-names></name>; <name name-style="western"><surname>Wang</surname><given-names>X.</given-names></name>; <name name-style="western"><surname>Namboodiri</surname><given-names>P.</given-names></name>; <name name-style="western"><surname>Wyrick</surname><given-names>J.</given-names></name>; <name name-style="western"><surname>Murray</surname><given-names>R.</given-names></name>; <name name-style="western"><surname>Stewart</surname><given-names>M. D.</given-names></name>; <name name-style="western"><surname>Silver</surname><given-names>R. M.</given-names></name>; <name name-style="western"><surname>Richter</surname><given-names>C. A.</given-names></name>
+<article-title>High Resolution
+Thickness Measurements of Ultrathin Si:P Monolayers Using Weak Localization</article-title>. <source>Appl. Phys. Lett.</source>
+<year>2018</year>, <volume>112</volume>, <elocation-id>043102</elocation-id><pub-id pub-id-type="doi">10.1063/1.4998712</pub-id>.</mixed-citation></ref><ref id="ref64"><mixed-citation publication-type="journal" id="cit64"><name name-style="western"><surname>Berding</surname><given-names>M. A.</given-names></name>; <name name-style="western"><surname>Sher</surname><given-names>A.</given-names></name>; <name name-style="western"><surname>Van Schilfgaarde</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Rousseau</surname><given-names>P. M.</given-names></name>; <name name-style="western"><surname>Spicer</surname><given-names>W. E.</given-names></name>
+<article-title>Deactivation
+in Heavily Arsenic-Doped Silicon</article-title>. <source>Appl. Phys.
+Lett.</source>
+<year>1998</year>, <volume>72</volume>, <fpage>1492</fpage>–<lpage>1494</lpage>. <pub-id pub-id-type="doi">10.1063/1.121036</pub-id>.</mixed-citation></ref><ref id="ref65"><mixed-citation publication-type="journal" id="cit65"><name name-style="western"><surname>Duguay</surname><given-names>S.</given-names></name>; <name name-style="western"><surname>Vurpillot</surname><given-names>F.</given-names></name>; <name name-style="western"><surname>Philippe</surname><given-names>T.</given-names></name>; <name name-style="western"><surname>Cadel</surname><given-names>E.</given-names></name>; <name name-style="western"><surname>Lardé</surname><given-names>R.</given-names></name>; <name name-style="western"><surname>Deconihout</surname><given-names>B.</given-names></name>; <name name-style="western"><surname>Servanton</surname><given-names>G.</given-names></name>; <name name-style="western"><surname>Pantel</surname><given-names>R.</given-names></name>
+<article-title>Evidence of Atomic-Scale
+Arsenic Clustering in Highly Doped Silicon</article-title>. <source>J. Appl. Phys.</source>
+<year>2009</year>, <volume>106</volume>, <fpage>106102</fpage><pub-id pub-id-type="doi">10.1063/1.3257178</pub-id>.</mixed-citation></ref><ref id="ref66"><mixed-citation publication-type="computer-program" id="cit66"><person-group person-group-type="allauthors"><name name-style="western"><surname>Frisch</surname><given-names>M. J.</given-names></name>; <name name-style="western"><surname>Trucks</surname><given-names>G. W.</given-names></name>; <name name-style="western"><surname>Schlegel</surname><given-names>H. B.</given-names></name>; <name name-style="western"><surname>Scuseria</surname><given-names>G. E.</given-names></name>; <name name-style="western"><surname>Robb</surname><given-names>M. A.</given-names></name>; <name name-style="western"><surname>Cheeseman</surname><given-names>J. R.</given-names></name>; <name name-style="western"><surname>Scalmani</surname><given-names>G.</given-names></name>; <name name-style="western"><surname>Barone</surname><given-names>V.</given-names></name>; <name name-style="western"><surname>Mennucci</surname><given-names>B.</given-names></name>; <name name-style="western"><surname>Petersson</surname><given-names>G. A.</given-names></name>; <name name-style="western"><surname>Nakatsuji</surname><given-names>H.</given-names></name>; <name name-style="western"><surname>Caricato</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Li</surname><given-names>X.</given-names></name>; <name name-style="western"><surname>Hratchian</surname><given-names>H. P.</given-names></name>; <name name-style="western"><surname>Izmaylov</surname><given-names>A. F.</given-names></name>; <name name-style="western"><surname>Bloino</surname><given-names>J.</given-names></name>; <name name-style="western"><surname>Zheng</surname><given-names>G.</given-names></name>; <name name-style="western"><surname>Sonnenberg</surname><given-names>J. L.</given-names></name>; <name name-style="western"><surname>Hada</surname><given-names>M.</given-names></name>; <name name-style="western"><surname>Ehara</surname><given-names>M.</given-names></name></person-group>;<etal/><source>Gaussian 09</source>, rev. E.01; <publisher-name>Gaussian Inc.</publisher-name>: <publisher-loc>Wallingford, CT</publisher-loc>, <year>2013</year>.</mixed-citation></ref><ref id="ref67"><mixed-citation publication-type="journal" id="cit67"><name name-style="western"><surname>Warschkow</surname><given-names>O.</given-names></name>; <name name-style="western"><surname>Gao</surname><given-names>I.</given-names></name>; <name name-style="western"><surname>Schofield</surname><given-names>S. R.</given-names></name>; <name name-style="western"><surname>Belcher</surname><given-names>D. R.</given-names></name>; <name name-style="western"><surname>Radny</surname><given-names>M. W.</given-names></name>; <name name-style="western"><surname>Saraireh</surname><given-names>S. A.</given-names></name>; <name name-style="western"><surname>Smith</surname><given-names>P. V.</given-names></name>
+<article-title>Acetone on Silicon (001): Ambiphilic Molecule Meets
+Ambiphilic Surface</article-title>. <source>Phys. Chem. Chem. Phys.</source>
+<year>2009</year>, <volume>11</volume>, <fpage>2747</fpage>–<lpage>2759</lpage>. <pub-id pub-id-type="doi">10.1039/b815542a</pub-id>.<pub-id pub-id-type="pmid">19421533</pub-id></mixed-citation></ref><ref id="ref68"><mixed-citation publication-type="journal" id="cit68"><name name-style="western"><surname>Schofield</surname><given-names>S. R.</given-names></name>; <name name-style="western"><surname>Warschkow</surname><given-names>O.</given-names></name>; <name name-style="western"><surname>Belcher</surname><given-names>D. R.</given-names></name>; <name name-style="western"><surname>Rahnejat</surname><given-names>K. A.</given-names></name>; <name name-style="western"><surname>Radny</surname><given-names>M. W.</given-names></name>; <name name-style="western"><surname>Smith</surname><given-names>P. V.</given-names></name>
+<article-title>Phenyl
+Attachment to Si(001) <italic toggle="yes">via</italic> STM
+Manipulation of Acetophenone</article-title>. <source>J. Phys. Chem.
+C</source>
+<year>2013</year>, <volume>117</volume>, <fpage>5736</fpage>–<lpage>5741</lpage>. <pub-id pub-id-type="doi">10.1021/jp311261r</pub-id>.</mixed-citation></ref><ref id="ref69"><mixed-citation publication-type="journal" id="cit69"><name name-style="western"><surname>Belcher</surname><given-names>D.
+R.</given-names></name>; <name name-style="western"><surname>Schofield</surname><given-names>S. R.</given-names></name>; <name name-style="western"><surname>Warschkow</surname><given-names>O.</given-names></name>; <name name-style="western"><surname>Radny</surname><given-names>M. W.</given-names></name>; <name name-style="western"><surname>Smith</surname><given-names>P. V.</given-names></name>
+<article-title>Carbonyl
+Mediated Attachment to Silicon: Acetaldehyde on Si(001)</article-title>. <source>J. Chem. Phys.</source>
+<year>2009</year>, <volume>131</volume>, <fpage>104707</fpage><pub-id pub-id-type="doi">10.1063/1.3224174</pub-id>.</mixed-citation></ref></ref-list></back></article>
