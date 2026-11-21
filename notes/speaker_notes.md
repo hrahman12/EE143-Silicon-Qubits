@@ -43,9 +43,9 @@ _123 words_
 
 ## Slide 5: The problem: implantation can't place one atom
 
-This is the obvious EE143 question: we implant dopants every day, so why an STM? Two reasons in the table. Placement: implantation is routinely sub-100 nm, but a Kane-type device needs about 15 nm, and the STM gives plus or minus one atomic spacing. Second, counting: ions arrive randomly. If you aim for one ion per site on average, Poisson statistics say only 36% of sites get exactly one; the bar chart is that distribution, which I calculated. On the right is the course's own Gaussian implant profile, with range and straggle read off the lecture chart at about 10 keV: even then an arsenic ion's depth spreads about 3.8 nm, phosphorus 7.5 nm, compared with a 0.45 nm δ-layer. Compare that 36% with the 97% Curson's group gets for arsenic. The bottom row is the strongest rival: Jakob 2022 detect each 14 keV phosphorus ion with 99.85% confidence, but where the ion stops is still set by random straggling, not by the lattice.
+Why not just implant? Two reasons in the table. Placement: implantation is routinely sub-100 nm, Kane needs about 15 nm, the STM gives ±1 atomic spacing. Second, counting: ions arrive randomly. Aim for one ion per site and Poisson statistics give exactly one only 36% of the time; that's the bar chart. On the right is the course's own Gaussian implant profile, read off the lecture chart at about 10 keV: arsenic depth still spreads 3.8 nm, phosphorus 7.5, against a 0.45 nm δ-layer. Compare that 36% with the 97% Curson's group gets for arsenic. The bottom row is the strongest rival: Jakob 2022 detect each 14 keV phosphorus ion with 99.85% confidence, but where the ion stops is still set by random straggling, not by the lattice.
 
-_164 words_
+_128 words_
 
 ## Slide 6: The answer: write the device atom by atom
 
@@ -103,9 +103,9 @@ _121 words_
 
 ## Slide 15: EE143 check: how far do the dopants diffuse?
 
-This slide uses only the course's own diffusion numbers. From the Diffusion lecture, D equals D-zero times e to the minus Ea over kT, with Jaeger's values for phosphorus and arsenic, and the characteristic length 2 root Dt. Plug in each heat step of the qubit flow. Incorporation at 350 °C for two minutes moves phosphorus about 10 to the minus 6 nanometres; the 500 °C RTA about 10 to the minus 4; the 2.6-hour overgrowth at 250 °C, 10 to the minus 8. All far left of the dashed line, one lattice site. Our own lab drive-in at 1050 °C for 42 minutes moves phosphorus about 300 nanometres. Same physics, opposite goal. Likely question: so why does phosphorus still smear? Surface segregation during overgrowth, about 5 nm, which bulk diffusion can't capture.
+From the Diffusion lecture, D equals D-zero times e to the minus Ea over kT, with Jaeger's values for phosphorus and arsenic, and the characteristic length 2 root Dt. Plug in each heat step of the qubit flow. Incorporation at 350 °C for two minutes moves phosphorus about 10 to the minus 6 nanometres; the 500 °C RTA about 10 to the minus 4; the 2.6-hour overgrowth at 250 °C, 10 to the minus 8. All far left of the dashed line, one lattice site. Our own lab drive-in at 1050 °C for 42 minutes moves phosphorus about 300 nanometres. Likely question: so why does phosphorus still smear? Surface segregation during overgrowth, about 5 nm, which bulk diffusion can't capture.
 
-_133 words_
+_120 words_
 
 ## Slide 16: Steps 9–11 · Back to the outside world
 
