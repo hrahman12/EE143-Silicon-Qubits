@@ -31,6 +31,9 @@ QA render: `pdftoppm -jpeg -r 110 deck/atom_by_atom_silicon.pdf qa/render/s` (re
 
 Animated GIFs play in PowerPoint and Keynote; the PDF shows each first frame. `qa/add_transitions.py` adds fade transitions after the build. No real quantum hardware was run.
 
+## Web preview
+`python3 qa/build_preview.py <dir>` composites each embedded GIF into its LibreOffice slide render (animated WebP) and writes `slides.json`. That folder plus `index.html` is the published preview page, republished after each deck change.
+
 ## Layout system
 `build_deck.js` defines the theme once (Arial; ink #1F2A36, muted #5B6770, P #D9731A, As #0F9FA0, fixed material legend) and eight slide masters (TITLE, SECTION, TITLE_ONLY, FIG_TEXT, TWO_FIG, TABLE, PROCESS, REFS) with named `title` and `src` placeholders, footer and slide number. Sections: Intro, Motivation, Process, Results, Scaling, Prototype, Wrap-up, Backup. Charts (array yield, write speed on a log axis, Poisson ion statistics, thermal budget) are native PowerPoint charts.
 
