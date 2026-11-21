@@ -230,8 +230,8 @@ const EVENTS = [
     text(s, c.t, x + 0.1, 2.2, cw - 0.2, 1.15, { fontSize: 12 });
     text(s, c.k, x + 0.1, 3.38, cw - 0.2, 0.42, { fontSize: 9, color: T.muted });
   });
-  callout(s, "Theme of his work: new dopant chemistry (As, Bi, Ge hosts), new ways to see buried atoms, and a path to scale (EUV).", 0.5, 4.15, 9.0, 0.55, { fontSize: 13 });
-  src(s, "REFERENCES.md, Neil J. Curson's papers table (authorship verified against Crossref)");
+  callout(s, "Theme of his work: new dopants (As, Bi) and hosts (Ge), new ways to see buried atoms, and a path to scale (EUV).", 0.5, 4.15, 9.0, 0.55, { fontSize: 13 });
+  src(s, "Author lists verified against ORCID and Crossref; papers as cited on each card");
   notes(s, "A quick profile of the researcher. Neil Curson is at the London Centre for Nanotechnology and UCL's electrical engineering department. In 2003 he co-authored the paper that first placed single phosphorus atoms. In 2020 his group, with him as corresponding author, showed arsenic could be patterned the same way. In 2023 the group took arsenic into germanium, imaged δ-layers in momentum space with X-ray ARPES, and mapped a buried device with X-ray fluorescence. 2024 is the big one: 97% single-atom yield for arsenic, plus the first hydrogen removal with EUV light. And he co-edited the 2025 roadmap I lean on throughout. Likely question: is he a physicist or an engineer? His appointment is in electronic and electrical engineering.");
 }
 
@@ -244,7 +244,7 @@ const EVENTS = [
     ["5", "Dose PH₃ / AsH₃", "room temp.", "Gas-phase doping", "dose"], ["6", "Incorporate", "350 °C, 2 min", "Activation anneal", "incorp"],
     ["7", "Lock layer + RTA", "500 °C × 15 s", "RTA", "cap"], ["8", "Si overgrowth", "28 nm at 250 °C", "Epitaxy", "cap"],
     ["9", "Find device", "registration marks", "Alignment marks", "cap"], ["10", "Etch + Al contacts", "RIE holes, Al", "Etch + metallization", "contact"],
-    ["11", "Measure", "millikelvin", "Hall / 4-point probe", "contact"]];
+    ["11", "Measure", "1.8 K Hall; mK qubits", "Hall / 4-point probe", "contact"]];
   const tw = 1.42, th = 1.78, gx = 0.1;
   steps.forEach((st, i) => {
     const row = i < 6 ? 0 : 1, col = row ? i - 6 : i;
@@ -507,7 +507,7 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
     ["6", "350 °C, 1–2 min (H₂ leaves at 380 °C)", "Drive-in / activation"],
     ["7–8", "2 nm unheated; 500 °C × 15 s; 28 nm Si at 250 °C", "RTA + epitaxy"],
     ["9–10", "Markers + STM–SEM; optical litho, RIE, Al into holes", "Alignment, etch, metal"],
-    ["11", "Hall bar at mK: Rₛ, μ, Nₛ", "Hall / 4-point probe"]];
+    ["11", "Hall bar at 1.8 K: Rₛ, μ, Nₛ; qubits at mK", "Hall / 4-point probe"]];
   s.addTable(rows.map((r) => r.map((c) => (typeof c === "string" ? { text: c } : c))), { x: 0.5, y: 1.0, w: 5.6, colW: [0.5, 3.35, 1.75], fontFace: T.font, fontSize: 10.5, color: T.ink, valign: "middle", rowH: 0.42, border: { type: "solid", pt: 0.75, color: "E0E4E8" } });
   s.addChart(pres.charts.BAR, [{ name: "peak T (°C)", labels: ["Flash anneal", "Outgas", "RTA (As)", "Incorporation", "Overgrowth"], values: [1200, 600, 500, 350, 250] }],
     Object.assign(chartBase(), { x: 6.3, y: 1.0, w: 3.3, h: 3.8, barDir: "bar", chartColors: ["8C96A0"], showValue: true, dataLabelColor: T.ink, dataLabelFontSize: 10,
