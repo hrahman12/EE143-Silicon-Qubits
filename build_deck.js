@@ -37,7 +37,7 @@ function newSlide(master, title, section) {
   const s = pres.addSlide({ masterName: master, sectionTitle: section });
   if (title) s.addText(title, { placeholder: "title", x: 0.5, y: 0.26, w: master === "PROCESS" ? 7.3 : 9.0, h: 0.62, fontFace: T.font, fontSize: T.title, bold: true, color: T.ink, align: "left", valign: "top", margin: 0 });
   s._title = title || "";
-  const ACT = { "Act 1": "ACT 1 · WHY SINGLE ATOMS", "Act 2": "ACT 2 · HOW IT'S BUILT", "Act 3": "ACT 3 · DOES IT WORK?", "Act 4": "ACT 4 · HOW IT SCALES" };
+  const ACT = { "Act 1": "ACT 1 · WHY SINGLE ATOMS", "Act 2": "ACT 2 · HOW IT'S BUILT", "Act 3": "ACT 3 · DOES IT WORK? THE QUANTUM PAYOFF", "Act 4": "ACT 4 · HOW IT SCALES" };
   if (ACT[section]) s.addText(ACT[section], { x: 0.5, y: 0.06, w: 6, h: 0.2, fontFace: T.font, fontSize: 8.5, bold: true, color: T.As, charSpacing: 1, margin: 0, isTextBox: true });
   return s;
 }
@@ -104,7 +104,7 @@ const chartBase = () => ({ fontFace: T.font, catAxisLabelColor: T.ink, valAxisLa
   const acts = [
     ["1", "Why single atoms?", "A donor is a natural qubit, but only if you can place it exactly.", "O2_surface_H.png", T.ink],
     ["2", "How is it built?", "Eleven steps, each one an EE143 module shrunk to one atom.", "O2_surface_window.png", T.ink],
-    ["3", "Does it work?", "Buried layers conduct, single atoms switch, arsenic fixes yield, processors run.", "F1_stock2024_fig1_4x4.png", T.As],
+    ["3", "Does it work?", "Layers conduct, arsenic fixes yield, spins entangle, processors run.", "F24_thorvaldson2025_fig3b.png", T.As],
     ["4", "How does it scale?", "Throughput is the wall; EUV and our prototype show a way through.", "O_prototype3d.png", T.ink]];
   const cw = 2.15, gap = 0.12;
   acts.forEach(([n, h, d, im, col], i) => {
@@ -437,17 +437,33 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
   notes(s, "This is the data behind Curson's 97%. Stock and co-workers wrote windows of different sizes, dosed arsine, and counted what landed. A single dangling bond usually just grabs a hydrogen back: 89% end up with no arsenic. Two sites do better, 74% catch one molecule. Six sites are too generous: 63% catch two molecules, which would mean two dopants. Four sites, two dimers, held exactly one arsine fragment in all 24 windows they measured. Add the 350 °C anneal and you get the 97 ± 2% single-atom yield. It's a lithography design rule: the window size sets the dopant count. Likely question: is n = 24 enough? It's the published sample; the 97% comes with its ± 2% uncertainty.");
 }
 
-// ============================================================================ 18. Beyond Si:P
+// ============================================================================ Q1. Spin Hamiltonian, measured
 {
-  const s = newSlide("TWO_FIG", "Beyond Si:P: new dopants, new hosts", "Act 3");
-  bullets(s, ["Ge(001): As from arsine incorporates at room temperature, no anneal; H leaves by 330 °C", "Bi on Si(001): ~1 nm triphenyl-bismuth; phenyls detach ~140 °C, Bi incorporates ~360 °C"], 0.5, 1.05, 3.7, 2.4, 13.5);
-  callout(s, "Why it matters: the same STM toolbox, with a different gas or substrate, gives a new qubit or device platform.", 0.5, 3.55, 3.7, 0.95, { fontSize: 12 });
-  const a = img(s, "F12_hofmann2023_fig1a.jpg", 4.4, 1.0, 2.6, 2.5, "left");
-  caption(s, "STM of arsine on Ge(001) at room temperature. Hofmann et al., Angew. Chem. Int. Ed. 62, e202213982 (2023) Fig. 1a, CC BY 4.0", 4.4, a.y + a.h + 0.04, 2.6, 0.75);
-  const b = img(s, "F12b_lundgren2023_fig1.jpg", 7.1, 1.0, 2.4, 2.5, "right");
-  caption(s, "Triphenyl-bismuth on Si(001). Lundgren et al., J. Phys. Chem. C 127, 16433 (2023), CC BY 4.0", 7.1, b.y + b.h + 0.04, 2.4, 0.75);
-  src(s, "Hofmann2023; Lundgren2023");
-  notes(s, "Two side projects from Curson's group show the method generalises. First, germanium: arsenic from arsine goes into the germanium surface at room temperature with no anneal at all, the STM image on the left. That removes a thermal step entirely. Second, bismuth: they studied how a triphenyl-bismuth molecule sticks to and breaks apart on Si(001), on the right, as a route to ultra-shallow bismuth doping. The point for us: the toolbox is the same, a hydrogen resist, a tip and a gas. Change the gas or the substrate and you get a different device platform. Likely question: why germanium? It's another group-IV host used in quantum devices; the pack doesn't go further, so I won't either.");
+  const s = newSlide("TWO_FIG", "The qubit as a spin Hamiltonian, and its spectrum", "Act 3");
+  s.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 1.0, w: 4.3, h: 0.95, fill: { color: "111A22" }, line: { color: "111A22", width: 0 } });
+  text(s, [{ text: "H = γₑ B·S + Σᵢ γₙ B·Iᵢ + Σᵢ S·Āᵢ(E)·Iᵢ", options: { fontSize: 15, color: "FFFFFF", bold: true, breakLine: true } },
+    { text: "electron Zeeman + nuclear Zeeman + hyperfine (ħ = 1), N-donor register", options: { fontSize: 9.5, color: "9FB0BE" } }], 0.65, 1.1, 4.0, 0.8, { fontFace: "Arial" });
+  bullets(s, ["3 P nuclei share 1 electron: A₁ = 6, A₂ = 68, A₃ = 103 MHz; B = 1.45 T, 15 mK", "2³ = 8 ESR lines: the electron's frequency reads out the nuclear register", "Field-tunable hyperfine Āᵢ(E): gates address each nucleus"], 0.5, 2.05, 4.3, 1.6, 11.5);
+  const a = img(s, "F24_thorvaldson2025_fig1bc.png", 5.0, 0.95, 4.5, 2.25, "center");
+  caption(s, "Measured ESR: one peak per nuclear configuration. Thorvaldson et al., Nat. Nanotechnol. 20, 472 (2025) Fig. 1b, CC BY 4.0", 5.0, a.y + a.h + 0.02, 4.5, 0.36);
+  const c = img(s, "C_coherence_times.png", 5.0, 3.55, 4.5, 1.6, "center");
+  caption(s, "Right: our chart of published T₂* values; 35.6 s is the best donor coherence (implanted donors, ²⁸Si).", 0.5, 4.1, 4.3, 0.45);
+  src(s, "Hamiltonian: Reiner2024 Eq. 1; Thorvaldson2025 (A, B, T, T₂*); Reiner2024 (T₂*); Schofield2025 §3.2");
+  notes(s, "This is the physicist's view of the device. Reiner 2024 writes the register's Hamiltonian: electron Zeeman, nuclear Zeeman, and the hyperfine coupling between the shared electron and each phosphorus nucleus. In Thorvaldson's processor, three nuclei share one electron, with hyperfine couplings of 6, 68 and 103 megahertz, at 1.45 tesla and 15 millikelvin. Because each nucleus shifts the electron's resonance, the ESR spectrum on the right splits into two-cubed, eight peaks, one per nuclear configuration. So reading the electron reads the register. The chart shows why nuclei are the memory: electron dephasing in tens of microseconds, nuclei in milliseconds, and the best donor coherence reaches 35.6 seconds. Likely question: why does A depend on E? Gate fields distort the electron wavefunction, tuning its overlap with each nucleus.");
+}
+
+// ============================================================================ Q2. Entanglement by tomography
+{
+  const s = newSlide("TWO_FIG", "Entanglement, measured by full state tomography", "Act 3");
+  const a = img(s, "F24_thorvaldson2025_fig2bd.png", 0.4, 0.95, 5.7, 2.2, "left");
+  caption(s, "Bell-state density matrices for each nuclear pair, with fidelities. Thorvaldson2025 Fig. 2b–d, CC BY 4.0", 0.45, a.y + a.h + 0.02, 5.6, 0.25);
+  const g = img(s, "F24_thorvaldson2025_fig3b.png", 6.25, 0.95, 3.25, 2.35, "center");
+  caption(s, "Three-qubit GHZ state, F = 96.2 ± 0.5%. Thorvaldson2025 Fig. 3b, CC BY 4.0", 6.25, g.y + g.h + 0.02, 3.25, 0.4);
+  const c = img(s, "F24_thorvaldson2025_fig4a.png", 0.4, 3.5, 5.7, 1.15, "left");
+  caption(s, "Grover search on three nuclear spins: oracle (red), diffusion operator (blue), r = 2. Thorvaldson2025 Fig. 4a, CC BY 4.0", 0.45, c.y + c.h + 0.02, 5.6, 0.3);
+  bullets(s, ["Bell fidelities 97.5 ± 0.3, 97.7 ± 0.4, 96.8 ± 0.4%", "Grover finds the marked state at 98.87% of ideal"], 6.25, 3.75, 3.25, 1.2, 11.5);
+  src(s, "Thorvaldson2025 (²⁸Si, 3P + 1 e⁻ register; fidelities include SPAM for GHZ)");
+  notes(s, "Here is the quantum evidence, straight from the 2025 four-qubit paper. Top left: they reconstruct the full density matrix of a Bell state for each pair of phosphorus nuclei. The four tall bars in the corners are exactly what a maximally entangled state looks like; everything else should be zero. Fidelities are about 97% for every pair. Right: a three-qubit GHZ state, all three nuclei entangled, 96.2% fidelity including state preparation and measurement errors. Bottom: the Grover circuit they ran, an oracle that marks one of eight states and a diffusion operator, repeated twice; it found the marked state at 98.87% of the ideal probability. Likely question: what is tomography? Measuring many copies in different bases to rebuild the full quantum state.");
 }
 
 // ============================================================================ 19. Processors
@@ -463,17 +479,21 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
   notes(s, "Now the payoff: processors. 2019 gave the first exchange gate between two phosphorus donor electrons, about 800 picoseconds, and a 3D device with stacked dopant layers aligned within 5 nm. In 2025 a four-qubit processor, three phosphorus nuclei plus one electron in silicon-28, ran Grover's search; the bar chart shows the marked state found 93.46% of the time, 98.87% of ideal. And an 11-qubit processor linked a four-phosphorus and a five-phosphorus register by exchange: Bell states 99.5% within a register, 97% across. Please read the caveat box: 2019 used natural silicon and electron spins, 2025 used silicon-28 and nuclear spins, so the numbers aren't apples to apples. Likely question: are these Curson's devices? No, these are context papers from other groups using the same fabrication.");
 }
 
-// ============================================================================ 20. Simulator
+// ============================================================================ 20. Many-body physics
 {
-  const s = newSlide("TWO_FIG", "Same atoms, new job: a quantum simulator", "Act 3");
-  bullets(s, ["2022: 3×3 dopant dots, 2 ± 1 P each, spacing 4.1, 6.6, 10.7 ± 0.3 nm: metallic → Mott-insulating", "2022: 10-dot chain, ~25 P per dot, ≤10 nm apart, 40 nm cap at 0.125 nm/min: topological states"], 0.5, 1.05, 3.9, 2.6, 13);
-  callout(s, "EE143 view: the 'circuit' here is a lattice of doped islands with in-plane δ-layer gates and leads.", 0.5, 3.7, 4.0, 0.8, { fontSize: 12 });
-  const b = img(s, "F15_wang2022_fig1.jpg", 4.6, 1.0, 2.6, 3.0, "left");
-  caption(s, "3×3 dopant-dot array. Wang et al., Nat. Commun. 13, 6824 (2022) Fig. 1, CC BY 4.0", 4.6, b.y + b.h + 0.04, 2.6, 0.6);
-  const c = img(s, "F18_kiczynski2022_fig2a.png", 7.35, 1.0, 2.15, 2.0, "right");
-  caption(s, "10-dot chain with 6 in-plane gates (STM, 50 nm scale in original). Kiczynski et al., Nature 606, 694 (2022) Fig. 2a, CC BY 4.0", 7.35, c.y + c.h + 0.04, 2.15, 0.85);
-  src(s, "Wang2022; Kiczynski2022 (Methods)");
-  notes(s, "Same fabrication, different job. Instead of qubits, this group wrote a 3×3 grid of tiny dopant-based quantum dots, shown in the schematic and the STM images on the right, with gates and leads written in the same layer. Electrons hopping between dots behave like electrons in a crystal, so the device simulates a material physics model directly in hardware. By changing the array, they tuned it from metallic behaviour toward a Mott insulator, where repulsion between electrons stops conduction. For us the interesting part is that it's a circuit made only of doped islands and δ-layer wiring. Likely question: why not simulate on a computer? Interacting-electron problems get exponentially hard as the lattice grows.");
+  const s = newSlide("TWO_FIG", "Beyond qubits: Hubbard and topological physics", "Act 3");
+  s.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 1.0, w: 3.9, h: 0.85, fill: { color: "111A22" }, line: { color: "111A22", width: 0 } });
+  text(s, [{ text: "H = Σ⟨ij⟩σ (−t c†ᵢσ cⱼσ + h.c.) + Σᵢ U nᵢ↑nᵢ↓ + …", options: { fontSize: 12.5, color: "FFFFFF", bold: true, breakLine: true } },
+    { text: "extended Fermi-Hubbard model on a dopant-dot lattice (Wang2022 Eq. 1)", options: { fontSize: 9, color: "9FB0BE" } }], 0.62, 1.08, 3.7, 0.7);
+  bullets(s, ["3×3 dots, 2 ± 1 P each, a = 4.1 / 6.6 / 10.7 nm: metallic → Mott-insulating", "10-dot SSH chain: 2 conductance peaks (topological) vs 10 (trivial); on-site ≈25 meV"], 0.5, 1.95, 3.9, 1.25, 11);
+  const k = img(s, "C_ssh_spectrum.png", 0.45, 3.2, 2.75, 1.95, "left");
+  caption(s, "Our tight-binding calc. of the SSH model: edge states (teal) pinned at E = 0 for v < w.", 3.25, 3.6, 1.25, 1.3);
+  const b = img(s, "F15_wang2022_fig1.jpg", 4.6, 1.0, 2.4, 2.9, "left");
+  caption(s, "3×3 Hubbard array. Wang et al., Nat. Commun. 13, 6824 (2022) Fig. 1, CC BY 4.0", 4.6, b.y + b.h + 0.04, 2.4, 0.6);
+  const c = img(s, "F25_kiczynski2022_fig1.jpg", 7.1, 1.0, 2.4, 3.3, "right");
+  caption(s, "SSH model in P-dot chains. Kiczynski et al., Nature 606, 694 (2022) Fig. 1, CC BY 4.0", 7.1, c.y + c.h + 0.04, 2.4, 0.6);
+  src(s, "Wang2022 (Eq. 1, Results); Kiczynski2022 (abstract, Fig. 1); SSH spectrum: our calculation");
+  notes(s, "Write a lattice of small dopant dots and electrons hopping between them obey the Fermi-Hubbard model, the textbook model for strongly correlated materials: hopping t between sites, repulsion U on each site. Wang 2022 tuned the spacing of a three-by-three array from 4 to 11 nanometres and watched it go from metallic to Mott insulating. Kiczynski 2022 wrote a ten-dot chain with alternating strong and weak couplings, the SSH model, and saw the topological phase: two conductance peaks instead of ten. My plot is a quick tight-binding calculation of that model, showing the two edge states locked at zero energy. Likely question: is this like moiré materials? It's the same family of Hubbard physics, but none of these papers make that comparison, so I won't push it.");
 }
 
 // ============================================================================ 21. Throughput wall (O8)
@@ -612,6 +632,19 @@ for (let pg = 0; pg * 17 < REFS.length; pg++) {
   notes(s, "Backup slide with the alternate titles from the reference pack, in case the course wants a 'How X is built' style title like the DMD and CMOS decks. The image is the 4×4 arsenic array from Stock 2024, with the lithography, the incorporated atoms and the dopant map. If asked about it: with non-ideal windows, 10 to 12 of 15 sites were single atoms, up to 80%, which shows that window shape matters as much as the chemistry. That 4×4 result is why the 2×2 is described as the first defect-free array: the bigger array still had defects.");
 }
 
+
+// ============================================================================ 18. Beyond Si:P
+{
+  const s = newSlide("SECTION", "Backup · Beyond Si:P: new dopants, new hosts", "Backup");
+  bullets(s, ["Ge(001): As from arsine incorporates at room temperature, no anneal; H leaves by 330 °C", "Bi on Si(001): ~1 nm triphenyl-bismuth; phenyls detach ~140 °C, Bi incorporates ~360 °C"], 0.5, 1.05, 3.7, 2.4, 13.5);
+  callout(s, "Why it matters: the same STM toolbox, with a different gas or substrate, gives a new qubit or device platform.", 0.5, 3.55, 3.7, 0.95, { fontSize: 12 });
+  const a = img(s, "F12_hofmann2023_fig1a.jpg", 4.4, 1.0, 2.6, 2.5, "left");
+  caption(s, "STM of arsine on Ge(001) at room temperature. Hofmann et al., Angew. Chem. Int. Ed. 62, e202213982 (2023) Fig. 1a, CC BY 4.0", 4.4, a.y + a.h + 0.04, 2.6, 0.75);
+  const b = img(s, "F12b_lundgren2023_fig1.jpg", 7.1, 1.0, 2.4, 2.5, "right");
+  caption(s, "Triphenyl-bismuth on Si(001). Lundgren et al., J. Phys. Chem. C 127, 16433 (2023), CC BY 4.0", 7.1, b.y + b.h + 0.04, 2.4, 0.75);
+  src(s, "Hofmann2023; Lundgren2023");
+  notes(s, "Two side projects from Curson's group show the method generalises. First, germanium: arsenic from arsine goes into the germanium surface at room temperature with no anneal at all, the STM image on the left. That removes a thermal step entirely. Second, bismuth: they studied how a triphenyl-bismuth molecule sticks to and breaks apart on Si(001), on the right, as a route to ultra-shallow bismuth doping. The point for us: the toolbox is the same, a hydrogen resist, a tip and a gas. Change the gas or the substrate and you get a different device platform. Likely question: why germanium? It's another group-IV host used in quantum devices; the pack doesn't go further, so I won't either.");
+}
 
 // ============================================================================ Backup: Monte Carlo
 {

@@ -147,3 +147,18 @@ Paper-internal conflicts kept visible rather than resolved: Constantinou2024 330
 | 15 | lab 1050 °C, 10 + 12 + 20 min | Process Manual Fall 2026 pp. 16–18 | OK |
 | 15 | 8e-07, 2e-04, 1e-08, 305 nm (P); 5e-07, 1e-04, 8e-09, 94 nm (As) | Derived (our calc.) | Derived; recomputed independently |
 | 20 | window outcomes 89/10.6, 26/74, 100, 37/63 % (n = 286, 92, 24, 19) | Stock2024 §2.2–2.3, Table 1 | OK |
+
+## Round 5: quantum layer
+| Slide | Number / statement | Verbatim source | Key | Status |
+|---|---|---|---|---|
+| 22 | H = γe B·S + Σ γn B·Ii + Σ S·Āi(E)·Ii | "The spin Hamiltonian for an individual N-donor quantum dot ... H=γeB⋅S+∑γnB⋅Ii+∑S⋅Āi(E)⋅Ii" | Reiner2024 Eq. 1 | OK |
+| 22 | A1 = 6, A2 = 68, A3 = 103 MHz | "we find hyperfine interaction strengths of A1 = 6 MHz, A2 = 68 MHz and A3 = 103 MHz" | Thorvaldson2025 p. 3 | OK |
+| 22 | 1.45 T, 15 mK | "base temperature of 15 mK, with an applied magnetic field of 1.45 T" | Thorvaldson2025 p. 2 | OK |
+| 22 | T2* 28.1 µs (e), 1.26 / 0.49 / 0.60 ms (n) | "We find T2*=28.1μs for the electron spin and 1.26 ms, 0.49 ms and 0.60 ms for nuclear spins 1, 2 and 3" | Thorvaldson2025 | OK |
+| 22 | T2* = 12 µs | "coherent control of the electron spin qubit with T2*=12μs" | Reiner2024 | OK |
+| 22 | 2³ = 8 ESR lines | "eight resonance frequencies" (Fig. 1b caption) | Thorvaldson2025 | OK |
+| 23 | Bell 97.5 ± 0.3, 97.7 ± 0.4, 96.8 ± 0.4%; GHZ 96.2 ± 0.5% | main text pp. 3–4 | Thorvaldson2025 | OK |
+| 25 | Hubbard Hamiltonian Ht, HU | Wang2022 Eq. 1 | Wang2022 | OK |
+| 25 | 2 vs 10 conductance peaks; on-site ≈25 meV | Kiczynski2022 abstract | Kiczynski2022 | OK |
+| 25 | SSH spectrum | our 10-site tight-binding diagonalisation | ours | Derived |
+| — | Moiré-materials connection | no source found in the cited papers or a literature search | — | Not on slides |

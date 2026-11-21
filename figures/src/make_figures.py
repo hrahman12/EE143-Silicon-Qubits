@@ -64,6 +64,11 @@ CROPS = [
  ("F21_leeuwenhoek2020_fig1ab.jpg", f"{RAW}/Leeuwenhoek2020/41378_2020_209_Fig1_HTML.jpg", (0.0, 0.0, 1.0, 0.33)),
  ("F22_reiner2024_fig1cd.jpg", f"{RAW}/Reiner2024/41565_2023_1596_Fig1_HTML.jpg", (0.468, 0.0, 1.0, 1.0)),
  ("F23_constantinou2024_fig1stm.png", f"{RAW}/Constantinou2024/pdfimg/p2_x69_1652x943.png", (0.352, 0.52, 1.0, 1.0)),
+ ("F24_thorvaldson2025_fig1bc.png", f"{RAW}/Thorvaldson2025/page2_300dpi.png", (0.279, 0.056, 0.655, 0.232)),
+ ("F24_thorvaldson2025_fig2bd.png", f"{RAW}/Thorvaldson2025/page3_300dpi.png", (0.05, 0.186, 0.93, 0.425)),
+ ("F24_thorvaldson2025_fig3b.png", f"{RAW}/Thorvaldson2025/page4_300dpi.png", (0.04, 0.153, 0.48, 0.392)),
+ ("F24_thorvaldson2025_fig4a.png", f"{RAW}/Thorvaldson2025/page5_300dpi.png", (0.06, 0.062, 0.93, 0.205)),
+ ("F25_kiczynski2022_fig1.jpg", f"{RAW}/Kiczynski2022/41586_2022_4706_Fig1_HTML.jpg", (0, 0, 1, 1)),
  ("F17_tseng2023_fig7.jpg", f"{RAW}/Tseng2023/pdfimg/p8_x32_1650x1005.jpeg", (0, 0, 1, 1)),
 ]
 
@@ -716,6 +721,49 @@ def implant_profiles():
     _clean(ax)
     save(fig, "C_implant_profiles.png")
 
+def coherence_times():
+    """Log dot plot of published coherence times (s)."""
+    rows = [("Electron T$_2^*$, 3P register", 28.1e-6, INK, "Thorvaldson2025"), ("Electron T$_2^*$, 3P register", 12e-6, INK, "Reiner2024"),
+            ("Nuclear T$_2^*$, n1 / n2 / n3", None, AS_C, "Thorvaldson2025"), ("Best donor coherence (²⁸Si, implanted)", 35.6, AS_C, "Schofield2025 §3.2")]
+    fig, ax = plt.subplots(figsize=(4.0, 1.85))
+    ys = {"e": 2, "n": 1, "best": 0}
+    ax.plot([28.1e-6], [2.12], "o", ms=9, color=INK); ax.text(28.1e-6 * 1.6, 2.12, "28.1 µs (Thorvaldson2025)", va="center", fontsize=8, color=MUTED)
+    ax.plot([12e-6], [1.88], "o", ms=9, color="#5B6770"); ax.text(12e-6 * 1.6, 1.88, "12 µs (Reiner2024)", va="center", fontsize=8, color=MUTED)
+    for v in (1.26e-3, 0.49e-3, 0.60e-3): ax.plot([v], [1], "o", ms=9, color=AS_C, mec="white", mew=1)
+    ax.text(1.26e-3 * 1.6, 1, "0.49–1.26 ms (Thorvaldson2025)", va="center", fontsize=8, color=MUTED)
+    ax.plot([35.6], [0], "D", ms=9, color=AS_C); ax.text(35.6 / 30, 0, "35.6 s (Schofield2025)", va="center", ha="right", fontsize=8, color=MUTED)
+    for y, lab in ((2, "electron spin T$_2^*$"), (1, "nuclear spin T$_2^*$"), (0, "best donor coherence")):
+        ax.text(2e-6 / 1.15, y, lab, ha="right", va="center", fontsize=9, color=INK)
+    ax.set_xscale("log"); ax.set_xlim(2e-6, 3e2); ax.set_ylim(-0.6, 2.6); ax.set_yticks([])
+    ax.set_xlabel("coherence time (s, log scale)", fontsize=9.5)
+    ax.set_title("Nuclear spins hold coherence ~100× longer than electrons", fontsize=9.5, loc="left", color=INK, x=-0.45)
+    _clean(ax); ax.spines["left"].set_visible(False)
+    save(fig, "C_coherence_times.png")
+
+def ssh_spectrum():
+    """Single-particle SSH spectrum, 10 sites, staggered hoppings v (intra) and w (inter); our tight-binding calc
+    of the model in Kiczynski2022 Fig. 1b."""
+    N = 10; r = np.linspace(0.05, 3.0, 400); E = []
+    for x in r:
+        v, w = x, 1.0
+        H = np.zeros((N, N))
+        for i in range(N - 1):
+            t = v if i % 2 == 0 else w
+            H[i, i + 1] = H[i + 1, i] = -t
+        E.append(np.linalg.eigvalsh(H))
+    E = np.array(E)
+    fig, ax = plt.subplots(figsize=(3.6, 2.6))
+    for k in range(N):
+        edge = k in (N // 2 - 1, N // 2)
+        ax.plot(r, E[:, k], color=AS_C if edge else "#9AA3AC", lw=2.2 if edge else 1.1)
+    ax.axvline(1, color=INK, ls=":", lw=1)
+    ax.text(0.12, 2.9, "topological\n(v < w)", fontsize=8.5, color=INK); ax.text(1.9, 2.9, "trivial\n(v > w)", fontsize=8.5, color=INK)
+    ax.annotate("zero-energy\nedge states", (0.4, 0.0), xytext=(0.15, -2.6), fontsize=8.5, color=AS_C, arrowprops=dict(arrowstyle="-", color=AS_C))
+    ax.set_xlabel("v / w", fontsize=9.5); ax.set_ylabel("E / w", fontsize=9.5); ax.set_xlim(0, 3); ax.set_ylim(-4.2, 4.2)
+    ax.set_title("SSH chain, 10 sites (our calc.)", fontsize=10, loc="left", color=INK)
+    _clean(ax)
+    save(fig, "C_ssh_spectrum.png")
+
 def mini_icons():
     for st in ("prep", "litho", "dose", "incorp", "cap", "contact"):
         xsec(st, f"icon_{st}.png", w=1.6, h=0.9, mini=True)
@@ -725,7 +773,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         for fn in sys.argv[1:]: globals()[fn]()
         raise SystemExit
-    do_crops(); hero(); bloch(); wavefunction_scale(); prototype_layout(); dumbbell_thickness(); dot_yield(); range_fidelity(); diffusion_lengths(); implant_profiles()
+    do_crops(); hero(); bloch(); wavefunction_scale(); prototype_layout(); dumbbell_thickness(); dot_yield(); range_fidelity(); diffusion_lengths(); implant_profiles(); coherence_times(); ssh_spectrum()
     surface_scene("H", "O2_surface_H.png"); surface_scene("window", "O2_surface_window.png")
     surface_scene("dose", "O2_surface_dose.png"); surface_scene("incorp", "O2_surface_incorp.png")
     for st in ("prep", "litho", "dose", "incorp", "cap", "contact"): xsec(st, f"xsec_{st}.png")
