@@ -149,7 +149,7 @@ const chartBase = () => ({ fontFace: T.font, catAxisLabelColor: T.ink, valAxisLa
   const rows = [[H(""), H("Ion implantation"), H("STM H-resist lithography")],
     [{ text: "Placement", options: { bold: true } }, "Sub-100 nm routine; Kane-type devices need ≈15 nm", "±1 atomic spacing"],
     [{ text: "One dopant per site", options: { bold: true } }, "36% (Poisson, without ion counting)", { text: "97 ± 2% (As, 4-site window)", options: { color: T.As, bold: true } }],
-    [{ text: "Best ion counting", options: { bold: true } }, "99.85 ± 0.02% detection confidence, 14 keV ³¹P⁺; yield limit 98.1% (Jakob2022)", "Placement still set by ion straggling, not by the lattice"]];
+    [{ text: "Best ion counting", options: { bold: true } }, "Upper-bound 99.85 ± 0.02% detection confidence, 14 keV ³¹P⁺; yield limit 98.1% (Jakob2022)", "Placement still set by ion straggling, not by the lattice"]];
   s.addTable(rows, { x: 0.5, y: 1.0, w: 5.0, colW: [1.15, 2.05, 1.8], fontFace: T.font, fontSize: 10.5, color: T.ink, valign: "middle", rowH: [0.36, 0.6, 0.5, 0.62], border: { type: "solid", pt: 0.75, color: "E0E4E8" } });
   s.addChart(pres.charts.BAR, [{ name: "Probability", labels: ["0", "1", "2", "3", "≥4"], values: [36.8, 36.8, 18.4, 6.1, 1.9] }],
     Object.assign(chartBase(), { x: 0.4, y: 3.2, w: 5.1, h: 1.95, barDir: "col", chartColors: ["8C96A0"], showValue: true, dataLabelColor: T.ink, dataLabelFontSize: 9, dataLabelFormatCode: "0.0",
@@ -218,7 +218,7 @@ const EVENTS = [
     { y: 2003, t: "Co-author: first single P atoms placed", k: "Schofield2003" },
     { y: 2020, t: "Corresponding author: arsenic patterned by STM", k: "Stock2020" },
     { y: 2023, t: "As in germanium · ARPES of δ-layers · X-ray imaging of buried devices", k: "Hofmann2023; Constantinou2023; DAnna2023" },
-    { y: 2024, t: "Corresponding author: 97% single-As yield · EUV H desorption", k: "Stock2024; Constantinou2024" },
+    { y: 2024, t: "Corr. author: 97% single-As yield · co-author: EUV H desorption", k: "Stock2024; Constantinou2024" },
     { y: 2025, t: "Guest editor: roadmap on atomic-scale devices", k: "Schofield2025" }];
   const x0 = 0.5, cw = 1.72, gap = 0.1;
   s.addShape(pres.shapes.LINE, { x: 0.6, y: 1.85, w: 8.8, h: 0, line: { color: "9AA3AC", width: 1.5 } });
@@ -276,10 +276,10 @@ function processSlide(title, step, bulletsArr, xsecFile, rightFn, srcText, noteT
 
 // ============================================================================ 8. Steps 1-3
 processSlide("Steps 1–3 · Clean surface, 1-atom resist", "Steps 1–3 of 11",
-  ["Clean: acetone/IPA, outgas >8 h at 600 °C, ≈1200 °C flashes, UHV <5×10⁻¹¹ mbar", "Resist: atomic H at 330 °C, 5×10⁻⁷ mbar, 5 min caps every surface Si", "EE143 hook: a resist coat one atom thick, no spin speed"],
+  ["Clean: acetone/IPA, outgas >8 h at 600 °C, ≈1200 °C flashes; STM chamber <5×10⁻¹¹ mbar", "Resist: atomic H at 330 °C, 5×10⁻⁷ mbar, 5 min caps every surface Si", "EE143 hook: a resist coat one atom thick, no spin speed"],
   "xsec_prep.png", (s) => {
     const b = img(s, "O2_surface_H.png", 4.8, 1.0, 4.7, 3.6, "center");
-    caption(s, "H-terminated Si(001): dimer rows (grey) each capped by H (blue). Original 3D render, geometry only.", 4.8, b.y + b.h + 0.04, 4.7, 0.4);
+    caption(s, "H-terminated Si(001): dimer rows (grey) each capped by H (blue). Original 3D render (geometry: Ren2016, Xiang2025).", 4.8, b.y + b.h + 0.04, 4.7, 0.4);
   }, "Stock2020; Stock2024; Constantinou2024 (H termination)",
   "Step one is about cleanliness, because a single stray atom is a defect at this scale. Samples get an acetone and IPA clean, then outgas for more than eight hours at 600 °C, then repeated flash anneals to about 1200 °C, all in ultra-high vacuum below 5×10^-11 millibar. Then atomic hydrogen goes onto every surface silicon. My render on the right shows the result: rows of silicon dimers, each atom capped by one hydrogen. That monolayer is the resist. Think of it as spin-coating, except the thickness is exactly one atom and perfectly uniform. The number to remember: one atom thick. Likely question: why flash to 1200 °C? It's the standard surface prep in these papers; the pack gives the recipe, not the mechanism.");
 
@@ -310,18 +310,18 @@ processSlide("Step 6 · Incorporation anneal", "Step 6 of 11",
   ["350 °C anneal (1–2 min), below the 380 °C onset of H₂ desorption, so the H resist survives", "Each incorporated As ejects one Si atom", "So counting ejected Si counts the dopants: built-in metrology"],
   "xsec_incorp.png", (s) => {
     const b = img(s, "F11_stock2020_fig3_ad.png", 4.8, 1.0, 4.7, 3.3, "center");
-    caption(s, "STM of a patterned square: H resist (a), lithography (b), AsH₃ dose (c), 350 °C anneal (d). Reproduced from Stock et al., ACS Nano 14, 3316 (2020) Fig. 3, CC BY 4.0", 4.8, b.y + b.h + 0.03, 4.7, 0.45);
+    caption(s, "STM of a patterned square: H resist (a), lithography (b), AsH₃ dose (c), 350 °C anneal (d). Reproduced from Stock et al., ACS Nano 14, 3316 (2020) Fig. 3, CC BY", 4.8, b.y + b.h + 0.03, 4.7, 0.45);
   }, "Stock2020; Stock2024",
   "Step six is the drive-in, but tiny. A 350 °C anneal for one to two minutes lets the dopant swap into the top silicon layer. Why 350? Hydrogen starts leaving the surface at 380 °C, so we stay just under it and the resist survives everywhere else. On the right, real data: a patterned square through dose and anneal, with clean resist outside. There's a neat bonus: each arsenic that goes in kicks out one silicon atom, which sits on the surface as an adatom. Count adatoms and you've counted dopants, metrology for free. The number to remember: 350 °C versus 380 °C. Likely question: can you overshoot? Above 380 °C hydrogen starts to desorb, so the resist stops protecting the rest of the surface.");
 
 // ============================================================================ 12. Steps 7-8
 processSlide("Steps 7–8 · Burying the dopants", "Steps 7–8 of 11",
-  ["Trade-off: low T keeps atoms in place, high T grows good crystal", "P: constant 250 °C (≈5 nm segregation, full activation)", "As: 2 nm at RT, 500 °C × 15 s RTA, 28 nm at 250 °C, 0.003 nm/s: layer 30 nm deep"],
+  ["Trade-off: low T keeps atoms in place, high T grows good crystal", "P: constant 250 °C (≈5 nm segregation, full activation)", "As: 2 nm unheated, 500 °C × 15 s RTA, 28 nm at 250 °C, 0.003 nm/s: layer 30 nm deep"],
   "xsec_cap.png", (s) => {
     const a = img(s, "O5_overgrowth_program.png", 4.7, 1.0, 4.8, 2.1, "center");
     caption(s, "Exact temperature programs: (a) Stock2020 Fig. 4e inset + text; (b) DAnna2023 Methods. Redrawn (ours).", 4.7, a.y + a.h + 0.02, 4.8, 0.25);
     const b = img(s, "F11_stock2020_fig4_sims.png", 4.7, 3.45, 1.65, 1.6, "left");
-    caption(s, "SIMS: As stays sharp at 15 nm. Stock et al., ACS Nano 14, 3316 (2020) Fig. 4e, CC BY 4.0", b.x + b.w + 0.08, 3.45, 1.3, 1.3);
+    caption(s, "SIMS: As stays sharp at 15 nm. Stock et al., ACS Nano 14, 3316 (2020) Fig. 4e, CC BY", b.x + b.w + 0.08, 3.45, 1.3, 1.3);
     callout(s, "EE143 link: a thermal-budget problem, like keeping a shallow junction shallow.", 7.95, 3.5, 1.55, 1.25, { fontSize: 10.5 });
   }, "Oberbeck2002; Stock2020; DAnna2023",
   "Steps seven and eight bury the dopants: a classic thermal-budget fight. Low temperature keeps atoms in place; high temperature gives good crystal. For phosphorus the answer is a constant 250 °C overgrowth, with about 5 nm of segregation and full activation. For arsenic, Curson's group grows a thin unheated locking layer, does a quick 500 °C, ten-second RTA, then continues epitaxy. A worked example: 2 nm unheated, 500 °C for 15 seconds, then 28 nm at 250 °C, so the layer sits 30 nm down. The SIMS profile on the right shows the arsenic still in a sharp spike. Likely question: why not grow everything hot? That's the trade-off on the slide: even at 250 °C phosphorus segregates about 5 nm.");
@@ -343,7 +343,7 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
   const b = img(s, "F9_constantinou2023_fig2.jpg", 4.8, 1.0, 4.7, 1.95, "center");
   caption(s, "ARPES Fermi surfaces of P (top) and As (bottom) δ-layers. Reproduced from Constantinou et al., Adv. Sci. 10, 2302101 (2023) Fig. 2, CC BY 4.0", 4.8, b.y + b.h + 0.03, 4.7, 0.4);
   const a = img(s, "F11_stock2020_fig4_transport.png", 4.8, 3.33, 1.8, 1.78, "left");
-  caption(s, "Mobility, carrier density and Rₛ vs RTA temperature. Reproduced from Stock et al., ACS Nano 14, 3316 (2020) Fig. 4f,g, CC BY 4.0", a.x + a.w + 0.12, 3.6, 2.75, 0.9);
+  caption(s, "Mobility, carrier density and Rₛ vs RTA temperature. Reproduced from Stock et al., ACS Nano 14, 3316 (2020) Fig. 4f,g, CC BY", a.x + a.w + 0.12, 3.6, 2.75, 0.9);
   src(s, "Stock2020; Constantinou2023; DAnna2023; DAnna2026. Nₛ check is our calculation from Stock2020's numbers");
   notes(s, "Did the process work? Three kinds of evidence. Electrical: an arsenic δ-layer measures 1.6 kilo-ohms per square with mobility of 28, and 81% of the arsenic is active after the 500 °C RTA, 88% at 560. EE143 check: Rs = 1/(q·Ns·μ) with 1.6 kΩ and 28 gives about 1.4×10^14 per square centimetre, right where it should be. Second, X-ray ARPES, top right, shows the layers are under a nanometre thick, and arsenic is tighter than phosphorus. Curson's newest paper, D'Anna 2026, uses X-ray reflectometry to show the chemical layer is also sub-nanometre, below SIMS's 2 nm resolution. Third, X-ray fluorescence imaging moved the arsenic less than 0.2 Å. Likely question: does the X-ray beam change the device? Less than 3% loss of active dopants.");
 }
@@ -372,7 +372,7 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
       catAxisTitle: "atoms in array n", showCatAxisTitle: true, valAxisTitle: "array yield", showValAxisTitle: true }));
   text(s, "As 0.97¹⁶ ≈ 61%", 3.45, 1.62, 1.45, 0.25, { fontSize: 10, color: T.ink, bold: true });
   text(s, "P 0.7¹⁶ < 0.4%", 3.3, 2.65, 1.4, 0.25, { fontSize: 10, color: T.ink, bold: true });
-  bullets(s, ["P fills an ideal 3-dimer window 63 ± 10% of the time (\"less than 70%\" in 6-site windows)", "Array yield 0.7ⁿ: 16 P atoms <0.4%; a ~50-donor array ~10⁻¹⁰. Modelled fix: dose hot (150 °C, >1 L)"], 0.5, 4.08, 4.6, 1.0, 11.5);
+  bullets(s, ["P fills an ideal 3-dimer window 63 ± 10% of the time (\"less than 70%\" in 6-site windows)", "Array yield 0.7ⁿ: 16 P atoms <0.4%; a 50-donor array ~10⁻⁸. Modelled fix: dose hot (150 °C, >1 L)"], 0.5, 4.08, 4.6, 1.0, 11.5);
   const b = img(s, "O_yield_surface3d.png", 5.2, 1.0, 4.3, 3.3, "center");
   caption(s, "The same law in 3D: array yield pⁿ against per-site yield p and array size n (our model). Orange and teal lines are the measured P (0.7) and As (0.97) yields.", 5.2, b.y + b.h + 0.05, 4.3, 0.55);
   src(s, "Ivie2021 (incl. kinetic model); Stock2024; Schofield2025 §4.1. As curve and 3D surface are our model");
@@ -382,7 +382,7 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
 // ============================================================================ 17. Arsenic fix
 {
   const s = newSlide("TWO_FIG", "Curson's fix: arsenic in a 4-site window", "Act 3");
-  bullets(s, ["97 ± 2% single-atom yield in a 4-site window: 1-in-4 lattice sites (≈0.6 nm²), 33% better precision than P", "First defect-free 2×2 single-dopant array in Si", "Iterative litho/dose cycles could push yield toward 100%"], 0.5, 1.05, 3.75, 2.2, 13);
+  bullets(s, ["97 ± 2% single-atom yield, placed within 4 lattice sites (4-DB windows)", "First defect-free 2×2 single-dopant array in Si (windows of 2–8 DBs)", "Iterative litho/dose cycles could push yield toward 100%"], 0.5, 1.05, 3.75, 2.2, 13);
   const a = img(s, "F3_schofield2025_s41_fig1.png", 4.45, 1.0, 5.05, 3.25, "center");
   caption(s, "2×2 As array steps and the ideal 4-site window. Reproduced from Schofield et al., Nano Futures 9, 012001 (2025) §4.1 Fig. 1, CC BY 4.0", 4.45, a.y + a.h + 0.04, 5.05, 0.4);
   const b = img(s, "F2_stock2024_fig3_stats.png", 0.5, 3.25, 3.0, 1.45, "left");
@@ -407,7 +407,7 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
 // ============================================================================ 19. Processors
 {
   const s = newSlide("TWO_FIG", "The payoff: from devices to processors", "Act 3");
-  bullets(s, ["2019: ≈800 ps exchange gate (natural Si); 3D device, 97.9% readout, <5 nm layer alignment", "2025, 4 qubits: 3P + 1 e⁻, 45 nm ²⁸Si cap, 1.45 T, 15 mK; CZ 99.32–99.65%, Grover search", "2025, 11 qubits: 4P + 5P registers 13(1) nm apart, SET 17 nm away, ~1.39 T; Bell 99.5% local, 97.0% across"], 0.5, 1.05, 3.75, 3.0, 12);
+  bullets(s, ["2019: ≈800 ps exchange gate (natural Si); 3D device, 97.9% readout, <5 nm layer alignment", "2025, 4 qubits: 3P + 1 e⁻, 45 nm ²⁸Si cap, 1.45 T, 15 mK; CZ 99.32–99.65%, Grover search", "2025, 11 qubits: 4P + 5P registers 13(1) nm apart, SET 17 nm away, ~1.39 T; best Bell 99.5% local, 97.0% across"], 0.5, 1.05, 3.75, 3.0, 12);
   callout(s, "Caveat: 2019 used natural Si and electron spins; 2025 used ²⁸Si and nuclear-spin registers, so don't compare fidelities directly.", 0.5, 4.05, 3.75, 0.85, { fontSize: 11 });
   const c = img(s, "F14_edlbauer2025_fig1ab.png", 4.4, 1.0, 5.1, 2.35, "center");
   caption(s, "11-qubit processor: connectivity and STM of the 4P and 5P registers. Reproduced from Edlbauer et al., Nature 648, 569 (2025) Fig. 1a,b, CC BY 4.0", 4.4, c.y + c.h + 0.03, 5.1, 0.4);
@@ -427,7 +427,7 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
   const a = img(s, "F24_thorvaldson2025_fig1bc.png", 5.0, 0.95, 4.5, 2.25, "center");
   caption(s, "Measured ESR: one peak per nuclear configuration. Thorvaldson et al., Nat. Nanotechnol. 20, 472 (2025) Fig. 1b, CC BY 4.0", 5.0, a.y + a.h + 0.02, 4.5, 0.36);
   const c = img(s, "C_coherence_times.png", 5.0, 3.55, 4.5, 1.6, "center");
-  caption(s, "Right: our chart of published T₂* values; 35.6 s is the best donor coherence (implanted donors, ²⁸Si).", 0.5, 4.1, 4.3, 0.45);
+  caption(s, "Right: published T₂* values from the same register (Thorvaldson2025, Reiner2024), plus the best donor T₂, 35.6 s (implanted, ²⁸Si).", 0.5, 4.1, 4.3, 0.45);
   src(s, "Hamiltonian: Reiner2024 Eq. 1; Thorvaldson2025 (A, B, T, T₂*); Reiner2024 (T₂*); Schofield2025 §3.2");
   notes(s, "Zooming into that four-qubit processor, here's the physicist's view. Reiner 2024 writes the register's Hamiltonian: electron Zeeman, nuclear Zeeman, and the hyperfine coupling between the shared electron and each phosphorus nucleus. In Thorvaldson's processor, three nuclei share one electron, with hyperfine couplings of 6, 68 and 103 megahertz, at 1.45 tesla and 15 millikelvin. Because each nucleus shifts the electron's resonance, the ESR spectrum on the right splits into two-cubed, eight peaks, one per nuclear configuration. So reading the electron reads the register. The chart shows why nuclei are the memory: electron dephasing in tens of microseconds, nuclei in milliseconds, and the best donor coherence reaches 35.6 seconds. Likely question: why does A depend on E? Gate fields distort the electron wavefunction, tuning its overlap with each nucleus.");
 }
@@ -442,7 +442,7 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
   const c = img(s, "F24_thorvaldson2025_fig4a.png", 0.4, 3.5, 5.7, 1.15, "left");
   caption(s, "Grover search on three nuclear spins: oracle (red), diffusion operator (blue), r = 2. Thorvaldson2025 Fig. 4a, CC BY 4.0", 0.45, c.y + c.h + 0.02, 5.6, 0.3);
   bullets(s, ["Bell fidelities 97.5 ± 0.3, 97.7 ± 0.4, 96.8 ± 0.4%", "Grover finds the marked state at 98.87% of ideal"], 6.25, 3.75, 3.25, 1.2, 11.5);
-  src(s, "Thorvaldson2025 (²⁸Si, 3P + 1 e⁻ register; fidelities include SPAM for GHZ)");
+  src(s, "Thorvaldson2025 (²⁸Si, 3P + 1 e⁻ register; fidelities include SPAM)");
   notes(s, "Here is the quantum evidence, straight from the 2025 four-qubit paper. Top left: they reconstruct the full density matrix of a Bell state for each pair of phosphorus nuclei. The four tall bars in the corners are exactly what a maximally entangled state looks like; everything else should be zero. Fidelities are about 97% for every pair. Right: a three-qubit GHZ state, all three nuclei entangled, 96.2% fidelity including state preparation and measurement errors. Bottom: the Grover circuit they ran, an oracle that marks one of eight states and a diffusion operator, repeated twice; it found the marked state at 98.87% of the ideal probability. Likely question: what is tomography? Measuring many copies in different bases to rebuild the full quantum state.");
 }
 
@@ -465,7 +465,7 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
   s.addChart(pres.charts.BAR, [{ name: "write speed (nm/s)", labels: ["STM, atom-wide lines", "STM, 2 V / hundreds of nA", "EUV (equivalent)"], values: [10, 1000, 1e14] }],
     Object.assign(chartBase(), { x: 0.4, y: 1.0, w: 5.2, h: 3.6, barDir: "bar", chartColors: ["5B6770"], valAxisLogScaleBase: 10, valAxisMinVal: 1, valAxisMaxVal: 1e15,
       valAxisLabelFormatCode: "0E+0", showValue: true, dataLabelFormatCode: "0E+0", dataLabelColor: T.ink, dataLabelFontSize: 10, dataLabelPosition: "outEnd",
-      title: "EUV writes 11 orders of magnitude faster than STM", showLegend: false, valAxisTitle: "write speed (nm/s, log scale)", showValAxisTitle: true, catAxisLabelFontSize: 10 }));
+      title: "EUV writes 11–13 orders of magnitude faster than STM", showLegend: false, valAxisTitle: "write speed (nm/s, log scale)", showValAxisTitle: true, catAxisLabelFontSize: 10 }));
   bullets(s, ["STM: 10–1000 nm/s; precise mode ≈100 atoms/s", "EUV: equivalent ≈10¹⁴ nm/s", "Even 10⁷ MEMS tips over a 300 mm wafer stay orders of magnitude too slow for CMOS volumes"], 5.85, 1.15, 3.65, 3.2, 14);
   src(s, "Schofield2025 §2.2, §5.4");
   notes(s, "Here's the wall. The STM writes at 10 nm per second for atom-wide lines, up to about 1000 nm per second at 2 volts and hundreds of nanoamps. In atomically precise mode that's around 100 atoms a second. EUV lithography, as used in CMOS fabs, writes at an equivalent of about 10^14 nm per second, eleven orders of magnitude faster. Note the log axis. People have proposed massively parallel MEMS tip arrays, up to ten million tips over a 300 mm wafer, and the roadmap says even that stays orders of magnitude too slow for CMOS volumes. The number to remember: eleven orders of magnitude. Likely question: so is this a dead end? Not for qubit cores, which is where the hybrid idea next comes in.");
@@ -474,7 +474,7 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
 // ============================================================================ 22. Scaling with EUV
 {
   const s = newSlide("TWO_FIG", "Scaling: EUV photons instead of a tip", "Act 4");
-  bullets(s, ["First H removal from Si(001):H with monochromatic EUV (109 eV), driven by secondary electrons", "Doses up to 18 000 J/cm²: several minutes per chip with 300 W sources", "Hybrid flow: STM for qubits, EUV for contacts, gates and wiring"], 0.5, 1.05, 3.8, 2.9, 14);
+  bullets(s, ["First H removal from Si(001):H with monochromatic EUV (clear at 93 and 106 eV), driven by secondary electrons", "Doses up to 18 000 J/cm²: exposures of order minutes with 300 W sources", "Hybrid flow: STM for qubits, EUV for contacts, gates and wiring"], 0.5, 1.05, 3.8, 2.9, 14);
   const a = img(s, "F8_constantinou2024_fig5.png", 4.5, 1.0, 5.0, 2.95, "center");
   caption(s, "Proposed 4-stage UHV flow combining EUV and STM lithography. Reproduced from Constantinou et al., Nat. Commun. 15, 694 (2024) Fig. 5, CC BY 4.0", 4.5, a.y + a.h + 0.02, 5.0, 0.36);
   const b = img(s, "F6_schofield2025_s53_fig1_sem.jpg", 0.5, 3.95, 1.75, 1.1, "left");
@@ -547,7 +547,7 @@ const REFS = [
   ["Kane1998", "\"A silicon-based nuclear spin quantum computer,\" Nature 393, 133–137 (1998). doi:10.1038/30156"],
   ["Koch2019", "\"Spin read-out in atomic qubits in an all-epitaxial three-dimensional transistor,\" Nat. Nanotechnol. 14, 137–140 (2019). doi:10.1038/s41565-018-0338-1"],
   ["Lundgren2023", "\"Adsorption and thermal decomposition of triphenyl bismuth on silicon (001),\" J. Phys. Chem. C 127, 16433 (2023). doi:10.1021/acs.jpcc.3c03916"],
-  ["Lyding1994", "\"Nanoscale patterning and oxidation of H-passivated Si(100)-2×1 surfaces with an ultrahigh vacuum STM,\" Appl. Phys. Lett. 64, 2010–2012 (1994). doi:10.1063/1.111722"],
+  ["Lyding1994", "\"Nanoscale patterning and oxidation of H-passivated Si(100)-2×1 surfaces with an ultrahigh vacuum scanning tunneling microscope,\" Appl. Phys. Lett. 64, 2010–2012 (1994). doi:10.1063/1.111722"],
   ["Oberbeck2002", "\"Encapsulation of phosphorus dopants in silicon for the fabrication of a quantum computer,\" Appl. Phys. Lett. 81, 3197 (2002). doi:10.1063/1.1516859"],
   ["Ruess2004", "\"Toward atomic-scale device fabrication in silicon using scanning probe microscopy,\" Nano Lett. 4, 1969–1973 (2004). doi:10.1021/nl048808v"],
   ["Schofield2003", "\"Atomically precise placement of single dopants in Si,\" Phys. Rev. Lett. 91, 136104 (2003). doi:10.1103/PhysRevLett.91.136104"],

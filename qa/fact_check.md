@@ -184,3 +184,20 @@ Paper-internal conflicts kept visible rather than resolved: Constantinou2024 330
 | 23 | fit A = 6.05, 67.97, 102.99 MHz; rms 52 kHz, max 97 kHz; ν_e 39.068 GHz, ν_n 24.06 MHz | our least-squares fit of Reiner2024 Eq. 1 (isotropic A) | Derived |
 | 23 | f_Rabi = 4.82 / 28.1 µs = 172 kHz | Thorvaldson2025 Q and T2* | Derived |
 | 24 | ideal P = sin²(5θ) = 94.53%; 93.46/94.53 = 98.87% | our QuTiP state-vector sim; Thorvaldson2025 93.46%, 98.87% | Derived, matches paper |
+
+## Independent re-check of the final deck (22 items, `qa/independent_check.md`)
+Verified against the source texts, then fixed in `build_deck_final.js` and `notes/speaker_notes_final.json`:
+- Slide 5: 99.85% labelled as an upper-bound detection confidence (Jakob2022 title).
+- Slide 8: 2024 card now says corresponding author on Stock2024, co-author on Constantinou2024.
+- Slide 10: <5×10⁻¹¹ mbar attributed to the STM chamber; render caption cites Ren2016 and Xiang2025 for geometry.
+- Slides 14, 28: "2 nm unheated" (not "at RT"). Notes for 9, 14, 28 no longer claim bulk diffusion is negligible; Stock2020 says confinement is limited mainly by As solid-state diffusivity.
+- Slide 16 notes: N_s = 1.4×10¹⁴ cm⁻² is 0.21 ML, not 0.24.
+- Slide 18: 0.7⁵⁰ ≈ 1.8×10⁻⁸, so "~10⁻⁸" (notes keep 0.63⁵⁰ ≈ 10⁻¹⁰).
+- Slide 19: removed "≈0.6 nm²" and "33% better precision" (not in Stock2024); the 2×2 array used windows of 2–8 DBs, and the 97% comes from the 4-DB statistics.
+- Slide 21: Bell 99.5% / 97.0% marked as the best pairs.
+- Slide 22: the chart title said "~100×"; the real ratio is 17–45× (0.49–1.26 ms vs 28.1 µs). 35.6 s is now labelled T₂ (implanted, ²⁸Si), not T₂*. Notes use a ~200 mK electron temperature: hf/kT ≈ 9, polarisation ≈ 0.9998.
+- Slide 23: all fidelities include SPAM.
+- Slide 25: chart title "11–13 orders"; notes say 1000 nm/s keeps resolution, and precision is lost only in field-emission mode.
+- Slide 26: clear H removal at 93 and 106 eV; "exposure times of order minutes with 300 W sources" (Constantinou2024 abstract).
+- Slide 3 notes: ~200 ppm residual ²⁹Si. Slide 20 notes: room-temperature reaction implies a barrier below ≈0.78 eV.
+- References: full Lyding1994 title; Stock2020 licence written as "CC BY".

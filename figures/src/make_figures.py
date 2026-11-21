@@ -740,12 +740,12 @@ def coherence_times():
     ax.plot([12e-6], [1.88], "o", ms=9, color="#5B6770"); ax.text(12e-6 * 1.6, 1.88, "12 µs (Reiner2024)", va="center", fontsize=8, color=MUTED)
     for v in (1.26e-3, 0.49e-3, 0.60e-3): ax.plot([v], [1], "o", ms=9, color=AS_C, mec="white", mew=1)
     ax.text(1.26e-3 * 1.6, 1, "0.49–1.26 ms (Thorvaldson2025)", va="center", fontsize=8, color=MUTED)
-    ax.plot([35.6], [0], "D", ms=9, color=AS_C); ax.text(35.6 / 30, 0, "35.6 s (Schofield2025)", va="center", ha="right", fontsize=8, color=MUTED)
-    for y, lab in ((2, "electron spin T$_2^*$"), (1, "nuclear spin T$_2^*$"), (0, "best donor coherence")):
+    ax.plot([35.6], [0], "D", ms=9, color=AS_C); ax.text(35.6 / 30, 0, "35.6 s, T$_2$ (implanted, ²⁸Si)", va="center", ha="right", fontsize=8, color=MUTED)
+    for y, lab in ((2, "electron spin T$_2^*$"), (1, "nuclear spin T$_2^*$"), (0, "best donor T$_2$")):
         ax.text(2e-6 / 1.15, y, lab, ha="right", va="center", fontsize=9, color=INK)
     ax.set_xscale("log"); ax.set_xlim(2e-6, 3e2); ax.set_ylim(-0.6, 2.6); ax.set_yticks([])
     ax.set_xlabel("coherence time (s, log scale)", fontsize=9.5)
-    ax.set_title("Nuclear spins hold coherence ~100× longer than electrons", fontsize=9.5, loc="left", color=INK, x=-0.45)
+    ax.set_title("Nuclear T$_2^*$ is 17–45× the electron's (same chip)", fontsize=9.5, loc="left", color=INK, x=-0.45)
     _clean(ax); ax.spines["left"].set_visible(False)
     save(fig, "C_coherence_times.png")
 

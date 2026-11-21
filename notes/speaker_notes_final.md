@@ -4,7 +4,7 @@ Same text as the speaker notes inside atom_by_atom_silicon_final.pptx. Physics, 
 
 ## 15-minute timing plan
 
-Slides 1–29 are about 3,281 words, roughly 22 minutes read aloud. For 15 minutes, keep each slide's equation and its one worked number, and save the "Likely question" lines for Q&A.
+Slides 1–29 are about 3,426 words, roughly 23 minutes read aloud. For 15 minutes, keep each slide's equation and its one worked number, and save the "Likely question" lines for Q&A.
 
 | Slides | Block | Target |
 |---|---|---|
@@ -31,9 +31,9 @@ _112 words_
 
 ## Slide 3: A single donor atom is a natural qubit
 
-Treat the donor as hydrogen in a dielectric. The effective Bohr radius is a_B = ε_r (m_e/m*) a_0, so silicon's large permittivity and small effective mass stretch hydrogen's 0.053 nm to about 2 nm. Two spins come for free: the electron and the phosphorus nucleus with I = 1/2, giving a 2 × 2 = 4-level system. Electron transitions are driven by ESR, nuclear ones by NMR. Readout converts spin to charge: a spin-up electron can tunnel into a nearby single-electron transistor, a spin-down one cannot, and the SET current changes. In isotopically purified ²⁸Si there are no stray nuclear spins, which is why ion-implanted donors there reach 35.6 s coherence and gates near 99.99%. Likely question: is it really hydrogen-like? To first order; silicon's six conduction-band valleys split the ground state.
+Treat the donor as hydrogen in a dielectric. The effective Bohr radius is a_B = ε_r (m_e/m*) a_0, so silicon's large permittivity and small effective mass stretch hydrogen's 0.053 nm to about 2 nm. Two spins come for free: the electron and the phosphorus nucleus with I = 1/2, giving a 2 × 2 = 4-level system. Electron transitions are driven by ESR, nuclear ones by NMR. Readout converts spin to charge: a spin-up electron can tunnel into a nearby single-electron transistor, a spin-down one cannot, and the SET current changes. In isotopically purified ²⁸Si only about 200 ppm of silicon-29 remains, so stray nuclear spins are rare, which is why ion-implanted donors there reach 35.6 s coherence and gates near 99.99%. Likely question: is it really hydrogen-like? To first order; silicon's six conduction-band valleys split the ground state.
 
-_132 words_
+_139 words_
 
 ## Slide 4: Why one site matters: wavefunction overlap
 
@@ -67,9 +67,9 @@ _113 words_
 
 ## Slide 9: The process: 11 steps, each an EE143 module
 
-This is the process traveler, with the EE143 module for each step. The thermal history is the key design constraint: hot steps first, then everything at or below 500 °C. Steps one to three prepare and passivate the surface. Step four is the lithography. Steps five and six are gas-phase doping and activation, at 350 °C. Steps seven and eight bury the dopants by epitaxy at 250 °C. Steps nine to eleven are alignment, reactive ion etching, aluminium contacts and electrical test. The design rule is diffusion: with D = D₀ e^(−E_a/kT), every step after patterning keeps 2√(Dt) far below one lattice site. Likely question: which step limits throughput? Step four, the tip.
+This is the process traveler, with the EE143 module for each step. The thermal history is the key design constraint: hot steps first, then everything at or below 500 °C. Steps one to three prepare and passivate the surface. Step four is the lithography. Steps five and six are gas-phase doping and activation, at 350 °C. Steps seven and eight bury the dopants by epitaxy at 250 °C. Steps nine to eleven are alignment, reactive ion etching, aluminium contacts and electrical test. The design rule is diffusion: with D = D₀ e^(−E_a/kT), every step after patterning must keep 2√(Dt) to a fraction of a nanometre, and because D is exponential in temperature the hottest late step sets the budget. Likely question: which step limits throughput? Step four, the tip.
 
-_113 words_
+_129 words_
 
 ## Slide 10: Steps 1–3 · Clean surface, 1-atom resist
 
@@ -97,9 +97,9 @@ _113 words_
 
 ## Slide 14: Steps 7–8 · Burying the dopants
 
-Burying the dopants is a thermal-budget optimisation. Epitaxial quality wants higher temperature, dopant confinement wants lower. Phosphorus grown over at a constant 250 °C segregates about 5 nm toward the surface. For arsenic: 2 nm at room temperature to lock the atoms, a 500 °C, 15-second RTA that leaves a confined, electrically active layer, then 28 nm at 250 °C. At 0.003 nm/s, 28 nm takes 9333 seconds, about 2.6 hours. Bulk diffusion using the textbook Arrhenius parameters gives 2√(Dt) around 10⁻⁴ nm even for the RTA step, so any broadening comes from surface segregation during growth, not bulk diffusion. Likely question: why not grow everything cold? Below a critical thickness cold silicon grows epitaxially; beyond it, the film turns amorphous.
+Burying the dopants is a thermal-budget optimisation. Epitaxial quality wants higher temperature, dopant confinement wants lower. Phosphorus grown over at a constant 250 °C segregates about 5 nm toward the surface. For arsenic: 2 nm grown unheated to lock the atoms, a 500 °C, 15-second RTA that leaves a confined, electrically active layer, then 28 nm at 250 °C. At 0.003 nm/s, 28 nm takes 9333 seconds, about 2.6 hours. Textbook bulk Arrhenius parameters predict a vanishingly small 2√(Dt) for the RTA, yet the measured arsenic layer is limited mainly by arsenic's own solid-state diffusion: in a δ-layer this dense and defect-rich, the effective diffusivity is far above the bulk value. That is why the RTA is kept to 15 seconds. Likely question: why not grow everything cold? Below a critical thickness cold silicon grows epitaxially; beyond it, the film turns amorphous.
 
-_121 words_
+_142 words_
 
 ## Slide 15: Steps 9–11 · Back to the outside world
 
@@ -109,7 +109,7 @@ _114 words_
 
 ## Slide 16: Proof 1: the buried δ-layer conducts
 
-Electrical proof uses sheet resistance. For a 2D sheet, R_s = 1/(q N_s μ). Measured: 1.6 kΩ per square and μ = 28 cm²/V·s. Solve: N_s = 1/(1.6×10⁻¹⁹ × 1600 × 28) ≈ 1.4×10¹⁴ cm⁻². Compare with the surface atom density, 6.78×10¹⁴ cm⁻²: that is about 0.24 monolayer, matching the saturation coverage measured by STM. Activation is 81%, or 88% after a 560 °C anneal. Photoemission shows the electrons confined to less than 1 nm, with arsenic confining better than phosphorus. X-ray fluorescence moves dopants less than 0.2 Å. Likely question: why is mobility low? At 10¹⁴ cm⁻² in one atomic plane, electrons scatter off the ionised dopants they came from.
+Electrical proof uses sheet resistance. For a 2D sheet, R_s = 1/(q N_s μ). Measured: 1.6 kΩ per square and μ = 28 cm²/V·s. Solve: N_s = 1/(1.6×10⁻¹⁹ × 1600 × 28) ≈ 1.4×10¹⁴ cm⁻². Compare with the surface atom density, 6.78×10¹⁴ cm⁻²: that is about 0.21 monolayer, roughly one dopant per five surface sites. Activation is 81%, or 88% after a 560 °C anneal. Photoemission shows the electrons confined to less than 1 nm, with arsenic confining better than phosphorus. X-ray fluorescence moves dopants less than 0.2 Å. Likely question: why is mobility low? At 10¹⁴ cm⁻² in one atomic plane, electrons scatter off the ionised dopants they came from.
 
 _111 words_
 
@@ -127,15 +127,15 @@ _107 words_
 
 ## Slide 19: Curson's fix: arsenic in a 4-site window
 
-The arsenic solution is a geometric design rule. Arsine's fast dissociation means one molecule needs fewer free sites, so a four-site window, two dimers, admits exactly one. Single-atom yield is 97 ± 2%. The window covers one in four lattice sites, about 0.6 nm², giving 33% better positional precision than phosphorus. With p = 0.97, a defect-free 2×2 array has probability 0.97⁴ ≈ 0.89, and it was achieved. Iterating lithography and dosing on failed sites raises the effective p toward one, because a second attempt only multiplies the failure probability. Likely question: why not three sites? Smaller windows let hydrogen recapture the site before arsine adsorbs.
+The arsenic solution is a geometric design rule. Arsine's fast dissociation means one molecule needs fewer free sites, so a four-site window, two dimers, admits exactly one. Single-atom yield is 97 ± 2%, with each atom placed within four lattice sites. With p = 0.97, a 2×2 array of ideal windows would be defect-free with probability 0.97⁴ ≈ 0.89. The first defect-free 2×2 array was actually made with windows of two to eight dangling bonds; the 97% comes from the later four-site statistics. Iterating lithography and dosing on failed sites raises the effective p toward one, because a second attempt only multiplies the failure probability. Likely question: why not three sites? Smaller windows let hydrogen recapture the site before arsine adsorbs.
 
-_106 words_
+_121 words_
 
 ## Slide 20: Beyond Si:P: new dopants, new hosts
 
-The same chemistry generalises. On germanium, arsine incorporates at room temperature with no anneal, and hydrogen leaves by 330 °C. That removes a thermal step: if incorporation is spontaneous at 300 K, the activation barrier is low enough that kT ≈ 26 meV suffices. Bismuth is the other direction: a heavy donor with a large nucleus, delivered by triphenyl-bismuth, a molecule about 1 nm across. Its phenyl groups detach near 140 °C and bismuth incorporates near 360 °C, close to the 380 °C limit of the hydrogen resist. Different precursor, different host, same toolbox. Likely question: why germanium? Germanium donors have larger Bohr radii and a stronger Stark effect, but this talk stays with silicon.
+The same chemistry generalises. On germanium, arsine incorporates at room temperature with no anneal, and hydrogen leaves by 330 °C. That removes a thermal step: if incorporation is spontaneous at 300 K, the barrier must be below roughly 0.8 eV, since with an attempt frequency near 10¹³ per second, 10¹³·e^(−E_a/kT) stays above one per second only up to E_a ≈ 30 kT ≈ 0.78 eV. Bismuth is the other direction: a heavy donor with a large nucleus, delivered by triphenyl-bismuth, a molecule about 1 nm across. Its phenyl groups detach near 140 °C and bismuth incorporates near 360 °C, close to the 380 °C limit of the hydrogen resist. Different precursor, different host, same toolbox. Likely question: why germanium? Germanium donors have larger Bohr radii and a stronger Stark effect, but this talk stays with silicon.
 
-_115 words_
+_136 words_
 
 ## Slide 21: The payoff: from devices to processors
 
@@ -145,9 +145,9 @@ _110 words_
 
 ## Slide 22: The qubit as a spin Hamiltonian, and its spectrum
 
-The physics in one equation: H = γₑ B·S + Σ γₙ B·Iᵢ + Σ S·Aᵢ·Iᵢ, electron Zeeman, nuclear Zeeman, hyperfine. Three nuclei with A = 6, 68 and 103 MHz shift the electron resonance by ±A/2 each, so there are 2³ = 8 ESR lines. Check: the span is A₁ + A₂ + A₃ = 177 MHz, exactly 39.157 minus 38.980 GHz. So the electron frequency reads out the nuclear register. Thermal check: hf at 39 GHz is 162 µeV, kT at 15 mK is 1.3 µeV, ratio 125, so the electron is fully polarised. Coherence: electron T₂* 28 µs, nuclei 0.5 to 1.3 ms. Likely question: why does A depend on E? Gate fields reshape the wavefunction at the nucleus.
+The physics in one equation: H = γₑ B·S + Σ γₙ B·Iᵢ + Σ S·Aᵢ·Iᵢ, electron Zeeman, nuclear Zeeman, hyperfine. Three nuclei with A = 6, 68 and 103 MHz shift the electron resonance by ±A/2 each, so there are 2³ = 8 ESR lines. Check: the span is A₁ + A₂ + A₃ = 177 MHz, exactly 39.157 minus 38.980 GHz. So the electron frequency reads out the nuclear register. Thermal check: the fridge is at 15 mK but the electron sits near 200 mK. hf at 39 GHz is 161 µeV, kT at 200 mK is 17 µeV, ratio about 9, so tanh(hf/2kT) ≈ 0.9998 and the electron is still polarised. Coherence: electron T₂* 28 µs, nuclei 0.5 to 1.3 ms. Likely question: why does A depend on E? Gate fields reshape the wavefunction at the nucleus.
 
-_122 words_
+_140 words_
 
 ## Slide 23: Entanglement, measured by full state tomography
 
@@ -163,15 +163,15 @@ _106 words_
 
 ## Slide 25: The next wall: throughput
 
-Throughput is an EE scaling problem. A tip in precise mode writes about 100 atoms per second. One square centimetre of Si(001) has 6.78×10¹⁴ surface sites, so writing it serially takes 6.8×10¹² seconds, about 215,000 years. Faster modes reach 1000 nm per second but lose atomic precision. EUV lithography exposes the equivalent of 10¹⁴ nm per second, eleven orders of magnitude faster, because every photon in the field exposes in parallel. Even ten million tips across a 300 mm wafer remain orders of magnitude too slow for chip volumes. The answer has to be parallel exposure for everything except the qubit cores. Likely question: can tips run faster? Speed trades directly against precision.
+Throughput is an EE scaling problem. A tip in precise mode writes about 100 atoms per second. One square centimetre of Si(001) has 6.78×10¹⁴ surface sites, so writing it serially takes 6.8×10¹² seconds, about 215,000 years. At 2 V and hundreds of nanoamps the tip writes 1000 nm per second and keeps its patterning resolution; atomic precision is lost only in field-emission mode. EUV lithography exposes the equivalent of 10¹⁴ nm per second: eleven orders of magnitude faster than 1000 nm per second, thirteen faster than the 10 nm per second atom-wide lines, because every photon in the field exposes in parallel. Even ten million tips across a 300 mm wafer remain orders of magnitude too slow for chip volumes. The answer has to be parallel exposure for everything except the qubit cores. Likely question: can tips run faster? Speed trades directly against precision.
 
-_113 words_
+_144 words_
 
 ## Slide 26: Scaling: EUV photons instead of a tip
 
-EUV can strip the same hydrogen resist. Photon energy E = hc/λ: industrial 13.5 nm light is 92 eV, and hydrogen removal was shown at 109 eV. The mechanism is indirect: photons are absorbed in the silicon, which emits secondary electrons, and those electrons break Si–H bonds, the same bond-breaking physics as under the STM tip. The cost is dose: up to 18,000 J/cm², several minutes per chip with a 300 W source. Resistless EUV gratings at 75 nm half-pitch show the photon route works without organic resist. The proposed flow: EUV for leads and wiring, STM for qubit cores. Likely question: resolution? Diffraction, R = k₁λ/NA, limits EUV to roughly ten nanometres.
+EUV can strip the same hydrogen resist. Photon energy E = hc/λ: industrial 13.5 nm light is 92 eV, and clear hydrogen removal was shown at 93 and 106 eV. The mechanism is indirect: photons are absorbed in the silicon, which emits secondary electrons, and those electrons break Si–H bonds, the same bond-breaking physics as under the STM tip. The cost is dose: up to 18,000 J/cm², exposure times of order minutes with 300 W sources. Resistless EUV gratings at 75 nm half-pitch show the photon route works without organic resist. The proposed flow: EUV for leads and wiring, STM for qubit cores. Likely question: resolution? Diffraction, R = k₁λ/NA, limits EUV to roughly ten nanometres.
 
-_113 words_
+_116 words_
 
 ## Slide 27: Our prototype: a 2×2 arsenic register
 
@@ -181,9 +181,9 @@ _107 words_
 
 ## Slide 28: Prototype traveler, mapped to EE143
 
-The traveler, as numbers. Hot steps first: 1200 °C flash, 600 °C outgas. After patterning, the maximum is a 500 °C, 15-second RTA, then 350 °C incorporation and 250 °C overgrowth. Why that ordering works: diffusion length is 2√(Dt) with D = D₀ e^(−E_a/kT), and the exponential makes the brief 500 °C step dominate the post-pattern budget while still moving dopants only about 10⁻⁴ nm. Compare our own lab: a 1050 °C drive-in for about 40 minutes moves phosphorus hundreds of nanometres. Same physics, opposite goal. Every row maps onto an EE143 module. Likely question: where is the risk? The RTA: too hot or too long and the δ-layer broadens.
+The traveler, as numbers. Hot steps first: 1200 °C flash, 600 °C outgas. After patterning, the maximum is a 500 °C, 15-second RTA, then 350 °C incorporation and 250 °C overgrowth. Why that ordering works: diffusion length is 2√(Dt) with D = D₀ e^(−E_a/kT), and the exponential makes the brief 500 °C step dominate the post-pattern budget, and in a dense δ-layer arsenic diffuses far faster than the bulk textbook value, so this step sets the final confinement. Compare our own lab: a 1050 °C drive-in for about 40 minutes moves phosphorus hundreds of nanometres. Same physics, opposite goal. Every row maps onto an EE143 module. Likely question: where is the risk? The RTA: too hot or too long and the δ-layer broadens.
 
-_110 words_
+_123 words_
 
 ## Slide 29: Takeaways: one atom, exactly where you want it
 
@@ -199,15 +199,15 @@ _70 words_
 
 ## Slide 31: References (2 of 2)
 
-Not presented. Q&A equation sheet, continued. Spin Hamiltonian H = γₑB·S + Σγₙ B·Iᵢ + Σ S·Aᵢ·Iᵢ; ESR lines at f₀ ± A₁/2 ± A₂/2 ± A₃/2. Polarisation needs hf ≫ kT: 162 µeV versus 1.3 µeV. Conditional flip off resonance ≤ Ω²/(Ω² + Δ²). Bell fidelity F = ⟨ψ|ρ|ψ⟩. Grover success sin²((2r+1)θ), sin θ = 1/√N. Hubbard H = −tΣc†c + UΣn↑n↓; Mott regime U ≫ t. EUV photon energy E = hc/λ; resolution R = k₁λ/NA.
+Not presented. Q&A equation sheet, continued. Spin Hamiltonian H = γₑB·S + Σγₙ B·Iᵢ + Σ S·Aᵢ·Iᵢ; ESR lines at f₀ ± A₁/2 ± A₂/2 ± A₃/2. Polarisation needs hf ≫ kT: 161 µeV versus 17 µeV at a 200 mK electron temperature, polarisation tanh(hf/2kT) ≈ 0.9998. Conditional flip off resonance ≤ Ω²/(Ω² + Δ²). Bell fidelity F = ⟨ψ|ρ|ψ⟩. Grover success sin²((2r+1)θ), sin θ = 1/√N. Hubbard H = −tΣc†c + UΣn↑n↓; Mott regime U ≫ t. EUV photon energy E = hc/λ; resolution R = k₁λ/NA.
 
-_78 words_
+_88 words_
 
 ## Slide 32: Backup · Alternate titles
 
-Backup. Alternate titles, plus the 4×4 arsenic array in the image. With non-ideal windows, 10 to 12 of the 15 checked sites held single atoms, up to 80%. That number is a useful check on the p^n argument: at p = 0.8, a perfect sixteen-site array would occur 0.8¹⁶ ≈ 3% of the time, which is why the defect-free result was the 2×2 array with ideal windows. Window geometry matters as much as precursor chemistry. Use this slide only if asked how the larger array performed.
+Backup. Alternate titles, plus the 4×4 arsenic array in the image. With non-ideal windows, 10 to 12 of the 15 checked sites held single atoms, up to 80%. That number is a useful check on the p^n argument: at p = 0.8, a perfect sixteen-site array would occur 0.8¹⁶ ≈ 3% of the time, which is why the defect-free demonstration was a small 2×2 array. Window geometry matters as much as precursor chemistry. Use this slide only if asked how the larger array performed.
 
-_86 words_
+_84 words_
 
 ## Slide 33: Backup · Monte Carlo of 4×4 arrays
 
