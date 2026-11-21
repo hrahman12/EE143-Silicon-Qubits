@@ -121,14 +121,14 @@ const chartBase = () => ({ fontFace: T.font, catAxisLabelColor: T.ink, valAxisLa
 }
 // ============================================================================ 4. Why a donor
 {
-  const s = newSlide("TWO_FIG", "A single donor atom is a natural qubit", "Act 1");
-  bullets(s, ["P nucleus (I = 1/2) + its electron = 4 spin states", "Electron Bohr radius ~2 nm; exchange depends on exact donor position, so atomic precision matters", "In ²⁸Si: coherence up to 35.6 s and single-qubit gates close to 99.99% (ion-implanted donors)"], 0.5, 1.1, 3.6, 2.7, 14);
+  const s = newSlide("TWO_FIG", "Donor physics: why the lattice site sets the qubit", "Act 1");
+  bullets(s, ["Ground state: 1sA₁ multivalley wavefunction built from the six Δ conduction-band minima; a_B ~2 nm", "Valley interference makes exchange J oscillate with position; placing donors along chosen crystal directions removes it", "Hyperfine Stark ~70 MHz/(MV m⁻¹): local addressing at ~99.99%; two-qubit gates in 0.8 ns"], 0.5, 1.05, 3.65, 2.3, 12.5);
   img(s, "O_levels_4state.png", 0.6, 3.3, 2.2, 1.75, "left");
   caption(s, "Spin levels, schematic (ours)", 2.8, 4.6, 1.3, 0.45);
   const b = img(s, "F5_schofield2025_s32_fig1.png", 4.4, 1.05, 5.1, 3.6, "center");
   caption(s, "Donor control and readout: SET charge sensor + on-chip microwave antenna (a); ion-implanted device (b). Reproduced from Schofield et al., Nano Futures 9, 012001 (2025) §3.2 Fig. 1, CC BY 4.0", 4.4, b.y + b.h + 0.04, 5.1, 0.45);
-  src(s, "Schofield2025 §1, §3.2");
-  notes(s, "Why bother with single atoms? A phosphorus donor brings two spins for free: its nucleus with spin one-half and its bound electron. Two times two gives four states, shown in my sketch on the left; we drive the electron with ESR and the nucleus with NMR. On the right is how you read it out: a single-electron transistor senses charge, spin-dependent tunnelling turns spin into charge, and an on-chip antenna delivers the microwaves. In silicon-28, coherence reaches 35.6 seconds, which is enormous for a qubit. The catch is the electron's Bohr radius of about 2 nm: the exchange coupling between two donors depends on their exact lattice positions. That's why fabrication precision is the whole game. Likely question: what's ESR? Electron spin resonance, flipping the electron with microwaves.");
+  src(s, "Schofield2025 §1, §2.1 (1sA₁, valleys), §3.1 (valley interference, Stark, 0.8 ns), §3.2");
+  notes(s, "The donor electron's ground state is the 1s A-one state, built from silicon's six conduction-band valleys, Bohr radius ~2 nm. Valley interference makes exchange oscillate site by site; placing donors along chosen crystal directions removes it. Electric fields shift the hyperfine coupling by about 70 MHz per MV per metre, which is how gates address one qubit at ~99.99% without touching its neighbour. Right: readout by spin-to-charge conversion on an SET, with an on-chip microwave antenna. The left sketch is the four spin levels of one donor. Likely question: why not just calibrate each J? You can tune it with gates, but the roadmap stresses J depends strongly on the exact site, so precision comes first.");
 }
 
 // ============================================================================ 4b. Quantum coupling to scale
@@ -393,13 +393,15 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
   const n = Array.from({ length: 16 }, (_, i) => i + 1);
   s.addChart(pres.charts.LINE, [
     { name: "P: 0.7ⁿ", labels: n.map(String), values: n.map((k) => Math.pow(0.7, k)) },
-    { name: "As: 0.97ⁿ", labels: n.map(String), values: n.map((k) => Math.pow(0.97, k)) }],
-    Object.assign(chartBase(), { x: 0.4, y: 0.95, w: 4.6, h: 3.05, chartColors: [T.P, T.As], lineSize: 2, lineDataSymbol: "none",
+    { name: "As: 0.97ⁿ", labels: n.map(String), values: n.map((k) => Math.pow(0.97, k)) },
+    { name: "As ± 2% (0.95ⁿ, 0.99ⁿ)", labels: n.map(String), values: n.map((k) => Math.pow(0.99, k)) },
+    { name: " ", labels: n.map(String), values: n.map((k) => Math.pow(0.95, k)) }],
+    Object.assign(chartBase(), { x: 0.4, y: 0.95, w: 4.6, h: 3.05, chartColors: [T.P, T.As, "9ED8D8", "9ED8D8"], lineSize: 2, lineDataSymbol: "none",
       title: "Array yield collapses unless per-site yield is near 1", showLegend: true, legendPos: "b", valAxisMaxVal: 1, valAxisMinVal: 0, valAxisLabelFormatCode: "0%",
       catAxisTitle: "atoms in array n", showCatAxisTitle: true, valAxisTitle: "array yield", showValAxisTitle: true }));
   text(s, "As 0.97¹⁶ ≈ 61%", 3.45, 1.62, 1.45, 0.25, { fontSize: 10, color: T.ink, bold: true });
   text(s, "P 0.7¹⁶ < 0.4%", 3.3, 2.65, 1.4, 0.25, { fontSize: 10, color: T.ink, bold: true });
-  bullets(s, ["P fills an ideal 3-dimer window 63 ± 10% of the time (\"less than 70%\" in 6-site windows)", "Array yield 0.7ⁿ: 16 P atoms <0.4%; a ~50-donor array ~10⁻¹⁰. Modelled fix: dose hot (150 °C, >1 L)"], 0.5, 4.08, 4.6, 1.0, 11.5);
+  bullets(s, ["P fills an ideal 3-dimer window 63 ± 10% of the time (\"<70%\" in 6-site windows)", "0.7ⁿ: 16 P <0.4%; ~50 donors ~10⁻¹⁰. As ±2% ⇒ 44–85% at n = 16; 24/24 adsorptions ⇒ 95% CI 86–100% (ours)"], 0.5, 4.05, 4.6, 1.05, 10.5);
   const b = img(s, "O_yield_surface3d.png", 5.2, 1.0, 4.3, 3.3, "center");
   caption(s, "The same law in 3D: array yield pⁿ against per-site yield p and array size n (our model). Orange and teal lines are the measured P (0.7) and As (0.97) yields.", 5.2, b.y + b.h + 0.05, 4.3, 0.55);
   src(s, "Ivie2021 (incl. kinetic model); Stock2024; Schofield2025 §4.1. As curve and 3D surface are our model");
@@ -479,6 +481,22 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
   notes(s, "Now the payoff: processors. 2019 gave the first exchange gate between two phosphorus donor electrons, about 800 picoseconds, and a 3D device with stacked dopant layers aligned within 5 nm. In 2025 a four-qubit processor, three phosphorus nuclei plus one electron in silicon-28, ran Grover's search; the bar chart shows the marked state found 93.46% of the time, 98.87% of ideal. And an 11-qubit processor linked a four-phosphorus and a five-phosphorus register by exchange: Bell states 99.5% within a register, 97% across. Please read the caveat box: 2019 used natural silicon and electron spins, 2025 used silicon-28 and nuclear spins, so the numbers aren't apples to apples. Likely question: are these Curson's devices? No, these are context papers from other groups using the same fabrication.");
 }
 
+// ============================================================================ Q3. Figures of merit vs fault tolerance
+{
+  const s = newSlide("TWO_FIG", "Figures of merit: how close to fault tolerance?", "Act 3");
+  const labels = ["electron", "nucleus 1", "nucleus 2", "nucleus 3"];
+  s.addChart(pres.charts.BAR, [
+    { name: "Qubit quality Q = T₂*·f_Rabi", labels, values: [4.82, 14.14, 11.84, 18.86] },
+    { name: "Gate quality Q = T₂^Rabi·f_Rabi", labels, values: [34, 797, 84, 69] }],
+    Object.assign(chartBase(), { x: 0.4, y: 1.0, w: 4.9, h: 3.4, barDir: "col", barGrouping: "clustered", chartColors: ["9AA3AC", T.As],
+      valAxisLogScaleBase: 10, valAxisMinVal: 1, valAxisMaxVal: 1000, valAxisLabelFormatCode: "0", showValue: true, dataLabelFontSize: 8.5, dataLabelColor: T.ink, dataLabelFormatCode: "0.#",
+      title: "Nuclear qubits survive tens to hundreds of operations per coherence time", titleFontSize: 10.5, showLegend: true, legendPos: "b", legendFontSize: 9, barGapWidthPct: 60 }));
+  bullets(s, ["Thorvaldson2025: all four single-qubit fidelities > 99.9%; CZ 99.32–99.65%", "Surface codes are 2D and assume independent errors, but nearby donors share field noise: correlated errors", "Proposed fix: engineer a >800 MHz field gradient between qubits; predicted CNOT 99.98% for a 2P–3P pair"], 5.5, 1.05, 4.0, 3.2, 11.5);
+  callout(s, "Grad-level question: is the error model correlated? That decides whether threshold arguments apply.", 5.5, 4.25, 4.0, 0.75, { fontSize: 11 });
+  src(s, "Thorvaldson2025 (Q factors, fidelities); Schofield2025 §2.1 p. 10 (correlated errors), §3.1 p. 25 (>800 MHz gradient, 99.98%, KRANZ2023B)");
+  notes(s, "Judge a qubit by dimensionless figures of merit, not one fidelity. Thorvaldson report the qubit quality factor, T2-star times the Rabi frequency, and the gate quality factor using the Rabi decay time. The electron gets about 5 and 34; the nuclei 12 to 19 and up to 797, which is why nuclei carry the data. But fault tolerance is not just a threshold: surface codes assume errors are independent, and the roadmap points out that donors only nanometres apart see the same electric-field noise, so their errors correlate. One proposed fix is to engineer a magnetic field gradient above 800 MHz between qubits, with predicted CNOT fidelities of 99.98% for a 2P–3P pair. Likely question: are these above threshold? Thorvaldson say yes for their gates, under standard independent-error assumptions.");
+}
+
 // ============================================================================ 20. Many-body physics
 {
   const s = newSlide("TWO_FIG", "Beyond qubits: Hubbard and topological physics", "Act 3");
@@ -556,6 +574,24 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
   notes(s, "And here's the traveler for that prototype, every step with its recipe and the EE143 module it maps to. It's a normal process flow: clean and bake, coat a resist, write it, pre-deposit dopant from the gas phase, drive in, RTA, epitaxy, alignment marks, etch, metal, and a Hall measurement. On the right I plotted each step's peak temperature. The two hot steps, outgas and the 1200 °C flash, happen before any patterning. After the pattern exists, nothing exceeds the 500 °C, 15-second RTA. That's the design principle: front-load the heat, then protect the atoms. Likely question: where does it break? Step 4 throughput, which is why the EUV hybrid matters.");
 }
 
+// ============================================================================ Open problems
+{
+  const s = newSlide("TWO_FIG", "Open problems: where the research is now", "Act 4");
+  const rows = [
+    ["Throughput", "Serial writing at 0.768 nm resolution: >200 h per µm² (Tennant's law)", "Massive tip parallelism; EUV for coarse layers", "Schofield2025 §5.5; Constantinou2024"],
+    ["Yield at scale", "~50-donor array ≈10⁻¹⁰ at 63% per site (P)", "As 4-site windows (97 ± 2%); hot dosing (model)", "Ivie2021; Stock2024"],
+    ["Charge noise", "Single Si/SiO₂ traps switch (telegraph noise); ensembles give 1/f", "Bury qubits in epitaxial Si away from interfaces", "Cowie2024; Schofield2025 §3.1"],
+    ["Coupling registers", "Bell 97.0% across vs 99.5% within registers", "Placement along chosen axes; field gradients", "Edlbauer2025; Schofield2025 §3.1"]];
+  const H = (t) => ({ text: t, options: { bold: true, fill: { color: "F2F4F6" } } });
+  s.addTable([[H("Problem"), H("The number"), H("Proposed direction"), H("Source")], ...rows.map((r) => [{ text: r[0], options: { bold: true } }, r[1], r[2], { text: r[3], options: { color: T.muted, fontSize: 8.5 } }])],
+    { x: 0.5, y: 1.0, w: 6.0, colW: [1.05, 2.05, 1.75, 1.15], fontFace: T.font, fontSize: 9.5, color: T.ink, valign: "middle", rowH: [0.3, 0.75, 0.62, 0.75, 0.68], border: { type: "solid", pt: 0.75, color: "E0E4E8" } });
+  const b = img(s, "F26_cowie2024_fig3rts.jpg", 6.7, 1.0, 2.85, 1.6, "center");
+  caption(s, "Telegraph noise from one Si/SiO₂ trap, imaged by fm-AFM. Cowie, Constantinou, Curson, Stock & Grütter, PNAS 121, e2404456121 (2024) Fig. 3, CC BY 4.0", 6.7, b.y + b.h + 0.03, 2.85, 0.75);
+  callout(s, "Common thread: every problem is a materials or fabrication problem first, which is why this is an EE143 topic.", 6.7, 3.55, 2.85, 1.0, { fontSize: 10.5 });
+  src(s, "As listed in the table; 'proposed direction' entries are the papers' own proposals");
+  notes(s, "If you were starting a PhD here, these are the open problems, each with a number. Throughput: Tennant's law says a serial tool at 0.768 nm resolution needs over 200 hours per square micron, so you need massive parallelism or EUV. Yield: at 63% per site a 50-donor array works about once in ten billion tries, which is what Curson's arsenic chemistry attacks. Noise: Curson's group, with McGill, imaged a single trap at the silicon–oxide interface switching back and forth, and showed many such traps add up to 1/f noise; that's why qubits are buried in epitaxial silicon. Coupling: entanglement across registers is 97% versus 99.5% within one. Likely question: which is hardest? The papers don't rank them; throughput is the one with no demonstrated solution yet.");
+}
+
 // ============================================================================ 25. Takeaways
 {
   const s = newSlide("TITLE_ONLY", "Takeaways: one atom, exactly where you want it", "Wrap-up");
@@ -606,6 +642,7 @@ const REFS = [
   ["Achal2018", "\"Lithography for robust and editable atomic-scale silicon devices and memories,\" Nat. Commun. 9, 2778 (2018). doi:10.1038/s41467-018-05171-y"],
   ["Siegl2025", "\"Imaging the acceptor wave function anisotropy in silicon,\" Nano Lett. 25, 13996 (2025). doi:10.1021/acs.nanolett.5c02675"],
   ["Leeuwenhoek2020", "\"Fabrication of on-chip probes for double-tip scanning tunneling microscopy,\" Microsyst. Nanoeng. 6, 99 (2020). doi:10.1038/s41378-020-00209-y"],
+  ["Cowie2024", "\"Spatially resolved random telegraph fluctuations of a single trap at the Si/SiO₂ interface,\" PNAS 121, e2404456121 (2024). doi:10.1073/pnas.2404456121"],
   ["Kane2000", "\"Silicon-based quantum computation,\" Fortschr. Phys. 48, 1023–1041 (2000). doi:10.1002/1521-3978(200009)48:9/11<1023::AID-PROP1023>3.0.CO;2-J"],
   ["OBrien2001", "\"Towards the fabrication of phosphorus qubits for a silicon quantum computer,\" Phys. Rev. B 64, 161401 (2001). doi:10.1103/PhysRevB.64.161401"],
   ["Ren2016", "\"Origin of symmetric dimer images of Si(001) observed by low-temperature scanning tunneling microscopy,\" Sci. Rep. 6, 27868 (2016). doi:10.1038/srep27868"],

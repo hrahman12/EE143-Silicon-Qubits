@@ -59,3 +59,5 @@ F24,"22, 23, 2",F24_thorvaldson2025_fig1bc/fig2bd/fig3b/fig4a.png,Thorvaldson202
 F25,25,F25_kiczynski2022_fig1.jpg,Kiczynski2022,Fig. 1,https://doi.org/10.1038/s41586-022-04706-0 (PMC9217742),CC BY 4.0,"Kiczynski et al., Nature 606, 694 (2022) Fig. 1, CC BY 4.0"
 C-coherence,22,C_coherence_times.png,Thorvaldson2025; Reiner2024; Schofield2025 §3.2,,,original chart (this project),log dot plot of T2*
 C-ssh,25,C_ssh_spectrum.png,model of Kiczynski2022 Fig. 1b,,,original calculation (this project),10-site SSH tight-binding spectrum
+F26,31,F26_cowie2024_fig3rts.jpg,Cowie2024,Fig. 3 (top-left RTS traces),https://doi.org/10.1073/pnas.2404456121 (PMC11536084),CC BY 4.0,"Cowie et al., PNAS 121, e2404456121 (2024) Fig. 3, CC BY 4.0"
+C-Q,25,native chart,Thorvaldson2025,,,"native pptx clustered column, log axis",qubit and gate quality factors

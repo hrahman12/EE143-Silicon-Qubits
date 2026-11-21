@@ -69,14 +69,15 @@ CROPS = [
  ("F24_thorvaldson2025_fig3b.png", f"{RAW}/Thorvaldson2025/page4_300dpi.png", (0.04, 0.153, 0.48, 0.392)),
  ("F24_thorvaldson2025_fig4a.png", f"{RAW}/Thorvaldson2025/page5_300dpi.png", (0.06, 0.062, 0.93, 0.205)),
  ("F25_kiczynski2022_fig1.jpg", f"{RAW}/Kiczynski2022/41586_2022_4706_Fig1_HTML.jpg", (0, 0, 1, 1)),
+ ("F26_cowie2024_fig3rts.jpg", f"{RAW}/Cowie2024/pnas.2404456121fig03.jpg", (0.0, 0.0, 0.418, 0.62)),
  ("F17_tseng2023_fig7.jpg", f"{RAW}/Tseng2023/pdfimg/p8_x32_1650x1005.jpeg", (0, 0, 1, 1)),
 ]
 
 def do_crops():
     for name, src, (x0, y0, x1, y1) in CROPS:
-        im = Image.open(src).convert("RGB"); W, H = im.size
+        im = Image.open(src); im = im.convert("RGB"); W, H = im.size
         c = im.crop((int(x0 * W), int(y0 * H), int(x1 * W), int(y1 * H)))
-        c.save(f"{OUT}/{name}", quality=95); print("crop", name, c.size)
+        c.convert("RGB").save(f"{OUT}/{name}", quality=95); print("crop", name, c.size)
 
 # --------------------------------------------------------------------------------------------
 # 2. Tiny ball renderer (orthographic, painter's algorithm, radial shading) for 3D atom scenes

@@ -162,3 +162,17 @@ Paper-internal conflicts kept visible rather than resolved: Constantinou2024 330
 | 25 | 2 vs 10 conductance peaks; on-site ≈25 meV | Kiczynski2022 abstract | Kiczynski2022 | OK |
 | 25 | SSH spectrum | our 10-site tight-binding diagonalisation | ours | Derived |
 | — | Moiré-materials connection | no source found in the cited papers or a literature search | — | Not on slides |
+
+## Round 6: graduate-level content
+| Slide | Statement | Source (verbatim location) | Status |
+|---|---|---|---|
+| 3 | 1sA1 multivalley ground state from the six conduction-band minima | Schofield2025 §2.1 ("the ground state of an electron bound to an isolated donor in silicon is the 1sA1 multivalley coupled wave function constructed from states near the six conduction-band minima") | OK |
+| 3 | valley interference; placement along crystallographic directions removes it | Schofield2025 §3.1 p. 25 | OK |
+| 3 | hyperfine Stark ~70 MHz/(MV m⁻¹); ~99.99%; 0.8 ns two-qubit gates | Schofield2025 §3.1 p. 25 | OK |
+| 19 | 0.95¹⁶ = 44%, 0.99¹⁶ = 85% | derived from Stock2024 97 ± 2% | Derived |
+| 19 | 24/24 ⇒ 95% CI 85.8–100% | Clopper–Pearson exact, lower = 0.025^(1/24) (our calc.) on Stock2024 n = 24 | Derived |
+| 25 | Q = T2*·fRabi 4.82, 14.14, 11.84, 18.86; gate Q 34, 797, 84, 69 | Thorvaldson2025 main text | OK |
+| 25 | correlated errors from shared field noise | Schofield2025 p. 10 | OK |
+| 25 | >800 MHz gradient; CNOT 99.98% for 2P–3P | Schofield2025 §3.1 p. 25 (KRANZ2023B) | OK |
+| 31 | Tennant's law: >200 h per µm² at 0.768 nm | Schofield2025 §5.5 p. 87 | OK |
+| 31 | single-trap telegraph noise; ensemble 1/f | Cowie2024 abstract/significance | OK |
