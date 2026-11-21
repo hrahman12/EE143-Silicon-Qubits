@@ -26,10 +26,10 @@ const slideNum = { x: 9.0, y: 5.24, w: 0.5, h: 0.25, fontFace: T.font, fontSize:
 const frame = (name) => pres.defineSlideMaster({ title: name, background: { color: "FFFFFF" }, objects: [titlePH, srcPH, footer], slideNumber: slideNum });
 ["FIG_TEXT", "TWO_FIG", "TABLE", "TITLE_ONLY", "PROCESS"].forEach(frame);
 pres.defineSlideMaster({ title: "REFS", background: { color: "FFFFFF" }, objects: [titlePH, footer], slideNumber: slideNum });
-pres.defineSlideMaster({ title: "TITLE", background: { color: "FFFFFF" }, objects: [] });
+pres.defineSlideMaster({ title: "TITLE", background: { color: "111A22" }, objects: [] });
 pres.defineSlideMaster({ title: "SECTION", background: { color: "FFFFFF" }, objects: [titlePH, footer], slideNumber: slideNum });
 
-["Intro", "Motivation", "Process", "Results", "Scaling", "Prototype", "Wrap-up", "Backup"].forEach((t) => pres.addSection({ title: t }));
+["Intro", "Act 1", "Act 2", "Act 3", "Act 4", "Wrap-up", "Backup"].forEach((t) => pres.addSection({ title: t }));
 
 // ---------------------------------------------------------------- helpers (fresh option objects every call)
 const NOTES = [];
@@ -37,6 +37,8 @@ function newSlide(master, title, section) {
   const s = pres.addSlide({ masterName: master, sectionTitle: section });
   if (title) s.addText(title, { placeholder: "title", x: 0.5, y: 0.26, w: master === "PROCESS" ? 7.3 : 9.0, h: 0.62, fontFace: T.font, fontSize: T.title, bold: true, color: T.ink, align: "left", valign: "top", margin: 0 });
   s._title = title || "";
+  const ACT = { "Act 1": "ACT 1 · WHY SINGLE ATOMS", "Act 2": "ACT 2 · HOW IT'S BUILT", "Act 3": "ACT 3 · DOES IT WORK?", "Act 4": "ACT 4 · HOW IT SCALES" };
+  if (ACT[section]) s.addText(ACT[section], { x: 0.5, y: 0.06, w: 6, h: 0.2, fontFace: T.font, fontSize: 8.5, bold: true, color: T.As, charSpacing: 1, margin: 0, isTextBox: true });
   return s;
 }
 function notes(s, text) { s.addNotes(text); NOTES.push({ title: s._title, text }); }
@@ -78,21 +80,77 @@ const chartBase = () => ({ fontFace: T.font, catAxisLabelColor: T.ink, valAxisLa
   legendFontFace: T.font, legendFontSize: 10, legendColor: T.ink, catAxisTitleColor: T.ink, valAxisTitleColor: T.ink,
   catAxisTitleFontSize: 10, valAxisTitleFontSize: 10, catAxisTitleFontFace: T.font, valAxisTitleFontFace: T.font });
 
-// ============================================================================ 1. Title
+// ============================================================================ 1. Title (dark, silicon-qubit hero)
 {
   const s = pres.addSlide({ masterName: "TITLE", sectionTitle: "Intro" }); s._title = "Title";
-  text(s, "Atom-by-Atom Silicon: Building Quantum Processors from Single Dopant Atoms", 0.5, 0.9, 4.7, 1.9, { fontSize: 28, bold: true });
-  text(s, "Device profile: STM-patterned P and As dopant qubits, featuring the work of Neil J. Curson (UCL)", 0.5, 2.85, 4.5, 0.9, { fontSize: 15, color: T.muted });
-  text(s, "Hanah Rahman · EE143 · Fall 2026", 0.5, 3.85, 4.5, 0.35, { fontSize: 14 });
-  text(s, "AI disclosure: AI tools were used to draft and lay out these slides and to code the original diagrams.", 0.5, 4.65, 4.4, 0.45, { fontSize: 10, color: T.muted });
-  const b = img(s, "F1_stock2024_fig1_2x2.png", 5.6, 0.35, 3.9, 4.5, "center");
-  caption(s, "A 2×2 array of single As atoms: lithography → AsH₃ dose → anneal. Reproduced from Stock et al., Adv. Mater. 36, 2312282 (2024), CC BY 4.0", 5.45, b.y + b.h + 0.06, 4.2, 0.5);
-  notes(s, "Hi everyone. Today's device is a quantum processor where every qubit is a single dopant atom, put into silicon one at a time with a scanning tunnelling microscope. You already know every ingredient from EE143: a clean surface, a resist, lithography, gas-phase doping, an activation anneal, epitaxy, etch and metal. The twist is that the resist is one atom thick and the 'implant' is one molecule. On the right is real STM data: a 2×2 array of single arsenic atoms, imaged after each of three steps. The person behind that image is Neil Curson at UCL, so I'll follow his work through the process. Likely question: is this a real device or a demo? It's a real fabricated array, imaged at each step.");
+  s.background = { color: "111A22" };
+  img(s, "O_hero_title.png", 3.95, 0.0, 6.05, 5.625, "right", "middle");
+  text(s, "EE143 · DEVICE PROFILE", 0.5, 0.75, 4.0, 0.25, { fontSize: 10, bold: true, color: "5FC9C9", charSpacing: 2 });
+  text(s, "Atom-by-Atom Silicon", 0.5, 1.05, 5.4, 0.6, { fontSize: 32, bold: true, color: "FFFFFF" });
+  text(s, "Building Quantum Processors from Single Dopant Atoms", 0.5, 1.68, 4.3, 0.85, { fontSize: 19, color: "E6ECF1" });
+  text(s, "Device profile: STM-patterned P and As dopant qubits, featuring the work of Neil J. Curson (UCL)", 0.5, 2.65, 4.0, 0.7, { fontSize: 12.5, color: "9FB0BE" });
+  [["As", T.As], ["P", T.P]].forEach(([lab, col], i) => {
+    s.addShape(pres.shapes.OVAL, { x: 0.52 + i * 1.05, y: 3.55, w: 0.16, h: 0.16, fill: { color: col }, line: { color: col, width: 0 } });
+    text(s, lab === "As" ? "arsenic" : "phosphorus", 0.74 + i * 1.05, 3.5, 0.95, 0.26, { fontSize: 10.5, color: "C9D3DC" });
+  });
+  text(s, "Hanah Rahman · EE143 · Fall 2026", 0.5, 4.05, 4.2, 0.3, { fontSize: 13, bold: true, color: "FFFFFF" });
+  text(s, "AI disclosure: AI tools were used to draft and lay out these slides and to code the original diagrams.", 0.5, 4.55, 3.7, 0.45, { fontSize: 9, color: "8C9AA6" });
+  text(s, "Cover: original 3D render of a diamond-cubic Si crystal with a 2×2 As register (teal), one P donor (orange) and an STM tip.", 0.5, 5.12, 3.7, 0.35, { fontSize: 8, color: "8C9AA6" });
+  notes(s, "Hi everyone. Today's device is a quantum processor where every qubit is a single dopant atom, put into silicon one at a time with a scanning tunnelling microscope. That's the picture behind me: a silicon crystal, four arsenic atoms in a 2×2 register, one phosphorus, and the STM tip that places them. You already know every ingredient from EE143: a clean surface, a resist, lithography, gas-phase doping, an activation anneal, epitaxy, etch and metal. The twist is that the resist is one atom thick and the 'implant' is one molecule. I'll follow the work of Neil Curson at UCL through the process. Likely question: is the picture real data? No, it's my 3D render of the real crystal structure; every micrograph after this is published data, credited on the slide.");
+}
+// ============================================================================ Agenda (story in four acts)
+{
+  const s = newSlide("TITLE_ONLY", "The story in four acts", "Intro");
+  const acts = [
+    ["1", "Why single atoms?", "A donor is a natural qubit, but only if you can place it exactly.", "O2_surface_H.png", T.ink],
+    ["2", "How is it built?", "Eleven steps, each one an EE143 module shrunk to one atom.", "O2_surface_window.png", T.ink],
+    ["3", "Does it work?", "Buried layers conduct, single atoms switch, arsenic fixes yield, processors run.", "F1_stock2024_fig1_4x4.png", T.As],
+    ["4", "How does it scale?", "Throughput is the wall; EUV and our prototype show a way through.", "O_prototype3d.png", T.ink]];
+  const cw = 2.15, gap = 0.12;
+  acts.forEach(([n, h, d, im, col], i) => {
+    const x = 0.5 + i * (cw + gap);
+    s.addShape(pres.shapes.RECTANGLE, { x, y: 1.05, w: cw, h: 3.75, fill: { color: T.panel }, line: { color: T.panel, width: 0 } });
+    img(s, im, x + 0.1, 1.15, cw - 0.2, 1.45, "center", "middle");
+    s.addShape(pres.shapes.OVAL, { x: x + 0.12, y: 2.75, w: 0.42, h: 0.42, fill: { color: col }, line: { color: col, width: 0 } });
+    text(s, n, x + 0.12, 2.81, 0.42, 0.3, { fontSize: 14, bold: true, color: "FFFFFF", align: "center" });
+    text(s, h, x + 0.65, 2.79, cw - 0.75, 0.4, { fontSize: 14, bold: true });
+    text(s, d, x + 0.15, 3.3, cw - 0.3, 1.4, { fontSize: 12, color: T.muted });
+  });
+  src(s, "Roadmap of this talk");
+  notes(s, "Here's the plan, in four acts. Act one: why anyone would want a single atom as a qubit, and why the obvious tool, ion implantation, can't place one. Act two: how the device is actually built, eleven steps that each map onto an EE143 module, just shrunk to one atom. Act three: does it work? We'll check the buried wiring, the first single-atom devices, the yield problem and Curson's arsenic fix, and today's processors. Act four: the throughput wall, how EUV could get around it, and a prototype we designed from the papers. Keep one question in mind the whole time: how do you put exactly one atom exactly where you want it?");
+}
+// ============================================================================ 4. Why a donor
+{
+  const s = newSlide("TWO_FIG", "A single donor atom is a natural qubit", "Act 1");
+  bullets(s, ["P nucleus (I = 1/2) + its electron = 4 spin states", "Electron Bohr radius ~2 nm; exchange depends on exact donor position, so atomic precision matters", "In ²⁸Si: coherence up to 35.6 s and single-qubit gates close to 99.99% (ion-implanted donors)"], 0.5, 1.1, 3.6, 2.7, 14);
+  img(s, "O_levels_4state.png", 0.6, 3.3, 2.2, 1.75, "left");
+  caption(s, "Spin levels, schematic (ours)", 2.8, 4.6, 1.3, 0.45);
+  const b = img(s, "F5_schofield2025_s32_fig1.png", 4.4, 1.05, 5.1, 3.6, "center");
+  caption(s, "Donor control and readout: SET charge sensor + on-chip microwave antenna (a); ion-implanted device (b). Reproduced from Schofield et al., Nano Futures 9, 012001 (2025) §3.2 Fig. 1, CC BY 4.0", 4.4, b.y + b.h + 0.04, 5.1, 0.45);
+  src(s, "Schofield2025 §1, §3.2");
+  notes(s, "Why bother with single atoms? A phosphorus donor brings two spins for free: its nucleus with spin one-half and its bound electron. Two times two gives four states, shown in my sketch on the left; we drive the electron with ESR and the nucleus with NMR. On the right is how you read it out: a single-electron transistor senses charge, spin-dependent tunnelling turns spin into charge, and an on-chip antenna delivers the microwaves. In silicon-28, coherence reaches 35.6 seconds, which is enormous for a qubit. The catch is the electron's Bohr radius of about 2 nm: the exchange coupling between two donors depends on their exact lattice positions. That's why fabrication precision is the whole game. Likely question: what's ESR? Electron spin resonance, flipping the electron with microwaves.");
+}
+
+// ============================================================================ 5. Why not ion implantation?
+{
+  const s = newSlide("TABLE", "The problem: implantation can't place one atom", "Act 1");
+  const H = (t) => ({ text: t, options: { bold: true, color: T.ink, fill: { color: "F2F4F6" } } });
+  const rows = [[H(""), H("Ion implantation"), H("STM H-resist lithography")],
+    [{ text: "Placement", options: { bold: true } }, "Sub-100 nm routine; Kane-type devices need ≈15 nm", "±1 atomic spacing"],
+    [{ text: "One dopant per site", options: { bold: true } }, "36% (Poisson, without ion counting)", { text: "97 ± 2% (As, 4-site window)", options: { color: T.As, bold: true } }]];
+  s.addTable(rows, { x: 0.5, y: 1.1, w: 5.0, colW: [1.25, 1.95, 1.8], fontFace: T.font, fontSize: 12, color: T.ink, valign: "middle", rowH: [0.4, 0.75, 0.75], border: { type: "solid", pt: 0.75, color: "E0E4E8" } });
+  s.addChart(pres.charts.BAR, [{ name: "Probability", labels: ["0", "1", "2", "3", "≥4"], values: [36.8, 36.8, 18.4, 6.1, 1.9] }],
+    Object.assign(chartBase(), { x: 0.4, y: 3.05, w: 5.1, h: 2.1, barDir: "col", chartColors: ["8C96A0"], showValue: true, dataLabelColor: T.ink, dataLabelFontSize: 9, dataLabelFormatCode: "0.0",
+      title: "Ions per site at mean 1 ion/site: exactly one only ~36%", valAxisHidden: true, valGridLine: { style: "none" }, showLegend: false, catAxisTitle: "ions landing in one site (Poisson, our calc.)", showCatAxisTitle: true, barGapWidthPct: 60 }));
+  const b = img(s, "F7_schofield2025_s24_fig2.jpg", 6.0, 1.05, 3.4, 3.55, "center");
+  caption(s, "Deterministic single-ion implanter column. Reproduced from Schofield et al., Nano Futures 9, 012001 (2025) §2.4 Fig. 2, CC BY 4.0", 5.8, b.y + b.h + 0.04, 3.8, 0.45);
+  src(s, "Schofield2025 §1, §2.4; Stock2024. Poisson bars: P(k)=e⁻¹/k!, our calculation of the 36% quoted in Schofield2025");
+  notes(s, "This is the obvious EE143 question: we implant dopants every day, so why an STM? Two reasons in the table. Placement: implantation is routinely sub-100 nm, but a Kane-type device needs about 15 nm, and the STM gives plus or minus one atomic spacing. Second, counting: ions arrive randomly. If you aim for one ion per site on average, Poisson statistics say only 36% of sites get exactly one; the bar chart is that distribution, which I calculated. Deterministic implanters like the one on the right add ion detection to fix this. Compare that 36% with the 97% Curson's group gets for arsenic. Likely question: can't you just detect each ion? Yes, that's the ion-counting route, and it's an active alternative.");
 }
 
 // ============================================================================ 2. Device at a glance
 {
-  const s = newSlide("FIG_TEXT", "The device at a glance", "Intro");
+  const s = newSlide("FIG_TEXT", "The answer: write the device atom by atom", "Act 1");
   const rows = [["Host", "Si(001); ²⁸Si for qubit devices"], ["Dopants", "P (from PH₃) or As (from AsH₃)"], ["Placement", "±1 atomic spacing"], ["δ-layer leads", "≈10¹⁴ cm⁻², <1 nm thick"], ["Measured at", "millikelvin temperatures"]];
   const tbl = rows.map(([k, v]) => [{ text: k, options: { bold: true, color: T.ink } }, { text: v, options: { color: T.ink } }]);
   s.addTable(tbl, { x: 0.5, y: 1.15, w: 4.1, colW: [1.25, 2.85], fontFace: T.font, fontSize: 13, rowH: 0.52, valign: "middle",
@@ -131,7 +189,7 @@ const EVENTS = [
   { year: 2025, label: "4-qubit Grover; 11-qubit processor", up: false, w: 1.45, dx: 0.35 },
 ];
 {
-  const s = newSlide("TITLE_ONLY", "Where it came from: 30 years of atom fab", "Intro");
+  const s = newSlide("TITLE_ONLY", "30 years: from one H atom to 11 qubits", "Act 1");
   timeline(s, 0.75, 1.55, 8.4, EVENTS);
   s.addShape(pres.shapes.OVAL, { x: 0.6, y: 4.62, w: 0.14, h: 0.14, fill: { color: T.As }, line: { color: T.As, width: 0 } });
   text(s, "Curson is an author (teal)", 0.82, 4.56, 2.6, 0.25, { fontSize: 11, color: T.muted });
@@ -140,38 +198,9 @@ const EVENTS = [
   notes(s, "Thirty years in one line. 1994: Lyding shows an STM tip can pull hydrogen off silicon, which gives us lithography. 1998: Kane proposes phosphorus nuclear spins as qubits. 2003: the first single phosphorus atoms placed on purpose, Curson among the authors. 2012: a transistor whose active region is one atom. 2019: the first two-qubit gate between donors and a 3D stacked device. 2020 and 2024: Curson's group adds arsenic and pushes single-atom yield to 97%, and also shows EUV light can do the hydrogen removal. 2025: a four-qubit Grover search and an 11-qubit processor. Likely question: what changed in 2012? The atom became a working device, wired up and measured as a transistor, not just imaged.");
 }
 
-// ============================================================================ 4. Why a donor
-{
-  const s = newSlide("TWO_FIG", "Why a single donor makes a good qubit", "Motivation");
-  bullets(s, ["P nucleus (I = 1/2) + its electron = 4 spin states", "Electron Bohr radius ~2 nm; exchange depends on exact donor position, so atomic precision matters", "In ²⁸Si: coherence up to 35.6 s and single-qubit gates close to 99.99% (ion-implanted donors)"], 0.5, 1.1, 3.6, 2.7, 14);
-  img(s, "O_levels_4state.png", 0.6, 3.3, 2.2, 1.75, "left");
-  caption(s, "Spin levels, schematic (ours)", 2.8, 4.6, 1.3, 0.45);
-  const b = img(s, "F5_schofield2025_s32_fig1.png", 4.4, 1.05, 5.1, 3.6, "center");
-  caption(s, "Donor control and readout: SET charge sensor + on-chip microwave antenna (a); ion-implanted device (b). Reproduced from Schofield et al., Nano Futures 9, 012001 (2025) §3.2 Fig. 1, CC BY 4.0", 4.4, b.y + b.h + 0.04, 5.1, 0.45);
-  src(s, "Schofield2025 §1, §3.2");
-  notes(s, "Why bother with single atoms? A phosphorus donor brings two spins for free: its nucleus with spin one-half and its bound electron. Two times two gives four states, shown in my sketch on the left; we drive the electron with ESR and the nucleus with NMR. On the right is how you read it out: a single-electron transistor senses charge, spin-dependent tunnelling turns spin into charge, and an on-chip antenna delivers the microwaves. In silicon-28, coherence reaches 35.6 seconds, which is enormous for a qubit. The catch is the electron's Bohr radius of about 2 nm: the exchange coupling between two donors depends on their exact lattice positions. That's why fabrication precision is the whole game. Likely question: what's ESR? Electron spin resonance, flipping the electron with microwaves.");
-}
-
-// ============================================================================ 5. Why not ion implantation?
-{
-  const s = newSlide("TABLE", "Why not just ion-implant the donors?", "Motivation");
-  const H = (t) => ({ text: t, options: { bold: true, color: T.ink, fill: { color: "F2F4F6" } } });
-  const rows = [[H(""), H("Ion implantation"), H("STM H-resist lithography")],
-    [{ text: "Placement", options: { bold: true } }, "Sub-100 nm routine; Kane-type devices need ≈15 nm", "±1 atomic spacing"],
-    [{ text: "One dopant per site", options: { bold: true } }, "36% (Poisson, without ion counting)", { text: "97 ± 2% (As, 4-site window)", options: { color: T.As, bold: true } }]];
-  s.addTable(rows, { x: 0.5, y: 1.1, w: 5.0, colW: [1.25, 1.95, 1.8], fontFace: T.font, fontSize: 12, color: T.ink, valign: "middle", rowH: [0.4, 0.75, 0.75], border: { type: "solid", pt: 0.75, color: "E0E4E8" } });
-  s.addChart(pres.charts.BAR, [{ name: "Probability", labels: ["0", "1", "2", "3", "≥4"], values: [36.8, 36.8, 18.4, 6.1, 1.9] }],
-    Object.assign(chartBase(), { x: 0.4, y: 3.05, w: 5.1, h: 2.1, barDir: "col", chartColors: ["8C96A0"], showValue: true, dataLabelColor: T.ink, dataLabelFontSize: 9, dataLabelFormatCode: "0.0",
-      title: "Ions per site at mean 1 ion/site: exactly one only ~36%", valAxisHidden: true, valGridLine: { style: "none" }, showLegend: false, catAxisTitle: "ions landing in one site (Poisson, our calc.)", showCatAxisTitle: true, barGapWidthPct: 60 }));
-  const b = img(s, "F7_schofield2025_s24_fig2.jpg", 6.0, 1.05, 3.4, 3.55, "center");
-  caption(s, "Deterministic single-ion implanter column. Reproduced from Schofield et al., Nano Futures 9, 012001 (2025) §2.4 Fig. 2, CC BY 4.0", 5.8, b.y + b.h + 0.04, 3.8, 0.45);
-  src(s, "Schofield2025 §1, §2.4; Stock2024. Poisson bars: P(k)=e⁻¹/k!, our calculation of the 36% quoted in Schofield2025");
-  notes(s, "This is the obvious EE143 question: we implant dopants every day, so why an STM? Two reasons in the table. Placement: implantation is routinely sub-100 nm, but a Kane-type device needs about 15 nm, and the STM gives plus or minus one atomic spacing. Second, counting: ions arrive randomly. If you aim for one ion per site on average, Poisson statistics say only 36% of sites get exactly one; the bar chart is that distribution, which I calculated. Deterministic implanters like the one on the right add ion detection to fix this. Compare that 36% with the 97% Curson's group gets for arsenic. Likely question: can't you just detect each ion? Yes, that's the ion-counting route, and it's an active alternative.");
-}
-
 // ============================================================================ 6. Neil J. Curson
 {
-  const s = newSlide("TITLE_ONLY", "The researcher: Neil J. Curson (UCL)", "Motivation");
+  const s = newSlide("TITLE_ONLY", "The researcher: Neil J. Curson (UCL)", "Act 1");
   text(s, "London Centre for Nanotechnology and Dept. of Electronic & Electrical Engineering, UCL", 0.5, 0.95, 9.0, 0.3, { fontSize: 13, color: T.muted });
   const cards = [
     { y: 2003, t: "Co-author: first single P atoms placed", k: "Schofield2003" },
@@ -196,7 +225,7 @@ const EVENTS = [
 
 // ============================================================================ 7. Process flow (O3)
 {
-  const s = newSlide("TITLE_ONLY", "The whole process flow in 11 steps", "Process");
+  const s = newSlide("TITLE_ONLY", "The process: 11 steps, each an EE143 module", "Act 2");
   const steps = [
     ["1", "Clean + outgas", "600 °C, >8 h", "Wafer clean", "prep"], ["2", "Flash anneal", "≈1200 °C", "Thermal process", "prep"],
     ["3", "H-terminate", "1-atom resist", "Resist coat", "prep"], ["4", "STM lithography", "±1 atomic spacing", "E-beam litho", "litho"],
@@ -222,7 +251,7 @@ const EVENTS = [
 
 // ============================================================================ process slide helper
 function processSlide(title, step, bulletsArr, xsecFile, rightFn, srcText, noteText) {
-  const s = newSlide("PROCESS", title, "Process");
+  const s = newSlide("PROCESS", title, "Act 2");
   tracker(s, step);
   bullets(s, bulletsArr, 0.5, 1.05, 4.05, 2.0, 14);
   img(s, xsecFile, 0.5, 3.05, 4.05, 1.65, "left", "bottom");
@@ -296,7 +325,7 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
 
 // ============================================================================ 14. Did it work?
 {
-  const s = newSlide("TWO_FIG", "Did it work? Measuring a buried δ-layer", "Results");
+  const s = newSlide("TWO_FIG", "Proof 1: the buried δ-layer conducts", "Act 3");
   bullets(s, ["As δ-layer: 1.6 ± 0.1 kΩ/□, 28 ± 1 cm²/V·s; 81% activation (88% at 560 °C); P layers reach 2.4×10¹⁴ cm⁻²", "ARPES: layers <1 nm thick; As confines better than P", "XRF at ≈1 µm: <0.2 Å As motion, <3% loss of active dopants"], 0.5, 1.05, 4.1, 2.45, 13);
   callout(s, "EE143 check (our calc.):  Rₛ = 1/(q·Nₛ·μ)  →  Nₛ = 1/(1.6×10⁻¹⁹ C × 1600 Ω × 28 cm²/V·s) ≈ 1.4×10¹⁴ cm⁻², consistent with the ≈10¹⁴ cm⁻² sheets.", 0.5, 3.6, 4.1, 1.05, { fontSize: 12 });
   const b = img(s, "F9_constantinou2023_fig2.jpg", 4.8, 1.0, 4.7, 1.95, "center");
@@ -309,7 +338,7 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
 
 // ============================================================================ 15. Landmarks
 {
-  const s = newSlide("TWO_FIG", "Landmarks: one atom, then one transistor", "Results");
+  const s = newSlide("TWO_FIG", "Proof 2: one atom, then one transistor", "Act 3");
   const a = img(s, "O_landmark2003.png", 0.5, 1.05, 4.3, 3.3, "center");
   caption(s, "Schematic after Schofield2003 (original drawing)", 0.5, a.y + a.h + 0.04, 4.3, 0.25);
   const b = img(s, "O_landmark2012.png", 5.2, 1.05, 4.3, 3.3, "center");
@@ -321,7 +350,7 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
 
 // ============================================================================ 16. Yield problem (O6)
 {
-  const s = newSlide("TWO_FIG", "The yield problem: every site must work", "Results");
+  const s = newSlide("TWO_FIG", "The catch: every site must work", "Act 3");
   const n = Array.from({ length: 16 }, (_, i) => i + 1);
   s.addChart(pres.charts.LINE, [
     { name: "P: 0.7ⁿ", labels: n.map(String), values: n.map((k) => Math.pow(0.7, k)) },
@@ -340,7 +369,7 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
 
 // ============================================================================ 17. Arsenic fix
 {
-  const s = newSlide("TWO_FIG", "Curson's fix: arsenic in a 4-site window", "Results");
+  const s = newSlide("TWO_FIG", "Curson's fix: arsenic in a 4-site window", "Act 3");
   bullets(s, ["97 ± 2% single-atom yield in a 4-site window: 1-in-4 lattice sites (≈0.6 nm²), 33% better precision than P", "First defect-free 2×2 single-dopant array in Si", "Iterative litho/dose cycles could push yield toward 100%"], 0.5, 1.05, 3.75, 2.2, 13);
   const a = img(s, "F3_schofield2025_s41_fig1.png", 4.45, 1.0, 5.05, 3.25, "center");
   caption(s, "2×2 As array steps and the ideal 4-site window. Reproduced from Schofield et al., Nano Futures 9, 012001 (2025) §4.1 Fig. 1, CC BY 4.0", 4.45, a.y + a.h + 0.04, 5.05, 0.4);
@@ -352,7 +381,7 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
 
 // ============================================================================ 18. Beyond Si:P
 {
-  const s = newSlide("TWO_FIG", "Beyond Si:P: new hosts and new dopants", "Results");
+  const s = newSlide("TWO_FIG", "Beyond Si:P: new dopants, new hosts", "Act 3");
   bullets(s, ["Arsenic from arsine incorporates into germanium Ge(001) at room temperature, with no anneal", "Bismuth: triphenyl-bismuth precursor chemistry on Si(001) for ultra-shallow doping"], 0.5, 1.05, 3.7, 2.4, 14);
   callout(s, "Why it matters: the same STM toolbox, with a different gas or substrate, gives a new qubit or device platform.", 0.5, 3.55, 3.7, 0.95, { fontSize: 12 });
   const a = img(s, "F12_hofmann2023_fig1a.jpg", 4.4, 1.0, 2.6, 2.5, "left");
@@ -365,7 +394,7 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
 
 // ============================================================================ 19. Processors
 {
-  const s = newSlide("TWO_FIG", "From devices to processors", "Results");
+  const s = newSlide("TWO_FIG", "The payoff: from devices to processors", "Act 3");
   bullets(s, ["2019: ≈800 ps exchange gate, readout 93.9 ± 1.3% (natural Si); 3D device, 97.9% readout, <5 nm layer alignment", "2025: 4-qubit Grover (1Q 99.94–99.98%, CZ 99.32–99.65%); 11-qubit processor, Bell 99.5% in a register, 97.0% across"], 0.5, 1.05, 3.75, 3.1, 13);
   callout(s, "Caveat: 2019 used natural Si and electron spins; 2025 used ²⁸Si and nuclear-spin registers, so don't compare fidelities directly.", 0.5, 4.05, 3.75, 0.85, { fontSize: 11 });
   const c = img(s, "F14_edlbauer2025_fig1ab.png", 4.4, 1.0, 5.1, 2.35, "center");
@@ -378,7 +407,7 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
 
 // ============================================================================ 20. Simulator
 {
-  const s = newSlide("TWO_FIG", "Same atoms, new job: a quantum simulator", "Results");
+  const s = newSlide("TWO_FIG", "Same atoms, new job: a quantum simulator", "Act 3");
   bullets(s, ["A 3×3 array of dopant-based quantum dots, written by the same STM process", "Tuned from metallic toward Mott-insulating behaviour: a hardware model of interacting electrons"], 0.5, 1.05, 4.0, 2.6, 15);
   callout(s, "EE143 view: the 'circuit' here is a lattice of doped islands with in-plane δ-layer gates and leads.", 0.5, 3.7, 4.0, 0.8, { fontSize: 12 });
   const b = img(s, "F15_wang2022_fig1.jpg", 4.8, 1.0, 4.7, 3.65, "center");
@@ -389,7 +418,7 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
 
 // ============================================================================ 21. Throughput wall (O8)
 {
-  const s = newSlide("TWO_FIG", "The throughput wall", "Scaling");
+  const s = newSlide("TWO_FIG", "The next wall: throughput", "Act 4");
   s.addChart(pres.charts.BAR, [{ name: "write speed (nm/s)", labels: ["STM, atom-wide lines", "STM, 2 V / hundreds of nA", "EUV (equivalent)"], values: [10, 1000, 1e14] }],
     Object.assign(chartBase(), { x: 0.4, y: 1.0, w: 5.2, h: 3.6, barDir: "bar", chartColors: ["5B6770"], valAxisLogScaleBase: 10, valAxisMinVal: 1, valAxisMaxVal: 1e15,
       valAxisLabelFormatCode: "0E+0", showValue: true, dataLabelFormatCode: "0E+0", dataLabelColor: T.ink, dataLabelFontSize: 10, dataLabelPosition: "outEnd",
@@ -401,7 +430,7 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
 
 // ============================================================================ 22. Scaling with EUV
 {
-  const s = newSlide("TWO_FIG", "Scaling: EUV photons instead of a tip", "Scaling");
+  const s = newSlide("TWO_FIG", "Scaling: EUV photons instead of a tip", "Act 4");
   bullets(s, ["First H removal from Si(001):H with monochromatic EUV (109 eV), driven by secondary electrons", "Doses up to 18 000 J/cm²: several minutes per chip with 300 W sources", "Hybrid flow: STM for qubits, EUV for contacts, gates and wiring"], 0.5, 1.05, 3.8, 2.9, 14);
   const a = img(s, "F8_constantinou2024_fig5.png", 4.5, 1.0, 5.0, 2.95, "center");
   caption(s, "Proposed 4-stage UHV flow combining EUV and STM lithography. Reproduced from Constantinou et al., Nat. Commun. 15, 694 (2024) Fig. 5, CC BY 4.0", 4.5, a.y + a.h + 0.02, 5.0, 0.36);
@@ -413,7 +442,7 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
 
 // ============================================================================ 23. Our prototype
 {
-  const s = newSlide("TWO_FIG", "Our prototype: a 2×2 arsenic register", "Prototype");
+  const s = newSlide("TWO_FIG", "Our prototype: a 2×2 arsenic register", "Act 4");
   const a = img(s, "O_prototype3d.png", 0.4, 0.95, 4.6, 2.75, "center");
   caption(s, "Concept render (ours, not to scale): dark pillars are Al contacts. Layout after the gated As array in Stock2024 Fig. 1.", 0.5, a.y + a.h + 0.02, 4.5, 0.4);
   const b = img(s, "O_yield_surface3d.png", 5.3, 0.95, 4.2, 2.75, "center");
@@ -425,7 +454,7 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
 
 // ============================================================================ 24. Prototype traveler
 {
-  const s = newSlide("TABLE", "Prototype traveler, mapped to EE143", "Prototype");
+  const s = newSlide("TABLE", "Prototype traveler, mapped to EE143", "Act 4");
   const H = (t) => ({ text: t, options: { bold: true, fill: { color: "F2F4F6" } } });
   const rows = [[H("#"), H("Step (recipe from the papers)"), H("EE143 analogue")],
     ["1–2", "Acetone/IPA, outgas 600 °C >8 h; flash ≈1200 °C", "Clean + bake"],
@@ -446,7 +475,7 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
 
 // ============================================================================ 25. Takeaways
 {
-  const s = newSlide("TITLE_ONLY", "Takeaways", "Wrap-up");
+  const s = newSlide("TITLE_ONLY", "Takeaways: one atom, exactly where you want it", "Wrap-up");
   const items = [["1", "Placing single atoms works.", "H-resist lithography + PH₃/AsH₃ + a 350 °C anneal gives ±1 atomic spacing."],
     ["2", "Arsenic brought single-atom yield to ~97%.", "Curson's 4-site window beats P's <70%; that's what makes arrays possible."],
     ["3", "Throughput is the next wall; EUV is the bridge.", "Same resist, photons for wiring, STM for qubits."]];

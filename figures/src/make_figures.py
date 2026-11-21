@@ -366,12 +366,78 @@ def landmarks():
     ax.text(10, -0.4, "2012: single-atom transistor,\none-lattice-site accuracy", ha="center", fontsize=10, color=INK)
     save(fig, "O_landmark2012.png")
 
+
+# --------------------------------------------------------------------------------------------
+# 10. Title hero: diamond-cubic Si block (a = 5.431 Å, geometry only) with single As/P dopants
+# --------------------------------------------------------------------------------------------
+def hero():
+    a0 = 5.431
+    basis = [(0, 0, 0), (0, .5, .5), (.5, 0, .5), (.5, .5, 0), (.25, .25, .25), (.25, .75, .75), (.75, .25, .75), (.75, .75, .25)]
+    N, NZ = 5, 2
+    pts = set()
+    for i in range(N + 1):
+        for j in range(N + 1):
+            for k in range(NZ + 1):
+                for (bx, by, bz) in basis:
+                    x, y, z = (i + bx) * a0, (j + by) * a0, (k + bz) * a0
+                    if x <= N * a0 + 0.01 and y <= N * a0 + 0.01 and z <= NZ * a0 + 0.01:
+                        pts.add((round(x, 3), round(y, 3), round(z, 3)))
+    pts = sorted(pts)
+    P = np.array(pts)
+    dnn0 = a0 * math.sqrt(3) / 4
+    for _ in range(2):  # drop dangling edge atoms (fewer than 2 bonds)
+        D = np.linalg.norm(P[:, None, :] - P[None, :, :], axis=2)
+        keep = ((D > 0.1) & (D < dnn0 + 0.05)).sum(1) >= 2
+        P = P[keep]
+    pts = [tuple(p) for p in P]; zt = P[:, 2].max()
+    sc = Scene(az=-35, el=32)
+    fig = plt.figure(figsize=(7.0, 6.2), facecolor="#111A22"); ax = fig.add_axes([0, 0, 1, 1]); ax.set_facecolor("#111A22")
+    # bonds (nearest neighbours, a*sqrt(3)/4)
+    dnn = a0 * math.sqrt(3) / 4
+    from itertools import combinations
+    idx = {p: n for n, p in enumerate(pts)}
+    for n, p in enumerate(P):
+        d = np.linalg.norm(P - p, axis=1)
+        for m in np.where((d > 0.1) & (d < dnn + 0.05))[0]:
+            if m > n:
+                (u1, w1, _), (u2, w2, _) = sc.proj(*p), sc.proj(*P[m])
+                ax.plot([u1, u2], [w1, w2], color="#6B7986", lw=1.0, zorder=2, alpha=0.8)
+    # dopants on the top layer: a 2x2 As register and one P
+    top = [tuple(p) for p in P if abs(p[2] - zt) < 0.01]
+    def nearest(x, y):
+        return min(top, key=lambda t: (t[0] - x) ** 2 + (t[1] - y) ** 2)
+    c = N * a0 / 2
+    dop = {nearest(c - 4, c - 4): AS_C, nearest(c + 4, c - 4): AS_C, nearest(c - 4, c + 4): AS_C, nearest(c + 4, c + 4): AS_C,
+           nearest(c + 9.5, c - 8.5): P_C}
+    for p in pts:
+        col = dop.get(p)
+        if col:
+            u, w, _ = sc.proj(*p)
+            for r, al in ((3.2, .06), (2.4, .10), (1.7, .16)):
+                ax.add_patch(Circle((u, w), r, color=col, alpha=al, lw=0, zorder=3))
+        shade = 0.25 + 0.75 * (p[2] / zt)
+        sc.ball(*p, 0.95 if col else 0.62, col or _mix("#3E4A56", "#B9C3CC", shade))
+    sc.draw(ax)
+    # STM tip above the register
+    u, w, _ = sc.proj(c, c, zt)
+    ax.add_patch(Polygon([[u - 3.0, w + 27], [u + 3.0, w + 27], [u, w + 9.5]], color=TIP, zorder=200, lw=0))
+    ax.add_patch(Polygon([[u - 1.1, w + 27], [u + 0.6, w + 27], [u, w + 9.5]], color="#F0D27A", zorder=201, lw=0))
+    for r, al in ((1.3, .18), (0.7, .4)):
+        ax.add_patch(Circle((u, w + 9.3), r, color="#F6E3A1", alpha=al, lw=0, zorder=202))
+    ax.plot([u, u], [w + 9.0, w + 2.5], color="#F6E3A1", lw=1.2, ls=(0, (2, 2)), alpha=0.7, zorder=199)
+    ax.set_aspect("equal"); ax.axis("off"); ax.autoscale_view(); ax.margins(0.03)
+    fig.savefig(f"{OUT}/O_hero_title.png", dpi=300, facecolor="#111A22"); plt.close(fig); print("wrote O_hero_title.png")
+
 def mini_icons():
     for st in ("prep", "litho", "dose", "incorp", "cap", "contact"):
         xsec(st, f"icon_{st}.png", w=1.6, h=0.9, mini=True)
 
 if __name__ == "__main__":
-    do_crops()
+    import sys
+    if len(sys.argv) > 1:
+        for fn in sys.argv[1:]: globals()[fn]()
+        raise SystemExit
+    do_crops(); hero()
     surface_scene("H", "O2_surface_H.png"); surface_scene("window", "O2_surface_window.png")
     surface_scene("dose", "O2_surface_dose.png"); surface_scene("incorp", "O2_surface_incorp.png")
     for st in ("prep", "litho", "dose", "incorp", "cap", "contact"): xsec(st, f"xsec_{st}.png")
