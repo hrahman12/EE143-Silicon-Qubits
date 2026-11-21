@@ -1,0 +1,285 @@
+
+JOURNAL INFORMATION
+==============================
+NLM Title Abbreviation: Proc Natl Acad Sci U S A
+Journal ID: Proc Natl Acad Sci U S A
+NLM Journal ID: 7505876
+Journal ID: PNAS
+
+Proceedings of the National Academy of Sciences of the United States of America
+
+ISSN: 0027-8424
+EISSN: 1091-6490
+Publisher: National Academy of Sciences
+
+ARTICLE INFORMATION
+==============================
+PMCID: PMC11536084
+PMID: 39446387
+DOI: 10.1073/pnas.2404456121
+Article ID: 202404456
+Article version: 1
+Subjects: 426, Physical Sciences, Physics
+
+Spatially resolved random telegraph fluctuations of a single trap at the Si/SiO2 interface
+
+Cowie Megan megan.cowie@mail.mcgill.ca a 1 https://orcid.org/0000-0003-0760-2525
+Constantinou Procopios C. b https://orcid.org/0000-0001-9769-9345
+Curson Neil J. b c https://orcid.org/0000-0002-5661-0559
+Stock Taylor J. Z. b c https://orcid.org/0000-0003-4164-362X
+Grütter Peter a https://orcid.org/0000-0003-1719-8239
+a Department of Physics , McGill University , Montréal , QC H3A 2T8 , Canada
+b Department of Physics and Astronomy , London Centre for Nanotechnology , University College London , London WC1H 0AH , United Kingdom
+c Department of Electronic and Electrical Engineering , University College London , London WC1E 7JE , United Kingdom
+1To whom correspondence may be addressed. Email: megan.cowie@mail.mcgill.ca.Edited by Eva Andrei, Rutgers The State University of New Jersey, Piscataway, NJ; received March 14, 2024; accepted August 13, 2024
+
+Electronic publication date: 2024 Oct 24
+Print publication date: 2024 Oct 29
+Volume: 121
+Issue: 44
+Electronic Location ID: e2404456121
+Received 2024 Mar 14; Accepted 2024 Aug 13
+Copyright: Copyright © 2024 the Author(s). Published by PNAS.
+Copyright year: 2024
+License: This open access article is distributed under Creative Commons Attribution License 4.0 (CC BY).
+License URL: https://creativecommons.org/licenses/by/4.0/
+
+Keywords: noise, interface traps, atomic force microscopy
+
+Funding: Canadian Government | Natural Sciences and Engineering Research Council of Canada (NSERC) 501100000038 ALLRP 556313 - 20 Megan Cowie Peter Grütter Canadian Government | Natural Sciences and Engineering Research Council of Canada (NSERC) 501100000038 223-110 Megan Cowie Peter Grütter FRQ | Fonds de recherche du Québec – Nature et technologies (FRQNT) 501100003151 INTRIQ Megan Cowie Peter Grütter FRQ | Fonds de recherche du Québec – Nature et technologies (FRQNT) 501100003151 RQMP Megan Cowie Peter Grütter UKRI | Engineering and Physical Sciences Research Council (EPSRC) 501100000266 EP/R034540/1 Procopios C. Constantinou Neil J. Curson Taylor J.Z. Stock UKRI | Engineering and Physical Sciences Research Council (EPSRC) 501100000266 EP/V027700/1 Procopios C. Constantinou Neil J. Curson Taylor J.Z. Stock UKRI | Engineering and Physical Sciences Research Council (EPSRC) 501100000266 EP/W000520/1 Procopios C. Constantinou Neil J. Curson Taylor J.Z. Stock UKRI | Innovate UK 501100006041 75574 Procopios C. Constantinou Neil J. Curson Taylor J.Z. Stock
+Page count: 8
+
+==============================
+Significance
+
+Low-frequency noise due to two-level fluctuations inhibits the reliability and performance of nanoscale semiconductor devices and challenges the scaling of emerging spin-based quantum sensors and computers. Here, we measure temporal two-state fluctuations of individual defects at the Si/SiO2 interface with nanometer spatial resolution using atomic force microscopy. When measured as an ensemble, the observed defects have a 1/f power spectral trend at low frequencies. The presented method and insights provide a more detailed understanding of the origins of 1/f noise in silicon-based classical and quantum devices and could be used to develop processing techniques to reduce two-state fluctuations associated with defects.
+
+We use electrostatic force microscopy to spatially resolve random telegraph noise at the Si/SiO2 interface. Our measurements demonstrate that two-state fluctuations are localized at interfacial traps, with bias-dependent rates and amplitudes. These two-level systems lead to correlated carrier number and mobility fluctuations with a range of characteristic timescales; taken together as an ensemble, they give rise to a 1/f power spectral trend. Such individual defect fluctuations at the Si/SiO2 interface impair the performance and reliability of nanoscale semiconductor devices and will be a significant source of noise in semiconductor-based quantum sensors and computers. The fluctuations measured here are associated with a four-fold competition of rates, including slow two-state switching on the order of seconds and, in one state, fast switching on the order of nanoseconds which is associated with energy loss.
+
+Low-frequency 1/f noise in silicon-based field-effect devices is widely attributed to random fluctuations in the charge state occupancy and/or structure of traps at the Si/SiO2 interface. This random telegraph noise (RTN) compromises circuit performance and reliability and is increasingly detrimental as device areas decrease in size, in highly scaled devices. RTN in nanoscale metal-oxide-semiconductor field effect transistors (MOSFETs), for example, can introduce current variations that are comparable to the channel signal (1, 2). RTN also decreases the read margin for RAM, which limits device stability and scaling (2, 3). Emerging semiconductor-based quantum sensors and computers are also prone to RTN. Spin qubits are realized in silicon either as gate-defined quantum dots or as buried dopant atoms positioned nanometers beneath a Si/SiO2 interface (4). In both architectures, RTN in the near-interfacial silicon electronic bath, due to Si/SiO2 trap fluctuations, will significantly limit qubit coherence and control in noisy intermediate-scale quantum (NISQ) silicon devices (5).
+
+A more robust understanding of RTN is needed to establish silicon nanofabrication methodologies that limit device noise, and will aid in the development of error correction algorithms for upcoming NISQ technologies. However, despite more than 50 y of research investigating 1/f noise in silicon, there is still significant debate regarding what kinds of defects predominantly contribute to its origin. The two defect classes typically associated with RTN in silicon-based devices are interfacial charge traps, which are silicon dangling bonds located exactly at the Si/SiO2 interface, and oxide traps, which are oxygen vacancies positioned deeper within the oxide layer (2, 6–8).
+
+In field-effect silicon devices, RTN is commonly attributed either to fluctuations in carrier number, which is associated with a variable interfacial capacitance as the defect charge state switches, or to fluctuations in the carrier mobility due to variable trap scattering (2, 7, 9). There is increasing consensus that number and mobility fluctuations are correlated and both contribute to device noise, but the exact noise mechanism remains unclear. This is in part because oxide traps and interface traps contribute very differently to carrier number and mobility fluctuation models. The rate of carrier exchange with oxide traps is consistent with commonly observed slow (∼ms−s) RTN timescales. However, oxide traps are too far removed, spatially, from the Si/SiO2 interface to participate appreciably in scattering with the silicon surface charge density, and therefore are not expected to be associated with significant mobility fluctuations (7). Interface traps, on the other hand, due to their close proximity to the silicon surface, are effective scattering sites and so could give rise to mobility fluctuations, but carrier exchange with interface traps is expected to be too fast to account for slow RTN timescales (10–12).
+
+Part of the challenge in pinpointing the dominant origin of RTN is that the constituent random telegraph signals (RTSs, due to individual two-state fluctuators) and 1/f noise (due to an ensemble of two-state fluctuators) are commonly studied by measuring the drain current or voltage in MOSFET devices. In this measurement scheme, distinguishing RTSs associated with individual trap fluctuations requires small and pristine MOSFET devices with few RTS sources. Even then, the exact position of the trap in the MOSFET channel is unknown. Furthermore, both carrier number and mobility fluctuations manifest as MOSFET current switching, which makes it difficult to disentangle these two correlated yet potentially competing noise mechanisms.
+
+In this work, we demonstrate spatially resolved RTN at an n-type Si/SiO2 interface using frequency-modulated atomic force microscopy (fm-AFM) (13, 14) at room temperature in ultrahigh vacuum (∼10−10 mbar). We measure nanoscale spatial heterogeneities in the noise landscape at the silicon surface and attribute this to localization of two-state fluctuators at charge trap sites. In these measurements, fluctuations in the interfacial capacitance and carrier scattering rates, which are associated with the local carrier number and mobility, respectively, are measured simultaneously. In this way, we detect correlated fluctuations, with a range of characteristic timescales, at individual trap sites with bias-dependent rates and amplitudes consistent with scattering by donor-like interface traps (15).
+
+Results
+
+The fm-AFM tip-sample junction resembles a metal-insulator-semiconductor (MIS) capacitor, where the tip (which has an applied bias Vg) is metallic and the n-type silicon sample (grounded) is semiconducting, and there is an insulating gap composed of vacuum (∼10 nm) and SiO2 (1nm) between them (15–22). As the fm-AFM cantilever oscillates above the silicon surface, the surface charge density (i.e. surface potential) varies in time—that is, the effect of the oscillating cantilever is similar to the application of an AC bias at the cantilever resonance frequency, 300kHz. This leads to a time-varying tip-sample force (Fts) with an in-phase contribution, with respect to the tip-sample separation (zins), as well as an out-of-phase contribution. The in-phase force is related to the interfacial capacitance (16, 23), and manifests as a shift in the cantilever resonance frequency (Δf). The out-of-phase force, which is nonzero if the surface charge reorganization is noninstantaneous, is related to the equivalent series resistance, or Ohmic energy dissipation due to scattering of mobile carriers near the surface as they reposition over every oscillation cycle. This out-of-phase force manifests as an increase in the amplitude of the cantilever driving force (Fd) (15). Thus, we expect any RTN due to capacitance fluctuations to manifest in the fm-AFM Δf channel, and RTN due to fluctuating trap structures and scattering centers to manifest in the Fd channel.
+
+Spatial Localization.
+
+Fig. 1 shows multipass images of the fm-AFM driving force Fd, where the applied bias Vg is −6.5 V. The measured Fd varies spatially. Specifically, in Fig. 1, three traps (labeled Ta, Tb, and Tc) are identified, as well as a background region labeled B0 (away from any traps). The traps exhibit different noise timescales, ranging from static (0Hz, Ta) to slow (∼Hz, Tb) to fast (∼kHz, Tc). Furthermore, Fig. 1, being a measurement of Fd, shows that in the proximity of traps, the mobility at the Si/SiO2 interface can fluctuate with timescales on the order of Hz−kHz. A more detailed description of this Fd measurement, as well as the slow Fd noise at trap sites, follows.
+
+Fig. 1. fm-AFM driving force (Fd) images showing spatially heterogeneous dielectric loss and noise at the SiO2 interface. (A and B) Multipass image showing Fd at variable bias (indicated). Three defects labeled Ta, Tb, and Tc are identified, with arrows pointing to the approximate location, as well as a trap-free background region B0. The bright regions (as compared to B0) correspond to additional unlabeled donor-like traps. (C and D) Multipass image of the Tc trap. The horizontal scan speed for both images was ∼5 s/line. The color scale bars are (A) Fd=[30:35]mV, (B) Fd=[31:40]mV, (C) Fd=[32:37]mV, and (D) Fd=[33:41]mV, where bright green corresponds to an increase in Fd associated with increased dielectric loss.
+
+Fig. 1 shows that there is a notable increase in Fd near traps as compared to the background. This corresponds to an increase in scattering loss near trap sites. The loss mechanism is understood by measuring the full bias dependence of Δf and Fd at the trap locations as compared to the background, as shown in Fig. 2. The Fd peaks in Fig. 2B manifest as rings in Fig. 1; this is due to the spatial localization of the tip, which acts as a gate (15). The bias spectral position of these peaks (rings) is consistent with scattering by a donor-like interface trap, as described in ref. 15: As the fm-AFM cantilever oscillates, the trap level ET continually shifts with respect to the Fermi level EF. At a particular bias, VCbot, the trap level equals the Fermi level at the bottom of the cantilever oscillation; at VCtop, the trap level equals the Fermi level at the top of the oscillation. At biases between these two crossing points, then, the donor-like trap energy crosses the Fermi level during every cantilever oscillation cycle. Consequently, within this bias range (i.e. between the dashed lines in Fig. 2), energy is dissipated by cascade phonon scattering as carriers are repeatedly captured and emitted by the interface trap (24–27), and the measured Fd increases. This carrier exchange with the donor-like interface trap states occurs faster than the cantilever oscillation period, with timescales on the order of MHz (15). Note that the bias dependence of the trap-free background (B0) Fd(Vg) spectrum in Fig. 2B is due to the bias-dependent change in surface potential as the cantilever oscillates, as explained in ref. 15.
+
+Fig. 2. fm-AFM bias spectra of the Si/SiO2 surface. (A) fm-AFM frequency shift (Δf) and (B) driving force (Fd) at variable bias (Vg) measured at the background (light gray, B0), at a 0Hz trap (black, Ta), and at a noisy trap (dark gray, Tb or Tc). The closest tip-sample separation, determined using the MIS capacitor model, is 12nm. A null spectrum measured ∼1 μm above the sample surface (where the tip-sample force Fts≈0) is also shown (light gray). Between the crossing points (dashed lines, VCtop and VCbot), the traps move above and below the Fermi level over every cantilever oscillation (15).
+
+The slow (Hz−kHz) noise at Tb and Tc in Figs. 1 and 2 shows two-state fluctuations. The two states are here defined with the generic labels 0 and 1. The fact that Fd fluctuates at these traps indicates that the 0 and 1 states have different characteristic mobilities. The total mobility μtot near the Si/SiO2 interface is (28):[1] 1μtot=1μbulk+1μinterface...+1μtrap,
+
+where μbulk is the lattice-limited mobility, μinterface is the mobility which is limited by scattering at the Si/SiO2 interface, and μtrap is the mobility limited by scattering at trap sites. In the background (B0), there is no trap scattering, and the final term in Eq. 1 equals zero. At static traps (Ta), μtrap>0 due to trap scattering. At fluctuating traps (Tb and Tc), the final term in Eq. 1 fluctuates between zero and nonzero. The 0 state, then, corresponds to the background condition, where the fast (MHz) charge transfer between the interface trap and the silicon (and the associated energy dissipation) does not occur and the driving force is at the minimum value measured at that bias. The 1 state corresponds to the increased loss condition, where fast charge transfer (and the associated energy dissipation) does occur. The RTN in Figs. 1 and 2 is not due to tunneling between the tip (gate) and the trap, since RTN is observed even when the tip-sample separation is increased by 10nm (SI Appendix, section S.1).
+
+RTS Characterization.
+
+Δf and Fd both exhibit slow two-state fluctuations. While only the Fd fluctuations are resolved in Fig. 2 (SI Appendix, section S.1), fluctuations in both Δf and Fd can be seen in Fig. 3. Fig. 3 shows a RTS measured by positioning the fm-AFM tip above a fast (Tc-type) trap and recording Δf and Fd as a function of time. In this measurement, Vg=−6.5 V. Δ(Δf) and ΔFd show the change in Δf and Fd with respect to state 0.
+
+Fig. 3. Random telegraph signal of an individual trap at the Si/SiO2 interface. Two-state noise is seen in the simultaneously measured fm-AFM frequency shift (Δf, A–D) and drive (Fd, E–H) above a fast (Tc) trap at bias Vg=−6.5 V. The closest tip-sample separation, determined using the MIS capacitor model, is 12 nm. (A and E) 60 s of the total 400 s time trace. (B and F) Histograms of the time trace (black) with Gaussian fits (color) overlaid. The Gaussian mean and full-width half-maximum are shown in (A and E) as colored lines and shaded regions, respectively. (C, D, G, and H) Histograms of the wait time between 0→1 transitions (τ0) and 1→0 transitions (τ1) (black) with exponential fits (color) overlaid. (I and J) Power spectral density (PSD) of the Δf and Fd time traces, respectively (color), and the base instrument noise (gray). Lorentzian functions are overlaid, and the corner frequency (fC) is indicated. (K) Correlation matrix of the Δf and Fd signals, showing the counts of a particular state (e.g. N01 is the number of sampled points where Δf is in state 0 and Fd is in state 1).
+
+The two-state fluctuations (i.e. RTS) measured at this trap can be generically described as the reversible reactions: [2a] 0 →k01 1
+
+[2b] 1 →k10 0
+
+with rates k01 and k10. The RTS amplitude (A01) is found by fitting Gaussian distribution functions to the RTS time trace (Fig. 3A, B, E, and F) such that[3] A01=|0¯−1¯|,
+
+where 0¯(1¯) is the mean value of 0 (1) peak. The time between transitions is exponentially distributed (Fig. 3C, D, G, and H), such that the probability of a transition from the 0 to 1 (1 to 0) state (P0→1(1→0)) is [4a] P0→1=1τ¯0exp(−τ0τ¯0)
+
+[4b] P1→0=1τ¯1exp(−τ1τ¯1),
+
+where τ0(1) is the wait time in the 0 (1) state before a 0→1 (1→0) transition, and τ¯0(1) is the average wait time in the 0 (1) state. (i.e. k01=1/τ¯0 and k10=1/τ¯1 are the transition rates). The power spectral density (PSD, Fig. 3 I and J) of the RTS is Lorentzian in the form (9, 29):[5] S(fF)=4A012τ¯0+τ¯1×1τ¯0+1τ¯12+2πfF2,
+
+where fF is the Fourier frequency. Eq. 5 shows that S(fF)∝fFα, where the exponent (i.e. slope of the PSD on logarithmic axes) α = 0 for fF<fC and α=−2 for fF>fC, where the corner frequency fC is[6] fC=1τ¯0+τ¯1
+
+The Lorentzian curves and fC values shown in Fig. 3 I and J correspond to Eqs. 5 and 6 and use no fit parameters. This validates the use of Eqs. 3 and 4 to extract RTS amplitudes and rates.
+
+Correlated Fluctuations.
+
+The correlation between the Δf and Fd fluctuations is quantified as the phi coefficient:[7] Φ=N11N00−N10N01(N11+N10)(N10+N00)(N00+N01)(N01+N11),
+
+where Φ=1 indicates perfect correlation, Φ=−1 indicates perfect anticorrelation, and Φ=0 indicates no correlation. N11, N10, N01, and N00 (Fig. 3K) are the number of instances (over the time trace) where Δf and Fd, respectively, are in the given state. (For example, N01 is the number of sampled points where Δf is in state 0 and Fd is in state 1.) The system is defined as being in a given state based on whether the measurement falls within the full-width half-maximum of the Gaussian peak; see SI Appendix. For the RTS shown in Fig. 3, Φ=0.87, which indicates that Δf and Fd are strongly correlated. (The departure from Φ=1 is attributed to the uncertainty in assigning the 0 and 1 states to each sampled point; see SI Appendix, section S.2.) This result indicates that as the interface trap switches between the 0 and 1 states according to Eq. 2, the interfacial capacitance and dielectric loss at the interface trap site both fluctuate. This means that there are correlated carrier number and mobility fluctuations near traps at the Si/SiO2 interface.
+
+Bias Dependence.
+
+Fig. 4 shows the bias-dependent RTS rates and amplitudes of an isolated trap at the Si/SiO2 interface. Fig. 4A shows that for both the 0→1 and 1→0 transitions, log(k) varies linearly with EF−EV, where EV is the energy of the valence band edge. The trap energy ET is fixed with respect to the band edges, meaning that as the surface potential varies with Vg, ET varies with respect to the Fermi level EF. The logarithmic trends in Fig. 4A can be attributed to thermal activation of the reactions in Eq. 2 (30, 31) according to:[8] k=koexp−EA(Vg)kBT,
+
+Fig. 4. Random telegraph signal (RTS) amplitude and rate dependence on applied bias. fm-AFM frequency shift (Δf, red) and drive (Fd, blue) RTS rates (A) and amplitudes (B and C) measured simultaneously at a single fast-switching (Tc-type) trap site at variable bias Vg. The Inset in (A) shows the modeled nonlinear relationship between Vg and EF−Ev (the difference between the Fermi level and the valence band edge). The shaded region of the Inset shows the x-axis range of (A), where notably the Topx-axis is nonlinear. The EF−EV=0 line is shown.
+
+where k is the RTS rate (k01 or k10), ko is the attempt frequency (k01o or k10o), EA is the bias (Vg)-dependent activation energy (E01 or E10), and T is the temperature.
+
+Note that there is a nonlinear relationship between Vg and EF−EV due to the nonlinear bias-dependent surface potential. k, correspondingly, is not expected to vary exponentially with Vg, which is why the Topx-axes in Fig. 4 are nonlinear. In this work, the relationship between the experimental Vg and EF−EV was found by modeling the tip-sample junction as a metal-insulator-semiconductor capacitor (see ref. 15 for details). The modeled relation when the cantilever is at the Bottom of its oscillation—where the tip-sample force contribution is largest—is shown in Fig. 4A, Inset.
+
+The RTS amplitudes of the isolated trap are also bias-dependent, as shown in Fig. 4 B and C. The Δf fluctuation amplitude (A01Δf) and Fd fluctuation amplitude (A01Fd) both appear to peak where Vg is between VCbot and VCtop (∼−7 V, recall Fig. 2B). At this peak bias, loss is maximized when the trap is in the 1 state, since the trap occupancy has the highest probability of switching over every cantilever oscillation cycle. In the 0 state, no charge switching occurs, so the difference in loss between the 0 and 1 states is maximized, and A01Fd peaks. The A01Δf peak indicates that the change in the interfacial capacitance associated with states 0 and 1 is also largest between the crossing points.
+
+Emergent 1/f Trend.
+
+Fig. 5 shows the PSDs and RTS time traces of two traps measured at the Si/SiO2 interface. Individually, each trap is Lorentzian according to Eq. 5, with an α=−2 trend above its corner frequency. In the region between their corner frequencies (fF∼1 to 10Hz), α≈−1. In this electrostatic force microscopy methodology, traps are measured individually, and so exhibit Lorentzian power spectra. In a MOSFET device, however, depending on its size and quality, many traps can contribute to the total noise spectrum. The α=−1 dependence of MOSFET PSDs is commonly attributed to an ensemble of two-state fluctuators with a range of amplitudes and corner frequencies (30, 32, 33).
+
+Fig. 5. Emergent 1/f trend for an ensemble of random telegraph signals. (A) Power spectra (S) as a function of the Fourier frequency (fF) of the fm-AFM frequency shift (Δf) channel for two traps: A slow-switching Tb-type trap, purple; and a fast-switching Tc-type trap, red); as well as the background (B0, gray). Lorentzian fits and corner frequencies are shown for both traps in their respective colors. The black lines show S∝fFα for α=−1 and −2 (indicated). (B and C) Time traces of both traps in their respective colors. The time traces were each measured for 500 s; only the first 30 s are shown.
+
+Considering the emergence of a 1/f trend in the noise, note that Fig. 1 demonstrates that these interface traps, even when located mere nanometers apart, exhibit a variety of RTS timescales. Furthermore, the ring positions in Fig. 1 were stable over several months of measurements at large positive and negative bias (Vg=−10:10 V) at room temperature. This indicates that the RTS reactions (0→1 and 1→0) are permanently more favorable at certain locations, which, given Eq. 8, can be attributed to a lowering of the RTS reaction activation energies E01 and E10 by a permanent nanoscale variability in the local electrostatic landscape. In the Si/SiO2 interfacial system studied here, nanoscale spatial heterogeneities in the amorphous SiO2 likely modify the electrostatic landscape near traps, giving rise to the observed variability in RTS rates that collectively can produce an emergent 1/f trend as illustrated in Fig. 5.
+
+Discussion
+
+The fm-AFM tip-sample junction resembles a metal-insulator-semiconductor capacitor. The two-state fluctuations measured in this work, therefore, may also contribute to gate noise in MOSFET devices, which, like the noise measured above, exhibit low characteristic frequencies on the order of Hz (2, 9, 34). In MOSFET devices, RTN is commonly attributed to tunneling between an oxide trap and the channel, where the tunneling rate is determined by the position of the trap within the oxide. Carrier number fluctuations are attributed to capture and emission of charge from the channel by the trap, and mobility fluctuations are attributed to variable scattering from the trap, since the scattering cross-section depends on the trap charge state. However, this common description of the RTN mechanism in MOSFET devices has two significant shortcomings. First, RTN frequencies increase with temperature above 10 K, indicating thermally activated carrier exchange (Eq. 8) rather than tunneling (7). Second, predicted Coulomb scattering from oxide traps is very small, because oxide traps are spatially removed from the channel (7). Alternative RTN mechanisms should therefore be considered. A mechanism involving interface traps will be discussed below.
+
+The bias spectral peaks shown in Fig. 2B correspond to charge state switching of donor-like interface traps (15), which exhibit fast charging and discharging rates (k⊖+ and k+⊖, respectively) on the order of MHz (15, 35). These charging/discharging timescales are much faster than slow Hz−kHz RTS switching between states 0 and 1 (k01 and k10). The measurements shown in this work, therefore, point to a four-fold competition of rates, as illustrated in Fig. 6A. The 0 state is an “inactive” state, where the trap occupancy is constant. The 1 state is “active,” meaning that the donor-like interface trap occupancy can switch between neutral and charged. Switching between the active (1) and inactive (0) states is slow (ms−s), and trap charging and discharging when the trap is in the active state is fast (ns). In other words, in the active (1) state, the trap is able to be charged and discharged, and energy is dissipated by phonon scattering each time the trap occupancy switches (15). The inactive (0) state, however, does not experience this fast charge switching and associated energy loss. In Fig. 6B, the formation energies for the 0 and 1 states are shown as linearly dependent on EF−EV, given Eq. 8 and the linear RTS rates shown in Fig. 4A.
+
+Fig. 6. Four-fold rate competition reaction schematic. (A) Reaction diagram for trap activation and inactivation (k01 and k10) and charging and discharging (k⊖+ and k+⊖). The dashed lines show that with increasing negative bias (Vg), E01 decreases and E+⊖ increases. (B) Formation energy diagram for the active state (which can be neutral or charged) and the inactive state. The dashed arrow indicates the direction of increasing negative bias. The crossing point VC, at which the trap level equals the Fermi level, is shown as a vertical dashed line.
+
+Interface Trap Hydrogen Passivation Mechanism.
+
+A possible noise mechanism, to explain the results presented here, including the four-fold competition of rates illustrated in Fig. 6, is the slow spontaneous passivation and depassivation of a Pb center, i.e. an interface trap dangling bond (DB) (7, 36–38) with hydrogen. In the passivated state (Pb-H, i.e. Si3≡Si-H), the trap would be inactive (0), but in the depassivated state (Pb·, i.e. Si3≡Si·), the trap would be active (1), meaning that its charge state could rapidly switch between neutral and charged, due to the proximity of the Pb center to the silicon surface charge density.
+
+While details of individual Pb passivation at the Si/SiO2 interface are difficult to ascertain directly, the simpler and related system of hydrogen-terminated Si(001) is well studied, and scanning tunneling microscopy (STM) measurements provide atomic resolution details of DB passivation (39, 40). In particular, bistabilities attributed to hydrogen diffusion at a DB site at the bare Si(001) surface have been measured at room temperature on the order of seconds (41, 42). These timescales are very similar to the long 0 and 1 state lifetimes shown in Figs. 3 and 4A, and thus support the hydrogen passivation of Pb centers as a possible explanation for the slow noise measured in this work, at the Si/SiO2 interface.
+
+In this proposed slow noise mechanism, the Pb center can be passivated (inactivated) by reacting with either molecular (31, 43, 44) or atomic (44, 45) hydrogen according to: [9a] Pb· + H2→Pb-H+H·
+
+[9b] Pb· + H·  →Pb-H
+
+The Pb center can be depassivated (activated) according to refs. 31, 43, 45, and 46: [10a] Pb-H + H· → Pb· + H2
+
+[10b] Pb-H → Pb· + H·
+
+The DB state in Eqs. 9 and 10 is neutral (i.e. Pb· is equivalent to Pb⊖), but a donor-like DB can be positively charged according to: [11a] Pb⊖ + h+→k⊖+ Pb+ (charging)
+
+[11b] Pb+ →k+⊖Pb⊖ +  h+ (discharging),
+
+where k⊖+ and k+⊖ are the charging and discharging rates, respectively.
+
+If this mechanism is indeed responsible for the observed RTN, then there should be a plausible explanation for passivation/depassivation of the Pb defects at room temperature, while exposed to a time-varying (kHz) gate (tip) bias, of order 1 to 10 V. In STM experiments on hydrogen-terminated silicon, DB activation occurs when tunneling electrons transfer enough energy to the Si-H bond to cleave it. This tunneling electron–stimulated hydrogen desorption can be reliably controlled and is exploited to perform atomically precise lithography (47). The bond-cleaving mechanisms at work here are well understood. At high sample biases (>∼6.5 V), a single electron process is accessed, in which direct electronic excitation of the Si-H bond from the bonding to antibonding state serves to remove the hydrogen (48). At lower sample tunnel biases (<∼6.5 V), Si-H vibrational modes are excited by inelastic scattering of the tunneling electrons with the Si-H bond (41, 42, 47, 49–51); by pumping these vibrational modes, in a multielectron process, the bond can be broken. Similar mechanisms are also understood to occur in hot carrier–induced damage in complementary metal-oxide-semiconductor (CMOS) devices (52). In this case, sufficiently energetic electrons in the channel current interact with and break Si-H bonds at the gate oxide interface creating charge traps and degrading device performance. In our fm-AFM experiment, we suggest that DB activation at the Si/SiO2 interface can occur when Si-H bonds are excited sufficiently to overcome barrier E01 in Fig. 6, either directly or indirectly, by the oscillating electric field introduced by the biased AFM tip. As the AFM tip oscillates, bending the silicon bands at the sample surface, the interfacial carrier density continually reorganizes, introducing a local current density at the Si/SiO2 interface. In analogy with the STM-induced hydrogen desorption from Si(001) and hot carrier damage in CMOS devices, this surface charge reorganization current density and/or the associated electric field (52) may be responsible for cleaving of select Si-H bonds at the Si/SiO2 interface in the sample measured here using fm-AFM.
+
+DB passivation, on the other hand, can occur when the DB is exposed to interstitial atomic and/or molecular hydrogen (45, 46), both of which can diffuse near the Si/SiO2 interface (43). In MOSFET devices, hydrogen is intentionally introduced to passivate the oxide interface traps and improve device performance. The sample measured in this work, however, was not treated with hydrogen post-oxide growth to passivate DBs at the interface. Rather, the sample was fabricated using the same procedure as for hydrogen resist lithography, where the atomically flat Si(001) surface was passivated in ultra-high vacuum (UHV) with atomic hydrogen and subsequently capped by 3nm of epitaxial silicon (53); when exposed to the atmosphere, ∼1 nm of native SiO2 is formed at the surface. Due to this process, we expect only a fraction of interfacial DBs to be passivated. In the Pb passivation (slow fluctuation) mechanism proposed here, hydrogen present as interstitials or bound at various defects including other Pb centers may supply a reservoir available to passivate the Pb centers that have been activated under the influence of the oscillating tip bias. The concentration and diffusivity of the interstitial hydrogen will therefore contribute to the DB passivation rate k10 (43). Furthermore, the passivation rate of the PB center will depend on its charge state (44); this is consistent with the decrease of k10 with increasing negative bias measured here (Fig. 4A).
+
+Conclusions
+
+We investigated the nanoscale spatial heterogeneity of random telegraph noise at the Si/SiO2 interface. Our measurements show that two-state fluctuations are localized at individual interface charge traps. The traps measured here exhibit a range of characteristic RTS timescales, even though the traps were located mere tens of nanometers apart, and positioned equidistant from the gate (fm-AFM tip). This indicates that the RTS rate is affected by nanoscale heterogeneities in the electrostatic landscape, which is here attributed to the heterogeneity of the amorphous SiO2 overlayer. The range of RTN rates and corner frequencies that results from this inherent spatial heterogeneity gives rise to a collective 1/f power spectrum, which is a ubiquitous phenomenon in silicon-based semiconducting devices.
+
+The nanoscale spatial heterogeneity in the noise landscape measured here implies significant variability in the noise characteristics of nanoscale silicon field-effect devices. This result could be applied to explore how postprocessing techniques, such as deuterium annealing (54, 55), influence the density of interface traps and the prevalence of two-state fluctuators. Furthermore, these findings are of particular importance for advancing silicon-based quantum sensors and computers, where qubits are spaced roughly 1nm apart within a silicon lattice. In such devices, each qubit interacts with its local silicon electronic bath. Thus, the nanoscale electronic heterogeneities measured in this work indicate that each qubit could be susceptible to a unique noise landscape, potentially leading to distinct noise profiles for individual qubits.
+
+The fm-AFM measurement methodology used in this work provides a unique opportunity to simultaneously measure two drastically different noise timescales (∼ns and ∼s) associated with individual traps. The fast rates, k⊖+ and k+⊖, are associated with energy loss, and introduce a phase lag between the ∼300 kHz bias modulation (in this case, applied by the oscillating top gate i.e. fm-AFM tip) and the sample response. The slow rates, k01 and k10, are here fully resolved RTSs. Together, these fast and slow processes imply a four-fold competition of rates, where one RTS state (1) is associated with appreciable energy loss, and the other (0) is not. These findings address long-standing questions about the behavior of traps at the Si/SiO2 interface.
+
+Materials and Methods
+
+fm-AFM.
+
+The fm-AFM cantilever is maintained at a constant oscillation amplitude A on its resonance frequency ω using a self-excitation loop which applies a periodic driving force with amplitude Fd. In the linear force-distance regime, the tip-sample separation varies sinusoidally according to zins=Acos(ωt). The components of Fts(t) which are in-phase with zins(t) lead to a shift in the cantilever resonance frequency (Δω=2πΔf) with respect to its free natural resonance ωo, and the out-of-phase force components lead to an increase in Fd according to (56–58): [12a] Δω=ω−ωo=−ωo2kAωoπ∫02π/ω∂tFts(t)cos (ωt)
+
+[12b] Fd=kAQ−ωoπ∫02π/ω∂tFts(t)sin(ωt),
+
+where k and Q are the cantilever spring constant, and quality factor, respectively.
+
+Here, Fts is predominantly electrostatic and is related to the charge density at the silicon surface (23). Δf is therefore a measure of the interfacial capacitance. The first term in Eq. 12b represents intrinsic losses due to cantilever damping; the second term accounts for additional energy losses in the sample. Here, ω≈300kHz, which is in a low-frequency regime where scattering of mobile carriers at the surface dominates energy loss, such that the loss tangent tan(δ) is[13] tan(δ)≈σωϵϵo,
+
+where σ is the conductivity and ϵϵo is the permittivity. In other words, Fd is a measure of the equivalent series resistance of the interfacial capacitance.
+
+Experimental Setup.
+
+All results were measured at room temperature (∼300 K) in UHV (∼10−10 mbar) using a JEOL JSPM-4500A system. A beam deflection detection mechanism was used for fm-AFM, with Nanosensors platinum-iridium coated silicon cantilevers (PPP-NCHPt, fo≈300kHz, k≈42 N/m, Q≈18,000, and A≈6nm), and a Nanonis controller with a 20ms sampling frequency. Bias spectra (Fig. 2) were measured over ∼30 s, and show the positive-negative and negative-positive sweeps superimposed. For multipass images (Fig. 1) Δf=−3Hz and Vg=0V for the first pass, and Vg was set to the displayed value following the first-pass topography for subsequent passes. For time trace measurements (e.g. Fig. 3 A and E), the z-controller was turned off. Vertical (z) drift was <1 nm for every measured time trace, and the tip was reapproached before and after every time trace. Lateral (x, y) drift was estimated to be <2 nm. The time traces corresponding to the data points in Fig. 4 were measured out of order, so the bias-dependent trends presented in this work cannot be attributed to spatial drift.
+
+Sample Fabrication.
+
+The 300 μm thick n-type silicon sample was phosphorous-doped, with donor concentration 9.0×1014/cm3. The atomically clean Si(001) surface was passivated by atomic hydrogen in UHV at 250 C, and then capped by 3nm of epitaxial intrinsic Si at 250 C following a 10-monolayer room temperature locking layer and a 15 s 250 C rapid thermal anneal (53). Upon exposure to the atmosphere, 1nm of self-limited native SiO2 formed at the surface.
+
+Model Parameters.
+
+The MIS model (15, 16, 23, 28) parameters for the Inset in Fig. 4A are: Closest zins=12nm, tip radius 5nm, ϵ = 11.7, electron affinity 4.05eV, tip work function 4.75eV, electron and hole effective masses 1.08 and 0.56, n-type dopant density 5×1017/cm3, and band gap 0.7eV (which can be attributed to surface band gap narrowing due to the large interface trap density, as in refs. 59 and 60).
+
+Supplementary Material
+
+Appendix 01 (PDF)
+
+This research was supported by Natural Sciences and Engineering Research Council of Canada (NSERC) Alliance Grants—Canada-UK Quantum Technologies, an NSERC Discovery Grant, and Fonds de recherche du Québec—Nature et technologies, as well as the Engineering and Physical Sciences Research Council (grants EP/R034540/1, EP/V027700/1, and EP/W000520/1) and Innovate UK (grant 75574). For the purpose of open access, the author has applied a Creative Commons Attribution (CC BY) license to any Author Accepted Manuscript version arising. This work includes a portion of research developed from Cowie, 2023.
+
+Author contributions
+
+M.C., N.J.C., T.J.Z.S., and P.G. designed research; M.C. performed research; M.C. contributed new reagents/analytic tools; M.C. analyzed data; P.C.C. N.J.C. and T.J.Z.S. fabricated sample; and M.C., T.J.Z.S., and P.G. wrote the paper.
+
+Competing interests
+
+The authors declare no competing interest.
+
+Data, Materials, and Software Availability
+
+.dat and .sxm data have been deposited in FigShare (DOI: 10.6084/m9.figshare.25378318) (62).
+
+Supporting Information
+
+This article is a PNAS Direct Submission.
+
+
+1 E. Simoen, B. Kaczer, M. Toledano-Luque, C. Claeys, Random telegraph noise: From a device physicist’s dream to a designer’s nightmare. ECS Trans. 39, 3–15 (2011).
+2 T. Grasser, Noise in Nanoscale Semiconductor Devices (Springer International Publishing, 2020).
+3 F. Zahoor, T. Z. A. Zulkifli, F. A. Khanday, Resistive random access memory (RRAM): An overview of materials, switching mechanism, performance, multilevel cell (mlc) storage, modeling, and applications. Nanoscale Res. Lett. 15, 90 (2020).32323059 10.1186/s11671-020-03299-9 PMC7176808
+4 J. J. L. Morton, D. R. McCamey, M. A. Eriksson, S. A. Lyon, Embracing the quantum limit in silicon computing. Nature 479, 345–353 (2011).22094695 10.1038/nature10681
+5 J. Preskill, Quantum computing in the NISQ era and beyond. Quantum 2, 79 (2018).
+6 O. Engström, The MOS system (Cambridge University Press, 2014), pp. 9–128, 131–167, 229–260.
+7 D. M. Fleetwood, Interface traps, correlated mobility fluctuations, and low-frequency noise in metal-oxide-semiconductor transistors. Appl. Phys. Lett. 122, 173504 (2023).
+8 E. Simoen, C. Claeys, Random Telegraph Signals in Semiconductor Devices (IOP Publishing, 2016).
+9 M. Kirton, M. Uren, Noise in solid-state microstructures: A new perspective on individual defects, interface states and low-frequency (1/f) noise. Adv. Phys. 38, 367–468 (1989).
+10 T. Contaret, K. Romanjek, T. Boutchacha, G. Ghibaudo, F. Bœuf, Low frequency noise characterization and modelling in ultrathin oxide MOSFETs. Solid-State Electr. 50, 63–68 (2006).
+11 P. Srinivasan, “Impact of gate material on low-frequency noise of nMOSFETs with 1.5 nm SiON gate dielectric: Testing the limits of the number fluctuations theory” in AIP Conference Proceedings, T. González, J. Mateos, D. Pardo, Eds. (AIP, 2005).
+12 M. von Haartman, M. Östling, Low-Frequency Noise In Advanced Mos Devices (Springer, Netherlands, 2007).
+13 T. R. Albrecht, P. Grütter, D. Horne, D. Rugar, Frequency modulation detection using high-Q cantilevers for enhanced force microscope sensitivity. J. Appl. Phys. 69, 668–673 (1991).
+14 R. García, Dynamic atomic force microscopy methods. Surf. Sci. Rep. 47, 197–301 (2002).
+15 M. Cowie, T. J. Stock, P. C. Constantinou, N. J. Curson, P. Grütter, Spatially resolved dielectric loss at the Si/SiO2 interface. Phys. Rev. Lett. 132, 256202 (2024).38996269 10.1103/PhysRevLett.132.256202
+16 M. Cowie, R. Plougmann, Z. Schumacher, P. Grütter, Single-dopant band bending fluctuations in MoSe2 measured with electrostatic force microscopy. Phys. Rev. Mater. 6, 104002 (2022).
+17 R. M. Feenstra, Y. Dong, M. P. Semtsiv, W. T. Masselink, Influence of tip-induced band bending on tunnelling spectra of semiconductor surfaces. Nanotechnology 18, 044015 (2006).
+18 J. P. Johnson, D. W. Winslow, C. C. Williams, Measurement of depth and energy of buried trap states in dielectric films by single electron tunneling force spectroscopy. Appl. Phys. Lett. 98, 052902 (2011).
+19 J. P. Johnson, N. Zheng, C. C. Williams, Atomic scale imaging and spectroscopy of individual electron trap states using force detected dynamic tunnelling. Nanotechnology 20, 055701 (2009).19417360 10.1088/0957-4484/20/5/055701
+20 I. D. Bernardo , Defects, band bending and ionization rings in MoS2. J. Phys. Condens. Matter 34, 174002 (2022).10.1088/1361-648X/ac4f1d 35081526
+21 R. Wang, C. C. Williams, Dynamic tunneling force microscopy for characterizing electronic trap states in non-conductive surfaces. Rev. Sci. Instrum. 86, 093708 (2015).26429449 10.1063/1.4931065
+22 D. Winslow, C. Williams, Local density of trap states in SiO2 and Si3N4 films studied by single electron tunneling force spectroscopy. J. Appl. Phys. 110, 114102 (2011).
+23 S. Hudlet, M. S. Jean, B. Roulet, J. Berger, C. Guthmann, Electrostatic forces between metallic tip and semiconductor surfaces. J. Appl. Phys. 77, 3308–3314 (1995).
+24 E. H. Nicollian, A. Goetzberger, The Si-SiO2 interface - electrical properties as determined by the metal-insulator-silicon conductance technique. Bell Syst. Tech. J. 46, 1055–1133 (1967).
+25 M. Lax, Cascade capture of electrons in solids. Phys. Rev. 119, 1502–1523 (1960).
+26 Y. Wang, K. P. Cheung, Carrier capture at the SiO2-Si interface: A physical model. Appl. Phys. Lett. 91, 113509 (2007).
+27 J. Piscator, B. Raeissi, O. Engström, Multiparameter admittance spectroscopy for metal-oxide-semiconductor systems. J. Appl. Phys. 106, 054510 (2009).
+28 S. M. Sze, K. K. Ng, Physics of Semiconductor Devices (John Wiley & Sons, Inc., ed. 3, 2007), pp. 16–27, 197–238.
+29 S. Machlup, Noise in semiconductors: Spectrum of a two-parameter random signal. J. Appl. Phys. 25, 341–343 (1954).
+30 B. N. Costanzi, E. D. Dahlberg, Emergent 1/f noise in ensembles of random telegraph noise oscillators. Phys. Rev. Lett. 119, 097201 (2017).28949589 10.1103/PhysRevLett.119.097201
+31 K. L. Brower, Dissociation kinetics of hydrogen-passivated (111) SiO2 interface defects. Phys. Rev. B 42, 3444–3453 (1990).10.1103/physrevb.42.3444 9995858
+32 H. Mueller, M. Schulz, Individual interface traps at the Si-SiO2 interface. J. Mater. Sci. Mater. Electron. 5, 329–338 (1994).
+33 A. P. van der Wel , Low-frequency noise phenomena in switched MOSFETs. IEEE J. Solid-State Circ. 42, 540–550 (2007).
+34 M. J. Kirton , Individual defects at the Si:SiO2 interface. Semicond. Sci. Technol. 4, 1116–1126 (1989).
+35 H. Labidi , Scanning tunneling spectroscopy reveals a silicon dangling bond charge state transition. New J. Phys. 17, 073023 (2015).
+36 A. Stirling, A. Pasquarello, J. C. Charlier, R. Car, Dangling bond defects at Si/SiO2 interfaces: Atomic structure of the pb1 center. Phys. Rev. Lett. 85, 2773–2776 (2000).10991230 10.1103/PhysRevLett.85.2773
+37 W. Goes , Identification of oxide defects in semiconductor devices: A systematic approach linking DFT to rate equations and experimental evidence. Microelectron. Reliab. 87, 286–320 (2018).
+38 C. Herring, N. M. Johnson, C. G. V. de Walle, Energy levels of isolated interstitial hydrogen in silicon. Phys. Rev. B 64, 125209 (2001).
+39 J. Pitters , Atomically precise manufacturing of silicon electronics. ACS Nano 18, 6766–6816 (2024).38376086 10.1021/acsnano.3c10412 PMC10919096
+40 M. Taucer , Single-electron dynamics of an atomic silicon quantum dot on H-Si(001)-(2 × 1) surface. Phys. Rev. Lett. 112, 256801 (2014).25014824 10.1103/PhysRevLett.112.256801
+41 A. Bellec , Nonlocal activation of a bistable atom through a surface state charge-transfer process on Si(001)-2 × 1:H. Phys. Rev. Lett. 105, 048302 (2010).20867890 10.1103/PhysRevLett.105.048302
+42 K. Stokbro, U. J. Quaade, R. Lin, C. Thirstrup, F. Grey, Electronic mechanism of STM-induced diffusion of hydrogen on Si(100). Faraday Discuss. 117, 231–240 (2000).10.1039/b003179h 11271994
+43 A. Stesmans, Dissociation kinetics of hydrogen-passivated pb defects at the (111)Si/SiO2 interface. Phys. Rev. B 61, 8393–8403 (2000).
+44 L. Å. Ragnarsson, P. Lundgren, Electrical characterization of Pb centers in (100)Si–SiO2 structures: The influence of surface potential on passivation during post metallization anneal. J. Appl. Phys. 88, 938–942 (2000).
+45 E. Cartier, J. H. Stathis, D. A. Buchanan, Passivation and depassivation of silicon dangling bonds at the Si/SiO2 interface by atomic hydrogen. Appl. Phys. Lett. 63, 1510–1512 (1993).
+46 L. Tsetseris, S. T. Pantelides, Migration, incorporation, and passivation reactions of molecular hydrogen at the Si-SiO2 interface. Phys. Rev. B 70, 245320 (2004).
+47 T. C. Shen , Atomic-scale desorption through electronic and vibrational excitation mechanisms. Science 268, 1590–1592 (1995).17754609 10.1126/science.268.5217.1590
+48 M. C. Hersam, N. P. Guisinger, J. Lee, K. Cheng, J. W. Lyding, Variable temperature study of the passivation of dangling bonds at Si(100)-2 × 1 reconstructed surfaces with H and D. Appl. Phys. Lett. 80, 201–203 (2002).
+49 M. Møller , Automated extraction of single H atoms with STM: Tip state dependency. Nanotechnology 28, 075302 (2017).28074783 10.1088/1361-6528/28/7/075302
+50 N. Pavliček, Z. Majzik, G. Meyer, L. Gross, Tip-induced passivation of dangling bonds on hydrogenated Si(100)-2 × 1. Appl. Phys. Lett. 111, 053104 (2017).
+51 B. N. J. Persson, Inelastic vacuum tunneling. Phys. Scr. 38, 282–290 (1988).
+52 M. Jech , Quantum chemistry treatment of silicon-hydrogen bond rupture by nonequilibrium carriers in semiconductor devices. Phys. Rev. Appl. 16, 014026 (2021).
+53 T. J. Z. Stock , Atomic-scale patterning of arsenic in silicon by scanning tunneling microscopy. ACS Nano 14, 3316–3327 (2020).32142256 10.1021/acsnano.9b08943 PMC7146850
+54 J. W. Lyding, K. Hess, I. C. Kizilyalli, Reduction of hot electron degradation in metal oxide semiconductor transistors by deuterium processing. Appl. Phys. Lett. 68, 2526–2528 (1996).
+55 D. M. Fleetwood , Defects in Microelectronic Materials and Devices (CRC Press, 2008).
+56 H. Hölscher , Measurement of conservative and dissipative tip-sample interaction forces with a dynamic force microscope using the frequency modulation technique. Phys. Rev. B 64, 075402 (2001).
+57 J. E. Sader , Quantitative force measurements using frequency modulation atomic force microscopy - theoretical foundations. Nanotechnology 16, S94–S101 (2005).
+58 L. N. Kantorovich, T. Trevethan, General theory of microscopic dynamical response in surface probe microscopy: From imaging to dissipation. Phys. Rev. Lett. 93, 236102 (2004).15601176 10.1103/PhysRevLett.93.236102
+59 C. M. van Vliet, P. Vasilopoulos, Electrical and optical bandgap narrowing due to heavy doping in silicon. Phys. Status Solidi A 94, 635–644 (1986).
+60 P. D. C. King , Surface band-gap narrowing in quantized electron accumulation layers. Phys. Rev. Lett. 104, 256803 (2010).20867408 10.1103/PhysRevLett.104.256803
+61 M Cowie, “Charge re-organization timescales and loss tangents at semiconductor surfaces measured by nc-AFM,” PhD thesis, McGill University, Montreal, Canada (2023).
+62 M. Cowie, Data for “Spatially resolved random telegraph fluctuations of a single trap at the Si/SiO2interface”. Figshare. 10.6084/m9.figshare.25378318.v2. Deposited 6 October 2024.PMC11536084 39446387

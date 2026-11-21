@@ -131,6 +131,17 @@ const chartBase = () => ({ fontFace: T.font, catAxisLabelColor: T.ink, valAxisLa
   notes(s, "Why bother with single atoms? A phosphorus donor brings two spins for free: its nucleus with spin one-half and its bound electron. Two times two gives four states, shown in my sketch on the left; we drive the electron with ESR and the nucleus with NMR. On the right is how you read it out: a single-electron transistor senses charge, spin-dependent tunnelling turns spin into charge, and an on-chip antenna delivers the microwaves. In silicon-28, coherence reaches 35.6 seconds, which is enormous for a qubit. The catch is the electron's Bohr radius of about 2 nm: the exchange coupling between two donors depends on their exact lattice positions. That's why fabrication precision is the whole game. Likely question: what's ESR? Electron spin resonance, flipping the electron with microwaves.");
 }
 
+// ============================================================================ 4b. Quantum coupling to scale
+{
+  const s = newSlide("TWO_FIG", "Why one site matters: wavefunction overlap", "Act 1");
+  const a = img(s, "O_wavefunction_scale.png", 0.4, 1.0, 6.3, 2.75, "left");
+  caption(s, "To scale: two P donors 13.0 nm apart over the Si(001) surface lattice, hydrogenic envelope |ψ|² ∝ e^(−2r/a_B) with a_B ≈ 2 nm (our model; inputs He2019, Schofield2025 §3.2, Stock2024).", 0.5, a.y + a.h + 0.04, 6.2, 0.5);
+  const b = img(s, "O_bloch.png", 6.9, 0.95, 2.6, 2.45, "center");
+  caption(s, "Each spin is a qubit: |ψ⟩ = α|0⟩ + β|1⟩ on the Bloch sphere (schematic).", 6.9, b.y + b.h + 0.02, 2.6, 0.45);
+  bullets(s, ["Qubits interact through exchange, set by how their electron clouds overlap", "Exchange depends strongly on exact donor position (valley oscillations), so a one-site error changes the gate"], 0.5, 4.3, 9.0, 0.85, 13);
+  src(s, "Schofield2025 §3.2; He2019; Stock2024. Envelope plot is our model, not a full valley calculation");
+  notes(s, "This is the quantum reason the whole talk is about placement. Each donor's electron is a cloud about 2 nanometres in radius; I drew two of them to scale, 13 nanometres apart as in the He 2019 two-qubit gate, on top of the actual silicon surface lattice. The dots are individual surface sites. The colour is log scale: the clouds barely touch in the middle, and that faint overlap is what sets the exchange coupling J, the interaction a two-qubit gate uses. The roadmap says exchange depends strongly on the exact donor position because of valley oscillations, so moving one donor by one site changes the gate. On the right, each spin is a qubit on the Bloch sphere. Likely question: is your plot exact? It's a simple hydrogen-like envelope; real donors add valley oscillations on top.");
+}
 // ============================================================================ 5. Why not ion implantation?
 {
   const s = newSlide("TABLE", "The problem: implantation can't place one atom", "Act 1");
@@ -228,9 +239,9 @@ const EVENTS = [
   const s = newSlide("TITLE_ONLY", "The process: 11 steps, each an EE143 module", "Act 2");
   const steps = [
     ["1", "Clean + outgas", "600 °C, >8 h", "Wafer clean", "prep"], ["2", "Flash anneal", "≈1200 °C", "Thermal process", "prep"],
-    ["3", "H-terminate", "1-atom resist", "Resist coat", "prep"], ["4", "STM lithography", "±1 atomic spacing", "E-beam litho", "litho"],
-    ["5", "Dose PH₃ / AsH₃", "room temp.", "Gas-phase doping", "dose"], ["6", "Incorporate", "350 °C", "Activation anneal", "incorp"],
-    ["7", "Lock layer + RTA", "500 °C × 10 s (As)", "RTA", "cap"], ["8", "Si overgrowth", "250 °C", "Epitaxy", "cap"],
+    ["3", "H-terminate", "330 °C atomic H", "Resist coat", "prep"], ["4", "STM lithography", "±1 atomic spacing", "E-beam litho", "litho"],
+    ["5", "Dose PH₃ / AsH₃", "room temp.", "Gas-phase doping", "dose"], ["6", "Incorporate", "350 °C, 2 min", "Activation anneal", "incorp"],
+    ["7", "Lock layer + RTA", "500 °C × 15 s", "RTA", "cap"], ["8", "Si overgrowth", "28 nm at 250 °C", "Epitaxy", "cap"],
     ["9", "Find device", "registration marks", "Alignment marks", "cap"], ["10", "Etch + Al contacts", "RIE holes, Al", "Etch + metallization", "contact"],
     ["11", "Measure", "millikelvin", "Hall / 4-point probe", "contact"]];
   const tw = 1.42, th = 1.78, gx = 0.1;
@@ -245,7 +256,7 @@ const EVENTS = [
     text(s, st[3], x + 0.1, y + 1.44, tw - 0.2, 0.22, { fontSize: 8.5, color: T.ink, align: "center", valign: "middle" });
   });
   text(s, "white tag = EE143 module", 0.55, 4.9, 3, 0.22, { fontSize: 9, color: T.muted });
-  src(s, "Stock2020; Stock2024; DAnna2023; Ruess2004; Fuechsle2012; Schofield2025 §5.4");
+  src(s, "Stock2020; Stock2024; DAnna2023 (steps 6–8); Constantinou2024 (step 3); Ruess2004; Fuechsle2012; Schofield2025 §5.4");
   notes(s, "Steps one to three make a perfect surface: clean and outgas at 600 °C for more than eight hours, flash to about 1200 °C, then cap every surface atom with hydrogen. Step four is the lithography. Five and six dose the precursor gas and anneal at 350 °C to lock the dopant into the lattice. Seven and eight bury it under epitaxial silicon. Nine to eleven are what you'd recognise from lab: find the device with alignment marks, etch holes, deposit aluminium, measure. White tags give the EE143 module. The number to remember: 350 °C, because the whole flow is designed around not losing the hydrogen resist. Likely question: is this in vacuum? The STM work runs below 5×10^-11 millibar.");
 }
 
@@ -264,16 +275,16 @@ function processSlide(title, step, bulletsArr, xsecFile, rightFn, srcText, noteT
 
 // ============================================================================ 8. Steps 1-3
 processSlide("Steps 1–3 · Clean surface, 1-atom resist", "Steps 1–3 of 11",
-  ["Acetone/IPA clean, outgas >8 h at 600 °C, repeated ≈1200 °C flash anneals in UHV (<5×10⁻¹¹ mbar)", "Atomic H caps every surface Si: a resist exactly one atom thick", "EE143 hook: same job as a resist coat, with no spin speed"],
+  ["Clean: acetone/IPA, outgas >8 h at 600 °C, ≈1200 °C flashes, UHV <5×10⁻¹¹ mbar", "Resist: atomic H at 330 °C, 5×10⁻⁷ mbar, 5 min caps every surface Si", "EE143 hook: a resist coat one atom thick, no spin speed"],
   "xsec_prep.png", (s) => {
     const b = img(s, "O2_surface_H.png", 4.8, 1.0, 4.7, 3.6, "center");
     caption(s, "H-terminated Si(001): dimer rows (grey) each capped by H (blue). Original 3D render, geometry only.", 4.8, b.y + b.h + 0.04, 4.7, 0.4);
-  }, "Stock2020; Stock2024",
+  }, "Stock2020; Stock2024; Constantinou2024 (H termination)",
   "Step one is about cleanliness, because a single stray atom is a defect at this scale. Samples get an acetone and IPA clean, then outgas for more than eight hours at 600 °C, then repeated flash anneals to about 1200 °C, all in ultra-high vacuum below 5×10^-11 millibar. Then atomic hydrogen goes onto every surface silicon. My render on the right shows the result: rows of silicon dimers, each atom capped by one hydrogen. That monolayer is the resist. Think of it as spin-coating, except the thickness is exactly one atom and perfectly uniform. The number to remember: one atom thick. Likely question: why flash to 1200 °C? It's the standard surface prep in these papers; the pack gives the recipe, not the mechanism.");
 
 // ============================================================================ 9. Step 4
 processSlide("Step 4 · Writing with the tip", "Step 4 of 11",
-  ["Tip pulses strip H atom by atom: atom-wide lines at 3 V, 10 nA, 10 nm/s", "As single-atom windows: 3.5 V, 3000 pA, 50 nm/s; placement ±1 atomic spacing", "EE143 hook: e-beam lithography where the resist is one atom thick"],
+  ["Tip pulses strip H atom by atom: atom-wide lines at 3 V, 10 nA, 10 nm/s", "As windows: 3.5 V, 3000 pA, 50 nm/s, 2 dimers each, ≈12 lattice vectors (4.6 nm) apart", "EE143 hook: e-beam lithography where the resist is one atom thick"],
   "xsec_litho.png", (s) => {
     const a = img(s, "O2_surface_window.png", 4.8, 1.0, 4.7, 2.4, "center");
     caption(s, "Bare (tinted) Si sites form the windows. Original render.", 4.8, a.y + a.h, 4.7, 0.22);
@@ -304,19 +315,19 @@ processSlide("Step 6 · Incorporation anneal", "Step 6 of 11",
 
 // ============================================================================ 12. Steps 7-8
 processSlide("Steps 7–8 · Burying the dopants", "Steps 7–8 of 11",
-  ["Trade-off: low T keeps atoms in place, high T grows good crystal", "P: constant 250 °C overgrowth (≈5 nm segregation, full activation)", "As: unheated locking layer → 500 °C × 10 s RTA → epitaxy. Example: 2 nm, 500 °C × 15 s, 28 nm at 250 °C"],
+  ["Trade-off: low T keeps atoms in place, high T grows good crystal", "P: constant 250 °C (≈5 nm segregation, full activation)", "As: 2 nm at RT, 500 °C × 15 s RTA, 28 nm at 250 °C, 0.003 nm/s: layer 30 nm deep"],
   "xsec_cap.png", (s) => {
-    const a = img(s, "O5_overgrowth_program.png", 4.7, 1.0, 2.85, 2.35, "left");
-    caption(s, "Temperature programs, schematic (ours)", 4.75, a.y + a.h + 0.02, 2.8, 0.22);
-    const b = img(s, "F11_stock2020_fig4_sims.png", 7.65, 1.0, 1.85, 2.05, "right");
-    caption(s, "SIMS: As stays in a sharp δ-layer. Stock et al., ACS Nano 14, 3316 (2020) Fig. 4e, CC BY 4.0", 7.6, b.y + b.h + 0.02, 1.9, 0.75);
-    callout(s, "EE143 link: this is a thermal-budget problem, exactly like keeping a shallow junction shallow.", 4.75, 3.95, 4.75, 0.6, { fontSize: 12 });
+    const a = img(s, "O5_overgrowth_program.png", 4.7, 1.0, 4.8, 2.1, "center");
+    caption(s, "Exact temperature programs: (a) Stock2020 Fig. 4e inset + text; (b) DAnna2023 Methods. Redrawn (ours).", 4.7, a.y + a.h + 0.02, 4.8, 0.25);
+    const b = img(s, "F11_stock2020_fig4_sims.png", 4.7, 3.45, 1.65, 1.6, "left");
+    caption(s, "SIMS: As stays sharp at 15 nm. Stock et al., ACS Nano 14, 3316 (2020) Fig. 4e, CC BY 4.0", b.x + b.w + 0.08, 3.45, 1.3, 1.3);
+    callout(s, "EE143 link: a thermal-budget problem, like keeping a shallow junction shallow.", 7.95, 3.5, 1.55, 1.25, { fontSize: 10.5 });
   }, "Oberbeck2002; Stock2020; DAnna2023",
   "Steps seven and eight bury the dopants: a classic thermal-budget fight. Low temperature keeps atoms in place; high temperature gives good crystal. For phosphorus the answer is a constant 250 °C overgrowth, with about 5 nm of segregation and full activation. For arsenic, Curson's group grows a thin unheated locking layer, does a quick 500 °C, ten-second RTA, then continues epitaxy. A worked example: 2 nm unheated, 500 °C for 15 seconds, then 28 nm at 250 °C, so the layer sits 30 nm down. The SIMS profile on the right shows the arsenic still in a sharp spike. Likely question: why not grow everything hot? That's the trade-off on the slide: even at 250 °C phosphorus segregates about 5 nm.");
 
 // ============================================================================ 13. Steps 9-11
 processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
-  ["Registration markers + an STM–SEM system relocate the buried device", "Hall bars by optical lithography and RIE; Al deposited into holes etched through to the δ-layer", "Then cool to millikelvin and measure"],
+  ["Registration markers + an STM–SEM system relocate the buried device", "20 × 200 µm² Hall bars by optical lithography and RIE; Al into holes etched through the δ-layer", "Transport at 1.8 K (Hall bar); qubits at millikelvin"],
   "xsec_contact.png", (s) => {
     const b = img(s, "F10_danna2023_fig2_maps.jpg", 4.8, 1.0, 4.7, 2.75, "center");
     caption(s, "X-ray fluorescence maps of a buried As Hall bar: Al contacts, Fe, and the As δ-layer itself. Reproduced from D'Anna et al., Adv. Electron. Mater. 9, 2201212 (2023) Fig. 2, CC BY 4.0", 4.8, b.y + b.h + 0.04, 4.7, 0.5);

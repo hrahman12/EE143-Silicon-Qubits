@@ -1,0 +1,217 @@
+
+JOURNAL INFORMATION
+==============================
+NLM Title Abbreviation: Nat Nanotechnol
+Journal ID: Nat Nanotechnol
+NLM Journal ID: 101283273
+
+Nature Nanotechnology
+
+ISSN: 1748-3387
+EISSN: 1748-3395
+
+ARTICLE INFORMATION
+==============================
+PMCID: PMC11106007
+PMID: 38326467
+DOI: 10.1038/s41565-023-01596-9
+Article ID: 1596
+Article version: 1
+Subjects: Article
+
+High-fidelity initialization and control of electron and nuclear spins in a four-qubit register
+
+http://orcid.org/0009-0009-1796-7422 Reiner J. 1 2
+http://orcid.org/0000-0003-1347-9535 Chung Y. 1 2
+http://orcid.org/0009-0004-1412-5274 Misha S. H. 1 2
+http://orcid.org/0000-0002-7802-7719 Lehner C. 1 2
+Moehle C. 1 2
+Poulos D. 1 2
+http://orcid.org/0000-0002-0474-4264 Monir S. 2 3
+Charde K. J. 1 2
+http://orcid.org/0009-0002-8330-0529 Macha P. 1 2
+Kranz L. 1 2
+Thorvaldson I. 1 2
+http://orcid.org/0000-0002-4491-1717 Thorgrimsson B. 1 2
+http://orcid.org/0000-0001-7990-3189 Keith D. 1 2
+http://orcid.org/0000-0001-9232-0930 Hsueh Y. L. 2 3
+http://orcid.org/0000-0003-1649-823X Rahman R. 2 3
+http://orcid.org/0000-0002-9385-5766 Gorman S. K. 1 2
+http://orcid.org/0000-0001-5341-4774 Keizer J. G. 1 2
+http://orcid.org/0000-0002-6422-5888 Simmons M. Y. michelle.simmons@unsw.edu.au
+1 2
+1 https://ror.org/03r8z3t63 grid.1005.4 0000 0004 4902 0432 Centre of Excellence for Quantum Computation and Communication Technology, School of Physics, University of New South Wales, Sydney, New South Wales Australia
+2 https://ror.org/03r8z3t63 grid.1005.4 0000 0004 4902 0432 Silicon Quantum Computing Pty Ltd., University of New South Wales, Sydney, New South Wales Australia
+3 https://ror.org/03r8z3t63 grid.1005.4 0000 0004 4902 0432 School of Physics, University of New South Wales, Sydney, New South Wales Australia
+Electronic publication date: 2024 Feb 7
+Print publication date: 2024
+Volume: 19
+Issue: 5
+First page: 605
+Last page: 611
+Received 2023 Aug 10; Accepted 2023 Dec 20
+Copyright: © The Author(s) 2024
+License: Open Access This article is licensed under a Creative Commons Attribution 4.0 International License, which permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source, provide a link to the Creative Commons license, and indicate if changes were made. The images or other third party material in this article are included in the article’s Creative Commons license, unless indicated otherwise in a credit line to the material. If material is not included in the article’s Creative Commons license and your intended use is not permitted by statutory regulation or exceeds the permitted use, you will need to obtain permission directly from the copyright holder. To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/.
+License URL: https://creativecommons.org/licenses/by/4.0/
+
+Keywords: Electronic devices, Quantum information, Nanoscale devices, Qubits
+
+Funding: Australian Research Council Centre of Excellence for Quantum Computation and Communication Technology, Project Number CE170100012
+issue-copyright-statement: © Springer Nature Limited 2024
+
+==============================
+Single electron spins bound to multi-phosphorus nuclear spin registers in silicon have demonstrated fast (0.8 ns) two-qubit SWAP gates and long spin relaxation times (~30 s). In these spin registers, when the donors are ionized, the nuclear spins remain weakly coupled to their environment, allowing exceptionally long coherence times. When the electron is present, the hyperfine interaction allows coupling of the spin and charge degrees of freedom for fast qubit operation and control. Here we demonstrate the use of the hyperfine interaction to enact electric dipole spin resonance to realize high-fidelity (F=100−6+0%) initialization of all the nuclear spins within a four-qubit nuclear spin register. By controllably initializing the nuclear spins to ⇓⇓⇓, we achieve single-electron qubit gate fidelities of F = 99.78 ± 0.07% (Clifford gate fidelities of 99.58 ± 0.14%), above the fault-tolerant threshold for the surface code with a coherence time of T2*=12μs.
+
+An electric dipole spin resonance protocol making use of hyperfine interaction enacts high-fidelity initialization of a four-qubit nuclear spin register in silicon. This protocol allows for high-fidelity qubit control and a path towards a register-based quantum computer using the exceptional coherence properties of donors in silicon.
+
+Main
+
+Quantum bits encoded into the spin of individual electrons in silicon have shown rapid progress in the past few years1. Phosphorus atom qubits in silicon (Si:P), in particular, have allowed for single qubit gates using both electron spin resonance (ESR)2 and nuclear spin resonance (NMR)3 with some of the highest fidelities and longest coherence times in the solid state to date4–8 (Table 1). One of the unique control mechanisms in these atom-based systems is the hyperfine coupling between the electron and nuclear spins, which has been utilized to demonstrate violation of Bell inequalities6 and a high-fidelity two-qubit gate8. As we advance to many qubits in these multi-nuclear spin registers, the hyperfine coupling has also be used for individual qubit addressability in silicon8–10 and diamond11–14.Table 1 Comparison of nuclear spin registers realized by phosphorus atom qubits in silicon (Si:P) and NV colour centres in diamond (C:NV)
+
+Parameter	Si:P	C:NV	
+Fabrication accuracy	±0.384 nm (ref. 43)	±5 nm (ref. 26)	
+Dopant activation	100% (ref. 43)	2.5% (ref. 44)	
+Qubit readout fidelity	99.95% (ref. 35)	95% (ref. 12)	
+Qubit readout speed	1.5 μs (ref. 7)	10 μs (ref. 12)	
+Electron spin fidelity	99.93% (ref. 5)	99.99% (ref. 14)	
+Electron spin gate speed	2.3 μs (ref. 5)	1 μs (ref. 14)	
+Electron–photon gate	—	70% (ref. 45)	
+Electron–electron gate	87% (ref. 28)	—	
+Nuclear spin fidelity	99.98% (ref. 4)	99.1% (ref. 13)	
+Nuclear spin gate speed	19 μs (ref. 4)	400 μs (ref. 13)	
+Nuclear–nuclear gate	99.37% (ref. 8)	95% (ref. 13)	
+
+In this Article, we address the importance of the hyperfine interaction for a different role: the initialization and control of electron and nuclear spins in these multi-qubit registers critical for the development of a large-scale quantum computer15,16. The initialization of nuclear spins in nitrogen vacancy (NV) centres in diamond has to date used either non-deterministic methods such as post-selection or more active methods such as NMR-based initialization to perform electron–nuclear SWAP operations to map the electron spin state to the individual nuclear spin13,17–19. Similarly, initial experiments in Si:P multi-nuclear spin registers have relied on post-selection to initialize the nuclear spin qubits8. While these non-deterministic methods work well for small qubit systems, when scaling to a large quantum computer with multiple coupled registers, the time required to initialize the system will become unworkable. Here, we propose a robust method for initialization of nuclear spins in these multi-qubit registers using the hyperfine interaction with direct SWAP operations to initialize and control both electron and nuclear spins in a four-qubit register.
+
+Phosphorus donor atom qubits represent an ideal system to investigate nanoscale multi-nuclear spin registers, since sub-nanometre precision placement of the donors has already been realized20–24, an on-going challenge for the diamond system25–27. Such precision not only allows for direct inter-register coupling—a highly desirable property for scalability—but has demonstrated other benefits, including long (~30 s) spin relaxation times21, highly tunable exchange coupling22, fast electron–electron two-qubit gate operations28 between registers and enhanced qubit addressability while minimising errors on neighbouring spectator qubits10,20. Using the electron exchange interactions, we can envisage a large-scale modular architecture based on coupled multi-nuclear spin registers15. Phosphorus donors in silicon also show 100% dopant activation compared with the few percent of NV centres. While the rate of NV formation being in the negatively charged state is quite low after nitrogen implantation, the position of the active NV centre can be selected by the measurement.
+
+Multi-nuclear spin qubit registers in silicon
+
+Here, we demonstrate a deterministic protocol for initializing all the nuclear spins in a four-qubit donor nuclear spin register (Fig. 1a) using the hyperfine interaction to mediate electric dipole spin resonance (EDSR). To date, the EDSR mechanism has been proposed for qubit control16,29 and long-range spin coupling30 in flip–flop qubit architectures, where the two basis states are the (⇓↑) and (⇑↓) states of a donor delocalized across two different orbital states. Now, we show that it can also be operated within a single multi-donor qubit register utilizing the hyperfine interaction. Importantly, we show how this hyperfine-mediated EDSR mechanism can enact unique controlled-multi-qubit SWAP gates (the Fredkin gate31) that, when combined with electron spin state preparation, transfer the polarization of the electron onto the nuclear spins17,32,33. This protocol can be repeated multiple times to achieve robust nuclear spin initialization fidelity above 99%. This new EDSR initialization protocol offers an attractive alternative to non-deterministic measurement-based methods that require additional overheads in time due to their probabilistic nature. NMR-based initialization methods are also slower owing to the weak coupling of the magnetic field to the nuclear spin and require vastly different frequency ranges and multiple ESR/NMR pulses for high-fidelity operation. The use of similar qubit frequencies in this new protocol therefore greatly reduces the design complexity of control structures and allows for narrow-band operation of the qubits.Fig. 1 Four-qubit spin registers in isotopically purified silicon-28.
+
+a, A schematic of a multi-donor spin register in silicon. The four-qubit register comprises an electron spin qubit directly coupled to three phosphorus nuclear spin qubits via the hyperfine interaction. b, Multi-qubit operations in a four-qubit register include electron spin initialization via energy-selective readout, ESR for controlled-rotation gates (Rϕ(θ)) of the electron conditional on the nuclear spin state, NMR for controlled-rotation gates (Rϕ(θ)) of the nuclei conditional on the electron spin state, EDSR, electron spin measurement and ancilla-based nuclear spin measurement. c, STM image of two individual four-qubit registers (dots) used to perform EDSR for nuclear spin initialization. d, Lithographic patches used to define the left and right multi-nuclear spin registers, both containing three phosphorus atoms. The predicted atomistic locations of these donors (red, yellow, and blue) within each lithographic patch (green region) are based on the measured hyperfine and relaxation times compared with atomistic tight-binding simulations (Supplementary Information I).
+
+To investigate the operation of our multi-nuclear spin qubit registers, we precision-pattern multi-donor quantum dots using scanning tunnelling microscopy (STM) hydrogen lithography10 (Supplementary Information I). Figure 1c shows an STM image of the patterned device, where the bright regions correspond to regions in which the hydrogen mask has been selectively removed to allow incorporation of phosphorus donors via phosphine dosing. The device consists of two small quantum dot registers, each defined by three phosphorus atoms (3P) (Fig. 1d and Supplementary Information I) and tuned to contain one electron spin each. These quantum dots are weakly tunnel-coupled to a single-electron transistor patterned ~17 nm away, which acts as both a charge sensor and an electron reservoir to load the electrons onto the nuclear spin registers34. High-frequency electromagnetic fields for ESR and EDSR control are generated using an on-chip microfabricated antenna on the surface10. The electron spin qubits are tuned using electrostatic gates labelled Left gate, Middle gate, and Right gate, and the single-electron transistor (SET) conductance can be tuned using the SET gate. Electron spin initialization and readout is performed using a ramped spin measurement35, giving a fidelity of ~81% at an electron temperature of ~200 mK at magnetic field B = 1.45 T.
+
+The spin Hamiltonian for an individual N-donor quantum dot (multi-nuclear spin register) is given by (with ℏ = 1)1 H=γeB⋅S+∑iNγnB⋅Ii+∑iNS⋅Ai¯(E)⋅Ii,
+
+where B is the external magnetic field, γe (γn) is the electron (nuclear) gyromagnetic ratio, S(Ii) is the vector of Pauli spin operators for the electron (ith nuclei) and Ai¯(E) is the electric field-dependent hyperfine tensor. The hyperfine interaction can be considered as an effective magnetic field that the ith nuclear spin and the electron spin impart on each other. The presence of the hyperfine interaction therefore lifts the degeneracy of the nuclear spin frequencies and splits the ESR frequencies into nuclear spin-dependent transitions. We observe 23 = 8 distinct peaks in the electron spin-up probability (Fig. 2a,b, left), corresponding to flipping the electron spin conditional on the state of all three nuclear spins10, as illustrated in the energy diagrams to the right. In these measurements, all eight ESR transitions of both registers are observed since all the nuclear spin states are populated over the course of the experiment. Here, the total measurement time (on the order of minutes) is longer than the spontaneous nuclear spin flip times (order of seconds) that can be caused by ionization shock3,10 and hyperfine-mediated relaxation36. Since each of these electron spin transitions is dependent on the state of the individual nuclear spins, we can perform controlled-rotation gates conditional on all the nuclear spin states by driving one or multiple electron transitions (Fig. 2c). These multi-qubit gates arise from the contact hyperfine interaction of the electron spin with the nuclear spins, resulting in nuclear spin-dependent transitions of the electron spin. From the measured hyperfine values A1, A2, and A3 obtained from the ESR spectra as well as the electron and nuclear gyromagnetic ratios, we can directly calculate the resonance frequencies of all the relevant EDSR transitions by finding the spin-conserving transitions in equation (1) (Supplementary Information II).Fig. 2 ESR for the left and right four-qubit registers.
+
+a,b, Left: The ESR spectrum for an electron on the left register (a) and for the right register (b) at a magnetic field of B = 1.45 T. Right: The corresponding schematic energy level diagrams for the 3P spin registers with a single electron spin (↑ or ↓ depending on the different nuclear spin ⇑ or ⇓ states). Each ESR transition is shown by the green arrows. c, The circuit representation of the different ESR transitions in the four-qubit nuclear spin registers. Full circles indicate conditional on ⇑. Empty circles indicate conditional on ⇓.
+
+EDSR for initialization of the qubit register
+
+Modulation of the electric field around the spin register creates a time-dependent shift of the hyperfine interaction, which when applied on-resonance with the EDSR transition frequencies, drives electron–nuclear flip flops16. Figure 3a shows the EDSR spectrum for the left spin register measured via readout of the electron spin with N2N−1 = 12 (where N = 3 is the number of P atoms) transitions since for each nuclear spin there are 2N−1 transitions due to the states of the other nuclei (Fig. 3b). For the remainder of the paper, we focus solely on the left spin register. Importantly, the EDSR frequencies correspond to the 12 different Fredkin gates (controlled-SWAP gates) possible between the electron spin and each of the nuclear spins (Fig. 3c). Four of these 12 transitions correspond to the flip of nuclear spin n1 (red) where the other two nuclear spins remain ⇓⇓, ⇓⇑, ⇑⇓ and ⇑⇑. Four correspond to the flip of nuclear spin n2 (blue), and the final four to nuclear spin n3 (orange). As an example, transition 1 corresponds to a controlled-controlled-SWAP between the electron spin and the third nuclear spin, ↓⇓⇓⇑→↑⇓⇓⇓. To be able to observe all possible EDSR transitions, we introduce a pulse sequence that first randomizes the nuclear configuration and then initializes the electron spin to ↓ before applying an adiabatic inversion pulse at the expected EDSR frequencies to flip the electron to the ↑ manifold, followed by readout of the electron spin. For efficient inversion of the electron spin, we sweep a 3 MHz window around each EDSR frequency (Supplementary Information II) with the resulting spectra shown in Fig. 3a. We find excellent agreement between the experimental and theoretical EDSR frequencies to within ~1 MHz.Fig. 3 EDSR of the left four-qubit register.
+
+a, The measured EDSR spectrum of the left register, showing 12 resonances corresponding to angular momentum-conserving electron–nuclear flip flops measured through the electron spin state. The different colours indicate which phosphorus nuclear spin is flipped (red, n1; blue, n2; orange, n3). b, The corresponding energy level diagram for the four-qubit register, showing the 12 EDSR transitions measured in a. c, Equivalent gate operations corresponding to each of the 12 EDSR transitions. The controlled-SWAP (Fredkin gates) for each nuclear spin configuration (black controls indicate conditional on ⇑ and white controls indicate conditional on ⇓) can be used for robust initialization of the nuclear spins in the four-qubit register.
+
+Having identified the different EDSR transitions in the left 3P qubit register, we now investigate the use of controlled-SWAP gates between the electron and nuclear spins to initialize the nuclear spins by polarization transfer from the electron spin qubit. The overall nuclear spin initialization fidelity depends strongly on the efficiency of each EDSR inversion pulse, which requires a careful optimization between the EDSR power and the pulse duration using Landau–Zener interferometry (Supplementary Information III). Figure 4a shows the sequence used to determine the initialization fidelity, in this case into the ⇓⇓⇓ state. Characterization of the initialization fidelity requires four steps: randomize, measure, initialize and measure (see Supplementary Information IV for details on the randomize and measure steps). Each of these four individual operations involves the use of multi-qubit gates between the electron and the nuclear spins in the register.Fig. 4 High-fidelity nuclear spin initialisation in a four-qubit register.
+
+a, The sequence for the estimation of the initialization fidelity of the qubit register with four sequential gate sequences of native multi-qubit gates between the electron and nuclear spin qubits: randomize, measure, initialize and measure. Randomization of the nuclear spin register is performed by initializing the electron spin into a mixed state and performing SWAP gates between the electron and nuclear spins via adiabatic EDSR. Measurement involves controlled-π rotations of the electron spin conditional on the total nuclear spin state, followed by a measurement of the electron spin. The initializtion step involves initialization of the electron spin followed by SWAP gates between the electron and each of the nuclear spins. b, The resulting ESR spectrum after initialization of the qubit register shows that the nuclear spins are polarized into the ⇓⇓⇓ state (at the lowest ESR transition). c, The initialization fidelity of the nuclear spins into ⇓⇓⇓ as a function of the number of repetitions (N) of the initialization protocol for different initial nuclear spin states. Error bars correspond to ±1 s.d. about the mean. The fidelity increases for more iterations, indicating robustness. That is, the initialization protocol can be applied multiple times to increase the fidelity to achieve F=100−6+0%.
+
+The initialize step is as follows: Once the nuclear spin state has been randomized and measured, we then perform our nuclear spin initialization procedure to initialize the ⇓⇓⇓ state. The initialization procedure works by swapping the electron ↓ state with each of the nuclear spin states. To initialize to ⇓⇓⇓, starting from a random nuclear configuration, we first initialize the electron spin to the ↓ state and apply four EDSR pulses (1, 6, 7 and 12) sequentially (Fig. 3c), which leaves n1 in the ⇓ state. This initialization sequence transfers the spin-down polarization from the electron to nuclear spin n1, unconditional on the states of the other two nuclear spins. We then repeat the electron spin initialization and apply EDSR pulses 2 and 10 only to initialize spin n2. This is conditional on spin n1 already being ⇓, since we have just initialized that nuclear spin. To conclude the nuclear initialization sequence, we then initialize the electron spin down again and apply EDSR 4, realizing a single controlled-SWAP gate between the electron spin and spin n3 conditional on spins n1 and n2 being ⇓. Therefore, the total initialization sequence is {↓, 1, 6, 7, 12, ↓, 2, 10, ↓, 4}. Importantly, we can initialize into any arbitrary nuclear spin state by modifying this pulse sequence and/or by initializing the electron ↑ before swapping with the nuclear spin (Supplementary Information VI). Finally, to determine the nuclear spin state after the initialization protocol, we perform an ESR measurement. In Fig. 4b, we see that the electron spin is only inverted when driving the lowest ESR peak, corresponding to the polarized nuclear spin state ⇓⇓⇓.
+
+From measuring the nuclear configuration before and after this initialization sequence, we use a Markov model to construct a normalized transition probability matrix M. The initialization fidelity from the initial state i to the final nuclear spin state j is then given by the Mj,i element (Supplementary Information VI). Figure 4c shows the initialization fidelity achieved starting from each one of the seven possible nuclear spin states to the target state j=⇓⇓⇓ (excluding i = j when the initial state is already at the target state) as a function of the number of initialization attempts N. These curves are normalized by the probability of starting and remaining in the target state (i = j case), which helps to remove the nuclear state readout and electron initialization errors and leads to uncertainty in the total probability (Fig. 4c). Owing to the low Stark coefficient of n3, the EDSR Rabi frequency for these transitions is the smallest and hence the inversion fidelity is lower compared with n1 and n2 (Supplementary Information III). As a consequence, we see in Fig. 4c that the fidelity for n3 to flip is much lower for N < 5. However, by averaging over the different initial nuclear spin configurations (dashed black line), we obtain an overall effective initialization fidelity of F¯=100−6+0% for N ≥ 5 repetitions.
+
+High-fidelity control of the electron spin qubit
+
+Having achieved F=100−6+0% nuclear spin initialization fidelity, we now initialize the register to ⇓⇓⇓ to demonstrate high-fidelity control of the single electron spin qubit in this multi-nuclear spin qubit register. Importantly, this can now be achieved at a single resonance frequency (that is, ESR conditional on the nuclear spins being in the ⇓⇓⇓ state) and does not require any post-selection (Fig. 5a, circuit diagram). Figure 5b shows a Rabi–Chevron (electron spin rotations as a function of frequency and pulse duration) measurement on the electron spin qubit when initialized to ⇓⇓⇓ of the left spin register where we measure T2Rabi=180μs with a gate time of tπ = 1.64 μs. We have also measured the dephasing time, T2*=12μs with a measurement time of 300 s through the Ramsey sequence shown in Fig. 5c, comparable to previous donor-based8,37 and gate-defined quantum dot single spin qubits38,39 (T2*≈10μs). This value of T2* validates the advantage of using solid source isotopically purified silicon-28 for molecular beam epitaxial growth, which has now been incorporated into our atomic-precision manufacturing process.Fig. 5 Single-electron spin qubit operation in a four-qubit nuclear spin register.
+
+a, Circuit diagram of the initialization of the nuclear spin qubits followed by operation of the electron spin qubit for three different experiments. b, Circuit diagram and Rabi oscillations used to create a Rabi–Chevron pattern by varying the ESR frequency and pulse time, demonstrating coherent control of the bound electron spin. c, Circuit diagram and Ramsey decay measurement of the electron spin qubit with T2*=12μs. d, Circuit diagram and randomized benchmarking of the electron spin qubit corresponding to an average Clifford gate fidelity of FClifford = 99.58 ± 0.14% and primitive gate fidelity of FSingle gate = 99.78 ± 0.07%. Here, we define P↑|↑ > to be the measured probability, P↑, when the target state was |↑>; C is Clifford gate; Crec is the recovery Clifford gate.
+
+Finally, we performed randomized benchmarking on the electron spin qubit to determine the Clifford gate fidelity (Fig. 5d). Here, the nuclear spins are initialized into ⇓⇓⇓ using five initialization shots and the electron spin is controlled via coherent ESR drive conditional on the nuclear spins being in ⇓⇓⇓ achieved via initialization. We obtain an average Clifford gate fidelity of  FClifford = 99.58 ± 0.14%, corresponding to a primitive gate fidelity of FSingle gate = 99.78 ± 0.07%, above the 99% minimum fidelity required for fault-tolerant surface code error correction (Supplementary Information VI). This primitive gate fidelity is comparable to other semiconductor spin qubits4,38,40 fabricated in isotopically purified silicon. Importantly, we can now access multi-nuclear spin registers using our precision manufacturing route to achieving high-fidelity spin qubits.
+
+Conclusions
+
+We demonstrate high-fidelity initialization and control of electron and nuclear spins in a four-qubit register defined using phosphorus donors in silicon. By initializing the nuclear spins to ⇓⇓⇓ with a fidelity F=100−6+0%, we demonstrated coherent control of the electron spin qubit with T2*=12μs and gate fidelities FG = 99.78 ± 0.07% using randomized benchmarking. This unique control of both electron and nuclear spins within this multi-qubit register allows for the future development of small-scale algorithms. Immediate future work will focus on improving the per-shot EDSR initialization fidelity, using optimized EDSR inversion efficiencies by engineering larger electric fields in the device and/or performing higher-fidelity electron spin initialization by decreasing the electron temperature. We also aim to incorporate coherent resonant EDSR control of the nuclear spins. This can be achieved by optimizing the electric field coupling using larger Stark coefficients and/or increasing the electric field strength by incorporating electrical control via in-plane phosphorus-doped silicon gates rather than through the broadband antenna line. By coherently controlling the nuclear spin qubits in the register, we can access a rich four-qubit system with multiple controlled (SWAP and CNOT) gates for efficient algorithms in the noisy intermediate-scale quantum era41,42.
+
+Online content
+
+Any methods, additional references, Nature Portfolio reporting summaries, source data, extended data, supplementary information, acknowledgements, peer review information; details of author contributions and competing interests; and statements of data and code availability are available at 10.1038/s41565-023-01596-9.
+
+Supplementary information
+
+Supplementary Information Supplementary discussion with six sections, four figures and three tables.
+
+Supplementary information
+
+The online version contains supplementary material available at 10.1038/s41565-023-01596-9.
+
+Acknowledgements
+
+This work was supported by Silicon Quantum Computing Pty Ltd., Australian Research Council Centre of Excellence for Quantum Computation and Communication Technology (project number CE170100012). M.Y.S. acknowledges an Australian Research Council Laureate Fellowship.
+
+Author contributions
+
+J.R., S.M., S.K.G. and M.Y.S. conceived the project. J.R., Y.C., S.H.M., C.L. and J.G.K. fabricated the device. J.R., C.M., D.P., K.J.C., P.M., B.T., L.K., D.K. and S.K.G. performed or contributed to the measurements. D.P. performed and optimized the randomized benchmarking. J.R., S.M., I.T., Y.L.H., R.R. and S.K.G. carried out the theoretical calculations. The manuscript was written by J.R., S.M., D.P., C.M., S.K.G. and M.Y.S. with input from all authors. M.Y.S. supervised the project.
+
+Peer review
+
+Peer review information
+
+Nature Nanotechnology thanks Yoshiro Hirayama and the other, anonymous, reviewer(s) for their contribution to the peer review of this work.
+
+Funding
+
+Open access funding provided through UNSW Library.
+
+Data availability
+
+The data pertaining to this study are available from the corresponding author upon reasonable request.
+
+Competing interests
+
+M.Y.S. is a director of the company Silicon Quantum Computing Pty Ltd.
+
+Publisher’s note Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.
+
+These authors contributed equally: J. Reiner, Y. Chung, S. H. Misha.
+
+
+References
+
+1. Burkard G Ladd TD Pan A Nichol JM Petta JR Semiconductor spin qubits Rev. Mod. Phys. 2023 95 025003 10.1103/RevModPhys.95.025003
+2. Pla JJ A single-atom electron spin qubit in silicon Nature 2012 489 541 545 10.1038/nature11449 22992519
+3. Pla JJ High-fidelity readout and control of a nuclear spin qubit in silicon Nature 2013 496 334 338 10.1038/nature12011 23598342
+4. Muhonen JT Storing quantum information for 30 seconds in a nanoelectronic device Nat. Nanotechnol. 2014 9 986 991 10.1038/nnano.2014.211 25305745
+5. Muhonen J Quantifying the quantum gate fidelity of single-atom spin qubits in silicon by randomized benchmarking J. Phys. Condens. Matter 2015 27 154205 10.1088/0953-8984/27/15/154205 25783435
+6. Dehollain JP Bell’s inequality violation with spins in silicon Nat. Nanotechnol. 2016 11 242 246 10.1038/nnano.2015.262 26571006
+7. Keith D Single-shot spin readout in semiconductors near the shot-noise sensitivity limit Phys. Rev. X 2019 9 041003
+8. Mądzik MT Precision tomography of a three-qubit donor quantum processor in silicon Nature 2022 601 348 353 10.1038/s41586-021-04292-7 35046601
+9. Fricke L Coherent control of a donor-molecule electron spin qubit in silicon Nat. Commun. 2021 12 3323 10.1038/s41467-021-23662-3 34083543 PMC8175606
+10. Hile SJ Addressable electron spin resonance using donors and donor molecules in silicon Sci. Adv. 2018 4 eaaq1459 10.1126/sciadv.aaq1459 30027114 PMC6044739
+11. Doherty MW The nitrogen-vacancy colour centre in diamond Phys. Rep. 2013 528 1 45 10.1016/j.physrep.2013.02.001
+12. Abobeih MH One-second coherence for a single electron spin coupled to a multi-qubit nuclear-spin environment Nat. Commun. 2018 9 2552 10.1038/s41467-018-04916-z 29959326 PMC6026183
+13. Bradley CE A ten-qubit solid-state spin register with quantum memory up to one minute Phys. Rev. X 2019 9 031045
+14. Rong X Experimental fault-tolerant universal quantum gates with solid-state spins under ambient conditions Nat. Commun. 2015 6 8748 10.1038/ncomms9748 26602456 PMC4674779
+15. Hill CD Quantum computing: a surface code quantum computer in silicon Sci. Adv. 2015 1 e1500707 10.1126/sciadv.1500707 26601310 PMC4646824
+16. Tosi G Silicon quantum processor with robust long-distance qubit couplings Nat. Commun. 2017 8 450 10.1038/s41467-017-00378-x 28878207 PMC5587611
+17. Gurudev Dutt MV Quantum register based on individual electronic and nuclear spin qubits in diamond Science 2007 316 1312 1316 10.1126/science.1139831 17540898
+18. Robledo L High-fidelity projective read-out of a solid-state spin quantum register Nature 2011 477 574 578 10.1038/nature10401 21937989
+19. Taminiau TH Cramer J Sar TVD Dobrovitski VV Hanson R Universal control and error correction in multi-qubit spin registers in diamond Nat. Nanotechnol. 2014 9 171 176 10.1038/nnano.2014.2 24487650
+20. Büch H Mahapatra S Rahman R Morello A Simmons MY Spin readout and addressability of phosphorus-donor clusters in silicon Nat. Commun. 2013 4 2017 10.1038/ncomms3017 23774081
+21. Watson TF Atomically engineered electron spin lifetimes of 30 s in silicon Sci. Adv. 2017 3 e1602811 10.1126/sciadv.1602811 29159289 PMC5477090
+22. Broome MA Two-electron spin correlations in precision placed donors in silicon Nat. Commun. 2018 9 980 10.1038/s41467-018-02982-x 29515115 PMC5841377
+23. Kranz L The use of exchange coupled atom qubits as atomic-scale magnetic field sensors Adv. Mater. 2022 35 2201625 10.1002/adma.202201625 36208088
+24. Kiczynski M Engineering topological states in atom-based semiconductor quantum dots Nature 2022 606 694 699 10.1038/s41586-022-04706-0 35732762 PMC9217742
+25. Waldermann F Creating diamond color centers for quantum optical applications Diamond Relat. Mater. 2007 16 1887 1895 10.1016/j.diamond.2007.09.009
+26. Pezzagna S Naydenov B Jelezko F Wrachtrup J Meijer J Creation efficiency of nitrogen-vacancy centres in diamond N. J. Phys. 2010 12 065017 10.1088/1367-2630/12/6/065017
+27. Deák P Aradi B Kaviani M Frauenheim T Gali A Formation of NV centers in diamond: a theoretical study based on calculated transitions and migration of nitrogen and vacancy related defects Phys. Rev. B 2014 89 075203 10.1103/PhysRevB.89.075203
+28. He Y A two-qubit gate between phosphorus donor electrons in silicon Nature 2019 571 371 375 10.1038/s41586-019-1381-2 31316197
+29. Krauth F Flopping-mode electric dipole spin resonance in phosphorus donor qubits in silicon Phys. Rev. Appl. 2022 17 054006 10.1103/PhysRevApplied.17.054006
+30. Osika EN Spin–photon coupling for atomic qubit devices in silicon Phys. Rev. Appl. 2022 17 054007 10.1103/PhysRevApplied.17.054007
+31. Fredkin E Toffoli T Conservative logic Int. J. Theor. Phys. 1982 21 219 253 10.1007/BF01857727
+32. Waldherr G Quantum error correction in a solid-state hybrid spin register Nature 2014 506 204 207 10.1038/nature12919 24476818
+33. Foletti S Bluhm H Mahalu D Umansky V Yacoby A Universal quantum control of two-electron spin quantum bits using dynamic nuclear polarization Nat. Phys. 2009 5 903 908 10.1038/nphys1424
+34. Morello A Single-shot readout of an electron spin in silicon Nature 2010 467 687 91 10.1038/nature09392 20877281
+35. Keith D Ramped measurement technique for robust high-fidelity spin qubit readout Sci. Adv. 2022 8 eabq0455 10.1126/sciadv.abq0455 36070386 PMC9451149
+36. Hsueh Y-L Hyperfine-mediated spin relaxation in donor-atom qubits in silicon Phys. Rev. Res. 2023 5 023043 10.1103/PhysRevResearch.5.023043
+37. Dehollain JP Nanoscale broadband transmission lines for spin qubit control Nanotechnology 2012 24 015202 10.1088/0957-4484/24/1/015202 23221273
+38. Philips SGJ Universal control of a six-qubit quantum processor in silicon Nature 2022 609 919 924 10.1038/s41586-022-05117-x 36171383 PMC9519456
+39. Mills AR Two-qubit silicon quantum processor with operation fidelity exceeding 99% Sci. Adv. 2022 8 eabn5130 10.1126/sciadv.abn5130 35385308 PMC8986105
+40. Veldhorst M An addressable quantum dot qubit with fault-tolerant control-fidelity Nat. Nanotechnol. 2014 9 981 985 10.1038/nnano.2014.216 25305743
+41. Cerezo M Variational quantum algorithms Nat. Rev. Phys. 2021 3 625 644 10.1038/s42254-021-00348-9
+42. Bharti K Noisy intermediate-scale quantum algorithms Rev. Mod. Phys. 2022 94 015004 10.1103/RevModPhys.94.015004
+43. Fuechsle M A single-atom transistor Nat. Nanotechnol. 2012 7 242 246 10.1038/nnano.2012.21 22343383
+44. Rabeau JR Implantation of labelled single nitrogen vacancy centers in diamond using N15 Appl. Phys. Lett. 2006 88 023113 10.1063/1.2158700
+45. Togan E Quantum entanglement between an optical photon and a solid-state spin qubit Nature 2010 466 730 734 10.1038/nature09256 20686569

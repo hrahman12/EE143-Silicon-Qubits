@@ -1,0 +1,186 @@
+
+JOURNAL INFORMATION
+==============================
+NLM Title Abbreviation: Nano Lett
+Journal ID: Nano Lett
+NLM Journal ID: 101088070
+Journal ID: nl
+
+Nano Letters
+
+ISSN: 1530-6984
+EISSN: 1530-6992
+pubs.acs.org/NanoLett
+
+ARTICLE INFORMATION
+==============================
+PMCID: PMC12464996
+PMID: 40839833
+DOI: 10.1021/acs.nanolett.5c02675
+Article version: 1
+Subjects: Letter
+
+Imaging the Acceptor Wave Function Anisotropy in Silicon
+
+7656493 Siegl Manuel
+7656498 https://orcid.org/0000-0002-2830-1361 Zanon Julian
+7656507 https://orcid.org/0000-0002-4969-1565 Sink Joseph
+7656501 https://orcid.org/0000-0001-8719-399X Rodrigues da Cruz Adonai
+7656503 https://orcid.org/0000-0003-3703-7942 Hedgeland Holly
+3923550 https://orcid.org/0000-0002-5661-0559 Curson Neil J.
+1171679 https://orcid.org/0000-0001-5093-1549 Flatté Michael E.
+927469 https://orcid.org/0000-0002-0727-3015 Schofield Steven R.
+† London Centre for Nanotechnology , 127386 University College London , London WC1H 0AH , U.K.
+‡ Department of Physics and Astronomy , University College London , London WC1E 6BT , U.K.
+¶ Department of Applied Physics and Science Education , Eindhoven University of Technology , Eindhoven 5612 AZ , The Netherlands
+§ Department of Physics and Astronomy , 4083 University of Iowa , Iowa City , Iowa 52242 , United States
+∥ Department of Electronic and Electrical Engineering , 4919 University College London , London WC1E 6BT , U.K.
+* E-mail: michaelflatte@quantumsci.net. * E-mail: s.schofield@ucl.ac.uk.
+Electronic publication date: 2025 Aug 21
+Publication date: 2025 Sep 24
+Volume: 25
+Issue: 38
+First page: 13996
+Last page: 14001
+Received 2025 May 19; Accepted 2025 Aug 18; Revised 2025 Aug 15; 2025 Aug 21
+Copyright: © 2025 The Authors. Published by American Chemical Society
+Copyright year: 2025
+Copyright holder: The Authors
+
+License: This article is licensed under CC-BY 4.0
+License URL: https://creativecommons.org/licenses/by/4.0/
+
+Keywords: scanning tunneling microscopy, acceptor states, silicon, effective-mass theory, tight binding Green’s functions, quantum device engineering
+
+Funding: Air Force Office of Scientific Research 10.13039/100000181 FA9550-24-1-0355
+
+Funding: Basic Energy Sciences 10.13039/100006151 DE-SC0016379
+
+Funding: HORIZON EUROPE Marie Sklodowska-Curie Actions 10.13039/100018694 956548
+
+Funding: Engineering and Physical Sciences Research Council 10.13039/501100000266 EP/L002140/1
+
+Funding: Engineering and Physical Sciences Research Council 10.13039/501100000266 EP/M009564/1
+document-id-old-9: nl5c02675
+document-id-new-14: nl5c02675
+production-flag-MathML-config-version: 3
+production-flag-journal-citation-display-style: acs-titles
+production-flag-journal-date-display-style: dates-used-rcd-rvd-acc
+production-flag-si-avail: yes
+document-id-alt-64: ac8c6130f96a131dfb6bbf298f8701c1ed4d3b0dce4f4ad4a0c01e2f1eaa76ab
+
+==============================
+We present the first scanning tunneling microscopy (STM) image of hydrogenic acceptor wave functions in silicon. These acceptor states appear as square-ring-like features in STM images and originate from near-surface defects introduced by high-energy bismuth implantation into a silicon (001) wafer. Scanning tunneling spectroscopy confirms the formation of a p-type surface. Effective-mass and tight-binding calculations provide an excellent description of the observed square-ring-like features, confirming their acceptor character and attributing their symmetry to the light- and heavy-hole band degeneracy in silicon. A detailed understanding of the energetic and spatial properties of acceptor wave functions in silicon is essential for engineering large-scale acceptor-based quantum devices.
+
+Shallow defects associated with substitutional impurities in semiconductorsknown as donors when their energy levels lie near the conduction band edge or acceptors when they lie near the valence band edgeare stable and reproducible localized quantum systems. These shallow states, with binding energies of a few tens of millielectronvolts in silicon, are well described using a hydrogen-like wave function that extends over many atoms, couples to electric and magnetic fields, and provides access to both charge and spin degrees of freedom.
+
+The spin states associated with these defects provide an exceptionally stable platform for quantum technologies, especially quantum computing. When housed in the pristine environment of isotopically purified and low defect density silicon, these spin states exhibit notably long coherence times and high resistance to noise. , These properties, combined with the fact that each qubit is naturally identical, position dopants in semiconductors as an arguably superior choice compared to other physical qubit implementations. ,
+
+In silicon, nanometer positioning of individual phosphorus, arsenic, , and boron donor and acceptor impurities has been achieved via scanning tunneling microscopy (STM). This has led to the fabrication of remarkable atomic-scale electronic devices, including the single-atom transistor and few-donor qubit gates. , In order to fully utilize these devices in technologies, such as in the qubit array of an error-corrected quantum computer, the fabrication process will need to be scaled to produce millions of deterministically placed dopants with predetermined and/or gate tunable couplings. This will require not only exquisite control over the positioning of these dopants but also a detailed understanding of the spatial properties of single defects and their interactions with each other and their environment.
+
+In compound semiconductors, like GaAs, there is a long history of dopant investigations using cross-sectional STM where the semiconductor is cleaved in situ. , Notable successes include mapping the spatial structure of manganese − and zinc acceptors, observing binding energy shifts as a function of the dopant depth, and manipulating the charge state of individual donors.
+
+In silicon, early measurements reported imaging the screened Coulomb potential of ionized arsenic and boron defects at room temperature using the (001) surface. − Later, measurements of phosphorus and boron dopants at 4.2 K reported tunneling through neutral donor and acceptor states, respectively, , and subsequent experiments observed highly anisotropic localized features attributed to the hydrogenic donor wave functions of the substitutional arsenic. , Near-surface arsenic donors are strongly influenced by their proximity to it, but when deeper beneath the surface (∼2.5 nm), the observed features consist of a 1s-type envelope function modulated by a high-frequency Bloch component observable due to the effect of valley interference in the silicon conduction band. ,
+
+Here we present the first STM observations of hydrogenic acceptor state wave functions in silicon produced by high-energy bismuth implantation (see below). The observed features are large, sometimes exceeding 10 nm in lateral extent, and are highly anisotropic, exhibiting a square-shaped enhancement with edges aligned to the ⟨001⟩ directions and a central depression, giving an appearance of a “square ring” (Figure b,d,f). Using both multiband effective-mass approximation (EFMA) theory and atomistic tight-binding (TB) Green’s function calculations, we calculate an idealized substitutional acceptor in silicon and show that the observed anisotropy is consistent with its origin in the ground-state multiplet of a hydrogenic acceptor in silicon. Our theory takes into account both the degeneracy of the light and heavy hole bands at the Γ point as well as the local tetrahedral symmetry of the host crystal lattice. A slightly larger spatial extent of the observed features is accounted for in the EFMA theory by a small change in the effective mass of the (assumed isotropic) heavy hole band, which we attribute to strain in the near-surface region. The best fits for our EFMA and TB calculations are obtained for different acceptor depths. This discrepancy is due to the differing symmetry and accuracy of the two band structure models and impurity potential models.
+
+1 STM images of hydrogenic acceptor states beneath a Si(001) surface. (a and b) Filled- and empty-state images of the same 54 nm × 38 nm region of the surface. The locations of six acceptor states are highlighted by circles. Small black features are surface vacancy defects in the surface layer. (c–f) Differential conductance (dI/dV) maps over the two acceptors indicated by dashed circles in parts a and b at bias voltages of +1300, +5, −100, and −10 meV, respectively. (g) Spatially integrated tunneling spectroscopy showing (black) the silicon background away from the acceptor states, (red) the full region inside the square acceptor state of the rightmost acceptor, and (blue) the central depression region (only) of the rightmost acceptor. (h) Effective-mass isosurface of the probability density (|Ψ|2) of an ideal acceptor state in silicon, presented in more detail in Figures and . The regulation parameters during the dI/dV measurement were −500 mV and 500 pA.
+
+The acceptor states were created by ion-implanting a 15 Ωcm arsenic-doped Si(001) wafer to produce a bismuth density of ∼1 × 1020 cm–3 extending from 20 to 550 nm into the sample bulk (Figure S1). The sample was annealed at 500 °C overnight under ultrahigh vacuum (<2 × 10–10 mbar), followed by a 10 s flash anneal at 1150 °C by direct current heating, which repairs implantation damage and produces an atomically flat surface suitable for STM imaging. This bismuth implantation and annealing protocol is known to produce a high concentration of near-surface acceptor centers that persist even after thermal treatment, resulting in a p-type surface atop a deeper n-type region. While the precise microscopic structure of the observed acceptors is not known, their large spatial extent and spectral properties, described in detail below, are consistent with shallow hydrogen acceptor states.
+
+Prior to STM imaging, the surface was passivated with hydrogen by being exposed to an atomic hydrogen beam (chamber background 5 × 10–7 mbar for 5 min), while the sample was maintained at 340 °C. STM images were taken at 77 K. Filled- and empty-state STM images of the same region of an implanted sample are shown in Figure a,b, and we have highlighted the location of six acceptor states. In the filled-state image (Figure a), the acceptors are barely noticeable, producing only a slight isotropic enhancement superimposed on top of the silicon dimer rows that can be seen running diagonally across the image. In contrast, the empty-state image (Figure b) shows very striking long-range features that are square-shaped with edges, sometimes longer than 10 nm, aligned along the ⟨100⟩ directions, and a central depression (a square ring). While each of the six acceptors has the same qualitative appearance, the width and the relative intensity of the features compared to the atomic corrugation vary from feature to feature.
+
+Parts c–f of Figure present spatially resolved conductance (dI/dV) measurements taken at the site of the two acceptors highlighted by dashed circles in Figure a,b (measurements at other acceptor sites exhibited similar behavior). At high positive bias (+1.3 V; Figure c), we resolve only the surface atomic corrugation in the dI/dV map, demonstrating that the acceptors are electrically neutral and that the conduction band states dominate the tunneling. At low positive and negative bias voltages (+5 and −10 mV; Figure d,f), the acceptors appear as square ring-like features. At lower negative voltage (−100 mV; Figure e), the acceptors appear as isotropic round elevations superimposed on the atomic lattice, indicating the band bending on the valence band states due to the negative charge of the ionized acceptors. This bias-dependent behavior, well-known from STM/STS studies of GaAs acceptors, arises from tip-induced band bending: at negative bias, the acceptor level lies below the Fermi level and donates its hole; at positive bias, it lies above and captures a hole, becoming neutral. , The two dI/dV maps at +5 and −10 meV (Figure d,f) are within the substrate band gap, and therefore we do not image the silicon dimer row background surrounding the defects. Instead, we obtain a tunneling current only when directly probing the acceptor state. The acceptor state is energetically at the Fermi level, and therefore we are able to inject current into the acceptor state at low empty-state bias (Figure f) and extract current through the acceptor state at low filled-state bias (Figure d).
+
+Figure g shows tunneling spectra as a function of tip bias, generated by spatially integrating the dI/dV data (i.e., the data from which the maps shown in Figure c–f are sampled) over different spatial regions, as indicated by arrows on Figure d. The black trace corresponds to the silicon background away from the acceptor states; the Fermi level lies at the valence band edge, indicating a strongly p-type surface, consistent with Hall effect measurements of samples prepared with a similar bismuth implantation procedure. Comparing this to the spectrum within the defect depression (blue trace), we observe a 30 meV upward shift of the valence band edge, confirming the defect’s negative charge state, as expected for an ionized acceptor. Extending the integration area to include the full square-shaped enhancement (red trace) reveals a pronounced shoulder near zero bias, which is the spatially resolved acceptor state seen in Figure d,f.
+
+Line profiles along the [110] direction reveal the relationship between the intensity and width of the acceptor states (Figure a,c). Detailed analysis of 75 individual acceptors (Figure S2b,c) shows that the intensity, measured relative to the surrounding surface, decays exponentially with the feature widthconsistent with probing acceptors at varying depths below the surface. We have also imaged the acceptor states as a function of bias and found that the only change is a decrease in their relative intensity compared to the background (Figure S2a). This is expected due to an increasing contribution to the tunneling current from the bulk bands. From this observation, we can rule out contributions to the appearance of the state from quasi-particle interference or Friedel oscillations.
+
+2 Comparison between STM measurements and EFMA theory calculations of acceptor states in silicon. (a) STM topograph acquired at +1.0 V and 20 pA (z-range 160 pm) showing a square ring-like feature. The white line indicates the line profile shown in part c. (b) EFMA density plot of the defect wave function, calculated for an acceptor 2.9 nm below the image plane along the [001] direction. The color range corresponds to 80 pm. (d) Line profile extracted from the effective-mass model in part b for direct comparison to the experimental data in part c. For the purpose of quantifying the features, we define the parameters “width” and “dip”, as shown in parts c and d. Both experiment and theory exhibit a dip of approximately 30 pm and a width of 2.0 nm. (e) Simulated dip versus width curves for different heavy-hole effective masses (m hh ), with each point corresponding to a (001) plane spaced by 1 nm between 1.5 and 15.5 nm depth. (f) Isosurface of the probability density (|Ψ|2) at 10–3 nm–3, generated by scaling the probability density by e qr , where q is analogous to an inverse Bohr radius (see the Supporting Information). The results in parts b and f were obtained using m lh = 0.16, m hh = 1.261 (β = 0.127), and κ = 1.15 Å–1.
+
+The square-ring wave function described above is indicative of multiple Bloch states being involved in the description of the defect state, necessitating the use of multiband theories such as EFMA and TB Green’s functions. , The effective-mass modeling presented here used the Luttinger Hamiltonian within the spherical approximation, with the impurity described by a zero-range potential. , As explained in the Supporting Information (Section 2.1), our calculations obtain the cubic-symmetric solutions for the 4-fold symmetric ground state (J = 3/2) multiplet of the acceptor. These four solutions are described by the (degenerate) binding energy E 0 and four wave functions ΨM3/2=ΨM3/2(r,θ,φ) , where M labels are ±3/2 and ±1/2. The 4-fold degeneracy of the multiplet will produce a measurement of the wave function that is a temporal average of the four M states. Because time-reversal symmetry requires the two light-hole states (±1/2) to have identical local densities of states and likewise two heavy-hole states (±3/2), we expect 1 |Ψavg|2=12(|Ψ1/23/2|2+|Ψ3/23/2|2)
+
+Assuming a spherically symmetric delta-function-like potential, centered at r = 0, and the averaging described in eq , the analytic solution for the defect wave function is 2 |Ψavg(r,θ,φ)|2=|R0(r)|216π+5f(θ,φ)|R2(r)|216π
+
+where R 0(r) and R 2(r) are radial functions that depend on the binding energy E 0 and the mass ratio β = m lh /m hh , where m lh and m hh are the light- and heavy-hole effective masses at the Γ point. The presence of the angular function f(θ,φ) in the second term of eq causes |Ψavg(r,θ,φ)|2 to exhibit a d-like orbital character.
+
+To make comparisons with the STM measurements, it is useful to consider the relationship among the tunneling current, the local density of states, and the defect wave function. The tunneling current reflects the probability of an electron transferring between the STM tip and the sample through vacuum and depends sensitively on both the local density of states and the tip-sample separation. In the simplest case, assuming a delta-function tip with a constant density of states, the tunneling current is given by 3 I(ω,r,θ,z)∼η(ω,r,θ,0)e−2κz
+
+where z is the tip-sample separation, ω is the energy corresponding to the applied bias, and κ is the decay constant of the tunneling current. When on resonance with the defect, the sample local density of states η is dominated by the defect and is well approximated by η = |ψ|2. Solving for the STM height expressed as a function of the defect probability density yields 4 Height(r,θ,φ)=12κln(|Ψavg(r,θ,φ)|2|Ψavg(r0,θ0,φ0)|2)
+
+where we have included an offset to set the wave function located at r 0 to correspond to Height = 0.
+
+In Figure b,d–f, we show an EFMA wave function calculated considering the impurity site 2.9 nm below the (001) cleaved plane, using E 0 = 30 meV, m lh = 0.16, and m hh = 1.261 (β = 0.127). This produces excellent agreement between our theoretical results and the experimentally observed feature shown in Figure c,d, having a peak-to-peak width of 2 nm and a dip of 30 pm. Our effective-mass model in Figure f presents clearly a symmetry similar to that reported in ref for an excited state of an acceptor in Si; here, however, we show that this structure emerges for the ground state.
+
+The optimal values for β and the [001] plane depth were obtained by using Figure e. For κ = 1.15 Å–1 and the light-hole mass fixed at its bulk value (m lh = 0.16), Figure e shows that increasing the heavy-hole mass m hh enhances both the feature dip and lateral width of the simulated line profile. The deviation of m hh from its bulk value likely reflects the influence of the surface strain field on the hole dispersion; the strain-induced splitting of bulk valence bands has a well-understood effect on the valence band dispersion and anisotropy. In addition to this, it is well-known that, among tetrahedral semiconductors, Si has a substantial anisotropy for the hole masses (larger, for example, than gallium arsenide); therefore, the optimal β = 0.127 value is an isotropic value that approximates this anisotropy. A more detailed discussion of the parameter choices, including the hole masses and tunneling decay constant κ, is provided in the Supporting Information (Section 2.1).
+
+As the number of atomic planes from the impurity increases, corresponding in the experiment to a greater defect depth below the surface, we continue to find good qualitative agreement between the STM measurements and EFMA results. Figure shows a comparison between experimental STM images (left column) and EFMA simulations (center column). The right column of Figure shows corresponding atomistic TB simulations, which also exhibit excellent agreement with the STM data and are discussed further below. In the STM measurements, the top to bottom rows correspond to increasing feature width that we attribute to the defect depth beneath the surface, while in the EFMA simulations, they correspond to wave function evaluations at planes located progressively farther from the impurity site (2.9, 3.9, and 5.9 nm). The agreement between the STM and EFMA simulations is excellent and becomes increasingly better as the defect depth increases.
+
+3 Comparison of STM measurements (left column), effective-mass modeling (center column), and TB calculations (right column) for acceptor states in silicon. STM image parameters (top to bottom): 1.1 V, 20 pA, z-range 160 pm; 1.6 V, 20 pA, z-range 30 pm; 1.0 V, 5 pA, z-range 100 pm. For the effective-mass results, contour plots are shown for acceptors at depths of 2.9, 3.9, and 5.9 nm below the image plane. The TB simulations show topographical scans of the acceptor local density of states at depths of 0.81, 1.62, and 2.17 nm below the surface. Both effective-mass and TB images use a color intensity scale with a range of 80 pm.
+
+To gain an additional atomistic perspective on the electronic structure, we turn next to TB calculations. In particular, the Green’s function method used here is a many-band single-particle theory formulated on a TB basis. This method casts the defect problem in terms of bulk Bloch waves scattering off a localized defect potential. Formally, this is expressed using the Dyson equation 5 Ĝ(ω)=[1−V′^ĝ(ω)]−1ĝ(ω)
+
+where V′ is the perturbative (inhomogeneous) potential associated with the defect, ĝ are bulk (unperturbed) Green’s functions, and Ĝ are the resultant inhomogeneous Green’s functions containing information about the defect resonant energy and wave function. We compute the real-space bulk Green’s functions, g(ω), by taking the inverse Fourier transform of the resolvent of the bulk electronic Hamiltonian 6 g(r,r′;z)=∫BZ[z−Ĥ(k)]−1ei(r−r′)·kdk
+
+We employ an empirical spds* TB model (including s, p, d, and excited s* orbitals) for silicon that includes spin–orbit coupling. This model accurately reproduces the conduction and valence band edges and effective masses throughout the Brillouin zone.
+
+A key detail, as it pertains to the computational cost of this method, is that if V′ is well described by a relatively small cluster of atoms with short-ranged interactions, then eq can be efficiently and exactly solved. Expressed in block form, it can be written as 7 Ĝ=(ĜnnĜnfĜfnĜff)=(M̂nnĝnnM̂nnĝnfĝfnM̂nnĝff+ĝfnV′^nnM̂nnĝnf)
+
+where M̂n,n=(1−ĝn,nV′^n,n)−1 . Here the subscripts “n” and “f” refer to the so-called near and far fields, as described in the Supporting Information. In eq , the computation of the inhomogeneous Green’s functions depends only on the local propagator (g ii ), the propagator from the local site to the defect impurity (g i,n ), and the description of the local impurity in the near-field defined by M nn . Because there is no coupling of terms between two differing far-field sites, the defect calculation avoids truncation effects when computing finite-size fields of view.
+
+The local density of states, η, can be directly extracted from the inhomogeneous Green’s functions via the relationship 8 η(r;ω)=−1πIm[Tr[Ĝ(r,r;ω)]]
+
+Topographical images for comparison with STM images are generated by computing η in conjunction with eq for every atomic site in the field of view for a given plane and then convolving with a spherical Gaussian of full width at half-maximum of one-quarter the nearest-neighbor bond distance (d NN = 2.35Å).
+
+The right column of Figure shows acceptor states generated by using this method. We found excellent agreement between our TB Green’s function calculations for a defect modeled as an ideal substitutional impurity with T d site symmetry, located 30 meV above the valence band edge, and the experimentally observed acceptor state wave function. The series of images with increasing depth in Figure demonstrates the evolution of the defect wave function with depth. As with the EFMA observations (center column, Figure ), these images reproduce extremely well the features seen in the experimental data (left column, Figure ), although we obtain slightly different predictions for the defect depth (0.81, 1.62, and 2.17 nm) compared to those in the EFMA theory.
+
+Some featuressuch as the four central bright spots in the 0.81 nm depth feature (top right, Figure )likely arise from neglecting near-defect relaxation of neighboring atoms. We further note that the EFMA and TB models have different strengths, which can account for the discrepancies between them. We have included a brief discussion of this in the Supporting Information and calculations of a split-vacancy configuration and why this does not match the experimentally observed features.
+
+This work presents the first images of acceptor state wave functions in silicon. Through STM measurements, the acceptor states are identified as square ring-like features with strong electronic contrast superimposed on the atomic lattice of the Si(001) surface. Tunneling spectroscopy and spatial dI/dV conductance maps confirm their spatial structure, energetic position approximately 30 meV above the valence band edge, and role in inducing a p-type Si(001) surface. Comparison with effective-mass and atomistic TB calculations confirms that the observed features are consistent with acceptor states in silicon and provides deeper insight into their characteristics. The effective-mass model clearly reveals a d-like contribution to the square ring appearance, while the TB calculations indicate that the observed symmetry arises from a substitutional impurity with T d site symmetry. The combination of a high-resolution experiment and detailed theoretical modeling demonstrated here provides the foundation for a thorough understanding of acceptor states in silicon, which is essential for future quantum technological applications based on these defects.
+
+Supplementary Material
+
+The authors acknowledge useful conversations with A. J. Fisher, S. K. Clowes, and J. A. Gupta. The STM experiments were financially supported by the Engineering & Physical Sciences Research Council (EP/L002140/1 and EP/M009564/1), effective-mass simulations by a Marie Sklodowska-Curie Grant 956548, and TB simulations by the U.S. Air Force Office of Scientific Research under Award FA9550-24-1-0355; code development enabling TB simulations was supported by the U.S. Department of Energy, Office of Basic Energy Sciences, under Award DE-SC0016379.
+
+The Supporting Information is available free of charge at https://pubs.acs.org/doi/10.1021/acs.nanolett.5c02675.Experimental methods and results, ion implantation simulations, STM image analysis and statistics, parameter tables and figures, theoretical methods and results, effective-mass approximation, TB Green’s function, and comparison to the split-vacancy model (PDF)
+
+The authors declare no competing financial interest.
+
+
+Peter, Y. Y. ; Cardona, M. ; Cardona, M. Fundamentals of Semiconductors, 4th ed.; Springer, 2010.
+Muhonen J. T. Dehollain J. P. Laucht A. Hudson F. E. Kalra R. Sekiguchi T. Itoh K. M. Jamieson D. N. McCallum J. C. Dzurak A. S. Morello A. Storing quantum information for 30 seconds in a nanoelectronic device Nat. Nanotechnol. 2014 9 986 991 10.1038/nnano.2014.211 25305745
+Kobayashi T. Salfi J. Chua C. van der Heijden J. House M. G. Culcer D. Hutchison W. D. Johnson B. C. McCallum J. C. Riemann H. Abrosimov N. V. Becker P. Pohl H. J. Simmons M. Y. Rogge S. Engineering long spin coherence times of spin–orbit qubits in silicon Nat. Mater. 2021 20 38 42 10.1038/s41563-020-0743-3 32690913
+Weber J. R. Koehl W. F. Varley J. B. Janotti A. Buckley B. B. Van de Walle C. G. Awschalom D. D. Quantum computing with defects Proc. Natl. Acad. Sci. U.S.A. 2010 107 8513 8518 10.1073/pnas.1003052107 20404195 PMC2889300
+Koenraad P. M. Flatté M. E. Single dopants in semiconductors Nat. Mater. 2011 10 91 100 10.1038/nmat2940 21258352
+Schofield S. R. Curson N. J. Simmons M. Y. Ruess F. J. Hallam T. Oberbeck L. Clark R. G. Atomically Precise Placement of Single Dopants in Si Phys. Rev. Lett. 2003 91 136104 10.1103/PhysRevLett.91.136104 14525322
+Stock T. J. Warschkow O. Constantinou P. C. Li J. Fearn S. Crane E. Hofmann E. V. Kölker A. Mckenzie D. R. Schofield S. R. Curson N. J. Atomic-Scale Patterning of Arsenic in Silicon by Scanning Tunneling Microscopy ACS Nano 2020 14 3316 3327 10.1021/acsnano.9b08943 32142256 PMC7146850
+Stock T. J. Z. Warschkow O. Constantinou P. C. Bowler D. R. Schofield S. R. Curson N. J. Single-Atom Control of Arsenic Incorporation in Silicon for High-Yield Artificial Lattice Fabrication Adv. Mater. 2024 36 12282 10.1002/adma.202312282 PMC11475292 38380859
+Škereň T. Köster S. A. Douhard B. Fleischmann C. Fuhrer A. Bipolar device fabrication using a scanning tunnelling microscope Nat. Electron. 2020 3 524 530 10.1038/s41928-020-0445-5
+Fuechsle M. Miwa J. A. Mahapatra S. Ryu H. Lee S. Warschkow O. Hollenberg L. C. L. Klimeck G. Simmons M. Y. A single-atom transistor Nat. Nano. 2012 7 242 10.1038/nnano.2012.21 22343383
+He Y. Gorman S. K. Keith D. Kranz L. Keizer J. G. Simmons M. Y. A two-qubit gate between phosphorus donor electrons in silicon Nature 2019 571 371 375 10.1038/s41586-019-1381-2 31316197
+Thorvaldson I. Poulos D. Moehle C. M. Misha S. H. Edlbauer H. Reiner J. Geng H. Voisin B. Jones M. T. Donnelly M. B. Pena L. F. Hill C. D. Myers C. R. Keizer J. G. Chung Y. Gorman S. K. Kranz L. Simmons M. Y. Grover’s algorithm in a four-qubit silicon processor above the fault-tolerant threshold Nat. Nanotechnol. 2025 20 472 477 10.1038/s41565-024-01853-5 39979400 PMC12014505
+Hill C. D. Peretz E. Hile S. J. House M. G. Fuechsle M. Rogge S. Simmons M. Y. Hollenberg L. C. Quantum Computing: A surface code quantum computer in silicon Sci. Adv. 2015 1 e1500707 10.1126/sciadv.1500707 26601310 PMC4646824
+Ebert H. Imaging defects and dopants Mater. Today 2003 6 36 43 10.1016/S1369-7021(03)00632-1
+Studer P. Brázdová V. Schofield S. R. Bowler D. R. Hirjibehedin C. F. Curson N. J. Site-dependent ambipolar charge states induced by group V atoms in a silicon surface ACS Nano 2012 6 10456 10462 10.1021/nn3039484 23186379
+Tang J.-M. Flatté M. E. Multiband Tight-Binding Model of Local Magnetism in Ga1–x Mn x As Phys. Rev. Lett. 2004 92 047201 10.1103/PhysRevLett.92.047201 14995399
+Yakunin A. Silov A. Y. Koenraad P. M. Wolter J. Van Roy W. De Boeck J. Tang J.-M. Flatté M. E. Spatial Structure of an Individual Mn Acceptor in GaAs Phys. Rev. Lett. 2004 92 216806 10.1103/PhysRevLett.92.216806 15245308
+Marczinowski F. Wiebe J. Tang J. M. Flatté M. E. Meier F. Morgenstern M. Wiesendanger R. Local electronic structure near Mn acceptors in InAs: Surface-induced symmetry breaking and coupling to host states Phys. Rev. Lett. 2007 99 10 13 10.1103/PhysRevLett.99.157202 17995207
+Loth S. Wenderoth M. Winking L. Ulbrich R. Malzer S. Döhler G. Probing Semiconductor Gap States with Resonant Tunneling Phys. Rev. Lett. 2006 96 066403 10.1103/PhysRevLett.96.066403 16606021
+Garleff J. K. Wijnheijmer A. Silov A. van Bree J. Van Roy W. Tang J.-M. Flatté M. E. Koenraad P. M. Enhanced binding energy of manganese acceptors close to the GaAs(110) surface Phys. Rev. B 2010 82 035303 10.1103/PhysRevB.82.035303
+Teichmann K. Wenderoth M. Loth S. Ulbrich R. Garleff J. Wijnheijmer A. Koenraad P. M. Controlled charge switching on a single donor with a scanning tunneling microscope Phys. Rev. Lett. 2008 101 076103 10.1103/PhysRevLett.101.076103 18764558
+Liu L. Yu J. Lyding J. W. Atom-resolved three-dimensional mapping of boron dopants in Si(100) by scanning tunneling microscopy Appl. Phys. Lett. 2001 78 386 388 10.1063/1.1339260
+Lequn Liu Jixin Yu Lyding J.W. Subsurface Dopant-Induced Features on the Si(100)­2 × 1:H Surface: Fundamental the Study and Applications IEEE Trans. Nanotechnol. 2002 1 176 183 10.1109/TNANO.2002.807391
+Nishizawa M. Bolotov L. Kanayama T. Scanning tunneling microscopy/spectroscopy as an atomic-resolution dopant profiling method in Si J. Phys. Conf. Ser. 2008 106 012002 10.1088/1742-6596/106/1/012002
+Miwa J. A. Hofmann P. Simmons M. Y. Wells J. W. Direct measurement of the band structure of a buried two-dimensional electron gas Phys. Rev. Lett. 2013 110 136801 10.1103/PhysRevLett.110.136801 23581353
+Mol J. A. Salfi J. Miwa J. A. Simmons M. Y. Rogge S. Interplay between quantum confinement and dielectric mismatch for ultrashallow dopants Phys. Rev. B 2013 87 245417 10.1103/PhysRevB.87.245417
+Sinthiptharakoon K. Schofield S. R. Studer P. Brázdová V. Hirjibehedin C. F. Bowler D. R. Curson N. J. Investigating individual arsenic dopant atoms in silicon using low-temperature scanning tunnelling microscopy J. Phys.: Condens. Matter 2014 26 012001 10.1088/0953-8984/26/1/012001 24304933
+Usman M. Bocquel J. Salfi J. Voisin B. Tankasala A. Rahman R. Simmons M. Y. Rogge S. Hollenberg L. C. Spatial metrology of dopants in silicon with exact lattice site precision Nat. Nanotechnol. 2016 11 763 768 10.1038/nnano.2016.83 27271965
+Brazdova V. Bowler D. R. Sinthiptharakoon K. Studer P. Rahnejat A. Curson N. J. Schofield S. R. Fisher A. J. Exact location of dopants below the Si(001):H surface from scanning tunneling microscopy and density functional theory Phys. Rev. B 2017 95 075408 10.1103/PhysRevB.95.075408
+Salfi J. Mol J. A. Rahman R. Klimeck G. Simmons M. Y. Hollenberg L. C. L. Rogge S. Spatially resolving valley quantum interference of a donor in silicon Nat. Mater. 2014 13 605 610 10.1038/nmat3941 24705384
+Voisin B. Bocquel J. Tankasala A. Usman M. Salfi J. Rahman R. Simmons M. Y. Hollenberg L. C. Rogge S. Valley interference and spin exchange at the atomic scale in silicon Nat. Commun. 2020 11 1 11 10.1038/s41467-020-19835-1 33257680 PMC7705737
+Peach T. Homewood K. Lourenco M. Hughes M. Saeedi K. Stavrias N. Li J. Chick S. Murdin B. Clowes S. The Effect of Lattice Damage and Annealing Conditions on the Hyperfine Structure of Ion Implanted Bismuth Donors in Silicon Adv. Quantum Technol. 2018 1 1 6 10.1002/qute.201870021
+Yakunin A. M. Silov A. Y. Koenraad P. M. Tang J. M. Flatté M. E. Primus J. L. Van Roy W. De Boeck J. Monakhov A. M. Romanov K. S. Panaiotti I. E. Averkiev N. S. Warping a single Mn acceptor wavefunction by straining the GaAs host Nat. Mater. 2007 6 512 515 10.1038/nmat1936 17558428
+Averkiev N. Il’Inskii S. Y. Spin ordering of carriers localized at two deep centers in cubic semiconductors Phys. Solid State 1994 36 278 283
+Vinh N. Q. Redlich B. van der Meer A. F. G. Pidgeon C. R. Greenland P. T. Lynch S. A. Aeppli G. Murdin B. N. Time-Resolved Dynamics of Shallow Acceptor Transitions in Silicon Phys. Rev. X 2013 3 011019 10.1103/PhysRevX.3.011019
+Baldereschi A. Lipari N. O. Cubic contributions to the spherical model of shallow acceptor states Phys. Rev. B 1974 9 1525 1539 10.1103/PhysRevB.9.1525
+Jancu J.-M. Scholz R. Beltram F. Bassani F. Empirical spds* tight-binding calculation for cubic semiconductors: General method and material parameters Phys. Rev. B 1998 57 6493 6507 10.1103/PhysRevB.57.6493

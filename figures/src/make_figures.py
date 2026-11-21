@@ -407,17 +407,34 @@ def hero():
     def nearest(x, y):
         return min(top, key=lambda t: (t[0] - x) ** 2 + (t[1] - y) ** 2)
     c = N * a0 / 2
-    dop = {nearest(c - 4, c - 4): AS_C, nearest(c + 4, c - 4): AS_C, nearest(c - 4, c + 4): AS_C, nearest(c + 4, c + 4): AS_C,
-           nearest(c + 9.5, c - 8.5): P_C}
+    dop = {nearest(c - 5.5, c - 5.5): AS_C, nearest(c + 5.5, c - 5.5): AS_C, nearest(c - 5.5, c + 5.5): AS_C, nearest(c + 5.5, c + 5.5): AS_C,
+           nearest(c + 10.5, c - 10.5): P_C}
+    aB = 20.0  # donor Bohr radius ~2 nm (Schofield2025 §3.2), in Å, same units as the lattice
     for p in pts:
         col = dop.get(p)
-        if col:
+        if col:  # |psi|^2 ~ exp(-2r/aB) glow, drawn as stacked translucent discs
             u, w, _ = sc.proj(*p)
-            for r, al in ((3.2, .06), (2.4, .10), (1.7, .16)):
-                ax.add_patch(Circle((u, w), r, color=col, alpha=al, lw=0, zorder=3))
+            for r in np.linspace(7.5, 1.0, 18):
+                ax.add_patch(Circle((u, w), r, color=col, alpha=0.05 * math.exp(-2 * r / (aB / 2.5)) * 3.0, lw=0, zorder=3))
+            for rr in (2.6, 4.6):
+                ax.add_patch(Circle((u, w), rr, fill=False, ec=col, lw=0.7, alpha=0.55, zorder=3))
         shade = 0.25 + 0.75 * (p[2] / zt)
         sc.ball(*p, 0.95 if col else 0.62, col or _mix("#3E4A56", "#B9C3CC", shade))
     sc.draw(ax)
+    # exchange links (dashed) and spin arrows on the As register
+    As_sites = [q for q, c_ in dop.items() if c_ == AS_C]
+    proj = {q: sc.proj(*q)[:2] for q in dop}
+    for i_, q1 in enumerate(As_sites):
+        for q2 in As_sites[i_ + 1:]:
+            (u1, w1), (u2, w2) = proj[q1], proj[q2]
+            if math.hypot(u1 - u2, w1 - w2) < 9.5:
+                ax.plot([u1, u2], [w1, w2], color="#9FF0EE", lw=1.6, ls=(0, (3, 2)), alpha=0.85, zorder=150)
+    spins = [1, -1, -1, 1]
+    for q, sp in zip(sorted(As_sites), spins):
+        u, w = proj[q]
+        ax.add_patch(FancyArrowPatch((u, w + (1.2 if sp > 0 else 5.4)), (u, w + (5.4 if sp > 0 else 1.2)), arrowstyle="-|>", mutation_scale=13, color="#FFFFFF", lw=2.0, zorder=160))
+    up, wp = proj[[q for q, c_ in dop.items() if c_ == P_C][0]]
+    ax.add_patch(FancyArrowPatch((up, wp + 1.2), (up + 2.6, wp + 4.8), arrowstyle="-|>", mutation_scale=12, color="#FFE2C4", lw=1.8, zorder=160))
     # STM tip above the register
     u, w, _ = sc.proj(c, c, zt)
     ax.add_patch(Polygon([[u - 3.0, w + 27], [u + 3.0, w + 27], [u, w + 9.5]], color=TIP, zorder=200, lw=0))
@@ -428,6 +445,108 @@ def hero():
     ax.set_aspect("equal"); ax.axis("off"); ax.autoscale_view(); ax.margins(0.03)
     fig.savefig(f"{OUT}/O_hero_title.png", dpi=300, facecolor="#111A22"); plt.close(fig); print("wrote O_hero_title.png")
 
+def bloch():
+    fig = plt.figure(figsize=(3.4, 3.4)); ax = fig.add_subplot(111, projection="3d", computed_zorder=False)
+    u_, v_ = np.mgrid[0:2 * np.pi:60j, 0:np.pi:30j]
+    ax.plot_surface(np.cos(u_) * np.sin(v_), np.sin(u_) * np.sin(v_), np.cos(v_), color="#E8F4F4", alpha=0.25, lw=0, zorder=1)
+    t = np.linspace(0, 2 * np.pi, 120)
+    for z0 in (0,):
+        ax.plot(np.cos(t), np.sin(t), 0 * t, color="#9AA3AC", lw=0.8, zorder=2)
+    ax.plot(np.cos(t), 0 * t, np.sin(t), color="#C3CAD1", lw=0.6, zorder=2)
+    ax.plot(0 * t, np.cos(t), np.sin(t), color="#C3CAD1", lw=0.6, zorder=2)
+    for (x, y, z) in ((1.25, 0, 0), (0, 1.25, 0), (0, 0, 1.25)):
+        ax.plot([-x, x], [-y, y], [-z, z], color="#9AA3AC", lw=0.7, zorder=2)
+    th, ph = 0.95, 0.75
+    vx, vy, vz = np.sin(th) * np.cos(ph), np.sin(th) * np.sin(ph), np.cos(th)
+    ax.quiver(0, 0, 0, vx, vy, vz, color=AS_C, lw=2.6, arrow_length_ratio=0.12, zorder=10)
+    ax.plot([vx, vx], [vy, vy], [0, vz], color=AS_C, lw=0.8, ls=":", zorder=9)
+    ax.text(0, 0, 1.42, "|0⟩", fontsize=13, ha="center", zorder=11); ax.text(0, 0, -1.6, "|1⟩", fontsize=13, ha="center", zorder=11)
+    ax.text(vx * 1.25, vy * 1.25, vz * 1.2, "|ψ⟩", fontsize=13, color=AS_C, fontweight="bold", zorder=11)
+    ax.set_box_aspect((1, 1, 1)); ax.view_init(elev=18, azim=35); ax.axis("off")
+    ax.set_xlim(-1.1, 1.1); ax.set_ylim(-1.1, 1.1); ax.set_zlim(-1.1, 1.1)
+    save(fig, "O_bloch.png")
+
+def wavefunction_scale():
+    """Two donors 13.0 nm apart (He2019) with hydrogenic envelopes |psi|^2 ~ exp(-2r/aB), aB = 2 nm
+    (Schofield2025 §3.2, 'of order 2 nm'), over the Si(001) surface lattice (a = 0.384 nm, Stock2024 Fig. 1)."""
+    aB, d, a = 2.0, 13.0, 0.384
+    x = np.linspace(-4.5, d + 4.5, 900); y = np.linspace(-4, 4, 420); X, Y = np.meshgrid(x, y)
+    psi1 = np.exp(-np.hypot(X, Y) / aB); psi2 = np.exp(-np.hypot(X - d, Y) / aB)
+    dens = psi1 ** 2 + psi2 ** 2
+    fig, ax = plt.subplots(figsize=(7.4, 3.0))
+    from matplotlib.colors import LinearSegmentedColormap
+    cm = LinearSegmentedColormap.from_list("q", ["#FFFFFF", "#CFEFEF", "#5FC9C9", "#0F9FA0", "#075E5F"])
+    ax.imshow(np.log10(dens + 1e-9), extent=(x[0], x[-1], y[0], y[-1]), origin="lower", cmap=cm, vmin=-3.2, vmax=0, aspect="equal", zorder=1)
+    gx = np.arange(x[0], x[-1], a); gy = np.arange(y[0], y[-1], 2 * a)
+    GX, GY = np.meshgrid(gx, gy); ax.scatter(GX, GY, s=1.4, color="#5B6770", alpha=0.6, zorder=2, lw=0)
+    for x0 in (0, d):
+        ax.add_patch(Circle((x0, 0), aB, fill=False, ec=INK, lw=1.0, ls="--", zorder=3))
+        ax.add_patch(Circle((x0, 0), 0.22, color=P_C, zorder=4))
+    ax.annotate("", (d, -3.3), (0, -3.3), arrowprops=dict(arrowstyle="<->", color=INK, lw=1.3), zorder=5)
+    ax.text(d / 2, -3.05, "13.0 ± 0.5 nm donor spacing (He2019)", ha="center", fontsize=10.5, zorder=5)
+    ax.annotate("", (aB, 2.6), (0, 2.6), arrowprops=dict(arrowstyle="<->", color=INK, lw=1.2), zorder=5)
+    ax.text(aB / 2, 2.85, "a$_B$ ≈ 2 nm", ha="center", fontsize=10.5, zorder=5)
+    ax.text(d / 2, 0.9, "the faint overlap of |ψ|²\nsets the exchange J\n(log colour scale)", ha="center", fontsize=10, color=INK, zorder=5)
+    ax.plot([d + 0.6, d + 0.6 + 10 * a], [3.55, 3.55], color=INK, lw=2, zorder=5)
+    ax.text(d + 0.6, 3.0, "10 surface sites = 3.84 nm", fontsize=8.5, zorder=5)
+    ax.set_xlabel("x (nm)"); ax.set_yticks([]); ax.set_xlim(x[0], x[-1]); ax.set_ylim(y[0], y[-1])
+    for sp in ("top", "right", "left"): ax.spines[sp].set_visible(False)
+    save(fig, "O_wavefunction_scale.png")
+
+def xsec_scaled(stage, fname):
+    """To-scale vertical cross-section of the DAnna2023 stack: CZ Si(001) substrate, As delta-layer,
+    2 nm lock layer (RT) + RTA 500 C x 15 s, 28 nm Si cap at 250 C, 0.003 nm/s -> layer 30 nm deep."""
+    fig, ax = plt.subplots(figsize=(6.2, 2.75))
+    X0, X1 = 0, 60
+    ax.add_patch(Rectangle((X0, -14), X1, 14, color=SI, lw=0))
+    ax.add_patch(Rectangle((X0, 0), X1, 2, color="#B5BEC6", lw=0))
+    ax.add_patch(Rectangle((X0, 2), X1, 28, color=CAP, lw=0))
+    ax.add_patch(Rectangle((X0, -0.45), X1, 0.9, color=AS_C, lw=0))
+    if stage == "contact":
+        for xc in (10, 46):
+            ax.add_patch(Rectangle((xc, -3.0), 4.5, 33.0, color="white", lw=0))
+            ax.add_patch(Polygon([[xc, -3.0], [xc + 4.5, -3.0], [xc + 4.5, 30], [xc + 8.5, 30], [xc + 8.5, 34], [xc - 4, 34], [xc - 4, 30], [xc, 30]], color=AL, lw=0))
+        ax.text(19.5, 31.0, "Al in RIE-etched holes", fontsize=9.5, color=INK)
+        ax.text(X0 + 1, -11.2, "Hall bar 20 × 200 µm² · lateral not to scale · Al thickness not stated", fontsize=8.2, color="white")
+    # depth axis (to scale)
+    ax.plot([X1 + 2, X1 + 2], [0, 30], color=INK, lw=1)
+    for d in (0, 10, 20, 30):
+        ax.plot([X1 + 2, X1 + 3], [30 - d, 30 - d], color=INK, lw=1); ax.text(X1 + 3.6, 30 - d - 0.9, f"{d}", fontsize=8.5)
+    ax.text(X1 + 7.5, 13, "depth (nm)", rotation=90, fontsize=8.5, va="center")
+    lab = dict(fontsize=9.5, color=INK)
+    ax.text(X0 + 1, 15, "Si cap 28 nm · 250 °C · 0.003 nm/s", **lab)
+    ax.text(X0 + 1, 2.6, "lock layer 2 nm · RT, then RTA 500 °C × 15 s", fontsize=8.6, color=INK)
+    ax.text(X0 + 1, -3.4, "As δ-layer, buried 30 nm", fontsize=9.5, color="#075E5F", fontweight="bold")
+    ax.text(X0 + 1, -7.4, "CZ Si(001) substrate, 0.5 mm, >15 Ω cm", fontsize=9.5, color="white")
+    ax.set_xlim(X0, X1 + 9); ax.set_ylim(-14, 35 if stage == "contact" else 31.5); ax.axis("off")
+    save(fig, fname)
+
+def overgrowth2():
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(6.6, 2.6), gridspec_kw=dict(width_ratios=[1.15, 1], wspace=0.32))
+    # (a) Stock2020 Fig. 4e program: 40 C locking layer 10 min (10 ML at 1 ML/min), 500 C RTA, 250 C LTE to ~240 min
+    def m(t):  # broken time axis: 0-16 min linear, 16-240 compressed
+        t = np.asarray(t, float); return np.where(t <= 16, t, 16 + (t - 16) * 6 / 224)
+    tt = [0, 10, 12.4, 12.6, 12.9, 13.1, 240]; TT = [40, 40, 500, 500, 250, 250, 250]
+    a1.plot(m([0, 240]), [250, 250], color=P_C, lw=2)
+    a1.plot(m(tt), TT, color=AS_C, lw=2)
+    a1.set_xticks(m([0, 5, 10, 15, 240])); a1.set_xticklabels(["0", "5", "10", "15", "240"])
+    a1.text(m(19.5), 0, "//", fontsize=11, ha="center", va="center", clip_on=False, backgroundcolor="white")
+    a1.set_ylim(0, 560); a1.set_xlim(0, m(240)); a1.set_ylabel("T (°C)"); a1.set_xlabel("growth time (min)")
+    a1.text(0.4, 70, "As: 40 °C lock\nlayer, 10 ML", fontsize=8.5); a1.text(m(13.4), 475, "500 °C RTA", fontsize=8.5)
+    a1.text(m(13.4), 265, "250 °C", fontsize=8.5, color=INK); a1.text(0.4, 285, "P: 250 °C", fontsize=8.5, color=INK)
+    a1.set_title("(a) Stock2020 As program (Fig. 4e)", fontsize=9.5, loc="left")
+    # (b) DAnna2023 vs deposited thickness
+    a2.plot([0, 30], [250, 250], color=P_C, lw=2, alpha=0.0)
+    a2.plot([0, 2, 2, 2, 30], [25, 25, 500, 250, 250], color=AS_C, lw=2)
+    a2.set_xlim(0, 30); a2.set_ylim(0, 560); a2.set_xlabel("Si deposited (nm)")
+    a2.text(0.4, 70, "2 nm, RT", fontsize=8.5); a2.text(2.6, 475, "500 °C × 15 s", fontsize=8.5)
+    a2.text(6, 265, "28 nm at 250 °C, 0.003 nm/s", fontsize=8.5)
+    a2.text(6, 150, "≈2.6 h of growth (our calc.)", fontsize=8, color=MUTED)
+    a2.set_title("(b) DAnna2023 stack", fontsize=9.5, loc="left")
+    for a_ in (a1, a2):
+        for sp in ("top", "right"): a_.spines[sp].set_visible(False)
+    save(fig, "O5_overgrowth_program.png")
+
 def mini_icons():
     for st in ("prep", "litho", "dose", "incorp", "cap", "contact"):
         xsec(st, f"icon_{st}.png", w=1.6, h=0.9, mini=True)
@@ -437,8 +556,9 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         for fn in sys.argv[1:]: globals()[fn]()
         raise SystemExit
-    do_crops(); hero()
+    do_crops(); hero(); bloch(); wavefunction_scale()
     surface_scene("H", "O2_surface_H.png"); surface_scene("window", "O2_surface_window.png")
     surface_scene("dose", "O2_surface_dose.png"); surface_scene("incorp", "O2_surface_incorp.png")
     for st in ("prep", "litho", "dose", "incorp", "cap", "contact"): xsec(st, f"xsec_{st}.png")
-    mini_icons(); kane(); levels(); overgrowth(); montecarlo(); yield_surface(); prototype3d(); landmarks()
+    xsec_scaled("cap", "xsec_cap.png"); xsec_scaled("contact", "xsec_contact.png")
+    mini_icons(); kane(); levels(); overgrowth2(); montecarlo(); yield_surface(); prototype3d(); landmarks()
