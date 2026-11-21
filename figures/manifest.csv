@@ -38,3 +38,9 @@ O-landmark,15,O_landmark2003.png; O_landmark2012.png,Schofield2003; Fuechsle2012
 O-proto,23,O_prototype3d.png,our design (Stock2024 layout),,, original work (this project),original concept render
 O-yield3d,23,O_yield_surface3d.png,our model,,, original work (this project),original 3D surface
 O-thermal,24,native chart,Stock2020; Stock2024; Oberbeck2002,,, original work (this project),native pptx bar chart
+F18,22,F18_kiczynski2022_fig2a.png,Kiczynski2022,"Fig. 2a (STM micrograph, from article PDF)",https://doi.org/10.1038/s41586-022-04706-0 (PMC9217742),CC BY 4.0,"Kiczynski et al., Nature 606, 694 (2022) Fig. 2a, CC BY 4.0"
+O-hero,1,O_hero_title.png,Si a=5.431 Å; Schofield2025 §3.2,,,original work (this project),"cover render: diamond-cubic Si, wavefunction glow, spins, exchange links"
+O-bloch,4,O_bloch.png,schematic,,,original work (this project),Bloch sphere
+O-wf,4,O_wavefunction_scale.png,He2019; Schofield2025 §3.2; Stock2024,,,original work (this project),"two donors to scale, |psi|^2 log map"
+O-proto-layout,25,O_prototype_layout.png,Stock2024; Edlbauer2025; DAnna2023,,,original work (this project),to-scale prototype layout + atomic zoom
+O4-scaled,"14,15",xsec_cap.png; xsec_contact.png,DAnna2023,,,original work (this project),to-scale vertical stack

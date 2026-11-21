@@ -37,15 +37,15 @@ _128 words_
 
 ## Slide 4: Why one site matters: wavefunction overlap
 
-This is the quantum reason the whole talk is about placement. Each donor's electron is a cloud about 2 nanometres in radius; I drew two of them to scale, 13 nanometres apart as in the He 2019 two-qubit gate, on top of the actual silicon surface lattice. The dots are individual surface sites. The colour is log scale: the clouds barely touch in the middle, and that faint overlap is what sets the exchange coupling J, the interaction a two-qubit gate uses. The roadmap says exchange depends strongly on the exact donor position because of valley oscillations, so moving one donor by one site changes the gate. On the right, each spin is a qubit on the Bloch sphere. Likely question: is your plot exact? It's a simple hydrogen-like envelope; real donors add valley oscillations on top.
+This is the quantum reason the whole talk is about placement. Each donor's electron is a cloud about 2 nanometres in radius; drawn to scale, 13 nanometres apart as in the He 2019 gate, over the real surface lattice. The colour is log scale: the clouds barely touch in the middle, and that faint overlap is what sets the exchange coupling J, the interaction a two-qubit gate uses. The roadmap says exchange depends strongly on the exact donor position because of valley oscillations, so moving one donor by one site changes the gate. On the right, each spin is a qubit on the Bloch sphere. Likely question: is your plot exact? It's a simple hydrogen-like envelope; real donors add valley oscillations on top.
 
-_137 words_
+_123 words_
 
 ## Slide 5: The problem: implantation can't place one atom
 
-This is the obvious EE143 question: we implant dopants every day, so why an STM? Two reasons in the table. Placement: implantation is routinely sub-100 nm, but a Kane-type device needs about 15 nm, and the STM gives plus or minus one atomic spacing. Second, counting: ions arrive randomly. If you aim for one ion per site on average, Poisson statistics say only 36% of sites get exactly one; the bar chart is that distribution, which I calculated. Deterministic implanters like the one on the right add ion detection to fix this. Compare that 36% with the 97% Curson's group gets for arsenic. Likely question: can't you just detect each ion? Yes, that's the ion-counting route, and it's an active alternative.
+This is the obvious EE143 question: we implant dopants every day, so why an STM? Two reasons in the table. Placement: implantation is routinely sub-100 nm, but a Kane-type device needs about 15 nm, and the STM gives plus or minus one atomic spacing. Second, counting: ions arrive randomly. If you aim for one ion per site on average, Poisson statistics say only 36% of sites get exactly one; the bar chart is that distribution, which I calculated. Compare that 36% with the 97% Curson's group gets for arsenic. The bottom row is the strongest rival: Jakob 2022 detect each 14 keV phosphorus ion with 99.85% confidence, but where the ion stops is still set by random straggling, not by the lattice.
 
-_121 words_
+_122 words_
 
 ## Slide 6: The answer: write the device atom by atom
 
@@ -109,9 +109,9 @@ _125 words_
 
 ## Slide 16: Proof 1: the buried δ-layer conducts
 
-Did the process work? Three kinds of evidence. Electrical: an arsenic δ-layer measures 1.6 kilo-ohms per square with mobility of 28, and 81% of the arsenic is active after the 500 °C RTA, 88% at 560. The plots at bottom right track mobility, density and sheet resistance against RTA temperature. My EE143 sanity check: sheet resistance equals one over q times sheet density times mobility. Plug in 1.6 kΩ and 28 and you get about 1.4×10^14 per square centimetre, right where it should be. Second, X-ray ARPES, top right, shows the layers are under a nanometre thick, and arsenic is tighter than phosphorus. Third, X-ray fluorescence imaging moved the arsenic less than 0.2 Å. Likely question: does the X-ray beam change the device? Less than 3% loss of active dopants.
+Did the process work? Three kinds of evidence. Electrical: an arsenic δ-layer measures 1.6 kilo-ohms per square with mobility of 28, and 81% of the arsenic is active after the 500 °C RTA, 88% at 560. EE143 check: Rs = 1/(q·Ns·μ) with 1.6 kΩ and 28 gives about 1.4×10^14 per square centimetre, right where it should be. Second, X-ray ARPES, top right, shows the layers are under a nanometre thick, and arsenic is tighter than phosphorus. Curson's newest paper, D'Anna 2026, uses X-ray reflectometry to show the chemical layer is also sub-nanometre, below SIMS's 2 nm resolution. Third, X-ray fluorescence imaging moved the arsenic less than 0.2 Å. Likely question: does the X-ray beam change the device? Less than 3% loss of active dopants.
 
-_130 words_
+_124 words_
 
 ## Slide 17: Proof 2: one atom, then one transistor
 
@@ -179,15 +179,27 @@ Three things to take home. One: placing single atoms works, using the same steps
 
 _118 words_
 
-## Slide 28: References
+## Slide 28: References (1 of 2)
 
-References, alphabetical by key; keys match each slide's source line. Every number in this talk comes from these papers via my reference pack. Figures marked 'Reproduced from' are CC BY 4.0 and credited on the slide; paywalled or no-derivatives figures, like Kane 1998, Schofield 2003, Fuechsle 2012, He 2019 and Koch 2019, were redrawn as original schematics instead of copied. Diagrams marked 'ours' or 'our model' are original and use only the published numbers. If someone wants one paper to start with, I'd point them to the 2025 roadmap, Schofield et al. in Nano Futures, which covers the whole field and is open access. Likely question: are the figures licensed? Yes: CC BY figures are reproduced with credit, and everything else is redrawn.
+References, alphabetical by key; keys match each slide's source line. Figures marked 'Reproduced from' are CC BY 4.0 and credited on the slide; paywalled or no-derivatives figures were redrawn as original schematics instead of copied. Diagrams marked 'ours' or 'our model' are original and use only published numbers, with the exact spec and its source in notes/specs. If someone wants one paper to start with, I'd point them to the 2025 roadmap, Schofield et al. in Nano Futures, which covers the whole field and is open access. Likely question: are the figures licensed? Yes: CC BY figures are reproduced with credit, and everything else is redrawn.
 
-_123 words_
+_106 words_
 
-## Slide 29: Backup · Alternate titles
+## Slide 29: References (2 of 2)
+
+Second page of references, continuing alphabetically. Kane 2000 and O'Brien 2001 supply the Kane-architecture numbers on slide 5, since the 1998 paper itself isn't open; Ren 2016 and Xiang 2025 give the dimer and silicon–hydrogen bond lengths used in my surface renders. New papers beyond my original pack, like Jakob 2022, Reiner 2024, Namboodiri 2024, Kiczynski 2022 and Curson's newest, D'Anna 2026, are here too, all open access. Likely question: why cite a contact-physics paper for a bond length? It states the 1.51 Å Si–H bond I used; I only use that number.
+
+_93 words_
+
+## Slide 30: Backup · Alternate titles
 
 Backup slide with the alternate titles from the reference pack, in case the course wants a 'How X is built' style title like the DMD and CMOS decks. The image is the 4×4 arsenic array from Stock 2024, with the lithography, the incorporated atoms and the dopant map. If asked about it: with non-ideal windows, 10 to 12 of 15 sites were single atoms, up to 80%, which shows that window shape matters as much as the chemistry. That 4×4 result is why the 2×2 is described as the first defect-free array: the bigger array still had defects.
 
 _98 words_
+
+## Slide 31: Backup · Monte Carlo of 4×4 arrays
+
+Backup for the yield slide. I simulated 100,000 four-by-four arrays at each per-site yield. With phosphorus at 0.7, almost every array has failed sites, about 0.3% come out perfect, matching 0.7 to the 16th. With arsenic at 0.97, about 61% are perfect. This is a model, not data: it assumes sites fail independently, which is the same assumption behind the p to the n formula in Stock 2024. If asked whether failures are really independent: the papers quote the formula, they don't test correlations, so I'd say it's the simplest reasonable assumption.
+
+_92 words_
 

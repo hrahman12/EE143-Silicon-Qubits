@@ -56,6 +56,7 @@ CROPS = [
  ("F13_thorvaldson2025_fig4b.png", f"{RAW}/Thorvaldson2025/page5_300dpi.png", (0.19, 0.205, 0.52, 0.395)),
  ("F14_edlbauer2025_fig1ab.png", f"{RAW}/Edlbauer2025/page2_300dpi.png", (0.06, 0.055, 0.63, 0.298)),
  ("F15_wang2022_fig1.jpg", f"{RAW}/Wang2022/41467_2022_34220_Fig1_HTML.jpg", (0, 0, 1, 1)),
+ ("F18_kiczynski2022_fig2a.png", f"{RAW}/Kiczynski2022/p4_940x833.png", (0, 0, 1, 1)),
  ("F17_tseng2023_fig7.jpg", f"{RAW}/Tseng2023/pdfimg/p8_x32_1650x1005.jpeg", (0, 0, 1, 1)),
 ]
 
@@ -105,7 +106,7 @@ def si001(nrows=5, ndim=9):
         for k in range(ndim):
             xc, y = r * 2 * A, k * A
             for s in (-1, 1):
-                top.append((r, k, s, xc + s * 1.17, y, 0.0))
+                top.append((r, k, s, xc + s * 1.1785, y, 0.0))  # dimer bond 2.357 Å (Ren2016)
     for r in range(nrows * 2):
         for k in range(ndim):
             sub.append((r * A - A / 2 + 0.0, k * A + A / 2, -1.35))
@@ -132,7 +133,7 @@ def surface_scene(stage, fname, title=None):
             if stage != "H" and (r, k) in Aswin: tint = "#86D0D0"
             sc.ball(x, y, z, 1.05, tint)
         if not win or stage == "H":
-            sc.ball(x + s * 0.5, y, z + 1.55, 0.72, H_ATOM)   # H resist atom
+            sc.ball(x + s * 0.45, y, z + 1.44, 0.72, H_ATOM)   # Si–H 1.51 Å (Xiang2025)
     if stage in ("window",):
         pass
     if stage == "dose":
@@ -148,7 +149,7 @@ def surface_scene(stage, fname, title=None):
         sc.ball(3 * 2 * A + 1.2, 6.6 * A, 1.3, 1.05, "#C3CAD1")   # ejected Si ad-atom
         r1x = 1 * 2 * A
         for k in (3, 4, 5):
-            for s in (-1, 1): sc.ball(r1x + s * 0.5 + s * 1.17, k * A, 1.55, 0.72, H_ATOM)
+            for s in (-1, 1): sc.ball(r1x + s * 0.45 + s * 1.1785, k * A, 1.44, 0.72, H_ATOM)
     sc.draw(ax)
     if stage == "window":   # STM tip above the As window
         u, w, _ = sc.proj(3 * 2 * A, 3.5 * A, 0)
@@ -223,20 +224,26 @@ def xsec(stage, fname, w=6.0, h=2.6, mini=False):
 # 4. O1 Kane-style cross-section (Schematic after Kane1998)
 # --------------------------------------------------------------------------------------------
 def kane():
-    fig, ax = plt.subplots(figsize=(6.6, 3.3)); ax.set_xlim(0, 13); ax.set_ylim(0, 6.4); ax.axis("off")
-    ax.add_patch(Rectangle((0, 0), 13, 3.6, color=SI, lw=0)); ax.text(0.25, 0.35, "$^{28}$Si host", fontsize=11, color="white")
-    ax.add_patch(Rectangle((0, 3.6), 13, 0.7, color=OX, lw=0)); ax.text(0.25, 3.8, "barrier", fontsize=10, color=INK)
-    xs = [2.6, 6.5, 10.4]
-    for x in xs:
-        ax.add_patch(Ellipse((x, 2.3), 2.7, 1.9, color=P_C, alpha=0.18, lw=0))
-        ax.add_patch(Circle((x, 2.3), 0.26, color=P_C, lw=0))
-        ax.add_patch(Rectangle((x - 0.6, 4.3), 1.2, 1.1, color=AL, lw=0)); ax.text(x, 5.6, "A-gate", ha="center", fontsize=10.5)
-    for x in (4.55, 8.45):
-        ax.add_patch(Rectangle((x - 0.35, 4.3), 0.7, 1.1, color="#3E4852", lw=0)); ax.text(x, 5.6, "J-gate", ha="center", fontsize=10.5)
-    ax.annotate("$^{31}$P donor\nnucleus I = 1/2", (2.6, 2.3), xytext=(0.3, 1.0), fontsize=10.5, color="white",
-                arrowprops=dict(arrowstyle="-", color="white", lw=1))
-    ax.annotate("electron cloud\nBohr radius ~2 nm", (10.4 + 1.1, 2.6), xytext=(9.0, 0.35), fontsize=10.5, color="white",
-                arrowprops=dict(arrowstyle="-", color="white", lw=1))
+    """Horizontal axis to scale (nm). Kane2000: donors and gates 'of order 100 Å' apart, B ≃ 1 T, T ≃ 0.1 K.
+    Bohr radius ~2 nm (Schofield2025 §3.2). Depth/barrier thickness not stated in open sources: drawn schematically."""
+    fig, ax = plt.subplots(figsize=(7.0, 2.7)); ax.set_xlim(-6, 26); ax.set_ylim(-1.8, 10.0); ax.set_aspect("equal"); ax.axis("off")
+    ax.add_patch(Rectangle((-6, 0), 32, 5.0, color=SI, lw=0)); ax.text(-5.6, 0.35, "$^{28}$Si host", fontsize=10.5, color="white")
+    ax.add_patch(Rectangle((-6, 5.0), 32, 1.0, color=OX, lw=0)); ax.text(-5.6, 5.2, "barrier", fontsize=9.5, color=INK)
+    for x in (0, 10, 20):
+        r = np.linspace(2.6 * 2.0, 0.2, 14)
+        for rr in r: ax.add_patch(Circle((x, 2.6), rr, color=P_C, alpha=0.03 + 0.5 * math.exp(-2 * rr / 2.0) * 0.25, lw=0))
+        ax.add_patch(Circle((x, 2.6), 2.0, fill=False, ec=P_C, lw=0.9, ls="--"))
+        ax.add_patch(Circle((x, 2.6), 0.32, color=P_C, lw=0))
+        ax.add_patch(Rectangle((x - 1.6, 6.0), 3.2, 1.6, color=AL, lw=0)); ax.text(x, 7.85, "A", ha="center", fontsize=11, fontweight="bold")
+    for x in (5, 15):
+        ax.add_patch(Rectangle((x - 0.8, 6.0), 1.6, 1.6, color="#3E4852", lw=0)); ax.text(x, 7.85, "J", ha="center", fontsize=11, fontweight="bold")
+    ax.annotate("", (10, -0.6), (0, -0.6), arrowprops=dict(arrowstyle="<->", color=INK, lw=1.2), annotation_clip=False)
+    ax.text(5, -1.15, "≈10 nm (\"of order 100 Å\", Kane2000)", ha="center", fontsize=9.5, annotation_clip=False) if False else ax.text(5, -1.2, "≈10 nm (\"of order 100 Å\", Kane2000)", ha="center", fontsize=9.5)
+    ax.annotate("", (22.0, 4.9), (20, 4.9), arrowprops=dict(arrowstyle="<->", color="white", lw=1))
+    ax.text(21.0, 5.25 - 1.0, "a$_B$≈2 nm", ha="center", fontsize=8.5, color="white")
+    ax.text(-5.6, 8.9, "B ≃ 1 T,  T ≃ 0.1 K  (Kane2000)", fontsize=10, color=INK)
+    ax.text(26, 8.9, "x to scale; depth schematic", fontsize=8.5, color=MUTED, ha="right")
+    ax.text(0.6, 3.25, "$^{31}$P, I = 1/2", fontsize=9, color="white")
     save(fig, "O1_kane_crosssection.png")
 
 # --------------------------------------------------------------------------------------------
@@ -347,12 +354,25 @@ def prototype3d():
 # 9. Landmark schematics (Schematic after Schofield2003 / Fuechsle2012)
 # --------------------------------------------------------------------------------------------
 def landmarks():
-    fig, ax = plt.subplots(figsize=(3.9, 3.0)); ax.set_xlim(0, 20); ax.set_ylim(0, 15); ax.axis("off")
-    for yy in np.arange(1.5, 15, 2.6): ax.add_patch(Rectangle((0.5, yy), 19, 1.3, color="#DCE1E6", lw=0))
-    ax.add_patch(Circle((4, 9.3 + 0.65), 0.75, color=P_C, lw=0)); ax.add_patch(Circle((16, 9.3 + 0.65), 0.75, color=P_C, lw=0))
-    ax.add_patch(FancyArrowPatch((4.9, 11.7), (15.1, 11.7), arrowstyle="<->", mutation_scale=12, color=INK, lw=1.5))
-    ax.text(10, 12.3, "≈12 nm", ha="center", fontsize=12, color=INK)
-    ax.text(10, 0.0, "2003: two single P atoms, one dimer row,\n≈1 nm placement accuracy", ha="center", fontsize=10, color=INK)
+    """2003, to scale: Si(001) dimer rows 2a = 0.768 nm apart, dimers a = 0.384 nm along the row (Stock2024 Fig. 1i);
+    ~1 nm (~3 dimers) H-desorption sites ~12 nm apart on one row (Schofield2003 Fig. 4)."""
+    a0 = 0.384
+    fig, ax = plt.subplots(figsize=(4.6, 2.3)); ax.set_xlim(-1.0, 14.6); ax.set_ylim(-1.6, 5.0); ax.set_aspect("equal"); ax.axis("off")
+    rows = [0.0, 0.768, 1.536, 2.304, 3.072]
+    w1, w2 = (1.0, 13.0)
+    for ry in rows:
+        for k in range(int(14.6 / a0)):
+            x = -0.8 + k * a0
+            bare = (ry == 1.536) and (abs(x - w1) < 0.6 or abs(x - w2) < 0.6)
+            for dy in (-0.118, 0.118):   # dimer bond 0.2357 nm (Ren2016)
+                ax.add_patch(Circle((x, ry + dy), 0.105, color="#EDB98A" if bare else "#A3ACB5", lw=0))
+                if not bare: ax.add_patch(Circle((x, ry + dy * 2.1), 0.06, color=H_ATOM, lw=0))
+    for xc in (w1, w2):
+        ax.add_patch(Circle((xc, 1.536), 0.28, color=P_C, ec=INK, lw=0.8, zorder=5))
+    ax.annotate("", (w2, 3.75), (w1, 3.75), arrowprops=dict(arrowstyle="<->", color=INK, lw=1.2))
+    ax.text((w1 + w2) / 2, 4.05, "≈12 nm apart, same dimer row (Kane array: 20 nm)", ha="center", fontsize=8.6)
+    ax.plot([-0.8, 0.2], [-0.55, -0.55], color=INK, lw=2); ax.text(-0.8, -1.05, "1 nm", fontsize=8.5)
+    ax.text(0.6, -1.05, "sites ≈1 nm (≈3 dimers) · +4 V, 1 nA · 0.3 L PH$_3$, 10$^{-9}$ mbar · ≈350 °C", fontsize=7.4, color=INK)
     save(fig, "O_landmark2003.png")
     fig, ax = plt.subplots(figsize=(3.9, 3.0)); ax.set_xlim(0, 20); ax.set_ylim(0, 15); ax.axis("off")
     ax.add_patch(Polygon([[0.5, 5.5], [7.5, 7.4], [7.5, 8.6], [0.5, 10.5]], color=P_C, alpha=0.85, lw=0))
@@ -363,7 +383,7 @@ def landmarks():
     ax.text(1, 11.2, "source", fontsize=10); ax.text(15.5, 11.2, "drain", fontsize=10)
     ax.text(13.4, 13.4, "gate", fontsize=10); ax.text(13.4, 2.3, "gate", fontsize=10)
     ax.annotate("one P atom", (10.5, 8.4), xytext=(12.5, 10.0), fontsize=10, arrowprops=dict(arrowstyle="-", color=INK, lw=1))
-    ax.text(10, -0.4, "2012: single-atom transistor,\none-lattice-site accuracy", ha="center", fontsize=10, color=INK)
+    ax.text(10, -0.4, "2012: single-atom transistor, one-lattice-site\naccuracy (illustrative layout: no open dimensions)", ha="center", fontsize=9.5, color=INK)
     save(fig, "O_landmark2012.png")
 
 
@@ -547,6 +567,46 @@ def overgrowth2():
         for sp in ("top", "right"): a_.spines[sp].set_visible(False)
     save(fig, "O5_overgrowth_program.png")
 
+def prototype_layout():
+    """Top view to scale. Inputs: 2x2 As register, pitch ~12 surface lattice vectors = 4.6 nm, 4-site windows (Stock2024);
+    SET 17 nm from the register and two gates 146.6 nm apart (Edlbauer2025 design values); burial 30 nm (DAnna2023).
+    Lead/gate widths are not stated in the papers: drawn illustratively."""
+    fig = plt.figure(figsize=(6.6, 3.4)); ax = fig.add_axes([0.0, 0.08, 0.6, 0.9]); ax.set_aspect("equal")
+    ax.set_xlim(-95, 95); ax.set_ylim(-60, 60); ax.axis("off")
+    ax.add_patch(Rectangle((-95, -60), 190, 120, color="#F2F4F6", lw=0))
+    for sx in (-1, 1):   # gates 146.6 nm apart (centre lines at +/-73.3 nm)
+        x0 = sx * 73.3
+        ax.add_patch(Polygon([[x0, -6], [x0, 6], [x0 + sx * 22, 30], [x0 + sx * 22, -30]], color=AS_C, alpha=0.75, lw=0))
+        ax.text(x0 + sx * 12, 36, "gate", ha="center", fontsize=9, color="#075E5F")
+    ax.add_patch(Rectangle((-6, 17), 12, 9, color=AS_C, alpha=0.9, lw=0)); ax.text(9, 19.5, "SET island", fontsize=9, color="#075E5F")
+    for sx in (-1, 1):
+        ax.add_patch(Polygon([[sx * 6, 21.5], [sx * 60, 50], [sx * 60, 58], [sx * 6, 23.5]], color=AS_C, alpha=0.75, lw=0))
+    ax.text(-62, 52, "S", fontsize=9, color="#075E5F"); ax.text(58, 52, "D", fontsize=9, color="#075E5F")
+    for (x, y) in ((-2.3, -2.3), (2.3, -2.3), (-2.3, 2.3), (2.3, 2.3)): ax.add_patch(Circle((x, y), 1.0, color=AS_C, ec="#075E5F", lw=0.6))
+    ax.annotate("", (0, 17), (0, 3.3), arrowprops=dict(arrowstyle="<->", color=INK, lw=1)); ax.text(1.5, 9, "17 nm", fontsize=8.5)
+    ax.annotate("", (73.3, -42), (-73.3, -42), arrowprops=dict(arrowstyle="<->", color=INK, lw=1)); ax.text(0, -50, "146.6 nm gate separation", ha="center", fontsize=8.5)
+    ax.plot([-90, -40], [-56, -56], color=INK, lw=2); ax.text(-90, -54, "50 nm", fontsize=8)
+    ax.add_patch(Rectangle((-6, -6), 12, 12, fill=False, ec=INK, lw=0.8))
+    # inset: register at atomic scale
+    bx = fig.add_axes([0.63, 0.12, 0.36, 0.84]); bx.set_aspect("equal"); bx.axis("off")
+    a0 = 0.384; L = 7.0
+    bx.set_xlim(-L / 2, L / 2); bx.set_ylim(-L / 2, L / 2)
+    for iy in range(-5, 6):
+        y = iy * 2 * a0
+        for ix in range(-10, 11):
+            x = ix * a0
+            for dy in (-0.118, 0.118):
+                bx.add_patch(Circle((x, y + dy), 0.095, color="#C3CAD1", lw=0))
+    for (x, y) in ((-2.3, -2.3), (2.3, -2.3), (-2.3, 2.3), (2.3, 2.3)):
+        xs = round(x / a0) * a0; ys = round(y / (2 * a0)) * 2 * a0
+        bx.add_patch(Rectangle((xs - a0 * 0.75, ys - 0.32), 1.5 * a0 * 1.0 + 0.0, 0.64, color="#86D0D0", lw=0, alpha=0.8))
+        bx.add_patch(Circle((xs, ys), 0.22, color=AS_C, ec="#075E5F", lw=0.6))
+    bx.annotate("", (2.3, -3.15), (-2.3, -3.15), arrowprops=dict(arrowstyle="<->", color=INK, lw=1))
+    bx.text(0, -3.05, "4.6 nm ≈ 12 lattice vectors", ha="center", va="bottom", fontsize=8.5, backgroundcolor="white")
+    bx.text(-3.4, 3.15, "zoom: 2×2 As in 4-site windows", fontsize=8.5, va="top", backgroundcolor="white")
+    fig.text(0.01, 0.01, "Si(001) surface sites to scale (0.384 nm). Buried 30 nm. Lead widths illustrative.", fontsize=8, color=MUTED)
+    save(fig, "O_prototype_layout.png")
+
 def mini_icons():
     for st in ("prep", "litho", "dose", "incorp", "cap", "contact"):
         xsec(st, f"icon_{st}.png", w=1.6, h=0.9, mini=True)
@@ -556,7 +616,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         for fn in sys.argv[1:]: globals()[fn]()
         raise SystemExit
-    do_crops(); hero(); bloch(); wavefunction_scale()
+    do_crops(); hero(); bloch(); wavefunction_scale(); prototype_layout()
     surface_scene("H", "O2_surface_H.png"); surface_scene("window", "O2_surface_window.png")
     surface_scene("dose", "O2_surface_dose.png"); surface_scene("incorp", "O2_surface_incorp.png")
     for st in ("prep", "litho", "dose", "incorp", "cap", "contact"): xsec(st, f"xsec_{st}.png")

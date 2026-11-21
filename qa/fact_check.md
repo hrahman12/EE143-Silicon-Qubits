@@ -93,3 +93,37 @@ Status: OK = matches Key numbers exactly. Nothing failed; earlier unsourced item
 - Speaker-note Q&A answers that were general knowledge (gas toxicity, why mobility is low, organic-resist contamination, mechanism of the flash anneal, tip height): replaced with answers from Key numbers.
 - Author names/initials in the reference list: the pack gives keys, titles, journals and DOIs only, so the list uses those.
 - 10⁻² C/cm line dose (Key numbers) vs "2×10⁻² C/cm" in the Schofield2025 §2.2 figure caption: mismatch, so neither is on the slides.
+
+## Round 2: exact paper specs + new sources (verbatim quotes and locations in notes/specs/*.md)
+
+| Slide | Number on slide | Verbatim source location | Key | Status |
+|---|---|---|---|---|
+| 1 | dopant spacing on cover, a_B ≈ 2 nm glow | geometry render; Schofield2025 §3.2 | Schofield2025 | Illustrative |
+| 4 | 13.0 ± 0.5 nm donor spacing | Key numbers (2-qubit gate) | He2019 | OK |
+| 4 | a_B ≈ 2 nm; surface sites 0.384 nm | Schofield2025 §3.2; Stock2024 Fig. 1i legend "a = 3.84 Å" | Schofield2025; Stock2024 | OK |
+| 5 | 99.85 ± 0.02%, 14 keV ³¹P⁺, yield limit 98.1% | Jakob2022 abstract | Jakob2022 | OK |
+| 6 | ±0.384 nm placement; 100% activation | Reiner2024 Table 1 | Reiner2024 | OK |
+| 6 | donors "of order 100 Å"; B ≃ 1 T; T ≃ 0.1 K | Kane2000 §IV, §V, Fig. 5 caption | Kane2000 | OK |
+| 6 | 20 nm (restated) | OBrien2001 p. 1; Schofield2003 Fig. 4 caption | OBrien2001 | OK (conflict flagged on slide) |
+| 9 | 330 °C atomic H | Constantinou2024 Methods (Fig. 5 prints 310 °C) | Constantinou2024 | OK (conflict logged) |
+| 9 | 350 °C, 2 min; 500 °C × 15 s; 28 nm at 250 °C | DAnna2023 §6 Experimental | DAnna2023 | OK |
+| 10 | 330 °C, 5×10⁻⁷ mbar, 5 min | Constantinou2024 Methods | Constantinou2024 | OK |
+| 11 | ≈12 lattice vectors = 4.6 nm pitch | Stock2024 §2.1 | Stock2024 | OK |
+| 14 | 40 °C lock layer 10 ML, 500 °C RTA, 250 °C to ~240 min | Stock2020 Fig. 4e inset + Results | Stock2020 | OK (time/thickness inconsistency in paper noted) |
+| 14 | 2 nm RT; 500 °C × 15 s; 28 nm at 250 °C, 0.003 nm/s; 30 nm | DAnna2023 §6 | DAnna2023 | OK |
+| 14 | ≈2.6 h growth | Derived: 28 nm / 0.003 nm/s = 9333 s | our calc. | Derived |
+| 15 | 20 × 200 µm²; 1.8 K; CZ, 0.5 mm, >15 Ω cm | DAnna2023 §3, §6 | DAnna2023 | OK |
+| 15 | 95% yield on >150 devices (KPFM) | Namboodiri2024 abstract | Namboodiri2024 | OK |
+| 16 | sub-nm chemical thickness; SIMS ~2 nm | DAnna2026 published abstract | DAnna2026 | OK |
+| 17 | ~1 nm (~3 dimers) sites; ~12 nm; +4 V, 1 nA; 0.3 L, 10⁻⁹ mbar; ~350 °C | Schofield2003 Fig. 4 caption, pp. 1–3 | Schofield2003 | OK |
+| 17 | dimer rows 0.768 nm; dimer bond 2.357 Å | Schofield2025 §5.5; Ren2016 Results | Schofield2025; Ren2016 | OK |
+| 18 | ~50-donor array ~10⁻¹⁰; 150 °C, >1 L deterministic (model) | Ivie2021 (arXiv 2105.12074) main text, Results | Ivie2021 | OK |
+| 20 | H leaves by 330 °C (Ge); Bi: phenyls ~140 °C, incorporation ~360 °C, ~1 nm molecule | Hofmann2023; Lundgren2023 Results | Hofmann2023; Lundgren2023 | OK |
+| 21 | 3P + 1 e⁻, 45 nm ²⁸Si cap, 1.45 T, 15 mK | Thorvaldson2025 Methods | Thorvaldson2025 | OK |
+| 21 | 13(1) nm, SET 17 nm, ~1.39 T | Edlbauer2025 Fig. 1 caption, SI | Edlbauer2025 | OK |
+| 22 | 4.1, 6.6, 10.7 ± 0.3 nm; 2 ± 1 P | Wang2022 Results | Wang2022 | OK |
+| 22 | ~25 P per dot; ≤10 nm; 40 nm at 0.125 nm/min | Kiczynski2022 main text, Methods | Kiczynski2022 | OK |
+| 25 | 4.6 nm pitch; SET 17 nm; gates 146.6 nm; 30 nm burial | Stock2024 §2.1; Edlbauer2025 SI; DAnna2023 | several | OK (layout combination is our design) |
+| surface renders | Si–H 1.51 Å; dimer bond 2.357 Å; a = 3.84 Å | Xiang2025; Ren2016; Stock2024 | | geometry inputs |
+
+Paper-internal conflicts kept visible rather than resolved: Constantinou2024 330 vs 310 °C; Stock2024 Methods +4 V/3.5 nA vs captions 3.5 V/3000 pA; Kane spacing 10 nm vs 20 nm; Schofield2025 HDL dose 10⁻² vs 2×10⁻² C/cm.

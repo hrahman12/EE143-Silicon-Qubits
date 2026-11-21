@@ -140,7 +140,7 @@ const chartBase = () => ({ fontFace: T.font, catAxisLabelColor: T.ink, valAxisLa
   caption(s, "Each spin is a qubit: |ψ⟩ = α|0⟩ + β|1⟩ on the Bloch sphere (schematic).", 6.9, b.y + b.h + 0.02, 2.6, 0.45);
   bullets(s, ["Qubits interact through exchange, set by how their electron clouds overlap", "Exchange depends strongly on exact donor position (valley oscillations), so a one-site error changes the gate"], 0.5, 4.3, 9.0, 0.85, 13);
   src(s, "Schofield2025 §3.2; He2019; Stock2024. Envelope plot is our model, not a full valley calculation");
-  notes(s, "This is the quantum reason the whole talk is about placement. Each donor's electron is a cloud about 2 nanometres in radius; I drew two of them to scale, 13 nanometres apart as in the He 2019 two-qubit gate, on top of the actual silicon surface lattice. The dots are individual surface sites. The colour is log scale: the clouds barely touch in the middle, and that faint overlap is what sets the exchange coupling J, the interaction a two-qubit gate uses. The roadmap says exchange depends strongly on the exact donor position because of valley oscillations, so moving one donor by one site changes the gate. On the right, each spin is a qubit on the Bloch sphere. Likely question: is your plot exact? It's a simple hydrogen-like envelope; real donors add valley oscillations on top.");
+  notes(s, "This is the quantum reason the whole talk is about placement. Each donor's electron is a cloud about 2 nanometres in radius; drawn to scale, 13 nanometres apart as in the He 2019 gate, over the real surface lattice. The colour is log scale: the clouds barely touch in the middle, and that faint overlap is what sets the exchange coupling J, the interaction a two-qubit gate uses. The roadmap says exchange depends strongly on the exact donor position because of valley oscillations, so moving one donor by one site changes the gate. On the right, each spin is a qubit on the Bloch sphere. Likely question: is your plot exact? It's a simple hydrogen-like envelope; real donors add valley oscillations on top.");
 }
 // ============================================================================ 5. Why not ion implantation?
 {
@@ -148,28 +148,29 @@ const chartBase = () => ({ fontFace: T.font, catAxisLabelColor: T.ink, valAxisLa
   const H = (t) => ({ text: t, options: { bold: true, color: T.ink, fill: { color: "F2F4F6" } } });
   const rows = [[H(""), H("Ion implantation"), H("STM H-resist lithography")],
     [{ text: "Placement", options: { bold: true } }, "Sub-100 nm routine; Kane-type devices need ≈15 nm", "±1 atomic spacing"],
-    [{ text: "One dopant per site", options: { bold: true } }, "36% (Poisson, without ion counting)", { text: "97 ± 2% (As, 4-site window)", options: { color: T.As, bold: true } }]];
-  s.addTable(rows, { x: 0.5, y: 1.1, w: 5.0, colW: [1.25, 1.95, 1.8], fontFace: T.font, fontSize: 12, color: T.ink, valign: "middle", rowH: [0.4, 0.75, 0.75], border: { type: "solid", pt: 0.75, color: "E0E4E8" } });
+    [{ text: "One dopant per site", options: { bold: true } }, "36% (Poisson, without ion counting)", { text: "97 ± 2% (As, 4-site window)", options: { color: T.As, bold: true } }],
+    [{ text: "Best ion counting", options: { bold: true } }, "99.85 ± 0.02% detection confidence, 14 keV ³¹P⁺; yield limit 98.1% (Jakob2022)", "Placement still set by ion straggling, not by the lattice"]];
+  s.addTable(rows, { x: 0.5, y: 1.0, w: 5.0, colW: [1.15, 2.05, 1.8], fontFace: T.font, fontSize: 10.5, color: T.ink, valign: "middle", rowH: [0.36, 0.6, 0.5, 0.62], border: { type: "solid", pt: 0.75, color: "E0E4E8" } });
   s.addChart(pres.charts.BAR, [{ name: "Probability", labels: ["0", "1", "2", "3", "≥4"], values: [36.8, 36.8, 18.4, 6.1, 1.9] }],
-    Object.assign(chartBase(), { x: 0.4, y: 3.05, w: 5.1, h: 2.1, barDir: "col", chartColors: ["8C96A0"], showValue: true, dataLabelColor: T.ink, dataLabelFontSize: 9, dataLabelFormatCode: "0.0",
+    Object.assign(chartBase(), { x: 0.4, y: 3.2, w: 5.1, h: 1.95, barDir: "col", chartColors: ["8C96A0"], showValue: true, dataLabelColor: T.ink, dataLabelFontSize: 9, dataLabelFormatCode: "0.0",
       title: "Ions per site at mean 1 ion/site: exactly one only ~36%", valAxisHidden: true, valGridLine: { style: "none" }, showLegend: false, catAxisTitle: "ions landing in one site (Poisson, our calc.)", showCatAxisTitle: true, barGapWidthPct: 60 }));
   const b = img(s, "F7_schofield2025_s24_fig2.jpg", 6.0, 1.05, 3.4, 3.55, "center");
   caption(s, "Deterministic single-ion implanter column. Reproduced from Schofield et al., Nano Futures 9, 012001 (2025) §2.4 Fig. 2, CC BY 4.0", 5.8, b.y + b.h + 0.04, 3.8, 0.45);
-  src(s, "Schofield2025 §1, §2.4; Stock2024. Poisson bars: P(k)=e⁻¹/k!, our calculation of the 36% quoted in Schofield2025");
-  notes(s, "This is the obvious EE143 question: we implant dopants every day, so why an STM? Two reasons in the table. Placement: implantation is routinely sub-100 nm, but a Kane-type device needs about 15 nm, and the STM gives plus or minus one atomic spacing. Second, counting: ions arrive randomly. If you aim for one ion per site on average, Poisson statistics say only 36% of sites get exactly one; the bar chart is that distribution, which I calculated. Deterministic implanters like the one on the right add ion detection to fix this. Compare that 36% with the 97% Curson's group gets for arsenic. Likely question: can't you just detect each ion? Yes, that's the ion-counting route, and it's an active alternative.");
+  src(s, "Schofield2025 §1, §2.4; Stock2024; Jakob2022. Poisson bars: P(k)=e⁻¹/k!, our calculation of the 36% in Schofield2025");
+  notes(s, "This is the obvious EE143 question: we implant dopants every day, so why an STM? Two reasons in the table. Placement: implantation is routinely sub-100 nm, but a Kane-type device needs about 15 nm, and the STM gives plus or minus one atomic spacing. Second, counting: ions arrive randomly. If you aim for one ion per site on average, Poisson statistics say only 36% of sites get exactly one; the bar chart is that distribution, which I calculated. Compare that 36% with the 97% Curson's group gets for arsenic. The bottom row is the strongest rival: Jakob 2022 detect each 14 keV phosphorus ion with 99.85% confidence, but where the ion stops is still set by random straggling, not by the lattice.");
 }
 
 // ============================================================================ 2. Device at a glance
 {
   const s = newSlide("FIG_TEXT", "The answer: write the device atom by atom", "Act 1");
-  const rows = [["Host", "Si(001); ²⁸Si for qubit devices"], ["Dopants", "P (from PH₃) or As (from AsH₃)"], ["Placement", "±1 atomic spacing"], ["δ-layer leads", "≈10¹⁴ cm⁻², <1 nm thick"], ["Measured at", "millikelvin temperatures"]];
+  const rows = [["Host", "Si(001); ²⁸Si for qubit devices"], ["Dopants", "P (from PH₃) or As (from AsH₃)"], ["Placement", "±1 atomic spacing (±0.384 nm)"], ["δ-layer leads", "≈10¹⁴ cm⁻², <1 nm thick"], ["Activation", "100% of placed P (Reiner2024)"], ["Measured at", "millikelvin temperatures"]];
   const tbl = rows.map(([k, v]) => [{ text: k, options: { bold: true, color: T.ink } }, { text: v, options: { color: T.ink } }]);
-  s.addTable(tbl, { x: 0.5, y: 1.15, w: 4.1, colW: [1.25, 2.85], fontFace: T.font, fontSize: 13, rowH: 0.52, valign: "middle",
+  s.addTable(tbl, { x: 0.5, y: 1.05, w: 4.1, colW: [1.25, 2.85], fontFace: T.font, fontSize: 12, rowH: 0.46, valign: "middle",
     border: { type: "solid", pt: 0.75, color: "E0E4E8" }, fill: { color: "FFFFFF" } });
-  img(s, "O1_kane_crosssection.png", 4.85, 1.1, 4.7, 3.0, "center");
-  caption(s, "Kane-style architecture: ³¹P donors under A-gates, J-gates between them. Schematic after Kane1998 (original drawing, not to scale).", 4.85, 3.95, 4.7, 0.5);
-  callout(s, "EE143 lens: it's a doped-Si device whose 'diffusions' are single atoms and whose wiring is δ-doped silicon.", 0.5, 4.1, 4.1, 0.75, { fontSize: 12 });
-  src(s, "Schofield2025 §3.2, §5.4; Stock2024; Constantinou2023; Fuechsle2012; Kane1998");
+  const kb = img(s, "O1_kane_crosssection.png", 4.85, 1.1, 4.7, 2.6, "center");
+  caption(s, "Kane architecture, x to scale: ³¹P donors under A-gates, J-gates between, donors ≈10 nm apart (Kane2000: \"of order 100 Å\"; UNSW papers restate 20 nm: OBrien2001, Schofield2003), a_B ≈ 2 nm. Original drawing after Kane1998/Kane2000.", 4.85, kb.y + kb.h + 0.05, 4.7, 0.65);
+  callout(s, "EE143 lens: a doped-Si device whose 'diffusions' are single atoms and whose wiring is δ-doped silicon.", 0.5, 4.35, 4.1, 0.65, { fontSize: 11.5 });
+  src(s, "Schofield2025 §3.2, §5.4; Stock2024; Constantinou2023; Reiner2024 (Table 1); Kane1998; Kane2000; OBrien2001");
   notes(s, "Here's the spec sheet. The substrate is ordinary Si(001), switched to silicon-28 for the qubit devices. The dopants are phosphorus, from phosphine, or arsenic, from arsine. The headline is placement: plus or minus one atomic spacing. The wires are δ-layers, sheets around 10^14 per square centimetre that are less than a nanometre thick. Everything is measured at millikelvin. On the right is the original idea, Kane 1998: phosphorus-31 donors under A-gates, with J-gates in between. The number to remember: ±1 atomic spacing. Likely question: why silicon-28? The record results in this talk, 35.6 s coherence and the 2025 processors, were all in ²⁸Si; later I'll flag why that matters when comparing fidelities.");
 }
 
@@ -327,24 +328,24 @@ processSlide("Steps 7–8 · Burying the dopants", "Steps 7–8 of 11",
 
 // ============================================================================ 13. Steps 9-11
 processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
-  ["Registration markers + an STM–SEM system relocate the buried device", "20 × 200 µm² Hall bars by optical lithography and RIE; Al into holes etched through the δ-layer", "Transport at 1.8 K (Hall bar); qubits at millikelvin"],
+  ["Relocate the buried device: markers + STM–SEM; KPFM alignment from nm to mm pads, 95% yield on >150 devices", "20 × 200 µm² Hall bars by optical litho + RIE; Al into holes etched through the δ-layer", "Transport at 1.8 K; qubits at millikelvin"],
   "xsec_contact.png", (s) => {
     const b = img(s, "F10_danna2023_fig2_maps.jpg", 4.8, 1.0, 4.7, 2.75, "center");
     caption(s, "X-ray fluorescence maps of a buried As Hall bar: Al contacts, Fe, and the As δ-layer itself. Reproduced from D'Anna et al., Adv. Electron. Mater. 9, 2201212 (2023) Fig. 2, CC BY 4.0", 4.8, b.y + b.h + 0.04, 4.7, 0.5);
-  }, "Ruess2004; DAnna2023",
+  }, "Ruess2004; Namboodiri2024; DAnna2023",
   "The last three steps will feel most familiar. Once the dopants are buried, you can't see them with the STM, so you need alignment marks: registration markers plus a combined STM and SEM system to find the device again. Then it's normal cleanroom work. In the D'Anna paper, Hall bars were defined with optical lithography and reactive ion etching, and aluminium was deposited into holes etched down through the δ-layer, like a via. The maps on the right are X-ray fluorescence: you can see the aluminium pads, and in the right panel the arsenic δ-layer itself, buried 30 nm down. Then cool to millikelvin and measure. Likely question: does the X-ray beam damage the device? We'll see next slide that it barely moves the dopants.");
 
 // ============================================================================ 14. Did it work?
 {
   const s = newSlide("TWO_FIG", "Proof 1: the buried δ-layer conducts", "Act 3");
-  bullets(s, ["As δ-layer: 1.6 ± 0.1 kΩ/□, 28 ± 1 cm²/V·s; 81% activation (88% at 560 °C); P layers reach 2.4×10¹⁴ cm⁻²", "ARPES: layers <1 nm thick; As confines better than P", "XRF at ≈1 µm: <0.2 Å As motion, <3% loss of active dopants"], 0.5, 1.05, 4.1, 2.45, 13);
+  bullets(s, ["As δ-layer: 1.6 ± 0.1 kΩ/□, 28 ± 1 cm²/V·s; 81% activation (88% at 560 °C); P layers reach 2.4×10¹⁴ cm⁻²", "ARPES and X-ray reflectometry: <1 nm thick (SIMS resolves only ~2 nm); As confines better than P", "XRF at ≈1 µm: <0.2 Å As motion, <3% loss of active dopants"], 0.5, 1.05, 4.1, 2.45, 13);
   callout(s, "EE143 check (our calc.):  Rₛ = 1/(q·Nₛ·μ)  →  Nₛ = 1/(1.6×10⁻¹⁹ C × 1600 Ω × 28 cm²/V·s) ≈ 1.4×10¹⁴ cm⁻², consistent with the ≈10¹⁴ cm⁻² sheets.", 0.5, 3.6, 4.1, 1.05, { fontSize: 12 });
   const b = img(s, "F9_constantinou2023_fig2.jpg", 4.8, 1.0, 4.7, 1.95, "center");
   caption(s, "ARPES Fermi surfaces of P (top) and As (bottom) δ-layers. Reproduced from Constantinou et al., Adv. Sci. 10, 2302101 (2023) Fig. 2, CC BY 4.0", 4.8, b.y + b.h + 0.03, 4.7, 0.4);
   const a = img(s, "F11_stock2020_fig4_transport.png", 4.8, 3.33, 1.8, 1.78, "left");
   caption(s, "Mobility, carrier density and Rₛ vs RTA temperature. Reproduced from Stock et al., ACS Nano 14, 3316 (2020) Fig. 4f,g, CC BY 4.0", a.x + a.w + 0.12, 3.6, 2.75, 0.9);
-  src(s, "Stock2020; Constantinou2023; DAnna2023. Nₛ check is our calculation from Stock2020's numbers");
-  notes(s, "Did the process work? Three kinds of evidence. Electrical: an arsenic δ-layer measures 1.6 kilo-ohms per square with mobility of 28, and 81% of the arsenic is active after the 500 °C RTA, 88% at 560. The plots at bottom right track mobility, density and sheet resistance against RTA temperature. My EE143 sanity check: sheet resistance equals one over q times sheet density times mobility. Plug in 1.6 kΩ and 28 and you get about 1.4×10^14 per square centimetre, right where it should be. Second, X-ray ARPES, top right, shows the layers are under a nanometre thick, and arsenic is tighter than phosphorus. Third, X-ray fluorescence imaging moved the arsenic less than 0.2 Å. Likely question: does the X-ray beam change the device? Less than 3% loss of active dopants.");
+  src(s, "Stock2020; Constantinou2023; DAnna2023; DAnna2026. Nₛ check is our calculation from Stock2020's numbers");
+  notes(s, "Did the process work? Three kinds of evidence. Electrical: an arsenic δ-layer measures 1.6 kilo-ohms per square with mobility of 28, and 81% of the arsenic is active after the 500 °C RTA, 88% at 560. EE143 check: Rs = 1/(q·Ns·μ) with 1.6 kΩ and 28 gives about 1.4×10^14 per square centimetre, right where it should be. Second, X-ray ARPES, top right, shows the layers are under a nanometre thick, and arsenic is tighter than phosphorus. Curson's newest paper, D'Anna 2026, uses X-ray reflectometry to show the chemical layer is also sub-nanometre, below SIMS's 2 nm resolution. Third, X-ray fluorescence imaging moved the arsenic less than 0.2 Å. Likely question: does the X-ray beam change the device? Less than 3% loss of active dopants.");
 }
 
 // ============================================================================ 15. Landmarks
@@ -371,10 +372,10 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
       catAxisTitle: "atoms in array n", showCatAxisTitle: true, valAxisTitle: "array yield", showValAxisTitle: true }));
   text(s, "As 0.97¹⁶ ≈ 61%", 3.45, 1.62, 1.45, 0.25, { fontSize: 10, color: T.ink, bold: true });
   text(s, "P 0.7¹⁶ < 0.4%", 3.3, 2.65, 1.4, 0.25, { fontSize: 10, color: T.ink, bold: true });
-  bullets(s, ["P fills an ideal 3-dimer window 63 ± 10% of the time (\"less than 70%\" in 6-site windows)", "Array yield 0.7ⁿ: a 16-atom P array works <0.4% of the time"], 0.5, 4.08, 4.6, 1.0, 11.5);
-  const b = img(s, "O_montecarlo_4x4.png", 5.2, 1.15, 4.3, 2.9, "center");
-  caption(s, "Monte Carlo of 4×4 arrays (our model, not data): filled = one atom, red = failed site; boxed = perfect array. 100 000 trials each.", 5.2, b.y + b.h + 0.05, 4.3, 0.5);
-  src(s, "Ivie2021; Stock2024; Schofield2025 §4.1. Chart: pⁿ formula from Stock2024; As curve and Monte Carlo are our model");
+  bullets(s, ["P fills an ideal 3-dimer window 63 ± 10% of the time (\"less than 70%\" in 6-site windows)", "Array yield 0.7ⁿ: 16 P atoms <0.4%; a ~50-donor array ~10⁻¹⁰. Modelled fix: dose hot (150 °C, >1 L)"], 0.5, 4.08, 4.6, 1.0, 11.5);
+  const b = img(s, "O_yield_surface3d.png", 5.2, 1.0, 4.3, 3.3, "center");
+  caption(s, "The same law in 3D: array yield pⁿ against per-site yield p and array size n (our model). Orange and teal lines are the measured P (0.7) and As (0.97) yields.", 5.2, b.y + b.h + 0.05, 4.3, 0.55);
+  src(s, "Ivie2021 (incl. kinetic model); Stock2024; Schofield2025 §4.1. As curve and 3D surface are our model");
   notes(s, "Here's the problem that motivated Curson's arsenic work. Phosphorus lands in an ideal three-dimer window only 63 ± 10% of the time; Stock 2024 says less than 70% in six-site windows. That sounds fine until you need many sites at once. Array yield multiplies: 0.7 to the n. The orange line falls to under 0.4% by 16 atoms. The teal line is the same formula with arsenic's 97%, still about 61% at 16. On the right I simulated 4×4 arrays: the phosphorus row is full of red failures, the arsenic row has mostly perfect boxed arrays. This is the same logic as die yield in a fab: defects multiply. Number to remember: 0.7^16 < 0.4%. Likely question: can you repair a failed site? Possibly, by repeating lithography and dosing.");
 }
 
@@ -393,7 +394,7 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
 // ============================================================================ 18. Beyond Si:P
 {
   const s = newSlide("TWO_FIG", "Beyond Si:P: new dopants, new hosts", "Act 3");
-  bullets(s, ["Arsenic from arsine incorporates into germanium Ge(001) at room temperature, with no anneal", "Bismuth: triphenyl-bismuth precursor chemistry on Si(001) for ultra-shallow doping"], 0.5, 1.05, 3.7, 2.4, 14);
+  bullets(s, ["Ge(001): As from arsine incorporates at room temperature, no anneal; H leaves by 330 °C", "Bi on Si(001): ~1 nm triphenyl-bismuth; phenyls detach ~140 °C, Bi incorporates ~360 °C"], 0.5, 1.05, 3.7, 2.4, 13.5);
   callout(s, "Why it matters: the same STM toolbox, with a different gas or substrate, gives a new qubit or device platform.", 0.5, 3.55, 3.7, 0.95, { fontSize: 12 });
   const a = img(s, "F12_hofmann2023_fig1a.jpg", 4.4, 1.0, 2.6, 2.5, "left");
   caption(s, "STM of arsine on Ge(001) at room temperature. Hofmann et al., Angew. Chem. Int. Ed. 62, e202213982 (2023) Fig. 1a, CC BY 4.0", 4.4, a.y + a.h + 0.04, 2.6, 0.75);
@@ -406,24 +407,26 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
 // ============================================================================ 19. Processors
 {
   const s = newSlide("TWO_FIG", "The payoff: from devices to processors", "Act 3");
-  bullets(s, ["2019: ≈800 ps exchange gate, readout 93.9 ± 1.3% (natural Si); 3D device, 97.9% readout, <5 nm layer alignment", "2025: 4-qubit Grover (1Q 99.94–99.98%, CZ 99.32–99.65%); 11-qubit processor, Bell 99.5% in a register, 97.0% across"], 0.5, 1.05, 3.75, 3.1, 13);
+  bullets(s, ["2019: ≈800 ps exchange gate (natural Si); 3D device, 97.9% readout, <5 nm layer alignment", "2025, 4 qubits: 3P + 1 e⁻, 45 nm ²⁸Si cap, 1.45 T, 15 mK; CZ 99.32–99.65%, Grover search", "2025, 11 qubits: 4P + 5P registers 13(1) nm apart, SET 17 nm away, ~1.39 T; Bell 99.5% local, 97.0% across"], 0.5, 1.05, 3.75, 3.0, 12);
   callout(s, "Caveat: 2019 used natural Si and electron spins; 2025 used ²⁸Si and nuclear-spin registers, so don't compare fidelities directly.", 0.5, 4.05, 3.75, 0.85, { fontSize: 11 });
   const c = img(s, "F14_edlbauer2025_fig1ab.png", 4.4, 1.0, 5.1, 2.35, "center");
   caption(s, "11-qubit processor: connectivity and STM of the 4P and 5P registers. Reproduced from Edlbauer et al., Nature 648, 569 (2025) Fig. 1a,b, CC BY 4.0", 4.4, c.y + c.h + 0.03, 5.1, 0.4);
   const b = img(s, "F13_thorvaldson2025_fig4b.png", 4.4, 3.7, 2.4, 1.42, "left");
   caption(s, "Grover output, marked state ⇓⇓⇓: 98.87% of ideal. Reproduced from Thorvaldson et al., Nat. Nanotechnol. 20, 472 (2025) Fig. 4b, CC BY 4.0", b.x + b.w + 0.12, 3.85, 2.8, 0.9);
-  src(s, "He2019; Koch2019; Thorvaldson2025; Edlbauer2025");
+  src(s, "He2019; Koch2019; Thorvaldson2025 (Methods); Edlbauer2025 (Fig. 1 caption, SI)");
   notes(s, "Now the payoff: processors. 2019 gave the first exchange gate between two phosphorus donor electrons, about 800 picoseconds, and a 3D device with stacked dopant layers aligned within 5 nm. In 2025 a four-qubit processor, three phosphorus nuclei plus one electron in silicon-28, ran Grover's search; the bar chart shows the marked state found 93.46% of the time, 98.87% of ideal. And an 11-qubit processor linked a four-phosphorus and a five-phosphorus register by exchange: Bell states 99.5% within a register, 97% across. Please read the caveat box: 2019 used natural silicon and electron spins, 2025 used silicon-28 and nuclear spins, so the numbers aren't apples to apples. Likely question: are these Curson's devices? No, these are context papers from other groups using the same fabrication.");
 }
 
 // ============================================================================ 20. Simulator
 {
   const s = newSlide("TWO_FIG", "Same atoms, new job: a quantum simulator", "Act 3");
-  bullets(s, ["A 3×3 array of dopant-based quantum dots, written by the same STM process", "Tuned from metallic toward Mott-insulating behaviour: a hardware model of interacting electrons"], 0.5, 1.05, 4.0, 2.6, 15);
+  bullets(s, ["2022: 3×3 dopant dots, 2 ± 1 P each, spacing 4.1, 6.6, 10.7 ± 0.3 nm: metallic → Mott-insulating", "2022: 10-dot chain, ~25 P per dot, ≤10 nm apart, 40 nm cap at 0.125 nm/min: topological states"], 0.5, 1.05, 3.9, 2.6, 13);
   callout(s, "EE143 view: the 'circuit' here is a lattice of doped islands with in-plane δ-layer gates and leads.", 0.5, 3.7, 4.0, 0.8, { fontSize: 12 });
-  const b = img(s, "F15_wang2022_fig1.jpg", 4.8, 1.0, 4.7, 3.65, "center");
-  caption(s, "3×3 dopant-dot array: schematic (a) and STM images (b, c). Reproduced from Wang et al., Nat. Commun. 13, 6824 (2022) Fig. 1, CC BY 4.0", 4.8, b.y + b.h + 0.04, 4.7, 0.45);
-  src(s, "Wang2022");
+  const b = img(s, "F15_wang2022_fig1.jpg", 4.6, 1.0, 2.6, 3.0, "left");
+  caption(s, "3×3 dopant-dot array. Wang et al., Nat. Commun. 13, 6824 (2022) Fig. 1, CC BY 4.0", 4.6, b.y + b.h + 0.04, 2.6, 0.6);
+  const c = img(s, "F18_kiczynski2022_fig2a.png", 7.35, 1.0, 2.15, 2.0, "right");
+  caption(s, "10-dot chain with 6 in-plane gates (STM, 50 nm scale in original). Kiczynski et al., Nature 606, 694 (2022) Fig. 2a, CC BY 4.0", 7.35, c.y + c.h + 0.04, 2.15, 0.85);
+  src(s, "Wang2022; Kiczynski2022 (Methods)");
   notes(s, "Same fabrication, different job. Instead of qubits, this group wrote a 3×3 grid of tiny dopant-based quantum dots, shown in the schematic and the STM images on the right, with gates and leads written in the same layer. Electrons hopping between dots behave like electrons in a crystal, so the device simulates a material physics model directly in hardware. By changing the array, they tuned it from metallic behaviour toward a Mott insulator, where repulsion between electrons stops conduction. For us the interesting part is that it's a circuit made only of doped islands and δ-layer wiring. Likely question: why not simulate on a computer? Interacting-electron problems get exponentially hard as the lattice grows.");
 }
 
@@ -454,12 +457,12 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
 // ============================================================================ 23. Our prototype
 {
   const s = newSlide("TWO_FIG", "Our prototype: a 2×2 arsenic register", "Act 4");
-  const a = img(s, "O_prototype3d.png", 0.4, 0.95, 4.6, 2.75, "center");
-  caption(s, "Concept render (ours, not to scale): dark pillars are Al contacts. Layout after the gated As array in Stock2024 Fig. 1.", 0.5, a.y + a.h + 0.02, 4.5, 0.4);
-  const b = img(s, "O_yield_surface3d.png", 5.3, 0.95, 4.2, 2.75, "center");
-  caption(s, "Array yield pⁿ (our model); P and As curves use the measured 0.7 and 0.97.", 5.3, b.y + b.h + 0.02, 4.2, 0.4);
-  bullets(s, ["Four single As atoms in 4-site windows; in-plane As δ-layer source, drain and gates; Al vias", "Design rule from pⁿ: 16 sites at p = 0.97 give ≈61% perfect arrays; at p = 0.7, ≈0.3%"], 0.5, 4.2, 9.0, 0.9, 13);
-  src(s, "Our design. Inputs: Stock2024 (97 ± 2%, 4-site window, pⁿ); Stock2020; DAnna2023");
+  const a = img(s, "O_prototype_layout.png", 0.4, 0.95, 5.9, 3.05, "left");
+  caption(s, "Layout to scale (ours). Inputs: 2×2 pitch 4.6 nm and 4-site windows (Stock2024); SET 17 nm away, gates 146.6 nm apart (Edlbauer2025); buried 30 nm (DAnna2023).", 0.5, a.y + a.h + 0.03, 5.8, 0.45);
+  const b = img(s, "O_prototype3d.png", 6.45, 0.95, 3.05, 2.6, "center");
+  caption(s, "3D concept (not to scale): As δ-layer leads, Al vias, epitaxial cap.", 6.45, b.y + b.h + 0.02, 3.05, 0.4);
+  bullets(s, ["Four single As atoms, one per 4-site window, ≈12 lattice vectors apart", "Design rule from pⁿ: 16 sites at p = 0.97 give ≈61% perfect arrays; at p = 0.7, ≈0.3%"], 0.5, 4.5, 9.0, 0.65, 12.5);
+  src(s, "Our design. Inputs: Stock2024; Edlbauer2025; DAnna2023; Stock2020. Lead widths not given in the papers");
   notes(s, "To pull it together, here's a prototype we designed on paper, using only recipes from the papers. Four single arsenic atoms in four-site windows form a 2×2 register, with source, drain and two gates written as arsenic δ-layers in the same plane, buried under epitaxial silicon and reached by aluminium vias. The 3D surface on the right is our yield model, p to the n. It shows why the dopant choice decides the design: at arsenic's 0.97 a 16-site array comes out perfect about 61% of the time, at phosphorus's 0.7 about 0.3%. So the register size you can afford is set by chemistry, not by lithography resolution. Likely question: did you build it? No, it's a design exercise; the next slide is its traveler.");
 }
 
@@ -526,15 +529,26 @@ const REFS = [
   ["Tseng2023", "\"Resistless EUV lithography: photon-induced oxide patterning on silicon,\" Sci. Adv. 9, eadf5997 (2023). doi:10.1126/sciadv.adf5997"],
   ["Wang2022", "\"Experimental realization of an extended Fermi-Hubbard model using a 2D lattice of dopant-based quantum dots,\" Nat. Commun. 13, 6824 (2022). doi:10.1038/s41467-022-34220-w"],
   ["Wilson2004", "\"Phosphine dissociation on the Si(001) surface,\" Phys. Rev. Lett. 93, 226102 (2004). doi:10.1103/PhysRevLett.93.226102"],
+  ["Jakob2022", "\"Deterministic shallow dopant implantation in silicon with detection confidence upper-bound to 99.85% by ion–solid interactions,\" Adv. Mater. 34, 2103235 (2022). doi:10.1002/adma.202103235"],
+  ["Reiner2024", "\"High-fidelity initialization and control of electron and nuclear spins in a four-qubit register,\" Nat. Nanotechnol. 19, 605–611 (2024). doi:10.1038/s41565-023-01596-9"],
+  ["Namboodiri2024", "\"Multi-scale alignment to buried atom-scale devices using Kelvin probe force microscopy,\" Nanotechnol. Rev. 13, 20230196 (2024). doi:10.1515/ntrev-2023-0196"],
+  ["DAnna2026", "\"Element-specific, non-destructive profiling of two-dimensional dopant layers in silicon,\" npj Quantum Inf. (2026, online 11 Nov). doi:10.1038/s41534-026-01393-x"],
+  ["Kiczynski2022", "\"Engineering topological states in atom-based semiconductor quantum dots,\" Nature 606, 694–699 (2022). doi:10.1038/s41586-022-04706-0"],
+  ["Kane2000", "\"Silicon-based quantum computation,\" Fortschr. Phys. 48, 1023–1041 (2000). doi:10.1002/1521-3978(200009)48:9/11<1023::AID-PROP1023>3.0.CO;2-J"],
+  ["OBrien2001", "\"Towards the fabrication of phosphorus qubits for a silicon quantum computer,\" Phys. Rev. B 64, 161401 (2001). doi:10.1103/PhysRevB.64.161401"],
+  ["Ren2016", "\"Origin of symmetric dimer images of Si(001) observed by low-temperature scanning tunneling microscopy,\" Sci. Rep. 6, 27868 (2016). doi:10.1038/srep27868"],
+  ["Xiang2025", "\"Self-passivation reduces the Fermi level pinning in the metal-semiconductor contacts,\" Nat. Commun. 16, 10675 (2025). doi:10.1038/s41467-025-65695-y"],
 ];
-{
-  const s = newSlide("REFS", "References", "Wrap-up");
-  const half = 12;
-  [REFS.slice(0, half), REFS.slice(half)].forEach((col, ci) => {
-    const runs = col.map(([k, r], i) => ({ text: `[${ci * half + i + 1}] ${k}: ${r}`, options: { breakLine: true, paraSpaceAfter: 2 } }));
-    text(s, runs, 0.4 + ci * 4.65, 0.92, 4.55, ci ? 4.25 : 4.55, { fontSize: 9, color: T.ink, lineSpacingMultiple: 0.9 });
+REFS.sort((p, q) => p[0].localeCompare(q[0]));
+for (let pg = 0; pg * 16 < REFS.length; pg++) {
+  const chunk = REFS.slice(pg * 16, pg * 16 + 16);
+  const s = newSlide("REFS", pg ? "References (2 of 2)" : "References (1 of 2)", "Wrap-up");
+  [chunk.slice(0, 8), chunk.slice(8)].forEach((col, ci) => {
+    const runs = col.map(([k, r], i) => ({ text: `[${pg * 16 + ci * 8 + i + 1}] ${k}: ${r}`, options: { breakLine: true, paraSpaceAfter: 4 } }));
+    text(s, runs, 0.5 + ci * 4.6, 0.95, 4.4, 4.25, { fontSize: 9.5, color: T.ink });
   });
-  notes(s, "References, alphabetical by key; keys match each slide's source line. Every number in this talk comes from these papers via my reference pack. Figures marked 'Reproduced from' are CC BY 4.0 and credited on the slide; paywalled or no-derivatives figures, like Kane 1998, Schofield 2003, Fuechsle 2012, He 2019 and Koch 2019, were redrawn as original schematics instead of copied. Diagrams marked 'ours' or 'our model' are original and use only the published numbers. If someone wants one paper to start with, I'd point them to the 2025 roadmap, Schofield et al. in Nano Futures, which covers the whole field and is open access. Likely question: are the figures licensed? Yes: CC BY figures are reproduced with credit, and everything else is redrawn.");
+  notes(s, pg ? "Second page of references, continuing alphabetically. Kane 2000 and O'Brien 2001 supply the Kane-architecture numbers on slide 5, since the 1998 paper itself isn't open; Ren 2016 and Xiang 2025 give the dimer and silicon–hydrogen bond lengths used in my surface renders. New papers beyond my original pack, like Jakob 2022, Reiner 2024, Namboodiri 2024, Kiczynski 2022 and Curson's newest, D'Anna 2026, are here too, all open access. Likely question: why cite a contact-physics paper for a bond length? It states the 1.51 Å Si–H bond I used; I only use that number." :
+    "References, alphabetical by key; keys match each slide's source line. Figures marked 'Reproduced from' are CC BY 4.0 and credited on the slide; paywalled or no-derivatives figures were redrawn as original schematics instead of copied. Diagrams marked 'ours' or 'our model' are original and use only published numbers, with the exact spec and its source in notes/specs. If someone wants one paper to start with, I'd point them to the 2025 roadmap, Schofield et al. in Nano Futures, which covers the whole field and is open access. Likely question: are the figures licensed? Yes: CC BY figures are reproduced with credit, and everything else is redrawn.");
 }
 
 // ============================================================================ Backup: alternate titles
@@ -544,6 +558,16 @@ const REFS = [
   img(s, "F1_stock2024_fig1_4x4.png", 6.0, 1.0, 3.5, 3.5, "center");
   caption(s, "4×4 single-As array: lithography, incorporation, dopant map. Reproduced from Stock et al., Adv. Mater. 36, 2312282 (2024) Fig. 1g–i, CC BY 4.0", 6.0, 4.55, 3.5, 0.55);
   notes(s, "Backup slide with the alternate titles from the reference pack, in case the course wants a 'How X is built' style title like the DMD and CMOS decks. The image is the 4×4 arsenic array from Stock 2024, with the lithography, the incorporated atoms and the dopant map. If asked about it: with non-ideal windows, 10 to 12 of 15 sites were single atoms, up to 80%, which shows that window shape matters as much as the chemistry. That 4×4 result is why the 2×2 is described as the first defect-free array: the bigger array still had defects.");
+}
+
+
+// ============================================================================ Backup: Monte Carlo
+{
+  const s = newSlide("SECTION", "Backup · Monte Carlo of 4×4 arrays", "Backup");
+  const b = img(s, "O_montecarlo_4x4.png", 0.5, 1.05, 9.0, 3.6, "center");
+  caption(s, "Our model, not data: filled = one atom, red = failed site; boxed = perfect array. 100 000 simulated arrays per row at the measured per-site yields (P 0.7, As 0.97; Stock2024).", 0.5, b.y + b.h + 0.05, 9.0, 0.4);
+  src(s, "Stock2024 (per-site yields); simulation ours");
+  notes(s, "Backup for the yield slide. I simulated 100,000 four-by-four arrays at each per-site yield. With phosphorus at 0.7, almost every array has failed sites, about 0.3% come out perfect, matching 0.7 to the 16th. With arsenic at 0.97, about 61% are perfect. This is a model, not data: it assumes sites fail independently, which is the same assumption behind the p to the n formula in Stock 2024. If asked whether failures are really independent: the papers quote the formula, they don't test correlations, so I'd say it's the simplest reasonable assumption.");
 }
 
 // ---------------------------------------------------------------- write outputs

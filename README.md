@@ -26,7 +26,13 @@ QA render: `pdftoppm -jpeg -r 110 deck/atom_by_atom_silicon.pdf qa/render/s` (re
 ## Layout system
 `build_deck.js` defines the theme once (Arial; ink #1F2A36, muted #5B6770, P #D9731A, As #0F9FA0, fixed material legend) and eight slide masters (TITLE, SECTION, TITLE_ONLY, FIG_TEXT, TWO_FIG, TABLE, PROCESS, REFS) with named `title` and `src` placeholders, footer and slide number. Sections: Intro, Motivation, Process, Results, Scaling, Prototype, Wrap-up, Backup. Charts (array yield, write speed on a log axis, Poisson ion statistics, thermal budget) are native PowerPoint charts.
 
-## Slides (26 + 1 backup)
+## Story and slides (four acts)
+Intro → Act 1 Why single atoms → Act 2 How it is built → Act 3 Does it work → Act 4 How it scales → Wrap-up. Each slide carries an act label.
+
+## Exact paper specs
+Diagrams are drawn from verbatim specs collected in `notes/specs/` (one table per paper group, each value with its quote and location): to-scale D'Anna 2023 stack, Stock 2020 Fig. 4e temperature program, Si(001) geometry (a = 3.84 Å, dimer bond 2.357 Å, Si–H 1.51 Å), Schofield 2003 sites, Kane 2000 operating point, prototype layout from Stock 2024 + Edlbauer 2025. New sources beyond the pack: Jakob2022, Reiner2024, Namboodiri2024, DAnna2026, Kiczynski2022, Kane2000, OBrien2001, Ren2016, Xiang2025 (see `notes/specs/additional_sources.md`).
+
+## Slides (original outline, now reordered)
 1 Title · 2 Device at a glance · 3 Timeline · 4 Why a donor · 5 Why not implantation · 6 Neil J. Curson · 7 11-step process flow (EE143 module per step) · 8–13 Steps 1–11 (cross-section + legend + step tracker) · 14 Did it work (+ EE143 sheet-resistance check) · 15 Landmarks · 16 Yield problem (+ Monte Carlo) · 17 Arsenic fix · 18 Beyond Si:P · 19 Processors · 20 Simulator · 21 Throughput wall · 22 EUV scaling · **23 Our prototype (3D render + yield model)** · **24 Prototype traveler mapped to EE143** · 25 Takeaways · 26 References · Backup: alternate titles
 
 Slides 23–24 go beyond the outline: an original 2×2 As register design and its traveler, built only from published recipes.
