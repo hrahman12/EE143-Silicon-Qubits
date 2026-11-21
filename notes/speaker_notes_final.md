@@ -4,7 +4,7 @@ Same text as the speaker notes inside atom_by_atom_silicon_final.pptx. Physics, 
 
 ## 15-minute timing plan
 
-Slides 1–29 are about 3,426 words, roughly 23 minutes read aloud. For 15 minutes, keep each slide's equation and its one worked number, and save the "Likely question" lines for Q&A.
+Slides 1–29 are about 3,419 words, roughly 23 minutes read aloud. For 15 minutes, keep each slide's equation and its one worked number, and save the "Likely question" lines for Q&A.
 
 | Slides | Block | Target |
 |---|---|---|
@@ -97,9 +97,9 @@ _113 words_
 
 ## Slide 14: Steps 7–8 · Burying the dopants
 
-Burying the dopants is a thermal-budget optimisation. Epitaxial quality wants higher temperature, dopant confinement wants lower. Phosphorus grown over at a constant 250 °C segregates about 5 nm toward the surface. For arsenic: 2 nm grown unheated to lock the atoms, a 500 °C, 15-second RTA that leaves a confined, electrically active layer, then 28 nm at 250 °C. At 0.003 nm/s, 28 nm takes 9333 seconds, about 2.6 hours. Textbook bulk Arrhenius parameters predict a vanishingly small 2√(Dt) for the RTA, yet the measured arsenic layer is limited mainly by arsenic's own solid-state diffusion: in a δ-layer this dense and defect-rich, the effective diffusivity is far above the bulk value. That is why the RTA is kept to 15 seconds. Likely question: why not grow everything cold? Below a critical thickness cold silicon grows epitaxially; beyond it, the film turns amorphous.
+Burying the dopants is a thermal-budget optimisation. Epitaxial quality wants higher temperature, dopant confinement wants lower. Phosphorus grown over at a constant 250 °C segregates about 5 nm toward the surface. For arsenic: 2 nm grown unheated to lock the atoms, a 500 °C, 15-second RTA that leaves a confined, electrically active layer, then 28 nm at 250 °C. At 0.003 nm/s, 28 nm takes 9333 seconds, about 2.6 hours. Textbook bulk Arrhenius parameters predict a vanishingly small 2√(Dt) for the RTA, yet the measured confinement is limited mainly by arsenic's solid-state diffusion. Put together, that means at δ-layer concentrations the effective diffusivity must exceed the low-concentration textbook value. That is why the RTA is kept to 15 seconds. Likely question: why not grow everything cold? Below a critical thickness cold silicon grows epitaxially; beyond it, the film turns amorphous.
 
-_142 words_
+_140 words_
 
 ## Slide 15: Steps 9–11 · Back to the outside world
 
@@ -181,9 +181,9 @@ _107 words_
 
 ## Slide 28: Prototype traveler, mapped to EE143
 
-The traveler, as numbers. Hot steps first: 1200 °C flash, 600 °C outgas. After patterning, the maximum is a 500 °C, 15-second RTA, then 350 °C incorporation and 250 °C overgrowth. Why that ordering works: diffusion length is 2√(Dt) with D = D₀ e^(−E_a/kT), and the exponential makes the brief 500 °C step dominate the post-pattern budget, and in a dense δ-layer arsenic diffuses far faster than the bulk textbook value, so this step sets the final confinement. Compare our own lab: a 1050 °C drive-in for about 40 minutes moves phosphorus hundreds of nanometres. Same physics, opposite goal. Every row maps onto an EE143 module. Likely question: where is the risk? The RTA: too hot or too long and the δ-layer broadens.
+The traveler, as numbers. Hot steps first: 1200 °C flash, 600 °C outgas. After patterning, the maximum is a 500 °C, 15-second RTA, then 350 °C incorporation and 250 °C overgrowth. Why that ordering works: diffusion length is 2√(Dt) with D = D₀ e^(−E_a/kT), and the exponential makes the brief 500 °C step dominate the post-pattern budget, and the measured confinement is limited by arsenic diffusion, so this step sets the final width. Compare our own lab: a 1050 °C drive-in for about 40 minutes moves phosphorus hundreds of nanometres. Same physics, opposite goal. Every row maps onto an EE143 module. Likely question: where is the risk? The RTA: too hot or too long and the δ-layer broadens.
 
-_123 words_
+_118 words_
 
 ## Slide 29: Takeaways: one atom, exactly where you want it
 
