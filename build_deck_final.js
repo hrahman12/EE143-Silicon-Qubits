@@ -368,7 +368,7 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
     { name: "P: 0.7ⁿ", labels: n.map(String), values: n.map((k) => Math.pow(0.7, k)) },
     { name: "As: 0.97ⁿ", labels: n.map(String), values: n.map((k) => Math.pow(0.97, k)) }],
     Object.assign(chartBase(), { x: 0.4, y: 0.95, w: 4.6, h: 3.05, chartColors: [T.P, T.As], lineSize: 2, lineDataSymbol: "none",
-      title: "Array yield collapses unless per-site yield is near 1", showLegend: true, legendPos: "b", valAxisMaxVal: 1, valAxisMinVal: 0, valAxisLabelFormatCode: "0%",
+      title: "Array yield collapses unless p ≈ 1", showLegend: true, legendPos: "b", valAxisMaxVal: 1, valAxisMinVal: 0, valAxisLabelFormatCode: "0%",
       catAxisTitle: "atoms in array n", showCatAxisTitle: true, valAxisTitle: "array yield", showValAxisTitle: true }));
   text(s, "As 0.97¹⁶ ≈ 61%", 3.45, 1.62, 1.45, 0.25, { fontSize: 10, color: T.ink, bold: true });
   text(s, "P 0.7¹⁶ < 0.4%", 3.3, 2.65, 1.4, 0.25, { fontSize: 10, color: T.ink, bold: true });
@@ -511,7 +511,7 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
   s.addTable(rows.map((r) => r.map((c) => (typeof c === "string" ? { text: c } : c))), { x: 0.5, y: 1.0, w: 5.6, colW: [0.5, 3.35, 1.75], fontFace: T.font, fontSize: 10.5, color: T.ink, valign: "middle", rowH: 0.42, border: { type: "solid", pt: 0.75, color: "E0E4E8" } });
   s.addChart(pres.charts.BAR, [{ name: "peak T (°C)", labels: ["Flash anneal", "Outgas", "RTA (As)", "Incorporation", "Overgrowth"], values: [1200, 600, 500, 350, 250] }],
     Object.assign(chartBase(), { x: 6.3, y: 1.0, w: 3.3, h: 3.8, barDir: "bar", chartColors: ["8C96A0"], showValue: true, dataLabelColor: T.ink, dataLabelFontSize: 10,
-      title: "Thermal budget: after patterning, ≤500 °C", showLegend: false, valAxisHidden: true, valGridLine: { style: "none" }, catAxisOrientation: "maxMin", barGapWidthPct: 50 }));
+      title: "After patterning: ≤500 °C", showLegend: false, valAxisHidden: true, valGridLine: { style: "none" }, catAxisOrientation: "maxMin", barGapWidthPct: 50 }));
   src(s, "Stock2020; Stock2024; DAnna2023; Ruess2004. Module mapping and thermal-budget chart are ours");
   notes(s, "And here's the traveler for that prototype, every step with its recipe and the EE143 module it maps to. It's a normal process flow: clean and bake, coat a resist, write it, pre-deposit dopant from the gas phase, drive in, RTA, epitaxy, alignment marks, etch, metal, and a Hall measurement. On the right I plotted each step's peak temperature. The two hot steps, outgas and the 1200 °C flash, happen before any patterning. After the pattern exists, nothing exceeds the 500 °C, 15-second RTA. That's the design principle: front-load the heat, then protect the atoms. Likely question: where does it break? Step 4 throughput, which is why the EUV hybrid matters.");
 }

@@ -34,7 +34,7 @@ CROPS = [
  ("F1_stock2024_fig1_2x2.png", f"{RAW}/Stock2024/pdfimg/p3_x27_2050x1929.jpeg", (0.0, 0.0, 0.197, 0.475)),
  ("F1_stock2024_fig1_4x4.png", f"{RAW}/Stock2024/pdfimg/p3_x27_2050x1929.jpeg", (0.488, 0.497, 1.0, 1.0)),
  ("F2_stock2024_fig3_ae.png", f"{RAW}/Stock2024/pdfimg/p8_x115_2050x1507.jpeg", (0.0, 0.0, 0.585, 0.33)),
- ("F2_stock2024_fig3_stats.png", f"{RAW}/Stock2024/pdfimg/p8_x115_2050x1507.jpeg", (0.6, 0.608, 1.0, 0.80)),
+ ("F2_stock2024_fig3_stats.png", f"{RAW}/Stock2024/pdfimg/p8_x115_2050x1507.jpeg", (0.6, 0.627, 1.0, 1.0)),
  ("F3_schofield2025_s41_fig1.png", f"{RAW}/Schofield2025/pdfimg/p48_x409_1319x852.png", (0, 0, 1, 1)),
  ("F4_schofield2025_s22_line.jpg", f"{RAW}/Schofield2025/pdfimg/p13_x109_833x327.jpeg", (0, 0, 1, 1)),
  ("F4_schofield2025_s22_b.jpg", f"{RAW}/Schofield2025/pdfimg/p13_x110_580x413.jpeg", (0, 0, 1, 1)),

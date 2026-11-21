@@ -1,0 +1,412 @@
+=== Slide 1
+ - EE143 · DEVICE PROFILE
+ - Atom-by-Atom Silicon
+ - Building Quantum Processors from Single Dopant Atoms
+ - Device profile: STM-patterned P and As dopant qubits, featuring the work of Neil J. Curson (UCL)
+ - arsenic
+ - phosphorus
+ - Hanah Rahman · EE143 · Fall 2026
+ - AI disclosure: AI tools were used to draft and lay out these slides and to code the original diagrams.
+ - Cover: original 3D render of a diamond-cubic Si crystal with a 2×2 As register (teal), one P donor (orange) and an STM tip.
+ NOTES: This talk is about a transistor-like device whose active region is one atom: a phosphorus or arsenic donor in silicon, placed with a scanning tunnelling microscope. Physically, the donor is a hydrogen atom embedded in a semiconductor: one extra electron bound by a screened Coulomb potential. In EE143 terms, every step is a process you know, a resist, lithography, gas-phase doping, an activation anneal, epitaxy, etch and metal, scaled down to a resist one atom thick and a dose of one molecule. The render behind me is the diamond-cubic lattice, a = 5.431 Å, with a 2×2 arsenic register. Likely question: is the image data? No, it's a render; every micrograph later is measured.
+=== Slide 2
+ - The story in four acts
+ - 1
+ - Why single atoms?
+ - A donor is a natural qubit, but only if you can place it exactly.
+ - 2
+ - How is it built?
+ - Eleven steps, each one an EE143 module shrunk to one atom.
+ - 3
+ - Does it work?
+ - Buried layers conduct, single atoms switch, arsenic fixes yield, processors run.
+ - 4
+ - How does it scale?
+ - Throughput is the wall; EUV and our prototype show a way through.
+ - Roadmap of this talk
+ - 2
+ NOTES: Three quantities run through the whole talk. Precision: one lattice site on Si(001) is 0.384 nm, and that is the placement error we can achieve. Yield: if each site works with probability p, an n-site array works with probability p to the n, so p must be very close to one. Speed: a tip writes about 100 atoms per second, which sets the throughput limit. Act one asks why a single donor is a good qubit, act two builds it, act three tests it, from conductance to entanglement, and act four confronts the write-speed problem. Keep the question in mind: how do you put exactly one atom exactly where you want it?
+=== Slide 3
+ - A single donor atom is a natural qubit
+ - ACT 1 · WHY SINGLE ATOMS
+ - P nucleus (I = 1/2) + its electron = 4 spin states / Electron Bohr radius ~2 nm; exchange depends on exact donor position, so atomic precision matters / In ²⁸Si: coherence up to 35.6 s and single-qubit gates close to 99.99% (ion-implanted donors)
+ - Spin levels, schematic (ours)
+ - Donor control and readout: SET charge sensor + on-chip microwave antenna (a); ion-implanted device (b). Reproduced from Schofield et al., Nano Futures 9, 012001 (2025) §3.2 Fig. 1, CC BY 4.0
+ - Schofield2025 §1, §3.2
+ - 3
+ NOTES: Treat the donor as hydrogen in a dielectric. The effective Bohr radius is a_B = ε_r (m_e/m*) a_0, so silicon's large permittivity and small effective mass stretch hydrogen's 0.053 nm to about 2 nm. Two spins come for free: the electron and the phosphorus nucleus with I = 1/2, giving a 2 × 2 = 4-level system. Electron transitions are driven by ESR, nuclear ones by NMR. Readout converts spin to charge: a spin-up electron can tunnel into a nearby single-electron transistor, a spin-down one cannot, and the SET current changes. In isotopically purified ²⁸Si there are no stray nuclear spins, which is why ion-implanted donors there reach 35.6 s coherence and gates near 99.99%. Likely question: is it really hydrogen-like? To first order; silicon's six conduction-band valleys split the ground state.
+=== Slide 4
+ - Why one site matters: wavefunction overlap
+ - ACT 1 · WHY SINGLE ATOMS
+ - To scale: two P donors 13.0 nm apart over the Si(001) surface lattice, hydrogenic envelope |ψ|² ∝ e^(−2r/a_B) with a_B ≈ 2 nm (our model; inputs He2019, Schofield2025 §3.2, Stock2024).
+ - Each spin is a qubit: |ψ⟩ = α|0⟩ + β|1⟩ on the Bloch sphere (schematic).
+ - Qubits interact through exchange, set by how their electron clouds overlap / Exchange depends strongly on exact donor position (valley oscillations), so a one-site error changes the gate
+ - Schofield2025 §3.2; He2019; Stock2024. Envelope plot is our model, not a full valley calculation
+ - 4
+ NOTES: Two-qubit gates use exchange, J, which comes from wavefunction overlap. For hydrogenic envelopes, |ψ|² falls as e^(−2r/a_B), so overlap, and roughly J, decays exponentially with donor spacing R. A quick estimate: moving one donor by one lattice site, 0.384 nm, multiplies the envelope term by e^(−0.384), about 0.68, a 30% change in coupling from a single-site error, before any valley effects. Silicon's six conduction-band valleys add interference that makes J oscillate site to site, which is why precision matters even more. The map is drawn to scale: two donors 13 nm apart on the real surface lattice. Likely question: can't you tune J with gates? Yes, but only within a window set by placement.
+=== Slide 5
+ - The problem: implantation can't place one atom
+ - ACT 1 · WHY SINGLE ATOMS
+ TABLE:  | Ion implantation | STM H-resist lithography | Placement | Sub-100 nm routine; Kane-type devices need ≈15 nm | ±1 atomic spacing | One dopant per site | 36% (Poisson, without ion counting) | 97 ± 2% (As, 4-site window) | Best ion counting | 99.85 ± 0.02% detection confidence, 14 keV ³¹P⁺; yield limit 98.1% (Jakob2022) | Placement still set by ion straggling, not by the lattice
+ CHART: Ions per site at mean 1 ion/site: exactly one only ~36% [('Probability', [36.8, 36.8, 18.4, 6.1, 1.9])]
+ - Deterministic single-ion implanter column. Reproduced from Schofield et al., Nano Futures 9, 012001 (2025) §2.4 Fig. 2, CC BY 4.0
+ - Schofield2025 §1, §2.4; Stock2024; Jakob2022. Poisson bars: P(k)=e⁻¹/k!, our calculation of the 36% in Schofield2025
+ - 5
+ NOTES: Ion implantation is a Poisson process. If the mean number of ions per site is λ, the probability of exactly one is λe^(−λ). Differentiate: the maximum is at λ = 1, where P(1) = 1/e ≈ 36.8%. So without counting ions, no choice of dose gives better than 37% single occupancy; the bars are that distribution. Even with near-perfect ion detection, 99.85% at 14 keV, the stopping position is random: straggle spreads each ion over nanometres. Placement is set by ion–solid scattering statistics, not by the crystal lattice. STM placement is lattice-registered, ±1 site, and arsenic windows give 97 ± 2% single occupancy. Likely question: what about lower energy? Straggle shrinks but never reaches one lattice site.
+=== Slide 6
+ - The answer: write the device atom by atom
+ - ACT 1 · WHY SINGLE ATOMS
+ TABLE: Host | Si(001); ²⁸Si for qubit devices | Dopants | P (from PH₃) or As (from AsH₃) | Placement | ±1 atomic spacing (±0.384 nm) | δ-layer leads | ≈10¹⁴ cm⁻², <1 nm thick | Activation | 100% of placed P (Reiner2024) | Measured at | millikelvin temperatures
+ - Kane architecture, x to scale: ³¹P donors under A-gates, J-gates between, donors ≈10 nm apart (Kane2000: "of order 100 Å"; UNSW papers restate 20 nm: OBrien2001, Schofield2003), a_B ≈ 2 nm. Original drawing after Kane1998/Kane2000.
+ - EE143 lens: a doped-Si device whose 'diffusions' are single atoms and whose wiring is δ-doped silicon.
+ - Schofield2025 §3.2, §5.4; Stock2024; Constantinou2023; Reiner2024 (Table 1); Kane1998; Kane2000; OBrien2001
+ - 6
+ NOTES: Here is the device as an EE spec sheet. Substrate: Si(001), isotopically enriched ²⁸Si for qubits. Dopants: P from phosphine or As from arsine. Placement: ±0.384 nm. Leads: δ-doped sheets near 10¹⁴ cm⁻², under 1 nm thick, which is a 2D degenerate electron gas. Activation: 100% of placed phosphorus. The Kane architecture on the right needs B ≈ 1 T and T ≈ 0.1 K so that the electron's Zeeman energy dwarfs kT and the spin is polarized, with A-gates tuning hyperfine and J-gates tuning exchange between donors about 10 nm apart. Likely question: why millikelvin? Thermal energy kT must sit far below the Zeeman splitting so the spin starts in a known state.
+=== Slide 7
+ - 30 years: from one H atom to 11 qubits
+ - ACT 1 · WHY SINGLE ATOMS
+ - 1994 / H depassivation lithography
+ - 1998 / Kane proposal: ³¹P spin qubits
+ - 2003 / Single P atoms placed
+ - 2012 / Single-atom transistor
+ - 2019 / Donor 2-qubit gate; 3D device
+ - 2020 / Arsenic patterned by STM
+ - 2024 / 97% single-As yield; EUV H removal
+ - 2025 / 4-qubit Grover; 11-qubit processor
+ - Curson is an author (teal)
+ - Each step reused the same EE143 recipe: passivate → pattern → dose → anneal → cap.
+ - Lyding1994; Kane1998; Schofield2003; Fuechsle2012; He2019; Koch2019; Stock2020; Stock2024; Constantinou2024; Thorvaldson2025; Edlbauer2025
+ - 7
+ NOTES: Read the timeline as a sequence of solved physics problems. 1994: a tip removes hydrogen from silicon by inelastic electron excitation of the Si–H bond, which gives a lithography. 1998: the proposal that donor nuclear spins are qubits. 2003: single phosphorus atoms placed deliberately. 2012: a transistor whose channel is one atom, showing discrete atomic levels in transport. 2019: a fast exchange gate and three-dimensional stacking. 2020 to 2024: arsenic chemistry pushes single-atom yield to 97%, and photons replace the tip for coarse patterning. 2025: four- and eleven-qubit processors. Each step reused the same recipe: passivate, pattern, dose, anneal, cap. Likely question: why so slow? Each step needed a new measurement capability.
+=== Slide 8
+ - The researcher: Neil J. Curson (UCL)
+ - ACT 1 · WHY SINGLE ATOMS
+ - London Centre for Nanotechnology and Dept. of Electronic & Electrical Engineering, UCL
+ - 2003
+ - Co-author: first single P atoms placed
+ - Schofield2003
+ - 2020
+ - Corresponding author: arsenic patterned by STM
+ - Stock2020
+ - 2023
+ - As in germanium · ARPES of δ-layers · X-ray imaging of buried devices
+ - Hofmann2023; Constantinou2023; DAnna2023
+ - 2024
+ - Corresponding author: 97% single-As yield · EUV H desorption
+ - Stock2024; Constantinou2024
+ - 2025
+ - Guest editor: roadmap on atomic-scale devices
+ - Schofield2025
+ - Theme of his work: new dopants (As, Bi) and hosts (Ge), new ways to see buried atoms, and a path to scale (EUV).
+ - Author lists verified against ORCID and Crossref; papers as cited on each card
+ - 8
+ NOTES: Neil Curson's group at UCL works on the materials physics underneath this platform. Three threads. Dopant chemistry: replacing phosphine with arsine, whose dissociation is about a thousand times faster. In Arrhenius terms that is like lowering the barrier by kT ln 1000 ≈ 0.18 eV at room temperature, assuming similar prefactors. Metrology: imaging buried layers non-destructively with X-ray fluorescence, and using photoemission to resolve sub-nanometre electron confinement. Scaling: showing that extreme-ultraviolet photons can strip the same hydrogen resist. Also arsenic in germanium, which incorporates at room temperature. The common theme is controlling a surface reaction one molecule at a time. Likely question: why arsenic? Faster dissociation needs fewer free sites, so smaller windows.
+=== Slide 9
+ - The process: 11 steps, each an EE143 module
+ - ACT 2 · HOW IT'S BUILT
+ - 1  Clean + outgas
+ - 600 °C, >8 h
+ - Wafer clean
+ - 2  Flash anneal
+ - ≈1200 °C
+ - Thermal process
+ - 3  H-terminate
+ - 330 °C atomic H
+ - Resist coat
+ - 4  STM lithography
+ - ±1 atomic spacing
+ - E-beam litho
+ - 5  Dose PH₃ / AsH₃
+ - room temp.
+ - Gas-phase doping
+ - 6  Incorporate
+ - 350 °C, 2 min
+ - Activation anneal
+ - 7  Lock layer + RTA
+ - 500 °C × 15 s
+ - RTA
+ - 8  Si overgrowth
+ - 28 nm at 250 °C
+ - Epitaxy
+ - 9  Find device
+ - registration marks
+ - Alignment marks
+ - 10  Etch + Al contacts
+ - RIE holes, Al
+ - Etch + metallization
+ - 11  Measure
+ - 1.8 K Hall; mK qubits
+ - Hall / 4-point probe
+ - white tag = EE143 module
+ - Stock2020; Stock2024; DAnna2023 (steps 6–8); Constantinou2024 (step 3); Ruess2004; Fuechsle2012; Schofield2025 §5.4
+ - 9
+ NOTES: This is the process traveler, with the EE143 module for each step. The thermal history is the key design constraint: hot steps first, then everything at or below 500 °C. Steps one to three prepare and passivate the surface. Step four is the lithography. Steps five and six are gas-phase doping and activation, at 350 °C. Steps seven and eight bury the dopants by epitaxy at 250 °C. Steps nine to eleven are alignment, reactive ion etching, aluminium contacts and electrical test. The design rule is diffusion: with D = D₀ e^(−E_a/kT), every step after patterning keeps 2√(Dt) far below one lattice site. Likely question: which step limits throughput? Step four, the tip.
+=== Slide 10
+ - Steps 1–3 · Clean surface, 1-atom resist
+ - ACT 2 · HOW IT'S BUILT
+ - Steps 1–3 of 11
+ - Clean: acetone/IPA, outgas >8 h at 600 °C, ≈1200 °C flashes, UHV <5×10⁻¹¹ mbar / Resist: atomic H at 330 °C, 5×10⁻⁷ mbar, 5 min caps every surface Si / EE143 hook: a resist coat one atom thick, no spin speed
+ - Si substrate
+ - Si cap
+ - H resist
+ - P
+ - As
+ - Al
+ - SiO₂
+ - H-terminated Si(001): dimer rows (grey) each capped by H (blue). Original 3D render, geometry only.
+ - Stock2020; Stock2024; Constantinou2024 (H termination)
+ - 10
+ NOTES: Surface preparation. An outgas above 8 hours at 600 °C and flashes to about 1200 °C desorb the native oxide and carbon and leave the 2×1 dimer reconstruction. All in ultra-high vacuum below 5×10⁻¹¹ mbar. Why so low? Kinetic theory: at 10⁻⁶ Torr a surface collects about a monolayer per second, so at 10⁻¹¹ mbar a monolayer takes on the order of a day. Then atomic hydrogen at 330 °C, 5×10⁻⁷ mbar for 5 minutes, terminates every dangling bond. That monolayer is the resist: chemically inert where present, reactive where removed. Its contrast ratio is set by chemistry, not by optics. Likely question: why 330 °C? Hot enough for ordered monohydride, below hydrogen desorption.
+=== Slide 11
+ - Step 4 · Writing with the tip
+ - ACT 2 · HOW IT'S BUILT
+ - Step 4 of 11
+ - Tip pulses strip H atom by atom: atom-wide lines at 3 V, 10 nA, 10 nm/s / As windows: 3.5 V, 3000 pA, 50 nm/s, 2 dimers each, ≈12 lattice vectors (4.6 nm) apart / EE143 hook: e-beam lithography where the resist is one atom thick
+ - Si substrate
+ - Si cap
+ - H resist
+ - P
+ - As
+ - Al
+ - SiO₂
+ - Bare (tinted) Si sites form the windows. Original render.
+ - HDL line written at 3 V, 10 nA. Reproduced from Schofield et al., Nano Futures 9, 012001 (2025) §2.2 Fig. 1 (Lyding, unpublished), CC BY 4.0
+ - Schofield2025 §2.2, §5.4; Stock2024
+ - 11
+ NOTES: STM lithography is controlled tunnelling. Current scales as I ∝ V e^(−2κd), with κ = √(2mφ)/ħ ≈ 1 Å⁻¹ for a barrier of a few eV, so each ångström of tip height changes current by roughly e², 7 to 8 times. That exponential sensitivity is why the tip resolves single atoms. Writing uses higher bias to break Si–H bonds by electron excitation. Check the line dose: current over speed, 10 nA ÷ 10 nm/s = 1 C/m, which is the quoted 10⁻² C/cm. Arsenic windows use 3.5 V and 3000 pA at 50 nm/s, two dimers each, on a 4.6 nm pitch, twelve lattice vectors. Likely question: e-beam analogy? Yes; here dose is charge per length, and the resist is one atom.
+=== Slide 12
+ - Step 5 · Dosing: phosphine vs arsine
+ - ACT 2 · HOW IT'S BUILT
+ - Step 5 of 11
+ - PH₃ breaks down stepwise, PH₂+H → PH+2H → P+3H, over minutes / AsH₃ dissociates three orders of magnitude faster: tens of seconds / Single-atom dose: AsH₃ at 5×10⁻⁹ mbar for 10 min; As saturates at 0.24 ± 0.04 ML
+ - Si substrate
+ - Si cap
+ - H resist
+ - P
+ - As
+ - Al
+ - SiO₂
+ - Fragments in each window. Original render.
+ - Window array before/after AsH₃. Reproduced from Stock et al., Adv. Mater. 36, 2312282 (2024) Fig. 3, CC BY 4.0
+ - Stock2020 (citing Wilson2004); Stock2024
+ - 12
+ NOTES: Dosing is gas-surface kinetics. The impingement flux is Φ = p/√(2πmkT). For arsine, mass 78 amu, at 5×10⁻⁹ mbar and 300 K, that gives about 9×10¹¹ molecules per cm² per second. Over 10 minutes, about 5×10¹⁴ arrivals per cm², roughly 0.8 per surface site. So every window sees order one molecule, and the hydrogen resist rejects the rest. Phosphine then loses hydrogens stepwise over minutes, needing free sites for each fragment; arsine dissociates about a thousand times faster, in tens of seconds. Saturated arsenic coverage is 0.24 ± 0.04 monolayer, a quarter of the sites. Likely question: why not a full monolayer? Coverage stops at 0.24 ML whatever the dose rate, so surface chemistry, not gas supply, sets the limit.
+=== Slide 13
+ - Step 6 · Incorporation anneal
+ - ACT 2 · HOW IT'S BUILT
+ - Step 6 of 11
+ - 350 °C anneal (1–2 min), below the 380 °C onset of H₂ desorption, so the H resist survives / Each incorporated As ejects one Si atom / So counting ejected Si counts the dopants: built-in metrology
+ - Si substrate
+ - Si cap
+ - H resist
+ - P
+ - As
+ - Al
+ - SiO₂
+ - STM of a patterned square: H resist (a), lithography (b), AsH₃ dose (c), 350 °C anneal (d). Reproduced from Stock et al., ACS Nano 14, 3316 (2020) Fig. 3, CC BY 4.0
+ - Stock2020; Stock2024
+ - 13
+ NOTES: Incorporation is an activated process with a thermal window. At 350 °C, kT ≈ 54 meV: enough for the arsenic or phosphorus to exchange into the top silicon layer, but below the 380 °C onset where hydrogen starts desorbing and the resist fails. A 30-kelvin window separates working from failing. Each incorporated arsenic ejects exactly one silicon atom to the surface, so the reaction is a substitution, As in, Si out, and counting ejected silicon adatoms counts dopants. That is in-situ metrology at single-atom resolution. In EE143 terms this is the drive-in and activation anneal, with a diffusion length of essentially zero. Likely question: what limits the window? The Si–H bond desorption barrier.
+=== Slide 14
+ - Steps 7–8 · Burying the dopants
+ - ACT 2 · HOW IT'S BUILT
+ - Steps 7–8 of 11
+ - Trade-off: low T keeps atoms in place, high T grows good crystal / P: constant 250 °C (≈5 nm segregation, full activation) / As: 2 nm at RT, 500 °C × 15 s RTA, 28 nm at 250 °C, 0.003 nm/s: layer 30 nm deep
+ - Si substrate
+ - Si cap
+ - H resist
+ - P
+ - As
+ - Al
+ - SiO₂
+ - Exact temperature programs: (a) Stock2020 Fig. 4e inset + text; (b) DAnna2023 Methods. Redrawn (ours).
+ - SIMS: As stays sharp at 15 nm. Stock et al., ACS Nano 14, 3316 (2020) Fig. 4e, CC BY 4.0
+ - EE143 link: a thermal-budget problem, like keeping a shallow junction shallow.
+ - Oberbeck2002; Stock2020; DAnna2023
+ - 14
+ NOTES: Burying the dopants is a thermal-budget optimisation. Epitaxial quality wants higher temperature, dopant confinement wants lower. Phosphorus grown over at a constant 250 °C segregates about 5 nm toward the surface. For arsenic: 2 nm at room temperature to lock the atoms, a 500 °C, 15-second RTA that leaves a confined, electrically active layer, then 28 nm at 250 °C. At 0.003 nm/s, 28 nm takes 9333 seconds, about 2.6 hours. Bulk diffusion using the textbook Arrhenius parameters gives 2√(Dt) around 10⁻⁴ nm even for the RTA step, so any broadening comes from surface segregation during growth, not bulk diffusion. Likely question: why not grow everything cold? Below a critical thickness cold silicon grows epitaxially; beyond it, the film turns amorphous.
+=== Slide 15
+ - Steps 9–11 · Back to the outside world
+ - ACT 2 · HOW IT'S BUILT
+ - Steps 9–11 of 11
+ - Relocate the buried device: markers + STM–SEM; KPFM alignment from nm to mm pads, 95% yield on >150 devices / 20 × 200 µm² Hall bars by optical litho + RIE; Al into holes etched through the δ-layer / Transport at 1.8 K; qubits at millikelvin
+ - Si substrate
+ - Si cap
+ - H resist
+ - P
+ - As
+ - Al
+ - SiO₂
+ - X-ray fluorescence maps of a buried As Hall bar: Al contacts, Fe, and the As δ-layer itself. Reproduced from D'Anna et al., Adv. Electron. Mater. 9, 2201212 (2023) Fig. 2, CC BY 4.0
+ - Ruess2004; Namboodiri2024; DAnna2023
+ - 15
+ NOTES: Connecting to the buried device is ordinary microfabrication with extreme alignment. Etched registration markers and a combined STM–SEM, or Kelvin-probe imaging of the buried pattern, let you overlay contacts with 95% yield across more than 150 devices. The layer itself is invisible to optics: it is a 2D electron sheet 30 nm down. Hall bars are 20 × 200 µm², defined by optical lithography and reactive ion etching, with aluminium deposited into holes etched through the δ-layer to make ohmic contact. Transport is measured at 1.8 K; qubits run at millikelvin. Likely question: why does aluminium make an ohmic contact? The δ-layer is degenerately doped, so the barrier is thin enough to tunnel through.
+=== Slide 16
+ - Proof 1: the buried δ-layer conducts
+ - ACT 3 · DOES IT WORK?
+ - As δ-layer: 1.6 ± 0.1 kΩ/□, 28 ± 1 cm²/V·s; 81% activation (88% at 560 °C); P layers reach 2.4×10¹⁴ cm⁻² / ARPES and X-ray reflectometry: <1 nm thick (SIMS resolves only ~2 nm); As confines better than P / XRF at ≈1 µm: <0.2 Å As motion, <3% loss of active dopants
+ - EE143 check (our calc.):  Rₛ = 1/(q·Nₛ·μ)  →  Nₛ = 1/(1.6×10⁻¹⁹ C × 1600 Ω × 28 cm²/V·s) ≈ 1.4×10¹⁴ cm⁻², consistent with the ≈10¹⁴ cm⁻² sheets.
+ - ARPES Fermi surfaces of P (top) and As (bottom) δ-layers. Reproduced from Constantinou et al., Adv. Sci. 10, 2302101 (2023) Fig. 2, CC BY 4.0
+ - Mobility, carrier density and Rₛ vs RTA temperature. Reproduced from Stock et al., ACS Nano 14, 3316 (2020) Fig. 4f,g, CC BY 4.0
+ - Stock2020; Constantinou2023; DAnna2023; DAnna2026. Nₛ check is our calculation from Stock2020's numbers
+ - 16
+ NOTES: Electrical proof uses sheet resistance. For a 2D sheet, R_s = 1/(q N_s μ). Measured: 1.6 kΩ per square and μ = 28 cm²/V·s. Solve: N_s = 1/(1.6×10⁻¹⁹ × 1600 × 28) ≈ 1.4×10¹⁴ cm⁻². Compare with the surface atom density, 6.78×10¹⁴ cm⁻²: that is about 0.24 monolayer, matching the saturation coverage measured by STM. Activation is 81%, or 88% after a 560 °C anneal. Photoemission shows the electrons confined to less than 1 nm, with arsenic confining better than phosphorus. X-ray fluorescence moves dopants less than 0.2 Å. Likely question: why is mobility low? At 10¹⁴ cm⁻² in one atomic plane, electrons scatter off the ionised dopants they came from.
+=== Slide 17
+ - Proof 2: one atom, then one transistor
+ - ACT 3 · DOES IT WORK?
+ - Schematic after Schofield2003 (original drawing)
+ - Schematic after Fuechsle2012 (original drawing)
+ - 2012 device works at liquid-helium temperature; at mK its transport shows the atom's discrete levels.
+ - Schofield2003; Schofield2025 §4.1; Fuechsle2012
+ - 17
+ NOTES: Two existence proofs. Left: single phosphorus atoms in desorption sites about 1 nm across, three dimers, written at 4 V and 1 nA, dosed and annealed at 350 °C, landing about 12 nm apart on one dimer row. Right: a transistor whose island is one phosphorus atom. Its transport shows Coulomb blockade: the charging energy e²/C of a single atom is large, so current flows only when a discrete atomic level aligns with the leads, giving sharp conductance peaks versus gate voltage at millikelvin. Likely question: why does it work at liquid helium? The single-atom charging energy is far above kT at 4 K.
+=== Slide 18
+ - The catch: every site must work
+ - ACT 3 · DOES IT WORK?
+ CHART: Array yield collapses unless per-site yield is near 1 [('P: 0.7ⁿ', [0.7, 0.49, 0.343, 0.2401, 0.1681, 0.1176, 0.0824, 0.0576, 0.0404, 0.0282, 0.0198, 0.0138, 0.0097, 0.0068, 0.0047, 0.0033]), ('As: 0.97ⁿ', [0.97, 0.9409, 0.9127, 0.8853, 0.8587, 0.833, 0.808, 0.7837, 0.7602, 0.7374, 0.7153, 0.6938, 0.673, 0.6528, 0.6333, 0.6143])]
+ - As 0.97¹⁶ ≈ 61%
+ - P 0.7¹⁶ < 0.4%
+ - P fills an ideal 3-dimer window 63 ± 10% of the time ("less than 70%" in 6-site windows) / Array yield 0.7ⁿ: 16 P atoms <0.4%; a ~50-donor array ~10⁻¹⁰. Modelled fix: dose hot (150 °C, >1 L)
+ - The same law in 3D: array yield pⁿ against per-site yield p and array size n (our model). Orange and teal lines are the measured P (0.7) and As (0.97) yields.
+ - Ivie2021 (incl. kinetic model); Stock2024; Schofield2025 §4.1. As curve and 3D surface are our model
+ - 18
+ NOTES: Yield is a product of probabilities. If each site independently succeeds with probability p, an n-site array succeeds with p^n. Phosphorus in an ideal three-dimer window: 63 ± 10%, below 70% in six-site windows. Then 0.7¹⁶ is 0.33%, and for fifty donors 0.63⁵⁰ is about 10⁻¹⁰. Invert the formula: the largest array with 50% yield is n = ln 0.5 / ln p, about 2 sites for phosphorus and 23 for arsenic at 0.97. The uncertainty band shows the sensitivity: arsenic at 95 to 99% gives 44 to 85% for sixteen sites. Likely question: are failures independent? The formula assumes it; correlated failures would change the statistics.
+=== Slide 19
+ - Curson's fix: arsenic in a 4-site window
+ - ACT 3 · DOES IT WORK?
+ - 97 ± 2% single-atom yield in a 4-site window: 1-in-4 lattice sites (≈0.6 nm²), 33% better precision than P / First defect-free 2×2 single-dopant array in Si / Iterative litho/dose cycles could push yield toward 100%
+ - 2×2 As array steps and the ideal 4-site window. Reproduced from Schofield et al., Nano Futures 9, 012001 (2025) §4.1 Fig. 1, CC BY 4.0
+ - Statistics behind the 97%. Stock et al., Adv. Mater. 36, 2312282 (2024) Fig. 3l, CC BY 4.0
+ - Stock2024; Schofield2025 §4.1
+ - 19
+ NOTES: The arsenic solution is a geometric design rule. Arsine's fast dissociation means one molecule needs fewer free sites, so a four-site window, two dimers, admits exactly one. Single-atom yield is 97 ± 2%. The window covers one in four lattice sites, about 0.6 nm², giving 33% better positional precision than phosphorus. With p = 0.97, a defect-free 2×2 array has probability 0.97⁴ ≈ 0.89, and it was achieved. Iterating lithography and dosing on failed sites raises the effective p toward one, because a second attempt only multiplies the failure probability. Likely question: why not three sites? Smaller windows let hydrogen recapture the site before arsine adsorbs.
+=== Slide 20
+ - Beyond Si:P: new dopants, new hosts
+ - ACT 3 · DOES IT WORK?
+ - Ge(001): As from arsine incorporates at room temperature, no anneal; H leaves by 330 °C / Bi on Si(001): ~1 nm triphenyl-bismuth; phenyls detach ~140 °C, Bi incorporates ~360 °C
+ - Why it matters: the same STM toolbox, with a different gas or substrate, gives a new qubit or device platform.
+ - STM of arsine on Ge(001) at room temperature. Hofmann et al., Angew. Chem. Int. Ed. 62, e202213982 (2023) Fig. 1a, CC BY 4.0
+ - Triphenyl-bismuth on Si(001). Lundgren et al., J. Phys. Chem. C 127, 16433 (2023), CC BY 4.0
+ - Hofmann2023; Lundgren2023
+ - 20
+ NOTES: The same chemistry generalises. On germanium, arsine incorporates at room temperature with no anneal, and hydrogen leaves by 330 °C. That removes a thermal step: if incorporation is spontaneous at 300 K, the activation barrier is low enough that kT ≈ 26 meV suffices. Bismuth is the other direction: a heavy donor with a large nucleus, delivered by triphenyl-bismuth, a molecule about 1 nm across. Its phenyl groups detach near 140 °C and bismuth incorporates near 360 °C, close to the 380 °C limit of the hydrogen resist. Different precursor, different host, same toolbox. Likely question: why germanium? Germanium donors have larger Bohr radii and a stronger Stark effect, but this talk stays with silicon.
+=== Slide 21
+ - The payoff: from devices to processors
+ - ACT 3 · DOES IT WORK?
+ - 2019: ≈800 ps exchange gate (natural Si); 3D device, 97.9% readout, <5 nm layer alignment / 2025, 4 qubits: 3P + 1 e⁻, 45 nm ²⁸Si cap, 1.45 T, 15 mK; CZ 99.32–99.65%, Grover search / 2025, 11 qubits: 4P + 5P registers 13(1) nm apart, SET 17 nm away, ~1.39 T; Bell 99.5% local, 97.0% across
+ - Caveat: 2019 used natural Si and electron spins; 2025 used ²⁸Si and nuclear-spin registers, so don't compare fidelities directly.
+ - 11-qubit processor: connectivity and STM of the 4P and 5P registers. Reproduced from Edlbauer et al., Nature 648, 569 (2025) Fig. 1a,b, CC BY 4.0
+ - Grover output, marked state ⇓⇓⇓: 98.87% of ideal. Reproduced from Thorvaldson et al., Nat. Nanotechnol. 20, 472 (2025) Fig. 4b, CC BY 4.0
+ - He2019; Koch2019; Thorvaldson2025 (Methods); Edlbauer2025 (Fig. 1 caption, SI)
+ - 21
+ NOTES: Now the qubits. 2019: an exchange gate between two donor electrons in about 800 ps, and a three-dimensional device with layers aligned better than 5 nm and 97.9% single-shot readout. 2025: a four-qubit processor, three phosphorus nuclei sharing one electron, under 45 nm of ²⁸Si at 1.45 T and 15 mK, with CZ fidelities 99.32 to 99.65%. And an eleven-qubit processor: four- and five-donor registers 13 nm apart, read by a transistor 17 nm away, with Bell fidelities 99.5% inside a register and 97.0% across. Compare carefully: 2019 used natural silicon and electron spins, 2025 used ²⁸Si and nuclear spins. Likely question: why nuclear spins? Their coherence is far longer.
+=== Slide 22
+ - The qubit as a spin Hamiltonian, and its spectrum
+ - ACT 3 · DOES IT WORK?
+ - H = γₑ B·S + Σᵢ γₙ B·Iᵢ + Σᵢ S·Āᵢ(E)·Iᵢ / electron Zeeman + nuclear Zeeman + hyperfine (ħ = 1), N-donor register
+ - 3 P nuclei share 1 electron: A₁ = 6, A₂ = 68, A₃ = 103 MHz; B = 1.45 T, 15 mK / 2³ = 8 ESR lines: the electron's frequency reads out the nuclear register / Field-tunable hyperfine Āᵢ(E): gates address each nucleus
+ - Measured ESR: one peak per nuclear configuration. Thorvaldson et al., Nat. Nanotechnol. 20, 472 (2025) Fig. 1b, CC BY 4.0
+ - Right: our chart of published T₂* values; 35.6 s is the best donor coherence (implanted donors, ²⁸Si).
+ - Hamiltonian: Reiner2024 Eq. 1; Thorvaldson2025 (A, B, T, T₂*); Reiner2024 (T₂*); Schofield2025 §3.2
+ - 22
+ NOTES: The physics in one equation: H = γₑ B·S + Σ γₙ B·Iᵢ + Σ S·Aᵢ·Iᵢ, electron Zeeman, nuclear Zeeman, hyperfine. Three nuclei with A = 6, 68 and 103 MHz shift the electron resonance by ±A/2 each, so there are 2³ = 8 ESR lines. Check: the span is A₁ + A₂ + A₃ = 177 MHz, exactly 39.157 minus 38.980 GHz. So the electron frequency reads out the nuclear register. Thermal check: hf at 39 GHz is 162 µeV, kT at 15 mK is 1.3 µeV, ratio 125, so the electron is fully polarised. Coherence: electron T₂* 28 µs, nuclei 0.5 to 1.3 ms. Likely question: why does A depend on E? Gate fields reshape the wavefunction at the nucleus.
+=== Slide 23
+ - Entanglement, measured by full state tomography
+ - ACT 3 · DOES IT WORK?
+ - Bell-state density matrices for each nuclear pair, with fidelities. Thorvaldson2025 Fig. 2b–d, CC BY 4.0
+ - Three-qubit GHZ state, F = 96.2 ± 0.5%. Thorvaldson2025 Fig. 3b, CC BY 4.0
+ - Grover search on three nuclear spins: oracle (red), diffusion operator (blue), r = 2. Thorvaldson2025 Fig. 4a, CC BY 4.0
+ - Bell fidelities 97.5 ± 0.3, 97.7 ± 0.4, 96.8 ± 0.4% / Grover finds the marked state at 98.87% of ideal
+ - Thorvaldson2025 (²⁸Si, 3P + 1 e⁻ register; fidelities include SPAM for GHZ)
+ - 23
+ NOTES: Entanglement is verified by quantum state tomography: measure in many bases and reconstruct the density matrix ρ. For a Bell state, ρ has four equal corner elements of ½ and nothing else; fidelity is F = ⟨ψ|ρ|ψ⟩. All three nuclear pairs reach 96.8 to 97.7%. The GHZ state (|000⟩ + |111⟩)/√2 entangles all three nuclei at 96.2%. Grover's search on three qubits: with sin θ = 1/√8, success after r iterations is sin²((2r+1)θ). For r = 2 that is 94.5%; the hardware measured 93.46%, which is 98.87% of ideal. Likely question: why two iterations? A third would rotate past the target and lower the probability.
+=== Slide 24
+ - Same atoms, new job: a quantum simulator
+ - ACT 3 · DOES IT WORK?
+ - 2022: 3×3 dopant dots, 2 ± 1 P each, spacing 4.1, 6.6, 10.7 ± 0.3 nm: metallic → Mott-insulating / 2022: 10-dot chain, ~25 P per dot, ≤10 nm apart, 40 nm cap at 0.125 nm/min: topological states
+ - EE143 view: the 'circuit' here is a lattice of doped islands with in-plane δ-layer gates and leads.
+ - 3×3 dopant-dot array. Wang et al., Nat. Commun. 13, 6824 (2022) Fig. 1, CC BY 4.0
+ - 10-dot chain with 6 in-plane gates (STM, 50 nm scale in original). Kiczynski et al., Nature 606, 694 (2022) Fig. 2a, CC BY 4.0
+ - Wang2022; Kiczynski2022 (Methods)
+ - 24
+ NOTES: Dopant arrays also simulate many-body physics. The Hubbard Hamiltonian, H = −t Σ c†c + U Σ n↑n↓, has two energies: hopping t, set by tunnelling between dots, and on-site repulsion U. Since t falls exponentially with spacing, changing a 3×3 lattice from 4.1 to 10.7 nm tunes U/t from small, metallic, to large, Mott-insulating, where repulsion freezes the electrons. A 10-dot chain with alternating couplings realises the SSH model: when intracell hopping is weaker than intercell hopping, the band is topological, with edge states pinned at zero energy, seen as 2 conductance peaks instead of 10. Likely question: why dopants? Lithographic precision sets t directly.
+=== Slide 25
+ - The next wall: throughput
+ - ACT 4 · HOW IT SCALES
+ CHART: EUV writes 11 orders of magnitude faster than STM [('write speed (nm/s)', [10.0, 1000.0, 100000000000000.0])]
+ - STM: 10–1000 nm/s; precise mode ≈100 atoms/s / EUV: equivalent ≈10¹⁴ nm/s / Even 10⁷ MEMS tips over a 300 mm wafer stay orders of magnitude too slow for CMOS volumes
+ - Schofield2025 §2.2, §5.4
+ - 25
+ NOTES: Throughput is an EE scaling problem. A tip in precise mode writes about 100 atoms per second. One square centimetre of Si(001) has 6.78×10¹⁴ surface sites, so writing it serially takes 6.8×10¹² seconds, about 215,000 years. Faster modes reach 1000 nm per second but lose atomic precision. EUV lithography exposes the equivalent of 10¹⁴ nm per second, eleven orders of magnitude faster, because every photon in the field exposes in parallel. Even ten million tips across a 300 mm wafer remain orders of magnitude too slow for chip volumes. The answer has to be parallel exposure for everything except the qubit cores. Likely question: can tips run faster? Speed trades directly against precision.
+=== Slide 26
+ - Scaling: EUV photons instead of a tip
+ - ACT 4 · HOW IT SCALES
+ - First H removal from Si(001):H with monochromatic EUV (109 eV), driven by secondary electrons / Doses up to 18 000 J/cm²: several minutes per chip with 300 W sources / Hybrid flow: STM for qubits, EUV for contacts, gates and wiring
+ - Proposed 4-stage UHV flow combining EUV and STM lithography. Reproduced from Constantinou et al., Nat. Commun. 15, 694 (2024) Fig. 5, CC BY 4.0
+ - Resistless EUV lines, 75 nm half-pitch. Schofield2025 §5.3 Fig. 1 (adapted from Tseng2023), CC BY 4.0
+ - Constantinou2024; Schofield2025 §5.3; Tseng2023
+ - 26
+ NOTES: EUV can strip the same hydrogen resist. Photon energy E = hc/λ: industrial 13.5 nm light is 92 eV, and hydrogen removal was shown at 109 eV. The mechanism is indirect: photons are absorbed in the silicon, which emits secondary electrons, and those electrons break Si–H bonds, the same bond-breaking physics as under the STM tip. The cost is dose: up to 18,000 J/cm², several minutes per chip with a 300 W source. Resistless EUV gratings at 75 nm half-pitch show the photon route works without organic resist. The proposed flow: EUV for leads and wiring, STM for qubit cores. Likely question: resolution? Diffraction, R = k₁λ/NA, limits EUV to roughly ten nanometres.
+=== Slide 27
+ - Our prototype: a 2×2 arsenic register
+ - ACT 4 · HOW IT SCALES
+ - Layout to scale (ours). Inputs: 2×2 pitch 4.6 nm and 4-site windows (Stock2024); SET 17 nm away, gates 146.6 nm apart (Edlbauer2025); buried 30 nm (DAnna2023).
+ - 3D concept (not to scale): As δ-layer leads, Al vias, epitaxial cap.
+ - Four single As atoms, one per 4-site window, ≈12 lattice vectors apart / Design rule from pⁿ: 16 sites at p = 0.97 give ≈61% perfect arrays; at p = 0.7, ≈0.3%
+ - Our design. Inputs: Stock2024; Edlbauer2025; DAnna2023; Stock2020. Lead widths not given in the papers
+ - 27
+ NOTES: Our prototype applies the design rules quantitatively. Four arsenic atoms, one per four-site window, on a 4.6 nm pitch, twelve lattice vectors. A single-electron transistor 17 nm away for readout, two gates 146.6 nm apart, all as δ-doped arsenic in one plane, buried 30 nm deep under epitaxial silicon. Expected yield: the four-site register succeeds with 0.97⁴ ≈ 89%. Scale to sixteen sites and p^n gives 61% for arsenic against 0.3% for phosphorus. So the register size you can build is fixed by chemistry, through p, not by lithographic resolution. Likely question: what sets the 17 nm SET spacing? Capacitive sensitivity versus tunnel coupling, an exponential trade-off.
+=== Slide 28
+ - Prototype traveler, mapped to EE143
+ - ACT 4 · HOW IT SCALES
+ TABLE: # | Step (recipe from the papers) | EE143 analogue | 1–2 | Acetone/IPA, outgas 600 °C >8 h; flash ≈1200 °C | Clean + bake | 3 | Atomic H on Si(001): 1-atom resist | Resist coat | 4 | STM: 3.5 V, 3000 pA, 50 nm/s, 4-site windows | E-beam lithography | 5 | AsH₃, 5×10⁻⁹ mbar × 10 min | Gas-phase pre-dep | 6 | 350 °C, 1–2 min (H₂ leaves at 380 °C) | Drive-in / activation | 7–8 | 2 nm unheated; 500 °C × 15 s; 28 nm Si at 250 °C | RTA + epitaxy | 9–10 | Markers + STM–SEM; optical litho, RIE, Al into holes | Alignment, etch, metal | 11 | Hall bar at 1.8 K: Rₛ, μ, Nₛ; qubits at mK | Hall / 4-point probe
+ CHART: Thermal budget: after patterning, ≤500 °C [('peak T (°C)', [1200.0, 600.0, 500.0, 350.0, 250.0])]
+ - Stock2020; Stock2024; DAnna2023; Ruess2004. Module mapping and thermal-budget chart are ours
+ - 28
+ NOTES: The traveler, as numbers. Hot steps first: 1200 °C flash, 600 °C outgas. After patterning, the maximum is a 500 °C, 15-second RTA, then 350 °C incorporation and 250 °C overgrowth. Why that ordering works: diffusion length is 2√(Dt) with D = D₀ e^(−E_a/kT), and the exponential makes the brief 500 °C step dominate the post-pattern budget while still moving dopants only about 10⁻⁴ nm. Compare our own lab: a 1050 °C drive-in for about 40 minutes moves phosphorus hundreds of nanometres. Same physics, opposite goal. Every row maps onto an EE143 module. Likely question: where is the risk? The RTA: too hot or too long and the δ-layer broadens.
+=== Slide 29
+ - Takeaways: one atom, exactly where you want it
+ - 1
+ - Placing single atoms works.
+ - H-resist lithography + PH₃/AsH₃ + a 350 °C anneal gives ±1 atomic spacing.
+ - 2
+ - Arsenic brought single-atom yield to ~97%.
+ - Curson's 4-site window beats P's <70%; that's what makes arrays possible.
+ - 3
+ - Throughput is the next wall; EUV is the bridge.
+ - Same resist, photons for wiring, STM for qubits.
+ - 1994
+ - 1998
+ - 2003
+ - 2012
+ - 2019
+ - 2020
+ - 2024
+ - 2025
+ - Stock2020; Stock2024; Ivie2021; Constantinou2024; Schofield2025
+ - 29
+ NOTES: Three takeaways, each with its equation. Precision: placement is set by the lattice, ±0.384 nm, and exchange depends exponentially on spacing, so precision is mandatory. Yield: arrays succeed with p^n; arsenic raised p to 0.97 ± 0.02, moving the 50% array size from about 2 sites to about 23. Throughput: serial writing at 100 atoms per second cannot cover a wafer; parallel photon exposure on the same hydrogen resist is the bridge. And the quantum test passed: an eight-line ESR spectrum, Bell states near 97%, and Grover's search at 98.9% of ideal. Thank you. Likely question: what comes next? Larger registers, which is exactly the p^n problem.
+=== Slide 30
+ - References (1 of 2)
+ - [1] Constantinou2023: "Momentum-space imaging of ultra-thin electron liquids in δ-doped silicon," Adv. Sci. 10, 2302101 (2023). doi:10.1002/advs.202302101 / [2] Constantinou2024: "EUV-induced hydrogen desorption as a step towards large-scale silicon quantum device patterning," Nat. Commun. 15, 694 (2024). doi:10.1038/s41467-024-44790-6 / [3] DAnna2023: "Non-destructive X-ray imaging of patterned delta-layer devices in silicon," Adv. Electron. Mater. 9, 2201212 (2023). doi:10.1002/aelm.202201212 / [4] DAnna2026: "Element-specific, non-destructive profiling of two-dimensional dopant layers in silicon," npj Quantum Inf. (2026, online 11 Nov). doi:10.1038/s41534-026-01393-x / [5] Edlbauer2025: "An 11-qubit atom processor in silicon," Nature 648, 569–575 (2025). doi:10.1038/s41586-025-09827-w / [6] Fuechsle2012: "A single-atom transistor," Nat. Nanotechnol. 7, 242–246 (2012). doi:10.1038/nnano.2012.21 / [7] He2019: "A two-qubit gate between phosphorus donor electrons in silicon," Nature 571, 371–375 (2019). doi:10.1038/s41586-019-1381-2 / [8] Hofmann2023: "Room temperature incorporation of arsenic atoms into the germanium (001) surface," Angew. Chem. Int. Ed. 62, e202213982 (2023). doi:10.1002/anie.202213982
+ - [9] Ivie2021: "Impact of incorporation kinetics on device fabrication with atomic precision," Phys. Rev. Applied 16, 054037 (2021). doi:10.1103/PhysRevApplied.16.054037 / [10] Jakob2022: "Deterministic shallow dopant implantation in silicon with detection confidence upper-bound to 99.85% by ion–solid interactions," Adv. Mater. 34, 2103235 (2022). doi:10.1002/adma.202103235 / [11] Kane1998: "A silicon-based nuclear spin quantum computer," Nature 393, 133–137 (1998). doi:10.1038/30156 / [12] Kane2000: "Silicon-based quantum computation," Fortschr. Phys. 48, 1023–1041 (2000). doi:10.1002/1521-3978(200009)48:9/11<1023::AID-PROP1023>3.0.CO;2-J / [13] Kiczynski2022: "Engineering topological states in atom-based semiconductor quantum dots," Nature 606, 694–699 (2022). doi:10.1038/s41586-022-04706-0 / [14] Koch2019: "Spin read-out in atomic qubits in an all-epitaxial three-dimensional transistor," Nat. Nanotechnol. 14, 137–140 (2019). doi:10.1038/s41565-018-0338-1 / [15] Lundgren2023: "Adsorption and thermal decomposition of triphenyl bismuth on silicon (001)," J. Phys. Chem. C 127, 16433 (2023). doi:10.1021/acs.jpcc.3c03916 / [16] Lyding1994: "Nanoscale patterning and oxidation of H-passivated Si(100)-2×1 surfaces with an ultrahigh vacuum STM," Appl. Phys. Lett. 64, 2010–2012 (1994). doi:10.1063/1.111722
+ - 30
+ NOTES: Not presented. Q&A equation sheet. Bohr radius a_B = ε_r (m_e/m*) a_0. Poisson single occupancy λe^(−λ), maximum 1/e at λ = 1. Exchange envelope ∝ e^(−2R/a_B). Tunnelling I ∝ V e^(−2κd), κ ≈ 1 Å⁻¹. Line dose = I/v. Gas flux Φ = p/√(2πmkT). Sheet resistance R_s = 1/(qN_sμ). Hall density N_s = IB/(qV_H). Diffusion length 2√(Dt), D = D₀e^(−E_a/kT). Array yield p^n; 50% size n = ln 0.5/ln p.
+=== Slide 31
+ - References (2 of 2)
+ - [17] Namboodiri2024: "Multi-scale alignment to buried atom-scale devices using Kelvin probe force microscopy," Nanotechnol. Rev. 13, 20230196 (2024). doi:10.1515/ntrev-2023-0196 / [18] Oberbeck2002: "Encapsulation of phosphorus dopants in silicon for the fabrication of a quantum computer," Appl. Phys. Lett. 81, 3197 (2002). doi:10.1063/1.1516859 / [19] OBrien2001: "Towards the fabrication of phosphorus qubits for a silicon quantum computer," Phys. Rev. B 64, 161401 (2001). doi:10.1103/PhysRevB.64.161401 / [20] Reiner2024: "High-fidelity initialization and control of electron and nuclear spins in a four-qubit register," Nat. Nanotechnol. 19, 605–611 (2024). doi:10.1038/s41565-023-01596-9 / [21] Ren2016: "Origin of symmetric dimer images of Si(001) observed by low-temperature scanning tunneling microscopy," Sci. Rep. 6, 27868 (2016). doi:10.1038/srep27868 / [22] Ruess2004: "Toward atomic-scale device fabrication in silicon using scanning probe microscopy," Nano Lett. 4, 1969–1973 (2004). doi:10.1021/nl048808v / [23] Schofield2003: "Atomically precise placement of single dopants in Si," Phys. Rev. Lett. 91, 136104 (2003). doi:10.1103/PhysRevLett.91.136104 / [24] Schofield2025: "Roadmap on atomic-scale semiconductor devices," Nano Futures 9, 012001 (2025). doi:10.1088/2399-1984/ada901
+ - [25] Stock2020: "Atomic-scale patterning of arsenic in silicon by scanning tunneling microscopy," ACS Nano 14, 3316 (2020). doi:10.1021/acsnano.9b08943 / [26] Stock2024: "Single-atom control of arsenic incorporation in silicon for high-yield artificial lattice fabrication," Adv. Mater. 36, 2312282 (2024). doi:10.1002/adma.202312282 / [27] Thorvaldson2025: "Grover's algorithm in a four-qubit silicon processor above the fault-tolerant threshold," Nat. Nanotechnol. 20, 472–477 (2025). doi:10.1038/s41565-024-01853-5 / [28] Tseng2023: "Resistless EUV lithography: photon-induced oxide patterning on silicon," Sci. Adv. 9, eadf5997 (2023). doi:10.1126/sciadv.adf5997 / [29] Wang2022: "Experimental realization of an extended Fermi-Hubbard model using a 2D lattice of dopant-based quantum dots," Nat. Commun. 13, 6824 (2022). doi:10.1038/s41467-022-34220-w / [30] Wilson2004: "Phosphine dissociation on the Si(001) surface," Phys. Rev. Lett. 93, 226102 (2004). doi:10.1103/PhysRevLett.93.226102 / [31] Xiang2025: "Self-passivation reduces the Fermi level pinning in the metal-semiconductor contacts," Nat. Commun. 16, 10675 (2025). doi:10.1038/s41467-025-65695-y
+ - 31
+ NOTES: Not presented. Q&A equation sheet, continued. Spin Hamiltonian H = γₑB·S + Σγₙ B·Iᵢ + Σ S·Aᵢ·Iᵢ; ESR lines at f₀ ± A₁/2 ± A₂/2 ± A₃/2. Polarisation needs hf ≫ kT: 162 µeV versus 1.3 µeV. Conditional flip off resonance ≤ Ω²/(Ω² + Δ²). Bell fidelity F = ⟨ψ|ρ|ψ⟩. Grover success sin²((2r+1)θ), sin θ = 1/√N. Hubbard H = −tΣc†c + UΣn↑n↓; Mott regime U ≫ t. EUV photon energy E = hc/λ; resolution R = k₁λ/NA.
+=== Slide 32
+ - Backup · Alternate titles
+ - Atom-by-Atom Silicon: Building Quantum Processors from Single Dopant Atoms (used) / How an Atom-Precise Silicon Qubit Is Built / Writing Qubits with an STM: Atomic-Precision Dopant Devices in Silicon / Single-Dopant Silicon Devices: The Atomic-Scale Route to Quantum Processors / From Phosphine to Processors: Atomic-Scale Dopant Engineering for Silicon Quantum Computing
+ - 4×4 single-As array: lithography, incorporation, dopant map. Reproduced from Stock et al., Adv. Mater. 36, 2312282 (2024) Fig. 1g–i, CC BY 4.0
+ - 32
+ NOTES: Backup. Alternate titles, plus the 4×4 arsenic array in the image. With non-ideal windows, 10 to 12 of the 15 checked sites held single atoms, up to 80%. That number is a useful check on the p^n argument: at p = 0.8, a perfect sixteen-site array would occur 0.8¹⁶ ≈ 3% of the time, which is why the defect-free result was the 2×2 array with ideal windows. Window geometry matters as much as precursor chemistry. Use this slide only if asked how the larger array performed.
+=== Slide 33
+ - Backup · Monte Carlo of 4×4 arrays
+ - Our model, not data: filled = one atom, red = failed site; boxed = perfect array. 100 000 simulated arrays per row at the measured per-site yields (P 0.7, As 0.97; Stock2024).
+ - Stock2024 (per-site yields); simulation ours
+ - 33
+ NOTES: Backup. Monte Carlo check of the p^n law. Each simulated array fills sixteen sites with independent Bernoulli trials at p = 0.7 or p = 0.97, repeated 100,000 times. The perfect-array fraction converges to 0.3% and 61.3%, matching 0.7¹⁶ and 0.97¹⁶. The binomial standard error at 100,000 trials is √(p(1−p)/N), under 0.2%, so the agreement is not luck. The model assumes independent site failures; spatially correlated defects, such as a contaminated region, would make large arrays fail more often than p^n predicts. Use this slide if someone questions the statistics.
