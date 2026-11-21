@@ -401,7 +401,48 @@ def burial_gif():
     to_gif(frames, f"{OUT}/S_burial.gif", ms=120)
 
 
+THEMES = [("Dopant chemistry & placement", "#0F9FA0"), ("Imaging & metrology", "#2F6FB0"), ("Lithography & scaling", "#A87F12"),
+          ("Quantum devices & theory", "#7A4E9C"), ("Noise & interfaces", "#B03A48"), ("Ge & other surfaces", "#9AA3AC")]
+
+def curson_gif():
+    """All of N. J. Curson's papers (ORCID + Crossref): bubbles appear year by year; size and height = citations."""
+    P = json.load(open("notes/curson/curson_papers.json"))
+    col = dict(THEMES); rng = np.random.default_rng(3)
+    for p in P: p["jit"] = rng.uniform(-0.32, 0.32); p["c"] = max(p["cites"] or 0, 0)
+    top = sorted(P, key=lambda p: -p["c"])[:6]
+    short = {"10.1103/physrevlett.91.136104": "single P placed (2003)", "10.1063/1.1516859": "P encapsulation (2002)",
+             "10.1038/s41534-020-0253-9": "topological Hubbard (2020)", "10.1038/ncomms2679": "dangling-bond quantum (2013)",
+             "10.1103/physrevlett.93.226102": "PH₃ dissociation (2004)", "10.1103/physrevb.64.161401": "P qubit arrays (2001)",
+             "10.1088/0953-8984/26/1/012001": "single As by STM (2014)", "10.1021/nl048808v": "contacting buried devices (2004)",
+             "10.1103/physrevb.74.195310": "PH₃ desorption (2006)", "10.1126/sciadv.1602586": "buried-device imaging (2017)",
+             "10.1021/acsnano.9b08943": "As patterned by STM (2020)"}
+    offs = {"10.1103/physrevlett.91.136104": (10, -2), "10.1103/physrevb.64.161401": (-8, 10), "10.1103/physrevlett.93.226102": (-30, 16),
+            "10.1103/physrevb.74.195310": (10, 2), "10.1126/sciadv.1602586": (-40, 14), "10.1021/acsnano.9b08943": (8, 8)}
+    years = list(range(1994, 2027))
+    frames = []
+    for k, Y in enumerate(years + [2026] * 10):
+        fig, ax = plt.subplots(figsize=(7.4, 3.6))
+        shown = [p for p in P if p["year"] <= Y]
+        for name, c in THEMES[::-1]:
+            pts = [p for p in shown if p["theme"] == name]
+            if pts:
+                ax.scatter([p["year"] + p["jit"] for p in pts], [p["c"] + 1 for p in pts], s=[18 + 2.2 * p["c"] for p in pts],
+                           color=c, alpha=0.8, edgecolor="white", lw=0.8, zorder=3 if c != "#9AA3AC" else 2)
+        for p in top:
+            if p["year"] <= Y:
+                ax.annotate(short.get(p["doi"], p["title"][:28]), (p["year"] + p["jit"], p["c"] + 1), xytext=offs.get(p["doi"], (6, 4)), textcoords="offset points", fontsize=7.5, color=INK)
+        ax.set_yscale("log"); ax.set_ylim(0.8, 1500); ax.set_xlim(1993, 2027)
+        ax.set_ylabel("citations + 1 (log)", fontsize=8.5); ax.tick_params(labelsize=8)
+        ax.text(0.99, 0.97, f"{Y}:  {len(shown)} papers,  {sum(p['c'] for p in shown):,} citations (Crossref)", transform=ax.transAxes, fontsize=10, fontweight="bold", va="top", ha="right")
+        handles = [plt.Line2D([], [], marker="o", ls="", color=c, ms=7, label=n) for n, c in THEMES]
+        ax.legend(handles=handles, fontsize=7.5, frameon=False, loc="upper center", bbox_to_anchor=(0.5, -0.12), ncol=3)
+        for sp in ("top", "right"): ax.spines[sp].set_visible(False)
+        fig.tight_layout(); frames.append(fig_to_img(fig, 100))
+    frames[-1].save(f"{OUT}/S_curson_last.png")
+    to_gif(frames, f"{OUT}/S_curson.gif", ms=170)
+
+
 if __name__ == "__main__":
     jobs = sys.argv[1:] or ["esr", "rabi", "grover", "yield", "fab", "hero", "lindblad", "overlap", "burial"]
     for j in jobs:
-        {"esr": esr_fit, "rabi": rabi_gif, "grover": grover_gif, "yield": yield_gif, "fab": fab_gif, "hero": hero_gif, "lindblad": lindblad_gif, "overlap": overlap_gif, "burial": burial_gif}[j]()
+        {"esr": esr_fit, "rabi": rabi_gif, "grover": grover_gif, "yield": yield_gif, "fab": fab_gif, "hero": hero_gif, "lindblad": lindblad_gif, "overlap": overlap_gif, "burial": burial_gif, "curson": curson_gif}[j]()

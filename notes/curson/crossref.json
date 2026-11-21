@@ -1,0 +1,967 @@
+{
+ "10.1002/adma.202312282": {
+  "lic": "http://creativecommons.org/licenses/by/4.0/",
+  "title": "Single\u2010Atom Control of Arsenic Incorporation in Silicon for High\u2010Yield Artificial Lattice Fabrication",
+  "journal": "Advanced Materials",
+  "year": 2024,
+  "first": "Stock",
+  "vol": "36",
+  "page": "2312282",
+  "cites": 12
+ },
+ "10.1002/advs.202302101": {
+  "lic": "http://creativecommons.org/licenses/by/4.0/",
+  "title": "Momentum\u2010Space Imaging of Ultra\u2010Thin Electron Liquids in \u03b4\u2010Doped Silicon",
+  "journal": "Advanced Science",
+  "year": 2023,
+  "first": "Constantinou",
+  "vol": "10",
+  "page": "2302101",
+  "cites": 6
+ },
+ "10.1002/aelm.202100989": {
+  "lic": "http://creativecommons.org/licenses/by/4.0/",
+  "title": "Microwave Properties of 2D CMOS Compatible Co\u2010Planar Waveguides Made from Phosphorus Dopant Monolayers in Silicon",
+  "journal": "Advanced Electronic Materials",
+  "year": 2022,
+  "first": "Chapman",
+  "vol": "8",
+  "page": "2100989",
+  "cites": 0
+ },
+ "10.1002/aelm.202201212": {
+  "lic": "http://creativecommons.org/licenses/by/4.0/",
+  "title": "Non\u2010Destructive X\u2010Ray Imaging of Patterned Delta\u2010Layer Devices in Silicon",
+  "journal": "Advanced Electronic Materials",
+  "year": 2023,
+  "first": "D'Anna",
+  "vol": "9",
+  "page": "2201212",
+  "cites": 6
+ },
+ "10.1002/ange.202213982": {
+  "lic": "http://creativecommons.org/licenses/by/4.0/",
+  "title": "Room Temperature Incorporation of Arsenic Atoms into the Germanium (001) Surface**",
+  "journal": "Angewandte Chemie",
+  "year": 2023,
+  "first": "Hofmann",
+  "vol": "135",
+  "page": "e202213982",
+  "cites": 2
+ },
+ "10.1002/anie.202213982": {
+  "lic": "http://creativecommons.org/licenses/by/4.0/",
+  "title": "Room Temperature Incorporation of Arsenic Atoms into the Germanium (001) Surface**",
+  "journal": "Angewandte Chemie International Edition",
+  "year": 2023,
+  "first": "Hofmann",
+  "vol": "62",
+  "page": "e202213982",
+  "cites": 6
+ },
+ "10.1002/smtd.202301610": {
+  "lic": "http://creativecommons.org/licenses/by/4.0/",
+  "title": "Benchmarking of X\u2010Ray Fluorescence Microscopy with Ion Beam Implanted Samples Showing Detection Sensitivity of Hundreds of Atoms",
+  "journal": "Small Methods",
+  "year": 2024,
+  "first": "Masteghin",
+  "vol": null,
+  "page": "2301610",
+  "cites": 18
+ },
+ "10.1016/0039-6028(94)91469-9": {
+  "lic": null,
+  "title": "Structure and growth of the K/Ge(100)-(2 \u00d7 1) surface",
+  "journal": "Surface Science",
+  "year": 1994,
+  "first": "Curson",
+  "vol": "307-309",
+  "page": "639-644",
+  "cites": 4
+ },
+ "10.1016/0039-6028(95)00268-5": {
+  "lic": null,
+  "title": "Growth and metallisation in potassium adsorption on the Si(100) surface",
+  "journal": "Surface Science",
+  "year": 1995,
+  "first": "Foulias",
+  "vol": "331-333",
+  "page": "522-527",
+  "cites": 4
+ },
+ "10.1016/j.apsusc.2017.11.058": {
+  "err": "Expecting value: line 1 column 1 (char 0)"
+ },
+ "10.1016/j.apsusc.2021.149961": {
+  "lic": null,
+  "title": "The formation of a Sn monolayer on Ge(1 0 0) studied at the atomic scale",
+  "journal": "Applied Surface Science",
+  "year": 2021,
+  "first": "Hofmann",
+  "vol": "561",
+  "page": "149961",
+  "cites": 4
+ },
+ "10.1016/j.apsusc.2022.153884": {
+  "lic": null,
+  "title": "Modification of the Ge(0 0 1) subsurface electronic structure after adsorption of Sn",
+  "journal": "Applied Surface Science",
+  "year": 2022,
+  "first": "Reichmann",
+  "vol": "599",
+  "page": "153884",
+  "cites": 1
+ },
+ "10.1016/j.orgel.2018.09.041": {
+  "lic": null,
+  "title": "Local anodic oxidation lithography on organic semiconductor crystals: Oxide depth revealed by conductance tomography",
+  "journal": "Organic Electronics",
+  "year": 2018,
+  "first": "Kamaludin",
+  "vol": "63",
+  "page": "231-236",
+  "cites": 5
+ },
+ "10.1016/j.susc.2005.10.031": {
+  "lic": null,
+  "title": "Phosphorus and hydrogen atoms on the (001) surface of silicon: A comparative scanning tunnelling microscopy study of surface species with a single dangling bond",
+  "journal": "Surface Science",
+  "year": 2006,
+  "first": "Reusch",
+  "vol": "600",
+  "page": "318-324",
+  "cites": 19
+ },
+ "10.1016/j.susc.2007.04.072": {
+  "lic": null,
+  "title": "Doping and STM tip-induced changes to single dangling bonds on Si(001)",
+  "journal": "Surface Science",
+  "year": 2007,
+  "first": "Reusch",
+  "vol": "601",
+  "page": "4036-4040",
+  "cites": 11
+ },
+ "10.1016/j.susc.2021.121912": {
+  "lic": null,
+  "title": "Ge(001) surface reconstruction with Sn impurities",
+  "journal": "Surface Science",
+  "year": 2021,
+  "first": "Noatschk",
+  "vol": "713",
+  "page": "121912",
+  "cites": 3
+ },
+ "10.1016/j.tsf.2004.05.118": {
+  "lic": null,
+  "title": "STM imaging of buried P atoms in hydrogen-terminated Si for the fabrication of a Si:P quantum computer",
+  "journal": "Thin Solid Films",
+  "year": 2004,
+  "first": "Oberbeck",
+  "vol": "464-465",
+  "page": "23-27",
+  "cites": 19
+ },
+ "10.1016/s0039-6028(01)01331-0": {
+  "lic": null,
+  "title": "An AFM study of the processing of hydrogen passivated silicon(111) of a low miscut angle",
+  "journal": "Surface Science",
+  "year": 2001,
+  "first": "MacLaren",
+  "vol": "490",
+  "page": "285-295",
+  "cites": 22
+ },
+ "10.1016/s0039-6028(03)00206-1": {
+  "lic": null,
+  "title": "Critical issues in the formation of atomic arrays of phosphorus in silicon for the fabrication of a solid-state quantum computer",
+  "journal": "Surface Science",
+  "year": 2003,
+  "first": "Curson",
+  "vol": "532-535",
+  "page": "678-684",
+  "cites": 8
+ },
+ "10.1016/s0039-6028(03)00485-0": {
+  "lic": null,
+  "title": "Towards the atomic-scale fabrication of a silicon-based solid state quantum computer",
+  "journal": "Surface Science",
+  "year": 2003,
+  "first": "Simmons",
+  "vol": "532-535",
+  "page": "1209-1218",
+  "cites": 34
+ },
+ "10.1016/s0167-9317(01)00478-6": {
+  "lic": null,
+  "title": "Modification of a shallow 2DEG by AFM lithography",
+  "journal": "Microelectronic Engineering",
+  "year": 2001,
+  "first": "Nemutudi",
+  "vol": "57-58",
+  "page": "967-973",
+  "cites": 21
+ },
+ "10.1016/s0169-4332(03)00370-2": {
+  "lic": null,
+  "title": "STM investigation of epitaxial Si growth for the fabrication of a Si-based quantum computer",
+  "journal": "Applied Surface Science",
+  "year": 2003,
+  "first": "Oberbeck",
+  "vol": "212-213",
+  "page": "319-324",
+  "cites": 13
+ },
+ "10.1021/acs.jpcc.1c07115": {
+  "lic": null,
+  "title": "Substitutional Tin Acceptor States in Black Phosphorus",
+  "journal": "The Journal of Physical Chemistry C",
+  "year": 2021,
+  "first": "Wentink",
+  "vol": "125",
+  "page": "22883-22889",
+  "cites": 8
+ },
+ "10.1021/acs.jpcc.3c03916": {
+  "lic": "https://creativecommons.org/licenses/by/4.0/",
+  "title": "Adsorption and Thermal Decomposition of Triphenyl Bismuth on Silicon (001)",
+  "journal": "The Journal of Physical Chemistry C",
+  "year": 2023,
+  "first": "Lundgren",
+  "vol": "127",
+  "page": "16433-16441",
+  "cites": 1
+ },
+ "10.1021/acs.nanolett.5c02675": {
+  "lic": "https://creativecommons.org/licenses/by/4.0/",
+  "title": "Imaging the Acceptor Wave Function Anisotropy in Silicon",
+  "journal": "Nano Letters",
+  "year": 2025,
+  "first": "Siegl",
+  "vol": "25",
+  "page": "13996-14001",
+  "cites": 1
+ },
+ "10.1021/acsnano.9b08943": {
+  "lic": null,
+  "title": "Atomic-Scale\nPatterning of Arsenic in Silicon by Scanning\nTunneling Microscopy",
+  "journal": "ACS Nano",
+  "year": 2020,
+  "first": "Stock",
+  "vol": "14",
+  "page": "3316-3327",
+  "cites": 58
+ },
+ "10.1021/jp054646v": {
+  "err": "Expecting value: line 1 column 1 (char 0)"
+ },
+ "10.1021/jp068834c": {
+  "err": "Expecting value: line 1 column 1 (char 0)"
+ },
+ "10.1021/nl048808v": {
+  "err": "Expecting value: line 1 column 1 (char 0)"
+ },
+ "10.1021/nn3039484": {
+  "lic": null,
+  "title": "Site-Dependent Ambipolar Charge States Induced by Group V Atoms in a Silicon Surface",
+  "journal": "ACS Nano",
+  "year": 2012,
+  "first": "Studer",
+  "vol": "6",
+  "page": "10456-10462",
+  "cites": 15
+ },
+ "10.1038/ncomms2679": {
+  "err": "Expecting value: line 1 column 1 (char 0)"
+ },
+ "10.1038/s41467-024-44790-6": {
+  "lic": "https://creativecommons.org/licenses/by/4.0",
+  "title": "EUV-induced hydrogen desorption as a step towards large-scale silicon quantum device patterning",
+  "journal": "Nature Communications",
+  "year": 2024,
+  "first": "Constantinou",
+  "vol": "15",
+  "page": "694",
+  "cites": 28
+ },
+ "10.1038/s41534-020-0253-9": {
+  "lic": "https://creativecommons.org/licenses/by/4.0",
+  "title": "Topological phases of a dimerized Fermi\u2013Hubbard model for semiconductor nano-lattices",
+  "journal": "npj Quantum Information",
+  "year": 2020,
+  "first": "Le",
+  "vol": "6",
+  "page": "24",
+  "cites": 55
+ },
+ "10.1038/s41928-020-0450-8": {
+  "lic": null,
+  "title": "Nanoscale imaging of mobile carriers and trapped charges in delta doped silicon p\u2013n junctions",
+  "journal": "Nature Electronics",
+  "year": 2020,
+  "first": "Gramse",
+  "vol": "3",
+  "page": "531-538",
+  "cites": 36
+ },
+ "10.1039/c3cp50310k": {
+  "lic": null,
+  "title": "Revealing surface oxidation on the organic semi-conducting single crystal rubrene with time of flight secondary ion mass spectroscopy",
+  "journal": "Physical Chemistry Chemical Physics",
+  "year": 2013,
+  "first": "Thompson",
+  "vol": "15",
+  "page": "5202",
+  "cites": 8
+ },
+ "10.1039/c6cp05369f": {
+  "lic": null,
+  "title": "Channels of oxygen diffusion in single crystal rubrene revealed",
+  "journal": "Physical Chemistry Chemical Physics",
+  "year": 2016,
+  "first": "Thompson",
+  "vol": "18",
+  "page": "32302-32307",
+  "cites": 4
+ },
+ "10.1039/d1nr08381c": {
+  "lic": null,
+  "title": "<i>In operando</i>\n                    charge transport imaging of atomically thin dopant nanostructures in silicon",
+  "journal": "Nanoscale",
+  "year": 2022,
+  "first": "K\u00f6lker",
+  "vol": "14",
+  "page": "6437-6448",
+  "cites": 1
+ },
+ "10.1063/1.1374225": {
+  "err": "Expecting value: line 1 column 1 (char 0)"
+ },
+ "10.1063/1.1486047": {
+  "lic": null,
+  "title": "Imaging charged defects on clean Si(100)-(2\u00d71) with scanning tunneling microscopy",
+  "journal": "Journal of Applied Physics",
+  "year": 2002,
+  "first": "Brown",
+  "vol": "92",
+  "page": "820-824",
+  "cites": 31
+ },
+ "10.1063/1.1516859": {
+  "err": "Expecting value: line 1 column 1 (char 0)"
+ },
+ "10.1063/1.1784881": {
+  "lic": null,
+  "title": "Measurement of phosphorus segregation in silicon at the atomic scale using scanning tunneling microscopy",
+  "journal": "Applied Physics Letters",
+  "year": 2004,
+  "first": "Oberbeck",
+  "vol": "85",
+  "page": "1359-1361",
+  "cites": 49
+ },
+ "10.1063/1.1897064": {
+  "lic": null,
+  "title": "Effective removal of hydrogen resists used to pattern devices in silicon using scanning tunneling microscopy",
+  "journal": "Applied Physics Letters",
+  "year": 2005,
+  "first": "Hallam",
+  "vol": "86",
+  "page": "143116",
+  "cites": 11
+ },
+ "10.1063/1.2433138": {
+  "lic": null,
+  "title": "Scanning tunneling microscope based fabrication of nano- and atomic scale dopant devices in silicon: The crucial step of hydrogen removal",
+  "journal": "Journal of Applied Physics",
+  "year": 2007,
+  "first": "Hallam",
+  "vol": "101",
+  "page": "034305",
+  "cites": 26
+ },
+ "10.1063/1.2786991": {
+  "err": "Expecting value: line 1 column 1 (char 0)"
+ },
+ "10.1063/1.2938091": {
+  "err": "Expecting value: line 1 column 1 (char 0)"
+ },
+ "10.1063/1.3456736": {
+  "lic": null,
+  "title": "Electronic effects of single H atoms on Ge(001) revisited",
+  "journal": "The Journal of Chemical Physics",
+  "year": 2010,
+  "first": "Shah",
+  "vol": "133",
+  "page": "014703",
+  "cites": 10
+ },
+ "10.1063/1.3551624": {
+  "err": "Expecting value: line 1 column 1 (char 0)"
+ },
+ "10.1063/1.4772508": {
+  "err": "Expecting value: line 1 column 1 (char 0)"
+ },
+ "10.1063/1.4865955": {
+  "lic": null,
+  "title": "Interface and nanostructure evolution of cobalt germanides on Ge(001)",
+  "journal": "Journal of Applied Physics",
+  "year": 2014,
+  "first": "Grzela",
+  "vol": "115",
+  "page": "074307",
+  "cites": 17
+ },
+ "10.1063/1.4884654": {
+  "err": "Expecting value: line 1 column 1 (char 0)"
+ },
+ "10.1063/1.48846541": {
+  "err": "Expecting value: line 1 column 1 (char 0)"
+ },
+ "10.1063/1.4939124": {
+  "lic": null,
+  "title": "Reaction paths of phosphine dissociation on silicon (001)",
+  "journal": "The Journal of Chemical Physics",
+  "year": 2016,
+  "first": "Warschkow",
+  "vol": "144",
+  "page": "014705",
+  "cites": 51
+ },
+ "10.1063/5.0145772": {
+  "lic": "https://creativecommons.org/licenses/by/4.0/",
+  "title": "Bismuth trichloride as a molecular precursor for silicon doping",
+  "journal": "Applied Physics Letters",
+  "year": 2023,
+  "first": "Lundgren",
+  "vol": "122",
+  "page": "151601",
+  "cites": 4
+ },
+ "10.1063/5.0208571": {
+  "lic": null,
+  "title": "Needle in a haystack: Efficiently finding atomically defined quantum dots for electrostatic force microscopy",
+  "journal": "Review of Scientific Instruments",
+  "year": 2024,
+  "first": "Bustamante",
+  "vol": "95",
+  "page": "083709",
+  "cites": 2
+ },
+ "10.1063/5.0283324": {
+  "lic": "https://creativecommons.org/licenses/by-nc/4.0/",
+  "title": "Hydrogen passivation effects on spatially resolved charge trap densities in Si(100)\u2013SiO2",
+  "journal": "AIP Advances",
+  "year": 2025,
+  "first": "Czarnecki",
+  "vol": "15",
+  "page": "105024",
+  "cites": 2
+ },
+ "10.1063/5.0294020": {
+  "lic": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+  "title": "Materials for quantum technologies: A roadmap for spin and topology",
+  "journal": "Applied Physics Reviews",
+  "year": 2025,
+  "first": "Banerjee",
+  "vol": "12",
+  "page": "041328",
+  "cites": 14
+ },
+ "10.1073/pnas.2404456121": {
+  "lic": "https://creativecommons.org/licenses/by/4.0/",
+  "title": "Spatially resolved random telegraph fluctuations of a single trap at the Si/SiO\n                    <sub>2</sub>\n                    interface",
+  "journal": "Proceedings of the National Academy of Sciences",
+  "year": 2024,
+  "first": "Cowie",
+  "vol": "121",
+  "page": "e2404456121",
+  "cites": 13
+ },
+ "10.1080/08927020500035580": {
+  "lic": null,
+  "title": "Scanning probe microscopy for silicon device fabrication",
+  "journal": "Molecular Simulation",
+  "year": 2005,
+  "first": "Simmons",
+  "vol": "31",
+  "page": "505-515",
+  "cites": 51
+ },
+ "10.1088/0143-0807/20/6/310": {
+  "lic": null,
+  "title": "Studying the kinetics of graphite oxidation using a scanning tunnelling microscope - an undergraduate laboratory experiment",
+  "journal": "European Journal of Physics",
+  "year": 1999,
+  "first": "Curson",
+  "vol": "20",
+  "page": "453-460",
+  "cites": 1
+ },
+ "10.1088/0953-8984/26/1/012001": {
+  "lic": "http://creativecommons.org/licenses/by/3.0/",
+  "title": "Investigating individual arsenic dopant atoms in silicon using low-temperature scanning tunnelling microscopy",
+  "journal": "Journal of Physics: Condensed Matter",
+  "year": 2013,
+  "first": "Sinthiptharakoon",
+  "vol": "26",
+  "page": "012001",
+  "cites": 31
+ },
+ "10.1088/0957-4484/18/6/065301": {
+  "lic": null,
+  "title": "Comparison of GaP and PH\n                    <sub>3</sub>\n                    as dopant sources for STM-based device fabrication",
+  "journal": "Nanotechnology",
+  "year": 2007,
+  "first": "Goh",
+  "vol": "18",
+  "page": "065301",
+  "cites": 9
+ },
+ "10.1088/0957-4484/26/15/155701": {
+  "lic": "http://creativecommons.org/licenses/by/3.0/",
+  "title": "Ba termination of Ge(001) studied with STM",
+  "journal": "Nanotechnology",
+  "year": 2015,
+  "first": "Koczorowski",
+  "vol": "26",
+  "page": "155701",
+  "cites": 7
+ },
+ "10.1088/0957-4484/26/38/385701": {
+  "lic": null,
+  "title": "Growth and evolution of nickel germanide nanostructures on Ge(001)",
+  "journal": "Nanotechnology",
+  "year": 2015,
+  "first": "Grzela",
+  "vol": "26",
+  "page": "385701",
+  "cites": 15
+ },
+ "10.1088/0964-1726/11/5/318": {
+  "lic": null,
+  "title": "Scanning tunnelling microscope fabrication of arrays of phosphorus atom qubits for a silicon quantum computer",
+  "journal": "Smart Materials and Structures",
+  "year": 2002,
+  "first": "O\u00a0Brien",
+  "vol": "11",
+  "page": "741-748",
+  "cites": 8
+ },
+ "10.1088/1742-6596/1079/1/012010": {
+  "lic": "http://creativecommons.org/licenses/by/3.0/",
+  "title": "Hydrogen resist lithography and electron beam lithography for fabricating silicon targets for studying donor orbital states",
+  "journal": "Journal of Physics: Conference Series",
+  "year": 2018,
+  "first": "Crane",
+  "vol": "1079",
+  "page": "012010",
+  "cites": 5
+ },
+ "10.1088/2399-1984/ada901": {
+  "lic": "https://creativecommons.org/licenses/by/4.0/",
+  "title": "Roadmap on atomic-scale semiconductor devices",
+  "journal": "Nano Futures",
+  "year": 2025,
+  "first": "Schofield",
+  "vol": "9",
+  "page": "012001",
+  "cites": 23
+ },
+ "10.1088/2632-2153/ae520e": {
+  "lic": "https://creativecommons.org/licenses/by/4.0/",
+  "title": "Overcoming labelled data scarcity for defect classification in scanning tunnelling microscopy",
+  "journal": "Machine Learning: Science and Technology",
+  "year": 2026,
+  "first": "Kolev",
+  "vol": "7",
+  "page": "025041",
+  "cites": 1
+ },
+ "10.1098/rsta.2003.1221": {
+  "lic": null,
+  "title": "Progress in silicon-based quantum computing",
+  "journal": "Philosophical Transactions of the Royal Society of London. Series A: Mathematical, Physical and Engineering Sciences",
+  "year": 2003,
+  "first": "Clark",
+  "vol": "361",
+  "page": "1451-1471",
+  "cites": 56
+ },
+ "10.1103/physrevb.55.10819": {
+  "lic": null,
+  "title": "Interaction of silane with Cu(111): Surface alloy and molecular chemisorbed phases",
+  "journal": "Physical Review B",
+  "year": 1997,
+  "first": "Curson",
+  "vol": "55",
+  "page": "10819-10829",
+  "cites": 22
+ },
+ "10.1103/physrevb.64.161401": {
+  "lic": null,
+  "title": "Towards the fabrication of phosphorus qubits for a silicon quantum computer",
+  "journal": "Physical Review B",
+  "year": 2001,
+  "first": "O\u2019Brien",
+  "vol": "64",
+  "page": "161401",
+  "cites": 173
+ },
+ "10.1103/physrevb.69.085312": {
+  "lic": null,
+  "title": "Split-off dimer defects on the<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><mml:mi mathvariant=\"normal\">Si</mml:mi><mml:mn/><mml:mo>(</mml:mo><mml:mn>001</mml:mn><mml:mo>)</mml:mo><mml:mn>2</mml:mn><mml:mo>\u00d7</mml:mo><mml:mn>1</mml:mn></mml:math>surface",
+  "journal": "Physical Review B",
+  "year": 2004,
+  "first": "Schofield",
+  "vol": "69",
+  "page": "085312",
+  "cites": 27
+ },
+ "10.1103/physrevb.69.195303": {
+  "err": "Expecting value: line 1 column 1 (char 0)"
+ },
+ "10.1103/physrevb.72.094414": {
+  "lic": null,
+  "title": "Coupling of spin-wave modes in extended ferromagnetic thin film antidot arrays",
+  "journal": "Physical Review B",
+  "year": 2005,
+  "first": "McPhail",
+  "vol": "72",
+  "page": "094414",
+  "cites": 30
+ },
+ "10.1103/physrevb.72.125328": {
+  "lic": null,
+  "title": "Phosphine adsorption and dissociation on the Si(001) surface: An\n                    <i>ab initio</i>\n                    survey of structures",
+  "journal": "Physical Review B",
+  "year": 2005,
+  "first": "Warschkow",
+  "vol": "72",
+  "page": "125328",
+  "cites": 50
+ },
+ "10.1103/physrevb.72.195323": {
+  "lic": null,
+  "title": "Observation of substitutional and interstitial phosphorus on clean<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><mml:mrow><mml:mi mathvariant=\"normal\">Si</mml:mi><mml:mrow><mml:mo>(</mml:mo><mml:mn>100</mml:mn><mml:mo>)</mml:mo></mml:mrow><mml:mtext>\u2212</mml:mtext><mml:mrow><mml:mo>(</mml:mo><mml:mn>2</mml:mn><mml:mo>\u00d7</mml:mo><mml:mn>1</mml:mn><mml:mo>)</mml:mo></mml:mrow></mml:mrow></mml:math>with scanning tunneling microscopy",
+  "journal": "Physical Review B",
+  "year": 2005,
+  "first": "Brown",
+  "vol": "72",
+  "page": "195323",
+  "cites": 12
+ },
+ "10.1103/physrevb.74.113311": {
+  "lic": null,
+  "title": "Importance of charging in atomic resolution scanning tunneling microscopy: Study of a single phosphorus atom in a<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><mml:mrow><mml:mi>Si</mml:mi><mml:mo>(</mml:mo><mml:mn>001</mml:mn><mml:mo>)</mml:mo></mml:mrow></mml:math>surface",
+  "journal": "Physical Review B",
+  "year": 2006,
+  "first": "Radny",
+  "vol": "74",
+  "page": "113311",
+  "cites": 16
+ },
+ "10.1103/physrevb.74.195310": {
+  "lic": null,
+  "title": "Thermal dissociation and desorption of<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\"><mml:mrow><mml:mi mathvariant=\"normal\">P</mml:mi><mml:msub><mml:mi mathvariant=\"normal\">H</mml:mi><mml:mn>3</mml:mn></mml:msub></mml:mrow></mml:math>on Si(001): A reinterpretation of spectroscopic data",
+  "journal": "Physical Review B",
+  "year": 2006,
+  "first": "Wilson",
+  "vol": "74",
+  "page": "195310",
+  "cites": 62
+ },
+ "10.1103/physrevb.76.155302": {
+  "lic": null,
+  "title": "Single hydrogen atoms on the Si(001) surface",
+  "journal": "Physical Review B",
+  "year": 2007,
+  "first": "Radny",
+  "vol": "76",
+  "page": "155302",
+  "cites": 29
+ },
+ "10.1103/physrevb.84.041306": {
+  "lic": null,
+  "title": "Model system for controlling strain in silicon at the atomic scale",
+  "journal": "Physical Review B",
+  "year": 2011,
+  "first": "Studer",
+  "vol": "84",
+  "page": "041306",
+  "cites": 7
+ },
+ "10.1103/physrevb.88.205203": {
+  "lic": null,
+  "title": "Magnetic anisotropy of single Mn acceptors in GaAs in an external magnetic field",
+  "journal": "Physical Review B",
+  "year": 2013,
+  "first": "Bozkurt",
+  "vol": "88",
+  "page": "205203",
+  "cites": 5
+ },
+ "10.1103/physrevb.91.235319": {
+  "lic": null,
+  "title": "Initial growth of Ba on<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\"><mml:mrow><mml:mi>Ge</mml:mi><mml:mo>(</mml:mo><mml:mn>001</mml:mn><mml:mo>)</mml:mo></mml:mrow></mml:math>: An STM and DFT study",
+  "journal": "Physical Review B",
+  "year": 2015,
+  "first": "Koczorowski",
+  "vol": "91",
+  "page": "235319",
+  "cites": 8
+ },
+ "10.1103/physrevb.93.195304": {
+  "lic": null,
+  "title": "STM and DFT study on formation and characterization of Ba-incorporated phases on a Ge(001) surface",
+  "journal": "Physical Review B",
+  "year": 2016,
+  "first": "Koczorowski",
+  "vol": "93",
+  "page": "195304",
+  "cites": 7
+ },
+ "10.1103/physrevb.95.075408": {
+  "lic": null,
+  "title": "Exact location of dopants below the Si(001):H surface from scanning tunneling microscopy and density functional theory",
+  "journal": "Physical Review B",
+  "year": 2017,
+  "first": "Br\u00e1zdov\u00e1",
+  "vol": "95",
+  "page": "075408",
+  "cites": 14
+ },
+ "10.1103/physrevb.97.155306": {
+  "lic": null,
+  "title": "Two- to three-dimensional crossover in a dense electron liquid in silicon",
+  "journal": "Physical Review B",
+  "year": 2018,
+  "first": "Matmon",
+  "vol": "97",
+  "page": "155306",
+  "cites": 6
+ },
+ "10.1103/physrevlett.100.246807": {
+  "lic": null,
+  "title": "Valence Surface Electronic States on Ge(001)",
+  "journal": "Physical Review Letters",
+  "year": 2008,
+  "first": "Radny",
+  "vol": "100",
+  "page": "246807",
+  "cites": 36
+ },
+ "10.1103/physrevlett.103.189702": {
+  "lic": null,
+  "title": "Radny<i>et\u00a0al.</i>Reply:",
+  "journal": "Physical Review Letters",
+  "year": 2009,
+  "first": "Radny",
+  "vol": "103",
+  "page": "189702",
+  "cites": 11
+ },
+ "10.1103/physrevlett.132.256202": {
+  "err": "Expecting value: line 1 column 1 (char 0)"
+ },
+ "10.1103/physrevlett.91.136104": {
+  "lic": null,
+  "title": "Atomically Precise Placement of Single Dopants in Si",
+  "journal": "Physical Review Letters",
+  "year": 2003,
+  "first": "Schofield",
+  "vol": "91",
+  "page": "136104",
+  "cites": 357
+ },
+ "10.1103/physrevlett.93.226102": {
+  "lic": null,
+  "title": "Phosphine Dissociation on the Si(001) Surface",
+  "journal": "Physical Review Letters",
+  "year": 2004,
+  "first": "Wilson",
+  "vol": "93",
+  "page": "226102",
+  "cites": 65
+ },
+ "10.1109/commad.2002.1237241": {
+  "lic": null,
+  "title": "Minimisation of P surface segregation during epitaxial silicon growth for the fabrication of a silicon-based quantum computer",
+  "journal": "2002 Conference on Optoelectronic and Microelectronic Materials and Devices. COMMAD 2002. Proceedings (Cat. No.02EX601)",
+  "year": null,
+  "first": "Oberbeck",
+  "vol": null,
+  "page": "259-262",
+  "cites": 0
+ },
+ "10.1109/nano.2001.966468": {
+  "lic": null,
+  "title": "Quantum-dot cellular automata: introduction and experimental overview",
+  "journal": "Proceedings of the 2001 1st IEEE Conference on Nanotechnology. IEEE-NANO 2001 (Cat. No.01EX516)",
+  "year": null,
+  "first": "Snider",
+  "vol": null,
+  "page": "465-470",
+  "cites": 8
+ },
+ "10.1109/nano.2001.966469": {
+  "lic": null,
+  "title": "The atomic fabrication of a silicon based quantum computer",
+  "journal": "Proceedings of the 2001 1st IEEE Conference on Nanotechnology. IEEE-NANO 2001 (Cat. No.01EX516)",
+  "year": null,
+  "first": "Simmons",
+  "vol": null,
+  "page": "471-476",
+  "cites": 0
+ },
+ "10.1116/1.1419084": {
+  "lic": null,
+  "title": "Simple design for the transportation of <i>ex situ</i> prepared hydrogen passivated silicon",
+  "journal": "Journal of Vacuum Science &amp; Technology A: Vacuum, Surfaces, and Films",
+  "year": 2002,
+  "first": "MacLaren",
+  "vol": "20",
+  "page": "285-287",
+  "cites": 4
+ },
+ "10.1116/1.1566973": {
+  "lic": null,
+  "title": "Scanning tunneling microscopy imaging of charged defects on clean Si(100)-(2\u00d71)",
+  "journal": "Journal of Vacuum Science &amp; Technology A: Vacuum, Surfaces, and Films",
+  "year": 2003,
+  "first": "Brown",
+  "vol": "21",
+  "page": "1506-1509",
+  "cites": 13
+ },
+ "10.1117/12.2552059": {
+  "lic": null,
+  "title": "Resistless EUV lithography: patterning with EUV-induced surface reactions (Conference Presentation)",
+  "journal": "Extreme Ultraviolet (EUV) Lithography XI",
+  "year": 2020,
+  "first": "Tseng",
+  "vol": null,
+  "page": "53",
+  "cites": 0
+ },
+ "10.1117/12.454617": {
+  "lic": null,
+  "title": "&lt;title&gt;Nanoscale phosphorous atom arrays created using STM for the fabricaton of a silicon-based quantum computer&lt;/title&gt;",
+  "journal": "SPIE Proceedings",
+  "year": 2001,
+  "first": "O'Brien",
+  "vol": "4590",
+  "page": "299-309",
+  "cites": 0
+ },
+ "10.1117/12.582283": {
+  "lic": null,
+  "title": "The fabrication of devices in silicon using scanning probe microscopy",
+  "journal": "SPIE Proceedings",
+  "year": 2005,
+  "first": "Ruess",
+  "vol": "5649",
+  "page": "306",
+  "cites": 0
+ },
+ "10.1117/12.583316": {
+  "lic": null,
+  "title": "STM characterization of phosphine adsorption on STM-patterned H:Si(001)surfaces",
+  "journal": "SPIE Proceedings",
+  "year": 2005,
+  "first": "Hallam",
+  "vol": "5650",
+  "page": "172",
+  "cites": 1
+ },
+ "10.1117/12.893058": {
+  "lic": null,
+  "title": "Morphology of cleaved rubrene and its evolution in an ambient environment",
+  "journal": "SPIE Proceedings",
+  "year": 2011,
+  "first": "Thompson",
+  "vol": "8117",
+  "page": "811712",
+  "cites": 0
+ },
+ "10.1126/sciadv.1602586": {
+  "lic": null,
+  "title": "Nondestructive imaging of atomically thin nanostructures buried in silicon",
+  "journal": "Science Advances",
+  "year": 2017,
+  "first": "Gramse",
+  "vol": "3",
+  "page": "e1602586",
+  "cites": 74
+ },
+ "10.1126/sciadv.adf5997": {
+  "lic": null,
+  "title": "Resistless EUV lithography: Photon-induced oxide patterning on silicon",
+  "journal": "Science Advances",
+  "year": 2023,
+  "first": "Tseng",
+  "vol": "9",
+  "page": "eadf5997",
+  "cites": 36
+ },
+ "10.1142/9789811206061_0003": {
+  "lic": null,
+  "title": "Definition of atomically precise fabrication and quantum metamaterials",
+  "journal": "2D Quantum Metamaterials",
+  "year": 2019,
+  "first": "Curson",
+  "vol": null,
+  "page": "23-32",
+  "cites": 0
+ },
+ "10.1142/s0218625x03005098": {
+  "lic": null,
+  "title": "Challenges in Surface Science for a P-in-Si Quantum Computer \u2014 Phosphine Adsorption/Incorporation and Epitaxial  Si Encapsulation",
+  "journal": "Surface Review and Letters",
+  "year": 2003,
+  "first": "Oberbeck",
+  "vol": "10",
+  "page": "415-423",
+  "cites": 2
+ },
+ "10.1143/jjap.40.2058": {
+  "lic": null,
+  "title": "Single Photon Detection with a Quantum Dot Transistor",
+  "journal": "Japanese Journal of Applied Physics",
+  "year": 2001,
+  "first": "Shields",
+  "vol": "40",
+  "page": "2058",
+  "cites": 39
+ },
+ "10.1380/ejssnt.2006.609": {
+  "lic": null,
+  "title": "Atomic-scale observation and control of the reaction of phosphine with silicon",
+  "journal": "e-Journal of Surface Science and Nanotechnology",
+  "year": 2006,
+  "first": "Schofield",
+  "vol": "4",
+  "page": "609-613",
+  "cites": 5
+ },
+ "10.1557/proc-864-e5.4": {
+  "lic": null,
+  "title": "Towards the Routine Fabrication of P in Si Nanostructures: Understanding P Precursor Molecules on Si(001)",
+  "journal": "MRS Proceedings",
+  "year": 2005,
+  "first": "Schofield",
+  "vol": "864",
+  "page": "E5.4",
+  "cites": 2
+ },
+ "10.26421/qic1.s-8": {
+  "lic": null,
+  "title": "Construction of a silicon-based solid state quantum computer",
+  "journal": "Quantum Information and Computation",
+  "year": 2001,
+  "first": "Dzurak",
+  "vol": "1",
+  "page": "82-95",
+  "cites": 4
+ }
+}
