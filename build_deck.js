@@ -136,10 +136,13 @@ const chartBase = () => ({ fontFace: T.font, catAxisLabelColor: T.ink, valAxisLa
   const s = newSlide("TWO_FIG", "Why one site matters: wavefunction overlap", "Act 1");
   const a = img(s, "O_wavefunction_scale.png", 0.4, 1.0, 6.3, 2.75, "left");
   caption(s, "To scale: two P donors 13.0 nm apart over the Si(001) surface lattice, hydrogenic envelope |ψ|² ∝ e^(−2r/a_B) with a_B ≈ 2 nm (our model; inputs He2019, Schofield2025 §3.2, Stock2024).", 0.5, a.y + a.h + 0.04, 6.2, 0.5);
-  const b = img(s, "O_bloch.png", 6.9, 0.95, 2.6, 2.45, "center");
-  caption(s, "Each spin is a qubit: |ψ⟩ = α|0⟩ + β|1⟩ on the Bloch sphere (schematic).", 6.9, b.y + b.h + 0.02, 2.6, 0.45);
+  const b = img(s, "F20_siegl2025_fig1f.png", 6.85, 0.98, 1.6, 1.15, "left");
+  const b2 = img(s, "F20_siegl2025_fig1h.png", 8.5, 0.98, 1.05, 1.15, "left");
+  caption(s, "Real thing: STM image of a buried acceptor's wavefunction (f) beside theory (h). Siegl et al. (Curson group), Nano Lett. 25, 13996 (2025) Fig. 1f,h, CC BY 4.0", 6.85, 2.18, 2.7, 0.75);
+  const c = img(s, "O_bloch.png", 6.85, 2.95, 1.3, 1.25, "left");
+  caption(s, "Each spin is a qubit: |ψ⟩ = α|0⟩ + β|1⟩ (schematic).", 8.2, 3.3, 1.35, 0.7);
   bullets(s, ["Qubits interact through exchange, set by how their electron clouds overlap", "Exchange depends strongly on exact donor position (valley oscillations), so a one-site error changes the gate"], 0.5, 4.3, 9.0, 0.85, 13);
-  src(s, "Schofield2025 §3.2; He2019; Stock2024. Envelope plot is our model, not a full valley calculation");
+  src(s, "Schofield2025 §3.2; He2019; Stock2024; Siegl2025. Envelope plot is our model, not a full valley calculation");
   notes(s, "This is the quantum reason the whole talk is about placement. Each donor's electron is a cloud about 2 nanometres in radius; drawn to scale, 13 nanometres apart as in the He 2019 gate, over the real surface lattice. The colour is log scale: the clouds barely touch in the middle, and that faint overlap is what sets the exchange coupling J, the interaction a two-qubit gate uses. The roadmap says exchange depends strongly on the exact donor position because of valley oscillations, so moving one donor by one site changes the gate. On the right, each spin is a qubit on the Bloch sphere. Likely question: is your plot exact? It's a simple hydrogen-like envelope; real donors add valley oscillations on top.");
 }
 // ============================================================================ 5. Why not ion implantation?
@@ -221,25 +224,28 @@ const EVENTS = [
 // ============================================================================ 6. Neil J. Curson
 {
   const s = newSlide("TITLE_ONLY", "The researcher: Neil J. Curson (UCL)", "Act 1");
-  text(s, "London Centre for Nanotechnology and Dept. of Electronic & Electrical Engineering, UCL", 0.5, 0.95, 9.0, 0.3, { fontSize: 13, color: T.muted });
+  text(s, "London Centre for Nanotechnology and Dept. of Electronic & Electrical Engineering, UCL", 0.5, 0.78, 9.0, 0.25, { fontSize: 11, color: T.muted });
   const cards = [
     { y: 2003, t: "Co-author: first single P atoms placed", k: "Schofield2003" },
     { y: 2020, t: "Corresponding author: arsenic patterned by STM", k: "Stock2020" },
     { y: 2023, t: "As in germanium · ARPES of δ-layers · X-ray imaging of buried devices", k: "Hofmann2023; Constantinou2023; DAnna2023" },
     { y: 2024, t: "Corresponding author: 97% single-As yield · EUV H desorption", k: "Stock2024; Constantinou2024" },
-    { y: 2025, t: "Guest editor: roadmap on atomic-scale devices", k: "Schofield2025" }];
+    { y: 2025, t: "Guest editor of the field roadmap · imaging dopant wavefunctions", k: "Schofield2025; Siegl2025" }];
   const x0 = 0.5, cw = 1.72, gap = 0.1;
-  s.addShape(pres.shapes.LINE, { x: 0.6, y: 1.85, w: 8.8, h: 0, line: { color: "9AA3AC", width: 1.5 } });
+  s.addShape(pres.shapes.LINE, { x: 0.6, y: 1.45, w: 8.8, h: 0, line: { color: "9AA3AC", width: 1.5 } });
+  const thumbs = ["O_landmark2003.png", "F11_stock2020_fig3_ad.png", "F12_hofmann2023_fig1a.jpg", "F1_stock2024_fig1_2x2.png", "F20_siegl2025_fig1f.png"];
   cards.forEach((c, i) => {
     const x = x0 + i * (cw + gap);
-    s.addShape(pres.shapes.OVAL, { x: x + cw / 2 - 0.09, y: 1.76, w: 0.18, h: 0.18, fill: { color: T.As }, line: { color: "FFFFFF", width: 1 } });
-    text(s, String(c.y), x, 1.4, cw, 0.3, { fontSize: 14, bold: true, color: T.As, align: "center" });
-    s.addShape(pres.shapes.RECTANGLE, { x, y: 2.1, w: cw, h: 1.75, fill: { color: T.panel }, line: { color: T.panel, width: 0 } });
-    text(s, c.t, x + 0.1, 2.2, cw - 0.2, 1.15, { fontSize: 12 });
-    text(s, c.k, x + 0.1, 3.38, cw - 0.2, 0.42, { fontSize: 9, color: T.muted });
+    s.addShape(pres.shapes.OVAL, { x: x + cw / 2 - 0.09, y: 1.36, w: 0.18, h: 0.18, fill: { color: T.As }, line: { color: "FFFFFF", width: 1 } });
+    text(s, String(c.y), x, 1.0, cw, 0.3, { fontSize: 14, bold: true, color: T.As, align: "center" });
+    s.addShape(pres.shapes.RECTANGLE, { x, y: 1.65, w: cw, h: 2.95, fill: { color: T.panel }, line: { color: T.panel, width: 0 } });
+    if (thumbs[i]) img(s, thumbs[i], x + 0.08, 1.72, cw - 0.16, 1.05, "center", "middle");
+    else text(s, "figure paywalled (PRL)", x + 0.1, 2.1, cw - 0.2, 0.3, { fontSize: 9, color: T.muted, align: "center" });
+    text(s, c.t, x + 0.1, 2.85, cw - 0.2, 1.2, { fontSize: 11 });
+    text(s, c.k, x + 0.1, 4.1, cw - 0.2, 0.42, { fontSize: 8.5, color: T.muted });
   });
-  callout(s, "Theme of his work: new dopant chemistry (As, Bi, Ge hosts), new ways to see buried atoms, and a path to scale (EUV).", 0.5, 4.15, 9.0, 0.55, { fontSize: 13 });
-  src(s, "REFERENCES.md, Neil J. Curson's papers table (authorship verified against Crossref)");
+  callout(s, "Theme: new dopant chemistry (As, Bi, Ge), new ways to see buried atoms, a path to scale (EUV).", 0.5, 4.68, 9.0, 0.42, { fontSize: 12 });
+  src(s, "Curson paper table. Thumbnails: our redraw (2003); Stock2020 Fig. 3, Hofmann2023 Fig. 1a, Stock2024 Fig. 1, Siegl2025 Fig. 1f (CC BY 4.0)");
   notes(s, "A quick profile of the researcher. Neil Curson is at the London Centre for Nanotechnology and UCL's electrical engineering department. In 2003 he co-authored the paper that first placed single phosphorus atoms. In 2020 his group, with him as corresponding author, showed arsenic could be patterned the same way. In 2023 the group took arsenic into germanium, imaged δ-layers in momentum space with X-ray ARPES, and mapped a buried device with X-ray fluorescence. 2024 is the big one: 97% single-atom yield for arsenic, plus the first hydrogen removal with EUV light. And he co-edited the 2025 roadmap I lean on throughout. Likely question: is he a physicist or an engineer? His appointment is in electronic and electrical engineering.");
 }
 
@@ -286,21 +292,23 @@ function processSlide(title, step, bulletsArr, xsecFile, rightFn, srcText, noteT
 processSlide("Steps 1–3 · Clean surface, 1-atom resist", "Steps 1–3 of 11",
   ["Clean: acetone/IPA, outgas >8 h at 600 °C, ≈1200 °C flashes, UHV <5×10⁻¹¹ mbar", "Resist: atomic H at 330 °C, 5×10⁻⁷ mbar, 5 min caps every surface Si", "EE143 hook: a resist coat one atom thick, no spin speed"],
   "xsec_prep.png", (s) => {
-    const b = img(s, "O2_surface_H.png", 4.8, 1.0, 4.7, 3.6, "center");
-    caption(s, "H-terminated Si(001): dimer rows (grey) each capped by H (blue). Original 3D render, geometry only.", 4.8, b.y + b.h + 0.04, 4.7, 0.4);
-  }, "Stock2020; Stock2024; Constantinou2024 (H termination)",
+    const a = img(s, "F19_achal2018_fig1a.jpg", 4.8, 1.0, 2.3, 1.65, "left");
+    caption(s, "Real STM of H–Si(001): one H per bright spot; rows 0.768 nm, atoms 0.384 nm apart. Achal et al., Nat. Commun. 9, 2778 (2018) Fig. 1a, CC BY 4.0", 7.2, 1.05, 2.3, 1.4);
+    const b = img(s, "O2_surface_H.png", 4.8, 2.75, 4.7, 1.95, "center");
+    caption(s, "Same surface as our 3D render (geometry: Ren2016, Xiang2025).", 4.8, b.y + b.h + 0.02, 4.7, 0.22);
+  }, "Stock2020; Stock2024; Constantinou2024 (H termination); Achal2018",
   "Step one is about cleanliness, because a single stray atom is a defect at this scale. Samples get an acetone and IPA clean, then outgas for more than eight hours at 600 °C, then repeated flash anneals to about 1200 °C, all in ultra-high vacuum below 5×10^-11 millibar. Then atomic hydrogen goes onto every surface silicon. My render on the right shows the result: rows of silicon dimers, each atom capped by one hydrogen. That monolayer is the resist. Think of it as spin-coating, except the thickness is exactly one atom and perfectly uniform. The number to remember: one atom thick. Likely question: why flash to 1200 °C? It's the standard surface prep in these papers; the pack gives the recipe, not the mechanism.");
 
 // ============================================================================ 9. Step 4
 processSlide("Step 4 · Writing with the tip", "Step 4 of 11",
   ["Tip pulses strip H atom by atom: atom-wide lines at 3 V, 10 nA, 10 nm/s", "As windows: 3.5 V, 3000 pA, 50 nm/s, 2 dimers each, ≈12 lattice vectors (4.6 nm) apart", "EE143 hook: e-beam lithography where the resist is one atom thick"],
   "xsec_litho.png", (s) => {
-    const a = img(s, "O2_surface_window.png", 4.8, 1.0, 4.7, 2.4, "center");
-    caption(s, "Bare (tinted) Si sites form the windows. Original render.", 4.8, a.y + a.h, 4.7, 0.22);
-    const b = img(s, "F4_schofield2025_s22_line.jpg", 4.8, 3.65, 4.7, 0.95, "center");
+    const a = img(s, "F19_achal2018_fig2ab.png", 4.8, 1.0, 4.7, 2.3, "center");
+    caption(s, "Before (a) and after (b) writing a pattern one H atom at a time. Achal et al., Nat. Commun. 9, 2778 (2018) Fig. 2a,b, CC BY 4.0", 4.8, a.y + a.h + 0.02, 4.7, 0.36);
+    const b = img(s, "F4_schofield2025_s22_line.jpg", 4.8, 3.72, 4.7, 0.9, "center");
     caption(s, "HDL line written at 3 V, 10 nA. Reproduced from Schofield et al., Nano Futures 9, 012001 (2025) §2.2 Fig. 1 (Lyding, unpublished), CC BY 4.0", 4.8, b.y + b.h + 0.02, 4.7, 0.36);
-  }, "Schofield2025 §2.2, §5.4; Stock2024",
-  "Step four is the lithography. A voltage and current pulse from the STM tip knocks hydrogen off, exposing bare silicon where molecules can later stick. Atom-wide lines are written at 3 volts, 10 nanoamps, 10 nanometres per second; the STM image at the bottom is one of those lines. For arsenic single-atom windows Curson's group used 3.5 volts, 3000 picoamps, 50 nm per second. In my render, the orange patch is a six-site window for phosphorus and the teal patch a four-site window for arsenic. Placement is ±1 atomic spacing. So: e-beam lithography with a one-atom resist. Likely question: how do you know a window is right? The same STM images the surface after each step, as in Stock 2024's Figure 1.");
+  }, "Schofield2025 §2.2, §5.4; Stock2024; Achal2018",
+  "Step four is the lithography. A voltage and current pulse from the STM tip knocks hydrogen off, exposing bare silicon where molecules can later stick. Atom-wide lines are written at 3 volts, 10 nanoamps, 10 nanometres per second; the STM image at the bottom is one of those lines. For arsenic single-atom windows Curson's group used 3.5 volts, 3000 picoamps, 50 nm per second. The top images are real: Achal 2018 writing a pattern one hydrogen at a time, and even repairing mistakes. Placement is ±1 atomic spacing. So: e-beam lithography with a one-atom resist. Likely question: how do you know a window is right? The same STM images the surface after each step, as in Stock 2024's Figure 1.");
 
 // ============================================================================ 10. Step 5
 processSlide("Step 5 · Dosing: phosphine vs arsine", "Step 5 of 11",
@@ -475,8 +483,10 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
     Object.assign(chartBase(), { x: 0.4, y: 1.0, w: 5.2, h: 3.6, barDir: "bar", chartColors: ["5B6770"], valAxisLogScaleBase: 10, valAxisMinVal: 1, valAxisMaxVal: 1e15,
       valAxisLabelFormatCode: "0E+0", showValue: true, dataLabelFormatCode: "0E+0", dataLabelColor: T.ink, dataLabelFontSize: 10, dataLabelPosition: "outEnd",
       title: "EUV writes 11 orders of magnitude faster than STM", showLegend: false, valAxisTitle: "write speed (nm/s, log scale)", showValAxisTitle: true, catAxisLabelFontSize: 10 }));
-  bullets(s, ["STM: 10–1000 nm/s; precise mode ≈100 atoms/s", "EUV: equivalent ≈10¹⁴ nm/s", "Even 10⁷ MEMS tips over a 300 mm wafer stay orders of magnitude too slow for CMOS volumes"], 5.85, 1.15, 3.65, 3.2, 14);
-  src(s, "Schofield2025 §2.2, §5.4");
+  bullets(s, ["STM: 10–1000 nm/s; precise mode ≈100 atoms/s", "EUV: equivalent ≈10¹⁴ nm/s", "Even 10⁷ MEMS tips over a 300 mm wafer stay orders of magnitude too slow"], 5.85, 1.05, 3.65, 2.0, 13);
+  const mt = img(s, "F21_leeuwenhoek2020_fig1ab.jpg", 5.85, 3.1, 3.65, 1.15, "left");
+  caption(s, "Multi-tip direction: a microfabricated double-tip STM probe (SEM). Leeuwenhoek et al., Microsyst. Nanoeng. 6, 99 (2020) Fig. 1a,b, CC BY 4.0", 5.85, mt.y + mt.h + 0.03, 3.65, 0.5);
+  src(s, "Schofield2025 §2.2, §5.4; Leeuwenhoek2020");
   notes(s, "Here's the wall. The STM writes at 10 nm per second for atom-wide lines, up to about 1000 nm per second at 2 volts and hundreds of nanoamps. In atomically precise mode that's around 100 atoms a second. EUV lithography, as used in CMOS fabs, writes at an equivalent of about 10^14 nm per second, eleven orders of magnitude faster. Note the log axis. People have proposed massively parallel MEMS tip arrays, up to ten million tips over a 300 mm wafer, and the roadmap says even that stays orders of magnitude too slow for CMOS volumes. The number to remember: eleven orders of magnitude. Likely question: so is this a dead end? Not for qubit cores, which is where the hybrid idea next comes in.");
 }
 
@@ -486,8 +496,8 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
   bullets(s, ["First H removal from Si(001):H with monochromatic EUV (109 eV), driven by secondary electrons", "Doses up to 18 000 J/cm²: several minutes per chip with 300 W sources", "Hybrid flow: STM for qubits, EUV for contacts, gates and wiring"], 0.5, 1.05, 3.8, 2.9, 14);
   const a = img(s, "F8_constantinou2024_fig5.png", 4.5, 1.0, 5.0, 2.95, "center");
   caption(s, "Proposed 4-stage UHV flow combining EUV and STM lithography. Reproduced from Constantinou et al., Nat. Commun. 15, 694 (2024) Fig. 5, CC BY 4.0", 4.5, a.y + a.h + 0.02, 5.0, 0.36);
-  const b = img(s, "F6_schofield2025_s53_fig1_sem.jpg", 0.5, 3.95, 1.75, 1.1, "left");
-  caption(s, "Resistless EUV lines, 75 nm half-pitch. Schofield2025 §5.3 Fig. 1 (adapted from Tseng2023), CC BY 4.0", 2.35, 4.3, 2.0, 0.75);
+  const b = img(s, "F23_constantinou2024_fig1stm.png", 0.5, 3.9, 2.4, 1.0, "left");
+  caption(s, "STM of Si(001):H before (left) and after photon exposure (right). Constantinou et al. 2024 Fig. 1f,g, CC BY 4.0", 2.98, 3.9, 1.5, 1.15);
   src(s, "Constantinou2024; Schofield2025 §5.3; Tseng2023");
   notes(s, "Curson's 2024 Nature Communications paper showed for the first time that monochromatic EUV light at 109 eV removes hydrogen from the same silicon surface; it's mostly the secondary electrons from the silicon that do the work. It needs doses up to 18,000 joules per square centimetre, several minutes per chip with a 300 watt source, but it's parallel. The proposed flow on the right uses the same hydrogen resist: EUV patterns the big contacts and wiring, the STM writes the qubit cores, then dose and encapsulate as before. The SEM bottom-left shows resistless EUV lines at 75 nm half-pitch. Likely question: why not normal photoresist? The proposed flow keeps the hydrogen monolayer as the resist so every stage stays in UHV, and Tseng 2023 patterned with no photoresist at all.");
 }
@@ -497,10 +507,11 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
   const s = newSlide("TWO_FIG", "Our prototype: a 2×2 arsenic register", "Act 4");
   const a = img(s, "O_prototype_layout.png", 0.4, 0.95, 5.9, 3.05, "left");
   caption(s, "Layout to scale (ours). Inputs: 2×2 pitch 4.6 nm and 4-site windows (Stock2024); SET 17 nm away, gates 146.6 nm apart (Edlbauer2025); buried 30 nm (DAnna2023).", 0.5, a.y + a.h + 0.03, 5.8, 0.45);
-  const b = img(s, "O_prototype3d.png", 6.45, 0.95, 3.05, 2.6, "center");
-  caption(s, "3D concept (not to scale): As δ-layer leads, Al vias, epitaxial cap.", 6.45, b.y + b.h + 0.02, 3.05, 0.4);
+  const b = img(s, "F22_reiner2024_fig1cd.jpg", 6.45, 0.95, 3.05, 1.6, "center");
+  caption(s, "Real counterpart: two 3P registers, SET and gates (c), and atom-scale patches (d). Reiner et al., Nat. Nanotechnol. 19, 605 (2024) Fig. 1c,d, CC BY 4.0", 6.45, b.y + b.h + 0.03, 3.05, 0.6);
+  const b3 = img(s, "O_prototype3d.png", 7.2, 3.25, 1.6, 1.2, "center");
   bullets(s, ["Four single As atoms, one per 4-site window, ≈12 lattice vectors apart", "Design rule from pⁿ: 16 sites at p = 0.97 give ≈61% perfect arrays; at p = 0.7, ≈0.3%"], 0.5, 4.5, 9.0, 0.65, 12.5);
-  src(s, "Our design. Inputs: Stock2024; Edlbauer2025; DAnna2023; Stock2020. Lead widths not given in the papers");
+  src(s, "Our design. Inputs: Stock2024; Edlbauer2025; DAnna2023; Reiner2024. Lead widths not given in the papers");
   notes(s, "To pull it together, here's a prototype we designed on paper, using only recipes from the papers. Four single arsenic atoms in four-site windows form a 2×2 register, with source, drain and two gates written as arsenic δ-layers in the same plane, buried under epitaxial silicon and reached by aluminium vias. The 3D surface on the right is our yield model, p to the n. It shows why the dopant choice decides the design: at arsenic's 0.97 a 16-site array comes out perfect about 61% of the time, at phosphorus's 0.7 about 0.3%. So the register size you can afford is set by chemistry, not by lithography resolution. Likely question: did you build it? No, it's a design exercise; the next slide is its traveler.");
 }
 
@@ -521,7 +532,7 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
   s.addChart(pres.charts.AREA, [{ name: "T (°C)", labels: ["Outgas", "Flash", "H-term.", "Litho/dose", "Incorp.", "Lock layer", "RTA", "Overgrowth"], values: [600, 1200, 330, 25, 350, 25, 500, 250] }],
     Object.assign(chartBase(), { x: 6.25, y: 1.0, w: 3.35, h: 3.8, chartColors: ["8C96A0"], chartColorsOpacity: 70, showValue: true, dataLabelColor: T.ink, dataLabelFontSize: 9, dataLabelPosition: "t",
       title: "Thermal budget: hot before patterning, ≤500 °C after", titleFontSize: 11, showLegend: false, valAxisMinVal: 0, valAxisMaxVal: 1400, valAxisMajorUnit: 400, catAxisLabelRotate: -45, catAxisLabelFontSize: 8.5, valAxisTitle: "°C", showValAxisTitle: true }));
-  src(s, "Stock2020; Stock2024; DAnna2023; Constantinou2024; Ruess2004. Area chart ours; room-temperature steps plotted at 25 °C");
+  src(s, "Stock2020; Stock2024; DAnna2023; Constantinou2024; Ruess2004. Area chart ours; RT steps plotted at 25 °C");
   notes(s, "And here's the traveler for that prototype, every step with its recipe and the EE143 module it maps to. It's a normal process flow: clean and bake, coat a resist, write it, pre-deposit dopant from the gas phase, drive in, RTA, epitaxy, alignment marks, etch, metal, and a Hall measurement. On the right I plotted each step's peak temperature. The two hot steps, outgas and the 1200 °C flash, happen before any patterning. After the pattern exists, nothing exceeds the 500 °C, 15-second RTA. That's the design principle: front-load the heat, then protect the atoms. Likely question: where does it break? Step 4 throughput, which is why the EUV hybrid matters.");
 }
 
@@ -572,18 +583,21 @@ const REFS = [
   ["Namboodiri2024", "\"Multi-scale alignment to buried atom-scale devices using Kelvin probe force microscopy,\" Nanotechnol. Rev. 13, 20230196 (2024). doi:10.1515/ntrev-2023-0196"],
   ["DAnna2026", "\"Element-specific, non-destructive profiling of two-dimensional dopant layers in silicon,\" npj Quantum Inf. (2026, online 11 Nov). doi:10.1038/s41534-026-01393-x"],
   ["Kiczynski2022", "\"Engineering topological states in atom-based semiconductor quantum dots,\" Nature 606, 694–699 (2022). doi:10.1038/s41586-022-04706-0"],
+  ["Achal2018", "\"Lithography for robust and editable atomic-scale silicon devices and memories,\" Nat. Commun. 9, 2778 (2018). doi:10.1038/s41467-018-05171-y"],
+  ["Siegl2025", "\"Imaging the acceptor wave function anisotropy in silicon,\" Nano Lett. 25, 13996 (2025). doi:10.1021/acs.nanolett.5c02675"],
+  ["Leeuwenhoek2020", "\"Fabrication of on-chip probes for double-tip scanning tunneling microscopy,\" Microsyst. Nanoeng. 6, 99 (2020). doi:10.1038/s41378-020-00209-y"],
   ["Kane2000", "\"Silicon-based quantum computation,\" Fortschr. Phys. 48, 1023–1041 (2000). doi:10.1002/1521-3978(200009)48:9/11<1023::AID-PROP1023>3.0.CO;2-J"],
   ["OBrien2001", "\"Towards the fabrication of phosphorus qubits for a silicon quantum computer,\" Phys. Rev. B 64, 161401 (2001). doi:10.1103/PhysRevB.64.161401"],
   ["Ren2016", "\"Origin of symmetric dimer images of Si(001) observed by low-temperature scanning tunneling microscopy,\" Sci. Rep. 6, 27868 (2016). doi:10.1038/srep27868"],
   ["Xiang2025", "\"Self-passivation reduces the Fermi level pinning in the metal-semiconductor contacts,\" Nat. Commun. 16, 10675 (2025). doi:10.1038/s41467-025-65695-y"],
 ];
 REFS.sort((p, q) => p[0].localeCompare(q[0]));
-for (let pg = 0; pg * 16 < REFS.length; pg++) {
-  const chunk = REFS.slice(pg * 16, pg * 16 + 16);
+for (let pg = 0; pg * 17 < REFS.length; pg++) {
+  const chunk = REFS.slice(pg * 17, pg * 17 + 17);
   const s = newSlide("REFS", pg ? "References (2 of 2)" : "References (1 of 2)", "Wrap-up");
-  [chunk.slice(0, 8), chunk.slice(8)].forEach((col, ci) => {
-    const runs = col.map(([k, r], i) => ({ text: `[${pg * 16 + ci * 8 + i + 1}] ${k}: ${r}`, options: { breakLine: true, paraSpaceAfter: 4 } }));
-    text(s, runs, 0.5 + ci * 4.6, 0.95, 4.4, 4.25, { fontSize: 9.5, color: T.ink });
+  [chunk.slice(0, 9), chunk.slice(9)].forEach((col, ci) => {
+    const runs = col.map(([k, r], i) => ({ text: `[${pg * 17 + ci * 9 + i + 1}] ${k}: ${r}`, options: { breakLine: true, paraSpaceAfter: 3 } }));
+    text(s, runs, 0.5 + ci * 4.6, 0.92, 4.4, 4.3, { fontSize: 9, color: T.ink });
   });
   notes(s, pg ? "Second page of references, continuing alphabetically. Kane 2000 and O'Brien 2001 supply the Kane-architecture numbers on slide 5, since the 1998 paper itself isn't open; Ren 2016 and Xiang 2025 give the dimer and silicon–hydrogen bond lengths used in my surface renders. New papers beyond my original pack, like Jakob 2022, Reiner 2024, Namboodiri 2024, Kiczynski 2022 and Curson's newest, D'Anna 2026, are here too, all open access. Likely question: why cite a contact-physics paper for a bond length? It states the 1.51 Å Si–H bond I used; I only use that number." :
     "References, alphabetical by key; keys match each slide's source line. Figures marked 'Reproduced from' are CC BY 4.0 and credited on the slide; paywalled or no-derivatives figures were redrawn as original schematics instead of copied. Diagrams marked 'ours' or 'our model' are original and use only published numbers, with the exact spec and its source in notes/specs. If someone wants one paper to start with, I'd point them to the 2025 roadmap, Schofield et al. in Nano Futures, which covers the whole field and is open access. Likely question: are the figures licensed? Yes: CC BY figures are reproduced with credit, and everything else is redrawn.");

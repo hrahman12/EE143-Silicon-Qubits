@@ -57,6 +57,13 @@ CROPS = [
  ("F14_edlbauer2025_fig1ab.png", f"{RAW}/Edlbauer2025/page2_300dpi.png", (0.06, 0.055, 0.63, 0.298)),
  ("F15_wang2022_fig1.jpg", f"{RAW}/Wang2022/41467_2022_34220_Fig1_HTML.jpg", (0, 0, 1, 1)),
  ("F18_kiczynski2022_fig2a.png", f"{RAW}/Kiczynski2022/p4_940x833.png", (0, 0, 1, 1)),
+ ("F19_achal2018_fig1a.jpg", f"{RAW}/Achal2018/pdfimg/p3_1845x436.jpeg", (0.0, 0.0, 0.333, 1.0)),
+ ("F19_achal2018_fig2ab.png", f"{RAW}/Achal2018/pdfimg/p4_975x1526.png", (0.0, 0.0, 1.0, 0.315)),
+ ("F20_siegl2025_fig1f.png", f"{RAW}/Siegl2025/pdfimg/p2_903x1357.png", (0.535, 0.53, 0.845, 0.69)),
+ ("F20_siegl2025_fig1h.png", f"{RAW}/Siegl2025/pdfimg/p2_903x1357.png", (0.645, 0.715, 1.0, 0.95)),
+ ("F21_leeuwenhoek2020_fig1ab.jpg", f"{RAW}/Leeuwenhoek2020/41378_2020_209_Fig1_HTML.jpg", (0.0, 0.0, 1.0, 0.33)),
+ ("F22_reiner2024_fig1cd.jpg", f"{RAW}/Reiner2024/41565_2023_1596_Fig1_HTML.jpg", (0.468, 0.0, 1.0, 1.0)),
+ ("F23_constantinou2024_fig1stm.png", f"{RAW}/Constantinou2024/pdfimg/p2_x69_1652x943.png", (0.352, 0.52, 1.0, 1.0)),
  ("F17_tseng2023_fig7.jpg", f"{RAW}/Tseng2023/pdfimg/p8_x32_1650x1005.jpeg", (0, 0, 1, 1)),
 ]
 

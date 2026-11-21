@@ -49,3 +49,9 @@ C-dot,19,C_dot_yield.png,Schofield2025 §1; Ivie2021; Stock2024,,,original chart
 C-range,21,C_range_fidelity.png,Thorvaldson2025; Edlbauer2025,,,original chart (this project),floating range chart
 C-scatter,7,native chart,He2019; Wang2022; Kiczynski2022; Reiner2024; Thorvaldson2025; Edlbauer2025,,,native pptx scatter,qubits/dots per device vs year
 C-area,26,native chart,Stock2020; Stock2024; DAnna2023; Constantinou2024,,,native pptx area,thermal budget across the flow
+F19,10,F19_achal2018_fig1a.jpg,Achal2018,Fig. 1a,https://doi.org/10.1038/s41467-018-05171-y (PMC6056515),CC BY 4.0,"Achal et al., Nat. Commun. 9, 2778 (2018) Fig. 1a, CC BY 4.0"
+F19,11,F19_achal2018_fig2ab.png,Achal2018,"Fig. 2a,b",https://doi.org/10.1038/s41467-018-05171-y (PMC6056515),CC BY 4.0,"Achal et al., Nat. Commun. 9, 2778 (2018) Fig. 2a,b, CC BY 4.0"
+F20,"4, 8",F20_siegl2025_fig1f.png; F20_siegl2025_fig1h.png,Siegl2025,"Fig. 1f,h",https://doi.org/10.1021/acs.nanolett.5c02675 (PMC12464996),CC BY 4.0,"Siegl et al., Nano Lett. 25, 13996 (2025) Fig. 1f,h, CC BY 4.0"
+F21,25,F21_leeuwenhoek2020_fig1ab.jpg,Leeuwenhoek2020,"Fig. 1a,b",https://doi.org/10.1038/s41378-020-00209-y (PMC8433193),CC BY 4.0,"Leeuwenhoek et al., Microsyst. Nanoeng. 6, 99 (2020) Fig. 1a,b, CC BY 4.0"
+F22,27,F22_reiner2024_fig1cd.jpg,Reiner2024,"Fig. 1c,d",https://doi.org/10.1038/s41565-023-01596-9 (PMC11106007),CC BY 4.0,"Reiner et al., Nat. Nanotechnol. 19, 605 (2024) Fig. 1c,d, CC BY 4.0"
+F23,26,F23_constantinou2024_fig1stm.png,Constantinou2024,"Fig. 1f,g",https://doi.org/10.1038/s41467-024-44790-6 (PMC10808421),CC BY 4.0,"Constantinou et al., Nat. Commun. 15, 694 (2024) Fig. 1f,g, CC BY 4.0"
