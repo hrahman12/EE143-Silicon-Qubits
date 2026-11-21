@@ -4,7 +4,7 @@ Same text as the speaker notes inside atom_by_atom_silicon_final.pptx. Physics, 
 
 ## 15-minute timing plan
 
-Slides 1–29 are about 3,258 words, roughly 22 minutes read aloud. For 15 minutes, keep each slide's equation and its one worked number, and save the "Likely question" lines for Q&A.
+Slides 1–29 are about 3,281 words, roughly 22 minutes read aloud. For 15 minutes, keep each slide's equation and its one worked number, and save the "Likely question" lines for Q&A.
 
 | Slides | Block | Target |
 |---|---|---|
@@ -31,9 +31,9 @@ _112 words_
 
 ## Slide 3: A single donor atom is a natural qubit
 
-Treat the donor as hydrogen in a dielectric. The effective Bohr radius is a_B = ε_r (m_e/m*) a_0, so silicon's large permittivity and small effective mass stretch hydrogen's 0.053 nm to about 2 nm. Two spins come for free: the electron and the phosphorus nucleus with I = 1/2, giving a 2 × 2 = 4-level system. Electron transitions are driven by ESR, nuclear ones by NMR. Readout converts spin to charge: a spin-up electron can tunnel into a nearby single-electron transistor, a spin-down one cannot, and the SET current changes. In isotopically purified ²⁸Si there are no stray nuclear spins, which is why coherence reaches 35.6 s and gates approach 99.99%. Likely question: why not hydrogen-like levels? They are; valleys add structure.
+Treat the donor as hydrogen in a dielectric. The effective Bohr radius is a_B = ε_r (m_e/m*) a_0, so silicon's large permittivity and small effective mass stretch hydrogen's 0.053 nm to about 2 nm. Two spins come for free: the electron and the phosphorus nucleus with I = 1/2, giving a 2 × 2 = 4-level system. Electron transitions are driven by ESR, nuclear ones by NMR. Readout converts spin to charge: a spin-up electron can tunnel into a nearby single-electron transistor, a spin-down one cannot, and the SET current changes. In isotopically purified ²⁸Si there are no stray nuclear spins, which is why ion-implanted donors there reach 35.6 s coherence and gates near 99.99%. Likely question: is it really hydrogen-like? To first order; silicon's six conduction-band valleys split the ground state.
 
-_123 words_
+_132 words_
 
 ## Slide 4: Why one site matters: wavefunction overlap
 
@@ -79,9 +79,9 @@ _114 words_
 
 ## Slide 11: Step 4 · Writing with the tip
 
-STM lithography is controlled tunnelling. Current scales as I ∝ V e^(−2κd), with κ = √(2mφ)/ħ ≈ 1 Å⁻¹ for a barrier of a few eV, so each ångström of tip height changes current by roughly e², about 8 times. That exponential sensitivity is why the tip resolves single atoms. Writing uses higher bias to break Si–H bonds by electron excitation. Check the line dose: current over speed, 10 nA ÷ 10 nm/s = 1 C/m, which is the quoted 10⁻² C/cm. Arsenic windows use 3.5 V and 3000 pA at 50 nm/s, two dimers each, on a 4.6 nm pitch, twelve lattice vectors. Likely question: e-beam analogy? Yes; here dose is charge per length, and the resist is one atom.
+STM lithography is controlled tunnelling. Current scales as I ∝ V e^(−2κd), with κ = √(2mφ)/ħ ≈ 1 Å⁻¹ for a barrier of a few eV, so each ångström of tip height changes current by roughly e², 7 to 8 times. That exponential sensitivity is why the tip resolves single atoms. Writing uses higher bias to break Si–H bonds by electron excitation. Check the line dose: current over speed, 10 nA ÷ 10 nm/s = 1 C/m, which is the quoted 10⁻² C/cm. Arsenic windows use 3.5 V and 3000 pA at 50 nm/s, two dimers each, on a 4.6 nm pitch, twelve lattice vectors. Likely question: e-beam analogy? Yes; here dose is charge per length, and the resist is one atom.
 
-_121 words_
+_122 words_
 
 ## Slide 12: Step 5 · Dosing: phosphine vs arsine
 
@@ -97,9 +97,9 @@ _113 words_
 
 ## Slide 14: Steps 7–8 · Burying the dopants
 
-Burying the dopants is a thermal-budget optimisation. Epitaxial quality wants higher temperature, dopant confinement wants lower. Phosphorus grown over at a constant 250 °C segregates about 5 nm toward the surface. For arsenic: 2 nm at room temperature to lock the atoms, a 500 °C, 15-second RTA to recrystallise, then 28 nm at 250 °C. At 0.003 nm/s, 28 nm takes 9333 seconds, about 2.6 hours. Bulk diffusion using the textbook Arrhenius parameters gives 2√(Dt) around 10⁻⁴ nm even for the RTA step, so the measured smearing is surface segregation, not diffusion. Likely question: why not grow everything cold? Below a critical thickness cold silicon grows epitaxially; beyond it, the film turns amorphous.
+Burying the dopants is a thermal-budget optimisation. Epitaxial quality wants higher temperature, dopant confinement wants lower. Phosphorus grown over at a constant 250 °C segregates about 5 nm toward the surface. For arsenic: 2 nm at room temperature to lock the atoms, a 500 °C, 15-second RTA that leaves a confined, electrically active layer, then 28 nm at 250 °C. At 0.003 nm/s, 28 nm takes 9333 seconds, about 2.6 hours. Bulk diffusion using the textbook Arrhenius parameters gives 2√(Dt) around 10⁻⁴ nm even for the RTA step, so any broadening comes from surface segregation during growth, not bulk diffusion. Likely question: why not grow everything cold? Below a critical thickness cold silicon grows epitaxially; beyond it, the film turns amorphous.
 
-_113 words_
+_121 words_
 
 ## Slide 15: Steps 9–11 · Back to the outside world
 
@@ -133,9 +133,9 @@ _106 words_
 
 ## Slide 20: Beyond Si:P: new dopants, new hosts
 
-The same chemistry generalises. On germanium, arsine incorporates at room temperature with no anneal, and hydrogen leaves by 330 °C. That removes a thermal step: if incorporation is spontaneous at 300 K, the activation barrier is low enough that kT ≈ 26 meV suffices. Bismuth is the other direction: a heavy donor with a large nucleus, delivered by triphenyl-bismuth, a molecule about 1 nm across. Its phenyl groups detach near 140 °C and bismuth incorporates near 360 °C, just inside the resist window. Different precursor, different host, same toolbox. Likely question: why germanium? Germanium donors have larger Bohr radii and a stronger Stark effect, but this talk stays with silicon.
+The same chemistry generalises. On germanium, arsine incorporates at room temperature with no anneal, and hydrogen leaves by 330 °C. That removes a thermal step: if incorporation is spontaneous at 300 K, the activation barrier is low enough that kT ≈ 26 meV suffices. Bismuth is the other direction: a heavy donor with a large nucleus, delivered by triphenyl-bismuth, a molecule about 1 nm across. Its phenyl groups detach near 140 °C and bismuth incorporates near 360 °C, close to the 380 °C limit of the hydrogen resist. Different precursor, different host, same toolbox. Likely question: why germanium? Germanium donors have larger Bohr radii and a stronger Stark effect, but this talk stays with silicon.
 
-_110 words_
+_115 words_
 
 ## Slide 21: The payoff: from devices to processors
 
