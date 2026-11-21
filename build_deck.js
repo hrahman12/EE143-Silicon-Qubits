@@ -154,10 +154,11 @@ const chartBase = () => ({ fontFace: T.font, catAxisLabelColor: T.ink, valAxisLa
   s.addChart(pres.charts.BAR, [{ name: "Probability", labels: ["0", "1", "2", "3", "≥4"], values: [36.8, 36.8, 18.4, 6.1, 1.9] }],
     Object.assign(chartBase(), { x: 0.4, y: 3.2, w: 5.1, h: 1.95, barDir: "col", chartColors: ["8C96A0"], showValue: true, dataLabelColor: T.ink, dataLabelFontSize: 9, dataLabelFormatCode: "0.0",
       title: "Ions per site at mean 1 ion/site: exactly one only ~36%", valAxisHidden: true, valGridLine: { style: "none" }, showLegend: false, catAxisTitle: "ions landing in one site (Poisson, our calc.)", showCatAxisTitle: true, barGapWidthPct: 60 }));
-  const b = img(s, "F7_schofield2025_s24_fig2.jpg", 6.0, 1.05, 3.4, 3.55, "center");
-  caption(s, "Deterministic single-ion implanter column. Reproduced from Schofield et al., Nano Futures 9, 012001 (2025) §2.4 Fig. 2, CC BY 4.0", 5.8, b.y + b.h + 0.04, 3.8, 0.45);
-  src(s, "Schofield2025 §1, §2.4; Stock2024; Jakob2022. Poisson bars: P(k)=e⁻¹/k!, our calculation of the 36% in Schofield2025");
-  notes(s, "This is the obvious EE143 question: we implant dopants every day, so why an STM? Two reasons in the table. Placement: implantation is routinely sub-100 nm, but a Kane-type device needs about 15 nm, and the STM gives plus or minus one atomic spacing. Second, counting: ions arrive randomly. If you aim for one ion per site on average, Poisson statistics say only 36% of sites get exactly one; the bar chart is that distribution, which I calculated. Compare that 36% with the 97% Curson's group gets for arsenic. The bottom row is the strongest rival: Jakob 2022 detect each 14 keV phosphorus ion with 99.85% confidence, but where the ion stops is still set by random straggling, not by the lattice.");
+  const b = img(s, "C_implant_profiles.png", 5.7, 1.0, 3.85, 2.3, "center");
+  caption(s, "Course Gaussian N(x) = Nₚ exp[−(x−Rₚ)²/2ΔRₚ²] with Rₚ, ΔRₚ read from the EE143 Ion Implantation lecture p. 12 chart (±10%), vs the 0.45 nm As δ-layer (Constantinou2023). Our chart.", 5.7, b.y + b.h + 0.03, 3.85, 0.62);
+  callout(s, "EE143 link: even the course's shallowest implant spreads ±3.8 nm (As) to ±7.5 nm (P) in depth, and lateral straggle is as large (lecture p. 14). STM: ±0.384 nm.", 5.7, 4.0, 3.85, 0.95, { fontSize: 10.5 });
+  src(s, "Schofield2025 §1, §2.4; Stock2024; Jakob2022; EE143 Implantation pp. 12, 14. Bars: our calc.");
+  notes(s, "This is the obvious EE143 question: we implant dopants every day, so why an STM? Two reasons in the table. Placement: implantation is routinely sub-100 nm, but a Kane-type device needs about 15 nm, and the STM gives plus or minus one atomic spacing. Second, counting: ions arrive randomly. If you aim for one ion per site on average, Poisson statistics say only 36% of sites get exactly one; the bar chart is that distribution, which I calculated. On the right is the course's own Gaussian implant profile, with range and straggle read off the lecture chart at about 10 keV: even then an arsenic ion's depth spreads about 3.8 nm, phosphorus 7.5 nm, compared with a 0.45 nm δ-layer. Compare that 36% with the 97% Curson's group gets for arsenic. The bottom row is the strongest rival: Jakob 2022 detect each 14 keV phosphorus ion with 99.85% confidence, but where the ion stops is still set by random straggling, not by the lattice.");
 }
 
 // ============================================================================ 2. Device at a glance
@@ -332,6 +333,17 @@ processSlide("Steps 7–8 · Burying the dopants", "Steps 7–8 of 11",
     callout(s, "EE143 link: a thermal-budget problem, like keeping a shallow junction shallow.", 7.95, 3.5, 1.55, 1.25, { fontSize: 10.5 });
   }, "Oberbeck2002; Stock2020; DAnna2023",
   "Steps seven and eight bury the dopants: a classic thermal-budget fight. Low temperature keeps atoms in place; high temperature gives good crystal. For phosphorus the answer is a constant 250 °C overgrowth, with about 5 nm of segregation and full activation. For arsenic, Curson's group grows a thin unheated locking layer, does a quick 500 °C, ten-second RTA, then continues epitaxy. A worked example: 2 nm unheated, 500 °C for 15 seconds, then 28 nm at 250 °C, so the layer sits 30 nm down. The SIMS profile on the right shows the arsenic still in a sharp spike. Likely question: why not grow everything hot? That's the trade-off on the slide: even at 250 °C phosphorus segregates about 5 nm.");
+
+// ============================================================================ 12b. EE143 check: thermal budget
+{
+  const s = newSlide("TWO_FIG", "EE143 check: how far do the dopants diffuse?", "Act 2");
+  const b = img(s, "C_diffusion_lengths.png", 0.4, 0.95, 6.1, 2.65, "left");
+  caption(s, "Our calculation with the course's own numbers: D = D₀ exp(−Eₐ/kT), P: D₀ = 10.5 cm²/s, Eₐ = 3.69 eV; As: 0.32 cm²/s, 3.56 eV (Diffusion lecture p. 11, Jaeger Table 4.1); L = 2√(Dt) (p. 13). Steps from Stock2020/DAnna2023; lab step from the Process Manual pp. 16–18.", 0.5, b.y + b.h + 0.04, 6.0, 0.7);
+  bullets(s, ["Every qubit-flow step moves P or As far less than one lattice site", "Our EE143 lab drive-in (1050 °C, 10 + 12 + 20 min) moves P ≈305 nm", "So bulk diffusion is not the limit; segregation during overgrowth is (≈5 nm for P at 250 °C)"], 6.7, 1.05, 2.85, 3.3, 12.5);
+  callout(s, "Same Arrhenius law, opposite goal: the lab drives dopants in; the qubit flow keeps them still.", 6.7, 4.25, 2.85, 0.8, { fontSize: 11 });
+  src(s, "EE143 Section 7 Diffusion pp. 11, 13; EE143 Process Manual Fall 2026 pp. 16–18; Stock2020; DAnna2023; Oberbeck2002");
+  notes(s, "This slide uses only the course's own diffusion numbers. From the Diffusion lecture, D equals D-zero times e to the minus Ea over kT, with Jaeger's values for phosphorus and arsenic, and the characteristic length 2 root Dt. Plug in each heat step of the qubit flow. Incorporation at 350 °C for two minutes moves phosphorus about 10 to the minus 6 nanometres; the 500 °C RTA about 10 to the minus 4; the 2.6-hour overgrowth at 250 °C, 10 to the minus 8. All far left of the dashed line, one lattice site. Our own lab drive-in at 1050 °C for 42 minutes moves phosphorus about 300 nanometres. Same physics, opposite goal. Likely question: so why does phosphorus still smear? Surface segregation during overgrowth, about 5 nm, which bulk diffusion can't capture.");
+}
 
 // ============================================================================ 13. Steps 9-11
 processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",

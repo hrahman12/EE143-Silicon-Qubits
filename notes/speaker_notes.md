@@ -43,9 +43,9 @@ _123 words_
 
 ## Slide 5: The problem: implantation can't place one atom
 
-This is the obvious EE143 question: we implant dopants every day, so why an STM? Two reasons in the table. Placement: implantation is routinely sub-100 nm, but a Kane-type device needs about 15 nm, and the STM gives plus or minus one atomic spacing. Second, counting: ions arrive randomly. If you aim for one ion per site on average, Poisson statistics say only 36% of sites get exactly one; the bar chart is that distribution, which I calculated. Compare that 36% with the 97% Curson's group gets for arsenic. The bottom row is the strongest rival: Jakob 2022 detect each 14 keV phosphorus ion with 99.85% confidence, but where the ion stops is still set by random straggling, not by the lattice.
+This is the obvious EE143 question: we implant dopants every day, so why an STM? Two reasons in the table. Placement: implantation is routinely sub-100 nm, but a Kane-type device needs about 15 nm, and the STM gives plus or minus one atomic spacing. Second, counting: ions arrive randomly. If you aim for one ion per site on average, Poisson statistics say only 36% of sites get exactly one; the bar chart is that distribution, which I calculated. On the right is the course's own Gaussian implant profile, with range and straggle read off the lecture chart at about 10 keV: even then an arsenic ion's depth spreads about 3.8 nm, phosphorus 7.5 nm, compared with a 0.45 nm δ-layer. Compare that 36% with the 97% Curson's group gets for arsenic. The bottom row is the strongest rival: Jakob 2022 detect each 14 keV phosphorus ion with 99.85% confidence, but where the ion stops is still set by random straggling, not by the lattice.
 
-_122 words_
+_164 words_
 
 ## Slide 6: The answer: write the device atom by atom
 
@@ -101,109 +101,115 @@ Steps seven and eight bury the dopants: a classic thermal-budget fight. Low temp
 
 _121 words_
 
-## Slide 15: Steps 9–11 · Back to the outside world
+## Slide 15: EE143 check: how far do the dopants diffuse?
+
+This slide uses only the course's own diffusion numbers. From the Diffusion lecture, D equals D-zero times e to the minus Ea over kT, with Jaeger's values for phosphorus and arsenic, and the characteristic length 2 root Dt. Plug in each heat step of the qubit flow. Incorporation at 350 °C for two minutes moves phosphorus about 10 to the minus 6 nanometres; the 500 °C RTA about 10 to the minus 4; the 2.6-hour overgrowth at 250 °C, 10 to the minus 8. All far left of the dashed line, one lattice site. Our own lab drive-in at 1050 °C for 42 minutes moves phosphorus about 300 nanometres. Same physics, opposite goal. Likely question: so why does phosphorus still smear? Surface segregation during overgrowth, about 5 nm, which bulk diffusion can't capture.
+
+_133 words_
+
+## Slide 16: Steps 9–11 · Back to the outside world
 
 The last three steps will feel most familiar. Once the dopants are buried, you can't see them with the STM, so you need alignment marks: registration markers plus a combined STM and SEM system to find the device again. Then it's normal cleanroom work. In the D'Anna paper, Hall bars were defined with optical lithography and reactive ion etching, and aluminium was deposited into holes etched down through the δ-layer, like a via. The maps on the right are X-ray fluorescence: you can see the aluminium pads, and in the right panel the arsenic δ-layer itself, buried 30 nm down. Then cool to millikelvin and measure. Likely question: does the X-ray beam damage the device? We'll see next slide that it barely moves the dopants.
 
 _125 words_
 
-## Slide 16: Proof 1: the buried δ-layer conducts
+## Slide 17: Proof 1: the buried δ-layer conducts
 
 Did the process work? Three kinds of evidence. Electrical: an arsenic δ-layer measures 1.6 kilo-ohms per square with mobility of 28, and 81% of the arsenic is active after the 500 °C RTA, 88% at 560. EE143 check: Rs = 1/(q·Ns·μ) with 1.6 kΩ and 28 gives about 1.4×10^14 per square centimetre, right where it should be. Second, X-ray ARPES, top right, shows the layers are under a nanometre thick, and arsenic is tighter than phosphorus. Curson's newest paper, D'Anna 2026, uses X-ray reflectometry to show the chemical layer is also sub-nanometre, below SIMS's 2 nm resolution. Third, X-ray fluorescence imaging moved the arsenic less than 0.2 Å. Likely question: does the X-ray beam change the device? Less than 3% loss of active dopants.
 
 _124 words_
 
-## Slide 17: Proof 2: one atom, then one transistor
+## Slide 18: Proof 2: one atom, then one transistor
 
 Two landmark results, which I've redrawn because the originals are paywalled. Left, 2003: the first deliberate placement of single phosphorus atoms, with about 1 nm accuracy. They put a pair about 12 nm apart on the same dimer row. That proved the lithography-plus-phosphine idea works for single atoms. Right, 2012: the single-atom transistor. One phosphorus atom sits between source, drain and gates, placed with one-lattice-site accuracy. It works at liquid-helium temperature, and at millikelvin its current shows the discrete energy levels of that one atom. Curson is on the 2003 paper. Likely question: why is a transistor from one atom useful? It proves you can wire up and electrically address a single placed dopant.
 
 _114 words_
 
-## Slide 18: The catch: every site must work
+## Slide 19: The catch: every site must work
 
 Here's the problem that motivated Curson's arsenic work. Phosphorus lands in an ideal three-dimer window only 63 ± 10% of the time; Stock 2024 says less than 70% in six-site windows. That sounds fine until you need many sites at once. Array yield multiplies: 0.7 to the n. The orange line falls to under 0.4% by 16 atoms. The teal line is the same formula with arsenic's 97%, still about 61% at 16. On the right I simulated 4×4 arrays: the phosphorus row is full of red failures, the arsenic row has mostly perfect boxed arrays. This is the same logic as die yield in a fab: defects multiply. Number to remember: 0.7^16 < 0.4%. Likely question: can you repair a failed site? Possibly, by repeating lithography and dosing.
 
 _129 words_
 
-## Slide 19: Curson's fix: arsenic in a 4-site window
+## Slide 20: Curson's fix: arsenic in a 4-site window
 
 Because arsine dissociates so fast and needs fewer sites, a window of just four lattice sites, two dimers, is enough. In that window a single arsenic atom incorporates 97 ± 2% of the time. That window is one site in four, about 0.6 square nanometres, which is 33% better placement precision than phosphorus. With that yield they made the first defect-free 2×2 single-dopant array in silicon, shown in the top figure: lithography, dose, anneal, plus the ideal window sketch. The histogram at the bottom is the statistics behind the 97%. And if a site fails, you could repeat lithography and dosing to push yield toward 100%. Likely question: what about other dopants? Bismuth chemistry is on the next slide; the pack has no yield numbers for others.
 
 _127 words_
 
-## Slide 20: Why four sites? The window-size sweet spot
+## Slide 21: Why four sites? The window-size sweet spot
 
 This is the data behind Curson's 97%. Stock and co-workers wrote windows of different sizes, dosed arsine, and counted what landed. A single dangling bond usually just grabs a hydrogen back: 89% end up with no arsenic. Two sites do better, 74% catch one molecule. Six sites are too generous: 63% catch two molecules, which would mean two dopants. Four sites, two dimers, held exactly one arsine fragment in all 24 windows they measured. Add the 350 °C anneal and you get the 97 ± 2% single-atom yield. It's a lithography design rule: the window size sets the dopant count. Likely question: is n = 24 enough? It's the published sample; the 97% comes with its ± 2% uncertainty.
 
 _119 words_
 
-## Slide 21: Beyond Si:P: new dopants, new hosts
+## Slide 22: Beyond Si:P: new dopants, new hosts
 
 Two side projects from Curson's group show the method generalises. First, germanium: arsenic from arsine goes into the germanium surface at room temperature with no anneal at all, the STM image on the left. That removes a thermal step entirely. Second, bismuth: they studied how a triphenyl-bismuth molecule sticks to and breaks apart on Si(001), on the right, as a route to ultra-shallow bismuth doping. The point for us: the toolbox is the same, a hydrogen resist, a tip and a gas. Change the gas or the substrate and you get a different device platform. Likely question: why germanium? It's another group-IV host used in quantum devices; the pack doesn't go further, so I won't either.
 
 _116 words_
 
-## Slide 22: The payoff: from devices to processors
+## Slide 23: The payoff: from devices to processors
 
 Now the payoff: processors. 2019 gave the first exchange gate between two phosphorus donor electrons, about 800 picoseconds, and a 3D device with stacked dopant layers aligned within 5 nm. In 2025 a four-qubit processor, three phosphorus nuclei plus one electron in silicon-28, ran Grover's search; the bar chart shows the marked state found 93.46% of the time, 98.87% of ideal. And an 11-qubit processor linked a four-phosphorus and a five-phosphorus register by exchange: Bell states 99.5% within a register, 97% across. Please read the caveat box: 2019 used natural silicon and electron spins, 2025 used silicon-28 and nuclear spins, so the numbers aren't apples to apples. Likely question: are these Curson's devices? No, these are context papers from other groups using the same fabrication.
 
 _125 words_
 
-## Slide 23: Same atoms, new job: a quantum simulator
+## Slide 24: Same atoms, new job: a quantum simulator
 
 Same fabrication, different job. Instead of qubits, this group wrote a 3×3 grid of tiny dopant-based quantum dots, shown in the schematic and the STM images on the right, with gates and leads written in the same layer. Electrons hopping between dots behave like electrons in a crystal, so the device simulates a material physics model directly in hardware. By changing the array, they tuned it from metallic behaviour toward a Mott insulator, where repulsion between electrons stops conduction. For us the interesting part is that it's a circuit made only of doped islands and δ-layer wiring. Likely question: why not simulate on a computer? Interacting-electron problems get exponentially hard as the lattice grows.
 
 _114 words_
 
-## Slide 24: The next wall: throughput
+## Slide 25: The next wall: throughput
 
 Here's the wall. The STM writes at 10 nm per second for atom-wide lines, up to about 1000 nm per second at 2 volts and hundreds of nanoamps. In atomically precise mode that's around 100 atoms a second. EUV lithography, as used in CMOS fabs, writes at an equivalent of about 10^14 nm per second, eleven orders of magnitude faster. Note the log axis. People have proposed massively parallel MEMS tip arrays, up to ten million tips over a 300 mm wafer, and the roadmap says even that stays orders of magnitude too slow for CMOS volumes. The number to remember: eleven orders of magnitude. Likely question: so is this a dead end? Not for qubit cores, which is where the hybrid idea next comes in.
 
 _126 words_
 
-## Slide 25: Scaling: EUV photons instead of a tip
+## Slide 26: Scaling: EUV photons instead of a tip
 
 Curson's 2024 Nature Communications paper showed for the first time that monochromatic EUV light at 109 eV removes hydrogen from the same silicon surface; it's mostly the secondary electrons from the silicon that do the work. It needs doses up to 18,000 joules per square centimetre, several minutes per chip with a 300 watt source, but it's parallel. The proposed flow on the right uses the same hydrogen resist: EUV patterns the big contacts and wiring, the STM writes the qubit cores, then dose and encapsulate as before. The SEM bottom-left shows resistless EUV lines at 75 nm half-pitch. Likely question: why not normal photoresist? The proposed flow keeps the hydrogen monolayer as the resist so every stage stays in UHV, and Tseng 2023 patterned with no photoresist at all.
 
 _130 words_
 
-## Slide 26: Our prototype: a 2×2 arsenic register
+## Slide 27: Our prototype: a 2×2 arsenic register
 
 To pull it together, here's a prototype we designed on paper, using only recipes from the papers. Four single arsenic atoms in four-site windows form a 2×2 register, with source, drain and two gates written as arsenic δ-layers in the same plane, buried under epitaxial silicon and reached by aluminium vias. The 3D surface on the right is our yield model, p to the n. It shows why the dopant choice decides the design: at arsenic's 0.97 a 16-site array comes out perfect about 61% of the time, at phosphorus's 0.7 about 0.3%. So the register size you can afford is set by chemistry, not by lithography resolution. Likely question: did you build it? No, it's a design exercise; the next slide is its traveler.
 
 _125 words_
 
-## Slide 27: Prototype traveler, mapped to EE143
+## Slide 28: Prototype traveler, mapped to EE143
 
 And here's the traveler for that prototype, every step with its recipe and the EE143 module it maps to. It's a normal process flow: clean and bake, coat a resist, write it, pre-deposit dopant from the gas phase, drive in, RTA, epitaxy, alignment marks, etch, metal, and a Hall measurement. On the right I plotted each step's peak temperature. The two hot steps, outgas and the 1200 °C flash, happen before any patterning. After the pattern exists, nothing exceeds the 500 °C, 15-second RTA. That's the design principle: front-load the heat, then protect the atoms. Likely question: where does it break? Step 4 throughput, which is why the EUV hybrid matters.
 
 _111 words_
 
-## Slide 28: Takeaways: one atom, exactly where you want it
+## Slide 29: Takeaways: one atom, exactly where you want it
 
 Three things to take home. One: placing single atoms works, using the same steps you know, a resist, lithography, gas-phase doping and an anneal, at the scale of one atom. Two: arsenic brought single-atom yield to about 97%, versus under 70% for phosphorus, and because array yield multiplies, that's the difference between arrays that work and arrays that don't. That's Neil Curson's group's key result. Three: throughput is the next wall, eleven orders of magnitude behind EUV, and the bridge is to use EUV on the same hydrogen resist for everything except the qubit cores. Thanks, happy to take questions. Likely question: when will this be a product? The pack doesn't make that prediction, and I won't either.
 
 _118 words_
 
-## Slide 29: References (1 of 2)
+## Slide 30: References (1 of 2)
 
 References, alphabetical by key; keys match each slide's source line. Figures marked 'Reproduced from' are CC BY 4.0 and credited on the slide; paywalled or no-derivatives figures were redrawn as original schematics instead of copied. Diagrams marked 'ours' or 'our model' are original and use only published numbers, with the exact spec and its source in notes/specs. If someone wants one paper to start with, I'd point them to the 2025 roadmap, Schofield et al. in Nano Futures, which covers the whole field and is open access. Likely question: are the figures licensed? Yes: CC BY figures are reproduced with credit, and everything else is redrawn.
 
 _106 words_
 
-## Slide 30: References (2 of 2)
+## Slide 31: References (2 of 2)
 
 Second page of references, continuing alphabetically. Kane 2000 and O'Brien 2001 supply the Kane-architecture numbers on slide 5, since the 1998 paper itself isn't open; Ren 2016 and Xiang 2025 give the dimer and silicon–hydrogen bond lengths used in my surface renders. New papers beyond my original pack, like Jakob 2022, Reiner 2024, Namboodiri 2024, Kiczynski 2022 and Curson's newest, D'Anna 2026, are here too, all open access. Likely question: why cite a contact-physics paper for a bond length? It states the 1.51 Å Si–H bond I used; I only use that number.
 
 _93 words_
 
-## Slide 31: Backup · Alternate titles
+## Slide 32: Backup · Alternate titles
 
 Backup slide with the alternate titles from the reference pack, in case the course wants a 'How X is built' style title like the DMD and CMOS decks. The image is the 4×4 arsenic array from Stock 2024, with the lithography, the incorporated atoms and the dopant map. If asked about it: with non-ideal windows, 10 to 12 of 15 sites were single atoms, up to 80%, which shows that window shape matters as much as the chemistry. That 4×4 result is why the 2×2 is described as the first defect-free array: the bigger array still had defects.
 
 _98 words_
 
-## Slide 32: Backup · Monte Carlo of 4×4 arrays
+## Slide 33: Backup · Monte Carlo of 4×4 arrays
 
 Backup for the yield slide. I simulated 100,000 four-by-four arrays at each per-site yield. With phosphorus at 0.7, almost every array has failed sites, about 0.3% come out perfect, matching 0.7 to the 16th. With arsenic at 0.97, about 61% are perfect. This is a model, not data: it assumes sites fail independently, which is the same assumption behind the p to the n formula in Stock 2024. If asked whether failures are really independent: the papers quote the formula, they don't test correlations, so I'd say it's the simplest reasonable assumption.
 

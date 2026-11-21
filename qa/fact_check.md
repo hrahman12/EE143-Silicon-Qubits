@@ -136,3 +136,14 @@ Paper-internal conflicts kept visible rather than resolved: Constantinou2024 330
 | 19 | dot + error bars | 36.8% (Poisson), 63 ± 10%, 97 ± 2% | Schofield2025 §1; Ivie2021; Stock2024 |
 | 21 | floating range | 1Q 99.94–99.98; CZ 99.32–99.65; GHZ 96.2 (Thorvaldson2025); all gates 99.10–99.99; Bell 91.4–99.5 local, 87.0–97.0 across (Edlbauer2025) | as listed |
 | 26 | area (native) | 600, 1200, 330, RT, 350, RT, 500, 250 °C (RT plotted at 25 °C) | Stock2020; Constantinou2024; DAnna2023 |
+
+## Round 4: course materials (notes/specs/course_hooks.md)
+| Slide | Number | Source | Status |
+|---|---|---|---|
+| 5 | As ~10 keV Rp ≈ 11 nm, ΔRp ≈ 3.8 nm; P Rp ≈ 14, ΔRp ≈ 7.5 nm | EE143 Section 6 Ion Implantation p. 12 chart, digitized ±10% | Read from chart |
+| 5 | lateral straggle ≥ vertical ("ΔRt/ΔRp > 1") | Implantation p. 14 | OK |
+| 15 | P D0 10.5 cm²/s, Ea 3.69 eV; As 0.32 cm²/s, 3.56 eV | Section 7 Diffusion p. 11 (Jaeger Table 4.1) | OK |
+| 15 | L = 2√(Dt) | Diffusion p. 13 | OK |
+| 15 | lab 1050 °C, 10 + 12 + 20 min | Process Manual Fall 2026 pp. 16–18 | OK |
+| 15 | 8e-07, 2e-04, 1e-08, 305 nm (P); 5e-07, 1e-04, 8e-09, 94 nm (As) | Derived (our calc.) | Derived; recomputed independently |
+| 20 | window outcomes 89/10.6, 26/74, 100, 37/63 % (n = 286, 92, 24, 19) | Stock2024 §2.2–2.3, Table 1 | OK |

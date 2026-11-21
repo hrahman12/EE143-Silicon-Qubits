@@ -667,6 +667,48 @@ def range_fidelity():
     _clean(ax); ax.spines["left"].set_visible(False)
     save(fig, "C_range_fidelity.png")
 
+def diffusion_lengths():
+    """Course Diffusion lecture: D = D0 exp(-Ea/kT) (p. 11, Jaeger Table 4.1: P 10.5 cm2/s, 3.69 eV; As 0.32, 3.56)
+    and L = 2 sqrt(Dt) (p. 13). Steps: Stock2020/DAnna2023 qubit flow vs EE143 lab 1050 C x 42 min (Process Manual pp. 16-18)."""
+    k = 8.617e-5
+    steps = [("Incorporation 350 °C × 2 min", 350, 120), ("RTA 500 °C × 15 s", 500, 15),
+             ("Overgrowth 250 °C × 2.6 h", 250, 9333), ("EE143 lab: 1050 °C × 42 min", 1050, 2520)]
+    fig, ax = plt.subplots(figsize=(6.4, 2.75))
+    for i, (lab, T, t) in enumerate(steps):
+        y = len(steps) - 1 - i
+        for el, D0, Ea, c, dy in (("P", 10.5, 3.69, P_C, 0.13), ("As", 0.32, 3.56, AS_C, -0.13)):
+            L = 2 * math.sqrt(D0 * math.exp(-Ea / (k * (T + 273.15))) * t) * 1e7
+            ax.plot([1e-10, L], [y + dy, y + dy], color="#E5E8EB", lw=1, zorder=1)
+            ax.plot(L, y + dy, "o", ms=8, color=c, mec="white", mew=1.2, zorder=3)
+            ax.text(L * 2.2, y + dy, f"{L:.0e} nm" if L < 1 else f"{L:.0f} nm", va="center", fontsize=7.8, color=MUTED)
+        ax.text(1.4e-10, y + 0.38, lab, fontsize=9, color=INK, va="center")
+    for xv, txt in ((0.384, "one lattice site\n0.384 nm"),):
+        ax.axvline(xv, color=INK, lw=1, ls="--", zorder=2); ax.text(xv * 1.3, 3.45, txt, fontsize=8, color=INK, va="top")
+    ax.set_xscale("log"); ax.set_xlim(1e-10, 1e5); ax.set_ylim(-0.5, 3.75); ax.set_yticks([])
+    ax.set_xlabel("diffusion length 2√(Dt) (nm, log scale)", fontsize=9.5)
+    ax.plot([], [], "o", color=P_C, label="P"); ax.plot([], [], "o", color=AS_C, label="As")
+    ax.legend(loc="center right", fontsize=8.5, frameon=False)
+    _clean(ax); ax.spines["left"].set_visible(False)
+    save(fig, "C_diffusion_lengths.png")
+
+def implant_profiles():
+    """Course Implantation lecture p. 12 (Rp, dRp digitized, +/-10%): ~10 keV As Rp 11, dRp 3.8 nm; P Rp 14, dRp 7.5 nm.
+    Gaussian N(x) = Np exp[-(x-Rp)^2/(2 dRp^2)] (course). As delta-layer electronic thickness 0.45 nm (Constantinou2023)."""
+    x = np.linspace(0, 46, 2000)
+    fig, ax = plt.subplots(figsize=(4.6, 2.6))
+    for lab, Rp, dR, c in (("P, ~10 keV implant", 14, 7.5, P_C), ("As, ~10 keV implant", 11, 3.8, AS_C)):
+        y = np.exp(-(x - Rp) ** 2 / (2 * dR ** 2))
+        ax.fill_between(x, y, color=c, alpha=0.18, lw=0); ax.plot(x, y, color=c, lw=2)
+        ax.text(23.5, 0.93 if c == AS_C else 0.70, f"{lab.split(',')[0]} ~10 keV: R$_p$≈{Rp}, ΔR$_p$≈{dR} nm", fontsize=8, color=INK)
+        ax.plot([21.8, 23.1], [0.95 if c == AS_C else 0.72] * 2, color=c, lw=2.5)
+    d0 = 43.5; w = 0.45 / 2.355
+    y = np.exp(-(x - d0) ** 2 / (2 * w ** 2)); ax.fill_between(x, y, color=INK, lw=0); 
+    ax.text(d0 - 0.8, 0.45, "As δ-layer,\n0.45 nm thick", fontsize=8.2, color=INK, ha="right")
+    ax.set_xlim(0, 46); ax.set_ylim(0, 1.08); ax.set_xlabel("depth (nm)", fontsize=9.5); ax.set_ylabel("N / N$_p$", fontsize=9.5)
+    ax.set_title("A δ-layer is ~10× sharper than the shallowest implant", fontsize=10, loc="left", color=INK)
+    _clean(ax)
+    save(fig, "C_implant_profiles.png")
+
 def mini_icons():
     for st in ("prep", "litho", "dose", "incorp", "cap", "contact"):
         xsec(st, f"icon_{st}.png", w=1.6, h=0.9, mini=True)
@@ -676,7 +718,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         for fn in sys.argv[1:]: globals()[fn]()
         raise SystemExit
-    do_crops(); hero(); bloch(); wavefunction_scale(); prototype_layout(); dumbbell_thickness(); dot_yield(); range_fidelity()
+    do_crops(); hero(); bloch(); wavefunction_scale(); prototype_layout(); dumbbell_thickness(); dot_yield(); range_fidelity(); diffusion_lengths(); implant_profiles()
     surface_scene("H", "O2_surface_H.png"); surface_scene("window", "O2_surface_window.png")
     surface_scene("dose", "O2_surface_dose.png"); surface_scene("incorp", "O2_surface_incorp.png")
     for st in ("prep", "litho", "dose", "incorp", "cap", "contact"): xsec(st, f"xsec_{st}.png")
