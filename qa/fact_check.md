@@ -127,3 +127,12 @@ Status: OK = matches Key numbers exactly. Nothing failed; earlier unsourced item
 | surface renders | Si–H 1.51 Å; dimer bond 2.357 Å; a = 3.84 Å | Xiang2025; Ren2016; Stock2024 | | geometry inputs |
 
 Paper-internal conflicts kept visible rather than resolved: Constantinou2024 330 vs 310 °C; Stock2024 Methods +4 V/3.5 nA vs captions 3.5 V/3000 pA; Kane spacing 10 nm vs 20 nm; Schofield2025 HDL dose 10⁻² vs 2×10⁻² C/cm.
+
+## Round 3: chart variety (all values verbatim from notes/specs)
+| Slide | Chart type | Values | Source |
+|---|---|---|---|
+| 7 | scatter (native) | qubits 2 (2019), 4 (2024), 4 and 11 (2025); simulator dots 9, 10 (2022) | He2019; Reiner2024; Thorvaldson2025; Edlbauer2025; Wang2022; Kiczynski2022 |
+| 16 | dumbbell | SIMS 2.01/2.22/2.24/2.86 ± 0.2 nm; ARPES 0.45 ± 0.04, 0.62 ± 0.10, 0.91 ± 0.21, 1.03 ± 0.35 nm | Constantinou2023 Table 1 |
+| 19 | dot + error bars | 36.8% (Poisson), 63 ± 10%, 97 ± 2% | Schofield2025 §1; Ivie2021; Stock2024 |
+| 21 | floating range | 1Q 99.94–99.98; CZ 99.32–99.65; GHZ 96.2 (Thorvaldson2025); all gates 99.10–99.99; Bell 91.4–99.5 local, 87.0–97.0 across (Edlbauer2025) | as listed |
+| 26 | area (native) | 600, 1200, 330, RT, 350, RT, 500, 250 °C (RT plotted at 25 °C) | Stock2020; Constantinou2024; DAnna2023 |

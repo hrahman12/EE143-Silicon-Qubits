@@ -202,11 +202,18 @@ const EVENTS = [
 ];
 {
   const s = newSlide("TITLE_ONLY", "30 years: from one H atom to 11 qubits", "Act 1");
-  timeline(s, 0.75, 1.55, 8.4, EVENTS);
-  s.addShape(pres.shapes.OVAL, { x: 0.6, y: 4.62, w: 0.14, h: 0.14, fill: { color: T.As }, line: { color: T.As, width: 0 } });
-  text(s, "Curson is an author (teal)", 0.82, 4.56, 2.6, 0.25, { fontSize: 11, color: T.muted });
-  callout(s, "Each step reused the same EE143 recipe: passivate → pattern → dose → anneal → cap.", 3.6, 4.45, 5.9, 0.5, { fontSize: 12 });
-  src(s, "Lyding1994; Kane1998; Schofield2003; Fuechsle2012; He2019; Koch2019; Stock2020; Stock2024; Constantinou2024; Thorvaldson2025; Edlbauer2025");
+  timeline(s, 0.75, 0.9, 8.4, EVENTS);
+  s.addChart(pres.charts.SCATTER, [
+    { name: "year", values: [2019, 2022, 2022, 2024, 2025, 2025] },
+    { name: "Qubits in one device", values: [2, null, null, 4, 4, 11] },
+    { name: "Dots in an analog simulator", values: [null, 9, 10, null, null, null] }],
+    Object.assign(chartBase(), { x: 0.4, y: 3.25, w: 5.6, h: 1.9, chartColors: [T.ink, "9AA3AC"], lineSize: 0, lineDataSymbol: "circle", lineDataSymbolSize: 9,
+      title: "Devices grew from 2 to 11 qubits in six years", titleFontSize: 11, showLegend: true, legendPos: "r", legendFontSize: 9,
+      valAxisMinVal: 0, valAxisMaxVal: 12, valAxisMajorUnit: 4, catAxisMinVal: 2018, catAxisMaxVal: 2026, catAxisMajorUnit: 2, valAxisLabelFontSize: 9, catAxisLabelFontSize: 9 }));
+  s.addShape(pres.shapes.OVAL, { x: 6.3, y: 3.5, w: 0.14, h: 0.14, fill: { color: T.As }, line: { color: T.As, width: 0 } });
+  text(s, "Curson is an author (teal)", 6.52, 3.44, 2.9, 0.25, { fontSize: 11, color: T.muted });
+  callout(s, "Every milestone reused one EE143 recipe: passivate → pattern → dose → anneal → cap.", 6.3, 3.9, 3.2, 0.85, { fontSize: 12 });
+  src(s, "Paper tables (Lyding1994 … Edlbauer2025). Scatter: He2019, Wang2022, Kiczynski2022, Reiner2024, Thorvaldson2025, Edlbauer2025");
   notes(s, "Thirty years in one line. 1994: Lyding shows an STM tip can pull hydrogen off silicon, which gives us lithography. 1998: Kane proposes phosphorus nuclear spins as qubits. 2003: the first single phosphorus atoms placed on purpose, Curson among the authors. 2012: a transistor whose active region is one atom. 2019: the first two-qubit gate between donors and a 3D stacked device. 2020 and 2024: Curson's group adds arsenic and pushes single-atom yield to 97%, and also shows EUV light can do the hydrogen removal. 2025: a four-qubit Grover search and an 11-qubit processor. Likely question: what changed in 2012? The atom became a working device, wired up and measured as a transistor, not just imaged.");
 }
 
@@ -340,9 +347,9 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
   const s = newSlide("TWO_FIG", "Proof 1: the buried δ-layer conducts", "Act 3");
   bullets(s, ["As δ-layer: 1.6 ± 0.1 kΩ/□, 28 ± 1 cm²/V·s; 81% activation (88% at 560 °C); P layers reach 2.4×10¹⁴ cm⁻²", "ARPES and X-ray reflectometry: <1 nm thick (SIMS resolves only ~2 nm); As confines better than P", "XRF at ≈1 µm: <0.2 Å As motion, <3% loss of active dopants"], 0.5, 1.05, 4.1, 2.45, 13);
   callout(s, "EE143 check (our calc.):  Rₛ = 1/(q·Nₛ·μ)  →  Nₛ = 1/(1.6×10⁻¹⁹ C × 1600 Ω × 28 cm²/V·s) ≈ 1.4×10¹⁴ cm⁻², consistent with the ≈10¹⁴ cm⁻² sheets.", 0.5, 3.6, 4.1, 1.05, { fontSize: 12 });
-  const b = img(s, "F9_constantinou2023_fig2.jpg", 4.8, 1.0, 4.7, 1.95, "center");
-  caption(s, "ARPES Fermi surfaces of P (top) and As (bottom) δ-layers. Reproduced from Constantinou et al., Adv. Sci. 10, 2302101 (2023) Fig. 2, CC BY 4.0", 4.8, b.y + b.h + 0.03, 4.7, 0.4);
-  const a = img(s, "F11_stock2020_fig4_transport.png", 4.8, 3.33, 1.8, 1.78, "left");
+  const b = img(s, "C_dumbbell_thickness.png", 4.8, 0.95, 4.7, 2.05, "center");
+  caption(s, "Our chart of Constantinou2023 Table 1: SIMS (open) vs ARPES (filled), ± as published.", 4.8, b.y + b.h + 0.01, 4.7, 0.2);
+  const a = img(s, "F11_stock2020_fig4_transport.png", 4.8, 3.42, 1.75, 1.72, "left");
   caption(s, "Mobility, carrier density and Rₛ vs RTA temperature. Reproduced from Stock et al., ACS Nano 14, 3316 (2020) Fig. 4f,g, CC BY 4.0", a.x + a.w + 0.12, 3.6, 2.75, 0.9);
   src(s, "Stock2020; Constantinou2023; DAnna2023; DAnna2026. Nₛ check is our calculation from Stock2020's numbers");
   notes(s, "Did the process work? Three kinds of evidence. Electrical: an arsenic δ-layer measures 1.6 kilo-ohms per square with mobility of 28, and 81% of the arsenic is active after the 500 °C RTA, 88% at 560. EE143 check: Rs = 1/(q·Ns·μ) with 1.6 kΩ and 28 gives about 1.4×10^14 per square centimetre, right where it should be. Second, X-ray ARPES, top right, shows the layers are under a nanometre thick, and arsenic is tighter than phosphorus. Curson's newest paper, D'Anna 2026, uses X-ray reflectometry to show the chemical layer is also sub-nanometre, below SIMS's 2 nm resolution. Third, X-ray fluorescence imaging moved the arsenic less than 0.2 Å. Likely question: does the X-ray beam change the device? Less than 3% loss of active dopants.");
@@ -385,8 +392,8 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
   bullets(s, ["97 ± 2% single-atom yield in a 4-site window: 1-in-4 lattice sites (≈0.6 nm²), 33% better precision than P", "First defect-free 2×2 single-dopant array in Si", "Iterative litho/dose cycles could push yield toward 100%"], 0.5, 1.05, 3.75, 2.2, 13);
   const a = img(s, "F3_schofield2025_s41_fig1.png", 4.45, 1.0, 5.05, 3.25, "center");
   caption(s, "2×2 As array steps and the ideal 4-site window. Reproduced from Schofield et al., Nano Futures 9, 012001 (2025) §4.1 Fig. 1, CC BY 4.0", 4.45, a.y + a.h + 0.04, 5.05, 0.4);
-  const b = img(s, "F2_stock2024_fig3_stats.png", 0.5, 3.25, 3.0, 1.45, "left");
-  caption(s, "Statistics behind the 97%. Stock et al., Adv. Mater. 36, 2312282 (2024) Fig. 3l, CC BY 4.0", 0.5, b.y + b.h + 0.03, 3.9, 0.35);
+  const b = img(s, "C_dot_yield.png", 0.4, 2.95, 3.95, 1.85, "left");
+  caption(s, "Our dot plot, published ± shown: chance a site gets exactly one dopant.", 0.5, b.y + b.h + 0.01, 3.9, 0.22);
   src(s, "Stock2024; Schofield2025 §4.1");
   notes(s, "Because arsine dissociates so fast and needs fewer sites, a window of just four lattice sites, two dimers, is enough. In that window a single arsenic atom incorporates 97 ± 2% of the time. That window is one site in four, about 0.6 square nanometres, which is 33% better placement precision than phosphorus. With that yield they made the first defect-free 2×2 single-dopant array in silicon, shown in the top figure: lithography, dose, anneal, plus the ideal window sketch. The histogram at the bottom is the statistics behind the 97%. And if a site fails, you could repeat lithography and dosing to push yield toward 100%. Likely question: what about other dopants? Bismuth chemistry is on the next slide; the pack has no yield numbers for others.");
 }
@@ -409,10 +416,10 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
   const s = newSlide("TWO_FIG", "The payoff: from devices to processors", "Act 3");
   bullets(s, ["2019: ≈800 ps exchange gate (natural Si); 3D device, 97.9% readout, <5 nm layer alignment", "2025, 4 qubits: 3P + 1 e⁻, 45 nm ²⁸Si cap, 1.45 T, 15 mK; CZ 99.32–99.65%, Grover search", "2025, 11 qubits: 4P + 5P registers 13(1) nm apart, SET 17 nm away, ~1.39 T; Bell 99.5% local, 97.0% across"], 0.5, 1.05, 3.75, 3.0, 12);
   callout(s, "Caveat: 2019 used natural Si and electron spins; 2025 used ²⁸Si and nuclear-spin registers, so don't compare fidelities directly.", 0.5, 4.05, 3.75, 0.85, { fontSize: 11 });
-  const c = img(s, "F14_edlbauer2025_fig1ab.png", 4.4, 1.0, 5.1, 2.35, "center");
+  const c = img(s, "F14_edlbauer2025_fig1ab.png", 4.4, 0.95, 5.1, 1.85, "center");
   caption(s, "11-qubit processor: connectivity and STM of the 4P and 5P registers. Reproduced from Edlbauer et al., Nature 648, 569 (2025) Fig. 1a,b, CC BY 4.0", 4.4, c.y + c.h + 0.03, 5.1, 0.4);
-  const b = img(s, "F13_thorvaldson2025_fig4b.png", 4.4, 3.7, 2.4, 1.42, "left");
-  caption(s, "Grover output, marked state ⇓⇓⇓: 98.87% of ideal. Reproduced from Thorvaldson et al., Nat. Nanotechnol. 20, 472 (2025) Fig. 4b, CC BY 4.0", b.x + b.w + 0.12, 3.85, 2.8, 0.9);
+  const b = img(s, "C_range_fidelity.png", 4.4, 3.2, 3.7, 1.95, "left");
+  caption(s, "Our range chart of published fidelities (Thorvaldson2025, Edlbauer2025).", b.x + b.w + 0.1, 3.6, 1.4, 1.1);
   src(s, "He2019; Koch2019; Thorvaldson2025 (Methods); Edlbauer2025 (Fig. 1 caption, SI)");
   notes(s, "Now the payoff: processors. 2019 gave the first exchange gate between two phosphorus donor electrons, about 800 picoseconds, and a 3D device with stacked dopant layers aligned within 5 nm. In 2025 a four-qubit processor, three phosphorus nuclei plus one electron in silicon-28, ran Grover's search; the bar chart shows the marked state found 93.46% of the time, 98.87% of ideal. And an 11-qubit processor linked a four-phosphorus and a five-phosphorus register by exchange: Bell states 99.5% within a register, 97% across. Please read the caveat box: 2019 used natural silicon and electron spins, 2025 used silicon-28 and nuclear spins, so the numbers aren't apples to apples. Likely question: are these Curson's devices? No, these are context papers from other groups using the same fabrication.");
 }
@@ -480,10 +487,10 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
     ["9–10", "Markers + STM–SEM; optical litho, RIE, Al into holes", "Alignment, etch, metal"],
     ["11", "Hall bar at mK: Rₛ, μ, Nₛ", "Hall / 4-point probe"]];
   s.addTable(rows.map((r) => r.map((c) => (typeof c === "string" ? { text: c } : c))), { x: 0.5, y: 1.0, w: 5.6, colW: [0.5, 3.35, 1.75], fontFace: T.font, fontSize: 10.5, color: T.ink, valign: "middle", rowH: 0.42, border: { type: "solid", pt: 0.75, color: "E0E4E8" } });
-  s.addChart(pres.charts.BAR, [{ name: "peak T (°C)", labels: ["Flash anneal", "Outgas", "RTA (As)", "Incorporation", "Overgrowth"], values: [1200, 600, 500, 350, 250] }],
-    Object.assign(chartBase(), { x: 6.3, y: 1.0, w: 3.3, h: 3.8, barDir: "bar", chartColors: ["8C96A0"], showValue: true, dataLabelColor: T.ink, dataLabelFontSize: 10,
-      title: "Thermal budget: after patterning, ≤500 °C", showLegend: false, valAxisHidden: true, valGridLine: { style: "none" }, catAxisOrientation: "maxMin", barGapWidthPct: 50 }));
-  src(s, "Stock2020; Stock2024; DAnna2023; Ruess2004. Module mapping and thermal-budget chart are ours");
+  s.addChart(pres.charts.AREA, [{ name: "T (°C)", labels: ["Outgas", "Flash", "H-term.", "Litho/dose", "Incorp.", "Lock layer", "RTA", "Overgrowth"], values: [600, 1200, 330, 25, 350, 25, 500, 250] }],
+    Object.assign(chartBase(), { x: 6.25, y: 1.0, w: 3.35, h: 3.8, chartColors: ["8C96A0"], chartColorsOpacity: 70, showValue: true, dataLabelColor: T.ink, dataLabelFontSize: 9, dataLabelPosition: "t",
+      title: "Thermal budget: hot before patterning, ≤500 °C after", titleFontSize: 11, showLegend: false, valAxisMinVal: 0, valAxisMaxVal: 1400, valAxisMajorUnit: 400, catAxisLabelRotate: -45, catAxisLabelFontSize: 8.5, valAxisTitle: "°C", showValAxisTitle: true }));
+  src(s, "Stock2020; Stock2024; DAnna2023; Constantinou2024; Ruess2004. Area chart ours; room-temperature steps plotted at 25 °C");
   notes(s, "And here's the traveler for that prototype, every step with its recipe and the EE143 module it maps to. It's a normal process flow: clean and bake, coat a resist, write it, pre-deposit dopant from the gas phase, drive in, RTA, epitaxy, alignment marks, etch, metal, and a Hall measurement. On the right I plotted each step's peak temperature. The two hot steps, outgas and the 1200 °C flash, happen before any patterning. After the pattern exists, nothing exceeds the 500 °C, 15-second RTA. That's the design principle: front-load the heat, then protect the atoms. Likely question: where does it break? Step 4 throughput, which is why the EUV hybrid matters.");
 }
 

@@ -607,6 +607,66 @@ def prototype_layout():
     fig.text(0.01, 0.01, "Si(001) surface sites to scale (0.384 nm). Buried 30 nm. Lead widths illustrative.", fontsize=8, color=MUTED)
     save(fig, "O_prototype_layout.png")
 
+def _clean(ax):
+    for sp in ("top", "right"): ax.spines[sp].set_visible(False)
+    ax.spines["left"].set_color("#9AA3AC"); ax.spines["bottom"].set_color("#9AA3AC")
+    ax.tick_params(colors=INK, labelsize=9)
+
+def dumbbell_thickness():
+    """Constantinou2023 Table 1: SIMS width vs SX-ARPES electronic thickness (nm)."""
+    rows = [("As, 2 nm cap", 2.01, 0.2, 0.45, 0.04, AS_C), ("As, 3 nm cap", 2.22, 0.2, 0.62, 0.10, AS_C),
+            ("P, 2 nm cap", 2.24, 0.2, 0.91, 0.21, P_C), ("P, 3 nm cap", 2.86, 0.2, 1.03, 0.35, P_C)]
+    fig, ax = plt.subplots(figsize=(4.6, 2.5))
+    for i, (lab, s_, se, a_, ae, c) in enumerate(rows):
+        y = len(rows) - 1 - i
+        ax.plot([a_, s_], [y, y], color="#C3CAD1", lw=2, zorder=1)
+        ax.errorbar(s_, y, xerr=se, fmt="o", ms=8, mfc="white", mec="#5B6770", mew=2, ecolor="#9AA3AC", capsize=3, zorder=3)
+        ax.errorbar(a_, y, xerr=ae, fmt="o", ms=9, color=c, mec="white", mew=1.5, ecolor=c, capsize=3, zorder=4)
+        ax.text(-0.08, y, lab, ha="right", va="center", fontsize=9.5, color=INK)
+    ax.set_yticks([]); ax.set_xlim(0, 3.3); ax.set_ylim(-0.6, 3.9); ax.set_xlabel("layer thickness (nm)", fontsize=9.5)
+    ax.text(0.45, 3.55, "ARPES (electronic)", fontsize=9, color=INK, ha="center")
+    ax.text(2.2, 3.55, "SIMS (resolution-limited)", fontsize=9, color=INK, ha="center")
+    ax.set_title("As layers are half as thick as P layers", fontsize=10.5, loc="left", color=INK, x=-0.36)
+    _clean(ax); ax.spines["left"].set_visible(False)
+    save(fig, "C_dumbbell_thickness.png")
+
+def dot_yield():
+    """Probability that a site ends up with exactly one dopant."""
+    rows = [("Ion implant, no counting\n(Poisson, mean 1)", 36.8, 0, "#5B6770", "Schofield2025 §1: 36%"),
+            ("P, ideal 3-dimer window", 63, 10, P_C, "Ivie2021: 63 ± 10%"),
+            ("As, 4-site window", 97, 2, AS_C, "Stock2024: 97 ± 2%")]
+    fig, ax = plt.subplots(figsize=(4.4, 2.2))
+    for i, (lab, v, e, c, src_) in enumerate(rows):
+        y = len(rows) - 1 - i
+        ax.plot([0, v], [y, y], color="#E5E8EB", lw=1, zorder=1)
+        ax.errorbar(v, y, xerr=e if e else None, fmt="o", ms=10, color=c, mec="white", mew=1.5, ecolor=c, elinewidth=2, capsize=4, zorder=3)
+        ax.text(-3, y, lab, ha="right", va="center", fontsize=9, color=INK)
+        ax.text(v + (e or 0) + 2.5 if v < 90 else v - 3, y + 0.32, src_, fontsize=8, color=MUTED, ha="left" if v < 90 else "right")
+    ax.axvline(100, color="#C3CAD1", lw=1, ls=":")
+    ax.set_xlim(0, 104); ax.set_ylim(-0.6, 2.7); ax.set_yticks([]); ax.set_xlabel("sites with exactly one dopant (%)", fontsize=9.5)
+    _clean(ax); ax.spines["left"].set_visible(False)
+    save(fig, "C_dot_yield.png")
+
+def range_fidelity():
+    """Floating ranges / points of published 2025 fidelities (%)."""
+    rows = [("1Q gates (4-qubit)", 99.94, 99.98, "Thorvaldson2025"), ("CZ (4-qubit)", 99.32, 99.65, "Thorvaldson2025"),
+            ("All gates (11-qubit)", 99.10, 99.99, "Edlbauer2025"), ("Bell, in register", 91.4, 99.5, "Edlbauer2025"),
+            ("Bell, across registers", 87.0, 97.0, "Edlbauer2025"), ("GHZ, 3 qubits (4-qubit)", 96.2, 96.2, "Thorvaldson2025")]
+    fig, ax = plt.subplots(figsize=(4.6, 2.6))
+    for i, (lab, lo, hi, k) in enumerate(rows):
+        y = len(rows) - 1 - i
+        if hi > lo:
+            ax.plot([lo, hi], [y, y], color=INK, lw=6, solid_capstyle="round", alpha=0.85, zorder=2)
+        else:
+            ax.plot([lo], [y], "o", color=INK, ms=8, zorder=2)
+        ax.text(86.6, y, lab, ha="right", va="center", fontsize=9, color=INK)
+        ax.text(min(hi, 99.4) + 0.25 if hi < 99 else lo - 0.3, y + (0.0 if hi < 99 else 0.0), f"{lo:g}–{hi:g}%" if hi > lo else f"{lo:g}%",
+                va="center", fontsize=8, color=MUTED, ha="left" if hi < 99 else "right")
+    ax.set_xlim(87, 100.2); ax.set_ylim(-0.6, len(rows) - 0.4); ax.set_yticks([]); ax.set_xlabel("fidelity (%)", fontsize=9.5)
+    ax.set_title("Gate fidelities cluster above 99%; entangled states vary", fontsize=10, loc="left", color=INK, x=-0.5)
+    _clean(ax); ax.spines["left"].set_visible(False)
+    save(fig, "C_range_fidelity.png")
+
 def mini_icons():
     for st in ("prep", "litho", "dose", "incorp", "cap", "contact"):
         xsec(st, f"icon_{st}.png", w=1.6, h=0.9, mini=True)
@@ -616,7 +676,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         for fn in sys.argv[1:]: globals()[fn]()
         raise SystemExit
-    do_crops(); hero(); bloch(); wavefunction_scale(); prototype_layout()
+    do_crops(); hero(); bloch(); wavefunction_scale(); prototype_layout(); dumbbell_thickness(); dot_yield(); range_fidelity()
     surface_scene("H", "O2_surface_H.png"); surface_scene("window", "O2_surface_window.png")
     surface_scene("dose", "O2_surface_dose.png"); surface_scene("incorp", "O2_surface_incorp.png")
     for st in ("prep", "litho", "dose", "incorp", "cap", "contact"): xsec(st, f"xsec_{st}.png")
