@@ -134,8 +134,8 @@ const chartBase = () => ({ fontFace: T.font, catAxisLabelColor: T.ink, valAxisLa
 // ============================================================================ 4b. Quantum coupling to scale
 {
   const s = newSlide("TWO_FIG", "Why one site matters: wavefunction overlap", "Act 1");
-  const a = img(s, "O_wavefunction_scale.png", 0.4, 1.0, 6.3, 2.75, "left");
-  caption(s, "To scale: two P donors 13.0 nm apart over the Si(001) surface lattice, hydrogenic envelope |ψ|² ∝ e^(−2r/a_B) with a_B ≈ 2 nm (our model; inputs He2019, Schofield2025 §3.2, Stock2024).", 0.5, a.y + a.h + 0.04, 6.2, 0.5);
+  const a = img(s, "S_overlap.gif", 0.4, 0.95, 6.3, 2.85, "left");
+  caption(s, "Animated, to scale: two P donors pulled from 6 to 20 nm over the Si(001) lattice; envelope |ψ|² ∝ e^(−2r/a_B), a_B ≈ 2 nm; overlap S(R) is the 1s textbook form (our model, no valley oscillations).", 0.5, a.y + a.h + 0.03, 6.2, 0.5);
   const b = img(s, "F20_siegl2025_fig1f.png", 6.85, 0.98, 1.6, 1.15, "left");
   const b2 = img(s, "F20_siegl2025_fig1h.png", 8.5, 0.98, 1.05, 1.15, "left");
   caption(s, "Real thing: STM image of a buried acceptor's wavefunction (f) beside theory (h). Siegl et al. (Curson group), Nano Lett. 25, 13996 (2025) Fig. 1f,h, CC BY 4.0", 6.85, 2.18, 2.7, 0.75);
@@ -334,8 +334,8 @@ processSlide("Step 6 · Incorporation anneal", "Step 6 of 11",
 processSlide("Steps 7–8 · Burying the dopants", "Steps 7–8 of 11",
   ["Trade-off: low T keeps atoms in place, high T grows good crystal", "P: constant 250 °C (≈5 nm segregation, full activation)", "As: 2 nm at RT, 500 °C × 15 s RTA, 28 nm at 250 °C, 0.003 nm/s: layer 30 nm deep"],
   "xsec_cap.png", (s) => {
-    const a = img(s, "O5_overgrowth_program.png", 4.7, 1.0, 4.8, 2.1, "center");
-    caption(s, "Exact temperature programs: (a) Stock2020 Fig. 4e inset + text; (b) DAnna2023 Methods. Redrawn (ours).", 4.7, a.y + a.h + 0.02, 4.8, 0.25);
+    const a = img(s, "S_burial.gif", 4.7, 1.0, 4.8, 1.85, "center");
+    caption(s, "Animated (ours): DAnna2023 stack grown to scale with its thermal program; Stock2020 uses 40 °C lock layer, 500 °C × 10 s, then 250 °C.", 4.75, a.y + a.h + 0.02, 4.75, 0.45);
     const b = img(s, "F11_stock2020_fig4_sims.png", 4.7, 3.45, 1.65, 1.6, "left");
     caption(s, "SIMS: As stays sharp at 15 nm. Stock et al., ACS Nano 14, 3316 (2020) Fig. 4e, CC BY 4.0", b.x + b.w + 0.08, 3.45, 1.3, 1.3);
     callout(s, "EE143 link: a thermal-budget problem, like keeping a shallow junction shallow.", 7.95, 3.5, 1.55, 1.25, { fontSize: 10.5 });
@@ -468,6 +468,20 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
   callout(s, "This selectivity is the CROT/CZ gate: the electron's flip is conditioned on the nuclear register.", 5.95, 4.2, 3.55, 0.8, { fontSize: 11 });
   src(s, "Model: Reiner2024 Eq. 1; inputs Thorvaldson2025 (A, lines, T₂* = 28.1 µs, Q = 4.82). Simulation and fit ours (figures/src/simulate_qubits.py)");
   notes(s, "Instead of just showing the paper's spectrum, I simulated it. I took the Hamiltonian from Reiner 2024, one electron and three phosphorus nuclei, sixteen states, and diagonalised it in QuTiP, then fitted it to the fourteen measured line positions from Thorvaldson's Figure 1. It recovers hyperfine couplings of 6.05, 67.97 and 102.99 megahertz against the published 6, 68 and 103, with a 52 kilohertz rms residual. The animation is a time-domain simulation: drive the electron at the frequency for nuclei in down-down-down and it Rabi-flips at 172 kHz, with T2-star dephasing; for any other nuclear state, 6 MHz away, it stays put. That conditional flip is the two-qubit gate. Likely question: what's fitted? Only the two Zeeman frequencies plus refined A values; the line pattern itself is the model's prediction.");
+}
+
+// ============================================================================ SIM3. Lindblad decoherence
+{
+  const s = newSlide("TWO_FIG", "Decoherence: Lindblad vs slow noise", "Act 3");
+  s.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 0.95, w: 4.2, h: 0.9, fill: { color: "111A22" }, line: { color: "111A22", width: 0 } });
+  text(s, [{ text: "dρ/dt = −i[H, ρ] + Σₖ (Lₖ ρ Lₖ† − ½{Lₖ†Lₖ, ρ})", options: { fontSize: 13.5, color: "FFFFFF", bold: true, breakLine: true } },
+    { text: "Lindblad (Markovian): L = √(γ/2) σ_z gives coherence e^(−t/T₂)", options: { fontSize: 9.5, color: "9FB0BE" } }], 0.62, 1.03, 4.0, 0.75);
+  bullets(s, ["Measured T₂* = 28.1 µs comes from slow (quasi-static) field noise: Gaussian decay e^(−(t/T₂*)²), which no Markovian Lindblad rate reproduces", "Driven gates see T₂^Rabi = Q/f_Rabi ≈ 198 µs (34 / 172 kHz, our calc.): the regime where a Lindblad model fits", "Spin-orbit and Stark engineering via donor placement tunes T₁, T₂, T₂* (weak for donors; acceptors are spin-orbit dominated)"], 0.5, 2.0, 4.2, 3.0, 11);
+  const g = img(s, "S_lindblad.gif", 4.9, 0.95, 4.6, 1.87, "center");
+  caption(s, "Animated (QuTiP mesolve vs quasi-static ensemble): Ramsey free precession of the electron, same T₂* = 28.1 µs. Both reach 1/e at T₂*; the shapes differ. Detuning 0.2 MHz is illustrative.", 4.9, g.y + g.h + 0.03, 4.6, 0.62);
+  callout(s, "Grad-level point: echo pulses remove quasi-static noise (T₂* → T₂); a Lindblad rate alone can't explain that gain.", 4.9, 3.7, 4.6, 0.8, { fontSize: 11 });
+  src(s, "Thorvaldson2025 (T₂* = 28.1 µs; Q_gate = 34; Q = 4.82); Schofield2025 §2.1, §3.1 (spin-orbit, T₁/T₂/T₂* engineering). Simulation ours");
+  notes(s, "The standard decoherence model is the Lindblad master equation: unitary evolution plus jump operators. With a pure-dephasing operator, coherence decays exponentially, the teal Bloch vector spiralling inward. But the measured T2-star of 28.1 microseconds comes from slow, quasi-static noise, the orange case, which gives a Gaussian decay. I simulated both with the same T2-star: both hit 1 over e at 28 microseconds, but the shapes differ, and only the quasi-static picture explains why echo sequences recover coherence. Under driving, the paper's gate quality factor implies a Rabi decay time near 200 microseconds, where a Lindblad rate is a fair model. Likely question: what about Rashba? It's a spin-orbit term; for phosphorus donors spin-orbit is weak, whereas acceptors are spin-orbit dominated, which is where Rashba-type physics matters.");
 }
 
 // ============================================================================ SIM2. Grover sim vs hardware

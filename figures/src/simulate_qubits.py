@@ -283,19 +283,125 @@ def fab_gif():
 
 
 def hero_gif():
+    """Title animation: gentle rotation + spin precession + wavefunction pulse + tip tunnelling flash (24 frames, loops)."""
     sys.path.insert(0, "figures/src")
     import make_figures as mf
-    src = open("figures/src/make_figures.py").read()
     frames = []
-    for az in range(-47, -22, 3):
-        mf.hero(az=az, fname="_hero_frame.png")
-        im = Image.open(f"{OUT}/_hero_frame.png").convert("RGB"); im.thumbnail((900, 800)); frames.append(im)
+    for k in range(24):
+        ph = k / 24
+        mf.hero(az=-35 + 7 * math.sin(2 * math.pi * ph), fname="_hero_frame.png", phase=ph)
+        im = Image.open(f"{OUT}/_hero_frame.png").convert("RGB"); im.thumbnail((1000, 900)); frames.append(im)
     os.remove(f"{OUT}/_hero_frame.png")
-    frames = frames + frames[::-1][1:-1]
-    to_gif(frames, f"{OUT}/S_hero.gif", ms=140)
+    to_gif(frames, f"{OUT}/S_hero.gif", ms=110)
+
+
+def lindblad_gif():
+    """Ramsey free evolution of one electron spin: Lindblad (Markovian) vs quasi-static (non-Markovian) dephasing.
+    Same characteristic time T2* = 28.1 us (Thorvaldson2025). Detuning 0.2 MHz is illustrative.
+    Also: driven Rabi under Lindblad with T2^Rabi = Q_gate / f_Rabi = 34 / 0.1715 MHz = 198 us (derived)."""
+    T2s, delta = 28.1, 0.2
+    t = np.linspace(0, 60, 241)
+    H = 2 * math.pi * delta / 2 * qt.sigmaz()
+    psi0 = (qt.basis(2, 0) + qt.basis(2, 1)).unit()
+    gamma = 1 / T2s
+    L = [math.sqrt(gamma / 2) * qt.sigmaz()]          # pure dephasing: coherence decays as exp(-t/T2)
+    rl = qt.mesolve(H, psi0, t, c_ops=L, e_ops=[qt.sigmax(), qt.sigmay(), qt.sigmaz()])
+    lx, ly, lz = [np.array(e) for e in rl.expect]
+    sig = math.sqrt(2) / (2 * math.pi * T2s)
+    dets = np.linspace(-3.5 * sig, 3.5 * sig, 61); w = np.exp(-dets ** 2 / (2 * sig ** 2)); w /= w.sum()
+    qx = np.zeros_like(t); qy = np.zeros_like(t)
+    for d, wt in zip(dets, w):
+        r = qt.sesolve(2 * math.pi * (delta + d) / 2 * qt.sigmaz(), psi0, t, e_ops=[qt.sigmax(), qt.sigmay()])
+        qx += wt * np.array(r.expect[0]); qy += wt * np.array(r.expect[1])
+    # check analytic envelopes
+    print("Lindblad |r| at T2*:", np.hypot(lx, ly)[np.argmin(abs(t - T2s))], "(e^-1 = 0.368)")
+    print("quasi-static |r| at T2*:", np.hypot(qx, qy)[np.argmin(abs(t - T2s))], "(e^-1 = 0.368)")
+    frames = []
+    for k in range(0, len(t), 6):
+        fig = plt.figure(figsize=(7.4, 3.0), facecolor="white")
+        for j, (X, Y, col, ttl) in enumerate(((lx, ly, AS_C, "Lindblad (Markovian)"), (qx, qy, P_C, "quasi-static noise"))):
+            ax = fig.add_subplot(1, 3, j + 1, projection="3d", computed_zorder=False)
+            u, v = np.mgrid[0:2 * np.pi:30j, 0:np.pi:15j]
+            ax.plot_surface(np.cos(u) * np.sin(v), np.sin(u) * np.sin(v), np.cos(v), color="#EEF2F5", alpha=0.18, lw=0)
+            th = np.linspace(0, 2 * np.pi, 80); ax.plot(np.cos(th), np.sin(th), 0 * th, color="#C3CAD1", lw=0.6)
+            ax.plot(X[:k + 1], Y[:k + 1], 0 * X[:k + 1], color=col, lw=1.0, alpha=0.6)
+            ax.quiver(0, 0, 0, X[k], Y[k], 0, color=col, lw=2.4, arrow_length_ratio=0.15)
+            ax.set_box_aspect((1, 1, 1)); ax.view_init(elev=28, azim=35); ax.axis("off")
+            ax.set_xlim(-1, 1); ax.set_ylim(-1, 1); ax.set_zlim(-1, 1); ax.set_title(ttl, fontsize=9, color=INK)
+        b = fig.add_subplot(1, 3, 3)
+        b.plot(t[:k + 1], np.hypot(lx, ly)[:k + 1], color=AS_C, lw=2, label="Lindblad: e$^{-t/T_2}$")
+        b.plot(t[:k + 1], np.hypot(qx, qy)[:k + 1], color=P_C, lw=2, label="quasi-static: e$^{-(t/T_2^*)^2}$")
+        b.axvline(T2s, color="#9AA3AC", ls=":", lw=1); b.text(T2s + 1, 0.92, "T₂* = 28.1 µs", fontsize=7.5, color=MUTED)
+        b.set_xlim(0, 60); b.set_ylim(0, 1.05); b.set_xlabel("free evolution (µs)", fontsize=8.5); b.set_ylabel("coherence |⟨σ⊥⟩|", fontsize=8.5)
+        b.legend(fontsize=7, frameon=False, loc="lower left"); b.tick_params(labelsize=7.5)
+        for sp in ("top", "right"): b.spines[sp].set_visible(False)
+        fig.tight_layout(); frames.append(fig_to_img(fig, 100))
+    to_gif(frames, f"{OUT}/S_lindblad.gif", ms=90)
+
+
+def overlap_gif():
+    """Two hydrogenic envelopes (a_B = 2 nm, Schofield2025 §3.2) pulled apart from 6 to 20 nm on the Si(001) lattice;
+    overlap S(R) = e^{-R/a}(1 + R/a + R^2/3a^2) (textbook 1s overlap; our envelope model, no valley oscillations)."""
+    aB, a = 2.0, 0.384
+    Rs = np.concatenate([np.linspace(6, 20, 15), np.linspace(20, 6, 15)[1:-1]])
+    S = lambda R: np.exp(-R / aB) * (1 + R / aB + R ** 2 / (3 * aB ** 2))
+    from matplotlib.colors import LinearSegmentedColormap
+    cm = LinearSegmentedColormap.from_list("q", ["#FFFFFF", "#CFEFEF", "#5FC9C9", "#0F9FA0", "#075E5F"])
+    x = np.linspace(-6, 26, 520); y = np.linspace(-5, 5, 170); X, Y = np.meshgrid(x, y)
+    frames = []
+    for R in Rs:
+        fig, (ax, bx) = plt.subplots(1, 2, figsize=(7.4, 2.6), gridspec_kw=dict(width_ratios=[2.1, 1], wspace=0.25))
+        d = np.exp(-2 * np.hypot(X, Y) / aB) + np.exp(-2 * np.hypot(X - R, Y) / aB)
+        ax.imshow(np.log10(d + 1e-9), extent=(x[0], x[-1], y[0], y[-1]), origin="lower", cmap=cm, vmin=-3.2, vmax=0, aspect="equal")
+        gx, gy = np.meshgrid(np.arange(x[0], x[-1], a), np.arange(y[0], y[-1], 2 * a)); ax.scatter(gx, gy, s=0.3, color="#5B6770", alpha=0.5, lw=0)
+        for x0 in (0, R): ax.add_patch(Circle((x0, 0), 0.28, color=P_C, zorder=3))
+        ax.annotate("", (R, -4.0), (0, -4.0), arrowprops=dict(arrowstyle="<->", color=INK, lw=1.1))
+        ax.text(R / 2, -3.7, f"R = {R:.1f} nm  (≈{R / a:.0f} lattice sites)", ha="center", fontsize=8.5)
+        ax.set_xticks([]); ax.set_yticks([]); [sp.set_visible(False) for sp in ax.spines.values()]
+        ax.set_title("two P donors, |ψ|² (log scale), a_B ≈ 2 nm", fontsize=9, loc="left")
+        rr = np.linspace(5, 21, 200); bx.semilogy(rr, S(rr), color=AS_C, lw=2); bx.semilogy([R], [S(R)], "o", color=P_C, ms=8)
+        bx.axvline(13.0, color="#9AA3AC", ls=":", lw=1); bx.text(13.3, 0.3, "He2019\n13 nm", fontsize=7, color=MUTED)
+        bx.set_xlabel("donor spacing R (nm)", fontsize=8.5); bx.set_ylabel("overlap S(R)", fontsize=8.5); bx.tick_params(labelsize=7.5)
+        bx.set_title("coupling falls exponentially", fontsize=9, loc="left")
+        for sp in ("top", "right"): bx.spines[sp].set_visible(False)
+        fig.subplots_adjust(left=0.02, right=0.98, bottom=0.2, top=0.88); frames.append(fig_to_img(fig, 100))
+    to_gif(frames, f"{OUT}/S_overlap.gif", ms=110)
+
+
+def burial_gif():
+    """DAnna2023 stack grown in time: 2 nm at RT, RTA 500 C x 15 s, 28 nm at 250 C, 0.003 nm/s (thickness axis to scale)."""
+    prog = [(0, 25), (2, 25), (2, 500), (2, 250), (30, 250)]
+    fr = list(np.linspace(0, 2, 8)) + [2] * 4 + list(np.linspace(2, 30, 22)) + [30] * 6
+    phase = ["lock"] * 8 + ["rta"] * 4 + ["cap"] * 22 + ["done"] * 6
+    frames = []
+    for th, ph in zip(fr, phase):
+        fig, (ax, bx) = plt.subplots(1, 2, figsize=(7.4, 2.8), gridspec_kw=dict(width_ratios=[1.3, 1], wspace=0.3))
+        ax.add_patch(Rectangle((0, -10), 40, 10, color="#8C96A0"))
+        ax.add_patch(Rectangle((0, -0.4), 40, 0.8, color=AS_C))
+        if th > 0: ax.add_patch(Rectangle((0, 0.4), 40, min(th, 2), color="#B5BEC6"))
+        if th > 2: ax.add_patch(Rectangle((0, 2.4), 40, th - 2, color="#C9D1D8"))
+        if ph == "rta":
+            for k in range(6): ax.add_patch(Rectangle((0, -10), 40, 42, color="#E8590C", alpha=0.05 + 0.02 * k))
+        ax.text(1, -6, "Si(001) substrate", color="white", fontsize=8.5); ax.text(41, -0.5, "As δ-layer", fontsize=8, color="#075E5F")
+        if th > 2: ax.text(1, 2.4 + (th - 2) / 2, f"Si cap {th - 2:.0f} nm, 250 °C", fontsize=8, va="center")
+        ax.text(1, 31, {"lock": "2 nm lock layer, room temperature", "rta": "RTA 500 °C × 15 s", "cap": "28 nm epitaxy at 250 °C, 0.003 nm/s", "done": "As layer buried 30 nm"}[ph], fontsize=9.5, fontweight="bold")
+        ax.set_xlim(0, 52); ax.set_ylim(-10, 34); ax.set_xticks([]); ax.set_ylabel("height above δ-layer (nm)", fontsize=8); ax.tick_params(labelsize=7.5)
+        for sp in ("top", "right", "bottom"): ax.spines[sp].set_visible(False)
+        tt = [0, 2, 2.05, 2.1, 30]; TT = [25, 25, 500, 250, 250]
+        bx.plot(tt, TT, color="#C3CAD1", lw=1.5)
+        if ph == "lock": px, py = [0, th], [25, 25]
+        elif ph == "rta": px, py = [0, 2, 2.05], [25, 25, 500]
+        else: px, py = [0, 2, 2.05, 2.1, th], [25, 25, 500, 250, 250]
+        bx.plot(px, py, color=AS_C, lw=2.2)
+        cur = 500 if ph == "rta" else (25 if th <= 2 else 250); bx.plot([min(th, 30)], [cur], "o", color=P_C, ms=8)
+        bx.set_xlim(0, 30); bx.set_ylim(0, 560); bx.set_xlabel("Si deposited (nm)", fontsize=8.5); bx.set_ylabel("T (°C)", fontsize=8.5); bx.tick_params(labelsize=7.5)
+        bx.set_title("DAnna2023 thermal program", fontsize=9, loc="left")
+        for sp in ("top", "right"): bx.spines[sp].set_visible(False)
+        fig.subplots_adjust(left=0.08, right=0.97, bottom=0.18, top=0.92); frames.append(fig_to_img(fig, 100))
+    to_gif(frames, f"{OUT}/S_burial.gif", ms=120)
 
 
 if __name__ == "__main__":
-    jobs = sys.argv[1:] or ["esr", "rabi", "grover", "yield", "fab", "hero"]
+    jobs = sys.argv[1:] or ["esr", "rabi", "grover", "yield", "fab", "hero", "lindblad", "overlap", "burial"]
     for j in jobs:
-        {"esr": esr_fit, "rabi": rabi_gif, "grover": grover_gif, "yield": yield_gif, "fab": fab_gif, "hero": hero_gif}[j]()
+        {"esr": esr_fit, "rabi": rabi_gif, "grover": grover_gif, "yield": yield_gif, "fab": fab_gif, "hero": hero_gif, "lindblad": lindblad_gif, "overlap": overlap_gif, "burial": burial_gif}[j]()

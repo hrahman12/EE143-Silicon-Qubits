@@ -403,7 +403,10 @@ def landmarks():
 # --------------------------------------------------------------------------------------------
 # 10. Title hero: diamond-cubic Si block (a = 5.431 Å, geometry only) with single As/P dopants
 # --------------------------------------------------------------------------------------------
-def hero(az=-35, fname="O_hero_title.png"):
+def hero(az=-35, fname="O_hero_title.png", phase=None):
+    """phase=None: static cover. phase in [0,1): animation frame (spin precession, glow pulse, tunnelling flash)."""
+    ph = 0.0 if phase is None else phase
+    pulse = 1.0 if phase is None else 1.0 + 0.45 * math.sin(2 * math.pi * ph)
     a0 = 5.431
     basis = [(0, 0, 0), (0, .5, .5), (.5, 0, .5), (.5, .5, 0), (.25, .25, .25), (.25, .75, .75), (.75, .25, .75), (.75, .75, .25)]
     N, NZ = 5, 2
@@ -448,7 +451,7 @@ def hero(az=-35, fname="O_hero_title.png"):
         if col:  # |psi|^2 ~ exp(-2r/aB) glow, drawn as stacked translucent discs
             u, w, _ = sc.proj(*p)
             for r in np.linspace(7.5, 1.0, 18):
-                ax.add_patch(Circle((u, w), r, color=col, alpha=0.05 * math.exp(-2 * r / (aB / 2.5)) * 3.0, lw=0, zorder=3))
+                ax.add_patch(Circle((u, w), r * (0.9 + 0.12 * pulse), color=col, alpha=min(1, 0.05 * math.exp(-2 * r / (aB / 2.5)) * 3.0 * pulse), lw=0, zorder=3))
             for rr in (2.6, 4.6):
                 ax.add_patch(Circle((u, w), rr, fill=False, ec=col, lw=0.7, alpha=0.55, zorder=3))
         shade = 0.25 + 0.75 * (p[2] / zt)
@@ -465,15 +468,20 @@ def hero(az=-35, fname="O_hero_title.png"):
     spins = [1, -1, -1, 1]
     for q, sp in zip(sorted(As_sites), spins):
         u, w = proj[q]
-        ax.add_patch(FancyArrowPatch((u, w + (1.2 if sp > 0 else 5.4)), (u, w + (5.4 if sp > 0 else 1.2)), arrowstyle="-|>", mutation_scale=13, color="#FFFFFF", lw=2.0, zorder=160))
+        phi = 2 * math.pi * (2 * ph + 0.25 * sp)                 # Larmor-like precession about the field axis
+        tilt = 0.0 if phase is None else 0.38
+        dx, dz = 4.2 * math.sin(tilt) * math.cos(phi), 4.2 * math.cos(tilt) * sp
+        base = (u, w + 2.9 - dz / 2)
+        ax.add_patch(FancyArrowPatch(base, (u + dx, w + 2.9 + dz / 2), arrowstyle="-|>", mutation_scale=13, color="#FFFFFF", lw=2.0, zorder=160))
     up, wp = proj[[q for q, c_ in dop.items() if c_ == P_C][0]]
     ax.add_patch(FancyArrowPatch((up, wp + 1.2), (up + 2.6, wp + 4.8), arrowstyle="-|>", mutation_scale=12, color="#FFE2C4", lw=1.8, zorder=160))
     # STM tip above the register
     u, w, _ = sc.proj(c, c, zt)
     ax.add_patch(Polygon([[u - 3.0, w + 27], [u + 3.0, w + 27], [u, w + 9.5]], color=TIP, zorder=200, lw=0))
     ax.add_patch(Polygon([[u - 1.1, w + 27], [u + 0.6, w + 27], [u, w + 9.5]], color="#F0D27A", zorder=201, lw=0))
+    flash = 1.0 if phase is None else 0.4 + 0.9 * max(0.0, math.sin(2 * math.pi * 2 * ph)) ** 4
     for r, al in ((1.3, .18), (0.7, .4)):
-        ax.add_patch(Circle((u, w + 9.3), r, color="#F6E3A1", alpha=al, lw=0, zorder=202))
+        ax.add_patch(Circle((u, w + 9.3), r * (0.8 + 0.6 * flash), color="#F6E3A1", alpha=min(1, al * (0.7 + flash)), lw=0, zorder=202))
     ax.plot([u, u], [w + 9.0, w + 2.5], color="#F6E3A1", lw=1.2, ls=(0, (2, 2)), alpha=0.7, zorder=199)
     ax.set_aspect("equal"); ax.axis("off"); ax.autoscale_view(); ax.margins(0.03)
     fig.savefig(f"{OUT}/{fname}", dpi=300 if fname == "O_hero_title.png" else 110, facecolor="#111A22"); plt.close(fig); print("wrote", fname)
