@@ -398,6 +398,25 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
   notes(s, "Because arsine dissociates so fast and needs fewer sites, a window of just four lattice sites, two dimers, is enough. In that window a single arsenic atom incorporates 97 ± 2% of the time. That window is one site in four, about 0.6 square nanometres, which is 33% better placement precision than phosphorus. With that yield they made the first defect-free 2×2 single-dopant array in silicon, shown in the top figure: lithography, dose, anneal, plus the ideal window sketch. The histogram at the bottom is the statistics behind the 97%. And if a site fails, you could repeat lithography and dosing to push yield toward 100%. Likely question: what about other dopants? Bismuth chemistry is on the next slide; the pack has no yield numbers for others.");
 }
 
+// ============================================================================ 17b. Window-size sweet spot (100% stacked bar)
+{
+  const s = newSlide("TWO_FIG", "Why four sites? The window-size sweet spot", "Act 3");
+  const labels = ["1 site (1DB, n=286)", "2 sites (2DB, n=92)", "4 sites (4DB, n=24)", "6 sites (6DB, n=19)"];
+  s.addChart(pres.charts.BAR, [
+    { name: "No As (H re-terminates)", labels, values: [89, 26, 0, 0] },
+    { name: "Exactly one AsHₓ", labels, values: [10.6, 74, 100, 37] },
+    { name: "Two AsHₓ", labels, values: [0, 0, 0, 63] }],
+    Object.assign(chartBase(), { x: 0.4, y: 1.0, w: 5.4, h: 3.35, barDir: "bar", barGrouping: "percentStacked", chartColors: ["8C96A0", T.As, T.ink],
+      title: "After arsine dosing, only 4-site windows always hold exactly one molecule", titleFontSize: 11, showLegend: true, legendPos: "b", legendFontSize: 9.5,
+      catAxisOrientation: "maxMin", valAxisLabelFormatCode: "0%", valGridLine: { style: "none" }, barGapWidthPct: 45, catAxisLabelFontSize: 10,
+      showValue: true, dataLabelFormatCode: "0;;;", dataLabelColor: "FFFFFF", dataLabelFontSize: 9 }));
+  const b = img(s, "F2_stock2024_fig3_ae.png", 6.05, 1.05, 3.45, 1.6, "center");
+  caption(s, "Window array before/after AsH₃. Reproduced from Stock et al., Adv. Mater. 36, 2312282 (2024) Fig. 3, CC BY 4.0", 6.05, b.y + b.h + 0.03, 3.45, 0.45);
+  bullets(s, ["Too small (1–2 sites): H often re-terminates", "Too big (6 sites): 63% catch two molecules", "4 sites: one AsHₓ every time; with the 350 °C anneal, 97 ± 2% single As"], 6.05, 3.25, 3.45, 1.7, 12);
+  src(s, "Stock2024 §2.2–2.3, Table 1. One = any single A–E feature (1DB: 10 + 0.6%). Chart ours");
+  notes(s, "This is the data behind Curson's 97%. Stock and co-workers wrote windows of different sizes, dosed arsine, and counted what landed. A single dangling bond usually just grabs a hydrogen back: 89% end up with no arsenic. Two sites do better, 74% catch one molecule. Six sites are too generous: 63% catch two molecules, which would mean two dopants. Four sites, two dimers, held exactly one arsine fragment in all 24 windows they measured. Add the 350 °C anneal and you get the 97 ± 2% single-atom yield. It's a lithography design rule: the window size sets the dopant count. Likely question: is n = 24 enough? It's the published sample; the 97% comes with its ± 2% uncertainty.");
+}
+
 // ============================================================================ 18. Beyond Si:P
 {
   const s = newSlide("TWO_FIG", "Beyond Si:P: new dopants, new hosts", "Act 3");
