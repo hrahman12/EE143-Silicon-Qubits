@@ -404,6 +404,19 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
   notes(s, "Two side projects from Curson's group show the method generalises. First, germanium: arsenic from arsine goes into the germanium surface at room temperature with no anneal at all, the STM image on the left. That removes a thermal step entirely. Second, bismuth: they studied how a triphenyl-bismuth molecule sticks to and breaks apart on Si(001), on the right, as a route to ultra-shallow bismuth doping. The point for us: the toolbox is the same, a hydrogen resist, a tip and a gas. Change the gas or the substrate and you get a different device platform. Likely question: why germanium? It's another group-IV host used in quantum devices; the pack doesn't go further, so I won't either.");
 }
 
+// ============================================================================ 19. Processors
+{
+  const s = newSlide("TWO_FIG", "The payoff: from devices to processors", "Act 3");
+  bullets(s, ["2019: ≈800 ps exchange gate (natural Si); 3D device, 97.9% readout, <5 nm layer alignment", "2025, 4 qubits: 3P + 1 e⁻, 45 nm ²⁸Si cap, 1.45 T, 15 mK; CZ 99.32–99.65%, Grover search", "2025, 11 qubits: 4P + 5P registers 13(1) nm apart, SET 17 nm away, ~1.39 T; Bell 99.5% local, 97.0% across"], 0.5, 1.05, 3.75, 3.0, 12);
+  callout(s, "Caveat: 2019 used natural Si and electron spins; 2025 used ²⁸Si and nuclear-spin registers, so don't compare fidelities directly.", 0.5, 4.05, 3.75, 0.85, { fontSize: 11 });
+  const c = img(s, "F14_edlbauer2025_fig1ab.png", 4.4, 1.0, 5.1, 2.35, "center");
+  caption(s, "11-qubit processor: connectivity and STM of the 4P and 5P registers. Reproduced from Edlbauer et al., Nature 648, 569 (2025) Fig. 1a,b, CC BY 4.0", 4.4, c.y + c.h + 0.03, 5.1, 0.4);
+  const b = img(s, "F13_thorvaldson2025_fig4b.png", 4.4, 3.7, 2.4, 1.42, "left");
+  caption(s, "Grover output, marked state ⇓⇓⇓: 98.87% of ideal. Reproduced from Thorvaldson et al., Nat. Nanotechnol. 20, 472 (2025) Fig. 4b, CC BY 4.0", b.x + b.w + 0.12, 3.85, 2.8, 0.9);
+  src(s, "He2019; Koch2019; Thorvaldson2025 (Methods); Edlbauer2025 (Fig. 1 caption, SI)");
+  notes(s, "Now the payoff: processors. 2019 gave the first exchange gate between two phosphorus donor electrons, about 800 picoseconds, and a 3D device with stacked dopant layers aligned within 5 nm. In 2025 a four-qubit processor, three phosphorus nuclei plus one electron in silicon-28, ran Grover's search; the bar chart shows the marked state found 93.46% of the time, 98.87% of ideal. And an 11-qubit processor linked a four-phosphorus and a five-phosphorus register by exchange: Bell states 99.5% within a register, 97% across. Please read the caveat box: 2019 used natural silicon and electron spins, 2025 used silicon-28 and nuclear spins, so the numbers aren't apples to apples. Likely question: are these Curson's devices? No, these are context papers from other groups using the same fabrication.");
+}
+
 // ============================================================================ Q1. Spin Hamiltonian, measured
 {
   const s = newSlide("TWO_FIG", "The qubit as a spin Hamiltonian, and its spectrum", "Act 3");
@@ -416,7 +429,7 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
   const c = img(s, "C_coherence_times.png", 5.0, 3.55, 4.5, 1.6, "center");
   caption(s, "Right: our chart of published T₂* values; 35.6 s is the best donor coherence (implanted donors, ²⁸Si).", 0.5, 4.1, 4.3, 0.45);
   src(s, "Hamiltonian: Reiner2024 Eq. 1; Thorvaldson2025 (A, B, T, T₂*); Reiner2024 (T₂*); Schofield2025 §3.2");
-  notes(s, "This is the physicist's view of the device. Reiner 2024 writes the register's Hamiltonian: electron Zeeman, nuclear Zeeman, and the hyperfine coupling between the shared electron and each phosphorus nucleus. In Thorvaldson's processor, three nuclei share one electron, with hyperfine couplings of 6, 68 and 103 megahertz, at 1.45 tesla and 15 millikelvin. Because each nucleus shifts the electron's resonance, the ESR spectrum on the right splits into two-cubed, eight peaks, one per nuclear configuration. So reading the electron reads the register. The chart shows why nuclei are the memory: electron dephasing in tens of microseconds, nuclei in milliseconds, and the best donor coherence reaches 35.6 seconds. Likely question: why does A depend on E? Gate fields distort the electron wavefunction, tuning its overlap with each nucleus.");
+  notes(s, "Zooming into that four-qubit processor, here's the physicist's view. Reiner 2024 writes the register's Hamiltonian: electron Zeeman, nuclear Zeeman, and the hyperfine coupling between the shared electron and each phosphorus nucleus. In Thorvaldson's processor, three nuclei share one electron, with hyperfine couplings of 6, 68 and 103 megahertz, at 1.45 tesla and 15 millikelvin. Because each nucleus shifts the electron's resonance, the ESR spectrum on the right splits into two-cubed, eight peaks, one per nuclear configuration. So reading the electron reads the register. The chart shows why nuclei are the memory: electron dephasing in tens of microseconds, nuclei in milliseconds, and the best donor coherence reaches 35.6 seconds. Likely question: why does A depend on E? Gate fields distort the electron wavefunction, tuning its overlap with each nucleus.");
 }
 
 // ============================================================================ Q2. Entanglement by tomography
@@ -431,19 +444,6 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
   bullets(s, ["Bell fidelities 97.5 ± 0.3, 97.7 ± 0.4, 96.8 ± 0.4%", "Grover finds the marked state at 98.87% of ideal"], 6.25, 3.75, 3.25, 1.2, 11.5);
   src(s, "Thorvaldson2025 (²⁸Si, 3P + 1 e⁻ register; fidelities include SPAM for GHZ)");
   notes(s, "Here is the quantum evidence, straight from the 2025 four-qubit paper. Top left: they reconstruct the full density matrix of a Bell state for each pair of phosphorus nuclei. The four tall bars in the corners are exactly what a maximally entangled state looks like; everything else should be zero. Fidelities are about 97% for every pair. Right: a three-qubit GHZ state, all three nuclei entangled, 96.2% fidelity including state preparation and measurement errors. Bottom: the Grover circuit they ran, an oracle that marks one of eight states and a diffusion operator, repeated twice; it found the marked state at 98.87% of the ideal probability. Likely question: what is tomography? Measuring many copies in different bases to rebuild the full quantum state.");
-}
-
-// ============================================================================ 19. Processors
-{
-  const s = newSlide("TWO_FIG", "The payoff: from devices to processors", "Act 3");
-  bullets(s, ["2019: ≈800 ps exchange gate (natural Si); 3D device, 97.9% readout, <5 nm layer alignment", "2025, 4 qubits: 3P + 1 e⁻, 45 nm ²⁸Si cap, 1.45 T, 15 mK; CZ 99.32–99.65%, Grover search", "2025, 11 qubits: 4P + 5P registers 13(1) nm apart, SET 17 nm away, ~1.39 T; Bell 99.5% local, 97.0% across"], 0.5, 1.05, 3.75, 3.0, 12);
-  callout(s, "Caveat: 2019 used natural Si and electron spins; 2025 used ²⁸Si and nuclear-spin registers, so don't compare fidelities directly.", 0.5, 4.05, 3.75, 0.85, { fontSize: 11 });
-  const c = img(s, "F14_edlbauer2025_fig1ab.png", 4.4, 1.0, 5.1, 2.35, "center");
-  caption(s, "11-qubit processor: connectivity and STM of the 4P and 5P registers. Reproduced from Edlbauer et al., Nature 648, 569 (2025) Fig. 1a,b, CC BY 4.0", 4.4, c.y + c.h + 0.03, 5.1, 0.4);
-  const b = img(s, "F13_thorvaldson2025_fig4b.png", 4.4, 3.7, 2.4, 1.42, "left");
-  caption(s, "Grover output, marked state ⇓⇓⇓: 98.87% of ideal. Reproduced from Thorvaldson et al., Nat. Nanotechnol. 20, 472 (2025) Fig. 4b, CC BY 4.0", b.x + b.w + 0.12, 3.85, 2.8, 0.9);
-  src(s, "He2019; Koch2019; Thorvaldson2025 (Methods); Edlbauer2025 (Fig. 1 caption, SI)");
-  notes(s, "Now the payoff: processors. 2019 gave the first exchange gate between two phosphorus donor electrons, about 800 picoseconds, and a 3D device with stacked dopant layers aligned within 5 nm. In 2025 a four-qubit processor, three phosphorus nuclei plus one electron in silicon-28, ran Grover's search; the bar chart shows the marked state found 93.46% of the time, 98.87% of ideal. And an 11-qubit processor linked a four-phosphorus and a five-phosphorus register by exchange: Bell states 99.5% within a register, 97% across. Please read the caveat box: 2019 used natural silicon and electron spins, 2025 used silicon-28 and nuclear spins, so the numbers aren't apples to apples. Likely question: are these Curson's devices? No, these are context papers from other groups using the same fabrication.");
 }
 
 // ============================================================================ 20. Simulator
