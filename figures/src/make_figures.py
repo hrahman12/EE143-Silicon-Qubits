@@ -403,7 +403,7 @@ def landmarks():
 # --------------------------------------------------------------------------------------------
 # 10. Title hero: diamond-cubic Si block (a = 5.431 Å, geometry only) with single As/P dopants
 # --------------------------------------------------------------------------------------------
-def hero():
+def hero(az=-35, fname="O_hero_title.png"):
     a0 = 5.431
     basis = [(0, 0, 0), (0, .5, .5), (.5, 0, .5), (.5, .5, 0), (.25, .25, .25), (.25, .75, .75), (.75, .25, .75), (.75, .75, .25)]
     N, NZ = 5, 2
@@ -423,7 +423,7 @@ def hero():
         keep = ((D > 0.1) & (D < dnn0 + 0.05)).sum(1) >= 2
         P = P[keep]
     pts = [tuple(p) for p in P]; zt = P[:, 2].max()
-    sc = Scene(az=-35, el=32)
+    sc = Scene(az=az, el=32)
     fig = plt.figure(figsize=(7.0, 6.2), facecolor="#111A22"); ax = fig.add_axes([0, 0, 1, 1]); ax.set_facecolor("#111A22")
     # bonds (nearest neighbours, a*sqrt(3)/4)
     dnn = a0 * math.sqrt(3) / 4
@@ -476,7 +476,7 @@ def hero():
         ax.add_patch(Circle((u, w + 9.3), r, color="#F6E3A1", alpha=al, lw=0, zorder=202))
     ax.plot([u, u], [w + 9.0, w + 2.5], color="#F6E3A1", lw=1.2, ls=(0, (2, 2)), alpha=0.7, zorder=199)
     ax.set_aspect("equal"); ax.axis("off"); ax.autoscale_view(); ax.margins(0.03)
-    fig.savefig(f"{OUT}/O_hero_title.png", dpi=300, facecolor="#111A22"); plt.close(fig); print("wrote O_hero_title.png")
+    fig.savefig(f"{OUT}/{fname}", dpi=300 if fname == "O_hero_title.png" else 110, facecolor="#111A22"); plt.close(fig); print("wrote", fname)
 
 def bloch():
     fig = plt.figure(figsize=(3.4, 3.4)); ax = fig.add_subplot(111, projection="3d", computed_zorder=False)

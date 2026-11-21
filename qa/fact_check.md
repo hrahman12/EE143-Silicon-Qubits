@@ -176,3 +176,11 @@ Paper-internal conflicts kept visible rather than resolved: Constantinou2024 330
 | 25 | >800 MHz gradient; CNOT 99.98% for 2P–3P | Schofield2025 §3.1 p. 25 (KRANZ2023B) | OK |
 | 31 | Tennant's law: >200 h per µm² at 0.768 nm | Schofield2025 §5.5 p. 87 | OK |
 | 31 | single-trap telegraph noise; ensemble 1/f | Cowie2024 abstract/significance | OK |
+
+## Round 7: simulations (figures/src/simulate_qubits.py, QuTiP 5.3.1; fit output notes/specs/qutip_fit.json)
+| Slide | Number | Basis | Status |
+|---|---|---|---|
+| 23 | measured ESR 38.980–39.157 GHz; NMR 27.182/20.939, 58.003/9.824, 75.594/27.337 MHz | Thorvaldson2025 Fig. 1b,c labels (PDF text layer) | OK |
+| 23 | fit A = 6.05, 67.97, 102.99 MHz; rms 52 kHz, max 97 kHz; ν_e 39.068 GHz, ν_n 24.06 MHz | our least-squares fit of Reiner2024 Eq. 1 (isotropic A) | Derived |
+| 23 | f_Rabi = 4.82 / 28.1 µs = 172 kHz | Thorvaldson2025 Q and T2* | Derived |
+| 24 | ideal P = sin²(5θ) = 94.53%; 93.46/94.53 = 98.87% | our QuTiP state-vector sim; Thorvaldson2025 93.46%, 98.87% | Derived, matches paper |

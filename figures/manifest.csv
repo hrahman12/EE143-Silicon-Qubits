@@ -61,3 +61,9 @@ C-coherence,22,C_coherence_times.png,Thorvaldson2025; Reiner2024; Schofield2025 
 C-ssh,25,C_ssh_spectrum.png,model of Kiczynski2022 Fig. 1b,,,original calculation (this project),10-site SSH tight-binding spectrum
 F26,31,F26_cowie2024_fig3rts.jpg,Cowie2024,Fig. 3 (top-left RTS traces),https://doi.org/10.1073/pnas.2404456121 (PMC11536084),CC BY 4.0,"Cowie et al., PNAS 121, e2404456121 (2024) Fig. 3, CC BY 4.0"
 C-Q,25,native chart,Thorvaldson2025,,,"native pptx clustered column, log axis",qubit and gate quality factors
+S-hero,1,S_hero.gif,geometry,,,original animation (this project),rotating cover render
+S-fab,12,S_fab.gif,Stock2024 window sizes; Stock2020,,,original animation (this project),write/dose/anneal sequence
+S-yield,19,S_yield_mc.gif,Stock2024 per-site yields,,,original animation (this project),Monte Carlo array filling
+S-esr,23,S_esr_nmr_fit.png,"Reiner2024 Eq.1; Thorvaldson2025 Fig.1b,c lines",,,original QuTiP simulation,Hamiltonian fit to 14 measured lines
+S-rabi,23,S_rabi.gif,"Thorvaldson2025 T2*, Q",,,original QuTiP simulation,conditional Rabi drive
+S-grover,24,S_grover.gif,Thorvaldson2025 circuit,,,original QuTiP simulation,Grover amplitude evolution

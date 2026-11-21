@@ -23,6 +23,14 @@ QA render: `pdftoppm -jpeg -r 110 deck/atom_by_atom_silicon.pdf qa/render/s` (re
 - Schofield2025: `https://arxiv.org/pdf/2501.04535v2`
 - DAnna2023: UCL Discovery 10167842 (CC BY published version)
 
+## Simulations and animations
+`npm run sim` (QuTiP 5) runs `figures/src/simulate_qubits.py`:
+- fits the Reiner2024 donor Hamiltonian to the 14 ESR/NMR lines of Thorvaldson2025, recovering A = 6.05/67.97/102.99 MHz;
+- simulates the conditional Rabi drive and Grover search;
+- renders the fabrication, yield Monte Carlo and cover animations.
+
+Animated GIFs play in PowerPoint and Keynote; the PDF shows each first frame. `qa/add_transitions.py` adds fade transitions after the build. No real quantum hardware was run.
+
 ## Layout system
 `build_deck.js` defines the theme once (Arial; ink #1F2A36, muted #5B6770, P #D9731A, As #0F9FA0, fixed material legend) and eight slide masters (TITLE, SECTION, TITLE_ONLY, FIG_TEXT, TWO_FIG, TABLE, PROCESS, REFS) with named `title` and `src` placeholders, footer and slide number. Sections: Intro, Motivation, Process, Results, Scaling, Prototype, Wrap-up, Backup. Charts (array yield, write speed on a log axis, Poisson ion statistics, thermal budget) are native PowerPoint charts.
 

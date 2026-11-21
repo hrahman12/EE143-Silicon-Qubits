@@ -149,97 +149,109 @@ This is the physicist's view of the device. Reiner 2024 writes the register's Ha
 
 _127 words_
 
-## Slide 23: Entanglement, measured by full state tomography
+## Slide 23: Simulation reproduces the hardware spectrum
+
+Instead of just showing the paper's spectrum, I simulated it. I took the Hamiltonian from Reiner 2024, one electron and three phosphorus nuclei, sixteen states, and diagonalised it in QuTiP, then fitted it to the fourteen measured line positions from Thorvaldson's Figure 1. It recovers hyperfine couplings of 6.05, 67.97 and 102.99 megahertz against the published 6, 68 and 103, with a 52 kilohertz rms residual. The animation is a time-domain simulation: drive the electron at the frequency for nuclei in down-down-down and it Rabi-flips at 172 kHz, with T2-star dephasing; for any other nuclear state, 6 MHz away, it stays put. That conditional flip is the two-qubit gate. Likely question: what's fitted? Only the two Zeeman frequencies plus refined A values; the line pattern itself is the model's prediction.
+
+_130 words_
+
+## Slide 24: Grover's search: simulation vs silicon hardware
+
+Here's an algorithm, simulated and then run on silicon. The animation is Grover's search on three qubits in QuTiP: start in an equal superposition, the oracle flips the sign of the marked state, down-down-down, and the diffusion step reflects every amplitude about the mean, the dashed line, so the marked amplitude grows. After two rounds the ideal success probability is 94.5%. On the right is the real hardware: three phosphorus nuclear spins found the marked state 93.46% of the time. Divide one by the other and you get 98.87%, exactly the figure quoted in the paper, so my simulation independently checks their normalisation. Likely question: why only two iterations? For eight states, the optimal number of Grover iterations is two; more would rotate past the target.
+
+_126 words_
+
+## Slide 25: Entanglement, measured by full state tomography
 
 Here is the quantum evidence, straight from the 2025 four-qubit paper. Top left: they reconstruct the full density matrix of a Bell state for each pair of phosphorus nuclei. The four tall bars in the corners are exactly what a maximally entangled state looks like; everything else should be zero. Fidelities are about 97% for every pair. Right: a three-qubit GHZ state, all three nuclei entangled, 96.2% fidelity including state preparation and measurement errors. Bottom: the Grover circuit they ran, an oracle that marks one of eight states and a diffusion operator, repeated twice; it found the marked state at 98.87% of the ideal probability. Likely question: what is tomography? Measuring many copies in different bases to rebuild the full quantum state.
 
 _122 words_
 
-## Slide 24: The payoff: from devices to processors
+## Slide 26: The payoff: from devices to processors
 
 Now the payoff: processors. 2019 gave the first exchange gate between two phosphorus donor electrons, about 800 picoseconds, and a 3D device with stacked dopant layers aligned within 5 nm. In 2025 a four-qubit processor, three phosphorus nuclei plus one electron in silicon-28, ran Grover's search; the bar chart shows the marked state found 93.46% of the time, 98.87% of ideal. And an 11-qubit processor linked a four-phosphorus and a five-phosphorus register by exchange: Bell states 99.5% within a register, 97% across. Please read the caveat box: 2019 used natural silicon and electron spins, 2025 used silicon-28 and nuclear spins, so the numbers aren't apples to apples. Likely question: are these Curson's devices? No, these are context papers from other groups using the same fabrication.
 
 _125 words_
 
-## Slide 25: Figures of merit: how close to fault tolerance?
+## Slide 27: Figures of merit: how close to fault tolerance?
 
 Judge a qubit by dimensionless figures of merit, not one fidelity. Thorvaldson report the qubit quality factor, T2-star times the Rabi frequency, and the gate quality factor using the Rabi decay time. The electron gets about 5 and 34; the nuclei 12 to 19 and up to 797, which is why nuclei carry the data. But fault tolerance is not just a threshold: surface codes assume errors are independent, and the roadmap points out that donors only nanometres apart see the same electric-field noise, so their errors correlate. One proposed fix is to engineer a magnetic field gradient above 800 MHz between qubits, with predicted CNOT fidelities of 99.98% for a 2P–3P pair. Likely question: are these above threshold? Thorvaldson say yes for their gates, under standard independent-error assumptions.
 
 _129 words_
 
-## Slide 26: Beyond qubits: Hubbard and topological physics
+## Slide 28: Beyond qubits: Hubbard and topological physics
 
 Write a lattice of small dopant dots and electrons hopping between them obey the Fermi-Hubbard model, the textbook model for strongly correlated materials: hopping t between sites, repulsion U on each site. Wang 2022 tuned the spacing of a three-by-three array from 4 to 11 nanometres and watched it go from metallic to Mott insulating. Kiczynski 2022 wrote a ten-dot chain with alternating strong and weak couplings, the SSH model, and saw the topological phase: two conductance peaks instead of ten. My plot is a quick tight-binding calculation of that model, showing the two edge states locked at zero energy. Likely question: is this like moiré materials? It's the same family of Hubbard physics, but none of these papers make that comparison, so I won't push it.
 
 _127 words_
 
-## Slide 27: The next wall: throughput
+## Slide 29: The next wall: throughput
 
 Here's the wall. The STM writes at 10 nm per second for atom-wide lines, up to about 1000 nm per second at 2 volts and hundreds of nanoamps. In atomically precise mode that's around 100 atoms a second. EUV lithography, as used in CMOS fabs, writes at an equivalent of about 10^14 nm per second, eleven orders of magnitude faster. Note the log axis. People have proposed massively parallel MEMS tip arrays, up to ten million tips over a 300 mm wafer, and the roadmap says even that stays orders of magnitude too slow for CMOS volumes. The number to remember: eleven orders of magnitude. Likely question: so is this a dead end? Not for qubit cores, which is where the hybrid idea next comes in.
 
 _126 words_
 
-## Slide 28: Scaling: EUV photons instead of a tip
+## Slide 30: Scaling: EUV photons instead of a tip
 
 Curson's 2024 Nature Communications paper showed for the first time that monochromatic EUV light at 109 eV removes hydrogen from the same silicon surface; it's mostly the secondary electrons from the silicon that do the work. It needs doses up to 18,000 joules per square centimetre, several minutes per chip with a 300 watt source, but it's parallel. The proposed flow on the right uses the same hydrogen resist: EUV patterns the big contacts and wiring, the STM writes the qubit cores, then dose and encapsulate as before. The SEM bottom-left shows resistless EUV lines at 75 nm half-pitch. Likely question: why not normal photoresist? The proposed flow keeps the hydrogen monolayer as the resist so every stage stays in UHV, and Tseng 2023 patterned with no photoresist at all.
 
 _130 words_
 
-## Slide 29: Our prototype: a 2×2 arsenic register
+## Slide 31: Our prototype: a 2×2 arsenic register
 
 To pull it together, here's a prototype we designed on paper, using only recipes from the papers. Four single arsenic atoms in four-site windows form a 2×2 register, with source, drain and two gates written as arsenic δ-layers in the same plane, buried under epitaxial silicon and reached by aluminium vias. The 3D surface on the right is our yield model, p to the n. It shows why the dopant choice decides the design: at arsenic's 0.97 a 16-site array comes out perfect about 61% of the time, at phosphorus's 0.7 about 0.3%. So the register size you can afford is set by chemistry, not by lithography resolution. Likely question: did you build it? No, it's a design exercise; the next slide is its traveler.
 
 _125 words_
 
-## Slide 30: Prototype traveler, mapped to EE143
+## Slide 32: Prototype traveler, mapped to EE143
 
 And here's the traveler for that prototype, every step with its recipe and the EE143 module it maps to. It's a normal process flow: clean and bake, coat a resist, write it, pre-deposit dopant from the gas phase, drive in, RTA, epitaxy, alignment marks, etch, metal, and a Hall measurement. On the right I plotted each step's peak temperature. The two hot steps, outgas and the 1200 °C flash, happen before any patterning. After the pattern exists, nothing exceeds the 500 °C, 15-second RTA. That's the design principle: front-load the heat, then protect the atoms. Likely question: where does it break? Step 4 throughput, which is why the EUV hybrid matters.
 
 _111 words_
 
-## Slide 31: Open problems: where the research is now
+## Slide 33: Open problems: where the research is now
 
 If you were starting a PhD here, these are the open problems, each with a number. Throughput: Tennant's law says a serial tool at 0.768 nm resolution needs over 200 hours per square micron, so you need massive parallelism or EUV. Yield: at 63% per site a 50-donor array works about once in ten billion tries, which is what Curson's arsenic chemistry attacks. Noise: Curson's group, with McGill, imaged a single trap at the silicon–oxide interface switching back and forth, and showed many such traps add up to 1/f noise; that's why qubits are buried in epitaxial silicon. Coupling: entanglement across registers is 97% versus 99.5% within one. Likely question: which is hardest? The papers don't rank them; throughput is the one with no demonstrated solution yet.
 
 _127 words_
 
-## Slide 32: Takeaways: one atom, exactly where you want it
+## Slide 34: Takeaways: one atom, exactly where you want it
 
 Three things to take home. One: placing single atoms works, using the same steps you know, a resist, lithography, gas-phase doping and an anneal, at the scale of one atom. Two: arsenic brought single-atom yield to about 97%, versus under 70% for phosphorus, and because array yield multiplies, that's the difference between arrays that work and arrays that don't. That's Neil Curson's group's key result. Three: throughput is the next wall, eleven orders of magnitude behind EUV, and the bridge is to use EUV on the same hydrogen resist for everything except the qubit cores. Thanks, happy to take questions. Likely question: when will this be a product? The pack doesn't make that prediction, and I won't either.
 
 _118 words_
 
-## Slide 33: References (1 of 2)
+## Slide 35: References (1 of 2)
 
 References, alphabetical by key; keys match each slide's source line. Figures marked 'Reproduced from' are CC BY 4.0 and credited on the slide; paywalled or no-derivatives figures were redrawn as original schematics instead of copied. Diagrams marked 'ours' or 'our model' are original and use only published numbers, with the exact spec and its source in notes/specs. If someone wants one paper to start with, I'd point them to the 2025 roadmap, Schofield et al. in Nano Futures, which covers the whole field and is open access. Likely question: are the figures licensed? Yes: CC BY figures are reproduced with credit, and everything else is redrawn.
 
 _106 words_
 
-## Slide 34: References (2 of 2)
+## Slide 36: References (2 of 2)
 
 Second page of references, continuing alphabetically. Kane 2000 and O'Brien 2001 supply the Kane-architecture numbers on slide 5, since the 1998 paper itself isn't open; Ren 2016 and Xiang 2025 give the dimer and silicon–hydrogen bond lengths used in my surface renders. New papers beyond my original pack, like Jakob 2022, Reiner 2024, Namboodiri 2024, Kiczynski 2022 and Curson's newest, D'Anna 2026, are here too, all open access. Likely question: why cite a contact-physics paper for a bond length? It states the 1.51 Å Si–H bond I used; I only use that number.
 
 _93 words_
 
-## Slide 35: References (2 of 2)
+## Slide 37: References (2 of 2)
 
 Second page of references, continuing alphabetically. Kane 2000 and O'Brien 2001 supply the Kane-architecture numbers on slide 5, since the 1998 paper itself isn't open; Ren 2016 and Xiang 2025 give the dimer and silicon–hydrogen bond lengths used in my surface renders. New papers beyond my original pack, like Jakob 2022, Reiner 2024, Namboodiri 2024, Kiczynski 2022 and Curson's newest, D'Anna 2026, are here too, all open access. Likely question: why cite a contact-physics paper for a bond length? It states the 1.51 Å Si–H bond I used; I only use that number.
 
 _93 words_
 
-## Slide 36: Backup · Alternate titles
+## Slide 38: Backup · Alternate titles
 
 Backup slide with the alternate titles from the reference pack, in case the course wants a 'How X is built' style title like the DMD and CMOS decks. The image is the 4×4 arsenic array from Stock 2024, with the lithography, the incorporated atoms and the dopant map. If asked about it: with non-ideal windows, 10 to 12 of 15 sites were single atoms, up to 80%, which shows that window shape matters as much as the chemistry. That 4×4 result is why the 2×2 is described as the first defect-free array: the bigger array still had defects.
 
 _98 words_
 
-## Slide 37: Backup · Beyond Si:P: new dopants, new hosts
+## Slide 39: Backup · Beyond Si:P: new dopants, new hosts
 
 Two side projects from Curson's group show the method generalises. First, germanium: arsenic from arsine goes into the germanium surface at room temperature with no anneal at all, the STM image on the left. That removes a thermal step entirely. Second, bismuth: they studied how a triphenyl-bismuth molecule sticks to and breaks apart on Si(001), on the right, as a route to ultra-shallow bismuth doping. The point for us: the toolbox is the same, a hydrogen resist, a tip and a gas. Change the gas or the substrate and you get a different device platform. Likely question: why germanium? It's another group-IV host used in quantum devices; the pack doesn't go further, so I won't either.
 
 _116 words_
 
-## Slide 38: Backup · Monte Carlo of 4×4 arrays
+## Slide 40: Backup · Monte Carlo of 4×4 arrays
 
 Backup for the yield slide. I simulated 100,000 four-by-four arrays at each per-site yield. With phosphorus at 0.7, almost every array has failed sites, about 0.3% come out perfect, matching 0.7 to the 16th. With arsenic at 0.97, about 61% are perfect. This is a model, not data: it assumes sites fail independently, which is the same assumption behind the p to the n formula in Stock 2024. If asked whether failures are really independent: the papers quote the formula, they don't test correlations, so I'd say it's the simplest reasonable assumption.
 

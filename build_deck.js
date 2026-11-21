@@ -84,7 +84,7 @@ const chartBase = () => ({ fontFace: T.font, catAxisLabelColor: T.ink, valAxisLa
 {
   const s = pres.addSlide({ masterName: "TITLE", sectionTitle: "Intro" }); s._title = "Title";
   s.background = { color: "111A22" };
-  img(s, "O_hero_title.png", 3.95, 0.0, 6.05, 5.625, "right", "middle");
+  img(s, "S_hero.gif", 3.95, 0.0, 6.05, 5.625, "right", "middle");
   text(s, "EE143 · DEVICE PROFILE", 0.5, 0.75, 4.0, 0.25, { fontSize: 10, bold: true, color: "5FC9C9", charSpacing: 2 });
   text(s, "Atom-by-Atom Silicon", 0.5, 1.05, 5.4, 0.6, { fontSize: 32, bold: true, color: "FFFFFF" });
   text(s, "Building Quantum Processors from Single Dopant Atoms", 0.5, 1.68, 4.3, 0.85, { fontSize: 19, color: "E6ECF1" });
@@ -95,7 +95,7 @@ const chartBase = () => ({ fontFace: T.font, catAxisLabelColor: T.ink, valAxisLa
   });
   text(s, "Hanah Rahman · EE143 · Fall 2026", 0.5, 4.05, 4.2, 0.3, { fontSize: 13, bold: true, color: "FFFFFF" });
   text(s, "AI disclosure: AI tools were used to draft and lay out these slides and to code the original diagrams.", 0.5, 4.55, 3.7, 0.45, { fontSize: 9, color: "8C9AA6" });
-  text(s, "Cover: original 3D render of a diamond-cubic Si crystal with a 2×2 As register (teal), one P donor (orange) and an STM tip.", 0.5, 5.12, 3.7, 0.35, { fontSize: 8, color: "8C9AA6" });
+  text(s, "Cover (animated): original 3D render of a diamond-cubic Si crystal with a 2×2 As register (teal), one P donor (orange) and an STM tip.", 0.5, 5.12, 3.7, 0.35, { fontSize: 8, color: "8C9AA6" });
   notes(s, "Hi everyone. Today's device is a quantum processor where every qubit is a single dopant atom, put into silicon one at a time with a scanning tunnelling microscope. That's the picture behind me: a silicon crystal, four arsenic atoms in a 2×2 register, one phosphorus, and the STM tip that places them. You already know every ingredient from EE143: a clean surface, a resist, lithography, gas-phase doping, an activation anneal, epitaxy, etch and metal. The twist is that the resist is one atom thick and the 'implant' is one molecule. I'll follow the work of Neil Curson at UCL through the process. Likely question: is the picture real data? No, it's my 3D render of the real crystal structure; every micrograph after this is published data, credited on the slide.");
 }
 // ============================================================================ Agenda (story in four acts)
@@ -314,9 +314,9 @@ processSlide("Step 4 · Writing with the tip", "Step 4 of 11",
 processSlide("Step 5 · Dosing: phosphine vs arsine", "Step 5 of 11",
   ["PH₃ breaks down stepwise, PH₂+H → PH+2H → P+3H, over minutes", "AsH₃ dissociates three orders of magnitude faster: tens of seconds", "Single-atom dose: AsH₃ at 5×10⁻⁹ mbar for 10 min; As saturates at 0.24 ± 0.04 ML"],
   "xsec_dose.png", (s) => {
-    const a = img(s, "O2_surface_dose.png", 4.8, 1.0, 4.7, 2.45, "center");
-    caption(s, "Fragments in each window. Original render.", 4.8, a.y + a.h, 4.7, 0.22);
-    const b = img(s, "F2_stock2024_fig3_ae.png", 4.8, 3.7, 4.7, 0.95, "center");
+    const a = img(s, "S_fab.gif", 4.8, 0.95, 4.7, 2.3, "center");
+    caption(s, "Animated (ours): tip writes the 4-site As and 6-site P windows, gases dose, 350 °C incorporates As.", 4.8, a.y + a.h, 4.7, 0.36);
+    const b = img(s, "F2_stock2024_fig3_ae.png", 4.8, 3.72, 4.7, 0.88, "center");
     caption(s, "Window array before/after AsH₃. Reproduced from Stock et al., Adv. Mater. 36, 2312282 (2024) Fig. 3, CC BY 4.0", 4.8, b.y + b.h + 0.02, 4.7, 0.36);
   }, "Stock2020 (citing Wilson2004); Stock2024",
   "Now we expose the whole sample to a dopant gas, like a pre-deposition step, except molecules only stick in the bare windows. Phosphine is slow: it sheds hydrogens one at a time, PH2 plus H, then PH plus two H, then P plus three H, over minutes, and each fragment needs a free site. Arsine is the key difference: it dissociates three orders of magnitude faster, in tens of seconds, so it needs fewer sites and fewer things go wrong. The single-atom recipe is arsine at 5×10^-9 millibar for ten minutes. Arsenic saturates at 0.24 monolayer. Bottom right: a window array before and after dosing. Likely question: why does faster dissociation help? Arsenic gets by with a four-site window instead of six, so there are fewer ways to fail.");
@@ -402,9 +402,9 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
   text(s, "As 0.97¹⁶ ≈ 61%", 3.45, 1.62, 1.45, 0.25, { fontSize: 10, color: T.ink, bold: true });
   text(s, "P 0.7¹⁶ < 0.4%", 3.3, 2.65, 1.4, 0.25, { fontSize: 10, color: T.ink, bold: true });
   bullets(s, ["P fills an ideal 3-dimer window 63 ± 10% of the time (\"<70%\" in 6-site windows)", "0.7ⁿ: 16 P <0.4%; ~50 donors ~10⁻¹⁰. As ±2% ⇒ 44–85% at n = 16; 24/24 adsorptions ⇒ 95% CI 86–100% (ours)"], 0.5, 4.05, 4.6, 1.05, 10.5);
-  const b = img(s, "O_yield_surface3d.png", 5.2, 1.0, 4.3, 3.3, "center");
-  caption(s, "The same law in 3D: array yield pⁿ against per-site yield p and array size n (our model). Orange and teal lines are the measured P (0.7) and As (0.97) yields.", 5.2, b.y + b.h + 0.05, 4.3, 0.55);
-  src(s, "Ivie2021 (incl. kinetic model); Stock2024; Schofield2025 §4.1. As curve and 3D surface are our model");
+  const b = img(s, "S_yield_mc.gif", 5.2, 1.0, 4.3, 3.2, "center");
+  caption(s, "Animated Monte Carlo (ours): 4×4 arrays fill site by site at the measured per-site yields; running count of perfect arrays.", 5.2, b.y + b.h + 0.05, 4.3, 0.5);
+  src(s, "Ivie2021 (incl. kinetic model); Stock2024; Schofield2025 §4.1. As curve and Monte Carlo are our model");
   notes(s, "Here's the problem that motivated Curson's arsenic work. Phosphorus lands in an ideal three-dimer window only 63 ± 10% of the time; Stock 2024 says less than 70% in six-site windows. That sounds fine until you need many sites at once. Array yield multiplies: 0.7 to the n. The orange line falls to under 0.4% by 16 atoms. The teal line is the same formula with arsenic's 97%, still about 61% at 16. On the right I simulated 4×4 arrays: the phosphorus row is full of red failures, the arsenic row has mostly perfect boxed arrays. This is the same logic as die yield in a fab: defects multiply. Number to remember: 0.7^16 < 0.4%. Likely question: can you repair a failed site? Possibly, by repeating lithography and dosing.");
 }
 
@@ -452,6 +452,34 @@ processSlide("Steps 9–11 · Back to the outside world", "Steps 9–11 of 11",
   caption(s, "Right: our chart of published T₂* values; 35.6 s is the best donor coherence (implanted donors, ²⁸Si).", 0.5, 4.1, 4.3, 0.45);
   src(s, "Hamiltonian: Reiner2024 Eq. 1; Thorvaldson2025 (A, B, T, T₂*); Reiner2024 (T₂*); Schofield2025 §3.2");
   notes(s, "This is the physicist's view of the device. Reiner 2024 writes the register's Hamiltonian: electron Zeeman, nuclear Zeeman, and the hyperfine coupling between the shared electron and each phosphorus nucleus. In Thorvaldson's processor, three nuclei share one electron, with hyperfine couplings of 6, 68 and 103 megahertz, at 1.45 tesla and 15 millikelvin. Because each nucleus shifts the electron's resonance, the ESR spectrum on the right splits into two-cubed, eight peaks, one per nuclear configuration. So reading the electron reads the register. The chart shows why nuclei are the memory: electron dephasing in tens of microseconds, nuclei in milliseconds, and the best donor coherence reaches 35.6 seconds. Likely question: why does A depend on E? Gate fields distort the electron wavefunction, tuning its overlap with each nucleus.");
+}
+
+// ============================================================================ SIM1. QuTiP vs hardware spectrum
+{
+  const s = newSlide("TWO_FIG", "Simulation reproduces the hardware spectrum", "Act 3");
+  const a = img(s, "S_esr_nmr_fit.png", 0.4, 0.92, 5.3, 1.85, "left");
+  caption(s, "QuTiP 5: diagonalise H (electron + three ³¹P, 16 states), fit to the 14 lines measured in Thorvaldson2025 Fig. 1b,c.", 0.45, a.y + a.h + 0.01, 5.25, 0.36);
+  const H = (t) => ({ text: t, options: { bold: true, fill: { color: "F2F4F6" } } });
+  s.addTable([[H(""), H("Published"), H("QuTiP fit")], ["A₁ (MHz)", "6", "6.05"], ["A₂ (MHz)", "68", "67.97"], ["A₃ (MHz)", "103", "102.99"], ["rms line residual", "–", "52 kHz"]],
+    { x: 5.95, y: 0.95, w: 3.55, colW: [1.45, 1.0, 1.1], fontFace: T.font, fontSize: 10, color: T.ink, rowH: 0.27, border: { type: "solid", pt: 0.75, color: "E0E4E8" } });
+  text(s, "Also fitted: ν_e = 39.068 GHz, ν_n = 24.06 MHz.", 5.95, 2.4, 3.55, 0.3, { fontSize: 9.5, color: T.muted });
+  const g = img(s, "S_rabi.gif", 0.4, 3.12, 5.3, 2.05, "left");
+  caption(s, "Animated (QuTiP): conditional Rabi drive. The electron flips only if the nuclei are |⇓⇓⇓⟩; 6 MHz away it stays put. f_Rabi = Q/T₂* = 172 kHz, T₂* = 28.1 µs dephasing included.", 5.95, 3.15, 3.55, 0.95);
+  callout(s, "This selectivity is the CROT/CZ gate: the electron's flip is conditioned on the nuclear register.", 5.95, 4.2, 3.55, 0.8, { fontSize: 11 });
+  src(s, "Model: Reiner2024 Eq. 1; inputs Thorvaldson2025 (A, lines, T₂* = 28.1 µs, Q = 4.82). Simulation and fit ours (figures/src/simulate_qubits.py)");
+  notes(s, "Instead of just showing the paper's spectrum, I simulated it. I took the Hamiltonian from Reiner 2024, one electron and three phosphorus nuclei, sixteen states, and diagonalised it in QuTiP, then fitted it to the fourteen measured line positions from Thorvaldson's Figure 1. It recovers hyperfine couplings of 6.05, 67.97 and 102.99 megahertz against the published 6, 68 and 103, with a 52 kilohertz rms residual. The animation is a time-domain simulation: drive the electron at the frequency for nuclei in down-down-down and it Rabi-flips at 172 kHz, with T2-star dephasing; for any other nuclear state, 6 MHz away, it stays put. That conditional flip is the two-qubit gate. Likely question: what's fitted? Only the two Zeeman frequencies plus refined A values; the line pattern itself is the model's prediction.");
+}
+
+// ============================================================================ SIM2. Grover sim vs hardware
+{
+  const s = newSlide("TWO_FIG", "Grover's search: simulation vs silicon hardware", "Act 3");
+  const g = img(s, "S_grover.gif", 0.4, 0.95, 5.2, 2.85, "left");
+  caption(s, "Animated (QuTiP state vector): oracle flips the sign of |⇓⇓⇓⟩, diffusion inverts every amplitude about the mean (dashed); r = 2 iterations.", 0.45, g.y + g.h + 0.03, 5.15, 0.45);
+  const h = img(s, "F13_thorvaldson2025_fig4b.png", 5.85, 0.95, 3.65, 2.25, "center");
+  caption(s, "Hardware result on three ³¹P nuclear spins. Thorvaldson et al., Nat. Nanotechnol. 20, 472 (2025) Fig. 4b, CC BY 4.0", 5.85, h.y + h.h + 0.03, 3.65, 0.45);
+  bullets(s, ["Ideal r = 2: P = sin²(5θ), θ = asin(1/√8) ⇒ 94.5% (our sim)", "Hardware: 93.46%, i.e. 98.87% of ideal: our sim reproduces the paper's normalisation"], 5.85, 3.75, 3.65, 1.3, 11);
+  src(s, "Thorvaldson2025 (circuit, 93.46%, 98.87%); ideal simulation ours");
+  notes(s, "Here's an algorithm, simulated and then run on silicon. The animation is Grover's search on three qubits in QuTiP: start in an equal superposition, the oracle flips the sign of the marked state, down-down-down, and the diffusion step reflects every amplitude about the mean, the dashed line, so the marked amplitude grows. After two rounds the ideal success probability is 94.5%. On the right is the real hardware: three phosphorus nuclear spins found the marked state 93.46% of the time. Divide one by the other and you get 98.87%, exactly the figure quoted in the paper, so my simulation independently checks their normalisation. Likely question: why only two iterations? For eight states, the optimal number of Grover iterations is two; more would rotate past the target.");
 }
 
 // ============================================================================ Q2. Entanglement by tomography
@@ -686,8 +714,10 @@ for (let pg = 0; pg * 17 < REFS.length; pg++) {
 // ============================================================================ Backup: Monte Carlo
 {
   const s = newSlide("SECTION", "Backup · Monte Carlo of 4×4 arrays", "Backup");
-  const b = img(s, "O_montecarlo_4x4.png", 0.5, 1.05, 9.0, 3.6, "center");
-  caption(s, "Our model, not data: filled = one atom, red = failed site; boxed = perfect array. 100 000 simulated arrays per row at the measured per-site yields (P 0.7, As 0.97; Stock2024).", 0.5, b.y + b.h + 0.05, 9.0, 0.4);
+  const b = img(s, "O_montecarlo_4x4.png", 0.5, 1.05, 5.4, 3.6, "left");
+  caption(s, "Our model, not data: 100 000 simulated arrays per row at the measured per-site yields (P 0.7, As 0.97; Stock2024).", 0.5, b.y + b.h + 0.05, 5.4, 0.4);
+  const b2 = img(s, "O_yield_surface3d.png", 6.1, 1.05, 3.4, 3.0, "center");
+  caption(s, "Array yield pⁿ vs p and n (our model).", 6.1, b2.y + b2.h + 0.03, 3.4, 0.3);
   src(s, "Stock2024 (per-site yields); simulation ours");
   notes(s, "Backup for the yield slide. I simulated 100,000 four-by-four arrays at each per-site yield. With phosphorus at 0.7, almost every array has failed sites, about 0.3% come out perfect, matching 0.7 to the 16th. With arsenic at 0.97, about 61% are perfect. This is a model, not data: it assumes sites fail independently, which is the same assumption behind the p to the n formula in Stock 2024. If asked whether failures are really independent: the papers quote the formula, they don't test correlations, so I'd say it's the simplest reasonable assumption.");
 }

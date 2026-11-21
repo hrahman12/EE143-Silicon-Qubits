@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "figures": "python3 figures/src/make_figures.py",
-    "build": "node build_deck.js && zip -dq deck/atom_by_atom_silicon.pptx '*/' ; soffice --headless --convert-to pdf --outdir deck deck/atom_by_atom_silicon.pptx"
+    "build": "node build_deck.js && python3 qa/add_transitions.py deck/atom_by_atom_silicon.pptx && soffice --headless --convert-to pdf --outdir deck deck/atom_by_atom_silicon.pptx",
+    "sim": "python3 figures/src/simulate_qubits.py"
   },
   "dependencies": {
     "image-size": "^1.1.1",
