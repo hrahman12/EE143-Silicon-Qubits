@@ -20,11 +20,12 @@ with zipfile.ZipFile(P) as zin, zipfile.ZipFile(tmp, "w", zipfile.ZIP_DEFLATED) 
             data = data.decode().replace("<Default ", '<Default Extension="jpg" ContentType="image/jpeg"/><Default ', 1).encode()
         zout.writestr(it, data)
 shutil.move(tmp, P)
-words = sum(len(d[str(i)].split()) for i in range(1, 30))
+main = lambda t: t.split("\n\nIf asked:")[0]
+words = sum(len(main(d[str(i)]).split()) for i in range(1, 30))
 md = ["# Speaker notes: Atom-by-Atom Silicon (final deck, 33 slides)", "",
-      "Same text as the speaker notes inside atom_by_atom_silicon_final.pptx. Physics, EE and maths focus; derived numbers use standard constants and the values on the slides.", "",
+      "Same text as the speaker notes inside atom_by_atom_silicon_final.pptx. Written to be read aloud: every number and equation is spelled out the way you say it. Lines starting with **If asked** are for Q&A, not the talk.", "",
       "## 15-minute timing plan", "",
-      f"Slides 1–29 are about {words:,} words, roughly {words/150:.0f} minutes read aloud. For 15 minutes, keep each slide's equation and its one worked number, and save the \"Likely question\" lines for Q&A.", "",
+      f"The talk script for slides 1–29 (without the If asked lines) is about {words:,} words: about {words/150:.0f} minutes at a relaxed 150 words a minute, or {words/200:.0f} minutes at a brisk 200.", "",
       "| Slides | Block | Target |", "|---|---|---|",
       "| 1–2 | Title, the story in four acts | 0:45 |",
       "| 3–8 | Act 1: why single atoms | 2:30 |",
@@ -35,6 +36,7 @@ md = ["# Speaker notes: Atom-by-Atom Silicon (final deck, 33 slides)", "",
       "| 30–33 | Q&A equation sheets and backup (not presented) | – |",
       "| **Total** | | **14:30** |", ""]
 for i, t in enumerate(titles, 1):
-    md += [f"## Slide {i}: {t}", "", d[str(i)], "", f"_{len(d[str(i)].split())} words_", ""]
+    body = d[str(i)].replace("\n\nIf asked:", "\n\n**If asked:**")
+    md += [f"## Slide {i}: {t}", "", body, ""]
 open("notes/speaker_notes_final.md", "w").write("\n".join(md))
 print("applied", len(titles), "notes;", words, "words on slides 1-29")
