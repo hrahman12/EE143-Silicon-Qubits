@@ -4,3 +4,4 @@ figures/raw/**/*.pdf
 reference_decks/
 course_materials/
 deck/versions/
+deck/*.mp4

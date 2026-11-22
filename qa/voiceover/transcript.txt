@@ -1,0 +1,235 @@
+    1.4  Hi everyone! This talk is about a device whose active part is a single atom, one phosphorous
+    6.9  or arsenic atom in silicon, put there with a scanning tunneling microscope. Physically,
+   12.5  that atom acts like a hydrogen atom living inside a semiconductor. One extra electron
+   17.7  held by a weakened column pole. And in EE143 terms, every step is a process we already
+   24.3  know. Resist, lithography, gas phase doping, and anneal, epitaxy, etch and metal. The
+   30.8  difference is that the resist is one atom thick, and the dose is one molecule. Three
+   38.6  ideas run through this whole talk. One is precision. One lattice site on the silicon
+   43.9  surface is 0.38 nanometers, and that's the placement error we can reach. Two is
+   49.7  yield. If each site works with probability p, an array of n sites works with p to the
+   54.7  n. So p has to be really close to 1. 3 is speed. A tip writes about 100 atoms per
+   61.4  second, and that sets the limit. Act one is why one atom makes a good qubit. Act two
+   67.0  is how it's built. Act three is does it work? Act four is how it scales, but keep on question
+   73.7  in mind. How do you put exactly one atom exactly where you want it? Think of the donor
+   82.1  as hydrogen inside a dielectric. The ball radius scales for the dielectric constant times
+   87.2  the free mass over the effective mass. Silicon has a big dielectric constant and a small
+   92.0  effective mass. So hydrogen 0.05 nanometers stretches to about two nanometers. You get
+   98.2  two spins for free. The electron and the phosphorous nucleus. Two times two gives a
+  102.7  four level system. Electron spins are driven with ESR, and nucleus spins with NMR. Read
+  108.5  out term spin into charge. A spin up electron can tunnel into a nearby single electron
+  112.9  transistor. A spin down one cannot. And the transistor current changes. In purified silicon
+  119.1  28, only about 200 parts per million of silicon 29 is left. So stray nuclear spins are rare.
+  125.7  That's why implanted donors there reach 35.6 seconds of coherence and gates near 99.99%.
+  133.9  Is it really hydrogen like you might ask? To first order, yes it is. Silicon's six conduction
+  139.5  band valleys split the ground state. Two qubit gates use exchange, called J, which comes
+  148.8  from the two electron wave functions overlapping. The wave function squared dies off exponentially.
+  154.9  E to the minus two are over the ball radius. So the coupling drops exponentially as the
+  159.7  donors move apart. Let's do a quick estimate. Move one donor by one lattice site and that
+  165.5  term shrinks by E to the minus 0.38, about 0.7. That's roughly a 30% change in coupling from
+  173.7  a one site mistake. On top of that, silicon's valleys make J jump around from site to site.
+  179.8  So precision is an optimal optional. The map is drawn to scale. Two donors, 13 nanometers apart.
+  186.8  Now you might ask, can't you just tune J with gates? Yes, you can, but only within a window
+  191.9  set by where the atoms are. Ion implantation is random. It's a Poisson process. If the average
+  203.3  number of ions per site is lambda, the chance of exactly one is lambda times e to the minus
+  209.3  lambda. That peaks at lambda equals one, where the chance is one over e, about 37%.
+  216.1  So without counting ions, no dose ever beats 37%. Those bars are that distribution,
+  223.1  even with the best ion counting, up to 99.85% confidence at 14 kilo electron volts,
+  230.8  each ion still stops at a random spot, spread over nanometers. STM placement is locked to the
+  238.1  lattice, plus or minus one site, and arsenic windows give 97% single atoms. Now you might
+  245.1  ask, what about lower energy? Well, in that case, the spread shrinks, but it never gets down to one
+  250.5  lattice site. So here's the device as an aspect sheet. So we have the substrate silicon, purified
+  263.6  silicon 28 for qubits, dopants, phosphorus from phosphine, or arsenic from r-sign. Placement
+  270.3  is plus or minus 0.38 nanometers. The leads are doped sheets around 10 to the 14 per square
+  277.3  centimeter, under one nanometer thick. That's a 2D electron gas. The cane design on the right
+  283.2  needs about one Tesla, and about a tenth of a Kelvin. That way the spin-zeman energy is way
+  288.6  bigger than the thermal energy, and the spin starts polarized. A gates tune the hyperfine,
+  294.3  J gates tune the exchange between donors about 10 nanometers apart. But you might ask,
+  300.4  why millikelvin? Well, that's because thermal energy has to sit far below the zeman splitting,
+  305.6  so the spin starts in a known state. So, if we read the timeline
+  316.4  from A List of Sol physics problems. 1994, a tip strips hydrogen off silicon by exciting the
+  325.6  silicon hydrogen bond. That's a lithography. 1998, the proposal that donor nuclear spins can be qubits.
+  334.7  2003, single-phosphorus atoms placed on purpose. 2012, a transistor whose channel is one atom.
+  342.4  2019, a fast exchange gate and 3D stacking. 2020 to 2024, arsenic chemistry pushes single
+  350.4  atom yield to 97%, and light starts replacing the tip for coarse patterning. 2025, 4 and 11
+  358.4  cubic processors. So, we see here that there is a same recipe every time. Passivate, pattern,
+  366.2  dose, anneal cap. Now, you might ask, why did it take so long? Well, each step needed a new way to
+  374.5  measure what was happening. Now, Dr. Neal Kerson's group at UCL works on the materials physics
+  388.8  underneath this platform. There's three threads to this. One is dopant chemistry,
+  394.3  so swapping phosphine for r-sign, which breaks apart about a thousand times faster. In arhenius
+  400.5  terms, that's like lowering the barrier by kT times the log of a thousand, about 0.18 electron
+  407.1  volts at room temperature. Two, metrology, imaging buried layers with x-ray fluorescence without
+  413.8  destroying them and using photoemission to see electrons squeezed into less than an anometer.
+  419.9  Three is scaling, showing that extreme ultraviolet light can strip the same hydrogen
+  424.9  resist, plus arsenic and germanium, which goes in at room temperature.
+  430.5  So, why arsenic? Well, it's because it breaks apart faster. It needs fewer free sites,
+  436.5  so the windows can be smaller. So, here's the process. So, we see here some travelers that I will
+  447.9  mention. So, the key role here is thermal history. So, hot steps first, and then everything at 500
+  455.5  degrees C or below. Steps one to three clean and passivate the surface. Step four is lithography.
+  462.3  Steps five and six are gas doping and activation at 350 degrees. Step seven and eight bury the
+  469.7  dopants with epitaxy at 250. Steps nine to eleven are alignment, etch, aluminum, contacts,
+  476.5  and testing. The design role is diffusion. Diffusion length is two root dt, and d goes up
+  482.9  exponentially with temperature. So, the hottest step after patterning sets the whole budget.
+  488.9  Now, which step limits throughput? That is step four, which is the tip.
+  500.1  So, let's prep the surface. So, how do we do that? We out gas for over eight hours at 600 degrees.
+  507.4  Then, flash to about 1200. That burns off the oxide and the carbon, and leaves clean
+  513.1  rows of silicon dimers. The STM chamber sits below five times 10 to the minus 11 millibar.
+  519.0  Why so low, you might ask. Well, at 10 to the minus six tor, a surface picks up about one monolayer
+  524.6  per second. At 10 to the minus 11, one monolayer takes on the order of a day. Then, atomic hydrogen
+  531.6  at 330 degrees for five minutes caps every dangling bond. That single layer is the resist, inert,
+  538.4  where it's there, reactive, where it's been removed. And why 330? Well, hot enough to get a clean
+  546.5  monohydrate layer, but below where the hydrogen leaves. Now, we write with the tip. STM lithography
+  555.7  is controlled tunneling. The current goes as e to the minus two kappa d, and kappa is about
+  561.3  one per angstrom. So, every angstrom of tip height changes the current by about e squared. That's
+  567.9  seven to eight times. That's why the tip can see single atoms. To write, you raise the bias.
+  574.7  And the electrons break silicon hydrogen bonds. Check the line dose. It's current divided by speed.
+  580.7  10 nano amps over 10 nanometers per second is one coulomb per meter. That's the quoted 10
+  586.4  to the minus two coulombs per centimeter. Arsenic windows use 3.5 volts and 3000 pico amps at
+  593.4  15 nanometers per second. Two dimers each, 4.6 nanometers apart.
+  599.5  You might ask, is this like e-bim lithography? The answer is yes. Dose is charged per length,
+  605.3  and the resist is one atom thick. Now, dosing, phosphine versus arseine. Dosing is gas kinetics.
+  615.7  The flux of molecules hitting the surface is the pressure over root two pi MKT. For r sine at
+  622.4  five times 10 to the minus nine millibar and room temperature, that's about nine times 10
+  627.1  to the 11 molecules per square centimeter per second. Over 10 minutes, that's about 0.8
+  633.6  arrivals per surface site. So, each window sees about one molecule, and the hydrogen resist rejects
+  639.3  the rest. Phosphine loses its hydrogens step by step over minutes. Arseine breaks apart about
+  645.7  a thousand times faster in tens of seconds. Arsenic coverage maxes out at about a quarter of the
+  651.6  sites. You might ask, why not a full layer? Well, coverage stops at a quarter, no matter how
+  658.3  the, no matter what the dosage rate is. So, surface chemistry sets the limit, not the gas supply.
+  669.6  Incorporation, as we know, needs heat, but not too much. At 350 degrees, Kt is about 54
+  676.2  milli electron volts. That's enough for the arsenic or phosphorous to swap into the top silicon layer,
+  681.8  but it's below 380, where hydrogen starts leaving and the resist fails. So, a 30-degree window
+  689.5  separates working from failing. Each arsenic that goes in kicks out exactly one silicon atom onto
+  696.3  the surface. Arsenic in silicon out. So, counting the kicked out silicon counts your dopants,
+  702.7  right there in the chamber. In class terms, this is the drive-in anneal, which is with basically zero
+  710.2  diffusion length. So, what limits the window? Well, that's the energy barrier for hydrogen
+  715.5  leaving the silicon. Burying the dopants. Now, burying the dopants is a thermal budget trade-off,
+  725.1  good crystal once heat, keeping the atoms in place once cold. Phosphorous grown over at 250
+  731.7  degrees drifts about 5 nanometers up toward the surface. For arsenic, two nanometers grown unheated
+  739.6  to lock the atoms down. Then a 500-degree anneal for 15 seconds, then 28 nanometers at 250.
+  752.0  At 0.003 nanometers per second, those 28 nanometers take about 2.6 hours.
+  760.5  Textbook diffusion numbers say that aneal should barely move anything, but the measured layer is
+  765.5  limited by arsenic diffusion. So, at these huge concentrations, the real diffusivity
+  770.4  must be higher than the textbook value. That's why the anneal is only 15 seconds.
+  776.1  So, you might ask, why not grow it all cold? Well, cold silicon only grows as a crystal,
+  782.3  up to a critical thickness. Past that, it ends up being amorphous.
+  789.5  Connecting to the buried device is normal microfab, just with extreme alignment.
+  794.0  Etched markers plus a combined STM and SEM, or Kelvin probe imaging of the buried pattern,
+  800.0  line up the contacts with 95% yield over more than 150 devices. You can't see the layer optically.
+  807.1  It's a sheet of electrons 30 nanometers down. Whole bars are 20 by 200 microns, made with
+  812.9  optical lithography and reactive iron etching. Aluminum goes into holes etched through the doped
+  818.4  layer. Transport is measured at 1.8 Kelvin and the qubits run at milli-kelvin.
+  824.3  So, why is the aluminum contact omic? Well, it's because the layer is so heavily doped
+  829.6  that the barrier is thin enough to tunnel straight through. Electrical proof uses sheet
+  839.5  resistance. For a 2D sheet, RS equals 1 over Q times NS times mu. Measured, 1600 ohms per square,
+  849.5  and a mobility of 28 square centimeters per volt second. Solve for NS and you get about
+  856.1  1.4 times 10 to the 14 per square centimeter. The surface has about 6.8 times 10 to the 14
+  863.3  atoms per square centimeter. So that's about one dopant for every five surface sites.
+  869.6  Activation is 81% or 88% after a 560 degree anneal.
+  877.2  Photoemission shows the electron squeezed into less than a nanometer,
+  881.3  and arsenic confines better than phosphorous. Why is the mobility so low? Well, the electrons
+  887.5  scatter off the ionized dopants that they came from, all packed into one atomic plane.
+  896.8  Two proofs that this works. On the left, single phosphorous atoms in windows about
+  901.8  1 nanometer across. Three dimers, written at 4 volts and 1 nano amp. Then dosed, annealed,
+  908.9  and at 350 and landing about 12 nanometers apart. On the right, a transistor whose island is one
+  916.1  phosphorous atom. Its transport shows column blockade. The charging energy of a single atom is huge,
+  922.6  so current only flows when a discrete atomic level lines up with the leads.
+  927.0  That gives sharp conductance peaks as you sweep the gate voltage.
+  931.5  So why does it work at 4 Kelvin? Well, the single atom charging energy is far above
+  936.8  the thermal energy. Now here's the catch. Every site needs to work.
+  946.1  As we know, yield is a product of probabilities. If each site works independently with probability
+  951.5  P, an N site array works with P to the N. Phosphorous, in an ideal window, works 63% of the time,
+  961.5  and under 70% in bigger windows. 0.7 to the 16 is about a third of a percent. For 50 donors,
+  968.9  at 63%, it's about 1 in 10 billion. Flip it around, the biggest array you can make half the time is
+  976.0  about two sites for phosphorous and about 23 for arsenic at 97%. The band shows how sensitive this is.
+  984.4  Arsenic at 95 to 99% gives 44 to 85% for 16 sites. Now, are the failures really independent? Well,
+  994.0  the formula assumes so. Correlated failures would change the math. So what did Dr. Kursum do? Well,
+ 1002.7  he put arsenic in a four-site window. So, arsenic's fix is a geometry rule.
+ 1010.3  Arseem breaks apart fast, so one molecule needs fewer free sites. A four-site window,
+ 1016.1  two dimers, takes exactly one. Single atom yield is 97%, plus or minus two, with each atom placed
+ 1024.0  within four lattice sites. At 97%, a two-by-two array would come out perfect, about 89% of the time.
+ 1033.3  The first perfect two-by-two was actually made with windows of two to eight sites.
+ 1038.6  The 97% comes from the later four-site statistics, and you can retry the failed sites. A second
+ 1045.2  try multiplies the failure chance, which pushes P toward one. Why not three sites? Well, that's
+ 1052.2  because smaller windows let hydrogen grab the site back before the Arseem actually lands. So,
+ 1061.7  beyond silicon phosphorous, new dopants, new hosts. The same chemistry carries over. On
+ 1069.4  germanium, our sign goes in at room temperature with no anneal, and the hydrogen leaves by 330 degrees.
+ 1078.2  If a reaction happens on its own at room temperature, its barrier has to be under about 0.8 electron
+ 1084.6  volts. That comes from an attempt rate of about 10 to the 13 per second. The rate only stays
+ 1091.4  above once per second up to about 30 kt. Bismuth goes the other way. It's a heavy donor delivered
+ 1099.4  by a molecule called tri-phenyl bismuth, about a nanometer across. Its side groups come off near
+ 1105.8  140 degrees, and bismuth goes in near 360. That's close to the 380-degree limit of the hydrogen
+ 1115.0  resist. So, why germanium? Well, donors there have bigger ball radii and a stronger stock effect,
+ 1122.8  but this talk at the moment will stay with silicon. Now, let's talk about the qubits.
+ 1132.1  In 2019, an exchange gate between two donor electrons in about 800 picoseconds,
+ 1139.3  plus a 3D device with layers aligned better than 5 nanometers and 97.9% readout.
+ 1148.5  2025, a 4-qubit processor, 3 phosphorus nuclei showing 1 electron at 1.45 Tesla and 15 milli-kelvin,
+ 1157.5  with 2 cubic gate fidelities of 99.3 to 99.65%. And an 11-qubit processor,
+ 1165.3  2 registers 13 nanometers apart. The best bell fidelities are 99.5% inside a register,
+ 1172.8  and 97% across. But we need to be careful when we compare these two. 2019 used natural silicon and
+ 1180.9  electron spins, whereas 2025 used silicon 28 and nuclear spins. Now, why nuclear spins? Well,
+ 1189.2  they just hold their coherence much longer. So, here's the physics in one equation. Three terms,
+ 1198.3  electron Zeeman, nuclear Zeeman, and hyperfine. Three nuclei with hyperfine values of 6,
+ 1205.5  68, and 103 megahertz. Each one shifts the electron's frequency up or down by half its value.
+ 1214.0  Two to the three gives eight ESR lines. Check. The full spread is 6 plus 68 plus 103. That's 177
+ 1225.1  megahertz, exactly the gap between the outer lines. So, the electron's frequency reads out
+ 1231.4  the nuclear register. Now, let's do a thermal check. The electron sits near 200 milli-kelvin.
+ 1238.3  HF at 39 gigahertz is about 9 times KT. So, the electron is still almost fully polarized.
+ 1246.5  Coherence, about 28 microseconds for the electron, and half a millisecond to 1.3 milliseconds for
+ 1254.1  the nuclei. Now, why does the hyperfine change with electric field? Well, gate voltages
+ 1262.9  reshape the electron wave function at the nucleus. Intanglement is checked with state
+ 1272.8  tomography. You measure in lots of bases and rebuild the density matrix. For a perfect Bell
+ 1278.9  state, the matrix has four equal corners of one half and nothing else. Fidelity is the overlap
+ 1285.1  with that ideal. All three nuclear pairs hit 96.8 to 97.7%. The GHZ state ties all three
+ 1295.0  nuclei together at 96.2%. Then, go research on three qubits with eight possible answers.
+ 1302.9  The ideal success after two rounds is 94.5%. The hardware got 93.5. That's 98.9% of ideal.
+ 1313.2  Now, why are there only two rounds? Well, a third round would overshoot the answer and it
+ 1319.4  would lower the probability. Now, let's look at the same atoms, but a new job and a quantum
+ 1331.1  simulator to match. Dopon arrays can also simulate many body physics. The Hubbard model has two
+ 1337.5  energies, hopping, called T, set by tunneling between the dots and on-site repulsion, called U.
+ 1345.0  Hopping drops exponentially with spacing. So, stretching a 3x3 lattice from 4.1 to 10.7
+ 1353.0  nanometers takes U over T from small, which is a metal, to large, which is a mott insulator,
+ 1360.8  where repulsion freezes the electrons in place. A 10-dot chain with alternating couplings builds
+ 1366.2  the SSH model. When the hopping inside each cell is weaker than the hopping between cells,
+ 1371.2  the chain is topological, with edge states at zero energy. You see two conductance peaks,
+ 1378.1  essentially, instead of 10. So, why used opens for this? Lithographic precision sets the hopping
+ 1385.4  directly. Throughput, as we mentioned, is a scaling problem. In precise mode, a tip
+ 1396.3  writes about 100 atoms per second. One square centimeter of silicon has about seven times
+ 1401.8  10 to the 14 surface sites. Writing that one atom at a time takes about 215,000 years.
+ 1411.0  At two volts and hundreds of nano amps, the tip goes 1,000 nanometers per second and still
+ 1416.4  keeps its resolution. Precision is only lost in field emission mode. EUV lithography exposes
+ 1422.9  the equivalent of 10 to the 14 nanometers per second. That's 11 to 13 orders of magnitude
+ 1428.5  faster because every photon exposes in parallel. Even 10 million tips across a wafer would still
+ 1435.2  be way too slow. Can tips just go faster, you might ask? Well, speed will trade directly against
+ 1443.8  precision. EUV can strip the same hydrogen resist. Photon energy is HC over lambda.
+ 1457.4  Industrial 13 and a half nanometer light is about 92 electron volts and clear hydrogen removal showed
+ 1464.7  up at 93 and 106. It works indirectly. The silicon absorbs the photons and spits out secondary electrons
+ 1473.6  and those electrons break the silicon hydrogen bonds. Same physics as under the tip. The cost
+ 1479.4  is dose, up to 18,000 joules per square centimeter, which means exposures on the order of minutes
+ 1485.3  with 300 watt sources. The plan is essentially EUV for the leads and wiring, STM for the cubic
+ 1493.9  cores. What's the resolution? Well, diffraction limits EUV to roughly about 10 nanometers. Our
+ 1504.6  prototype applies these design rules with real numbers. Four arsenic atoms, one per four-site window,
+ 1511.2  4.6 nanometers apart. A single electron transistor 17 nanometers away for readout and two gates.
+ 1519.2  All of it made of doped arsenic in one plane, buried 13 nanometers deep. Expected yield is about 0.97
+ 1526.8  to the fourth, about 89%. Scale up to 16 sites and it's 61% for arsenic versus 0.3% for phosphorus.
+ 1536.1  So how big a register can you build is set by the chemistry through P, not by lithography.
+ 1544.6  What sets the 17 nanometer spacing you might ask? Well, that's sensor sensitivity versus tunnel
+ 1551.1  coupling. It's an exponential tradeoff. Here's the traveler as numbers. Let's look at the hot steps
+ 1560.8  first. A 1200 degree flash and a 600 degree out gas. After patterning, the hottest step is a 500
+ 1568.4  degree anneal for 15 seconds. Then 350 for incorporation and 250 for overgrowth.
+ 1576.2  Why that order works is because diffusion goes up exponentially with temperature. So that short
+ 1582.2  500 degree step dominates everything after patterning. And it sets the final width.
+ 1589.1  Compare that with our own lab, a 1050 degree drive-in for about 40 minutes moves phosphorus hundreds
+ 1595.5  of nanometers. It's the same physics, but the opposite goal. Where is the risk? Well, the risk is
+ 1603.1  in the anneal because if it's too hot or too long, then the layer will spread out. So here's the key
+ 1614.7  takeaway. There are actually three. So one is precision. Placement is set by the lattice 0.38 nanometers.
+ 1627.0  An exchange depends exponentially on spacing. So precision is a must.
+ 1634.0  Yield. Arrays work with P to the N. Arsenic pushed P to 97%, which moves the half-yield
+ 1642.7  array size from about two sides to about 23 sides.
+ 1648.4  Throughput. Writing a hundred atoms per second can't cover a wafer. So parallel light on the
+ 1656.3  same hydrogen resist is the bridge. And our quantum tests passed. An eight-line spectrum
+ 1662.8  Bell states near 97% and Grover at 98.9% of ideal. So you might ask what comes next? Well, bigger
+ 1674.1  registers, which is exactly the P to the N problem. And I have some references as well and
+ 1688.0  some tiles here. So this is a Monte Carlo check of P to the N. So each simulated array fills 16
+ 1699.6  sites with independent coin flips. And the model in this case assumes sites fail independently.
+ 1706.3  So if you have clustered defects, like let's say you have a dirty patch, then that would make bigger
+ 1712.0  arrays fail more often than P to the N predicts. So feel free to use that. Thank you very much.
