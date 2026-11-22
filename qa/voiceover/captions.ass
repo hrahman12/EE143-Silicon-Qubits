@@ -1,0 +1,387 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+WrapStyle: 2
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Cap,DejaVu Sans,46,&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,2,60,60,30,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:01.36,0:00:06.88,Cap,,0,0,0,,Hi everyone! This talk is about a device whose\Nactive part is a single atom, one phosphorus
+Dialogue: 0,0:00:06.90,0:00:11.24,Cap,,0,0,0,,or arsenic atom in silicon, put there\Nwith a scanning tunneling microscope.
+Dialogue: 0,0:00:11.66,0:00:16.22,Cap,,0,0,0,,Physically, that atom acts like a hydrogen\Natom living inside a semiconductor.
+Dialogue: 0,0:00:16.80,0:00:20.00,Cap,,0,0,0,,One extra electron held by\Na weakened Coulomb pull.
+Dialogue: 0,0:00:20.66,0:00:25.20,Cap,,0,0,0,,And in EE143 terms, every step\Nis a process we already know.
+Dialogue: 0,0:00:25.46,0:00:30.34,Cap,,0,0,0,,Resist, lithography, gas phase doping,\Nan anneal, epitaxy, etch and metal.
+Dialogue: 0,0:00:30.74,0:00:34.88,Cap,,0,0,0,,The difference is that the resist is one\Natom thick, and the dose is one molecule.
+Dialogue: 0,0:00:38.30,0:00:41.92,Cap,,0,0,0,,Three ideas run through this\Nwhole talk. One is precision.
+Dialogue: 0,0:00:42.60,0:00:47.96,Cap,,0,0,0,,One lattice site on the silicon surface is 0.38\Nnanometers, and that's the placement error
+Dialogue: 0,0:00:47.98,0:00:48.98,Cap,,0,0,0,,we can reach.
+Dialogue: 0,0:00:49.48,0:00:55.20,Cap,,0,0,0,,Two is yield. If each site works with probability\Np, an array of n sites works with p to the n.
+Dialogue: 0,0:00:55.68,0:00:59.26,Cap,,0,0,0,,So p has to be really\Nclose to 1. Three is speed.
+Dialogue: 0,0:00:59.72,0:01:03.20,Cap,,0,0,0,,A tip writes about 100 atoms per\Nsecond, and that sets the limit.
+Dialogue: 0,0:01:03.70,0:01:06.36,Cap,,0,0,0,,Act one is why one atom makes a good qubit.
+Dialogue: 0,0:01:06.44,0:01:10.38,Cap,,0,0,0,,Act two is how it's built.\NAct three is does it work?
+Dialogue: 0,0:01:10.66,0:01:14.46,Cap,,0,0,0,,Act four is how it scales,\Nbut keep one question in mind.
+Dialogue: 0,0:01:14.86,0:01:18.24,Cap,,0,0,0,,How do you put exactly one atom\Nexactly where you want it?
+Dialogue: 0,0:01:21.27,0:01:24.51,Cap,,0,0,0,,Think of the donor as\Nhydrogen inside a dielectric.
+Dialogue: 0,0:01:24.63,0:01:28.51,Cap,,0,0,0,,The Bohr radius scales for the dielectric\Nconstant times the free mass over the effective
+Dialogue: 0,0:01:28.53,0:01:32.99,Cap,,0,0,0,,mass. Silicon has a big dielectric\Nconstant and a small effective mass.
+Dialogue: 0,0:01:33.35,0:01:37.65,Cap,,0,0,0,,So hydrogen 0.05 nanometers\Nstretches to about two nanometers.
+Dialogue: 0,0:01:37.95,0:01:41.25,Cap,,0,0,0,,You get two spins for free. The\Nelectron and the phosphorus nucleus.
+Dialogue: 0,0:01:41.61,0:01:43.73,Cap,,0,0,0,,Two times two gives a four level system.
+Dialogue: 0,0:01:43.91,0:01:48.03,Cap,,0,0,0,,Electron spins are driven with\NESR, and nucleus spins with NMR.
+Dialogue: 0,0:01:48.25,0:01:52.87,Cap,,0,0,0,,Readout turns spin into charge. A spin up\Nelectron can tunnel into a nearby single electron
+Dialogue: 0,0:01:52.89,0:01:53.89,Cap,,0,0,0,,transistor.
+Dialogue: 0,0:01:54.29,0:01:55.65,Cap,,0,0,0,,A spin down one can't.
+Dialogue: 0,0:01:56.11,0:01:57.77,Cap,,0,0,0,,And the transistor current changes.
+Dialogue: 0,0:01:58.25,0:02:03.35,Cap,,0,0,0,,In purified silicon 28, only about 200\Nparts per million of silicon 29 is left.
+Dialogue: 0,0:02:03.69,0:02:09.39,Cap,,0,0,0,,So stray nuclear spins are rare. That's why\Nimplanted donors there reach 35.6 seconds of
+Dialogue: 0,0:02:09.41,0:02:13.23,Cap,,0,0,0,,coherence and gates near 99.99%.
+Dialogue: 0,0:02:13.91,0:02:16.61,Cap,,0,0,0,,Is it really hydrogen like you might ask?
+Dialogue: 0,0:02:16.63,0:02:21.43,Cap,,0,0,0,,To first order, yes it is. Silicon's six\Nconduction band valleys split the ground state.
+Dialogue: 0,0:02:25.19,0:02:30.33,Cap,,0,0,0,,Two qubit gates use exchange, called J, which\Ncomes from the two electron wave functions
+Dialogue: 0,0:02:30.35,0:02:31.35,Cap,,0,0,0,,overlapping.
+Dialogue: 0,0:02:31.75,0:02:34.25,Cap,,0,0,0,,The wave function squared\Ndies off exponentially.
+Dialogue: 0,0:02:34.87,0:02:37.31,Cap,,0,0,0,,E to the minus two r over the Bohr radius.
+Dialogue: 0,0:02:37.81,0:02:40.79,Cap,,0,0,0,,So the coupling drops exponentially\Nas the donors move apart.
+Dialogue: 0,0:02:41.43,0:02:46.73,Cap,,0,0,0,,Let's do a quick estimate. Move one donor by\None lattice site and that term shrinks by E to
+Dialogue: 0,0:02:46.75,0:02:54.95,Cap,,0,0,0,,the minus 0.38, about 0.7. That's roughly a\N30% change in coupling from a one site mistake.
+Dialogue: 0,0:02:55.59,0:02:59.57,Cap,,0,0,0,,On top of that, silicon's valleys\Nmake J jump around from site to site.
+Dialogue: 0,0:02:59.85,0:03:01.71,Cap,,0,0,0,,So precision isn't optional.
+Dialogue: 0,0:03:02.23,0:03:05.87,Cap,,0,0,0,,The map is drawn to scale. Two\Ndonors, 13 nanometers apart.
+Dialogue: 0,0:03:06.77,0:03:09.55,Cap,,0,0,0,,Now you might ask, can't\Nyou just tune J with gates?
+Dialogue: 0,0:03:09.59,0:03:13.65,Cap,,0,0,0,,Yes, you can, but only within a\Nwindow set by where the atoms are.
+Dialogue: 0,0:03:17.80,0:03:22.48,Cap,,0,0,0,,Ion implantation is random.\NIt's a Poisson process.
+Dialogue: 0,0:03:22.64,0:03:28.56,Cap,,0,0,0,,If the average number of ions per site is\Nlambda, the chance of exactly one is lambda times
+Dialogue: 0,0:03:28.58,0:03:33.86,Cap,,0,0,0,,e to the minus lambda. That peaks at lambda\Nequals one, where the chance is one over e,
+Dialogue: 0,0:03:33.88,0:03:40.24,Cap,,0,0,0,,about 37%. So without counting\Nions, no dose ever beats 37%.
+Dialogue: 0,0:03:40.26,0:03:48.38,Cap,,0,0,0,,Those bars are that distribution, even with\Nthe best ion counting, up to 99.85% confidence
+Dialogue: 0,0:03:48.40,0:03:55.32,Cap,,0,0,0,,at 14 kilo electron volts, each ion still\Nstops at a random spot, spread over nanometers.
+Dialogue: 0,0:03:56.24,0:04:02.14,Cap,,0,0,0,,STM placement is locked to the lattice, plus\Nor minus one site, and arsenic windows give 97
+Dialogue: 0,0:04:02.16,0:04:03.80,Cap,,0,0,0,,% single atoms.
+Dialogue: 0,0:04:04.44,0:04:06.80,Cap,,0,0,0,,Now you might ask, what about lower energy?
+Dialogue: 0,0:04:07.20,0:04:11.40,Cap,,0,0,0,,Well, in that case, the spread shrinks,\Nbut it never gets down to one lattice site.
+Dialogue: 0,0:04:17.86,0:04:20.92,Cap,,0,0,0,,So here's the device as an EE spec sheet.
+Dialogue: 0,0:04:20.94,0:04:22.82,Cap,,0,0,0,,So we have the substrate silicon,
+Dialogue: 0,0:04:23.48,0:04:29.26,Cap,,0,0,0,,purified silicon 28 for qubits, dopants,\Nphosphorus from phosphine, or arsenic from arsine.
+Dialogue: 0,0:04:29.76,0:04:33.48,Cap,,0,0,0,,Placement is plus or minus 0.38 nanometers.
+Dialogue: 0,0:04:34.00,0:04:39.04,Cap,,0,0,0,,The leads are doped sheets around 10 to the\N14 per square centimeter, under one nanometer
+Dialogue: 0,0:04:39.06,0:04:41.70,Cap,,0,0,0,,thick. That's a 2D electron gas.
+Dialogue: 0,0:04:42.10,0:04:46.06,Cap,,0,0,0,,The Kane design on the right needs about\None Tesla, and about a tenth of a Kelvin.
+Dialogue: 0,0:04:46.44,0:04:50.68,Cap,,0,0,0,,That way the spin's Zeeman energy is way\Nbigger than the thermal energy, and the spin
+Dialogue: 0,0:04:50.70,0:04:51.78,Cap,,0,0,0,,starts polarized.
+Dialogue: 0,0:04:52.58,0:04:58.06,Cap,,0,0,0,,A gates tune the hyperfine, J gates tune the\Nexchange between donors about 10 nanometers apart.
+Dialogue: 0,0:04:59.32,0:05:01.64,Cap,,0,0,0,,But you might ask, why millikelvin?
+Dialogue: 0,0:05:02.00,0:05:06.26,Cap,,0,0,0,,Well, that's because thermal energy has to sit\Nfar below the Zeeman splitting, so the spin
+Dialogue: 0,0:05:06.28,0:05:07.84,Cap,,0,0,0,,starts in a known state.
+Dialogue: 0,0:05:13.28,0:05:15.44,Cap,,0,0,0,,So, if we read the timeline
+Dialogue: 0,0:05:16.36,0:05:19.26,Cap,,0,0,0,,from a list of solved physics problems.
+Dialogue: 0,0:05:19.94,0:05:20.94,Cap,,0,0,0,,1994,
+Dialogue: 0,0:05:21.86,0:05:27.08,Cap,,0,0,0,,a tip strips hydrogen off silicon by\Nexciting the silicon hydrogen bond.
+Dialogue: 0,0:05:27.52,0:05:28.82,Cap,,0,0,0,,That's a lithography.
+Dialogue: 0,0:05:29.52,0:05:30.52,Cap,,0,0,0,,1998,
+Dialogue: 0,0:05:31.08,0:05:34.30,Cap,,0,0,0,,the proposal that donor\Nnuclear spins can be qubits.
+Dialogue: 0,0:05:34.74,0:05:35.80,Cap,,0,0,0,,2003,
+Dialogue: 0,0:05:36.40,0:05:38.40,Cap,,0,0,0,,single phosphorus atoms placed on purpose.
+Dialogue: 0,0:05:38.92,0:05:41.98,Cap,,0,0,0,,2012, a transistor whose channel is one atom.
+Dialogue: 0,0:05:42.40,0:05:43.40,Cap,,0,0,0,,2019,
+Dialogue: 0,0:05:43.54,0:05:46.00,Cap,,0,0,0,,a fast exchange gate and 3D stacking.
+Dialogue: 0,0:05:46.52,0:05:53.70,Cap,,0,0,0,,2020 to 2024, arsenic chemistry pushes single\Natom yield to 97%, and light starts replacing
+Dialogue: 0,0:05:53.72,0:05:55.60,Cap,,0,0,0,,the tip for coarse patterning.
+Dialogue: 0,0:05:56.32,0:05:59.34,Cap,,0,0,0,,2025, 4 and 11 qubit processors.
+Dialogue: 0,0:05:59.90,0:06:03.96,Cap,,0,0,0,,So, we see here that there\Nis a same recipe every time.
+Dialogue: 0,0:06:04.28,0:06:05.82,Cap,,0,0,0,,Passivate, pattern,
+Dialogue: 0,0:06:06.24,0:06:08.18,Cap,,0,0,0,,dose, anneal, cap.
+Dialogue: 0,0:06:09.02,0:06:12.14,Cap,,0,0,0,,Now, you might ask, why did it take so long?
+Dialogue: 0,0:06:12.60,0:06:15.60,Cap,,0,0,0,,Well, each step needed a new way\Nto measure what was happening.
+Dialogue: 0,0:06:22.74,0:06:29.72,Cap,,0,0,0,,Now, Dr. Neil Curson's group at UCL works\Non the materials physics underneath this
+Dialogue: 0,0:06:29.74,0:06:32.50,Cap,,0,0,0,,platform. There's three threads to this.
+Dialogue: 0,0:06:32.74,0:06:37.66,Cap,,0,0,0,,One is dopant chemistry, so swapping phosphine\Nfor arsine, which breaks apart about a
+Dialogue: 0,0:06:37.68,0:06:38.94,Cap,,0,0,0,,thousand times faster.
+Dialogue: 0,0:06:39.78,0:06:44.80,Cap,,0,0,0,,In Arrhenius terms, that's like lowering the\Nbarrier by kT times the log of a thousand,
+Dialogue: 0,0:06:45.08,0:06:48.60,Cap,,0,0,0,,about 0.18 electron volts at room temperature.
+Dialogue: 0,0:06:49.26,0:06:55.10,Cap,,0,0,0,,Two, metrology, imaging buried layers with\Nx-ray fluorescence without destroying them and
+Dialogue: 0,0:06:55.12,0:06:59.28,Cap,,0,0,0,,using photoemission to see electrons\Nsqueezed into less than a nanometer.
+Dialogue: 0,0:06:59.88,0:07:05.58,Cap,,0,0,0,,Three is scaling, showing that extreme ultraviolet\Nlight can strip the same hydrogen resist,
+Dialogue: 0,0:07:06.08,0:07:09.34,Cap,,0,0,0,,plus arsenic and germanium, which\Ngoes in at room temperature.
+Dialogue: 0,0:07:10.50,0:07:14.68,Cap,,0,0,0,,So, why arsenic? Well, it's\Nbecause it breaks apart faster.
+Dialogue: 0,0:07:15.14,0:07:18.20,Cap,,0,0,0,,It needs fewer free sites, so\Nthe windows can be smaller.
+Dialogue: 0,0:07:22.00,0:07:23.24,Cap,,0,0,0,,So, here's the process.
+Dialogue: 0,0:07:24.40,0:07:28.88,Cap,,0,0,0,,So, we see here some\Ntravelers that I will mention.
+Dialogue: 0,0:07:29.32,0:07:32.10,Cap,,0,0,0,,So, the key role here is thermal history.
+Dialogue: 0,0:07:32.66,0:07:36.98,Cap,,0,0,0,,So, hot steps first, and then\Neverything at 500 degrees C or below.
+Dialogue: 0,0:07:37.46,0:07:40.28,Cap,,0,0,0,,Steps one to three clean\Nand passivate the surface.
+Dialogue: 0,0:07:40.62,0:07:47.28,Cap,,0,0,0,,Step four is lithography. Steps five and six\Nare gas doping and activation at 350 degrees.
+Dialogue: 0,0:07:47.68,0:07:51.60,Cap,,0,0,0,,Steps seven and eight bury the\Ndopants with epitaxy at 250.
+Dialogue: 0,0:07:52.74,0:07:57.26,Cap,,0,0,0,,Steps nine to eleven are alignment,\Netch, aluminum, contacts, and testing.
+Dialogue: 0,0:07:57.90,0:07:59.18,Cap,,0,0,0,,The design rule is diffusion.
+Dialogue: 0,0:07:59.72,0:08:04.30,Cap,,0,0,0,,Diffusion length is two root dt, and d\Ngoes up exponentially with temperature.
+Dialogue: 0,0:08:04.88,0:08:07.90,Cap,,0,0,0,,So, the hottest step after\Npatterning sets the whole budget.
+Dialogue: 0,0:08:08.90,0:08:11.02,Cap,,0,0,0,,Now, which step limits throughput?
+Dialogue: 0,0:08:11.98,0:08:14.92,Cap,,0,0,0,,That is step four, which is the tip.
+Dialogue: 0,0:08:20.10,0:08:23.22,Cap,,0,0,0,,So, let's prep the surface.\NSo, how do we do that?
+Dialogue: 0,0:08:23.24,0:08:26.54,Cap,,0,0,0,,We out gas for over eight\Nhours at 600 degrees.
+Dialogue: 0,0:08:27.42,0:08:29.32,Cap,,0,0,0,,Then, flash to about 1200.
+Dialogue: 0,0:08:29.80,0:08:31.82,Cap,,0,0,0,,That burns off the oxide and the carbon,
+Dialogue: 0,0:08:32.26,0:08:34.88,Cap,,0,0,0,,and leaves clean rows of silicon dimers.
+Dialogue: 0,0:08:35.06,0:08:38.90,Cap,,0,0,0,,The STM chamber sits below five\Ntimes 10 to the minus 11 millibar.
+Dialogue: 0,0:08:39.02,0:08:44.04,Cap,,0,0,0,,Why so low, you might ask. Well, at 10 to the\Nminus six torr, a surface picks up about one
+Dialogue: 0,0:08:44.06,0:08:49.98,Cap,,0,0,0,,monolayer per second. At 10 to the minus 11,\None monolayer takes on the order of a day.
+Dialogue: 0,0:08:50.56,0:08:55.96,Cap,,0,0,0,,Then, atomic hydrogen at 330 degrees for\Nfive minutes caps every dangling bond.
+Dialogue: 0,0:08:56.34,0:09:01.50,Cap,,0,0,0,,That single layer is the resist, inert, where\Nit's there, reactive, where it's been removed.
+Dialogue: 0,0:09:02.54,0:09:03.56,Cap,,0,0,0,,And why 330?
+Dialogue: 0,0:09:04.40,0:09:09.48,Cap,,0,0,0,,Well, hot enough to get a clean monohydride\Nlayer, but below where the hydrogen leaves.
+Dialogue: 0,0:09:12.78,0:09:14.26,Cap,,0,0,0,,Now, we write with the tip.
+Dialogue: 0,0:09:14.80,0:09:17.28,Cap,,0,0,0,,STM lithography is controlled tunneling.
+Dialogue: 0,0:09:17.44,0:09:22.48,Cap,,0,0,0,,The current goes as e to the minus two kappa\Nd, and kappa is about one per angstrom.
+Dialogue: 0,0:09:22.66,0:09:27.20,Cap,,0,0,0,,So, every angstrom of tip height\Nchanges the current by about e squared.
+Dialogue: 0,0:09:27.60,0:09:31.72,Cap,,0,0,0,,That's seven to eight times. That's\Nwhy the tip can see single atoms.
+Dialogue: 0,0:09:32.20,0:09:34.10,Cap,,0,0,0,,To write, you raise the bias.
+Dialogue: 0,0:09:34.68,0:09:37.06,Cap,,0,0,0,,And the electrons break\Nsilicon hydrogen bonds.
+Dialogue: 0,0:09:37.48,0:09:40.36,Cap,,0,0,0,,Check the line dose. It's\Ncurrent divided by speed.
+Dialogue: 0,0:09:40.68,0:09:45.08,Cap,,0,0,0,,10 nano amps over 10 nanometers per\Nsecond is one coulomb per meter.
+Dialogue: 0,0:09:45.54,0:09:48.70,Cap,,0,0,0,,That's the quoted 10 to the minus\Ntwo coulombs per centimeter.
+Dialogue: 0,0:09:49.02,0:09:55.04,Cap,,0,0,0,,Arsenic windows use 3.5 volts and 3000\Npicoamps at 50 nanometers per second.
+Dialogue: 0,0:09:55.46,0:09:58.40,Cap,,0,0,0,,Two dimers each, 4.6 nanometers apart.
+Dialogue: 0,0:09:59.50,0:10:01.88,Cap,,0,0,0,,You might ask, is this\Nlike e-beam lithography?
+Dialogue: 0,0:10:02.06,0:10:07.02,Cap,,0,0,0,,The answer is yes. Dose is charge per\Nlength, and the resist is one atom thick.
+Dialogue: 0,0:10:10.42,0:10:13.80,Cap,,0,0,0,,Now, dosing, phosphine versus arsine.
+Dialogue: 0,0:10:13.88,0:10:19.14,Cap,,0,0,0,,Dosing is gas kinetics. The flux of molecules\Nhitting the surface is the pressure over root
+Dialogue: 0,0:10:19.16,0:10:25.52,Cap,,0,0,0,,two pi m k T. For arsine at five times 10 to\Nthe minus nine millibar and room temperature,
+Dialogue: 0,0:10:25.78,0:10:30.62,Cap,,0,0,0,,that's about nine times 10 to the 11\Nmolecules per square centimeter per second.
+Dialogue: 0,0:10:31.16,0:10:35.44,Cap,,0,0,0,,Over 10 minutes, that's about\N0.8 arrivals per surface site.
+Dialogue: 0,0:10:35.88,0:10:40.04,Cap,,0,0,0,,So, each window sees about one molecule,\Nand the hydrogen resist rejects the rest.
+Dialogue: 0,0:10:40.54,0:10:43.92,Cap,,0,0,0,,Phosphine loses its hydrogens\Nstep by step over minutes.
+Dialogue: 0,0:10:44.50,0:10:48.04,Cap,,0,0,0,,Arsine breaks apart about a thousand\Ntimes faster in tens of seconds.
+Dialogue: 0,0:10:48.60,0:10:52.20,Cap,,0,0,0,,Arsenic coverage maxes out at\Nabout a quarter of the sites.
+Dialogue: 0,0:10:53.02,0:10:55.20,Cap,,0,0,0,,You might ask, why not a full layer?
+Dialogue: 0,0:10:55.38,0:11:00.84,Cap,,0,0,0,,Well, coverage stops at a quarter, no matter\Nhow the, no matter what the dosage rate is.
+Dialogue: 0,0:11:01.04,0:11:04.04,Cap,,0,0,0,,So, surface chemistry sets\Nthe limit, not the gas supply.
+Dialogue: 0,0:11:09.58,0:11:12.84,Cap,,0,0,0,,Incorporation, as we know,\Nneeds heat, but not too much.
+Dialogue: 0,0:11:13.22,0:11:17.58,Cap,,0,0,0,,At 350 degrees, kT is about\N54 milli electron volts.
+Dialogue: 0,0:11:17.98,0:11:23.56,Cap,,0,0,0,,That's enough for the arsenic or phosphorus to swap\Ninto the top silicon layer, but it's below 380,
+Dialogue: 0,0:11:24.06,0:11:26.60,Cap,,0,0,0,,where hydrogen starts\Nleaving and the resist fails.
+Dialogue: 0,0:11:27.44,0:11:31.60,Cap,,0,0,0,,So, a 30-degree window\Nseparates working from failing.
+Dialogue: 0,0:11:32.16,0:11:37.22,Cap,,0,0,0,,Each arsenic that goes in kicks out\Nexactly one silicon atom onto the surface.
+Dialogue: 0,0:11:37.84,0:11:42.74,Cap,,0,0,0,,Arsenic in silicon out. So, counting the\Nkicked out silicon counts your dopants, right
+Dialogue: 0,0:11:42.76,0:11:43.76,Cap,,0,0,0,,there in the chamber.
+Dialogue: 0,0:11:44.86,0:11:51.24,Cap,,0,0,0,,In class terms, this is the drive-in anneal,\Nwhich is with basically zero diffusion length.
+Dialogue: 0,0:11:52.06,0:11:56.62,Cap,,0,0,0,,So, what limits the window? Well, that's the\Nenergy barrier for hydrogen leaving the silicon.
+Dialogue: 0,0:12:00.86,0:12:05.50,Cap,,0,0,0,,Burying the dopants. Now, burying the dopants\Nis a thermal budget trade-off, good crystal
+Dialogue: 0,0:12:05.52,0:12:08.94,Cap,,0,0,0,,wants heat, keeping the\Natoms in place wants cold.
+Dialogue: 0,0:12:09.42,0:12:16.22,Cap,,0,0,0,,Phosphorus grown over at 250 degrees drifts\Nabout 5 nanometers up toward the surface.
+Dialogue: 0,0:12:16.84,0:12:21.46,Cap,,0,0,0,,For arsenic, two nanometers grown\Nunheated to lock the atoms down.
+Dialogue: 0,0:12:22.06,0:12:31.24,Cap,,0,0,0,,Then a 500-degree anneal for 15\Nseconds, then 28 nanometers at 250.
+Dialogue: 0,0:12:32.04,0:12:39.56,Cap,,0,0,0,,At 0.003 nanometers per second, those\N28 nanometers take about 2.6 hours.
+Dialogue: 0,0:12:40.52,0:12:44.94,Cap,,0,0,0,,Textbook diffusion numbers say that anneal\Nshould barely move anything, but the measured
+Dialogue: 0,0:12:44.96,0:12:47.10,Cap,,0,0,0,,layer is limited by arsenic diffusion.
+Dialogue: 0,0:12:47.76,0:12:51.76,Cap,,0,0,0,,So, at these huge concentrations, the real\Ndiffusivity must be higher than the textbook
+Dialogue: 0,0:12:51.78,0:12:54.98,Cap,,0,0,0,,value. That's why the\Nanneal is only 15 seconds.
+Dialogue: 0,0:12:56.14,0:12:59.12,Cap,,0,0,0,,So, you might ask, why not grow it all cold?
+Dialogue: 0,0:12:59.32,0:13:03.50,Cap,,0,0,0,,Well, cold silicon only grows as a\Ncrystal, up to a critical thickness.
+Dialogue: 0,0:13:03.88,0:13:06.14,Cap,,0,0,0,,Past that, it ends up being amorphous.
+Dialogue: 0,0:13:09.48,0:13:13.74,Cap,,0,0,0,,Connecting to the buried device is normal\Nmicrofab, just with extreme alignment.
+Dialogue: 0,0:13:14.00,0:13:19.74,Cap,,0,0,0,,Etched markers plus a combined STM and SEM, or\NKelvin probe imaging of the buried pattern,
+Dialogue: 0,0:13:19.96,0:13:24.84,Cap,,0,0,0,,line up the contacts with 95%\Nyield over more than 150 devices.
+Dialogue: 0,0:13:25.44,0:13:29.58,Cap,,0,0,0,,You can't see the layer optically. It's\Na sheet of electrons 30 nanometers down.
+Dialogue: 0,0:13:30.04,0:13:35.76,Cap,,0,0,0,,Hall bars are 20 by 200 microns, made with\Noptical lithography and reactive ion etching.
+Dialogue: 0,0:13:36.30,0:13:39.24,Cap,,0,0,0,,Aluminum goes into holes etched\Nthrough the doped layer.
+Dialogue: 0,0:13:39.34,0:13:43.88,Cap,,0,0,0,,Transport is measured at 1.8 Kelvin\Nand the qubits run at millikelvin.
+Dialogue: 0,0:13:44.34,0:13:46.98,Cap,,0,0,0,,So, why is the aluminum contact ohmic?
+Dialogue: 0,0:13:47.24,0:13:51.68,Cap,,0,0,0,,Well, it's because the layer is so heavily\Ndoped that the barrier is thin enough to tunnel
+Dialogue: 0,0:13:51.70,0:13:52.70,Cap,,0,0,0,,straight through.
+Dialogue: 0,0:13:57.67,0:14:00.13,Cap,,0,0,0,,Electrical proof uses sheet resistance.
+Dialogue: 0,0:14:00.69,0:14:06.13,Cap,,0,0,0,,For a 2D sheet, Rs equals\N1 over q times Ns times mu.
+Dialogue: 0,0:14:06.59,0:14:13.49,Cap,,0,0,0,,Measured, 1600 ohms per square, and a mobility\Nof 28 square centimeters per volt second.
+Dialogue: 0,0:14:13.89,0:14:19.71,Cap,,0,0,0,,Solve for Ns and you get about 1.4 times\N10 to the 14 per square centimeter.
+Dialogue: 0,0:14:20.05,0:14:25.25,Cap,,0,0,0,,The surface has about 6.8 times 10 to\Nthe 14 atoms per square centimeter.
+Dialogue: 0,0:14:25.89,0:14:29.35,Cap,,0,0,0,,So that's about one dopant\Nfor every five surface sites.
+Dialogue: 0,0:14:29.65,0:14:36.73,Cap,,0,0,0,,Activation is 81% or 88%\Nafter a 560 degree anneal.
+Dialogue: 0,0:14:37.25,0:14:42.17,Cap,,0,0,0,,Photoemission shows the electrons squeezed into\Nless than a nanometer, and arsenic confines
+Dialogue: 0,0:14:42.19,0:14:43.87,Cap,,0,0,0,,better than phosphorus.
+Dialogue: 0,0:14:44.55,0:14:46.29,Cap,,0,0,0,,Why is the mobility so low?
+Dialogue: 0,0:14:46.77,0:14:51.39,Cap,,0,0,0,,Well, the electrons scatter off the ionized\Ndopants that they came from, all packed into
+Dialogue: 0,0:14:51.41,0:14:52.73,Cap,,0,0,0,,one atomic plane.
+Dialogue: 0,0:14:56.84,0:14:58.24,Cap,,0,0,0,,Two proofs that this works.
+Dialogue: 0,0:14:58.92,0:15:03.22,Cap,,0,0,0,,On the left, single phosphorus atoms\Nin windows about 1 nanometer across.
+Dialogue: 0,0:15:03.80,0:15:06.78,Cap,,0,0,0,,Three dimers, written at\N4 volts and 1 nano amp.
+Dialogue: 0,0:15:07.20,0:15:12.98,Cap,,0,0,0,,Then dosed, annealed, and at 350 and\Nlanding about 12 nanometers apart.
+Dialogue: 0,0:15:13.54,0:15:17.08,Cap,,0,0,0,,On the right, a transistor whose\Nisland is one phosphorus atom.
+Dialogue: 0,0:15:17.60,0:15:19.46,Cap,,0,0,0,,Its transport shows Coulomb blockade.
+Dialogue: 0,0:15:19.90,0:15:24.76,Cap,,0,0,0,,The charging energy of a single atom is huge,\Nso current only flows when a discrete atomic
+Dialogue: 0,0:15:24.78,0:15:30.44,Cap,,0,0,0,,level lines up with the leads. That gives sharp\Nconductance peaks as you sweep the gate voltage.
+Dialogue: 0,0:15:31.48,0:15:37.12,Cap,,0,0,0,,So why does it work at 4 Kelvin? Well, the\Nsingle atom charging energy is far above the
+Dialogue: 0,0:15:37.14,0:15:38.14,Cap,,0,0,0,,thermal energy.
+Dialogue: 0,0:15:41.69,0:15:43.15,Cap,,0,0,0,,Now here's the catch.
+Dialogue: 0,0:15:43.73,0:15:45.65,Cap,,0,0,0,,Every site needs to work.
+Dialogue: 0,0:15:46.11,0:15:48.65,Cap,,0,0,0,,As we know, yield is a\Nproduct of probabilities.
+Dialogue: 0,0:15:49.17,0:15:55.35,Cap,,0,0,0,,If each site works independently with probability\Np, an n-site array works with p to the n.
+Dialogue: 0,0:15:55.93,0:15:56.93,Cap,,0,0,0,,Phosphorus,
+Dialogue: 0,0:15:58.01,0:16:01.11,Cap,,0,0,0,,in an ideal window, works 63% of the time,
+Dialogue: 0,0:16:01.55,0:16:03.61,Cap,,0,0,0,,and under 70% in bigger windows.
+Dialogue: 0,0:16:04.07,0:16:07.61,Cap,,0,0,0,,0.7 to the 16 is about a third of a percent.
+Dialogue: 0,0:16:08.21,0:16:12.19,Cap,,0,0,0,,For 50 donors, at 63%, it's\Nabout 1 in 10 billion.
+Dialogue: 0,0:16:12.73,0:16:17.07,Cap,,0,0,0,,Flip it around, the biggest array you can\Nmake half the time is about two sites for
+Dialogue: 0,0:16:17.09,0:16:21.33,Cap,,0,0,0,,phosphorus and about 23 for arsenic at 97%.
+Dialogue: 0,0:16:21.35,0:16:24.01,Cap,,0,0,0,,The band shows how sensitive this is.
+Dialogue: 0,0:16:24.43,0:16:30.03,Cap,,0,0,0,,Arsenic at 95 to 99% gives\N44 to 85% for 16 sites.
+Dialogue: 0,0:16:30.73,0:16:33.29,Cap,,0,0,0,,Now, are the failures really independent?
+Dialogue: 0,0:16:33.63,0:16:37.59,Cap,,0,0,0,,Well, the formula assumes so. Correlated\Nfailures would change the math.
+Dialogue: 0,0:16:40.92,0:16:45.62,Cap,,0,0,0,,So what did Dr. Curson do? Well, he\Nput arsenic in a four-site window.
+Dialogue: 0,0:16:46.22,0:16:49.70,Cap,,0,0,0,,So, arsenic's fix is a geometry rule.
+Dialogue: 0,0:16:50.28,0:16:54.38,Cap,,0,0,0,,Arsine breaks apart fast, so one\Nmolecule needs fewer free sites.
+Dialogue: 0,0:16:54.78,0:16:58.12,Cap,,0,0,0,,A four-site window, two\Ndimers, takes exactly one.
+Dialogue: 0,0:16:58.90,0:17:05.44,Cap,,0,0,0,,Single atom yield is 97%, plus or minus two,\Nwith each atom placed within four lattice sites.
+Dialogue: 0,0:17:05.92,0:17:12.82,Cap,,0,0,0,,At 97%, a two-by-two array would come\Nout perfect, about 89% of the time.
+Dialogue: 0,0:17:13.26,0:17:17.98,Cap,,0,0,0,,The first perfect two-by-two was actually\Nmade with windows of two to eight sites.
+Dialogue: 0,0:17:18.56,0:17:21.90,Cap,,0,0,0,,The 97% comes from the\Nlater four-site statistics,
+Dialogue: 0,0:17:22.50,0:17:24.20,Cap,,0,0,0,,and you can retry the failed sites.
+Dialogue: 0,0:17:24.50,0:17:28.84,Cap,,0,0,0,,A second try multiplies the failure\Nchance, which pushes p toward one.
+Dialogue: 0,0:17:29.82,0:17:31.04,Cap,,0,0,0,,Why not three sites?
+Dialogue: 0,0:17:31.72,0:17:36.42,Cap,,0,0,0,,Well, that's because smaller windows let\Nhydrogen grab the site back before the arsine
+Dialogue: 0,0:17:36.44,0:17:37.44,Cap,,0,0,0,,actually lands.
+Dialogue: 0,0:17:41.42,0:17:47.32,Cap,,0,0,0,,So, beyond silicon phosphorus,\Nnew dopants, new hosts.
+Dialogue: 0,0:17:47.78,0:17:52.84,Cap,,0,0,0,,The same chemistry carries over. On germanium,\Narsine goes in at room temperature with no
+Dialogue: 0,0:17:52.86,0:17:57.92,Cap,,0,0,0,,anneal, and the hydrogen\Nleaves by 330 degrees.
+Dialogue: 0,0:17:58.18,0:18:04.26,Cap,,0,0,0,,If a reaction happens on its own at room\Ntemperature, its barrier has to be under about 0.8
+Dialogue: 0,0:18:04.28,0:18:05.36,Cap,,0,0,0,,electron volts.
+Dialogue: 0,0:18:05.80,0:18:09.76,Cap,,0,0,0,,That comes from an attempt rate\Nof about 10 to the 13 per second.
+Dialogue: 0,0:18:10.10,0:18:15.86,Cap,,0,0,0,,The rate only stays above once\Nper second up to about 30 kT.
+Dialogue: 0,0:18:16.28,0:18:21.54,Cap,,0,0,0,,Bismuth goes the other way. It's a heavy donor\Ndelivered by a molecule called tri-phenyl
+Dialogue: 0,0:18:21.56,0:18:23.96,Cap,,0,0,0,,bismuth, about a nanometer across.
+Dialogue: 0,0:18:24.42,0:18:29.56,Cap,,0,0,0,,Its side groups come off near 140\Ndegrees, and bismuth goes in near 360.
+Dialogue: 0,0:18:30.52,0:18:35.70,Cap,,0,0,0,,That's close to the 380-degree\Nlimit of the hydrogen resist.
+Dialogue: 0,0:18:36.52,0:18:42.54,Cap,,0,0,0,,So, why germanium? Well, donors there have\Nbigger Bohr radii and a stronger Stark effect,
+Dialogue: 0,0:18:42.84,0:18:45.24,Cap,,0,0,0,,but this talk at the moment\Nwill stay with silicon.
+Dialogue: 0,0:18:49.34,0:18:51.44,Cap,,0,0,0,,Now, let's talk about the qubits.
+Dialogue: 0,0:18:52.12,0:18:58.10,Cap,,0,0,0,,In 2019, an exchange gate between two\Ndonor electrons in about 800 picoseconds,
+Dialogue: 0,0:18:59.30,0:19:06.12,Cap,,0,0,0,,plus a 3D device with layers aligned better\Nthan 5 nanometers and 97.9% readout.
+Dialogue: 0,0:19:08.54,0:19:10.86,Cap,,0,0,0,,2025, a 4-qubit processor,
+Dialogue: 0,0:19:11.36,0:19:18.42,Cap,,0,0,0,,3 phosphorus nuclei sharing 1 electron at 1.45\NTesla and 15 milli-kelvin, with 2-qubit gate
+Dialogue: 0,0:19:18.44,0:19:27.72,Cap,,0,0,0,,fidelities of 99.3 to 99.65%. And an 11-qubit\Nprocessor, 2 registers 13 nanometers apart.
+Dialogue: 0,0:19:28.24,0:19:34.72,Cap,,0,0,0,,The best Bell fidelities are 99.5%\Ninside a register, and 97% across.
+Dialogue: 0,0:19:35.62,0:19:38.22,Cap,,0,0,0,,But we need to be careful\Nwhen we compare these two.
+Dialogue: 0,0:19:38.90,0:19:46.22,Cap,,0,0,0,,2019 used natural silicon and electron spins,\Nwhereas 2025 used silicon 28 and nuclear spins.
+Dialogue: 0,0:19:46.86,0:19:48.24,Cap,,0,0,0,,Now, why nuclear spins?
+Dialogue: 0,0:19:48.70,0:19:51.12,Cap,,0,0,0,,Well, they just hold their\Ncoherence much longer.
+Dialogue: 0,0:19:54.76,0:19:56.88,Cap,,0,0,0,,So, here's the physics in one equation.
+Dialogue: 0,0:19:57.26,0:20:02.14,Cap,,0,0,0,,Three terms, electron Zeeman,\Nnuclear Zeeman, and hyperfine.
+Dialogue: 0,0:20:02.56,0:20:06.36,Cap,,0,0,0,,Three nuclei with hyperfine values of 6, 68,
+Dialogue: 0,0:20:07.00,0:20:13.64,Cap,,0,0,0,,and 103 megahertz. Each one shifts the electron's\Nfrequency up or down by half its value.
+Dialogue: 0,0:20:14.02,0:20:17.50,Cap,,0,0,0,,Two to the three gives eight ESR lines.
+Dialogue: 0,0:20:18.02,0:20:22.78,Cap,,0,0,0,,Check. The full spread is 6 plus 68 plus 103.
+Dialogue: 0,0:20:23.46,0:20:28.86,Cap,,0,0,0,,That's 177 megahertz, exactly\Nthe gap between the outer lines.
+Dialogue: 0,0:20:29.36,0:20:32.48,Cap,,0,0,0,,So, the electron's frequency\Nreads out the nuclear register.
+Dialogue: 0,0:20:33.04,0:20:34.62,Cap,,0,0,0,,Now, let's do a thermal check.
+Dialogue: 0,0:20:35.12,0:20:37.96,Cap,,0,0,0,,The electron sits near 200 milli-kelvin.
+Dialogue: 0,0:20:38.30,0:20:42.52,Cap,,0,0,0,,hf at 39 gigahertz is about 9 times kT.
+Dialogue: 0,0:20:43.14,0:20:46.02,Cap,,0,0,0,,So, the electron is still\Nalmost fully polarized.
+Dialogue: 0,0:20:46.52,0:20:53.26,Cap,,0,0,0,,Coherence, about 28 microseconds for the\Nelectron, and half a millisecond to 1.3
+Dialogue: 0,0:20:53.28,0:20:54.96,Cap,,0,0,0,,milliseconds for the nuclei.
+Dialogue: 0,0:20:55.62,0:20:59.76,Cap,,0,0,0,,Now, why does the hyperfine\Nchange with electric field?
+Dialogue: 0,0:21:00.96,0:21:06.34,Cap,,0,0,0,,Well, gate voltages reshape the\Nelectron wave function at the nucleus.
+Dialogue: 0,0:21:10.81,0:21:13.55,Cap,,0,0,0,,Entanglement is checked with state tomography.
+Dialogue: 0,0:21:14.21,0:21:17.43,Cap,,0,0,0,,You measure in lots of bases\Nand rebuild the density matrix.
+Dialogue: 0,0:21:18.01,0:21:23.23,Cap,,0,0,0,,For a perfect Bell state, the matrix has four\Nequal corners of one half and nothing else.
+Dialogue: 0,0:21:23.95,0:21:26.31,Cap,,0,0,0,,Fidelity is the overlap with that ideal.
+Dialogue: 0,0:21:26.85,0:21:31.83,Cap,,0,0,0,,All three nuclear pairs hit 96.8 to 97.7%.
+Dialogue: 0,0:21:31.85,0:21:37.79,Cap,,0,0,0,,The GHZ state ties all three\Nnuclei together at 96.2%.
+Dialogue: 0,0:21:37.81,0:21:42.47,Cap,,0,0,0,,Then, Grover's search on three\Nqubits with eight possible answers.
+Dialogue: 0,0:21:42.89,0:21:46.55,Cap,,0,0,0,,The ideal success after two rounds is 94.5%.
+Dialogue: 0,0:21:46.57,0:21:52.71,Cap,,0,0,0,,The hardware got 93.5. That's 98.9% of ideal.
+Dialogue: 0,0:21:53.21,0:21:54.21,Cap,,0,0,0,,Now,
+Dialogue: 0,0:21:54.33,0:21:59.47,Cap,,0,0,0,,why are there only two rounds? Well, a third\Nround would overshoot the answer and it would
+Dialogue: 0,0:21:59.49,0:22:00.51,Cap,,0,0,0,,lower the probability.
+Dialogue: 0,0:22:04.70,0:22:08.04,Cap,,0,0,0,,Now, let's look at the same atoms,
+Dialogue: 0,0:22:08.62,0:22:12.50,Cap,,0,0,0,,but a new job and a\Nquantum simulator to match.
+Dialogue: 0,0:22:13.06,0:22:15.96,Cap,,0,0,0,,Dopant arrays can also\Nsimulate many body physics.
+Dialogue: 0,0:22:16.38,0:22:21.56,Cap,,0,0,0,,The Hubbard model has two energies, hopping,\Ncalled T, set by tunneling between the dots
+Dialogue: 0,0:22:21.58,0:22:24.54,Cap,,0,0,0,,and on-site repulsion, called U.
+Dialogue: 0,0:22:24.96,0:22:27.50,Cap,,0,0,0,,Hopping drops exponentially with spacing.
+Dialogue: 0,0:22:28.06,0:22:36.24,Cap,,0,0,0,,So, stretching a 3x3 lattice from 4.1 to\N10.7 nanometers takes U over T from small,
+Dialogue: 0,0:22:36.80,0:22:40.36,Cap,,0,0,0,,which is a metal, to large,\Nwhich is a Mott insulator,
+Dialogue: 0,0:22:40.80,0:22:43.20,Cap,,0,0,0,,where repulsion freezes\Nthe electrons in place.
+Dialogue: 0,0:22:43.72,0:22:47.52,Cap,,0,0,0,,A 10-dot chain with alternating\Ncouplings builds the SSH model.
+Dialogue: 0,0:22:48.02,0:22:52.30,Cap,,0,0,0,,When the hopping inside each cell is weaker\Nthan the hopping between cells, the chain is
+Dialogue: 0,0:22:52.32,0:22:53.32,Cap,,0,0,0,,topological,
+Dialogue: 0,0:22:53.44,0:22:55.42,Cap,,0,0,0,,with edge states at zero energy.
+Dialogue: 0,0:22:56.34,0:23:00.06,Cap,,0,0,0,,You see two conductance peaks,\Nessentially, instead of 10.
+Dialogue: 0,0:23:01.04,0:23:02.88,Cap,,0,0,0,,So, why use dopants for this?
+Dialogue: 0,0:23:03.54,0:23:06.12,Cap,,0,0,0,,Lithographic precision\Nsets the hopping directly.
+Dialogue: 0,0:23:11.34,0:23:14.48,Cap,,0,0,0,,Throughput, as we mentioned,\Nis a scaling problem.
+Dialogue: 0,0:23:14.86,0:23:18.56,Cap,,0,0,0,,In precise mode, a tip writes\Nabout 100 atoms per second.
+Dialogue: 0,0:23:19.00,0:23:23.80,Cap,,0,0,0,,One square centimeter of silicon has about\Nseven times 10 to the 14 surface sites.
+Dialogue: 0,0:23:24.40,0:23:30.70,Cap,,0,0,0,,Writing that one atom at a time\Ntakes about 215,000 years.
+Dialogue: 0,0:23:31.00,0:23:36.40,Cap,,0,0,0,,At two volts and hundreds of nano amps, the\Ntip goes 1,000 nanometers per second and still
+Dialogue: 0,0:23:36.42,0:23:37.70,Cap,,0,0,0,,keeps its resolution.
+Dialogue: 0,0:23:38.28,0:23:40.98,Cap,,0,0,0,,Precision is only lost in field emission mode.
+Dialogue: 0,0:23:41.36,0:23:46.08,Cap,,0,0,0,,EUV lithography exposes the equivalent\Nof 10 to the 14 nanometers per second.
+Dialogue: 0,0:23:46.44,0:23:52.12,Cap,,0,0,0,,That's 11 to 13 orders of magnitude faster\Nbecause every photon exposes in parallel.
+Dialogue: 0,0:23:52.76,0:23:57.16,Cap,,0,0,0,,Even 10 million tips across a\Nwafer would still be way too slow.
+Dialogue: 0,0:23:58.04,0:24:00.36,Cap,,0,0,0,,Can tips just go faster, you might ask?
+Dialogue: 0,0:24:00.38,0:24:04.54,Cap,,0,0,0,,Well, speed will trade\Ndirectly against precision.
+Dialogue: 0,0:24:09.94,0:24:13.26,Cap,,0,0,0,,EUV can strip the same hydrogen resist.
+Dialogue: 0,0:24:13.78,0:24:16.40,Cap,,0,0,0,,Photon energy is hc over lambda.
+Dialogue: 0,0:24:17.40,0:24:23.48,Cap,,0,0,0,,Industrial 13 and a half nanometer light is\Nabout 92 electron volts and clear hydrogen
+Dialogue: 0,0:24:23.50,0:24:26.84,Cap,,0,0,0,,removal showed up at 93 and 106.
+Dialogue: 0,0:24:27.84,0:24:29.30,Cap,,0,0,0,,It works indirectly.
+Dialogue: 0,0:24:29.96,0:24:35.02,Cap,,0,0,0,,The silicon absorbs the photons and spits out\Nsecondary electrons and those electrons break
+Dialogue: 0,0:24:35.04,0:24:36.60,Cap,,0,0,0,,the silicon hydrogen bonds.
+Dialogue: 0,0:24:37.02,0:24:38.76,Cap,,0,0,0,,Same physics as under the tip.
+Dialogue: 0,0:24:39.16,0:24:44.70,Cap,,0,0,0,,The cost is dose, up to 18,000 joules per\Nsquare centimeter, which means exposures on the
+Dialogue: 0,0:24:44.72,0:24:47.02,Cap,,0,0,0,,order of minutes with 300 watt sources.
+Dialogue: 0,0:24:47.90,0:24:54.60,Cap,,0,0,0,,The plan is essentially EUV for the leads\Nand wiring, STM for the qubit cores.
+Dialogue: 0,0:24:55.74,0:25:00.58,Cap,,0,0,0,,What's the resolution? Well, diffraction\Nlimits EUV to roughly about 10 nanometers.
+Dialogue: 0,0:25:04.38,0:25:08.14,Cap,,0,0,0,,Our prototype applies these\Ndesign rules with real numbers.
+Dialogue: 0,0:25:08.58,0:25:13.68,Cap,,0,0,0,,Four arsenic atoms, one per four-site\Nwindow, 4.6 nanometers apart.
+Dialogue: 0,0:25:14.30,0:25:18.76,Cap,,0,0,0,,A single electron transistor 17 nanometers\Naway for readout and two gates.
+Dialogue: 0,0:25:19.20,0:25:24.04,Cap,,0,0,0,,All of it made of doped arsenic in\None plane, buried 30 nanometers deep.
+Dialogue: 0,0:25:24.46,0:25:29.34,Cap,,0,0,0,,Expected yield is about 0.97\Nto the fourth, about 89%.
+Dialogue: 0,0:25:29.36,0:25:36.12,Cap,,0,0,0,,Scale up to 16 sites and it's 61% for\Narsenic versus 0.3% for phosphorus.
+Dialogue: 0,0:25:36.14,0:25:43.46,Cap,,0,0,0,,So how big a register can you build is set by\Nthe chemistry through p, not by lithography.
+Dialogue: 0,0:25:44.58,0:25:47.64,Cap,,0,0,0,,What sets the 17 nanometer\Nspacing you might ask?
+Dialogue: 0,0:25:47.90,0:25:51.72,Cap,,0,0,0,,Well, that's sensor sensitivity\Nversus tunnel coupling.
+Dialogue: 0,0:25:51.92,0:25:53.58,Cap,,0,0,0,,It's an exponential tradeoff.
+Dialogue: 0,0:25:57.22,0:25:59.00,Cap,,0,0,0,,Here's the traveler as numbers.
+Dialogue: 0,0:25:59.64,0:26:01.48,Cap,,0,0,0,,Let's look at the hot steps first.
+Dialogue: 0,0:26:02.06,0:26:05.32,Cap,,0,0,0,,A 1200 degree flash and a 600 degree out gas.
+Dialogue: 0,0:26:05.72,0:26:10.72,Cap,,0,0,0,,After patterning, the hottest step is\Na 500 degree anneal for 15 seconds.
+Dialogue: 0,0:26:11.16,0:26:15.70,Cap,,0,0,0,,Then 350 for incorporation\Nand 250 for overgrowth.
+Dialogue: 0,0:26:16.22,0:26:21.10,Cap,,0,0,0,,Why that order works is because diffusion\Ngoes up exponentially with temperature.
+Dialogue: 0,0:26:21.62,0:26:26.62,Cap,,0,0,0,,So that short 500 degree step\Ndominates everything after patterning.
+Dialogue: 0,0:26:26.68,0:26:28.66,Cap,,0,0,0,,And it sets the final width.
+Dialogue: 0,0:26:29.10,0:26:35.00,Cap,,0,0,0,,Compare that with our own lab, a 1050 degree\Ndrive-in for about 40 minutes moves phosphorus
+Dialogue: 0,0:26:35.02,0:26:36.42,Cap,,0,0,0,,hundreds of nanometers.
+Dialogue: 0,0:26:36.90,0:26:39.26,Cap,,0,0,0,,It's the same physics, but the opposite goal.
+Dialogue: 0,0:26:40.06,0:26:41.52,Cap,,0,0,0,,Where is the risk?
+Dialogue: 0,0:26:42.02,0:26:48.06,Cap,,0,0,0,,Well, the risk is in the anneal because if it's too\Nhot or too long, then the layer will spread out.
+Dialogue: 0,0:26:53.30,0:26:55.44,Cap,,0,0,0,,So here's the key takeaway.
+Dialogue: 0,0:26:56.32,0:27:00.14,Cap,,0,0,0,,There are actually three. So one is precision.
+Dialogue: 0,0:27:00.70,0:27:06.88,Cap,,0,0,0,,Placement is set by the\Nlattice 0.38 nanometers.
+Dialogue: 0,0:27:07.04,0:27:10.04,Cap,,0,0,0,,And exchange depends exponentially on spacing.
+Dialogue: 0,0:27:11.02,0:27:13.46,Cap,,0,0,0,,So precision is a must.
+Dialogue: 0,0:27:13.98,0:27:14.98,Cap,,0,0,0,,Yield.
+Dialogue: 0,0:27:15.22,0:27:17.48,Cap,,0,0,0,,Arrays work with p to the n.
+Dialogue: 0,0:27:18.14,0:27:25.38,Cap,,0,0,0,,Arsenic pushed p to 97%, which moves the\Nhalf-yield array size from about two sites to
+Dialogue: 0,0:27:25.40,0:27:27.00,Cap,,0,0,0,,about 23 sites.
+Dialogue: 0,0:27:28.40,0:27:29.46,Cap,,0,0,0,,Throughput.
+Dialogue: 0,0:27:29.88,0:27:34.46,Cap,,0,0,0,,Writing a hundred atoms per\Nsecond can't cover a wafer.
+Dialogue: 0,0:27:35.00,0:27:38.68,Cap,,0,0,0,,So parallel light on the same\Nhydrogen resist is the bridge.
+Dialogue: 0,0:27:39.36,0:27:41.30,Cap,,0,0,0,,And our quantum tests passed.
+Dialogue: 0,0:27:41.90,0:27:49.20,Cap,,0,0,0,,An eight-line spectrum Bell states\Nnear 97% and Grover at 98.9% of ideal.
+Dialogue: 0,0:27:50.58,0:27:53.02,Cap,,0,0,0,,So you might ask what comes next?
+Dialogue: 0,0:27:53.32,0:27:54.84,Cap,,0,0,0,,Well, bigger registers,
+Dialogue: 0,0:27:55.32,0:27:58.34,Cap,,0,0,0,,which is exactly the p to the n problem.
+Dialogue: 0,0:28:00.82,0:28:05.90,Cap,,0,0,0,,And I have some references as well and
+Dialogue: 0,0:28:07.99,0:28:09.89,Cap,,0,0,0,,some titles
+Dialogue: 0,0:28:11.22,0:28:16.98,Cap,,0,0,0,,here. So this is a Monte\NCarlo check of p to the n.
+Dialogue: 0,0:28:17.06,0:28:21.66,Cap,,0,0,0,,So each simulated array fills 16\Nsites with independent coin flips.
+Dialogue: 0,0:28:22.20,0:28:26.04,Cap,,0,0,0,,And the model in this case\Nassumes sites fail independently.
+Dialogue: 0,0:28:26.34,0:28:31.58,Cap,,0,0,0,,So if you have clustered defects, like let's\Nsay you have a dirty patch, then that would
+Dialogue: 0,0:28:31.60,0:28:34.72,Cap,,0,0,0,,make big arrays fail more\Noften than p to the n predicts.
+Dialogue: 0,0:28:35.50,0:28:37.96,Cap,,0,0,0,,So feel free to use that.
+Dialogue: 0,0:28:39.18,0:28:40.82,Cap,,0,0,0,,Thank you very much.
