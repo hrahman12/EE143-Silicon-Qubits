@@ -1,0 +1,1735 @@
+1
+00:00:01,360 --> 00:00:06,880
+Hi everyone! This talk is about a device whose
+active part is a single atom, one phosphorus
+
+2
+00:00:06,900 --> 00:00:11,240
+or arsenic atom in silicon, put there
+with a scanning tunneling microscope.
+
+3
+00:00:11,660 --> 00:00:16,220
+Physically, that atom acts like a hydrogen
+atom living inside a semiconductor.
+
+4
+00:00:16,800 --> 00:00:20,000
+One extra electron held by
+a weakened Coulomb pull.
+
+5
+00:00:20,660 --> 00:00:25,200
+And in EE143 terms, every step
+is a process we already know.
+
+6
+00:00:25,460 --> 00:00:30,340
+Resist, lithography, gas phase doping,
+an anneal, epitaxy, etch and metal.
+
+7
+00:00:30,740 --> 00:00:34,880
+The difference is that the resist is one
+atom thick, and the dose is one molecule.
+
+8
+00:00:38,300 --> 00:00:41,920
+Three ideas run through this
+whole talk. One is precision.
+
+9
+00:00:42,600 --> 00:00:47,960
+One lattice site on the silicon surface is 0.38
+nanometers, and that's the placement error
+
+10
+00:00:47,980 --> 00:00:48,980
+we can reach.
+
+11
+00:00:49,480 --> 00:00:55,200
+Two is yield. If each site works with probability
+p, an array of n sites works with p to the n.
+
+12
+00:00:55,680 --> 00:00:59,260
+So p has to be really
+close to 1. Three is speed.
+
+13
+00:00:59,720 --> 00:01:03,200
+A tip writes about 100 atoms per
+second, and that sets the limit.
+
+14
+00:01:03,700 --> 00:01:06,360
+Act one is why one atom makes a good qubit.
+
+15
+00:01:06,440 --> 00:01:10,380
+Act two is how it's built.
+Act three is does it work?
+
+16
+00:01:10,660 --> 00:01:14,460
+Act four is how it scales,
+but keep one question in mind.
+
+17
+00:01:14,860 --> 00:01:18,240
+How do you put exactly one atom
+exactly where you want it?
+
+18
+00:01:21,270 --> 00:01:24,510
+Think of the donor as
+hydrogen inside a dielectric.
+
+19
+00:01:24,630 --> 00:01:28,510
+The Bohr radius scales for the dielectric
+constant times the free mass over the effective
+
+20
+00:01:28,530 --> 00:01:32,990
+mass. Silicon has a big dielectric
+constant and a small effective mass.
+
+21
+00:01:33,350 --> 00:01:37,650
+So hydrogen 0.05 nanometers
+stretches to about two nanometers.
+
+22
+00:01:37,950 --> 00:01:41,250
+You get two spins for free. The
+electron and the phosphorus nucleus.
+
+23
+00:01:41,610 --> 00:01:43,730
+Two times two gives a four level system.
+
+24
+00:01:43,910 --> 00:01:48,030
+Electron spins are driven with
+ESR, and nucleus spins with NMR.
+
+25
+00:01:48,250 --> 00:01:52,870
+Readout turns spin into charge. A spin up
+electron can tunnel into a nearby single electron
+
+26
+00:01:52,890 --> 00:01:53,890
+transistor.
+
+27
+00:01:54,290 --> 00:01:55,650
+A spin down one can't.
+
+28
+00:01:56,110 --> 00:01:57,770
+And the transistor current changes.
+
+29
+00:01:58,250 --> 00:02:03,350
+In purified silicon 28, only about 200
+parts per million of silicon 29 is left.
+
+30
+00:02:03,690 --> 00:02:09,390
+So stray nuclear spins are rare. That's why
+implanted donors there reach 35.6 seconds of
+
+31
+00:02:09,410 --> 00:02:13,230
+coherence and gates near 99.99%.
+
+32
+00:02:13,910 --> 00:02:16,610
+Is it really hydrogen like you might ask?
+
+33
+00:02:16,630 --> 00:02:21,430
+To first order, yes it is. Silicon's six
+conduction band valleys split the ground state.
+
+34
+00:02:25,190 --> 00:02:30,330
+Two qubit gates use exchange, called J, which
+comes from the two electron wave functions
+
+35
+00:02:30,350 --> 00:02:31,350
+overlapping.
+
+36
+00:02:31,750 --> 00:02:34,250
+The wave function squared
+dies off exponentially.
+
+37
+00:02:34,870 --> 00:02:37,310
+E to the minus two r over the Bohr radius.
+
+38
+00:02:37,810 --> 00:02:40,790
+So the coupling drops exponentially
+as the donors move apart.
+
+39
+00:02:41,430 --> 00:02:46,730
+Let's do a quick estimate. Move one donor by
+one lattice site and that term shrinks by E to
+
+40
+00:02:46,750 --> 00:02:54,950
+the minus 0.38, about 0.7. That's roughly a
+30% change in coupling from a one site mistake.
+
+41
+00:02:55,590 --> 00:02:59,570
+On top of that, silicon's valleys
+make J jump around from site to site.
+
+42
+00:02:59,850 --> 00:03:01,710
+So precision isn't optional.
+
+43
+00:03:02,230 --> 00:03:05,870
+The map is drawn to scale. Two
+donors, 13 nanometers apart.
+
+44
+00:03:06,770 --> 00:03:09,550
+Now you might ask, can't
+you just tune J with gates?
+
+45
+00:03:09,590 --> 00:03:13,650
+Yes, you can, but only within a
+window set by where the atoms are.
+
+46
+00:03:17,800 --> 00:03:22,480
+Ion implantation is random.
+It's a Poisson process.
+
+47
+00:03:22,640 --> 00:03:28,560
+If the average number of ions per site is
+lambda, the chance of exactly one is lambda times
+
+48
+00:03:28,580 --> 00:03:33,860
+e to the minus lambda. That peaks at lambda
+equals one, where the chance is one over e,
+
+49
+00:03:33,880 --> 00:03:40,240
+about 37%. So without counting
+ions, no dose ever beats 37%.
+
+50
+00:03:40,260 --> 00:03:48,380
+Those bars are that distribution, even with
+the best ion counting, up to 99.85% confidence
+
+51
+00:03:48,400 --> 00:03:55,320
+at 14 kilo electron volts, each ion still
+stops at a random spot, spread over nanometers.
+
+52
+00:03:56,240 --> 00:04:02,140
+STM placement is locked to the lattice, plus
+or minus one site, and arsenic windows give 97
+
+53
+00:04:02,160 --> 00:04:03,800
+% single atoms.
+
+54
+00:04:04,440 --> 00:04:06,800
+Now you might ask, what about lower energy?
+
+55
+00:04:07,200 --> 00:04:11,400
+Well, in that case, the spread shrinks,
+but it never gets down to one lattice site.
+
+56
+00:04:17,860 --> 00:04:20,920
+So here's the device as an EE spec sheet.
+
+57
+00:04:20,940 --> 00:04:22,820
+So we have the substrate silicon,
+
+58
+00:04:23,480 --> 00:04:29,260
+purified silicon 28 for qubits, dopants,
+phosphorus from phosphine, or arsenic from arsine.
+
+59
+00:04:29,760 --> 00:04:33,480
+Placement is plus or minus 0.38 nanometers.
+
+60
+00:04:34,000 --> 00:04:39,040
+The leads are doped sheets around 10 to the
+14 per square centimeter, under one nanometer
+
+61
+00:04:39,060 --> 00:04:41,700
+thick. That's a 2D electron gas.
+
+62
+00:04:42,100 --> 00:04:46,060
+The Kane design on the right needs about
+one Tesla, and about a tenth of a Kelvin.
+
+63
+00:04:46,440 --> 00:04:50,680
+That way the spin's Zeeman energy is way
+bigger than the thermal energy, and the spin
+
+64
+00:04:50,700 --> 00:04:51,780
+starts polarized.
+
+65
+00:04:52,580 --> 00:04:58,060
+A gates tune the hyperfine, J gates tune the
+exchange between donors about 10 nanometers apart.
+
+66
+00:04:59,320 --> 00:05:01,640
+But you might ask, why millikelvin?
+
+67
+00:05:02,000 --> 00:05:06,260
+Well, that's because thermal energy has to sit
+far below the Zeeman splitting, so the spin
+
+68
+00:05:06,280 --> 00:05:07,840
+starts in a known state.
+
+69
+00:05:13,280 --> 00:05:15,440
+So, if we read the timeline
+
+70
+00:05:16,360 --> 00:05:19,260
+from a list of solved physics problems.
+
+71
+00:05:19,940 --> 00:05:20,940
+1994,
+
+72
+00:05:21,860 --> 00:05:27,080
+a tip strips hydrogen off silicon by
+exciting the silicon hydrogen bond.
+
+73
+00:05:27,520 --> 00:05:28,820
+That's a lithography.
+
+74
+00:05:29,520 --> 00:05:30,520
+1998,
+
+75
+00:05:31,080 --> 00:05:34,300
+the proposal that donor
+nuclear spins can be qubits.
+
+76
+00:05:34,740 --> 00:05:35,800
+2003,
+
+77
+00:05:36,400 --> 00:05:38,400
+single phosphorus atoms placed on purpose.
+
+78
+00:05:38,920 --> 00:05:41,980
+2012, a transistor whose channel is one atom.
+
+79
+00:05:42,400 --> 00:05:43,400
+2019,
+
+80
+00:05:43,540 --> 00:05:46,000
+a fast exchange gate and 3D stacking.
+
+81
+00:05:46,520 --> 00:05:53,700
+2020 to 2024, arsenic chemistry pushes single
+atom yield to 97%, and light starts replacing
+
+82
+00:05:53,720 --> 00:05:55,600
+the tip for coarse patterning.
+
+83
+00:05:56,320 --> 00:05:59,340
+2025, 4 and 11 qubit processors.
+
+84
+00:05:59,900 --> 00:06:03,960
+So, we see here that there
+is a same recipe every time.
+
+85
+00:06:04,280 --> 00:06:05,820
+Passivate, pattern,
+
+86
+00:06:06,240 --> 00:06:08,180
+dose, anneal, cap.
+
+87
+00:06:09,020 --> 00:06:12,140
+Now, you might ask, why did it take so long?
+
+88
+00:06:12,600 --> 00:06:15,600
+Well, each step needed a new way
+to measure what was happening.
+
+89
+00:06:22,740 --> 00:06:29,720
+Now, Dr. Neil Curson's group at UCL works
+on the materials physics underneath this
+
+90
+00:06:29,740 --> 00:06:32,500
+platform. There's three threads to this.
+
+91
+00:06:32,740 --> 00:06:37,660
+One is dopant chemistry, so swapping phosphine
+for arsine, which breaks apart about a
+
+92
+00:06:37,680 --> 00:06:38,940
+thousand times faster.
+
+93
+00:06:39,780 --> 00:06:44,800
+In Arrhenius terms, that's like lowering the
+barrier by kT times the log of a thousand,
+
+94
+00:06:45,080 --> 00:06:48,600
+about 0.18 electron volts at room temperature.
+
+95
+00:06:49,260 --> 00:06:55,100
+Two, metrology, imaging buried layers with
+x-ray fluorescence without destroying them and
+
+96
+00:06:55,120 --> 00:06:59,280
+using photoemission to see electrons
+squeezed into less than a nanometer.
+
+97
+00:06:59,880 --> 00:07:05,580
+Three is scaling, showing that extreme ultraviolet
+light can strip the same hydrogen resist,
+
+98
+00:07:06,080 --> 00:07:09,340
+plus arsenic and germanium, which
+goes in at room temperature.
+
+99
+00:07:10,500 --> 00:07:14,680
+So, why arsenic? Well, it's
+because it breaks apart faster.
+
+100
+00:07:15,140 --> 00:07:18,200
+It needs fewer free sites, so
+the windows can be smaller.
+
+101
+00:07:22,000 --> 00:07:23,240
+So, here's the process.
+
+102
+00:07:24,400 --> 00:07:28,880
+So, we see here some
+travelers that I will mention.
+
+103
+00:07:29,320 --> 00:07:32,100
+So, the key role here is thermal history.
+
+104
+00:07:32,660 --> 00:07:36,980
+So, hot steps first, and then
+everything at 500 degrees C or below.
+
+105
+00:07:37,460 --> 00:07:40,280
+Steps one to three clean
+and passivate the surface.
+
+106
+00:07:40,620 --> 00:07:47,280
+Step four is lithography. Steps five and six
+are gas doping and activation at 350 degrees.
+
+107
+00:07:47,680 --> 00:07:51,600
+Steps seven and eight bury the
+dopants with epitaxy at 250.
+
+108
+00:07:52,740 --> 00:07:57,260
+Steps nine to eleven are alignment,
+etch, aluminum, contacts, and testing.
+
+109
+00:07:57,900 --> 00:07:59,180
+The design rule is diffusion.
+
+110
+00:07:59,720 --> 00:08:04,300
+Diffusion length is two root dt, and d
+goes up exponentially with temperature.
+
+111
+00:08:04,880 --> 00:08:07,900
+So, the hottest step after
+patterning sets the whole budget.
+
+112
+00:08:08,900 --> 00:08:11,020
+Now, which step limits throughput?
+
+113
+00:08:11,980 --> 00:08:14,920
+That is step four, which is the tip.
+
+114
+00:08:20,100 --> 00:08:23,220
+So, let's prep the surface.
+So, how do we do that?
+
+115
+00:08:23,240 --> 00:08:26,540
+We out gas for over eight
+hours at 600 degrees.
+
+116
+00:08:27,420 --> 00:08:29,320
+Then, flash to about 1200.
+
+117
+00:08:29,800 --> 00:08:31,820
+That burns off the oxide and the carbon,
+
+118
+00:08:32,260 --> 00:08:34,880
+and leaves clean rows of silicon dimers.
+
+119
+00:08:35,060 --> 00:08:38,900
+The STM chamber sits below five
+times 10 to the minus 11 millibar.
+
+120
+00:08:39,020 --> 00:08:44,040
+Why so low, you might ask. Well, at 10 to the
+minus six torr, a surface picks up about one
+
+121
+00:08:44,060 --> 00:08:49,980
+monolayer per second. At 10 to the minus 11,
+one monolayer takes on the order of a day.
+
+122
+00:08:50,560 --> 00:08:55,960
+Then, atomic hydrogen at 330 degrees for
+five minutes caps every dangling bond.
+
+123
+00:08:56,340 --> 00:09:01,500
+That single layer is the resist, inert, where
+it's there, reactive, where it's been removed.
+
+124
+00:09:02,540 --> 00:09:03,560
+And why 330?
+
+125
+00:09:04,400 --> 00:09:09,480
+Well, hot enough to get a clean monohydride
+layer, but below where the hydrogen leaves.
+
+126
+00:09:12,780 --> 00:09:14,260
+Now, we write with the tip.
+
+127
+00:09:14,800 --> 00:09:17,280
+STM lithography is controlled tunneling.
+
+128
+00:09:17,440 --> 00:09:22,480
+The current goes as e to the minus two kappa
+d, and kappa is about one per angstrom.
+
+129
+00:09:22,660 --> 00:09:27,200
+So, every angstrom of tip height
+changes the current by about e squared.
+
+130
+00:09:27,600 --> 00:09:31,720
+That's seven to eight times. That's
+why the tip can see single atoms.
+
+131
+00:09:32,200 --> 00:09:34,100
+To write, you raise the bias.
+
+132
+00:09:34,680 --> 00:09:37,060
+And the electrons break
+silicon hydrogen bonds.
+
+133
+00:09:37,480 --> 00:09:40,360
+Check the line dose. It's
+current divided by speed.
+
+134
+00:09:40,680 --> 00:09:45,080
+10 nano amps over 10 nanometers per
+second is one coulomb per meter.
+
+135
+00:09:45,540 --> 00:09:48,700
+That's the quoted 10 to the minus
+two coulombs per centimeter.
+
+136
+00:09:49,020 --> 00:09:55,040
+Arsenic windows use 3.5 volts and 3000
+picoamps at 50 nanometers per second.
+
+137
+00:09:55,460 --> 00:09:58,400
+Two dimers each, 4.6 nanometers apart.
+
+138
+00:09:59,500 --> 00:10:01,880
+You might ask, is this
+like e-beam lithography?
+
+139
+00:10:02,060 --> 00:10:07,020
+The answer is yes. Dose is charge per
+length, and the resist is one atom thick.
+
+140
+00:10:10,420 --> 00:10:13,800
+Now, dosing, phosphine versus arsine.
+
+141
+00:10:13,880 --> 00:10:19,140
+Dosing is gas kinetics. The flux of molecules
+hitting the surface is the pressure over root
+
+142
+00:10:19,160 --> 00:10:25,520
+two pi m k T. For arsine at five times 10 to
+the minus nine millibar and room temperature,
+
+143
+00:10:25,780 --> 00:10:30,620
+that's about nine times 10 to the 11
+molecules per square centimeter per second.
+
+144
+00:10:31,160 --> 00:10:35,440
+Over 10 minutes, that's about
+0.8 arrivals per surface site.
+
+145
+00:10:35,880 --> 00:10:40,040
+So, each window sees about one molecule,
+and the hydrogen resist rejects the rest.
+
+146
+00:10:40,540 --> 00:10:43,920
+Phosphine loses its hydrogens
+step by step over minutes.
+
+147
+00:10:44,500 --> 00:10:48,040
+Arsine breaks apart about a thousand
+times faster in tens of seconds.
+
+148
+00:10:48,600 --> 00:10:52,200
+Arsenic coverage maxes out at
+about a quarter of the sites.
+
+149
+00:10:53,020 --> 00:10:55,200
+You might ask, why not a full layer?
+
+150
+00:10:55,380 --> 00:11:00,840
+Well, coverage stops at a quarter, no matter
+how the, no matter what the dosage rate is.
+
+151
+00:11:01,040 --> 00:11:04,040
+So, surface chemistry sets
+the limit, not the gas supply.
+
+152
+00:11:09,580 --> 00:11:12,840
+Incorporation, as we know,
+needs heat, but not too much.
+
+153
+00:11:13,220 --> 00:11:17,580
+At 350 degrees, kT is about
+54 milli electron volts.
+
+154
+00:11:17,980 --> 00:11:23,560
+That's enough for the arsenic or phosphorus to swap
+into the top silicon layer, but it's below 380,
+
+155
+00:11:24,060 --> 00:11:26,600
+where hydrogen starts
+leaving and the resist fails.
+
+156
+00:11:27,440 --> 00:11:31,600
+So, a 30-degree window
+separates working from failing.
+
+157
+00:11:32,160 --> 00:11:37,220
+Each arsenic that goes in kicks out
+exactly one silicon atom onto the surface.
+
+158
+00:11:37,840 --> 00:11:42,740
+Arsenic in silicon out. So, counting the
+kicked out silicon counts your dopants, right
+
+159
+00:11:42,760 --> 00:11:43,760
+there in the chamber.
+
+160
+00:11:44,860 --> 00:11:51,240
+In class terms, this is the drive-in anneal,
+which is with basically zero diffusion length.
+
+161
+00:11:52,060 --> 00:11:56,620
+So, what limits the window? Well, that's the
+energy barrier for hydrogen leaving the silicon.
+
+162
+00:12:00,860 --> 00:12:05,500
+Burying the dopants. Now, burying the dopants
+is a thermal budget trade-off, good crystal
+
+163
+00:12:05,520 --> 00:12:08,940
+wants heat, keeping the
+atoms in place wants cold.
+
+164
+00:12:09,420 --> 00:12:16,220
+Phosphorus grown over at 250 degrees drifts
+about 5 nanometers up toward the surface.
+
+165
+00:12:16,840 --> 00:12:21,460
+For arsenic, two nanometers grown
+unheated to lock the atoms down.
+
+166
+00:12:22,060 --> 00:12:31,240
+Then a 500-degree anneal for 15
+seconds, then 28 nanometers at 250.
+
+167
+00:12:32,040 --> 00:12:39,560
+At 0.003 nanometers per second, those
+28 nanometers take about 2.6 hours.
+
+168
+00:12:40,520 --> 00:12:44,940
+Textbook diffusion numbers say that anneal
+should barely move anything, but the measured
+
+169
+00:12:44,960 --> 00:12:47,100
+layer is limited by arsenic diffusion.
+
+170
+00:12:47,760 --> 00:12:51,760
+So, at these huge concentrations, the real
+diffusivity must be higher than the textbook
+
+171
+00:12:51,780 --> 00:12:54,980
+value. That's why the
+anneal is only 15 seconds.
+
+172
+00:12:56,140 --> 00:12:59,120
+So, you might ask, why not grow it all cold?
+
+173
+00:12:59,320 --> 00:13:03,500
+Well, cold silicon only grows as a
+crystal, up to a critical thickness.
+
+174
+00:13:03,880 --> 00:13:06,140
+Past that, it ends up being amorphous.
+
+175
+00:13:09,480 --> 00:13:13,740
+Connecting to the buried device is normal
+microfab, just with extreme alignment.
+
+176
+00:13:14,000 --> 00:13:19,740
+Etched markers plus a combined STM and SEM, or
+Kelvin probe imaging of the buried pattern,
+
+177
+00:13:19,960 --> 00:13:24,840
+line up the contacts with 95%
+yield over more than 150 devices.
+
+178
+00:13:25,440 --> 00:13:29,580
+You can't see the layer optically. It's
+a sheet of electrons 30 nanometers down.
+
+179
+00:13:30,040 --> 00:13:35,760
+Hall bars are 20 by 200 microns, made with
+optical lithography and reactive ion etching.
+
+180
+00:13:36,300 --> 00:13:39,240
+Aluminum goes into holes etched
+through the doped layer.
+
+181
+00:13:39,340 --> 00:13:43,880
+Transport is measured at 1.8 Kelvin
+and the qubits run at millikelvin.
+
+182
+00:13:44,340 --> 00:13:46,980
+So, why is the aluminum contact ohmic?
+
+183
+00:13:47,240 --> 00:13:51,680
+Well, it's because the layer is so heavily
+doped that the barrier is thin enough to tunnel
+
+184
+00:13:51,700 --> 00:13:52,700
+straight through.
+
+185
+00:13:57,670 --> 00:14:00,130
+Electrical proof uses sheet resistance.
+
+186
+00:14:00,690 --> 00:14:06,130
+For a 2D sheet, Rs equals
+1 over q times Ns times mu.
+
+187
+00:14:06,590 --> 00:14:13,490
+Measured, 1600 ohms per square, and a mobility
+of 28 square centimeters per volt second.
+
+188
+00:14:13,890 --> 00:14:19,710
+Solve for Ns and you get about 1.4 times
+10 to the 14 per square centimeter.
+
+189
+00:14:20,050 --> 00:14:25,250
+The surface has about 6.8 times 10 to
+the 14 atoms per square centimeter.
+
+190
+00:14:25,890 --> 00:14:29,350
+So that's about one dopant
+for every five surface sites.
+
+191
+00:14:29,650 --> 00:14:36,730
+Activation is 81% or 88%
+after a 560 degree anneal.
+
+192
+00:14:37,250 --> 00:14:42,170
+Photoemission shows the electrons squeezed into
+less than a nanometer, and arsenic confines
+
+193
+00:14:42,190 --> 00:14:43,870
+better than phosphorus.
+
+194
+00:14:44,550 --> 00:14:46,290
+Why is the mobility so low?
+
+195
+00:14:46,770 --> 00:14:51,390
+Well, the electrons scatter off the ionized
+dopants that they came from, all packed into
+
+196
+00:14:51,410 --> 00:14:52,730
+one atomic plane.
+
+197
+00:14:56,840 --> 00:14:58,240
+Two proofs that this works.
+
+198
+00:14:58,920 --> 00:15:03,220
+On the left, single phosphorus atoms
+in windows about 1 nanometer across.
+
+199
+00:15:03,800 --> 00:15:06,780
+Three dimers, written at
+4 volts and 1 nano amp.
+
+200
+00:15:07,200 --> 00:15:12,980
+Then dosed, annealed, and at 350 and
+landing about 12 nanometers apart.
+
+201
+00:15:13,540 --> 00:15:17,080
+On the right, a transistor whose
+island is one phosphorus atom.
+
+202
+00:15:17,600 --> 00:15:19,460
+Its transport shows Coulomb blockade.
+
+203
+00:15:19,900 --> 00:15:24,760
+The charging energy of a single atom is huge,
+so current only flows when a discrete atomic
+
+204
+00:15:24,780 --> 00:15:30,440
+level lines up with the leads. That gives sharp
+conductance peaks as you sweep the gate voltage.
+
+205
+00:15:31,480 --> 00:15:37,120
+So why does it work at 4 Kelvin? Well, the
+single atom charging energy is far above the
+
+206
+00:15:37,140 --> 00:15:38,140
+thermal energy.
+
+207
+00:15:41,690 --> 00:15:43,150
+Now here's the catch.
+
+208
+00:15:43,730 --> 00:15:45,650
+Every site needs to work.
+
+209
+00:15:46,110 --> 00:15:48,650
+As we know, yield is a
+product of probabilities.
+
+210
+00:15:49,170 --> 00:15:55,350
+If each site works independently with probability
+p, an n-site array works with p to the n.
+
+211
+00:15:55,930 --> 00:15:56,930
+Phosphorus,
+
+212
+00:15:58,010 --> 00:16:01,110
+in an ideal window, works 63% of the time,
+
+213
+00:16:01,550 --> 00:16:03,610
+and under 70% in bigger windows.
+
+214
+00:16:04,070 --> 00:16:07,610
+0.7 to the 16 is about a third of a percent.
+
+215
+00:16:08,210 --> 00:16:12,190
+For 50 donors, at 63%, it's
+about 1 in 10 billion.
+
+216
+00:16:12,730 --> 00:16:17,070
+Flip it around, the biggest array you can
+make half the time is about two sites for
+
+217
+00:16:17,090 --> 00:16:21,330
+phosphorus and about 23 for arsenic at 97%.
+
+218
+00:16:21,350 --> 00:16:24,010
+The band shows how sensitive this is.
+
+219
+00:16:24,430 --> 00:16:30,030
+Arsenic at 95 to 99% gives
+44 to 85% for 16 sites.
+
+220
+00:16:30,730 --> 00:16:33,290
+Now, are the failures really independent?
+
+221
+00:16:33,630 --> 00:16:37,590
+Well, the formula assumes so. Correlated
+failures would change the math.
+
+222
+00:16:40,920 --> 00:16:45,620
+So what did Dr. Curson do? Well, he
+put arsenic in a four-site window.
+
+223
+00:16:46,220 --> 00:16:49,700
+So, arsenic's fix is a geometry rule.
+
+224
+00:16:50,280 --> 00:16:54,380
+Arsine breaks apart fast, so one
+molecule needs fewer free sites.
+
+225
+00:16:54,780 --> 00:16:58,120
+A four-site window, two
+dimers, takes exactly one.
+
+226
+00:16:58,900 --> 00:17:05,440
+Single atom yield is 97%, plus or minus two,
+with each atom placed within four lattice sites.
+
+227
+00:17:05,920 --> 00:17:12,820
+At 97%, a two-by-two array would come
+out perfect, about 89% of the time.
+
+228
+00:17:13,260 --> 00:17:17,980
+The first perfect two-by-two was actually
+made with windows of two to eight sites.
+
+229
+00:17:18,560 --> 00:17:21,900
+The 97% comes from the
+later four-site statistics,
+
+230
+00:17:22,500 --> 00:17:24,200
+and you can retry the failed sites.
+
+231
+00:17:24,500 --> 00:17:28,840
+A second try multiplies the failure
+chance, which pushes p toward one.
+
+232
+00:17:29,820 --> 00:17:31,040
+Why not three sites?
+
+233
+00:17:31,720 --> 00:17:36,420
+Well, that's because smaller windows let
+hydrogen grab the site back before the arsine
+
+234
+00:17:36,440 --> 00:17:37,440
+actually lands.
+
+235
+00:17:41,420 --> 00:17:47,320
+So, beyond silicon phosphorus,
+new dopants, new hosts.
+
+236
+00:17:47,780 --> 00:17:52,840
+The same chemistry carries over. On germanium,
+arsine goes in at room temperature with no
+
+237
+00:17:52,860 --> 00:17:57,920
+anneal, and the hydrogen
+leaves by 330 degrees.
+
+238
+00:17:58,180 --> 00:18:04,260
+If a reaction happens on its own at room
+temperature, its barrier has to be under about 0.8
+
+239
+00:18:04,280 --> 00:18:05,360
+electron volts.
+
+240
+00:18:05,800 --> 00:18:09,760
+That comes from an attempt rate
+of about 10 to the 13 per second.
+
+241
+00:18:10,100 --> 00:18:15,860
+The rate only stays above once
+per second up to about 30 kT.
+
+242
+00:18:16,280 --> 00:18:21,540
+Bismuth goes the other way. It's a heavy donor
+delivered by a molecule called tri-phenyl
+
+243
+00:18:21,560 --> 00:18:23,960
+bismuth, about a nanometer across.
+
+244
+00:18:24,420 --> 00:18:29,560
+Its side groups come off near 140
+degrees, and bismuth goes in near 360.
+
+245
+00:18:30,520 --> 00:18:35,700
+That's close to the 380-degree
+limit of the hydrogen resist.
+
+246
+00:18:36,520 --> 00:18:42,540
+So, why germanium? Well, donors there have
+bigger Bohr radii and a stronger Stark effect,
+
+247
+00:18:42,840 --> 00:18:45,240
+but this talk at the moment
+will stay with silicon.
+
+248
+00:18:49,340 --> 00:18:51,440
+Now, let's talk about the qubits.
+
+249
+00:18:52,120 --> 00:18:58,100
+In 2019, an exchange gate between two
+donor electrons in about 800 picoseconds,
+
+250
+00:18:59,300 --> 00:19:06,120
+plus a 3D device with layers aligned better
+than 5 nanometers and 97.9% readout.
+
+251
+00:19:08,540 --> 00:19:10,860
+2025, a 4-qubit processor,
+
+252
+00:19:11,360 --> 00:19:18,420
+3 phosphorus nuclei sharing 1 electron at 1.45
+Tesla and 15 milli-kelvin, with 2-qubit gate
+
+253
+00:19:18,440 --> 00:19:27,720
+fidelities of 99.3 to 99.65%. And an 11-qubit
+processor, 2 registers 13 nanometers apart.
+
+254
+00:19:28,240 --> 00:19:34,720
+The best Bell fidelities are 99.5%
+inside a register, and 97% across.
+
+255
+00:19:35,620 --> 00:19:38,220
+But we need to be careful
+when we compare these two.
+
+256
+00:19:38,900 --> 00:19:46,220
+2019 used natural silicon and electron spins,
+whereas 2025 used silicon 28 and nuclear spins.
+
+257
+00:19:46,860 --> 00:19:48,240
+Now, why nuclear spins?
+
+258
+00:19:48,700 --> 00:19:51,120
+Well, they just hold their
+coherence much longer.
+
+259
+00:19:54,760 --> 00:19:56,880
+So, here's the physics in one equation.
+
+260
+00:19:57,260 --> 00:20:02,140
+Three terms, electron Zeeman,
+nuclear Zeeman, and hyperfine.
+
+261
+00:20:02,560 --> 00:20:06,360
+Three nuclei with hyperfine values of 6, 68,
+
+262
+00:20:07,000 --> 00:20:13,640
+and 103 megahertz. Each one shifts the electron's
+frequency up or down by half its value.
+
+263
+00:20:14,020 --> 00:20:17,500
+Two to the three gives eight ESR lines.
+
+264
+00:20:18,020 --> 00:20:22,780
+Check. The full spread is 6 plus 68 plus 103.
+
+265
+00:20:23,460 --> 00:20:28,860
+That's 177 megahertz, exactly
+the gap between the outer lines.
+
+266
+00:20:29,360 --> 00:20:32,480
+So, the electron's frequency
+reads out the nuclear register.
+
+267
+00:20:33,040 --> 00:20:34,620
+Now, let's do a thermal check.
+
+268
+00:20:35,120 --> 00:20:37,960
+The electron sits near 200 milli-kelvin.
+
+269
+00:20:38,300 --> 00:20:42,520
+hf at 39 gigahertz is about 9 times kT.
+
+270
+00:20:43,140 --> 00:20:46,020
+So, the electron is still
+almost fully polarized.
+
+271
+00:20:46,520 --> 00:20:53,260
+Coherence, about 28 microseconds for the
+electron, and half a millisecond to 1.3
+
+272
+00:20:53,280 --> 00:20:54,960
+milliseconds for the nuclei.
+
+273
+00:20:55,620 --> 00:20:59,760
+Now, why does the hyperfine
+change with electric field?
+
+274
+00:21:00,960 --> 00:21:06,340
+Well, gate voltages reshape the
+electron wave function at the nucleus.
+
+275
+00:21:10,810 --> 00:21:13,550
+Entanglement is checked with state tomography.
+
+276
+00:21:14,210 --> 00:21:17,430
+You measure in lots of bases
+and rebuild the density matrix.
+
+277
+00:21:18,010 --> 00:21:23,230
+For a perfect Bell state, the matrix has four
+equal corners of one half and nothing else.
+
+278
+00:21:23,950 --> 00:21:26,310
+Fidelity is the overlap with that ideal.
+
+279
+00:21:26,850 --> 00:21:31,830
+All three nuclear pairs hit 96.8 to 97.7%.
+
+280
+00:21:31,850 --> 00:21:37,790
+The GHZ state ties all three
+nuclei together at 96.2%.
+
+281
+00:21:37,810 --> 00:21:42,470
+Then, Grover's search on three
+qubits with eight possible answers.
+
+282
+00:21:42,890 --> 00:21:46,550
+The ideal success after two rounds is 94.5%.
+
+283
+00:21:46,570 --> 00:21:52,710
+The hardware got 93.5. That's 98.9% of ideal.
+
+284
+00:21:53,210 --> 00:21:54,210
+Now,
+
+285
+00:21:54,330 --> 00:21:59,470
+why are there only two rounds? Well, a third
+round would overshoot the answer and it would
+
+286
+00:21:59,490 --> 00:22:00,510
+lower the probability.
+
+287
+00:22:04,700 --> 00:22:08,040
+Now, let's look at the same atoms,
+
+288
+00:22:08,620 --> 00:22:12,500
+but a new job and a
+quantum simulator to match.
+
+289
+00:22:13,060 --> 00:22:15,960
+Dopant arrays can also
+simulate many body physics.
+
+290
+00:22:16,380 --> 00:22:21,560
+The Hubbard model has two energies, hopping,
+called T, set by tunneling between the dots
+
+291
+00:22:21,580 --> 00:22:24,540
+and on-site repulsion, called U.
+
+292
+00:22:24,960 --> 00:22:27,500
+Hopping drops exponentially with spacing.
+
+293
+00:22:28,060 --> 00:22:36,240
+So, stretching a 3x3 lattice from 4.1 to
+10.7 nanometers takes U over T from small,
+
+294
+00:22:36,800 --> 00:22:40,360
+which is a metal, to large,
+which is a Mott insulator,
+
+295
+00:22:40,800 --> 00:22:43,200
+where repulsion freezes
+the electrons in place.
+
+296
+00:22:43,720 --> 00:22:47,520
+A 10-dot chain with alternating
+couplings builds the SSH model.
+
+297
+00:22:48,020 --> 00:22:52,300
+When the hopping inside each cell is weaker
+than the hopping between cells, the chain is
+
+298
+00:22:52,320 --> 00:22:53,320
+topological,
+
+299
+00:22:53,440 --> 00:22:55,420
+with edge states at zero energy.
+
+300
+00:22:56,340 --> 00:23:00,060
+You see two conductance peaks,
+essentially, instead of 10.
+
+301
+00:23:01,040 --> 00:23:02,880
+So, why use dopants for this?
+
+302
+00:23:03,540 --> 00:23:06,120
+Lithographic precision
+sets the hopping directly.
+
+303
+00:23:11,340 --> 00:23:14,480
+Throughput, as we mentioned,
+is a scaling problem.
+
+304
+00:23:14,860 --> 00:23:18,560
+In precise mode, a tip writes
+about 100 atoms per second.
+
+305
+00:23:19,000 --> 00:23:23,800
+One square centimeter of silicon has about
+seven times 10 to the 14 surface sites.
+
+306
+00:23:24,400 --> 00:23:30,700
+Writing that one atom at a time
+takes about 215,000 years.
+
+307
+00:23:31,000 --> 00:23:36,400
+At two volts and hundreds of nano amps, the
+tip goes 1,000 nanometers per second and still
+
+308
+00:23:36,420 --> 00:23:37,700
+keeps its resolution.
+
+309
+00:23:38,280 --> 00:23:40,980
+Precision is only lost in field emission mode.
+
+310
+00:23:41,360 --> 00:23:46,080
+EUV lithography exposes the equivalent
+of 10 to the 14 nanometers per second.
+
+311
+00:23:46,440 --> 00:23:52,120
+That's 11 to 13 orders of magnitude faster
+because every photon exposes in parallel.
+
+312
+00:23:52,760 --> 00:23:57,160
+Even 10 million tips across a
+wafer would still be way too slow.
+
+313
+00:23:58,040 --> 00:24:00,360
+Can tips just go faster, you might ask?
+
+314
+00:24:00,380 --> 00:24:04,540
+Well, speed will trade
+directly against precision.
+
+315
+00:24:09,940 --> 00:24:13,260
+EUV can strip the same hydrogen resist.
+
+316
+00:24:13,780 --> 00:24:16,400
+Photon energy is hc over lambda.
+
+317
+00:24:17,400 --> 00:24:23,480
+Industrial 13 and a half nanometer light is
+about 92 electron volts and clear hydrogen
+
+318
+00:24:23,500 --> 00:24:26,840
+removal showed up at 93 and 106.
+
+319
+00:24:27,840 --> 00:24:29,300
+It works indirectly.
+
+320
+00:24:29,960 --> 00:24:35,020
+The silicon absorbs the photons and spits out
+secondary electrons and those electrons break
+
+321
+00:24:35,040 --> 00:24:36,600
+the silicon hydrogen bonds.
+
+322
+00:24:37,020 --> 00:24:38,760
+Same physics as under the tip.
+
+323
+00:24:39,160 --> 00:24:44,700
+The cost is dose, up to 18,000 joules per
+square centimeter, which means exposures on the
+
+324
+00:24:44,720 --> 00:24:47,020
+order of minutes with 300 watt sources.
+
+325
+00:24:47,900 --> 00:24:54,600
+The plan is essentially EUV for the leads
+and wiring, STM for the qubit cores.
+
+326
+00:24:55,740 --> 00:25:00,580
+What's the resolution? Well, diffraction
+limits EUV to roughly about 10 nanometers.
+
+327
+00:25:04,380 --> 00:25:08,140
+Our prototype applies these
+design rules with real numbers.
+
+328
+00:25:08,580 --> 00:25:13,680
+Four arsenic atoms, one per four-site
+window, 4.6 nanometers apart.
+
+329
+00:25:14,300 --> 00:25:18,760
+A single electron transistor 17 nanometers
+away for readout and two gates.
+
+330
+00:25:19,200 --> 00:25:24,040
+All of it made of doped arsenic in
+one plane, buried 30 nanometers deep.
+
+331
+00:25:24,460 --> 00:25:29,340
+Expected yield is about 0.97
+to the fourth, about 89%.
+
+332
+00:25:29,360 --> 00:25:36,120
+Scale up to 16 sites and it's 61% for
+arsenic versus 0.3% for phosphorus.
+
+333
+00:25:36,140 --> 00:25:43,460
+So how big a register can you build is set by
+the chemistry through p, not by lithography.
+
+334
+00:25:44,580 --> 00:25:47,640
+What sets the 17 nanometer
+spacing you might ask?
+
+335
+00:25:47,900 --> 00:25:51,720
+Well, that's sensor sensitivity
+versus tunnel coupling.
+
+336
+00:25:51,920 --> 00:25:53,580
+It's an exponential tradeoff.
+
+337
+00:25:57,220 --> 00:25:59,000
+Here's the traveler as numbers.
+
+338
+00:25:59,640 --> 00:26:01,480
+Let's look at the hot steps first.
+
+339
+00:26:02,060 --> 00:26:05,320
+A 1200 degree flash and a 600 degree out gas.
+
+340
+00:26:05,720 --> 00:26:10,720
+After patterning, the hottest step is
+a 500 degree anneal for 15 seconds.
+
+341
+00:26:11,160 --> 00:26:15,700
+Then 350 for incorporation
+and 250 for overgrowth.
+
+342
+00:26:16,220 --> 00:26:21,100
+Why that order works is because diffusion
+goes up exponentially with temperature.
+
+343
+00:26:21,620 --> 00:26:26,620
+So that short 500 degree step
+dominates everything after patterning.
+
+344
+00:26:26,680 --> 00:26:28,660
+And it sets the final width.
+
+345
+00:26:29,100 --> 00:26:35,000
+Compare that with our own lab, a 1050 degree
+drive-in for about 40 minutes moves phosphorus
+
+346
+00:26:35,020 --> 00:26:36,420
+hundreds of nanometers.
+
+347
+00:26:36,900 --> 00:26:39,260
+It's the same physics, but the opposite goal.
+
+348
+00:26:40,060 --> 00:26:41,520
+Where is the risk?
+
+349
+00:26:42,020 --> 00:26:48,060
+Well, the risk is in the anneal because if it's too
+hot or too long, then the layer will spread out.
+
+350
+00:26:53,300 --> 00:26:55,440
+So here's the key takeaway.
+
+351
+00:26:56,320 --> 00:27:00,140
+There are actually three. So one is precision.
+
+352
+00:27:00,700 --> 00:27:06,880
+Placement is set by the
+lattice 0.38 nanometers.
+
+353
+00:27:07,040 --> 00:27:10,040
+And exchange depends exponentially on spacing.
+
+354
+00:27:11,020 --> 00:27:13,460
+So precision is a must.
+
+355
+00:27:13,980 --> 00:27:14,980
+Yield.
+
+356
+00:27:15,220 --> 00:27:17,480
+Arrays work with p to the n.
+
+357
+00:27:18,140 --> 00:27:25,380
+Arsenic pushed p to 97%, which moves the
+half-yield array size from about two sites to
+
+358
+00:27:25,400 --> 00:27:27,000
+about 23 sites.
+
+359
+00:27:28,400 --> 00:27:29,460
+Throughput.
+
+360
+00:27:29,880 --> 00:27:34,460
+Writing a hundred atoms per
+second can't cover a wafer.
+
+361
+00:27:35,000 --> 00:27:38,680
+So parallel light on the same
+hydrogen resist is the bridge.
+
+362
+00:27:39,360 --> 00:27:41,300
+And our quantum tests passed.
+
+363
+00:27:41,900 --> 00:27:49,200
+An eight-line spectrum Bell states
+near 97% and Grover at 98.9% of ideal.
+
+364
+00:27:50,580 --> 00:27:53,020
+So you might ask what comes next?
+
+365
+00:27:53,320 --> 00:27:54,840
+Well, bigger registers,
+
+366
+00:27:55,320 --> 00:27:58,340
+which is exactly the p to the n problem.
+
+367
+00:28:00,820 --> 00:28:05,900
+And I have some references as well and
+
+368
+00:28:07,990 --> 00:28:09,890
+some titles
+
+369
+00:28:11,220 --> 00:28:16,980
+here. So this is a Monte
+Carlo check of p to the n.
+
+370
+00:28:17,060 --> 00:28:21,660
+So each simulated array fills 16
+sites with independent coin flips.
+
+371
+00:28:22,200 --> 00:28:26,040
+And the model in this case
+assumes sites fail independently.
+
+372
+00:28:26,340 --> 00:28:31,580
+So if you have clustered defects, like let's
+say you have a dirty patch, then that would
+
+373
+00:28:31,600 --> 00:28:34,720
+make big arrays fail more
+often than p to the n predicts.
+
+374
+00:28:35,500 --> 00:28:37,960
+So feel free to use that.
+
+375
+00:28:39,180 --> 00:28:40,820
+Thank you very much.
