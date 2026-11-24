@@ -1,0 +1,40 @@
+{
+ "elements": {
+  "junction (rail)": 2172,
+  "capacitor (node shunt)": 2172,
+  "inductor (rail, granular Al)": 2166,
+  "injector junction": 4,
+  "injector pulse source": 4,
+  "catcher loop inductor": 4,
+  "accelerator bias source": 160,
+  "inductor (shared coupler strip)": 540,
+  "capacitor (coupler)": 540,
+  "junction (BS middle rail)": 160
+ },
+ "total_elements": 7922,
+ "cells_per_row": 362,
+ "rows": [
+  "D_A",
+  "A0",
+  "A1",
+  "B1",
+  "B0",
+  "D_B"
+ ],
+ "junction_model_rail": {
+  "Ic_nA": 80.53418149004195,
+  "Cj_fF": 1.92,
+  "shunt_fF": 0.5012786655823903
+ },
+ "source": "results/C_gate.json optimum_validation (2D-calibrated)",
+ "parse": {
+  "kinds": {
+   "B": 2336,
+   "C": 2712,
+   "L": 2721,
+   "I": 164
+  },
+  "nodes": 2877,
+  "isolated_nodes": 0
+ }
+}

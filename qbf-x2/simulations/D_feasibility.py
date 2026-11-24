@@ -61,23 +61,43 @@ n = np.arange(N)
 from hardware.params import CouplerParams
 env = np.array(CouplerParams(n_plateau=720, n_taper=40).envelope(N, 300))
 energy = []
+
+
+def flight(beta, alpha, cfg, coupled):
+    """cfg '11', '10', '01'; returns (kinetic in, kinetic out, dissipated) measured on the lattice, in E_J."""
+    cps = [Coupler(0, 1, arch.k, arch.c, env)] if coupled else []
+    sim = MultiRailSG(N, 2, Lam, alpha=alpha, couplers=cps)
+    v = beta * Lam
+    phi, dphi = np.zeros((N, 2)), np.zeros((N, 2))
+    if cfg[0] == "1":
+        phi[:, 0], dphi[:, 0] = kink(n, 250.0, Lam, v=v)
+    if cfg[1] == "1":
+        phi[:, 1], dphi[:, 1] = kink(n, 1150.0, Lam, v=-v)
+    nk = cfg.count("1")
+    e0 = sim.energy(phi, dphi)
+    pT, dT, _ = sim.run(phi, dphi, t_end=880 / v, dt=0.05)
+    ed = sim.energy_density(pT, dT)
+    ek = 0.0
+    for r_ in range(2):
+        if cfg[r_] == "1":
+            x = kink_centres(pT[:, r_])[0]
+            ek += ed[int(x) - 20:int(x) + 21, r_].sum()
+    return e0 - nk * E0, ek - nk * E0, e0 - sim.energy(pT, dT)
+
+
 for beta in (0.30, arch.beta):
     for alpha in (0.0, 1e-6, 1e-5, 1e-4):
-        sim = MultiRailSG(N, 2, Lam, alpha=alpha, couplers=[Coupler(0, 1, arch.k, arch.c, env)])
-        v = beta * Lam
-        phi, dphi = np.zeros((N, 2)), np.zeros((N, 2))
-        phi[:, 0], dphi[:, 0] = kink(n, 250.0, Lam, v=v)
-        phi[:, 1], dphi[:, 1] = kink(n, 1150.0, Lam, v=-v)
-        e0 = sim.energy(phi, dphi)
-        pT, dT, _ = sim.run(phi, dphi, t_end=880 / v, dt=0.05)
-        ed = sim.energy_density(pT, dT)
-        xa, xb = kink_centres(pT[:, 0])[0], kink_centres(pT[:, 1])[0]
-        ek = ed[int(xa) - 20:int(xa) + 21, 0].sum() + ed[int(xb) - 20:int(xb) + 21, 1].sum()
-        e1 = sim.energy(pT, dT)
-        ke0 = 2 * E0 * (1 / math.sqrt(1 - beta ** 2) - 1)
-        energy.append(dict(beta=beta, alpha=alpha, E_in_EJ=e0, kinetic_in_EJ=ke0, kinetic_out_EJ=ek - 2 * E0,
-                           radiated_EJ=e1 - ek, dissipated_EJ=e0 - e1, retention_of_KE=(ek - 2 * E0) / ke0))
-        print("energy", {k: round(vv, 6) for k, vv in energy[-1].items()})
+        kin_f, kout_f, _ = flight(beta, alpha, "11", False)              # free rails: launch transient + damping
+        kin1, kout1, _ = flight(beta, alpha, "10", True)                 # single fluxons through the couplers
+        kin2, kout2, _ = flight(beta, alpha, "01", True)
+        kin, kout, diss = flight(beta, alpha, "11", True)                # the gate
+        f_free = kout_f / kin_f
+        traversal = (kout_f - (kout1 + kout2)) / kin_f                   # extra loss from passing the couplers
+        collision = ((kout1 + kout2) - kout) / kin                       # loss caused by the collision itself
+        energy.append(dict(beta=beta, alpha=alpha, kinetic_in_EJ=kin, kinetic_out_EJ=kout, dissipated_EJ=diss,
+                           launch_and_flight_loss=1 - f_free, coupler_traversal_loss=traversal, collision_loss=collision,
+                           gate_retention=1 - traversal - collision, retention_of_KE_absolute=kout / kin))
+        print("energy", {k: round(v_, 6) for k, v_ in energy[-1].items()})
 res["energy_retention"] = energy
 EJ_J = arch.rail.EJ_GHz * 1e9 * H
 try:
@@ -88,21 +108,24 @@ except Exception:
 fig, ax = plt.subplots(1, 3, figsize=(13.5, 3.9))
 for beta, col in ((0.30, C_SIM), (arch.beta, C_MIX)):
     pts = [e for e in energy if e["beta"] == beta]
-    ax[0].semilogx([max(e["alpha"], 1e-7) for e in pts], [e["retention_of_KE"] for e in pts], "o-", color=col, label=f"beta = {beta:.2f}")
-ax[0].set(xlabel="sub-gap damping alpha (alpha = 0 plotted at 1e-7)", ylabel="kinetic energy retained after the gate",
+    ax[0].semilogx([max(e["alpha"], 1e-7) for e in pts], [e["gate_retention"] for e in pts], "o-", color=col, label=f"gate (couplers + collision), beta = {beta:.2f}")
+    ax[0].semilogx([max(e["alpha"], 1e-7) for e in pts], [e["retention_of_KE_absolute"] for e in pts], "s:", color=col, alpha=0.6, label=f"whole flight incl. launch transient + damping")
+ax[0].set(xlabel="sub-gap damping alpha (alpha = 0 plotted at 1e-7)", ylabel="kinetic energy retained",
           title="(a) Energy retention through the collision gate")
 ax[0].legend(fontsize=8)
 pts = [e for e in energy if e["beta"] == arch.beta]
-lab = ["radiated", "dissipated", "kinetic out"]
+lab = ["launch transient + damping", "coupler traversal", "collision"]
 for i, e in enumerate(pts):
-    vals = [max(e["radiated_EJ"], 0), max(e["dissipated_EJ"], 0), e["kinetic_out_EJ"]]
+    vals = [max(e["launch_and_flight_loss"], 0), max(e["coupler_traversal_loss"], 0), max(e["collision_loss"], 0)]
     bottom = 0
-    for j, (vv, c_) in enumerate(zip(vals, (C_IND, "#7c3aed", C_MIX))):
-        ax[1].bar(i, vv / e["kinetic_in_EJ"], bottom=bottom, color=c_, label=lab[j] if i == 0 else None)
-        bottom += vv / e["kinetic_in_EJ"]
+    for j, (vv, c_) in enumerate(zip(vals, (C_TH, C_IND, "#7c3aed"))):
+        ax[1].bar(i, vv, bottom=bottom, color=c_, label=lab[j] if i == 0 else None)
+        bottom += vv
+ax[1].set_yscale("log")
+ax[1].set_ylim(1e-6, 1)
 ax[1].set_xticks(range(len(pts)))
 ax[1].set_xticklabels([f"alpha {e['alpha']:.0e}" for e in pts], fontsize=8)
-ax[1].set(ylabel="fraction of incoming kinetic energy", title=f"(b) Where the energy goes (beta = {arch.beta:.2f})")
+ax[1].set(ylabel="fraction of kinetic energy lost", title=f"(b) Where the kinetic energy goes (beta = {arch.beta:.2f})")
 ax[1].legend(fontsize=8)
 if per_op:
     names = list(per_op.keys())
@@ -141,8 +164,10 @@ checks = [
      f"{nsum['total_elements']} elements, {nsum['parse']['nodes']} nodes, isolated {nsum['parse']['isolated_nodes']}"),
     ("flight time << coherence times reported for vortex qubits (us range)", flight_ns < 50,
      f"{flight_ns:.2f} ns per pass"),
-    ("energy: kinetic energy retained through the gate > 99.9 % without damping", min(e["retention_of_KE"] for e in energy if e["alpha"] == 0) > 0.999,
-     ", ".join(f"beta {e['beta']:.2f}: {e['retention_of_KE']:.5f}" for e in energy if e["alpha"] == 0)),
+    ("energy: kinetic energy retained through the gate (couplers + collision) > 99.9 % without damping",
+     min(e["gate_retention"] for e in energy if e["alpha"] == 0) > 0.999,
+     ", ".join(f"beta {e['beta']:.2f}: gate {e['gate_retention']:.5f} (whole flight incl. launch transient {e['retention_of_KE_absolute']:.5f})"
+               for e in energy if e["alpha"] == 0)),
     ("error budget at the optimum < 1 % with 2 % junction disorder, 20 mK launch, 10 ps jitter (realistic assumptions)",
      bud["total"] < 0.01, f"total {bud['total']:.4f}: " + ", ".join(f"{k} {v:.1e}" for k, v in bud["parts"].items())),
     ("coherent single-fluxon launcher derived (timing <= 10 ps, thermal-limited speed spread)", False,

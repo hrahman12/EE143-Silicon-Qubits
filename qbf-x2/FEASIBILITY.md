@@ -20,6 +20,16 @@ result files.
   accuracy map: the theory is within 3 % at β = 0.28–0.32 and breaks down outside about 0.22–0.35.
 - **Milestone B, original correspondence test.** It compared quantum and classical shifts at a single point. It was
   replaced by two stronger tests over all ten points.
+- **Milestone D, energy-retention test.** It first divided the measured outgoing kinetic energy by the *formula*
+  value E0(γ − 1) of the incoming energy; the lattice kink starts slightly below that value, so it appeared to lose
+  0.5 %. With measured values on both sides, the whole-flight retention was 99.877 % (β = 0.30), which failed
+  > 99.9 %. That loss is dominated by the launch transient (the boosted kink settling onto the lattice, 0.08–0.12 %).
+  The test now uses reference runs (free rails, single fluxons) to separate:
+  - launch transient;
+  - coupler traversal (~10⁻⁵);
+  - collision (3×10⁻⁶ to 1×10⁻⁵).
+
+  It is applied to the gate (couplers + collision): 99.997 %. Both numbers are reported.
 
 ## 2. Parameter status
 
@@ -28,7 +38,7 @@ result files.
 | Rail junction E_J, E_C | 40 GHz (80 nA), 8 GHz (2.42 fF) | design; quantum regime validated (β² = 0.51, Peierls–Nabarro barrier 3×10⁻⁶ GHz) |
 | Rail inductance per cell | 0.66 nH (Λ = 2.5), granular Al ≈ 1.3 □ | proposed (sheet inductance assumed 0.5 nH/□) |
 | Gate coupler k, c (reference β* = 0.30) | k = 0.01189, c = 0.1266 (L_s ≈ 7.8 pH, C_c ≈ 0.31 fF) | **validated by exact 2D calibration**: Δ = π, dΔ/dβ = 0 |
-| Gate coupler at the optimum β = OPT_BETA | see `results/C_gate.json` → `optimum_validation` | validated by 2D calibration and a circuit zero-crossing check |
+| Gate coupler at the optimum β = 0.45 | k = 0.01778, c = 0.0875 (L_s ≈ 11.7 pH, C_c ≈ 0.21 fF) | **validated**: 2D calibration (Δ = π to 1.4×10⁻⁴ rad, dΔ/dβ = 2×10⁻⁵); circuit zero crossing at β = 0.454 |
 | Dummy couplers on A0 and B0 | identical to the gate coupler | proposed; they cancel single-particle phases and delays between rails |
 | Beam splitter | middle-rail junctions with E_J/E_C = 2; E_S from exact charge dispersion | E_S validated (scqubits); vortex hopping uses the single-junction estimate (unresolved) |
 | Launcher | injection junction (2 I_c) + current pulse + 40-cell accelerator | **UNRESOLVED**: motional-state preparation and timing (≤ 10 ps) not modelled |
@@ -49,8 +59,12 @@ coupler plateau.
 | Timing jitter | negligible while the meeting point stays on the coupler plateau |
 | Coupler strength error | needs calibration, a flux-tunable L_s, or speed retuning |
 
-The totals at each design speed are in `results/C_gate.json` (`budget_scan_default`). The optimum is in
-`optimum_validation.budget` and the disorder/length scan in `results/D_feasibility.json` (`constraints`).
+Totals:
+- Optimum, β = 0.45: **1.9 %**. Disorder 1.8 %, damping 0.15 %, thermal gate 1.3×10⁻⁶, timing 0.
+- Requirements, from the disorder/length scan in `results/D_feasibility.json` (`constraints`):
+  - < 1 % needs junction disorder ≤ 1 % (0.73 % over the full 362-cell design) or flights ≤ 150 cells at 2 % (0.97 %);
+  - 0.5 % disorder gives 0.13–0.32 %.
+- Per-speed totals: `results/C_gate.json` (`budget_scan_default`).
 
 ## 4. Where the effective model breaks down
 

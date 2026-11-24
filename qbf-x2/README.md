@@ -45,14 +45,16 @@ both per cell.
 | **A** Classical ballistic physics | **PASS** | Energy conserved to 1.2×10⁻⁶. Exact sine-Gordon kink–antikink shift reproduced within 3.5 % (Λ = 10). Topological charge conserved. Collision radiation ≤ 2.2×10⁻⁴ of the kinetic energy. Conditional delay crosses zero at β = 0.302. |
 | **B** Quantum ballistic physics | **PASS** | Norm conserved to 3×10⁻⁸. Phase converged to 7×10⁻⁴ rad (time step, momentum cut-off, domain, Taylor order). Reflection 7×10⁻⁸. Derived interaction within 0.8 % of a constrained relaxation of the full circuit. Quantum vs classical sweet spot 0.293 vs 0.302. |
 | **C** Genuine quantum gate | **PASS** | From \|+⟩\|+⟩, exact 2D scattering gives concurrence **1.000**, Bell fidelity **0.999999**, CZ process fidelity **0.999999** and Δ = π (error 0.0017 rad). Motional (position–position) purity 0.999999, so the entanglement is logical, not motional. Thermal launch at 20 mK: gate error 1.2×10⁻⁵ at the sweet spot vs 3.8×10⁻³ with an inductive-only coupler. |
-| **D** Device feasibility | **NOT MET** | Preliminary netlist, layout and schematic exist; flight time is ns, coherence μs. Not met: realistic error budget at the optimum ≈ OPT_TOTAL (2 % junction disorder dominates); coherent single-fluxon launcher unresolved; layout not DRC/EM verified. |
+| **D** Device feasibility | **NOT MET** | Preliminary netlist, layout and schematic exist; flight time is ns, coherence μs. Not met: realistic error budget at the optimum β = 0.45 is 1.9 % for a 300-cell flight (2 % junction disorder dominates); coherent single-fluxon launcher unresolved; layout not DRC/EM verified. |
 
 **Why D is not met.** Fabrication disorder, not the collision, limits the device.
 - Each rail of a qubit accumulates a different random phase from junction disorder. The static part can be
   calibrated, but it scales ∝ 1/v, so the thermal launch-speed spread turns it into dephasing.
 - Faster fluxons help a lot: the error falls roughly ∝ β⁻⁴. The optimiser (restricted to β ≤ 0.45, where the
-  effective model is validated) picks β = OPT_BETA.
-- A sub-1 % gate still needs junction disorder at or below about 1 % and short flights (`results/D_feasibility.json`).
+  effective model is validated) picks β = 0.45. It was validated there by a circuit zero-crossing check (0.454) and
+  an exact 2D calibration: Δ = π to 1.4×10⁻⁴ rad, CZ fidelity 1.000000.
+- A sub-1 % gate needs either junction disorder ≤ 1 % (0.73 % over the full 362-cell rows) or flights ≤ 150 cells at
+  2 % disorder (0.97 %). At 0.5 % disorder the total is 0.13–0.32 % (`results/D_feasibility.json`).
 
 ### Five companion devices (same codebase, one executed simulation each)
 
@@ -61,8 +63,8 @@ both per cell.
 | 1 | Two-vortex Bell-pair chip (QFX-1 qubits, `../quantum_chip`) | Bell fidelity 0.9956 (T1 = 20 µs), 0.9976 (100 µs). Frequency-staggered double sweet spots; 6.6 ns exchange pulse | Works in simulation; no addressable entangled two-vortex processor was found in the literature |
 | 2 | Coherent ballistic fluxon router | A fluxon is split, carried on two rails and recombined. Fringe contrast 0.9965 for a thermal launch at 20 mK, 0.993 with 0.01e charge noise. Exit rail set by a gate voltage | Works in simulation; needs charge-stable beam-splitter islands |
 | 3 | Reusable fluxon (mediator) gate | Conditional phase ≤ 0.077 rad and concurrence ≤ 0.04, even with overlapping couplers | **Negative result**: needs a coupling nonlinear in the qubit operators, or a mediator that is itself a qubit (as in QBF-X2) |
-| 4 | Reversible quantum-fluxon logic cell | Kinetic energy retained through the gate > 99.99 %; regenerative braking returns 99.1–99.4 % of it to the bias supply (98.7 % at alpha = 1e-5); ~10⁻²¹ J per CZ on chip (estimate) | Recovery simulated, not measured; no thermodynamic advantage claimed |
-| 5 | Fluxon QEC module | One syndrome-extraction cycle of a 3-qubit phase-flip code (density matrix) with the QBF-X2 gate error | Beats an unencoded qubit only when memory error ≫ CZ error; full module not attempted |
+| 4 | Reversible quantum-fluxon logic cell | Kinetic energy retained through the gate 99.997 % (couplers + collision); regenerative braking returns 99.1–99.4 % of it to the bias supply (98.7 % at alpha = 1e-5); ~10⁻²¹ J per CZ on chip (estimate) | Recovery simulated, not measured; no thermodynamic advantage claimed |
+| 5 | Fluxon QEC module | One syndrome-extraction cycle of a 3-qubit phase-flip code (density matrix). With a 10⁻³ CZ error it beats an unencoded qubit for memory errors of 1–10 % per cycle. With the 1.9 % budget error it never breaks even | Needs a gate error of about 10⁻³; full module not attempted |
 
 ## Figures
 

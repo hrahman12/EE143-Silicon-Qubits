@@ -1,0 +1,562 @@
+{
+ "architecture": {
+  "beta": 0.45,
+  "k": 0.017778396467183658,
+  "c": 0.08746682084948028,
+  "E_S_GHz": 1.095025074091242,
+  "n_bs": 41,
+  "n_cells_per_row": 362,
+  "length_um": 724.0,
+  "rows": [
+   "D_A",
+   "A0",
+   "A1",
+   "B1",
+   "B0",
+   "D_B"
+  ],
+  "sections": [
+   {
+    "name": "inject",
+    "start": 0,
+    "cells": 10
+   },
+   {
+    "name": "accelerate",
+    "start": 10,
+    "cells": 40
+   },
+   {
+    "name": "BS_prep",
+    "start": 50,
+    "cells": 41
+   },
+   {
+    "name": "gap",
+    "start": 91,
+    "cells": 20
+   },
+   {
+    "name": "taper_in",
+    "start": 111,
+    "cells": 40
+   },
+   {
+    "name": "coupler",
+    "start": 151,
+    "cells": 100
+   },
+   {
+    "name": "taper_out",
+    "start": 251,
+    "cells": 40
+   },
+   {
+    "name": "gap",
+    "start": 291,
+    "cells": 20
+   },
+   {
+    "name": "BS_analysis",
+    "start": 311,
+    "cells": 41
+   },
+   {
+    "name": "detect",
+    "start": 352,
+    "cells": 10
+   }
+  ],
+  "elements": {
+   "rail_junction": {
+    "EJ_GHz": 40.0,
+    "Ic_nA": 80.53418149004195,
+    "area_um2": 0.048368877771796964,
+    "C_fF": 2.4212786655823906,
+    "C_from_area_fF": 2.4184438885898483,
+    "status": "validated by simulation (design point)"
+   },
+   "rail_inductor": {
+    "L_nH": 0.6538460512271247,
+    "squares_grAl": 1.3076921024542494,
+    "status": "proposed (granular Al)"
+   },
+   "coupler_shared_inductor": {
+    "L_s_pH": 11.624334327218298,
+    "k": 0.017778396467183658,
+    "status": "validated value; geometry proposed"
+   },
+   "coupler_capacitor": {
+    "C_c_fF": 0.2117815472691636,
+    "c": 0.08746682084948028,
+    "status": "validated value; geometry proposed"
+   },
+   "compensated_series_L_nH": 0.6422217168999064,
+   "compensated_node_C_fF": 2.2094971183132266,
+   "middle_rail_junction": {
+    "EJ_GHz": 25.3,
+    "EC_GHz": 12.7,
+    "area_um2": 0.030593315190661583,
+    "E_S_GHz": 1.095025074091242,
+    "status": "E_S from exact charge dispersion (scqubits); vortex hopping = single-junction estimate"
+   },
+   "injection_junction": {
+    "Ic_nA": 161.0683629800839,
+    "area_um2": 0.09673775554359393,
+    "status": "UNRESOLVED: coherent single-fluxon launcher"
+   },
+   "detector": {
+    "kind": "fluxon catcher loop + dispersive lambda/4 readout (QFX-1 heritage)",
+    "status": "proposed"
+   }
+  },
+  "source": "results/C_gate.json optimum_validation (2D-calibrated)"
+ },
+ "netlist": {
+  "elements": {
+   "junction (rail)": 2172,
+   "capacitor (node shunt)": 2172,
+   "inductor (rail, granular Al)": 2166,
+   "injector junction": 4,
+   "injector pulse source": 4,
+   "catcher loop inductor": 4,
+   "accelerator bias source": 160,
+   "inductor (shared coupler strip)": 540,
+   "capacitor (coupler)": 540,
+   "junction (BS middle rail)": 160
+  },
+  "total_elements": 7922,
+  "cells_per_row": 362,
+  "rows": [
+   "D_A",
+   "A0",
+   "A1",
+   "B1",
+   "B0",
+   "D_B"
+  ],
+  "junction_model_rail": {
+   "Ic_nA": 80.53418149004195,
+   "Cj_fF": 1.92,
+   "shunt_fF": 0.5012786655823903
+  },
+  "source": "results/C_gate.json optimum_validation (2D-calibrated)",
+  "parse": {
+   "kinds": {
+    "B": 2336,
+    "C": 2712,
+    "L": 2721,
+    "I": 164
+   },
+   "nodes": 2877,
+   "isolated_nodes": 0
+  }
+ },
+ "layout": {
+  "width_um": 844.0,
+  "height_um": 182.0,
+  "rows": 6,
+  "row_opening_um": 8.0,
+  "strip_um": 2.0,
+  "pitch_um": 2.0,
+  "cells_per_row": 362,
+  "junction_overlap_um": [
+   0.2,
+   0.2418
+  ],
+  "junction_area_um2": 0.0484,
+  "coupler_span_um": 360.0,
+  "bs_length_um": 82.0,
+  "status": "PRELIMINARY - not fabrication-ready"
+ },
+ "energy_retention": [
+  {
+   "beta": 0.3,
+   "alpha": 0.0,
+   "kinetic_in_EJ": 1.9196847352007893,
+   "kinetic_out_EJ": 1.9173157685146407,
+   "dissipated_EJ": 2.391029255477406e-06,
+   "launch_and_flight_loss": 0.001216313497158672,
+   "coupler_traversal_loss": 6.296236496408796e-06,
+   "collision_loss": 1.1429711837977814e-05,
+   "gate_retention": 0.9999822740516656,
+   "retention_of_KE_absolute": 0.998765960554507
+  },
+  {
+   "beta": 0.3,
+   "alpha": 1e-06,
+   "kinetic_in_EJ": 1.9196847352007893,
+   "kinetic_out_EJ": 1.912929863930266,
+   "dissipated_EJ": 0.004389652363514074,
+   "launch_and_flight_loss": 0.003502208398004858,
+   "coupler_traversal_loss": 1.4870536040986378e-06,
+   "collision_loss": 1.5044447011263029e-05,
+   "gate_retention": 0.9999834684993846,
+   "retention_of_KE_absolute": 0.9964812601013798
+  },
+  {
+   "beta": 0.3,
+   "alpha": 1e-05,
+   "kinetic_in_EJ": 1.9196847352007893,
+   "kinetic_out_EJ": 1.8739076981184581,
+   "dissipated_EJ": 0.04343577924426967,
+   "launch_and_flight_loss": 0.023849266397099167,
+   "coupler_traversal_loss": -4.491798783321984e-05,
+   "collision_loss": 4.177394766526928e-05,
+   "gate_retention": 1.000003144040168,
+   "retention_of_KE_absolute": 0.9761538776430687
+  },
+  {
+   "beta": 0.3,
+   "alpha": 0.0001,
+   "kinetic_in_EJ": 1.9196847352007893,
+   "kinetic_out_EJ": 1.524483561226198,
+   "dissipated_EJ": 0.3933634773214152,
+   "launch_and_flight_loss": 0.20623120068220102,
+   "coupler_traversal_loss": -0.0006366313208171785,
+   "collision_loss": 0.0002731789870214991,
+   "gate_retention": 1.0003634523337959,
+   "retention_of_KE_absolute": 0.7941322516515946
+  },
+  {
+   "beta": 0.45,
+   "alpha": 0.0,
+   "kinetic_in_EJ": 4.757601978832142,
+   "kinetic_out_EJ": 4.753587821828766,
+   "dissipated_EJ": 6.0001112984764404e-06,
+   "launch_and_flight_loss": 0.0008168355528427318,
+   "coupler_traversal_loss": 2.36366640772158e-05,
+   "collision_loss": 3.263139933296311e-06,
+   "gate_retention": 0.9999731001959895,
+   "retention_of_KE_absolute": 0.9991562646431468
+  },
+  {
+   "beta": 0.45,
+   "alpha": 1e-06,
+   "kinetic_in_EJ": 4.757601978832142,
+   "kinetic_out_EJ": 4.746567607575898,
+   "dissipated_EJ": 0.007032391274037764,
+   "launch_and_flight_loss": 0.002293730402649241,
+   "coupler_traversal_loss": 2.213535716233342e-05,
+   "collision_loss": 3.447899746141403e-06,
+   "gate_retention": 0.9999744167430915,
+   "retention_of_KE_absolute": 0.9976806863404424
+  },
+  {
+   "beta": 0.45,
+   "alpha": 1e-05,
+   "kinetic_in_EJ": 4.757601978832142,
+   "kinetic_out_EJ": 4.683811354546734,
+   "dissipated_EJ": 0.06982896414247364,
+   "launch_and_flight_loss": 0.01549378986691441,
+   "coupler_traversal_loss": 6.8352762874360895e-06,
+   "collision_loss": 9.420592805969277e-06,
+   "gate_retention": 0.9999837441309066,
+   "retention_of_KE_absolute": 0.9844899542639921
+  },
+  {
+   "beta": 0.45,
+   "alpha": 0.0001,
+   "kinetic_in_EJ": 4.757601978832142,
+   "kinetic_out_EJ": 4.098077847779635,
+   "dissipated_EJ": 0.6558588341469971,
+   "launch_and_flight_loss": 0.13867274900448967,
+   "coupler_traversal_loss": -0.00013353478114025755,
+   "collision_loss": 8.61129870620749e-05,
+   "gate_retention": 1.000047421794078,
+   "retention_of_KE_absolute": 0.8613746727895885
+  }
+ ],
+ "constraints": {
+  "flight_time_ns": 1.0121763767680165,
+  "cells_per_row": 362,
+  "speed_cells_per_ns": 357.6451775686598,
+  "budget_at_optimum": {
+   "beta": 0.45,
+   "k": 0.01811257230155948,
+   "c": 0.08947415485242141,
+   "parts": {
+    "gate_thermal": 1.2582600110722097e-06,
+    "disorder_dephasing": 0.017601759910834125,
+    "damping": 0.0015290114554140644,
+    "timing": 0.0,
+    "coupler": 0.0
+   },
+   "total": 0.01913202962625926,
+   "phi01_rms_rad": 4.992245234474479,
+   "p_dephase_disorder": 0.02212457408313262,
+   "p_dephase_damping": 0.00191217842585058,
+   "thermal_overlap": {
+    "re": -0.9999958057999634,
+    "im": -2.662495875947586e-06,
+    "abs": 0.9999958058035079,
+    "arg": -3.1415899910827503
+   },
+   "velocity_spread_rel": 0.04285065682388046,
+   "v_cells_per_ns": 357.6451775686598
+  },
+  "disorder_length_scan": [
+   {
+    "sigma": 0.005,
+    "n_cells": 150,
+    "total": 0.0013372593349919581,
+    "parts": {
+     "gate_thermal": 1.2582600110722097e-06,
+     "disorder_dephasing": 0.0005713125259572127,
+     "damping": 0.0007646885490236732,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "sigma": 0.005,
+    "n_cells": 300,
+    "total": 0.00267146888535863,
+    "parts": {
+     "gate_thermal": 1.2582600110722097e-06,
+     "disorder_dephasing": 0.0011411991699334934,
+     "damping": 0.0015290114554140644,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "sigma": 0.005,
+    "n_cells": 362,
+    "total": 0.003222420211952959,
+    "parts": {
+     "gate_thermal": 1.2582600110722097e-06,
+     "disorder_dephasing": 0.0013763371620368892,
+     "damping": 0.0018448247899049974,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "sigma": 0.01,
+    "n_cells": 150,
+    "total": 0.0030426642171749174,
+    "parts": {
+     "gate_thermal": 1.2582600110722097e-06,
+     "disorder_dephasing": 0.002276717408140172,
+     "damping": 0.0007646885490236732,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "sigma": 0.01,
+    "n_cells": 300,
+    "total": 0.006061159870799915,
+    "parts": {
+     "gate_thermal": 1.2582600110722097e-06,
+     "disorder_dephasing": 0.004530890155374778,
+     "damping": 0.0015290114554140644,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "sigma": 0.01,
+    "n_cells": 362,
+    "total": 0.007302196180893561,
+    "parts": {
+     "gate_thermal": 1.2582600110722097e-06,
+     "disorder_dephasing": 0.005456113130977491,
+     "damping": 0.0018448247899049974,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "sigma": 0.02,
+    "n_cells": 150,
+    "total": 0.00973895429864824,
+    "parts": {
+     "gate_thermal": 1.2582600110722097e-06,
+     "disorder_dephasing": 0.008973007489613494,
+     "damping": 0.0007646885490236732,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "sigma": 0.02,
+    "n_cells": 300,
+    "total": 0.01913202962625926,
+    "parts": {
+     "gate_thermal": 1.2582600110722097e-06,
+     "disorder_dephasing": 0.017601759910834125,
+     "damping": 0.0015290114554140644,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "sigma": 0.02,
+    "n_cells": 362,
+    "total": 0.02291873194092331,
+    "parts": {
+     "gate_thermal": 1.2582600110722097e-06,
+     "disorder_dephasing": 0.02107264889100724,
+     "damping": 0.0018448247899049974,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   }
+  ],
+  "required_for_99pct": [
+   {
+    "sigma": 0.005,
+    "n_cells": 150,
+    "total": 0.0013372593349919581,
+    "parts": {
+     "gate_thermal": 1.2582600110722097e-06,
+     "disorder_dephasing": 0.0005713125259572127,
+     "damping": 0.0007646885490236732,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "sigma": 0.005,
+    "n_cells": 300,
+    "total": 0.00267146888535863,
+    "parts": {
+     "gate_thermal": 1.2582600110722097e-06,
+     "disorder_dephasing": 0.0011411991699334934,
+     "damping": 0.0015290114554140644,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "sigma": 0.005,
+    "n_cells": 362,
+    "total": 0.003222420211952959,
+    "parts": {
+     "gate_thermal": 1.2582600110722097e-06,
+     "disorder_dephasing": 0.0013763371620368892,
+     "damping": 0.0018448247899049974,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "sigma": 0.01,
+    "n_cells": 150,
+    "total": 0.0030426642171749174,
+    "parts": {
+     "gate_thermal": 1.2582600110722097e-06,
+     "disorder_dephasing": 0.002276717408140172,
+     "damping": 0.0007646885490236732,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "sigma": 0.01,
+    "n_cells": 300,
+    "total": 0.006061159870799915,
+    "parts": {
+     "gate_thermal": 1.2582600110722097e-06,
+     "disorder_dephasing": 0.004530890155374778,
+     "damping": 0.0015290114554140644,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "sigma": 0.01,
+    "n_cells": 362,
+    "total": 0.007302196180893561,
+    "parts": {
+     "gate_thermal": 1.2582600110722097e-06,
+     "disorder_dephasing": 0.005456113130977491,
+     "damping": 0.0018448247899049974,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "sigma": 0.02,
+    "n_cells": 150,
+    "total": 0.00973895429864824,
+    "parts": {
+     "gate_thermal": 1.2582600110722097e-06,
+     "disorder_dephasing": 0.008973007489613494,
+     "damping": 0.0007646885490236732,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   }
+  ]
+ },
+ "milestone_D": {
+  "milestone": "D (device feasibility)",
+  "passed": false,
+  "checks": [
+   {
+    "check": "circuit parameters inside demonstrated fabrication ranges (junction >= 0.01 um^2, C_c >= 0.1 fF, L_s >= 1 pH, granular Al >= 1 square)",
+    "passed": true,
+    "detail": "rail JJ 0.048 um^2, middle JJ 0.031 um^2, C_c 0.21 fF, L_s 11.6 pH, grAl 1.31 sq"
+   },
+   {
+    "check": "complete netlist with no floating nodes; every logical row has an injector and a catcher",
+    "passed": true,
+    "detail": "7922 elements, 2877 nodes, isolated 0"
+   },
+   {
+    "check": "flight time << coherence times reported for vortex qubits (us range)",
+    "passed": true,
+    "detail": "1.01 ns per pass"
+   },
+   {
+    "check": "energy: kinetic energy retained through the gate (couplers + collision) > 99.9 % without damping",
+    "passed": true,
+    "detail": "beta 0.30: gate 0.99998 (whole flight incl. launch transient 0.99877), beta 0.45: gate 0.99997 (whole flight incl. launch transient 0.99916)"
+   },
+   {
+    "check": "error budget at the optimum < 1 % with 2 % junction disorder, 20 mK launch, 10 ps jitter (realistic assumptions)",
+    "passed": false,
+    "detail": "total 0.0191: gate_thermal 1.3e-06, disorder_dephasing 1.8e-02, damping 1.5e-03, timing 0.0e+00, coupler 0.0e+00"
+   },
+   {
+    "check": "coherent single-fluxon launcher derived (timing <= 10 ps, thermal-limited speed spread)",
+    "passed": false,
+    "detail": "UNRESOLVED: injector pulse + accelerator proposed, motional-state preparation not modelled"
+   },
+   {
+    "check": "layout verified (DRC, EM extraction of k, c, E_S)",
+    "passed": false,
+    "detail": "NOT DONE: preliminary layout only"
+   }
+  ]
+ },
+ "parameter_status": {
+  "validated_by_simulation": [
+   "rail E_J, E_C, Lambda (quantum fluxon regime)",
+   "coupler k = 0.01778, c = 0.0875 at beta = 0.45 (2D calibrated)",
+   "conditional phase pi, sweet spot, reflection < 1e-6",
+   "energy retention through the gate"
+  ],
+  "proposed": [
+   "granular-Al rail inductors 0.66 nH/cell",
+   "thin-Al shared strip",
+   "crossover coupling capacitors",
+   "middle-rail junctions E_J/E_C = 2",
+   "catcher loops with dispersive readout",
+   "dummy couplers"
+  ],
+  "unknown_or_unresolved": [
+   "coherent single-fluxon launcher (motional state, timing)",
+   "junction disorder below 1 %",
+   "charge stability of beam-splitter islands",
+   "quasiparticle and dielectric damping alpha at 20 mK",
+   "EM-extracted k, c, E_S of the drawn geometry",
+   "vortex hopping beyond the single-junction phase-slip estimate"
+  ]
+ },
+ "runtime_s": 66.59254264831543,
+ "_generated": "2026-11-24 12:54:32"
+}

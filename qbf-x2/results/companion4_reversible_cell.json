@@ -113,5 +113,5 @@
   "notes": "estimates; control electronics, refrigeration and amplifiers excluded for every entry"
  },
  "verdict": "Simulated, not measured: a collision CZ whose fluxons keep >99.99 % of their kinetic energy through the gate, and a braking section that returns most of that kinetic energy to the bias supply. The per-gate on-chip energy (~1e-21 J with dispersive readout) is set by creating and destroying two fluxons; recycling the rest energy needs fluxon storage and re-launch, not demonstrated here. Unitarity alone is not a thermodynamic advantage: measurement, reset and control dominate any real energy budget.",
- "_generated": "2026-11-24 12:37:19"
+ "_generated": "2026-11-24 12:55:00"
 }
