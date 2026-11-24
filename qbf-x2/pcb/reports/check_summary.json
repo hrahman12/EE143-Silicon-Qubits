@@ -1,0 +1,233 @@
+{
+ "sch_vs_pcb": {
+  "mismatches": 0,
+  "components": 44,
+  "pads": 120,
+  "nets": 35,
+  "passed": true
+ },
+ "erc": {
+  "issues": 0,
+  "passed": true
+ },
+ "impedance": {
+  "z_formula": 51.984361262957776,
+  "z_formula_asbuilt": [
+   52.00047099976886,
+   52.05546183038519
+  ],
+  "z_fieldsolver": 47.66090091576337,
+  "z_fieldsolver_thin_validation": 51.46245887750486,
+  "z_fieldsolver_if_masked": 44.08344583785198,
+  "eeff": 2.6237543288110827,
+  "gap_asbuilt_straight": [
+   0.17049854779257176,
+   0.17050031027970544
+  ],
+  "gap_asbuilt_arcs": [
+   0.17076723629690546,
+   0.17221732543001164
+  ],
+  "in1_coverage_min": 0.9999999999999994,
+  "passed": true
+ },
+ "lengths": {
+  "nets": {
+   "TRAP_A0": 15.6676,
+   "ACC_A0": 13.2652,
+   "ACC_A1": 13.2652,
+   "TRAP_A1": 15.6676,
+   "TRAP_B1": 15.6676,
+   "ACC_B1": 13.2652,
+   "ACC_B0": 13.2652,
+   "TRAP_B0": 15.6676,
+   "RO_IN": 13.7208,
+   "RO_OUT": 13.7208
+  },
+  "ps_per_mm": 5.403073570684167,
+  "pairs": [
+   {
+    "a": "TRAP_A0",
+    "b": "TRAP_B0",
+    "dL": 0.0,
+    "ps": 0.0
+   },
+   {
+    "a": "TRAP_A1",
+    "b": "TRAP_B1",
+    "dL": 0.0,
+    "ps": 0.0
+   },
+   {
+    "a": "ACC_A0",
+    "b": "ACC_B0",
+    "dL": 0.0,
+    "ps": 0.0
+   },
+   {
+    "a": "ACC_A1",
+    "b": "ACC_B1",
+    "dL": 0.0,
+    "ps": 0.0
+   }
+  ],
+  "passed": true
+ },
+ "filters": {
+  "channels": [
+   {
+    "net": "LOAD_A0",
+    "kind": "load",
+    "R1": 1000.0,
+    "C": 1.8e-11,
+    "R2": 1000.0,
+    "f3db_current": 17684864.94907931,
+    "f3db_current_50ohm": 17263796.74349847,
+    "f3db_open": 8841941.28288306,
+    "tau_ns": 8.999500055564807,
+    "atten_1GHz_dB": -35.04949447073471,
+    "topology_ok": true,
+    "passed": true,
+    "limit": "10-20 MHz (current drive), >= 5 MHz open"
+   },
+   {
+    "net": "LOAD_A1",
+    "kind": "load",
+    "R1": 1000.0,
+    "C": 1.8e-11,
+    "R2": 1000.0,
+    "f3db_current": 17684864.94907931,
+    "f3db_current_50ohm": 17263796.74349847,
+    "f3db_open": 8841941.28288306,
+    "tau_ns": 8.999500055564807,
+    "atten_1GHz_dB": -35.04949447073471,
+    "topology_ok": true,
+    "passed": true,
+    "limit": "10-20 MHz (current drive), >= 5 MHz open"
+   },
+   {
+    "net": "GATE_BSB_AN",
+    "kind": "gate",
+    "R1": 10000.0,
+    "C1": 1e-08,
+    "R2": 10000.0,
+    "C2": 1e-08,
+    "f3db": 595.6201131172044,
+    "f3db_50ohm": 593.5244496295668,
+    "f_single": 1591.5494309189535,
+    "atten_1MHz_dB": -111.92727173931195,
+    "topology_ok": true,
+    "passed": true,
+    "limit": "<= 10 kHz"
+   },
+   {
+    "net": "GATE_BSA_PREP",
+    "kind": "gate",
+    "R1": 10000.0,
+    "C1": 1e-08,
+    "R2": 10000.0,
+    "C2": 1e-08,
+    "f3db": 595.6201131172044,
+    "f3db_50ohm": 593.5244496295668,
+    "f_single": 1591.5494309189535,
+    "atten_1MHz_dB": -111.92727173931195,
+    "topology_ok": true,
+    "passed": true,
+    "limit": "<= 10 kHz"
+   },
+   {
+    "net": "GATE_BSA_AN",
+    "kind": "gate",
+    "R1": 10000.0,
+    "C1": 1e-08,
+    "R2": 10000.0,
+    "C2": 1e-08,
+    "f3db": 595.6201131172044,
+    "f3db_50ohm": 593.5244496295668,
+    "f_single": 1591.5494309189535,
+    "atten_1MHz_dB": -111.92727173931195,
+    "topology_ok": true,
+    "passed": true,
+    "limit": "<= 10 kHz"
+   },
+   {
+    "net": "GATE_BSB_PREP",
+    "kind": "gate",
+    "R1": 10000.0,
+    "C1": 1e-08,
+    "R2": 10000.0,
+    "C2": 1e-08,
+    "f3db": 595.6201131172044,
+    "f3db_50ohm": 593.5244496295668,
+    "f_single": 1591.5494309189535,
+    "atten_1MHz_dB": -111.92727173931195,
+    "topology_ok": true,
+    "passed": true,
+    "limit": "<= 10 kHz"
+   },
+   {
+    "net": "LOAD_B0",
+    "kind": "load",
+    "R1": 1000.0,
+    "C": 1.8e-11,
+    "R2": 1000.0,
+    "f3db_current": 17684864.94907931,
+    "f3db_current_50ohm": 17263796.74349847,
+    "f3db_open": 8841941.28288306,
+    "tau_ns": 8.999500055564807,
+    "atten_1GHz_dB": -35.04949447073471,
+    "topology_ok": true,
+    "passed": true,
+    "limit": "10-20 MHz (current drive), >= 5 MHz open"
+   },
+   {
+    "net": "LOAD_B1",
+    "kind": "load",
+    "R1": 1000.0,
+    "C": 1.8e-11,
+    "R2": 1000.0,
+    "f3db_current": 17684864.94907931,
+    "f3db_current_50ohm": 17263796.74349847,
+    "f3db_open": 8841941.28288306,
+    "tau_ns": 8.999500055564807,
+    "atten_1GHz_dB": -35.04949447073471,
+    "topology_ok": true,
+    "passed": true,
+    "limit": "10-20 MHz (current drive), >= 5 MHz open"
+   }
+  ],
+  "passed": true
+ },
+ "drc_selftest": {
+  "results": [
+   {
+    "fault": "F1_rf_width",
+    "detected": true
+   },
+   {
+    "fault": "F2_cpw_gap",
+    "detected": true
+   },
+   {
+    "fault": "F3_skew",
+    "detected": true
+   },
+   {
+    "fault": "F4_via_on_rf",
+    "detected": true
+   },
+   {
+    "fault": "F5_open_dc",
+    "detected": true
+   }
+  ],
+  "passed": true
+ },
+ "drc": {
+  "violations": 0,
+  "unconnected": 0,
+  "footprint_errors": 0,
+  "passed": true
+ },
+ "all_passed": true
+}

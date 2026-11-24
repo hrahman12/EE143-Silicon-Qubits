@@ -1,0 +1,8 @@
+DRC SELF-TEST: one fault injected per copy of the board, KiCad DRC must report it
+(shows that the 0-violation result of reports/drc_report.txt comes from live rules)
+
+F1_rf_width      expect ['RF_GCPW_width']: DETECTED
+F2_cpw_gap       expect ['clearance']: DETECTED
+F3_skew          expect ['TRAP_A_vs_TRAP_B_skew']: DETECTED
+F4_via_on_rf     expect ['RF_no_vias']: DETECTED
+F5_open_dc       expect ['Found 1 unconnected']: DETECTED

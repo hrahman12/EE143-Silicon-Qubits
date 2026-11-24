@@ -1,0 +1,266 @@
+[
+ {
+  "path": "fab/qbfx2_carrier-assembly.pdf",
+  "bytes": 339821
+ },
+ {
+  "path": "fab/qbfx2_carrier-fab_drawing.pdf",
+  "bytes": 377142
+ },
+ {
+  "path": "fab/qbfx2_carrier-schematic.pdf",
+  "bytes": 478089
+ },
+ {
+  "path": "fab/qbfx2_carrier.net",
+  "bytes": 71921
+ },
+ {
+  "path": "fab/qbfx2_carrier.step",
+  "bytes": 3415520
+ },
+ {
+  "path": "fab/qbfx2_carrier_bom.csv",
+  "bytes": 2325
+ },
+ {
+  "path": "fab/previews/_tex_B.png",
+  "bytes": 111109
+ },
+ {
+  "path": "fab/previews/_tex_B_metal.png",
+  "bytes": 31605
+ },
+ {
+  "path": "fab/previews/_tex_F.png",
+  "bytes": 180803
+ },
+ {
+  "path": "fab/previews/_tex_F_metal.png",
+  "bytes": 41940
+ },
+ {
+  "path": "fab/previews/assembly_drawing.png",
+  "bytes": 229478
+ },
+ {
+  "path": "fab/previews/bottom_view_mirrored.png",
+  "bytes": 96491
+ },
+ {
+  "path": "fab/previews/die_area_In2_dc_routing.png",
+  "bytes": 54982
+ },
+ {
+  "path": "fab/previews/die_area_top.png",
+  "bytes": 44753
+ },
+ {
+  "path": "fab/previews/fab_drawing_p1.png",
+  "bytes": 214494
+ },
+ {
+  "path": "fab/previews/layer_B_Cu.png",
+  "bytes": 80584
+ },
+ {
+  "path": "fab/previews/layer_F_Cu.png",
+  "bytes": 119785
+ },
+ {
+  "path": "fab/previews/layer_In1_Cu.png",
+  "bytes": 79621
+ },
+ {
+  "path": "fab/previews/layer_In2_Cu.png",
+  "bytes": 85285
+ },
+ {
+  "path": "fab/previews/layer_In3_Cu.png",
+  "bytes": 76375
+ },
+ {
+  "path": "fab/previews/layer_In4_Cu.png",
+  "bytes": 80384
+ },
+ {
+  "path": "fab/previews/render_3d_die_closeup.png",
+  "bytes": 1980968
+ },
+ {
+  "path": "fab/previews/render_3d_top.png",
+  "bytes": 2556861
+ },
+ {
+  "path": "fab/previews/schematic.png",
+  "bytes": 249340
+ },
+ {
+  "path": "fab/previews/top_view.png",
+  "bytes": 189758
+ },
+ {
+  "path": "fab/assembly/qbfx2_carrier-pos.csv",
+  "bytes": 3137
+ },
+ {
+  "path": "fab/gerbers/qbfx2_carrier-B_Cu.gbl",
+  "bytes": 69095
+ },
+ {
+  "path": "fab/gerbers/qbfx2_carrier-B_Mask.gbs",
+  "bytes": 46745
+ },
+ {
+  "path": "fab/gerbers/qbfx2_carrier-B_Paste.gbp",
+  "bytes": 491
+ },
+ {
+  "path": "fab/gerbers/qbfx2_carrier-B_Silkscreen.gbo",
+  "bytes": 61235
+ },
+ {
+  "path": "fab/gerbers/qbfx2_carrier-Edge_Cuts.gm1",
+  "bytes": 1393
+ },
+ {
+  "path": "fab/gerbers/qbfx2_carrier-F_Cu.gtl",
+  "bytes": 181149
+ },
+ {
+  "path": "fab/gerbers/qbfx2_carrier-F_Mask.gts",
+  "bytes": 228794
+ },
+ {
+  "path": "fab/gerbers/qbfx2_carrier-F_Paste.gtp",
+  "bytes": 4568
+ },
+ {
+  "path": "fab/gerbers/qbfx2_carrier-F_Silkscreen.gto",
+  "bytes": 123631
+ },
+ {
+  "path": "fab/gerbers/qbfx2_carrier-In1_Cu.g2",
+  "bytes": 68868
+ },
+ {
+  "path": "fab/gerbers/qbfx2_carrier-In2_Cu.g3",
+  "bytes": 76550
+ },
+ {
+  "path": "fab/gerbers/qbfx2_carrier-In3_Cu.g4",
+  "bytes": 68868
+ },
+ {
+  "path": "fab/gerbers/qbfx2_carrier-In4_Cu.g5",
+  "bytes": 68868
+ },
+ {
+  "path": "fab/gerbers/qbfx2_carrier-User_Drawings.gbr",
+  "bytes": 1827927
+ },
+ {
+  "path": "fab/gerbers/qbfx2_carrier-job.gbrjob",
+  "bytes": 5321
+ },
+ {
+  "path": "fab/drill/qbfx2_carrier-NPTH-drl_map.pdf",
+  "bytes": 5957
+ },
+ {
+  "path": "fab/drill/qbfx2_carrier-NPTH.drl",
+  "bytes": 382
+ },
+ {
+  "path": "fab/drill/qbfx2_carrier-PTH-drl_map.pdf",
+  "bytes": 26894
+ },
+ {
+  "path": "fab/drill/qbfx2_carrier-PTH.drl",
+  "bytes": 11130
+ },
+ {
+  "path": "reports/bom_intermediate.xml",
+  "bytes": 73090
+ },
+ {
+  "path": "reports/bom_summary.json",
+  "bytes": 3786
+ },
+ {
+  "path": "reports/build.log",
+  "bytes": 6606
+ },
+ {
+  "path": "reports/build_model.json",
+  "bytes": 25347
+ },
+ {
+  "path": "reports/check.log",
+  "bytes": 158
+ },
+ {
+  "path": "reports/check_summary.json",
+  "bytes": 4821
+ },
+ {
+  "path": "reports/drc_report.txt",
+  "bytes": 240
+ },
+ {
+  "path": "reports/drc_selftest.txt",
+  "bytes": 434
+ },
+ {
+  "path": "reports/drc_summary.json",
+  "bytes": 201
+ },
+ {
+  "path": "reports/drill.log",
+  "bytes": 228
+ },
+ {
+  "path": "reports/erc_report.txt",
+  "bytes": 511
+ },
+ {
+  "path": "reports/filter_report.txt",
+  "bytes": 1928
+ },
+ {
+  "path": "reports/finalize.log",
+  "bytes": 268
+ },
+ {
+  "path": "reports/gerbers.log",
+  "bytes": 744
+ },
+ {
+  "path": "reports/impedance_table.txt",
+  "bytes": 2908
+ },
+ {
+  "path": "reports/length_report.txt",
+  "bytes": 1248
+ },
+ {
+  "path": "reports/outputs_manifest.json",
+  "bytes": 4349
+ },
+ {
+  "path": "reports/pos.log",
+  "bytes": 14
+ },
+ {
+  "path": "reports/sch_netlist.net",
+  "bytes": 71921
+ },
+ {
+  "path": "reports/sch_vs_pcb.txt",
+  "bytes": 382
+ },
+ {
+  "path": "reports/step.log",
+  "bytes": 1102
+ }
+]

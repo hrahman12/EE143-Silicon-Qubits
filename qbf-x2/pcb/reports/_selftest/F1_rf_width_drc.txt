@@ -1,0 +1,17 @@
+** Drc report for /home/user/EE143-Silicon-Qubits/qbf-x2/pcb/reports/_selftest/F1_rf_width.kicad_pcb **
+** Created on 2026-11-24 22:54:26 **
+
+** Found 2 DRC violations **
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(78.0142 mm, 126.5550 mm): Polygon on F.Mask
+    @(77.3071 mm, 125.9071 mm): Track [TRAP_A0] on F.Cu, length 11.4752 mm
+[track_width]: Track width (rule RF_GCPW_width min width 0.3800 mm; actual 0.3000 mm)
+    Rule: RF_GCPW_width; Severity: error
+    @(77.3071 mm, 125.9071 mm): Track [TRAP_A0] on F.Cu, length 11.4752 mm
+
+** Found 0 unconnected pads **
+
+** Found 0 Footprint errors **
+
+** End of Report **

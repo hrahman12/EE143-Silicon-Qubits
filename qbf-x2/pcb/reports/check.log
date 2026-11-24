@@ -1,0 +1,8 @@
+sch_vs_pcb     PASS
+erc            PASS
+impedance      PASS
+lengths        PASS
+filters        PASS
+drc_selftest   PASS
+drc            PASS
+ALL CHECKS PASSED

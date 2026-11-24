@@ -1,0 +1,110 @@
+{
+ "rows": [
+  {
+   "Qty": 4,
+   "References": "C1 C2 C11 C12",
+   "Value": "18p C0G",
+   "Description": "MLCC 18 pF 5 % 50 V C0G (NP0) 0603, VJ Non-Magnetic series (termination C = Cu barrier)",
+   "Footprint": "qbfx2:C_0603_1608Metric",
+   "Manufacturer": "Vishay Vitramon",
+   "MPN": "VJ0603A180JCAAJ",
+   "MPN_status": "to confirm",
+   "Fitted": "SMT reflow (PCBA)",
+   "Note": "code built from the VJ Non-Magnetic ordering scheme, not seen listed (W1BC parts have Ni barrier)"
+  },
+  {
+   "Qty": 8,
+   "References": "C3 C4 C5 C6 C7 C8 C9 C10",
+   "Value": "10n C0G",
+   "Description": "MLCC 10 nF 5 % 50 V C0G (NP0) 0603, VJ Non-Magnetic series (termination C = Cu barrier)",
+   "Footprint": "qbfx2:C_0603_1608Metric",
+   "Manufacturer": "Vishay Vitramon",
+   "MPN": "VJ0603A103JCAAJ",
+   "MPN_status": "to confirm",
+   "Fitted": "SMT reflow (PCBA)",
+   "Note": "code built from the VJ Non-Magnetic ordering scheme, not seen listed; if 10 nF/0603 is not offered use 1 nF (gate f-3dB 5.96 kHz, still <= 10 kHz) or a Knowles Syfer non-magnetic C0G"
+  },
+  {
+   "Qty": 4,
+   "References": "H1 H2 H3 H4",
+   "Value": "M2.5",
+   "Description": "Mounting hole 2.7 mm plated, GND",
+   "Footprint": "qbfx2:MountingHole_2.7mm_M2.5_Pad",
+   "Manufacturer": "-",
+   "MPN": "-",
+   "MPN_status": "mechanical",
+   "Fitted": "board feature, not purchased",
+   "Note": "board feature, not purchased"
+  },
+  {
+   "Qty": 10,
+   "References": "J1 J2 J3 J4 J5 J6 J7 J8 J9 J10",
+   "Value": "SMP-MSLD-PCS-NM",
+   "Description": "SMP straight PCB jack, surface mount, limited detent, non-magnetic (BeCu/Au, LCP)",
+   "Footprint": "qbfx2:SMP_Amphenol_SMP-MSLD-PCS-NM",
+   "Manufacturer": "Amphenol RF",
+   "MPN": "SMP-MSLD-PCS-NM",
+   "MPN_status": "confirmed",
+   "Fitted": "SMT reflow (PCBA)",
+   "Note": "non-magnetic; land pattern generic - confirm against the Amphenol drawing"
+  },
+  {
+   "Qty": 1,
+   "References": "J11",
+   "Value": "MWDM2L-15PCBRP-.110",
+   "Description": "Micro-D 15-pin plug, condensed right-angle PCB, jackposts",
+   "Footprint": "qbfx2:MicroD_15P_Glenair_MWDM2L-15PCBRP",
+   "Manufacturer": "Glenair",
+   "MPN": "MWDM2L-15PCBRP-.110",
+   "MPN_status": "confirmed",
+   "Fitted": "hand solder after reflow (PCBA)",
+   "Note": "land pattern + shell finish TO CONFIRM (ask for a non-magnetic shell finish)"
+  },
+  {
+   "Qty": 8,
+   "References": "R1 R2 R3 R4 R13 R14 R15 R16",
+   "Value": "1k",
+   "Description": "Thin-film resistor 1 kOhm 0.1 % 25 ppm 0603, non-magnetic (PNM series)",
+   "Footprint": "qbfx2:R_0603_1608Metric",
+   "Manufacturer": "Vishay Dale Thin Film",
+   "MPN": "PNM0603E1001BST5",
+   "MPN_status": "confirmed",
+   "Fitted": "SMT reflow (PCBA)",
+   "Note": "distributor listing found; same series as the 10 kOhm part"
+  },
+  {
+   "Qty": 8,
+   "References": "R5 R6 R7 R8 R9 R10 R11 R12",
+   "Value": "10k",
+   "Description": "Thin-film resistor 10 kOhm 0.1 % 25 ppm 0603, non-magnetic (PNM series)",
+   "Footprint": "qbfx2:R_0603_1608Metric",
+   "Manufacturer": "Vishay Dale Thin Film",
+   "MPN": "PNM0603E1002BST5",
+   "MPN_status": "confirmed",
+   "Fitted": "SMT reflow (PCBA)",
+   "Note": "distributor listing: 10 kOhm 0.1 % 0603 non-magnetic"
+  },
+  {
+   "Qty": 1,
+   "References": "U1",
+   "Value": "QBF-X2",
+   "Description": "QBF-X2 superconducting die 10 x 10 x 0.525 mm, wire-bonded (24 launchers)",
+   "Footprint": "qbfx2:QBFX2_DIE_BONDPADS",
+   "Manufacturer": "QBF-X2 project",
+   "MPN": "QBF-X2 die rev per circuits/",
+   "MPN_status": "customer supplied",
+   "Fitted": "customer: die attach + wire bond",
+   "Note": "not part of PCBA; die attach + Al wedge bonding after assembly"
+  }
+ ],
+ "summary": {
+  "lines": 8,
+  "parts": 44,
+  "pcba_parts": 39,
+  "to_confirm": [
+   "VJ0603A180JCAAJ",
+   "VJ0603A103JCAAJ"
+  ],
+  "missing_mpn": []
+ }
+}

@@ -1,0 +1,26 @@
+RF LENGTH MATCHING (copper length per net read from the routed board with pcbnew: segments + arcs)
+length = landing-pad track start (0.30 mm outward of the pad centre) to the SMP centre pin; bond wires and the
+pad itself are identical for every launcher by construction. Delay 5.403 ps/mm (eeff 2.624).
+requirement: every A line and its B partner within 0.20 mm (also enforced by KiCad DRC skew rules)
+
+net         length (mm)
+ACC_A0          13.2652
+ACC_A1          13.2652
+ACC_B0          13.2652
+ACC_B1          13.2652
+RO_IN           13.7208
+RO_OUT          13.7208
+TRAP_A0         15.6676
+TRAP_A1         15.6676
+TRAP_B0         15.6676
+TRAP_B1         15.6676
+
+pair                       A (mm)     B (mm)  |dL| (mm)  skew (ps) result
+TRAP_A0 / TRAP_B0         15.6676    15.6676     0.0000     0.0000 PASS
+TRAP_A1 / TRAP_B1         15.6676    15.6676     0.0000     0.0000 PASS
+ACC_A0 / ACC_B0           13.2652    13.2652     0.0000     0.0000 PASS
+ACC_A1 / ACC_B1           13.2652    13.2652     0.0000     0.0000 PASS
+
+group spread: all four TRAP lines 0.0000 mm, all four ACC lines 0.0000 mm
+TRAP vs ACC offset 2.4024 mm = 12.98 ps (fixed, identical on both sides; not part of the A/B requirement)
+RO_IN / RO_OUT: 13.7208 / 13.7208 mm

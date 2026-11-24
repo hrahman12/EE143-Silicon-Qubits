@@ -1,0 +1,46 @@
+** Drc report for /home/user/EE143-Silicon-Qubits/qbf-x2/pcb/reports/_selftest/F2_cpw_gap.kicad_pcb **
+** Created on 2026-11-24 22:54:27 **
+
+** Found 9 DRC violations **
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(90.8500 mm, 127.0450 mm): Polygon on F.Mask
+    @(91.9179 mm, 127.8500 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(90.8500 mm, 127.0450 mm): Polygon on F.Mask
+    @(91.9179 mm, 127.8500 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(90.8500 mm, 127.0450 mm): Polygon on F.Mask
+    @(91.9179 mm, 127.8500 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(90.8500 mm, 127.0450 mm): Polygon on F.Mask
+    @(91.9179 mm, 127.8500 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(90.8500 mm, 127.0450 mm): Polygon on F.Mask
+    @(91.9179 mm, 127.8500 mm): Via [GND] on F.Cu - B.Cu
+[hole_near_hole]: Drilled holes too close together (board setup constraints min 0.2495 mm; actual 0.2440 mm)
+    Rule: board setup constraints; Severity: error
+    @(91.5000 mm, 128.0000 mm): Via [GND] on F.Cu - B.Cu
+    @(91.9179 mm, 127.8500 mm): Via [GND] on F.Cu - B.Cu
+[hole_near_hole]: Drilled holes too close together (board setup constraints min 0.2495 mm; actual 0.1195 mm)
+    Rule: board setup constraints; Severity: error
+    @(92.2000 mm, 128.0000 mm): Via [GND] on F.Cu - B.Cu
+    @(91.9179 mm, 127.8500 mm): Via [GND] on F.Cu - B.Cu
+[clearance]: Clearance violation (rule RF_GCPW_gap clearance 0.1700 mm; actual 0.0300 mm)
+    Rule: RF_GCPW_gap; Severity: error
+    @(91.9179 mm, 127.8500 mm): Via [GND] on F.Cu - B.Cu
+    @(90.8500 mm, 127.4000 mm): Track [ACC_B1] on F.Cu, length 2.1358 mm
+[hole_clearance]: Hole clearance violation (board setup constraints hole clearance 0.2000 mm; actual 0.1550 mm)
+    Rule: board setup constraints hole; Severity: error
+    @(90.8500 mm, 127.4000 mm): Track [ACC_B1] on F.Cu, length 2.1358 mm
+    @(91.9179 mm, 127.8500 mm): Via [GND] on F.Cu - B.Cu
+
+** Found 0 unconnected pads **
+
+** Found 0 Footprint errors **
+
+** End of Report **

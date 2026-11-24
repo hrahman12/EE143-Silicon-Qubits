@@ -4,14 +4,14 @@
 # via 0.45/0.2, annular 0.125, hole-hole 0.25,
 # copper-edge 0.1 for the wire-bond landing pads at the die window).
 
-# --- 50-ohm GCPW on F.Cu: w = 0.4 mm, gap = 0.15 mm over 0.203 mm RO4003C (In1 = reference)
+# --- 50-ohm GCPW on F.Cu: w = 0.39 mm, gap = 0.17 mm over 0.203 mm RO4003C (In1 = reference)
 (rule "RF_GCPW_width"
   (layer "F.Cu")
   (condition "A.NetClass == 'RF_50' && (A.Type == 'Track' || A.Type == 'Arc')")
-  (constraint track_width (min 0.39mm) (opt 0.40mm) (max 0.41mm)))
+  (constraint track_width (min 0.38mm) (opt 0.39mm) (max 0.40mm)))
 (rule "RF_GCPW_gap"
   (condition "A.NetClass == 'RF_50' && B.NetName == 'GND'")
-  (constraint clearance (min 0.15mm)))
+  (constraint clearance (min 0.17mm)))
 (rule "RF_to_other_signals"
   (condition "A.NetClass == 'RF_50' && B.NetName != 'GND' && A.NetName != B.NetName")
   (constraint clearance (min 0.40mm)))
@@ -51,6 +51,4 @@
 (rule "tracks_vias_from_edges"
   (condition "A.Type == 'Track' || A.Type == 'Arc' || A.Type == 'Via'")
   (constraint edge_clearance (min 0.30mm)))
-(rule "inner_layers_from_edges"
-  (layer inner)
-  (constraint edge_clearance (min 0.30mm)))
+# inner layers keep 0.30 mm from the die window through the keepout area "window_pullback_inner"

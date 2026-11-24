@@ -1,0 +1,31 @@
+IMPEDANCE TABLE - 50 ohm +/-5 %
+formula: rf_calc.gcpw_z0(w, g, h, er) from quantum_chip/src/rf_calc.py (conductor-backed CPW,
+         Ghione-Naldi conformal mapping, zero-thickness conductor, no solder mask, infinite side grounds):
+         k = a/b, k1 = tanh(pi a / 2h) / tanh(pi b / 2h), a = w/2, b = w/2 + g
+         eeff = (1 + er K(k1')K(k)... ) -> Z0 = 60 pi / sqrt(eeff) / (K(k)/K(k') + K(k1)/K(k1'))
+dielectric: Rogers RO4003C, er = 3.55 (design Dk at 10 GHz), h = 0.203 mm (core 1), ref. plane In1;
+RF lines are mask-free (F.Mask opening over trace + gaps), copper 35 um finished
+design: w = 0.390 mm, gap = 0.170 mm -> Z0 = 51.98 ohm, eeff = 2.624 (exact 50.00 ohm needs w = 0.4169 mm)
+
+segment type                                 layer       w           gap      h    er        Z0 (ohm)  result
+GCPW straight runs (10 RF nets), drawn       F.Cu    0.390         0.170  0.203  3.55           51.98    PASS
+GCPW straight runs, as filled (min-max)      F.Cu    0.390  0.170-0.171  0.203  3.55   52.00-52.00    PASS
+GCPW arc bends R 1.0, as filled (min-max)    F.Cu    0.390  0.171-0.172  0.203  3.55   52.01-52.06    PASS
+bond landing pad 0.39 x 0.60 (line start)    F.Cu    0.390  0.170-0.170  0.203  3.55           52.00    PASS
+SMP launch: last ~0.8 mm inside the anti-pad F.Cu    0.390  0.170-0.546  0.203  3.55   52.00-56.79    info
+SMP launch pad dia 0.75 / anti-pad dia 1.65  F.Cu        -             -      -     -   lumped ~22 fF    info
+
+The launch rows are a transition, not a line: ~0.8 mm (0.04 wavelength at 10 GHz) of wider gap next to a
+capacitive pad. Its match is NOT verified (no EM simulation); it is reported, not counted in the 50-ohm check.
+as-built gap = distance from the RF centre line to the filled GND zone minus w/2 (1126 + 120 samples every 0.1 mm); raw min/max straight 0.170/0.171 mm, arcs 0.171/0.172 mm
+(samples within 1.07 mm of an SMP centre are the launch transition and are listed separately).
+In1 reference plane under every RF line (trace +/- (w/2 + g + 2h)): min coverage 100.00 %
+
+CROSS-CHECK: 2D quasi-static finite-difference field solve of the same cross-section (carrier_lib/fd2d.py; In1
+ground plane, grounded lid 6 mm above, graded grid; C and C0 from the stored energy, Z0 = 1/(c sqrt(C C0)))
+  validation, copper 1 grid cell thick (~zero, no mask): Z0 = 51.46 ohm vs formula 51.98 ohm (-1.0 %), eeff 2.610 vs 2.624
+  35 um copper, no mask:                      Z0 = 47.74 ohm
+  35 um copper, 20 um LPI on the grounds only (as built, mask-free RF corridor): Z0 = 47.66 ohm (-4.7 % vs 50) PASS
+  for reference, the same line fully covered by LPI (mask in the gaps): Z0 = 44.08 ohm -> this is why the RF lines are mask-free
+The required formula check and the field solve bracket 50 ohm; the fab tunes w (+/-0.02 mm) with its own solver
+and a TDR coupon (fab note 3). Not verified: full-wave EM of the SMP launch, the bond-wire transition, box modes.

@@ -1,0 +1,14 @@
+FILTER CUT-OFF CHECK (values read back from the schematic netlist, topology checked from the nets)
+gate:  H(s) = 1/(1 + s(R1C1 + R2C2 + R1C2) + s^2 R1C1R2C2) into a high-impedance gate
+load:  current into the on-chip load loop (1 nH to GND): I/V = 1/(R1 + Z2 + s C R1 Z2), Z2 = R2 + s L;
+       open circuit: V/V = 1/(1 + s R1 C). -3 dB points by bisection on |H|.
+second case: 50 ohm source resistance added to R1
+
+LOAD_A0        R1=1 kohm C=18 pF R2=1 kohm: f-3dB = 17.68 MHz current drive (17.26 MHz with 50 ohm), 8.84 MHz open; tau 9.0 ns << 1 us ramp; |H(1 GHz)| = -35 dB  limit 10-20 MHz (current drive), >= 5 MHz open  PASS
+LOAD_A1        R1=1 kohm C=18 pF R2=1 kohm: f-3dB = 17.68 MHz current drive (17.26 MHz with 50 ohm), 8.84 MHz open; tau 9.0 ns << 1 us ramp; |H(1 GHz)| = -35 dB  limit 10-20 MHz (current drive), >= 5 MHz open  PASS
+GATE_BSB_AN    R1=10 kohm C1=10 nF R2=10 kohm C2=10 nF: f-3dB = 595.6 Hz (593.5 Hz with 50 ohm), single stage 1592 Hz, |H(1 MHz)| = -112 dB  limit <= 10 kHz  PASS
+GATE_BSA_PREP  R1=10 kohm C1=10 nF R2=10 kohm C2=10 nF: f-3dB = 595.6 Hz (593.5 Hz with 50 ohm), single stage 1592 Hz, |H(1 MHz)| = -112 dB  limit <= 10 kHz  PASS
+GATE_BSA_AN    R1=10 kohm C1=10 nF R2=10 kohm C2=10 nF: f-3dB = 595.6 Hz (593.5 Hz with 50 ohm), single stage 1592 Hz, |H(1 MHz)| = -112 dB  limit <= 10 kHz  PASS
+GATE_BSB_PREP  R1=10 kohm C1=10 nF R2=10 kohm C2=10 nF: f-3dB = 595.6 Hz (593.5 Hz with 50 ohm), single stage 1592 Hz, |H(1 MHz)| = -112 dB  limit <= 10 kHz  PASS
+LOAD_B0        R1=1 kohm C=18 pF R2=1 kohm: f-3dB = 17.68 MHz current drive (17.26 MHz with 50 ohm), 8.84 MHz open; tau 9.0 ns << 1 us ramp; |H(1 GHz)| = -35 dB  limit 10-20 MHz (current drive), >= 5 MHz open  PASS
+LOAD_B1        R1=1 kohm C=18 pF R2=1 kohm: f-3dB = 17.68 MHz current drive (17.26 MHz with 50 ohm), 8.84 MHz open; tau 9.0 ns << 1 us ramp; |H(1 GHz)| = -35 dB  limit 10-20 MHz (current drive), >= 5 MHz open  PASS

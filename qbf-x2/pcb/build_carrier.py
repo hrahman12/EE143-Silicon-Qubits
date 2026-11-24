@@ -15,7 +15,6 @@ import os
 import shutil
 import subprocess
 import sys
-import uuid
 
 from shapely.geometry import LineString, Point, Polygon, box as sbox
 from shapely.ops import unary_union
@@ -37,8 +36,7 @@ REPORTS = os.path.join(HERE, "reports")
 X0, Y0 = P.BOARD["page_origin"]
 
 
-def U():
-    return str(uuid.uuid4())
+from carrier_lib.ids import U  # noqa: E402  (deterministic ids)
 
 
 def f(v):
@@ -163,7 +161,7 @@ def build_model(pads, chans):
 
 
 # =============================================================================================== C. schematic
-def write_schematic(comps, chans, chan_parts, side, cut):
+def write_schematic(comps, chans, chan_parts, side):
     g = SC.g
     die_pins = []
     for s in "NESW":
@@ -184,9 +182,9 @@ def write_schematic(comps, chans, chan_parts, side, cut):
 
     # --- J11 micro-D (left)
     j = comps["J11"]
-    pos = (g(30), g(80))
+    pos = (g(22), g(80))
     pins, uuids["J11"] = sh.place(S["MICROD"], "J11", j["value"], pos, 0, fields(j), fpid(j),
-                                  ref_off=(0, -g(19)), val_off=(0, g(21)))
+                                  ref_off=(-g(3), -g(19.5)), val_off=(-g(3), -g(17.5)))
     for k in range(1, 9):
         a = pins[str(k)]
         b = (a[0] + g(4), a[1])
@@ -205,10 +203,12 @@ def write_schematic(comps, chans, chan_parts, side, cut):
     sh.wire((bus_x, ys[-1]), gnd_pt)
     sh.junction((bus_x, ys[-1]))
     sh.gnd(S, gnd_pt)
-    sh.flag(S, gnd_pt)
+    flag_pt = (bus_x + g(4), gnd_pt[1])
+    sh.wire(gnd_pt, flag_pt)
+    sh.flag(S, flag_pt)
     sh.gnd(S, pins["SH"])
-    sh.text("J11  DC input: Glenair MWDM2L-15PCBRP-.110 micro-D 15P (pins 1-8 filtered DC, 9-15 + shell = GND)",
-            (g(14), g(54)), 1.27)
+    sh.text("J11: DC input, Glenair MWDM2L-15PCBRP-.110\nmicro-D 15P right angle (non-magnetic shell\nfinish to confirm). "
+            "Pins 1-8 = filtered DC,\n9-15 + shell = GND returns.", (g(10), g(110)), 1.27)
 
     # --- filter bank (middle)
     co = FL.all_cutoffs(P.FILTERS)
@@ -231,7 +231,8 @@ def write_schematic(comps, chans, chan_parts, side, cut):
         na = (g(82), y)
         sh.wire(pr["2"], na)
         c1 = comps[cp["C1"]]
-        pc, uuids[cp["C1"]] = sh.place(S["C"], cp["C1"], c1["value"], (na[0], y + g(6)), 0, fields(c1), fpid(c1))
+        pc, uuids[cp["C1"]] = sh.place(S["C"], cp["C1"], c1["value"], (na[0], y + g(6)), 0, fields(c1), fpid(c1),
+                                       ref_off=(g(1.6), -g(0.8)), val_off=(g(1.6), g(1.2)), justify="left")
         sh.wire(na, pc["1"])
         sh.gnd(S, pc["2"])
         rb = comps[cp["R2"]]
@@ -242,7 +243,8 @@ def write_schematic(comps, chans, chan_parts, side, cut):
             nb = (g(100), y)
             sh.wire(pr2["2"], nb)
             c2 = comps[cp["C2"]]
-            pc2, uuids[cp["C2"]] = sh.place(S["C"], cp["C2"], c2["value"], (nb[0], y + g(6)), 0, fields(c2), fpid(c2))
+            pc2, uuids[cp["C2"]] = sh.place(S["C"], cp["C2"], c2["value"], (nb[0], y + g(6)), 0, fields(c2), fpid(c2),
+                                            ref_off=(g(1.6), -g(0.8)), val_off=(g(1.6), g(1.2)), justify="left")
             sh.wire(nb, pc2["1"])
             sh.gnd(S, pc2["2"])
             sh.wire(nb, (g(108), y))
@@ -257,9 +259,9 @@ def write_schematic(comps, chans, chan_parts, side, cut):
 
     # --- U1 die (right)
     u = comps["U1"]
-    cpos = (g(190), g(96))
+    cpos = (g(192), g(98))
     pu, uuids["U1"] = sh.place(S["DIE"], "U1", "QBF-X2", cpos, 0, fields(u), fpid(u),
-                               ref_off=(g(-6), g(-25)), val_off=(g(6), g(-25)))
+                               ref_off=(g(23), g(-25)), val_off=(g(23), g(-23.5)), justify="left")
     for s in "NESW":
         for p in side[s]:
             a = pu[str(p["id"])]
@@ -271,9 +273,9 @@ def write_schematic(comps, chans, chan_parts, side, cut):
             else:
                 sh.glabel(p["net"], b, {"N": 90, "S": 270, "W": 180, "E": 0}[s])
     sh.text("U1 = QBF-X2 die (10 x 10 x 0.525 mm), wire bonded to the 24 PCB landing pads; pin = die_pads.json id",
-            (g(160), g(141)), 1.27)
+            (g(160), g(142)), 1.27)
     sh.text("Every U1 pin net and number follows circuits/die_pads.json (checked in reports/erc_report.txt)",
-            (g(160), g(143)), 1.27)
+            (g(160), g(144)), 1.27)
 
     # --- SMP connectors (far right)
     for i, net in enumerate(P.SMP_REFS):
@@ -282,7 +284,7 @@ def write_schematic(comps, chans, chan_parts, side, cut):
         cy = g(30) + (i % 5) * g(16)
         c = comps[ref]
         pp, uuids[ref] = sh.place(S["SMP"], ref, c["value"], (cx, cy), 0, fields(c), fpid(c),
-                                  ref_off=(0, -g(3)), val_off=(g(3), g(2)))
+                                  ref_off=(g(2), -g(2)), val_off=(g(2), g(1)), justify="left")
         a = pp["1"]
         b = (a[0] - g(3), a[1])
         sh.wire(a, b)
@@ -297,7 +299,8 @@ def write_schematic(comps, chans, chan_parts, side, cut):
     for i in range(4):
         ref = f"H{i + 1}"
         c = comps[ref]
-        pm, uuids[ref] = sh.place(S["MH"], ref, "M2.5", (g(236) + i * g(10), g(118)), 0, fields(c), fpid(c))
+        pm, uuids[ref] = sh.place(S["MH"], ref, "M2.5", (g(236) + i * g(10), g(118)), 0, fields(c), fpid(c),
+                                  ref_off=(g(1.5), -g(0.5)), val_off=(g(1.5), g(1)), justify="left")
         sh.gnd(S, pm["1"])
     sh.text("H1-H4: M2.5 plated mounting holes to the Cu sample-holder base (GND)", (g(232), g(112)), 1.27)
 
@@ -364,7 +367,7 @@ class Board:
 
 def rf_routes(B, side):
     W = HALF + P.WINDOW["clearance"]
-    rc = W + P.BONDPAD["setback"] + P.BONDPAD["length"] / 2
+    rc = W + P.BONDPAD["setback"] + P.BONDPAD["length"] / 2 + P.BOARD["track_start_in_pad"]
     F, R = P.FAST, P.READOUT
     for s in "WE":
         sx = -1 if s == "W" else 1
@@ -394,7 +397,7 @@ def rf_routes(B, side):
 def dc_routes(B, side, chans):
     """F.Cu stubs from the bond pads to vias, In2 routing to the filter bank (planar, see README)"""
     W = HALF + P.WINDOW["clearance"]
-    rc = W + P.BONDPAD["setback"] + P.BONDPAD["length"] / 2
+    rc = W + P.BONDPAD["setback"] + P.BONDPAD["length"] / 2 + P.BOARD["track_start_in_pad"]
     D = P.DC
     o1, o2 = D["corridor"]
     j = D["jog"]
@@ -451,13 +454,16 @@ def dc_routes(B, side, chans):
 
 def filter_bank(B, comps, chans, chan_parts, netof, fpl):
     """F.Cu: each channel a vertical chain (input at the top, J11 side); shunt C column outboard"""
-    yv = P.FILTER_BANK["y_out_via"]
-    cdx = P.FILTER_BANK["cap_dx"]
+    FB = P.FILTER_BANK
+    yv = FB["y_out_via"]
+    cdx = FB["cap_dx"]
+    gdx = FB["cap_via_dx"]
     wf = P.DC["fcu_width"]
-    y_r1, y_r2, y_c1, y_c2 = yv + 6.05, yv + 3.1, yv + 4.45, yv + 1.5
+    rw = FB["rows"]
+    y_r1, y_r2, y_c1, y_c2 = yv + rw["R1"], yv + rw["R2"], yv + rw["C1"], yv + rw["C2"]
     md = P.MICROD
     pin_x = {k: -3.5 * md["pitch"] + (k - 1) * md["pitch"] for k in range(1, 9)}
-    levels = [18.35, 17.9, 17.45, 17.0, 17.0, 17.45, 17.9, 18.35]
+    levels = FB["fanin_levels"]
     gvia = dict(drill=P.VIAS["stitch_drill"], size=P.VIAS["stitch_pad"], kind="gnd_cap")
     for i, net in enumerate(chans):
         xc = B.chan_x[net]
@@ -480,13 +486,13 @@ def filter_bank(B, comps, chans, chan_parts, netof, fpl):
         tr = [(n_in, [(xc, pr1), (xc, lv), (pin_x[k], lv), (pin_x[k], md["y_row1"])]),
               (n_a, [(xc, pr1b), (xc, pr2a)]), (n_a, [(xc, pr1b), (xc + sgn * cdx, pc1a)]),
               (n_out, [(xc, pr2b), (xc, yv)]),
-              ("GND", [(xc + sgn * cdx, pc1b), (xc + sgn * 2.25, pc1b)])]
-        B.vias.append(dict(at=(xc + sgn * 2.25, pc1b), net="GND", **gvia))
+              ("GND", [(xc + sgn * cdx, pc1b), (xc + sgn * gdx, pc1b)])]
+        B.vias.append(dict(at=(xc + sgn * gdx, pc1b), net="GND", **gvia))
         if cp["gate"]:
             pc2a, pc2b = y_c2 + 0.775, y_c2 - 0.775
             tr.append((n_out, [(xc, pr2b), (xc + sgn * cdx, pc2a)]))
-            tr.append(("GND", [(xc + sgn * cdx, pc2b), (xc + sgn * 2.25, pc2b)]))
-            B.vias.append(dict(at=(xc + sgn * 2.25, pc2b), net="GND", **gvia))
+            tr.append(("GND", [(xc + sgn * cdx, pc2b), (xc + sgn * gdx, pc2b)]))
+            B.vias.append(dict(at=(xc + sgn * gdx, pc2b), net="GND", **gvia))
         for n, pts in tr:
             pts = [q for q in pts]
             B.tracks.append(dict(layer="F.Cu", net=n, w=wf if n != "GND" else 0.3, path=G.polyline_path(pts),
@@ -606,6 +612,48 @@ def stitching(B, window_poly, board_poly, pad_geoms):
     return stitch
 
 
+def place_silk_refs(B, pad_geoms, openings, silk_boxes, board_poly, win):
+    """auto-position the silkscreen reference designators of the filter passives: candidate spots around each part,
+    rejected if the (conservative) text box comes within 0.1 mm of a pad, a mask opening, an edge or other silk"""
+    from shapely.geometry import box as sb
+    keep = 0.10
+    obst = [pg["poly"] for pg in pad_geoms] + list(openings)
+    hard = unary_union([o.buffer(keep) for o in obst] + [win.buffer(0.3)] +
+                       [board_poly.difference(board_poly.buffer(-0.4))])
+    placed = [bx.buffer(keep) for bx in silk_boxes]
+    out, missed = {}, []
+    for fp in B.fps:
+        if not fp["fp"].name.startswith(("R_", "C_")):
+            continue
+        ref, (x, y) = fp["ref"], fp["pos"]
+        found = None
+        for size in (0.6, 0.5):
+            wd, ht = len(ref) * 0.82 * size + 0.12, size + 0.12
+            cands = [((x, y - 1.55), 0), ((x, y + 1.55), 0), ((x - 1.0, y), 90), ((x + 1.0, y), 90),
+                     ((x, y - 1.75), 0), ((x, y + 1.75), 0), ((x - 1.1, y - 0.4), 90), ((x + 1.1, y - 0.4), 90),
+                     ((x - 1.1, y + 0.4), 90), ((x + 1.1, y + 0.4), 90), ((x - 1.05, y), 90), ((x + 1.05, y), 90),
+                     ((x - 1.0, y - 0.7), 90), ((x + 1.0, y - 0.7), 90), ((x - 1.0, y + 0.7), 90), ((x + 1.0, y + 0.7), 90),
+                     ((x - 0.8, y - 1.6), 0), ((x + 0.8, y - 1.6), 0), ((x - 0.8, y + 1.6), 0), ((x + 0.8, y + 1.6), 0),
+                     ((x - 1.3, y), 90), ((x + 1.3, y), 90), ((x, y - 2.0), 0), ((x, y + 2.0), 0)]
+            for (cx, cy), r in cands:
+                bx = sb(cx - wd / 2, cy - ht / 2, cx + wd / 2, cy + ht / 2) if r == 0 else \
+                    sb(cx - ht / 2, cy - wd / 2, cx + ht / 2, cy + wd / 2)
+                if bx.intersects(hard) or any(bx.buffer(0.05).intersects(pp) for pp in placed):
+                    continue
+                found = ((cx, cy), r, size, bx)
+                break
+            if found:
+                break
+        if found is None:
+            missed.append(ref)
+            continue
+        (cx, cy), r, size, bx = found
+        placed.append(bx.buffer(keep))
+        d = G.rot((cx - x, cy - y), -fp["rot"])
+        out[ref] = dict(local=(d[0], -d[1]), rot=r, size=size)
+    return out, missed
+
+
 # =============================================================================================== F. writers
 def stackup_sexpr():
     out = ['    (stackup', '      (layer "F.SilkS" (type "Top Silk Screen"))', '      (layer "F.Paste" (type "Top Solder Paste"))']
@@ -623,7 +671,7 @@ def stackup_sexpr():
             out.append(f'      (layer "dielectric {di}" (type "{kind}") (thickness {t}) (material "{m}") '
                        f'(epsilon_r {er}) (loss_tangent {tand}))')
     out += ['      (layer "B.Paste" (type "Bottom Solder Paste"))', '      (layer "B.SilkS" (type "Bottom Silk Screen"))',
-            '      (copper_finish "None")', '      (dielectric_constraints yes)', '    )']
+            f'      (copper_finish "{P.FINISH}")', '      (dielectric_constraints yes)', '    )']
     return "\n".join(out)
 
 
@@ -646,7 +694,7 @@ PLOTPARAMS = ('    (pcbplotparams (layerselection 0x00010fc_ffffffff) (plot_on_a
               '(outputformat 1) (mirror false) (drillshape 0) (scaleselection 1) (outputdirectory "fab/gerbers/"))')
 
 
-def edge_items(D, board_pts_unused, W, R):
+def edge_items(D, W, R):
     """outer rounded rectangle + die window with 270-degree corner reliefs (Edge.Cuts)"""
     b = P.BOARD
     cr = b["corner_r"]
@@ -737,7 +785,7 @@ def main():
     comps, lnets, chan_parts = build_model(pads, chans)
 
     # --- schematic + KiCad's own netlist -> net names for the board
-    uuids, SYM = write_schematic(comps, chans, chan_parts, side, None)
+    uuids, SYM = write_schematic(comps, chans, chan_parts, side)
     knets = kicad_netlist()
     name_of = {}
     for ln, nodes in lnets.items():
@@ -860,6 +908,13 @@ def main():
         else:
             band = band.difference(sbox(p["lat"] - hw, min(u[1] * (W - 0.2), u[1] * (ro + 0.3)),
                                         p["lat"] + hw, max(u[1] * (W - 0.2), u[1] * (ro + 0.3))))
+    # mask-free RF corridors: trace + gaps open, ending corridor_inset short of the ground copper (signal net only)
+    corridors = []
+    if P.GCPW["mask_free"]:
+        hw = P.GCPW["w"] / 2 + P.GCPW["gap"] - P.GCPW["corridor_inset"]
+        for net, r in B.rf.items():
+            corridors.append(LineString(G.path_to_polyline(r["path"], 0.02)).buffer(hw, 32))
+        band = band.difference(unary_union(corridors).buffer(P.RULES["mask_min_web"] + 0.005, 32))
     band_polys = [band] if band.geom_type == "Polygon" else list(band.geoms)
     band_polys = [bp.simplify(0.002) for bp in band_polys if bp.area > 0.01]
     fw = 2.0
@@ -870,7 +925,7 @@ def main():
 
     # --- silkscreen and drawings
     D = B.gfx
-    edge_items(D, None, W, R)
+    edge_items(D, W, R)
     silk = []
     for net, r in B.rf.items():
         ref = f"J{P.SMP_REFS.index(net) + 1}"
@@ -891,15 +946,37 @@ def main():
     D.text("F.SilkS", "6L RO4003C/RO4450F 1.50MM  NI-FREE AU", *K((0, -24.6)), 0.8, 0.12, "center")
     bl = ["QBF-X2 CARRIER REV A  (BOTTOM = GND, BASE CONTACT)", "J11 MICRO-D PINOUT:"] + \
          [f"{k} {P.MICROD_PINS[k]}" for k in range(1, 9)] + ["9-15, SHELL: GND"]
-    yb = 9.0
+    yb = -7.6
     for s in bl:
-        D.text("B.SilkS", s, *K((0, yb)), 0.9, 0.14, "center", 0, mirror=True)
-        yb -= 1.6
+        D.text("B.SilkS", s, *K((0, yb)), 0.8, 0.12, "center", 0, mirror=True)
+        yb -= 1.3
+
+    # silkscreen reference designators of the filter passives (auto-positioned, see place_silk_refs)
+    from shapely.geometry import box as sb_
+    silk_boxes = []
+    for s_, at, rot in silk:
+        size = 1.0 if s_ == P.PROJECT["board_text"] else 0.8
+        wd, ht = len(s_) * 0.82 * size + 0.15, size + 0.15
+        silk_boxes.append(sb_(at[0] - wd / 2, at[1] - ht / 2, at[0] + wd / 2, at[1] + ht / 2) if rot == 0 else
+                          sb_(at[0] - ht / 2, at[1] - wd / 2, at[0] + ht / 2, at[1] + wd / 2))
+    for r in B.rf.values():
+        c = Point(r["conn"])
+        silk_boxes.append(c.buffer(3.12).difference(c.buffer(2.98)))
+    jx, jy = P.MICROD["x"], P.MICROD["y_row1"]
+    silk_boxes += [sb_(jx - 12.2, jy - 1.9, jx + 12.2, jy - 1.6), sb_(jx - 12.2, jy - 1.9, jx - 11.9, jy + 1.7),
+                   sb_(jx + 11.9, jy - 1.9, jx + 12.2, jy + 1.7)]
+    silk_refs, silk_missed = place_silk_refs(B, pad_geoms, band_polys + corridors, silk_boxes, board_poly, win)
+    if silk_missed:
+        print("silk designators not placed (kept on F.Fab only):", silk_missed)
 
     # fab + assembly drawings (built in drawing_layers.py from the same data)
     from carrier_lib.drawing_layers import fab_and_assembly
     co = FL.all_cutoffs(P.FILTERS)
     z = rf.gcpw_z0(P.GCPW["w"], P.GCPW["gap"], P.GCPW["h"], P.GCPW["er"])
+    from carrier_lib import fd2d
+    gc = P.GCPW
+    fd = fd2d.solve(gc["w"], gc["gap"], gc["h"], gc["er"], t=gc["t_cu"], mask_t=0.02,
+                    mask_mode="corridor" if gc["mask_free"] else "full", corridor_inset=gc["corridor_inset"])
     lengths = {n: G.path_length(r["path"]) for n, r in B.rf.items()}
     drills = {}
     for v in B.vias:
@@ -909,16 +986,17 @@ def main():
         if pg["th"]:
             key = (round(pg["drill"], 3), "NPTH" if pg["npth"] else "PTH")
             drills[key] = drills.get(key, 0) + 1
-    info = dict(z=z, lengths=lengths, drills=drills, cutoffs=co, comps=comps, chans=chans, chan_parts=chan_parts,
-                W=W, R=R, die_size=die_size)
+    info = dict(z=z, fd=fd, lengths=lengths, drills=drills, cutoffs=co, comps=comps, chans=chans, chan_parts=chan_parts,
+                W=W, R=R, die_size=die_size, fps=B.fps, pcb_pads=pcb_pad_board, die_pads=die_pad_board,
+                pad_nets={p["id"]: p["net"] for p in pads})
     fab_and_assembly(D, K, info)
 
     # --- write the board
     L = ['(kicad_pcb (version 20221018) (generator pcbnew)',
          f'  (general (thickness {sum(s[2] for s in P.STACKUP):.3f}))', f'  (paper "{P.BOARD["page"]}")',
          f'  (title_block (title "{P.PROJECT["title"]}") (date "{P.PROJECT["date"]}") (rev "{P.PROJECT["rev"]}") '
-         f'(company "{P.PROJECT["author"]}") (comment 1 "6-layer Rogers RO4003C/RO4450F, 1.50 mm, Ni-free soft Au '
-         f'finish") (comment 2 "Author: {P.PROJECT["author"]}") (comment 3 "Generated by pcb/build_carrier.py from '
+         f'(company "{P.PROJECT["author"]}") (comment 1 "6-layer Rogers RO4003C/RO4450F, 1.50 mm, Ni-free finish '
+         f'(EPAG or soft Au)") (comment 2 "Author: {P.PROJECT["author"]}") (comment 3 "Generated by pcb/build_carrier.py from '
          f'carrier_params.py") (comment 4 "Units mm; origin (drill/place) = board lower-left corner"))',
          '  (layers']
     for lyr in LAYERS:
@@ -937,11 +1015,19 @@ def main():
             for num, ln in comp["pins"].items():
                 kn = name_of[ln]
                 netmap[num] = (code[kn], kn)
-        L.append(fp["fp"].board_text(LIB, fp["ref"], fp["value"], K(fp["pos"]), fp["rot"], netmap,
-                                     uuids.get(fp["ref"]), f"{NAME}.kicad_sch" if comp else None))
+        sr = silk_refs.get(fp["ref"])
+        if sr:
+            L.append(fp["fp"].board_text(LIB, fp["ref"], fp["value"], K(fp["pos"]), fp["rot"], netmap,
+                                         uuids.get(fp["ref"]), f"{NAME}.kicad_sch" if comp else None,
+                                         ref_at=sr["local"], ref_rot=sr["rot"], ref_layer="F.SilkS", ref_size=sr["size"]))
+        else:
+            L.append(fp["fp"].board_text(LIB, fp["ref"], fp["value"], K(fp["pos"]), fp["rot"], netmap,
+                                         uuids.get(fp["ref"]), f"{NAME}.kicad_sch" if comp else None))
     L += D.items
     for bp in band_polys:
         L.append(poly_ring_sexpr(list(bp.exterior.coords)[:-1], "F.Mask"))
+    for cp_ in corridors:
+        L.append(poly_ring_sexpr(list(cp_.simplify(0.002).exterior.coords)[:-1], "F.Mask"))
     for fr in frame:
         L.append(poly_ring_sexpr(list(fr.exterior.coords)[:-1], "B.Mask"))
     for t in B.tracks:
@@ -974,14 +1060,15 @@ def main():
                     n_segs=sum(1 for q in r["path"] if q[0] == "seg"),
                     bend_turns_deg=[round(math.degrees(q[6]), 3) for q in r["path"] if q[0] == "arc"])
             for n, r in B.rf.items()},
-        dc_in2={n: p for n, p in B.dc_paths.items()}, chan_x=B.chan_x,
+        dc_in2={n: p for n, p in B.dc_paths.items()}, chan_x=B.chan_x, chan_parts=chan_parts,
         name_of=name_of, comps={k: dict(v, pins=v["pins"]) for k, v in comps.items()},
         board_only=[fp["ref"] for fp in B.fps if fp["comp"] is None],
+        silk_designators=dict(placed=sorted(silk_refs), missed=silk_missed),
         vias=dict(total=len(B.vias), stitch=len(stitch),
                   by_tag={t: sum(1 for _, tg in stitch if tg == t) for t in sorted(set(tg for _, tg in stitch))},
                   dc=sum(1 for v in B.vias if v["kind"] == "dc"), cap_gnd=sum(1 for v in B.vias if v["kind"] == "gnd_cap")),
         drills={f"{k[0]:.2f} {k[1]}": n for k, n in sorted(drills.items())},
-        gcpw=dict(P.GCPW), stackup=P.STACKUP, filters=P.FILTERS, cutoffs=co,
+        gcpw=dict(P.GCPW), gcpw_fd_crosscheck=fd, stackup=P.STACKUP, filters=P.FILTERS, cutoffs=co,
         bond_band_openings=len(band_polys),
     )
     with open(os.path.join(REPORTS, "build_model.json"), "w") as fh:
@@ -1127,9 +1214,7 @@ def write_dru():
 (rule "tracks_vias_from_edges"
   (condition "A.Type == 'Track' || A.Type == 'Arc' || A.Type == 'Via'")
   (constraint edge_clearance (min {rl['track_edge_clearance']:.2f}mm)))
-(rule "inner_layers_from_edges"
-  (layer inner)
-  (constraint edge_clearance (min {P.BOARD['inner_window_pullback']:.2f}mm)))
+# inner layers keep 0.30 mm from the die window through the keepout area "window_pullback_inner"
 """
     with open(os.path.join(HERE, f"{NAME}.kicad_dru"), "w") as fh:
         fh.write(txt)

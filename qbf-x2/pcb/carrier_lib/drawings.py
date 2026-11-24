@@ -3,11 +3,9 @@
 Used for the fab-notes layer (Dwgs.User -> fabrication drawing) and the assembly layer (Cmts.User -> assembly
 drawing). KiCad 7 has no table object, so a table is a grid of gr_line plus one gr_text per cell.
 """
-import uuid
 
 
-def U():
-    return str(uuid.uuid4())
+from carrier_lib.ids import U  # noqa: E402  (deterministic ids)
 
 
 def f(v):

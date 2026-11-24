@@ -1,0 +1,12 @@
+loaded: 49 footprints, 1028 tracks/vias, 6 copper layers, 36 nets
+{
+ "report": "reports/drc_report.txt",
+ "drc_violations": 0,
+ "unconnected_items": 0,
+ "footprint_errors": 0,
+ "by_severity": {},
+ "by_type": {},
+ "examples": {},
+ "kicad": "7.0.11",
+ "written": true
+}

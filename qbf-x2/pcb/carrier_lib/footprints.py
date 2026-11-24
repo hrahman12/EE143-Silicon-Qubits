@@ -5,13 +5,11 @@ Each footprint is described once (KiCad local frame: mm, y DOWN, unrotated) and 
   * into the board, placed, with nets                           (board instance)
 """
 import math
-import uuid
 
 from . import geom as G
 
 
-def U():
-    return str(uuid.uuid4())
+from carrier_lib.ids import U  # noqa: E402  (deterministic ids)
 
 
 def f(v):
@@ -136,7 +134,7 @@ class Footprint:
         return "\n".join(L) + "\n"
 
     def board_text(self, lib, ref, value, at_kicad, rot, netmap, sym_uuid=None, sheetfile=None,
-                   ref_visible=True, ref_at=None, ref_rot=None):
+                   ref_visible=True, ref_at=None, ref_rot=None, ref_layer=None, ref_size=None):
         """netmap: pad number -> (net code, net name)"""
         r = rot % 360
         L = [f'  (footprint "{lib}:{self.name}" (layer "{self.layer}")', f'    (tstamp {U()})',
@@ -151,9 +149,11 @@ class Footprint:
         ra = ref_at if ref_at is not None else self.ref_at
         rr = (r if ref_rot is None else ref_rot) % 360
         hide = "" if ref_visible else " hide"
+        rl = ref_layer or self.ref_layer
+        rs = ref_size or self.ref_size
         L.append(f'    (fp_text reference "{ref}" (at {f(ra[0])} {f(ra[1])}{(" " + f(rr)) if rr else ""}) '
-                 f'(layer "{self.ref_layer}"){hide} (tstamp {U()}) (effects (font (size {f(self.ref_size)} '
-                 f'{f(self.ref_size)}) (thickness {f(self.ref_size * 0.15)}))))')
+                 f'(layer "{rl}"){hide} (tstamp {U()}) (effects (font (size {f(rs)} '
+                 f'{f(rs)}) (thickness {f(max(0.1, rs * 0.15))}))))')
         L.append(f'    (fp_text value "{value}" (at {f(self.val_at[0])} {f(self.val_at[1])}{(" " + f(r)) if r else ""}) '
                  f'(layer "F.Fab") (tstamp {U()}) (effects (font (size 0.6 0.6) (thickness 0.09))))')
         for (layer, s, at, size, th, tr) in self.texts:
@@ -203,7 +203,9 @@ def smp_jack():
             fp.pad(2, "smd", "rect", (sx * 1.45, sy * 1.45), (1.1, 1.1), ["F.Cu", "F.Paste", "F.Mask"])
     fp.circle("F.Fab", (0, 0), 2.095, 0.1)
     fp.circle("F.Fab", (0, 0), 0.25, 0.05)
-    fp.circle("F.SilkS", (0, 0), 3.05, 0.12)
+    rs = 3.05                                     # silk arc with a gap where the mask-free GCPW corridor enters (-x)
+    a0, a1 = math.radians(220), math.radians(140)
+    fp.arc("F.SilkS", (rs * math.cos(a0), rs * math.sin(a0)), (rs, 0.0), (rs * math.cos(a1), rs * math.sin(a1)), 0.12)
     fp.circle("F.CrtYd", (0, 0), 3.25, 0.05)
     fp.text("F.Fab", "${REFERENCE}", (0, -1.0), 0.5)
     fp.ref_at, fp.val_at, fp.ref_layer = (0, -3.9), (0, 2.6), "F.Fab"
@@ -295,7 +297,7 @@ def mounting_hole(drill, pad):
 def fiducial():
     fp = Footprint("Fiducial_1.0mm_Mask2.0mm", "Fiducial 1.0 mm Cu dot, 2.0 mm mask opening",
                    "fiducial", "smd board_only exclude_from_bom")
-    fp.pad("", "smd", "circle", (0, 0), (1.0, 1.0), ["F.Cu", "F.Mask"], mask_margin=0.5)
+    fp.pad("", "smd", "circle", (0, 0), (1.0, 1.0), ["F.Cu", "F.Mask"], mask_margin=0.5, clearance=0.6)
     fp.circle("F.CrtYd", (0, 0), 1.25, 0.05)
     fp.circle("F.Fab", (0, 0), 1.0, 0.1)
     fp.ref_layer, fp.ref_at, fp.val_at = "F.Fab", (0, -1.8), (0, 1.8)

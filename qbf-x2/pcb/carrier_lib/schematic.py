@@ -6,13 +6,11 @@ placed at (X, Y) with rotation r (counter-clockwise on screen) lands at
 Everything is kept on the 1.27 mm grid.
 """
 import math
-import uuid
 
 GRID = 1.27
 
 
-def U():
-    return str(uuid.uuid4())
+from carrier_lib.ids import U  # noqa: E402  (deterministic ids)
 
 
 def f(v):
@@ -105,22 +103,23 @@ def library(lib, die_pins, microd_names):
     md_pins = [(str(k), microd_names[k], 10.16, 17.78 - 2.54 * (k - 1), 180, 5.08, "passive", False) for k in range(1, 16)]
     md_pins.append(("SH", "SHELL", 0, -27.94, 90, 5.08, "passive", False))
     S["MICROD"] = SymbolDef(f"{lib}:MicroD_15P", "J", "MicroD_15P", md_pins,
-                            [rect(-5.08, 20.32, 5.08, -22.86, "background")], "(pin_names (offset 1.016))",
+                            [rect(-12.7, 20.32, 5.08, -22.86, "background")], "(pin_names (offset 1.016))",
                             (0, 21.59), (0, -24.13), descr="Micro-D 15-pin connector with shell")
     die = []
     for num, name, side, k in die_pins:            # k = 0..5 along the side in die_pads order
         t = -12.7 + 5.08 * k
         if side == "N":
-            die.append((str(num), name, t, 25.4, 270, 5.08, "passive", False))
+            die.append((str(num), name, t, 33.02, 270, 5.08, "passive", False))
         elif side == "S":
-            die.append((str(num), name, t, -25.4, 90, 5.08, "passive", False))
+            die.append((str(num), name, t, -33.02, 90, 5.08, "passive", False))
         elif side == "W":
-            die.append((str(num), name, -25.4, -t, 0, 5.08, "passive", False))
+            die.append((str(num), name, -33.02, -t, 0, 5.08, "passive", False))
         else:
-            die.append((str(num), name, 25.4, -t, 180, 5.08, "passive", False))
+            die.append((str(num), name, 33.02, -t, 180, 5.08, "passive", False))
     S["DIE"] = SymbolDef(f"{lib}:QBF-X2_die", "U", "QBF-X2", die,
-                         [rect(-20.32, 20.32, 20.32, -20.32, "background"), rect(-7.62, 7.62, 7.62, -7.62, "none", 0.152)],
-                         "(pin_names (offset 1.016))", (0, 29.21), (0, -29.21),
+                         [rect(-27.94, 27.94, 27.94, -27.94, "background"), rect(-8.89, 8.89, 8.89, -8.89, "none", 0.152),
+                          stext("QBF-X2 die", -5.08, 1.27), stext("10 x 10 mm, top view", -6.35, -1.27)],
+                         "(pin_names (offset 1.016))", (0, 36.83), (0, -36.83),
                          descr="QBF-X2 superconducting die, 24 launchers (circuits/die_pads.json)")
     S["MH"] = SymbolDef(f"{lib}:MountingHole_Pad", "H", "MountingHole", [("1", "1", 0, -2.54, 90, 1.27, "passive", False)],
                         [circ(0, 0, 1.27, 0.508)], "(pin_numbers hide) (pin_names (offset 1.016) hide)",
@@ -151,7 +150,7 @@ class Sheet:
         return (round(pos[0] + x * math.cos(r) + y * math.sin(r), 4), round(pos[1] - x * math.sin(r) + y * math.cos(r), 4))
 
     def place(self, sdef, ref, value, pos, rot=0, fields=None, footprint="", ref_off=None, val_off=None,
-              hide_value=False):
+              hide_value=False, justify=None):
         """returns {pin: (x, y)} and the symbol uuid"""
         self.used[sdef.lib_id] = sdef
         uid = U()
@@ -166,8 +165,10 @@ class Sheet:
             props.append((k, v, pos, True))
         L = [f'(symbol (lib_id "{sdef.lib_id}") (at {f(pos[0])} {f(pos[1])} {rot}) (unit 1)',
              '  (in_bom yes) (on_board yes) (dnp no)', f'  (uuid {uid})']
+        jl = f"(effects (font (size 1.27 1.27)) (justify {justify}))" if justify else FONT
         for name, val, at, hide in props:
-            L.append(f'  (property "{name}" "{val}" (at {f(at[0])} {f(at[1])} 0) {FONT_H if hide else FONT})')
+            eff = FONT_H if hide else (jl if name in ("Reference", "Value") else FONT)
+            L.append(f'  (property "{name}" "{val}" (at {f(at[0])} {f(at[1])} 0) {eff})')
         for p in sdef.pins:
             L.append(f'  (pin "{p[0]}" (uuid {U()}))')
         L.append(f'  (instances (project "{self.project}" (path "/{self.root}" (reference "{ref}") (unit 1))))')

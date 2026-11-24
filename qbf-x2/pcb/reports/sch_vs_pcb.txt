@@ -1,0 +1,8 @@
+SCHEMATIC vs PCB NETLIST COMPARISON (Altium-style ECO check)
+schematic netlist: kicad-cli 7.0.11 sch export netlist -> reports/sch_netlist.net
+PCB: qbfx2_carrier.kicad_pcb read with pcbnew
+components compared: 44 (board-only, not in schematic by design: FID1, FID2, FID3, DW1, DW2)
+pads compared: 120; schematic nets: 35
+
+ECO list (0 mismatches):
+  (none) - schematic and PCB agree

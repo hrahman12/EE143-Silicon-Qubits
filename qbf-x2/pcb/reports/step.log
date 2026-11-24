@@ -1,0 +1,54 @@
+Loading board
+Determining PCB data
+Board Thickness from stackup: 1.502 mm
+Build STEP data
+Add component R2.
+Add component C2.
+Add component J5.
+Add component J1.
+Add component J11.
+Add component J3.
+Add component C4.
+Add component U1.
+Add component R9.
+Add component C10.
+Add component R10.
+Add component R15.
+Add component C9.
+Add component R16.
+Add component R1.
+Add component J7.
+Add component R6.
+Add component J4.
+Add component J8.
+Add component C7.
+Add component J10.
+Add component C1.
+Add component R8.
+Add component R12.
+Add component C12.
+Add component R11.
+Add component R4.
+Add component R13.
+Add component C3.
+Add component R14.
+Add component C6.
+Add component R7.
+Add component J2.
+Add component R5.
+Add component C8.
+Add component J6.
+Add component R3.
+Add component C11.
+Add component C5.
+Add component J9.
+Create PCB solid model
+Board outline: find 112 initial points
+Build board main outline 1 with 36 points.
+Add cutouts in outline 1 (1 cutout(s)).
+Build board cutouts and holes (24 hole(s)).
+
+Generate board full shape.
+Writing STEP file
+
+STEP file 'fab/qbfx2_carrier.step' created.

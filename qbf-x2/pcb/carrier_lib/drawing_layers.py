@@ -53,15 +53,15 @@ def fab_and_assembly(D, K, info):
         "1  MATERIAL: Rogers RO4003C cores 0.203 / 0.508 / 0.203 mm, RO4450F prepreg 2 x 0.102 mm per opening. No FR-4.",
         f"2  THICKNESS {thick:.2f} mm +/-10 %. Outer Cu 1 oz finished (incl. plating), inner Cu 0.5 oz.",
         f"3  IMPEDANCE: F.Cu GCPW {P.GCPW['z_target']:.0f} ohm +/-5 % (w {P.GCPW['w']:.2f} / gap {P.GCPW['gap']:.2f} mm,"
-        f" ref. In1). Fab may trim w by +/-0.02 mm. TDR coupon + report required.",
+        f" ref. In1, no mask, 35 um Cu). Fab may trim w by +/-0.02 mm with its field solver. TDR coupon + report.",
         "4  FINISH: NICKEL-FREE. Preferred EPAG (electroless Pd 0.1-0.3 um + immersion Au 0.05-0.1 um) or",
         "   electrolytic soft Au >= 0.5 um directly on Cu. Acceptable: immersion Ag (bond within 4 weeks) or ENEPIG",
         "   with high-P Ni (P >= 10 %) <= 1 um. DO NOT use ENIG or HASL.",
         "   WHY: ENIG carries 3-6 um electroless Ni(P), ferromagnetic at low P content or after heat cycles. At 10 mK",
         "   next to a flux-based die it traps vortices, offsets the flux bias and adds loss/noise. HASL Sn/SnPb",
         "   is not wire-bondable. Au/Pd surfaces take Al-1%Si wedge bonds; Ag tarnishes (store dry, N2).",
-        "5  SOLDER MASK: green LPI, both sides, 10-25 um. NO mask in the die bond band (F.Mask openings) and on pads.",
-        "   Min. mask dam 0.10 mm. B.Mask opened 2.0 mm along the outer edge (GND contact to the Cu base).",
+        "5  SOLDER MASK: green LPI, both sides, 10-25 um. NO mask over the RF lines (trace + gaps, F.Mask openings), in",
+        "   the die bond band and on pads. Min. mask dam 0.10 mm. B.Mask opened 2.0 mm along the outer edge (base contact).",
         "6  SILKSCREEN: white epoxy, top and bottom, never on pads or in the bond band.",
         f"7  VIAS: through only, finished {P.VIAS['stitch_drill']:.2f} mm (GND) and {P.VIAS['dc_drill']:.2f} mm (DC). "
         "Tented both sides. DC vias: non-functional inner pads removed.",
@@ -80,16 +80,20 @@ def fab_and_assembly(D, K, info):
 
     # impedance table
     rf_note = "TRAP/ACC (8) and RO (2), all F.Cu"
-    cpad = 8.854e-12 * P.GCPW["er"] * (math.pi * 0.375 ** 2 - P.GCPW["w"] * 0.75) * 1e-6 / (P.GCPW["h"] * 1e-3)
-    zrows = [["GCPW line (" + rf_note + ")", "F.Cu", "In1", f"{P.GCPW['w']:.2f}", f"{P.GCPW['gap']:.2f}",
-              f"{P.GCPW['h']:.3f}", f"{P.GCPW['er']:.2f}", f"{z0:.2f}", "50 +/-5 %", "PASS" if abs(z0 - 50) <= 2.5 else "FAIL"],
-             ["GCPW arc bends R 1.00 (same cross-section)", "F.Cu", "In1", f"{P.GCPW['w']:.2f}", f"{P.GCPW['gap']:.2f}",
-              f"{P.GCPW['h']:.3f}", f"{P.GCPW['er']:.2f}", f"{z0:.2f}", "50 +/-5 %", "PASS" if abs(z0 - 50) <= 2.5 else "FAIL"],
-             ["Bond landing pad 0.40 x 0.60 (line start, no mask)", "F.Cu", "In1", f"{P.GCPW['w']:.2f}",
-              f"{P.GCPW['gap']:.2f}", f"{P.GCPW['h']:.3f}", f"{P.GCPW['er']:.2f}", f"{z0:.2f}", "50 +/-5 %",
-              "PASS" if abs(z0 - 50) <= 2.5 else "FAIL"],
-             ["SMP launch pad dia 0.75, anti-pad dia 1.65", "F.Cu", "In1", "0.75", "0.45", f"{P.GCPW['h']:.3f}",
-              f"{P.GCPW['er']:.2f}", f"lumped {cpad * 1e15:.0f} fF", "info", "n/a"]]
+    gc = P.GCPW
+    fd = info["fd"]
+    cpad = 8.854e-12 * gc["er"] * (math.pi * 0.375 ** 2 - gc["w"] * 0.75) * 1e-6 / (gc["h"] * 1e-3)
+    ok = lambda zz: "PASS" if abs(zz - 50) <= 2.5 else "FAIL"  # noqa: E731
+    zrows = [["GCPW line, mask-free (" + rf_note + ")", "F.Cu", "In1", f"{gc['w']:.2f}", f"{gc['gap']:.2f}",
+              f"{gc['h']:.3f}", f"{gc['er']:.2f}", f"{z0:.2f}", "50 +/-5 %", ok(z0)],
+             ["GCPW arc bends R 1.00 (same cross-section)", "F.Cu", "In1", f"{gc['w']:.2f}", f"{gc['gap']:.2f}",
+              f"{gc['h']:.3f}", f"{gc['er']:.2f}", f"{z0:.2f}", "50 +/-5 %", ok(z0)],
+             [f"Bond landing pad {gc['w']:.2f} x 0.60 (line start)", "F.Cu", "In1", f"{gc['w']:.2f}",
+              f"{gc['gap']:.2f}", f"{gc['h']:.3f}", f"{gc['er']:.2f}", f"{z0:.2f}", "50 +/-5 %", ok(z0)],
+             ["Cross-check: 2D field solve, 35 um Cu, mask on grounds", "F.Cu", "In1", f"{gc['w']:.2f}",
+              f"{gc['gap']:.2f}", f"{gc['h']:.3f}", f"{gc['er']:.2f}", f"{fd['z0']:.2f}", "50 +/-5 %", ok(fd["z0"])],
+             ["SMP launch pad dia 0.75, anti-pad dia 1.65", "F.Cu", "In1", "0.75", "0.45", f"{gc['h']:.3f}",
+              f"{gc['er']:.2f}", f"lumped {cpad * 1e15:.0f} fF", "info", "n/a"]]
     y = D.table(FAB, 205, yn + 2, [("Segment type", 76), ("Layer", 12), ("Ref", 10), ("w", 10), ("gap", 10), ("h", 11),
                                    ("er", 10), ("Z0 (ohm)", 22), ("Target", 18), ("", 12)], zrows,
                 "CONTROLLED IMPEDANCE (rf_calc.gcpw_z0: conductor-backed CPW, Ghione-Naldi conformal map, t = 0)", 1.2)
@@ -114,7 +118,8 @@ def fab_and_assembly(D, K, info):
         "1  SMT reflow, top side only: SAC305 (or Sn63Pb37), no-clean low-residue flux, then clean (IPA). No bottom parts.",
         "2  Use ONLY the BOM parts (non-magnetic): no Ni-barrier terminations, no X7R/X5R, no ferrite, no brass.",
         "3  J1-J10 SMP: reflow with the land pattern of the vendor drawing; check centre-pin coplanarity < 0.1 mm.",
-        "4  J11 micro-D: hand-solder after reflow; trim tails to <= 0.3 mm below the board (or relieve the base).",
+        "4  J11 micro-D: hand-solder after reflow. Its tails + fillets (DC signals) reach the bottom: the Cu base NEEDS a",
+        "   relief pocket >= 1.5 mm deep under the J11 tail field (x -11..+11, y +17..+23 mm from the die centre).",
         "5  Board to base: dowels in DW1/DW2, then 4 x M2.5 non-magnetic (brass / Ti) screws in H1-H4, 0.25 N m.",
         "6  Die U1 (customer supplied, after PCBA + cleaning): on the base pedestal, top flush with the PCB top",
         f"   (pedestal {thick - 0.525 - 0.02:.3f} mm above the base for 20 um varnish), GE 7031 varnish or Ag paint.",
@@ -139,12 +144,117 @@ def fab_and_assembly(D, K, info):
                                    ("Status", 28)], brows, "BOM SUMMARY (full BOM: fab/qbfx2_carrier_bom.csv)", 1.2)
     prow = [[str(k), P.MICROD_PINS[k] + "_IN", f"{P.MICROD_PINS[k]} (die)"] for k in range(1, 9)]
     prow.append(["9-15, SH", "GND", "returns + shell"])
-    D.table(ASM, 16, 166, [("J11 pin", 18), ("Net (connector side)", 44), ("Filtered to", 40)], prow,
-            "J11 MICRO-D PINOUT", 1.2)
+    D.table(ASM, 16, 162, [("J11 pin", 16), ("Net (connector side)", 44), ("Filtered to", 40)], prow,
+            "J11 MICRO-D PINOUT", 1.15)
     lrows = []
     L = info["lengths"]
     for a, bb in (("TRAP_A0", "TRAP_B0"), ("TRAP_A1", "TRAP_B1"), ("ACC_A0", "ACC_B0"), ("ACC_A1", "ACC_B1")):
         lrows.append([f"{a} / {bb}", f"{L[a]:.3f}", f"{L[bb]:.3f}", f"{abs(L[a] - L[bb]):.4f}", "<= 0.20 mm"])
     lrows.append(["RO_IN / RO_OUT", f"{L['RO_IN']:.3f}", f"{L['RO_OUT']:.3f}", f"{abs(L['RO_IN'] - L['RO_OUT']):.4f}", "info"])
-    D.table(ASM, 16, 200, [("Pair (A / B)", 38), ("A (mm)", 18), ("B (mm)", 18), ("|dL| (mm)", 18), ("Limit", 22)], lrows,
-            "RF TRACK LENGTHS, landing-pad centre to SMP pin (KiCad DRC skew rule + reports/length_report.txt)", 1.2)
+    D.table(ASM, 16, 205, [("Pair (A / B)", 34), ("A (mm)", 16), ("B (mm)", 16), ("|dL| (mm)", 18), ("Limit", 20)], lrows,
+            "RF TRACK LENGTHS (KiCad DRC skew rules, reports/length_report.txt)", 1.15)
+    detail_view(D, info, (216.0, 174.0), 3.0)
+    bonding_diagram(D, info, (352.0, 168.0), 5.0)
+
+
+# ------------------------------------------------------------------------------------------------ scaled views
+def _fp_to_board(lp, pos, rot):
+    a = math.radians(rot)
+    x, y = lp[0], -lp[1]
+    return (pos[0] + x * math.cos(a) - y * math.sin(a), pos[1] + x * math.sin(a) + y * math.cos(a))
+
+
+def detail_view(D, info, centre, scale, layer=ASM):
+    """top assembly detail: board + window outline, F.Fab outlines of every footprint, reference designators"""
+    cx, cy = centre
+
+    def T(p):
+        return (cx + p[0] * scale, cy - p[1] * scale)
+    b = P.BOARD
+    D.text(layer, f"TOP ASSEMBLY DETAIL, SCALE {scale:g}:1 (references on F.Fab)", cx - (b['x_max'] - b['x_min']) * scale / 2,
+           cy - b["y_max"] * scale - 7.5, 1.6)
+    corners = [(b["x_min"], b["y_min"]), (b["x_max"], b["y_min"]), (b["x_max"], b["y_max"]), (b["x_min"], b["y_max"])]
+    for a, c in zip(corners, corners[1:] + corners[:1]):
+        D.line(layer, T(a), T(c), 0.3)
+    W = info["W"]
+    wc = [(-W, -W), (W, -W), (W, W), (-W, W)]
+    for a, c in zip(wc, wc[1:] + wc[:1]):
+        D.line(layer, T(a), T(c), 0.25)
+    for fp in info["fps"]:
+        F, pos, rot = fp["fp"], fp["pos"], fp["rot"]
+        for g in F.gfx:
+            if g[1] != "F.Fab":
+                continue
+            if g[0] == "fp_rect":
+                (x0, y0), (x1, y1) = g[2], g[3]
+                pts = [_fp_to_board(q, pos, rot) for q in ((x0, y0), (x1, y0), (x1, y1), (x0, y1))]
+                for a, c in zip(pts, pts[1:] + pts[:1]):
+                    D.line(layer, T(a), T(c), 0.15)
+            elif g[0] == "fp_circle":
+                if g[3] < 0.5:                       # skip pin markers: they collide with the designator text
+                    continue
+                D.circle(layer, T(_fp_to_board(g[2], pos, rot)), g[3] * scale, 0.15)
+            elif g[0] == "fp_line":
+                D.line(layer, T(_fp_to_board(g[2], pos, rot)), T(_fp_to_board(g[3], pos, rot)), 0.15)
+            elif g[0] == "fp_poly":
+                pts = [_fp_to_board(q, pos, rot) for q in g[2]]
+                for a, c in zip(pts, pts[1:]):
+                    D.line(layer, T(a), T(c), 0.15)
+        ref = fp["ref"]
+        small = F.name.startswith(("R_", "C_"))
+        size = 1.05 if small else 1.4
+        at = T(pos)
+        if F.name.startswith("MicroD"):
+            at = T((pos[0], pos[1] + 3.0))
+        if F.name.startswith("QBFX2_DIE"):
+            at = T((0, 1.5))
+        D.text(layer, ref, at[0], at[1], size, justify="center", rot=90 if (small and rot % 180) else 0)
+        if F.name.startswith("SMP"):
+            nm = info["comps"][ref]["pins"]["1"]
+            off = T((pos[0], pos[1] - 2.9))
+            D.text(layer, nm, off[0], off[1], 1.0, justify="center")
+    p1 = T((-3.5 * P.MICROD["pitch"] - 1.3, P.MICROD["y_row1"]))
+    D.text(layer, "1", p1[0], p1[1], 1.2, justify="center")
+
+
+def bonding_diagram(D, info, centre, scale, layer=ASM):
+    """die pad -> PCB landing pad map (two Al wedge bonds per launcher), numbered per die_pads.json"""
+    cx, cy = centre
+
+    def T(p):
+        return (cx + p[0] * scale, cy - p[1] * scale)
+    h = info["die_size"] / 2
+    W = info["W"]
+    D.text(layer, f"WIRE-BOND DIAGRAM, SCALE {scale:g}:1", cx - 8.0 * scale, cy - 10.6 * scale, 1.6)
+    D.text(layer, "die launcher ids = circuits/die_pads.json = U1 pad numbers", cx - 8.0 * scale, cy - 10.6 * scale + 2.6, 1.2)
+    for (a, c, w) in (((-h, -h), (h, h), 0.3), ((-W, -W), (W, W), 0.15)):
+        pts = [(a[0], a[1]), (c[0], a[1]), (c[0], c[1]), (a[0], c[1])]
+        for p0, p1 in zip(pts, pts[1:] + pts[:1]):
+            D.line(layer, T(p0), T(p1), w)
+    D.text(layer, "QBF-X2 die", *T((0, 1.0)), 1.5, justify="center")
+    D.text(layer, "10 x 10 mm, top view", *T((0, 0.0)), 1.2, justify="center")
+    D.text(layer, f"window {2 * W:.2f} mm", *T((0, -1.0)), 1.2, justify="center")
+    for pid, (pc, u) in info["pcb_pads"].items():
+        dc = info["die_pads"][pid]
+        net = info["pad_nets"][pid]
+        sx, sy = (0.24, 0.24)
+        for (c, (w_, h_)) in ((dc, (sx, sy)), (pc, ((0.6, 0.4) if u[0] else (0.4, 0.6)))):
+            pts = [(c[0] - w_ / 2, c[1] - h_ / 2), (c[0] + w_ / 2, c[1] - h_ / 2), (c[0] + w_ / 2, c[1] + h_ / 2),
+                   (c[0] - w_ / 2, c[1] + h_ / 2)]
+            for p0, p1 in zip(pts, pts[1:] + pts[:1]):
+                D.line(layer, T(p0), T(p1), 0.15)
+        lat = (-u[1], u[0])
+        for off in (-0.06, 0.06):
+            a = (dc[0] + lat[0] * off, dc[1] + lat[1] * off)
+            b = (pc[0] - u[0] * 0.1 + lat[0] * off, pc[1] - u[1] * 0.1 + lat[1] * off)
+            D.line(layer, T(a), T(b), 0.12)
+        num = (dc[0] - u[0] * 0.55, dc[1] - u[1] * 0.55)
+        D.text(layer, str(pid), *T(num), 1.15, justify="center")
+        lab = (pc[0] + u[0] * 0.45, pc[1] + u[1] * 0.45)
+        rot = 90 if u[1] else 0
+        just = "left" if (u[0] > 0 or u[1] > 0) else "right"
+        D.text(layer, net, *T(lab), 1.15, justify=just, rot=rot)
+    for i, s_ in enumerate(("Lines: two 25 um Al-1%Si wedge bonds per launcher, straight (pads aligned).",
+                            "Ground bonds: die ground plane to the exposed GND band",
+                            "between the landing pads and at the four corners.")):
+        D.text(layer, s_, cx - 8.0 * scale, cy + 9.0 * scale + 2.0 * i, 1.15)

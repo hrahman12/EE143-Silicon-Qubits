@@ -10,14 +10,14 @@ Conventions
   The writer converts to KiCad page coordinates (y down) with PAGE_ORIGIN.
 * The chip-to-board interface is read from ../circuits/die_pads.json (the contract) and is never copied here.
 """
-import math
 import os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-QBFX2_ROOT = os.path.abspath(os.path.join(HERE, ".."))
-DIE_PADS_JSON = os.path.join(QBFX2_ROOT, "circuits", "die_pads.json")
+QBFX2_ROOT = os.environ.get("QBFX2_ROOT", os.path.abspath(os.path.join(HERE, "..")))
+DIE_PADS_JSON = os.environ.get("QBFX2_DIE_PADS", os.path.join(QBFX2_ROOT, "circuits", "die_pads.json"))
 # closed-form impedance formulas of the QFX-1 carrier (read-only reference implementation)
-RF_CALC_PY = os.path.abspath(os.path.join(QBFX2_ROOT, "..", "quantum_chip", "src", "rf_calc.py"))
+RF_CALC_PY = os.environ.get("QBFX2_RF_CALC",
+                            os.path.abspath(os.path.join(QBFX2_ROOT, "..", "quantum_chip", "src", "rf_calc.py")))
 
 # ------------------------------------------------------------------------------------------------ project
 PROJECT = dict(
@@ -39,6 +39,7 @@ BOARD = dict(
     zone_inset=0.30,                # copper pour pull-back from the outer routed edge
     inner_window_pullback=0.30,     # inner-layer copper pull-back from the die window
     top_window_pullback=0.10,       # top copper (bond ring / bond pads) to the die-window edge
+    track_start_in_pad=0.30,        # tracks start this far outward of the landing-pad centre (end cap >= 0.3 mm from edge)
 )
 
 # die window (through-cut; the die sits on a pedestal of the sample-holder base, top flush with the PCB top)
@@ -51,16 +52,16 @@ WINDOW = dict(
 BONDPAD = dict(
     setback=0.10,                   # window edge -> pad inner edge
     length=0.60,                    # radial
-    width=0.40,                     # lateral (= GCPW centre conductor, so the line starts at the pad)
+    width=0.39,                     # lateral (= GCPW centre conductor, so the line starts at the pad)
     mask_expansion=0.05,
-    gnd_open_margin=0.25,           # exposed-ground (bond landing) openings keep this far from signal copper
+    gnd_open_margin=0.27,           # exposed-ground (bond landing) openings keep this far from signal copper
     ring_open_out=0.95,             # exposed bond band: window edge -> outer edge of the mask opening
 )
 
 # ------------------------------------------------------------------------------------------------ stackup
 # (name, kind, thickness mm, material, eps_r, loss tangent, note); top to bottom. Symmetric 3-core build.
 STACKUP = [
-    ("F.Mask", "mask", 0.020, "LPI solder mask", 3.8, 0.025, "green LPI; removed over the bond band"),
+    ("F.Mask", "mask", 0.020, "LPI solder mask", 3.8, 0.025, "green LPI; open over RF lines + bond band"),
     ("F.Cu", "copper", 0.035, "Cu 1 oz (finished)", None, None, "RF GCPW, bond pads, parts, GND pour"),
     ("diel1", "core", 0.203, "Rogers RO4003C", 3.55, 0.0027, "core 1 (8 mil); GCPW dielectric"),
     ("In1.Cu", "copper", 0.018, "Cu 0.5 oz", None, None, "solid GND: GCPW reference plane"),
@@ -75,14 +76,19 @@ STACKUP = [
     ("B.Mask", "mask", 0.020, "LPI solder mask", 3.8, 0.025, "opened along the board perimeter (base contact)"),
 ]
 COPPER_LAYERS = [s[0] for s in STACKUP if s[1] == "copper"]
-FINISH = "Ni-free soft gold (see fab notes)"
+FINISH = "EPAG (Ni-free Pd-Au)"          # stackup copper_finish -> Gerber job file; see fab note 4
 
 # ------------------------------------------------------------------------------------------------ RF lines
-# 50-ohm grounded CPW on F.Cu over the In1 plane (formula: rf_calc.gcpw_z0, Ghione-Naldi conformal mapping,
-# zero thickness). Design eps_r 3.55 = Rogers RO4003C "design Dk" at 10 GHz.
+# 50-ohm grounded CPW on F.Cu over the In1 plane. Required check: rf_calc.gcpw_z0 (Ghione-Naldi conformal mapping,
+# zero thickness, no mask) within +/-5 %. Cross-check: 2D field solve with 35 um copper (carrier_lib/fd2d.py).
+# The zero-thickness formula reads ~8 % high for a 35 um / 0.15 mm-gap line and LPI mask in the gaps costs another
+# ~8 %, so the RF lines are mask-free and w/gap sit between the two models (formula +4 %, field solve -4.5 %).
+# Design eps_r 3.55 = Rogers RO4003C "design Dk" at 10 GHz.
 GCPW = dict(
-    layer="F.Cu", w=0.40, gap=0.15, h=0.203, er=3.55, z_target=50.0, z_tol=0.05,
-    bend_r=1.00,                    # every bend is a tangent arc (R / w = 2.5): no mitres, no stubs
+    layer="F.Cu", w=0.39, gap=0.17, h=0.203, er=3.55, z_target=50.0, z_tol=0.05, t_cu=0.035,
+    bend_r=1.00,                    # every bend is a tangent arc (R / w = 2.6): no mitres, no stubs
+    mask_free=True,                 # F.Mask opening over trace + gaps (stops 0.01 mm short of the ground copper)
+    corridor_inset=0.01,
 )
 VIA_FENCE = dict(pitch=1.00, offset=0.625, start_r=6.50)   # offset from line centre; first row radius at the die
 
@@ -116,8 +122,11 @@ DC = dict(
 # filter bank (top side, between the die and the DC connector); channel order is fixed by the planar routing
 FILTER_BANK = dict(
     pitch=3.5,
-    y_out_via=9.5,                  # die-side via of every channel (F.Cu <-> In2)
-    cap_dx=1.3,                     # shunt capacitor column offset from the series-resistor column
+    y_out_via=9.0,                  # die-side via of every channel (F.Cu <-> In2)
+    cap_dx=1.5,                     # shunt capacitor column offset (>= 0603 courtyard width 1.46 mm)
+    rows=dict(R1=6.3, C1=4.7, R2=3.3, C2=1.7),   # part centres above the output via (courtyards 2.96 mm long)
+    cap_via_dx=2.45,                # cap GND via offset from the resistor column
+    fanin_levels=[18.1, 17.65, 17.2, 16.85, 16.85, 17.2, 17.65, 18.1],  # J11 fan-in jog heights
     channels=["LOAD_A0", "LOAD_A1", "GATE_BSB_AN", "GATE_BSA_PREP",
               "GATE_BSA_AN", "GATE_BSB_PREP", "LOAD_B0", "LOAD_B1"],
 )
@@ -147,7 +156,7 @@ RULES = dict(
 # ------------------------------------------------------------------------------------------------ mechanics
 MOUNT = dict(holes=[(-22.5, -22.5), (22.5, -22.5), (22.5, 22.5), (-22.5, 22.5)], drill=2.7, pad=5.0,
              screw="M2.5 brass or Ti (non-magnetic) into the Cu sample-holder base")
-DOWELS = dict(holes=[(-23.5, 7.0), (23.5, -7.0)], drill=1.60, note="NPTH, for 1.5 mm dowel pins in the base")
+DOWELS = dict(holes=[(-12.5, -21.0), (16.5, 21.5)], drill=1.60, note="NPTH, for 1.5 mm dowel pins in the base")
 FIDUCIALS = [(-17.5, -23.5), (17.5, -23.5), (-23.5, 16.5)]
 # DC connector (right-angle micro-D on the north edge). Land pattern drawn from typical data: TO CONFIRM.
 MICROD = dict(x=0.0, y_row1=19.0, pitch=2.54, row_dy=2.54, drill=0.70, pad=1.10,
@@ -171,19 +180,21 @@ PARTS = dict(
                 descr="Micro-D 15-pin plug, condensed right-angle PCB, jackposts",
                 footprint="MicroD_15P_Glenair_MWDM2L-15PCBRP",
                 note="land pattern + shell finish TO CONFIRM (ask for a non-magnetic shell finish)"),
-    R10K=dict(value="10k", mfr="Vishay", mpn="PNM0603E1002BST5", status="to confirm",
+    R10K=dict(value="10k", mfr="Vishay Dale Thin Film", mpn="PNM0603E1002BST5", status="confirmed",
               descr="Thin-film resistor 10 kOhm 0.1 % 25 ppm 0603, non-magnetic (PNM series)",
-              footprint="R_0603_1608Metric", note="PNM series confirmed (PNM0603E5001BST5 listed)"),
-    R1K=dict(value="1k", mfr="Vishay", mpn="PNM0603E1001BST5", status="to confirm",
+              footprint="R_0603_1608Metric", note="distributor listing: 10 kOhm 0.1 % 0603 non-magnetic"),
+    R1K=dict(value="1k", mfr="Vishay Dale Thin Film", mpn="PNM0603E1001BST5", status="confirmed",
              descr="Thin-film resistor 1 kOhm 0.1 % 25 ppm 0603, non-magnetic (PNM series)",
-             footprint="R_0603_1608Metric", note="PNM series confirmed (PNM0603E5001BST5 listed)"),
-    C10N=dict(value="10n C0G", mfr="Vishay Vitramon", mpn="VJ0603A103JCAAC", status="to confirm",
-              descr="MLCC 10 nF 5 % C0G (NP0) 0603, VJ Non-Magnetic series (Cu barrier termination)",
+             footprint="R_0603_1608Metric", note="distributor listing found; same series as the 10 kOhm part"),
+    C10N=dict(value="10n C0G", mfr="Vishay Vitramon", mpn="VJ0603A103JCAAJ", status="to confirm",
+              descr="MLCC 10 nF 5 % 50 V C0G (NP0) 0603, VJ Non-Magnetic series (termination C = Cu barrier)",
               footprint="C_0603_1608Metric",
-              note="series confirmed; check 10 nF/0603/50 V availability (else 0805 or Knowles Syfer non-magnetic)"),
-    C18P=dict(value="18p C0G", mfr="Vishay Vitramon", mpn="VJ0603A180JCAAC", status="to confirm",
-              descr="MLCC 18 pF 5 % C0G (NP0) 0603, VJ Non-Magnetic series (Cu barrier termination)",
-              footprint="C_0603_1608Metric", note="series confirmed; ordering code to confirm"),
+              note="code built from the VJ Non-Magnetic ordering scheme, not seen listed; if 10 nF/0603 is not "
+                   "offered use 1 nF (gate f-3dB 5.96 kHz, still <= 10 kHz) or a Knowles Syfer non-magnetic C0G"),
+    C18P=dict(value="18p C0G", mfr="Vishay Vitramon", mpn="VJ0603A180JCAAJ", status="to confirm",
+              descr="MLCC 18 pF 5 % 50 V C0G (NP0) 0603, VJ Non-Magnetic series (termination C = Cu barrier)",
+              footprint="C_0603_1608Metric",
+              note="code built from the VJ Non-Magnetic ordering scheme, not seen listed (W1BC parts have Ni barrier)"),
     DIE=dict(value="QBF-X2", mfr="QBF-X2 project", mpn="QBF-X2 die rev per circuits/", status="customer supplied",
              descr="QBF-X2 superconducting die 10 x 10 x 0.525 mm, wire-bonded (24 launchers)",
              footprint="QBFX2_DIE_BONDPADS", note="not part of PCBA; die attach + Al wedge bonding after assembly"),

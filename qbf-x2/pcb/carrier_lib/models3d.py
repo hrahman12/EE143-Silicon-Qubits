@@ -8,11 +8,7 @@ import os
 
 from OCP.BRep import BRep_Builder
 from OCP.BRepAlgoAPI import BRepAlgoAPI_Cut, BRepAlgoAPI_Fuse
-from OCP.BRepBuilderAPI import BRepBuilderAPI_MakeEdge, BRepBuilderAPI_MakeFace, BRepBuilderAPI_MakeWire
-from OCP.BRepOffsetAPI import BRepOffsetAPI_MakePipe
 from OCP.BRepPrimAPI import BRepPrimAPI_MakeBox, BRepPrimAPI_MakeCylinder
-from OCP.GeomAPI import GeomAPI_PointsToBSpline
-from OCP.Approx import Approx_ParametrizationType
 from OCP.IFSelect import IFSelect_RetDone
 from OCP.Interface import Interface_Static
 from OCP.Quantity import Quantity_Color, Quantity_TOC_RGB
@@ -23,8 +19,7 @@ from OCP.TDataStd import TDataStd_Name
 from OCP.TDocStd import TDocStd_Document
 from OCP.TopoDS import TopoDS_Compound
 from OCP.XCAFDoc import XCAFDoc_ColorSurf, XCAFDoc_DocumentTool
-from OCP.collections import Array1_gp_Pnt as TColgp_Array1OfPnt
-from OCP.gp import gp_Ax2, gp_Circ, gp_Dir, gp_Pnt
+from OCP.gp import gp_Ax2, gp_Dir, gp_Pnt
 
 GOLD = (1.0, 0.78, 0.34)
 SILVER = (0.80, 0.80, 0.82)
