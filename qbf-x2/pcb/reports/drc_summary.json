@@ -1,0 +1,24 @@
+{
+ "report": "reports/drc_report.txt",
+ "drc_violations": 81,
+ "unconnected_items": 0,
+ "footprint_errors": 0,
+ "by_severity": {
+  "error": 79,
+  "warning": 2
+ },
+ "by_type": {
+  "solder_mask_bridge": 5,
+  "copper_edge_clearance": 34,
+  "silk_edge_clearance": 2,
+  "courtyards_overlap": 40
+ },
+ "examples": {
+  "solder_mask_bridge": "Front solder mask aperture bridges items with different nets",
+  "copper_edge_clearance": "Board edge clearance violation (rule inner_layers_from_edges clearance 0.3000 mm; actual 0.2000 mm)",
+  "silk_edge_clearance": "Silkscreen clipped by board edge",
+  "courtyards_overlap": "Courtyards overlap"
+ },
+ "kicad": "7.0.11",
+ "written": true
+}
