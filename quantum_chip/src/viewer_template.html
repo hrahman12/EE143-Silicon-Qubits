@@ -259,7 +259,11 @@ async function loadGLB(buf) {
   document.getElementById("loading").hidden = true;
   select("die_Al_film");
 }
-fetch("assembly.glb").then(r => { if (!r.ok) throw 0; return r.arrayBuffer(); }).then(loadGLB).catch(() => {
+// assembly.glb when served from the repo; assembly.glb.b64.txt where only text types are served
+fetch("assembly.glb").then(r => { if (!r.ok) throw 0; return r.arrayBuffer(); })
+  .catch(() => fetch("assembly.glb.b64.txt").then(r => { if (!r.ok) throw 0; return r.text(); })
+    .then(t => Uint8Array.from(atob(t.trim()), c => c.charCodeAt(0)).buffer))
+  .then(loadGLB).catch(() => {
   document.querySelector("#loading .box").innerHTML = `assembly.glb could not be fetched (opened from disk?).<br>Serve the folder (<code>python3 -m http.server</code>) or pick the file:<br><br><input type="file" id="glbfile" accept=".glb">`;
   document.getElementById("glbfile").onchange = async e => { const f = e.target.files[0]; if (f) loadGLB(await f.arrayBuffer()); };
 });
