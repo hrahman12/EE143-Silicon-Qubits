@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "qbfx2")(type "KiCad")(uri "${KIPRJMOD}/qbfx2.kicad_sym")(options "")(descr "QBF-X2 carrier symbols (generated)"))
+)

@@ -1,0 +1,1727 @@
+{
+ "units": "mm, board frame (y up, origin = die centre)",
+ "page_origin": [
+  85.0,
+  128.0
+ ],
+ "die": {
+  "size": 10.0,
+  "window_half": 5.15,
+  "relief_r": 0.6,
+  "landing_pad_centre_r": 5.55
+ },
+ "u1_pads": {
+  "1": {
+   "pcb": [
+    -3.0,
+    5.55
+   ],
+   "die": [
+    -3.0,
+    4.68
+   ],
+   "outward": [
+    0,
+    1
+   ],
+   "net": "GND"
+  },
+  "2": {
+   "pcb": [
+    -1.7999999999999998,
+    5.55
+   ],
+   "die": [
+    -1.7999999999999998,
+    4.68
+   ],
+   "outward": [
+    0,
+    1
+   ],
+   "net": "GATE_BSA_PREP"
+  },
+  "3": {
+   "pcb": [
+    -0.5999999999999996,
+    5.55
+   ],
+   "die": [
+    -0.5999999999999996,
+    4.68
+   ],
+   "outward": [
+    0,
+    1
+   ],
+   "net": "GND"
+  },
+  "4": {
+   "pcb": [
+    0.5999999999999996,
+    5.55
+   ],
+   "die": [
+    0.5999999999999996,
+    4.68
+   ],
+   "outward": [
+    0,
+    1
+   ],
+   "net": "GND"
+  },
+  "5": {
+   "pcb": [
+    1.7999999999999998,
+    5.55
+   ],
+   "die": [
+    1.7999999999999998,
+    4.68
+   ],
+   "outward": [
+    0,
+    1
+   ],
+   "net": "GATE_BSA_AN"
+  },
+  "6": {
+   "pcb": [
+    3.0,
+    5.55
+   ],
+   "die": [
+    3.0,
+    4.68
+   ],
+   "outward": [
+    0,
+    1
+   ],
+   "net": "GND"
+  },
+  "7": {
+   "pcb": [
+    5.55,
+    3.0
+   ],
+   "die": [
+    4.68,
+    3.0
+   ],
+   "outward": [
+    1,
+    0
+   ],
+   "net": "LOAD_B1"
+  },
+  "8": {
+   "pcb": [
+    5.55,
+    1.7999999999999998
+   ],
+   "die": [
+    4.68,
+    1.7999999999999998
+   ],
+   "outward": [
+    1,
+    0
+   ],
+   "net": "TRAP_B1"
+  },
+  "9": {
+   "pcb": [
+    5.55,
+    0.5999999999999996
+   ],
+   "die": [
+    4.68,
+    0.5999999999999996
+   ],
+   "outward": [
+    1,
+    0
+   ],
+   "net": "ACC_B1"
+  },
+  "10": {
+   "pcb": [
+    5.55,
+    -0.5999999999999996
+   ],
+   "die": [
+    4.68,
+    -0.5999999999999996
+   ],
+   "outward": [
+    1,
+    0
+   ],
+   "net": "ACC_B0"
+  },
+  "11": {
+   "pcb": [
+    5.55,
+    -1.7999999999999998
+   ],
+   "die": [
+    4.68,
+    -1.7999999999999998
+   ],
+   "outward": [
+    1,
+    0
+   ],
+   "net": "TRAP_B0"
+  },
+  "12": {
+   "pcb": [
+    5.55,
+    -3.0
+   ],
+   "die": [
+    4.68,
+    -3.0
+   ],
+   "outward": [
+    1,
+    0
+   ],
+   "net": "LOAD_B0"
+  },
+  "13": {
+   "pcb": [
+    -3.0,
+    -5.55
+   ],
+   "die": [
+    -3.0,
+    -4.68
+   ],
+   "outward": [
+    0,
+    -1
+   ],
+   "net": "RO_IN"
+  },
+  "14": {
+   "pcb": [
+    -1.7999999999999998,
+    -5.55
+   ],
+   "die": [
+    -1.7999999999999998,
+    -4.68
+   ],
+   "outward": [
+    0,
+    -1
+   ],
+   "net": "GATE_BSB_AN"
+  },
+  "15": {
+   "pcb": [
+    -0.5999999999999996,
+    -5.55
+   ],
+   "die": [
+    -0.5999999999999996,
+    -4.68
+   ],
+   "outward": [
+    0,
+    -1
+   ],
+   "net": "GND"
+  },
+  "16": {
+   "pcb": [
+    0.5999999999999996,
+    -5.55
+   ],
+   "die": [
+    0.5999999999999996,
+    -4.68
+   ],
+   "outward": [
+    0,
+    -1
+   ],
+   "net": "GND"
+  },
+  "17": {
+   "pcb": [
+    1.7999999999999998,
+    -5.55
+   ],
+   "die": [
+    1.7999999999999998,
+    -4.68
+   ],
+   "outward": [
+    0,
+    -1
+   ],
+   "net": "GATE_BSB_PREP"
+  },
+  "18": {
+   "pcb": [
+    3.0,
+    -5.55
+   ],
+   "die": [
+    3.0,
+    -4.68
+   ],
+   "outward": [
+    0,
+    -1
+   ],
+   "net": "RO_OUT"
+  },
+  "19": {
+   "pcb": [
+    -5.55,
+    3.0
+   ],
+   "die": [
+    -4.68,
+    3.0
+   ],
+   "outward": [
+    -1,
+    0
+   ],
+   "net": "LOAD_A0"
+  },
+  "20": {
+   "pcb": [
+    -5.55,
+    1.7999999999999998
+   ],
+   "die": [
+    -4.68,
+    1.7999999999999998
+   ],
+   "outward": [
+    -1,
+    0
+   ],
+   "net": "TRAP_A0"
+  },
+  "21": {
+   "pcb": [
+    -5.55,
+    0.5999999999999996
+   ],
+   "die": [
+    -4.68,
+    0.5999999999999996
+   ],
+   "outward": [
+    -1,
+    0
+   ],
+   "net": "ACC_A0"
+  },
+  "22": {
+   "pcb": [
+    -5.55,
+    -0.5999999999999996
+   ],
+   "die": [
+    -4.68,
+    -0.5999999999999996
+   ],
+   "outward": [
+    -1,
+    0
+   ],
+   "net": "ACC_A1"
+  },
+  "23": {
+   "pcb": [
+    -5.55,
+    -1.7999999999999998
+   ],
+   "die": [
+    -4.68,
+    -1.7999999999999998
+   ],
+   "outward": [
+    -1,
+    0
+   ],
+   "net": "TRAP_A1"
+  },
+  "24": {
+   "pcb": [
+    -5.55,
+    -3.0
+   ],
+   "die": [
+    -4.68,
+    -3.0
+   ],
+   "outward": [
+    -1,
+    0
+   ],
+   "net": "LOAD_A1"
+  }
+ },
+ "rf": {
+  "TRAP_A0": {
+   "points": [
+    [
+     -5.55,
+     1.7999999999999998
+    ],
+    [
+     -7.4,
+     1.7999999999999998
+    ],
+    [
+     -16.1,
+     10.5
+    ],
+    [
+     -18.0,
+     10.5
+    ]
+   ],
+   "length": 15.967600069948443,
+   "conn": [
+    -18.0,
+    10.5
+   ],
+   "rot": 180,
+   "n_arcs": 2,
+   "n_segs": 3,
+   "bend_turns_deg": [
+    -45.0,
+    45.0
+   ]
+  },
+  "ACC_A0": {
+   "points": [
+    [
+     -5.55,
+     0.5999999999999996
+    ],
+    [
+     -8.4,
+     0.5999999999999996
+    ],
+    [
+     -11.3,
+     3.5
+    ],
+    [
+     -18.0,
+     3.5
+    ]
+   ],
+   "length": 13.565161408184492,
+   "conn": [
+    -18.0,
+    3.5
+   ],
+   "rot": 180,
+   "n_arcs": 2,
+   "n_segs": 3,
+   "bend_turns_deg": [
+    -45.0,
+    45.0
+   ]
+  },
+  "ACC_A1": {
+   "points": [
+    [
+     -5.55,
+     -0.5999999999999996
+    ],
+    [
+     -8.4,
+     -0.5999999999999996
+    ],
+    [
+     -11.3,
+     -3.5
+    ],
+    [
+     -18.0,
+     -3.5
+    ]
+   ],
+   "length": 13.565161408184492,
+   "conn": [
+    -18.0,
+    -3.5
+   ],
+   "rot": 180,
+   "n_arcs": 2,
+   "n_segs": 3,
+   "bend_turns_deg": [
+    45.0,
+    -45.0
+   ]
+  },
+  "TRAP_A1": {
+   "points": [
+    [
+     -5.55,
+     -1.7999999999999998
+    ],
+    [
+     -7.4,
+     -1.7999999999999998
+    ],
+    [
+     -16.1,
+     -10.5
+    ],
+    [
+     -18.0,
+     -10.5
+    ]
+   ],
+   "length": 15.967600069948443,
+   "conn": [
+    -18.0,
+    -10.5
+   ],
+   "rot": 180,
+   "n_arcs": 2,
+   "n_segs": 3,
+   "bend_turns_deg": [
+    45.0,
+    -45.0
+   ]
+  },
+  "TRAP_B1": {
+   "points": [
+    [
+     5.55,
+     1.7999999999999998
+    ],
+    [
+     7.4,
+     1.7999999999999998
+    ],
+    [
+     16.1,
+     10.5
+    ],
+    [
+     18.0,
+     10.5
+    ]
+   ],
+   "length": 15.967600069948443,
+   "conn": [
+    18.0,
+    10.5
+   ],
+   "rot": 0,
+   "n_arcs": 2,
+   "n_segs": 3,
+   "bend_turns_deg": [
+    45.0,
+    -45.0
+   ]
+  },
+  "ACC_B1": {
+   "points": [
+    [
+     5.55,
+     0.5999999999999996
+    ],
+    [
+     8.4,
+     0.5999999999999996
+    ],
+    [
+     11.3,
+     3.5
+    ],
+    [
+     18.0,
+     3.5
+    ]
+   ],
+   "length": 13.565161408184492,
+   "conn": [
+    18.0,
+    3.5
+   ],
+   "rot": 0,
+   "n_arcs": 2,
+   "n_segs": 3,
+   "bend_turns_deg": [
+    45.0,
+    -45.0
+   ]
+  },
+  "ACC_B0": {
+   "points": [
+    [
+     5.55,
+     -0.5999999999999996
+    ],
+    [
+     8.4,
+     -0.5999999999999996
+    ],
+    [
+     11.3,
+     -3.5
+    ],
+    [
+     18.0,
+     -3.5
+    ]
+   ],
+   "length": 13.565161408184492,
+   "conn": [
+    18.0,
+    -3.5
+   ],
+   "rot": 0,
+   "n_arcs": 2,
+   "n_segs": 3,
+   "bend_turns_deg": [
+    -45.0,
+    45.0
+   ]
+  },
+  "TRAP_B0": {
+   "points": [
+    [
+     5.55,
+     -1.7999999999999998
+    ],
+    [
+     7.4,
+     -1.7999999999999998
+    ],
+    [
+     16.1,
+     -10.5
+    ],
+    [
+     18.0,
+     -10.5
+    ]
+   ],
+   "length": 15.967600069948443,
+   "conn": [
+    18.0,
+    -10.5
+   ],
+   "rot": 0,
+   "n_arcs": 2,
+   "n_segs": 3,
+   "bend_turns_deg": [
+    -45.0,
+    45.0
+   ]
+  },
+  "RO_IN": {
+   "points": [
+    [
+     -3.0,
+     -5.55
+    ],
+    [
+     -3.0,
+     -7.5
+    ],
+    [
+     -7.0,
+     -11.5
+    ],
+    [
+     -7.0,
+     -18.0
+    ]
+   ],
+   "length": 14.020796326794898,
+   "conn": [
+    -7.0,
+    -18.0
+   ],
+   "rot": 270,
+   "n_arcs": 2,
+   "n_segs": 3,
+   "bend_turns_deg": [
+    -45.0,
+    45.0
+   ]
+  },
+  "RO_OUT": {
+   "points": [
+    [
+     3.0,
+     -5.55
+    ],
+    [
+     3.0,
+     -7.5
+    ],
+    [
+     7.0,
+     -11.5
+    ],
+    [
+     7.0,
+     -18.0
+    ]
+   ],
+   "length": 14.020796326794898,
+   "conn": [
+    7.0,
+    -18.0
+   ],
+   "rot": 270,
+   "n_arcs": 2,
+   "n_segs": 3,
+   "bend_turns_deg": [
+    45.0,
+    -45.0
+   ]
+  }
+ },
+ "dc_in2": {
+  "LOAD_A0": [
+   [
+    -7.1,
+    3.5
+   ],
+   [
+    -12.3,
+    8.700000000000001
+   ],
+   [
+    -12.3,
+    9.5
+   ]
+  ],
+  "LOAD_A1": [
+   [
+    -7.1,
+    -3.5
+   ],
+   [
+    -5.95,
+    -3.5
+   ],
+   [
+    -5.95,
+    3.4000000000000004
+   ],
+   [
+    -6.55,
+    4.0
+   ],
+   [
+    -6.55,
+    5.6
+   ],
+   [
+    -8.8,
+    7.8500000000000005
+   ],
+   [
+    -8.8,
+    9.5
+   ]
+  ],
+  "LOAD_B1": [
+   [
+    7.1,
+    3.5
+   ],
+   [
+    12.3,
+    8.700000000000001
+   ],
+   [
+    12.3,
+    9.5
+   ]
+  ],
+  "LOAD_B0": [
+   [
+    7.1,
+    -3.5
+   ],
+   [
+    5.95,
+    -3.5
+   ],
+   [
+    5.95,
+    3.4000000000000004
+   ],
+   [
+    6.55,
+    4.0
+   ],
+   [
+    6.55,
+    5.6
+   ],
+   [
+    8.8,
+    7.8500000000000005
+   ],
+   [
+    8.8,
+    9.5
+   ]
+  ],
+  "GATE_BSA_PREP": [
+   [
+    -1.7999999999999998,
+    7.0
+   ],
+   [
+    -1.7999999999999998,
+    9.5
+   ]
+  ],
+  "GATE_BSA_AN": [
+   [
+    1.7999999999999998,
+    7.0
+   ],
+   [
+    1.7999999999999998,
+    9.5
+   ]
+  ],
+  "GATE_BSB_AN": [
+   [
+    -1.7999999999999998,
+    -7.0
+   ],
+   [
+    -1.7999999999999998,
+    -5.55
+   ],
+   [
+    -4.0,
+    -5.55
+   ],
+   [
+    -4.6,
+    -6.1499999999999995
+   ],
+   [
+    -6.1499999999999995,
+    -6.1499999999999995
+   ],
+   [
+    -6.1499999999999995,
+    -4.6
+   ],
+   [
+    -5.55,
+    -4.0
+   ],
+   [
+    -5.55,
+    4.0
+   ],
+   [
+    -6.1499999999999995,
+    4.6
+   ],
+   [
+    -6.1499999999999995,
+    6.5
+   ],
+   [
+    -5.3,
+    7.35
+   ],
+   [
+    -5.3,
+    9.5
+   ]
+  ],
+  "GATE_BSB_PREP": [
+   [
+    1.7999999999999998,
+    -7.0
+   ],
+   [
+    1.7999999999999998,
+    -5.55
+   ],
+   [
+    4.0,
+    -5.55
+   ],
+   [
+    4.6,
+    -6.1499999999999995
+   ],
+   [
+    6.1499999999999995,
+    -6.1499999999999995
+   ],
+   [
+    6.1499999999999995,
+    -4.6
+   ],
+   [
+    5.55,
+    -4.0
+   ],
+   [
+    5.55,
+    4.0
+   ],
+   [
+    6.1499999999999995,
+    4.6
+   ],
+   [
+    6.1499999999999995,
+    6.5
+   ],
+   [
+    5.3,
+    7.35
+   ],
+   [
+    5.3,
+    9.5
+   ]
+  ]
+ },
+ "chan_x": {
+  "LOAD_A0": -12.3,
+  "LOAD_A1": -8.8,
+  "GATE_BSB_AN": -5.3,
+  "GATE_BSA_PREP": -1.7999999999999998,
+  "GATE_BSA_AN": 1.7999999999999998,
+  "GATE_BSB_PREP": 5.3,
+  "LOAD_B0": 8.8,
+  "LOAD_B1": 12.3
+ },
+ "name_of": {
+  "GND": "GND",
+  "GATE_BSA_PREP": "GATE_BSA_PREP",
+  "GATE_BSA_AN": "GATE_BSA_AN",
+  "LOAD_B1": "LOAD_B1",
+  "TRAP_B1": "TRAP_B1",
+  "ACC_B1": "ACC_B1",
+  "ACC_B0": "ACC_B0",
+  "TRAP_B0": "TRAP_B0",
+  "LOAD_B0": "LOAD_B0",
+  "RO_IN": "RO_IN",
+  "GATE_BSB_AN": "GATE_BSB_AN",
+  "GATE_BSB_PREP": "GATE_BSB_PREP",
+  "RO_OUT": "RO_OUT",
+  "LOAD_A0": "LOAD_A0",
+  "TRAP_A0": "TRAP_A0",
+  "ACC_A0": "ACC_A0",
+  "ACC_A1": "ACC_A1",
+  "TRAP_A1": "TRAP_A1",
+  "LOAD_A1": "LOAD_A1",
+  "LOAD_A0_IN": "LOAD_A0_IN",
+  "LOAD_A1_IN": "LOAD_A1_IN",
+  "GATE_BSB_AN_IN": "GATE_BSB_AN_IN",
+  "GATE_BSA_PREP_IN": "GATE_BSA_PREP_IN",
+  "GATE_BSA_AN_IN": "GATE_BSA_AN_IN",
+  "GATE_BSB_PREP_IN": "GATE_BSB_PREP_IN",
+  "LOAD_B0_IN": "LOAD_B0_IN",
+  "LOAD_B1_IN": "LOAD_B1_IN",
+  "LOAD_A0_NA": "Net-(C1-Pad1)",
+  "LOAD_A1_NA": "Net-(C2-Pad1)",
+  "GATE_BSB_AN_NA": "Net-(C3-Pad1)",
+  "GATE_BSA_PREP_NA": "Net-(C5-Pad1)",
+  "GATE_BSA_AN_NA": "Net-(C7-Pad1)",
+  "GATE_BSB_PREP_NA": "Net-(C9-Pad1)",
+  "LOAD_B0_NA": "Net-(C11-Pad1)",
+  "LOAD_B1_NA": "Net-(C12-Pad1)"
+ },
+ "comps": {
+  "U1": {
+   "ref": "U1",
+   "sym": "DIE",
+   "value": "QBF-X2",
+   "footprint": "QBFX2_DIE_BONDPADS",
+   "part": "DIE",
+   "pins": {
+    "1": "GND",
+    "2": "GATE_BSA_PREP",
+    "3": "GND",
+    "4": "GND",
+    "5": "GATE_BSA_AN",
+    "6": "GND",
+    "7": "LOAD_B1",
+    "8": "TRAP_B1",
+    "9": "ACC_B1",
+    "10": "ACC_B0",
+    "11": "TRAP_B0",
+    "12": "LOAD_B0",
+    "13": "RO_IN",
+    "14": "GATE_BSB_AN",
+    "15": "GND",
+    "16": "GND",
+    "17": "GATE_BSB_PREP",
+    "18": "RO_OUT",
+    "19": "LOAD_A0",
+    "20": "TRAP_A0",
+    "21": "ACC_A0",
+    "22": "ACC_A1",
+    "23": "TRAP_A1",
+    "24": "LOAD_A1"
+   },
+   "extra": {}
+  },
+  "J1": {
+   "ref": "J1",
+   "sym": "SMP",
+   "value": "SMP-MSLD-PCS-NM",
+   "footprint": "SMP_Amphenol_SMP-MSLD-PCS-NM",
+   "part": "SMP",
+   "pins": {
+    "1": "TRAP_A0",
+    "2": "GND"
+   },
+   "extra": {}
+  },
+  "J2": {
+   "ref": "J2",
+   "sym": "SMP",
+   "value": "SMP-MSLD-PCS-NM",
+   "footprint": "SMP_Amphenol_SMP-MSLD-PCS-NM",
+   "part": "SMP",
+   "pins": {
+    "1": "ACC_A0",
+    "2": "GND"
+   },
+   "extra": {}
+  },
+  "J3": {
+   "ref": "J3",
+   "sym": "SMP",
+   "value": "SMP-MSLD-PCS-NM",
+   "footprint": "SMP_Amphenol_SMP-MSLD-PCS-NM",
+   "part": "SMP",
+   "pins": {
+    "1": "ACC_A1",
+    "2": "GND"
+   },
+   "extra": {}
+  },
+  "J4": {
+   "ref": "J4",
+   "sym": "SMP",
+   "value": "SMP-MSLD-PCS-NM",
+   "footprint": "SMP_Amphenol_SMP-MSLD-PCS-NM",
+   "part": "SMP",
+   "pins": {
+    "1": "TRAP_A1",
+    "2": "GND"
+   },
+   "extra": {}
+  },
+  "J5": {
+   "ref": "J5",
+   "sym": "SMP",
+   "value": "SMP-MSLD-PCS-NM",
+   "footprint": "SMP_Amphenol_SMP-MSLD-PCS-NM",
+   "part": "SMP",
+   "pins": {
+    "1": "TRAP_B1",
+    "2": "GND"
+   },
+   "extra": {}
+  },
+  "J6": {
+   "ref": "J6",
+   "sym": "SMP",
+   "value": "SMP-MSLD-PCS-NM",
+   "footprint": "SMP_Amphenol_SMP-MSLD-PCS-NM",
+   "part": "SMP",
+   "pins": {
+    "1": "ACC_B1",
+    "2": "GND"
+   },
+   "extra": {}
+  },
+  "J7": {
+   "ref": "J7",
+   "sym": "SMP",
+   "value": "SMP-MSLD-PCS-NM",
+   "footprint": "SMP_Amphenol_SMP-MSLD-PCS-NM",
+   "part": "SMP",
+   "pins": {
+    "1": "ACC_B0",
+    "2": "GND"
+   },
+   "extra": {}
+  },
+  "J8": {
+   "ref": "J8",
+   "sym": "SMP",
+   "value": "SMP-MSLD-PCS-NM",
+   "footprint": "SMP_Amphenol_SMP-MSLD-PCS-NM",
+   "part": "SMP",
+   "pins": {
+    "1": "TRAP_B0",
+    "2": "GND"
+   },
+   "extra": {}
+  },
+  "J9": {
+   "ref": "J9",
+   "sym": "SMP",
+   "value": "SMP-MSLD-PCS-NM",
+   "footprint": "SMP_Amphenol_SMP-MSLD-PCS-NM",
+   "part": "SMP",
+   "pins": {
+    "1": "RO_IN",
+    "2": "GND"
+   },
+   "extra": {}
+  },
+  "J10": {
+   "ref": "J10",
+   "sym": "SMP",
+   "value": "SMP-MSLD-PCS-NM",
+   "footprint": "SMP_Amphenol_SMP-MSLD-PCS-NM",
+   "part": "SMP",
+   "pins": {
+    "1": "RO_OUT",
+    "2": "GND"
+   },
+   "extra": {}
+  },
+  "J11": {
+   "ref": "J11",
+   "sym": "MICROD",
+   "value": "MWDM2L-15PCBRP-.110",
+   "footprint": "MicroD_15P_Glenair_MWDM2L-15PCBRP",
+   "part": "MICROD",
+   "pins": {
+    "1": "LOAD_A0_IN",
+    "2": "LOAD_A1_IN",
+    "3": "GATE_BSB_AN_IN",
+    "4": "GATE_BSA_PREP_IN",
+    "5": "GATE_BSA_AN_IN",
+    "6": "GATE_BSB_PREP_IN",
+    "7": "LOAD_B0_IN",
+    "8": "LOAD_B1_IN",
+    "9": "GND",
+    "10": "GND",
+    "11": "GND",
+    "12": "GND",
+    "13": "GND",
+    "14": "GND",
+    "15": "GND",
+    "SH": "GND"
+   },
+   "extra": {}
+  },
+  "R1": {
+   "ref": "R1",
+   "sym": "R",
+   "value": "1k",
+   "footprint": "R_0603_1608Metric",
+   "part": "R1K",
+   "pins": {
+    "1": "LOAD_A0_IN",
+    "2": "LOAD_A0_NA"
+   },
+   "extra": {}
+  },
+  "C1": {
+   "ref": "C1",
+   "sym": "C",
+   "value": "18p C0G",
+   "footprint": "C_0603_1608Metric",
+   "part": "C18P",
+   "pins": {
+    "1": "LOAD_A0_NA",
+    "2": "GND"
+   },
+   "extra": {}
+  },
+  "R2": {
+   "ref": "R2",
+   "sym": "R",
+   "value": "1k",
+   "footprint": "R_0603_1608Metric",
+   "part": "R1K",
+   "pins": {
+    "1": "LOAD_A0_NA",
+    "2": "LOAD_A0"
+   },
+   "extra": {}
+  },
+  "R3": {
+   "ref": "R3",
+   "sym": "R",
+   "value": "1k",
+   "footprint": "R_0603_1608Metric",
+   "part": "R1K",
+   "pins": {
+    "1": "LOAD_A1_IN",
+    "2": "LOAD_A1_NA"
+   },
+   "extra": {}
+  },
+  "C2": {
+   "ref": "C2",
+   "sym": "C",
+   "value": "18p C0G",
+   "footprint": "C_0603_1608Metric",
+   "part": "C18P",
+   "pins": {
+    "1": "LOAD_A1_NA",
+    "2": "GND"
+   },
+   "extra": {}
+  },
+  "R4": {
+   "ref": "R4",
+   "sym": "R",
+   "value": "1k",
+   "footprint": "R_0603_1608Metric",
+   "part": "R1K",
+   "pins": {
+    "1": "LOAD_A1_NA",
+    "2": "LOAD_A1"
+   },
+   "extra": {}
+  },
+  "R5": {
+   "ref": "R5",
+   "sym": "R",
+   "value": "10k",
+   "footprint": "R_0603_1608Metric",
+   "part": "R10K",
+   "pins": {
+    "1": "GATE_BSB_AN_IN",
+    "2": "GATE_BSB_AN_NA"
+   },
+   "extra": {}
+  },
+  "C3": {
+   "ref": "C3",
+   "sym": "C",
+   "value": "10n C0G",
+   "footprint": "C_0603_1608Metric",
+   "part": "C10N",
+   "pins": {
+    "1": "GATE_BSB_AN_NA",
+    "2": "GND"
+   },
+   "extra": {}
+  },
+  "R6": {
+   "ref": "R6",
+   "sym": "R",
+   "value": "10k",
+   "footprint": "R_0603_1608Metric",
+   "part": "R10K",
+   "pins": {
+    "1": "GATE_BSB_AN_NA",
+    "2": "GATE_BSB_AN"
+   },
+   "extra": {}
+  },
+  "C4": {
+   "ref": "C4",
+   "sym": "C",
+   "value": "10n C0G",
+   "footprint": "C_0603_1608Metric",
+   "part": "C10N",
+   "pins": {
+    "1": "GATE_BSB_AN",
+    "2": "GND"
+   },
+   "extra": {}
+  },
+  "R7": {
+   "ref": "R7",
+   "sym": "R",
+   "value": "10k",
+   "footprint": "R_0603_1608Metric",
+   "part": "R10K",
+   "pins": {
+    "1": "GATE_BSA_PREP_IN",
+    "2": "GATE_BSA_PREP_NA"
+   },
+   "extra": {}
+  },
+  "C5": {
+   "ref": "C5",
+   "sym": "C",
+   "value": "10n C0G",
+   "footprint": "C_0603_1608Metric",
+   "part": "C10N",
+   "pins": {
+    "1": "GATE_BSA_PREP_NA",
+    "2": "GND"
+   },
+   "extra": {}
+  },
+  "R8": {
+   "ref": "R8",
+   "sym": "R",
+   "value": "10k",
+   "footprint": "R_0603_1608Metric",
+   "part": "R10K",
+   "pins": {
+    "1": "GATE_BSA_PREP_NA",
+    "2": "GATE_BSA_PREP"
+   },
+   "extra": {}
+  },
+  "C6": {
+   "ref": "C6",
+   "sym": "C",
+   "value": "10n C0G",
+   "footprint": "C_0603_1608Metric",
+   "part": "C10N",
+   "pins": {
+    "1": "GATE_BSA_PREP",
+    "2": "GND"
+   },
+   "extra": {}
+  },
+  "R9": {
+   "ref": "R9",
+   "sym": "R",
+   "value": "10k",
+   "footprint": "R_0603_1608Metric",
+   "part": "R10K",
+   "pins": {
+    "1": "GATE_BSA_AN_IN",
+    "2": "GATE_BSA_AN_NA"
+   },
+   "extra": {}
+  },
+  "C7": {
+   "ref": "C7",
+   "sym": "C",
+   "value": "10n C0G",
+   "footprint": "C_0603_1608Metric",
+   "part": "C10N",
+   "pins": {
+    "1": "GATE_BSA_AN_NA",
+    "2": "GND"
+   },
+   "extra": {}
+  },
+  "R10": {
+   "ref": "R10",
+   "sym": "R",
+   "value": "10k",
+   "footprint": "R_0603_1608Metric",
+   "part": "R10K",
+   "pins": {
+    "1": "GATE_BSA_AN_NA",
+    "2": "GATE_BSA_AN"
+   },
+   "extra": {}
+  },
+  "C8": {
+   "ref": "C8",
+   "sym": "C",
+   "value": "10n C0G",
+   "footprint": "C_0603_1608Metric",
+   "part": "C10N",
+   "pins": {
+    "1": "GATE_BSA_AN",
+    "2": "GND"
+   },
+   "extra": {}
+  },
+  "R11": {
+   "ref": "R11",
+   "sym": "R",
+   "value": "10k",
+   "footprint": "R_0603_1608Metric",
+   "part": "R10K",
+   "pins": {
+    "1": "GATE_BSB_PREP_IN",
+    "2": "GATE_BSB_PREP_NA"
+   },
+   "extra": {}
+  },
+  "C9": {
+   "ref": "C9",
+   "sym": "C",
+   "value": "10n C0G",
+   "footprint": "C_0603_1608Metric",
+   "part": "C10N",
+   "pins": {
+    "1": "GATE_BSB_PREP_NA",
+    "2": "GND"
+   },
+   "extra": {}
+  },
+  "R12": {
+   "ref": "R12",
+   "sym": "R",
+   "value": "10k",
+   "footprint": "R_0603_1608Metric",
+   "part": "R10K",
+   "pins": {
+    "1": "GATE_BSB_PREP_NA",
+    "2": "GATE_BSB_PREP"
+   },
+   "extra": {}
+  },
+  "C10": {
+   "ref": "C10",
+   "sym": "C",
+   "value": "10n C0G",
+   "footprint": "C_0603_1608Metric",
+   "part": "C10N",
+   "pins": {
+    "1": "GATE_BSB_PREP",
+    "2": "GND"
+   },
+   "extra": {}
+  },
+  "R13": {
+   "ref": "R13",
+   "sym": "R",
+   "value": "1k",
+   "footprint": "R_0603_1608Metric",
+   "part": "R1K",
+   "pins": {
+    "1": "LOAD_B0_IN",
+    "2": "LOAD_B0_NA"
+   },
+   "extra": {}
+  },
+  "C11": {
+   "ref": "C11",
+   "sym": "C",
+   "value": "18p C0G",
+   "footprint": "C_0603_1608Metric",
+   "part": "C18P",
+   "pins": {
+    "1": "LOAD_B0_NA",
+    "2": "GND"
+   },
+   "extra": {}
+  },
+  "R14": {
+   "ref": "R14",
+   "sym": "R",
+   "value": "1k",
+   "footprint": "R_0603_1608Metric",
+   "part": "R1K",
+   "pins": {
+    "1": "LOAD_B0_NA",
+    "2": "LOAD_B0"
+   },
+   "extra": {}
+  },
+  "R15": {
+   "ref": "R15",
+   "sym": "R",
+   "value": "1k",
+   "footprint": "R_0603_1608Metric",
+   "part": "R1K",
+   "pins": {
+    "1": "LOAD_B1_IN",
+    "2": "LOAD_B1_NA"
+   },
+   "extra": {}
+  },
+  "C12": {
+   "ref": "C12",
+   "sym": "C",
+   "value": "18p C0G",
+   "footprint": "C_0603_1608Metric",
+   "part": "C18P",
+   "pins": {
+    "1": "LOAD_B1_NA",
+    "2": "GND"
+   },
+   "extra": {}
+  },
+  "R16": {
+   "ref": "R16",
+   "sym": "R",
+   "value": "1k",
+   "footprint": "R_0603_1608Metric",
+   "part": "R1K",
+   "pins": {
+    "1": "LOAD_B1_NA",
+    "2": "LOAD_B1"
+   },
+   "extra": {}
+  },
+  "H1": {
+   "ref": "H1",
+   "sym": "MH",
+   "value": "M2.5",
+   "footprint": "MountingHole_2.7mm_M2.5_Pad",
+   "part": "MH",
+   "pins": {
+    "1": "GND"
+   },
+   "extra": {}
+  },
+  "H2": {
+   "ref": "H2",
+   "sym": "MH",
+   "value": "M2.5",
+   "footprint": "MountingHole_2.7mm_M2.5_Pad",
+   "part": "MH",
+   "pins": {
+    "1": "GND"
+   },
+   "extra": {}
+  },
+  "H3": {
+   "ref": "H3",
+   "sym": "MH",
+   "value": "M2.5",
+   "footprint": "MountingHole_2.7mm_M2.5_Pad",
+   "part": "MH",
+   "pins": {
+    "1": "GND"
+   },
+   "extra": {}
+  },
+  "H4": {
+   "ref": "H4",
+   "sym": "MH",
+   "value": "M2.5",
+   "footprint": "MountingHole_2.7mm_M2.5_Pad",
+   "part": "MH",
+   "pins": {
+    "1": "GND"
+   },
+   "extra": {}
+  }
+ },
+ "board_only": [
+  "FID1",
+  "FID2",
+  "FID3",
+  "DW1",
+  "DW2"
+ ],
+ "vias": {
+  "total": 861,
+  "stitch": 833,
+  "by_tag": {
+   "bond": 52,
+   "edge": 102,
+   "fence": 170,
+   "grid": 389,
+   "launch": 120
+  },
+  "dc": 16,
+  "cap_gnd": 12
+ },
+ "drills": {
+  "0.20 PTH": 845,
+  "0.25 PTH": 16,
+  "0.70 PTH": 15,
+  "1.20 PTH": 2,
+  "1.60 NPTH": 2,
+  "2.70 PTH": 4
+ },
+ "gcpw": {
+  "layer": "F.Cu",
+  "w": 0.4,
+  "gap": 0.15,
+  "h": 0.203,
+  "er": 3.55,
+  "z_target": 50.0,
+  "z_tol": 0.05,
+  "bend_r": 1.0
+ },
+ "stackup": [
+  [
+   "F.Mask",
+   "mask",
+   0.02,
+   "LPI solder mask",
+   3.8,
+   0.025,
+   "green LPI; removed over the bond band"
+  ],
+  [
+   "F.Cu",
+   "copper",
+   0.035,
+   "Cu 1 oz (finished)",
+   null,
+   null,
+   "RF GCPW, bond pads, parts, GND pour"
+  ],
+  [
+   "diel1",
+   "core",
+   0.203,
+   "Rogers RO4003C",
+   3.55,
+   0.0027,
+   "core 1 (8 mil); GCPW dielectric"
+  ],
+  [
+   "In1.Cu",
+   "copper",
+   0.018,
+   "Cu 0.5 oz",
+   null,
+   null,
+   "solid GND: GCPW reference plane"
+  ],
+  [
+   "diel2",
+   "prepreg",
+   0.203,
+   "Rogers RO4450F",
+   3.52,
+   0.004,
+   "2 x 4 mil plies"
+  ],
+  [
+   "In2.Cu",
+   "copper",
+   0.018,
+   "Cu 0.5 oz",
+   null,
+   null,
+   "DC routing (stripline between In1/In3) + GND fill"
+  ],
+  [
+   "diel3",
+   "core",
+   0.508,
+   "Rogers RO4003C",
+   3.55,
+   0.0027,
+   "core 2 (20 mil)"
+  ],
+  [
+   "In3.Cu",
+   "copper",
+   0.018,
+   "Cu 0.5 oz",
+   null,
+   null,
+   "solid GND"
+  ],
+  [
+   "diel4",
+   "prepreg",
+   0.203,
+   "Rogers RO4450F",
+   3.52,
+   0.004,
+   "2 x 4 mil plies"
+  ],
+  [
+   "In4.Cu",
+   "copper",
+   0.018,
+   "Cu 0.5 oz",
+   null,
+   null,
+   "solid GND"
+  ],
+  [
+   "diel5",
+   "core",
+   0.203,
+   "Rogers RO4003C",
+   3.55,
+   0.0027,
+   "core 3 (8 mil)"
+  ],
+  [
+   "B.Cu",
+   "copper",
+   0.035,
+   "Cu 1 oz (finished)",
+   null,
+   null,
+   "solid GND; contacts the sample-holder base"
+  ],
+  [
+   "B.Mask",
+   "mask",
+   0.02,
+   "LPI solder mask",
+   3.8,
+   0.025,
+   "opened along the board perimeter (base contact)"
+  ]
+ ],
+ "filters": {
+  "gate": {
+   "topology": "RC-RC ladder",
+   "R1": 10000.0,
+   "C1": 1e-08,
+   "R2": 10000.0,
+   "C2": 1e-08,
+   "fc_max": 10000.0
+  },
+  "load": {
+   "topology": "R-C-R T-section",
+   "R1": 1000.0,
+   "C": 1.8e-11,
+   "R2": 1000.0,
+   "band": [
+    10000000.0,
+    20000000.0
+   ],
+   "bw_min": 5000000.0
+  },
+  "source_R": 50.0,
+  "load_loop_L": 1e-09
+ },
+ "cutoffs": {
+  "gate": {
+   "f3db": 595.6201131172044,
+   "f_single": 1591.5494309189535,
+   "atten_1MHz_dB": -111.92727173931195
+  },
+  "gate_50ohm": {
+   "f3db": 593.5244496295668,
+   "f_single": 1591.5494309189535,
+   "atten_1MHz_dB": -111.97059275579635
+  },
+  "load": {
+   "f3db_current": 17684864.94907931,
+   "f3db_open": 8841941.28288306,
+   "formula_current": 17683882.56576615,
+   "formula_open": 8841941.282883074,
+   "tau_current_ns": 8.999500055564807,
+   "tau_open_ns": 18.00000000000003,
+   "atten_1GHz_dB": -35.04949447073471
+  },
+  "load_50ohm": {
+   "f3db_current": 17263796.74349847,
+   "f3db_open": 8420896.45988866,
+   "formula_current": 17262837.742771715,
+   "formula_open": 8420896.459888643,
+   "tau_current_ns": 9.219000052919004,
+   "tau_open_ns": 18.899999999999963,
+   "atten_1GHz_dB": -35.258739255305514
+  }
+ },
+ "bond_band_openings": 18
+}
