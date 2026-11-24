@@ -5,3 +5,9 @@ reference_decks/
 course_materials/
 deck/versions/
 deck/*.mp4
+quantum_chip/out/assembly.step
+quantum_chip/out/_cache/
+quantum_chip/out/*.blend1
+quantum_chip/out/*-backups/
+quantum_chip/out/fp-info-cache
+__pycache__/

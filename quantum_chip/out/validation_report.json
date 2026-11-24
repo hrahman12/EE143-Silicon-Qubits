@@ -1,0 +1,333 @@
+{
+ "summary": {
+  "PASS": 54,
+  "WARN": 0,
+  "FAIL": 0
+ },
+ "results": [
+  {
+   "category": "PCB net connectivity",
+   "check": "KiCad DRC violations",
+   "status": "PASS",
+   "detail": "0 violations (KiCad 7 DRC engine, rules in rf_carrier.kicad_pro/.kicad_dru)"
+  },
+  {
+   "category": "PCB net connectivity",
+   "check": "KiCad unconnected items (ratsnest)",
+   "status": "PASS",
+   "detail": "0 unconnected pads"
+  },
+  {
+   "category": "Trace and via continuity",
+   "check": "Q1_FLUX: connector -> bond pad",
+   "status": "PASS",
+   "detail": "9 KiCad items in one connected chain; layers F.Cu+In2.Cu+B.Cu; 2 via(s)"
+  },
+  {
+   "category": "Trace and via continuity",
+   "check": "Q2_DRIVE: connector -> bond pad",
+   "status": "PASS",
+   "detail": "5 KiCad items in one connected chain; layers F.Cu; 0 via(s)"
+  },
+  {
+   "category": "Trace and via continuity",
+   "check": "Q2_FLUX: connector -> bond pad",
+   "status": "PASS",
+   "detail": "10 KiCad items in one connected chain; layers F.Cu+In2.Cu+B.Cu; 2 via(s)"
+  },
+  {
+   "category": "Trace and via continuity",
+   "check": "Q3_FLUX: connector -> bond pad",
+   "status": "PASS",
+   "detail": "10 KiCad items in one connected chain; layers F.Cu+In2.Cu+B.Cu; 2 via(s)"
+  },
+  {
+   "category": "Trace and via continuity",
+   "check": "Q3_DRIVE: connector -> bond pad",
+   "status": "PASS",
+   "detail": "5 KiCad items in one connected chain; layers F.Cu; 0 via(s)"
+  },
+  {
+   "category": "Trace and via continuity",
+   "check": "Q4_FLUX: connector -> bond pad",
+   "status": "PASS",
+   "detail": "9 KiCad items in one connected chain; layers F.Cu+In2.Cu+B.Cu; 2 via(s)"
+  },
+  {
+   "category": "Trace and via continuity",
+   "check": "Q4_DRIVE: connector -> bond pad",
+   "status": "PASS",
+   "detail": "5 KiCad items in one connected chain; layers F.Cu; 0 via(s)"
+  },
+  {
+   "category": "Trace and via continuity",
+   "check": "PROBE_OUT: connector -> bond pad",
+   "status": "PASS",
+   "detail": "5 KiCad items in one connected chain; layers F.Cu; 0 via(s)"
+  },
+  {
+   "category": "Trace and via continuity",
+   "check": "PROBE_IN: connector -> bond pad",
+   "status": "PASS",
+   "detail": "5 KiCad items in one connected chain; layers F.Cu; 0 via(s)"
+  },
+  {
+   "category": "Trace and via continuity",
+   "check": "Q1_DRIVE: connector -> bond pad",
+   "status": "PASS",
+   "detail": "5 KiCad items in one connected chain; layers F.Cu; 0 via(s)"
+  },
+  {
+   "category": "Trace and via continuity",
+   "check": "blind via Q1_FLUX F.Cu->In2.Cu lands on copper at both ends",
+   "status": "PASS",
+   "detail": "at (-3.00, 6.25) mm, spans F.Cu, In1.Cu, In2.Cu"
+  },
+  {
+   "category": "Trace and via continuity",
+   "check": "blind via Q1_FLUX In2.Cu->B.Cu lands on copper at both ends",
+   "status": "PASS",
+   "detail": "at (-7.50, -11.50) mm, spans In2.Cu, In3.Cu, In4.Cu, B.Cu"
+  },
+  {
+   "category": "Trace and via continuity",
+   "check": "blind via Q2_FLUX F.Cu->In2.Cu lands on copper at both ends",
+   "status": "PASS",
+   "detail": "at (-0.60, 6.25) mm, spans F.Cu, In1.Cu, In2.Cu"
+  },
+  {
+   "category": "Trace and via continuity",
+   "check": "blind via Q2_FLUX In2.Cu->B.Cu lands on copper at both ends",
+   "status": "PASS",
+   "detail": "at (-11.50, -12.30) mm, spans In2.Cu, In3.Cu, In4.Cu, B.Cu"
+  },
+  {
+   "category": "Trace and via continuity",
+   "check": "blind via Q3_FLUX F.Cu->In2.Cu lands on copper at both ends",
+   "status": "PASS",
+   "detail": "at (0.60, 6.25) mm, spans F.Cu, In1.Cu, In2.Cu"
+  },
+  {
+   "category": "Trace and via continuity",
+   "check": "blind via Q3_FLUX In2.Cu->B.Cu lands on copper at both ends",
+   "status": "PASS",
+   "detail": "at (11.50, -12.30) mm, spans In2.Cu, In3.Cu, In4.Cu, B.Cu"
+  },
+  {
+   "category": "Trace and via continuity",
+   "check": "blind via Q4_FLUX F.Cu->In2.Cu lands on copper at both ends",
+   "status": "PASS",
+   "detail": "at (3.00, 6.25) mm, spans F.Cu, In1.Cu, In2.Cu"
+  },
+  {
+   "category": "Trace and via continuity",
+   "check": "blind via Q4_FLUX In2.Cu->B.Cu lands on copper at both ends",
+   "status": "PASS",
+   "detail": "at (7.50, -11.50) mm, spans In2.Cu, In3.Cu, In4.Cu, B.Cu"
+  },
+  {
+   "category": "Die netlist (GDS)",
+   "check": "Q1_FLUX launcher pad",
+   "status": "PASS",
+   "detail": "pad metal is galvanically tied to die ground (flux line shorted at the SQUID, by design)"
+  },
+  {
+   "category": "Die netlist (GDS)",
+   "check": "Q2_DRIVE launcher pad",
+   "status": "PASS",
+   "detail": "own isolated island #3 (open-ended capacitive drive line)"
+  },
+  {
+   "category": "Die netlist (GDS)",
+   "check": "Q2_FLUX launcher pad",
+   "status": "PASS",
+   "detail": "pad metal is galvanically tied to die ground (flux line shorted at the SQUID, by design)"
+  },
+  {
+   "category": "Die netlist (GDS)",
+   "check": "Q3_FLUX launcher pad",
+   "status": "PASS",
+   "detail": "pad metal is galvanically tied to die ground (flux line shorted at the SQUID, by design)"
+  },
+  {
+   "category": "Die netlist (GDS)",
+   "check": "Q3_DRIVE launcher pad",
+   "status": "PASS",
+   "detail": "own isolated island #4 (open-ended capacitive drive line)"
+  },
+  {
+   "category": "Die netlist (GDS)",
+   "check": "Q4_FLUX launcher pad",
+   "status": "PASS",
+   "detail": "pad metal is galvanically tied to die ground (flux line shorted at the SQUID, by design)"
+  },
+  {
+   "category": "Die netlist (GDS)",
+   "check": "Q4_DRIVE launcher pad",
+   "status": "PASS",
+   "detail": "own isolated island #6 (open-ended capacitive drive line)"
+  },
+  {
+   "category": "Die netlist (GDS)",
+   "check": "PROBE_OUT launcher pad",
+   "status": "PASS",
+   "detail": "probe-line island #2, same conductor for PROBE_IN and PROBE_OUT, isolated from ground"
+  },
+  {
+   "category": "Die netlist (GDS)",
+   "check": "PROBE_IN launcher pad",
+   "status": "PASS",
+   "detail": "probe-line island #2, same conductor for PROBE_IN and PROBE_OUT, isolated from ground"
+  },
+  {
+   "category": "Die netlist (GDS)",
+   "check": "Q1_DRIVE launcher pad",
+   "status": "PASS",
+   "detail": "own isolated island #5 (open-ended capacitive drive line)"
+  },
+  {
+   "category": "Die netlist (GDS)",
+   "check": "ground-plane islands tied by airbridges",
+   "status": "PASS",
+   "detail": "2 ground islands (probe line runs edge-to-edge); airbridge pads land on all of them"
+  },
+  {
+   "category": "Pad and wire-bond alignment",
+   "check": "every bond foot lands on the right die metal and PCB pad",
+   "status": "PASS",
+   "detail": "20 signal bonds (2 per line) + 67 ground bonds; 0 misplaced"
+  },
+  {
+   "category": "Pad and wire-bond alignment",
+   "check": "bond lengths within 0.5-1.6 mm",
+   "status": "PASS",
+   "detail": "min 0.948 mm, max 1.023 mm (short bonds keep series inductance ~1 nH/mm low)"
+  },
+  {
+   "category": "Physical clearance and grounding",
+   "check": "wire-to-wire spacing (plan view)",
+   "status": "PASS",
+   "detail": "closest approach 110 um between adjacent bonds (25 um wire)"
+  },
+  {
+   "category": "Die-to-carrier interface",
+   "check": "die fits PCB window",
+   "status": "PASS",
+   "detail": "clearance 150 um per side (window 10.3 mm, die 10.0 mm)"
+  },
+  {
+   "category": "Die-to-carrier interface",
+   "check": "die surface vs PCB bond-pad height",
+   "status": "PASS",
+   "detail": "die top z=1.4560 mm, PCB copper top z=1.4560 mm (difference 0 um)"
+  },
+  {
+   "category": "Die-to-carrier interface",
+   "check": "pedestal top == die-attach bottom",
+   "status": "PASS",
+   "detail": "pedestal top 0.9110 mm; GE varnish [0.9109999999999999, 0.9309999999999999]; substrate [0.9309999999999999, 1.456]"
+  },
+  {
+   "category": "Die-to-carrier interface",
+   "check": "die pad <-> PCB pad colinear and facing",
+   "status": "PASS",
+   "detail": "pad-centre spans 0.870-0.870 mm, all along the pad's outward normal"
+  },
+  {
+   "category": "Physical clearance and grounding",
+   "check": "ground stitching vias",
+   "status": "PASS",
+   "detail": "324 through vias; fences at <= 1.0 mm pitch along every RF line (lambda/10 at 8 GHz in RO4003C GCPW is 2.29 mm)"
+  },
+  {
+   "category": "Physical clearance and grounding",
+   "check": "ground bonds on every die edge",
+   "status": "PASS",
+   "detail": "{'N': 9, 'E': 18, 'S': 22, 'W': 18}"
+  },
+  {
+   "category": "Physical clearance and grounding",
+   "check": "SMA_EDGE connector spacing",
+   "status": "PASS",
+   "detail": "closest pair 12.00 mm centre-to-centre; needs >= 8.5 mm (SMA coupling hex 8 mm across corners)"
+  },
+  {
+   "category": "Physical clearance and grounding",
+   "check": "SMP_VERT_BOTTOM connector spacing",
+   "status": "PASS",
+   "detail": "closest pair 4.00 mm centre-to-centre; needs >= 3.8 mm (SMP flange 3.6 mm square)"
+  },
+  {
+   "category": "Layer dimensions and materials",
+   "check": "KiCad stackup == design_params.STACKUP",
+   "status": "PASS",
+   "detail": "13 layers compared; total 1.496 mm; mismatches []"
+  },
+  {
+   "category": "Layer dimensions and materials",
+   "check": "every 3D layer has material + thickness",
+   "status": "PASS",
+   "detail": "44 layer objects; missing: []"
+  },
+  {
+   "category": "Cross-section consistency",
+   "check": "PCB layers contiguous (no gaps / overlaps)",
+   "status": "PASS",
+   "detail": "13 layers from z=-0.020 to 1.476 mm; gaps/overlaps: []"
+  },
+  {
+   "category": "2D CAD vs 3D model",
+   "check": "die Al film area: GDS vs mesh",
+   "status": "PASS",
+   "detail": "GDS 88.9477 mm^2, mesh top face 88.9478 mm^2 (+0.000 %)"
+  },
+  {
+   "category": "2D CAD vs 3D model",
+   "check": "die substrate mesh extents == GDS chip box",
+   "status": "PASS",
+   "detail": "mesh x[-5.0000,5.0000] y[-5.0000,5.0000] mm; GDS box 0..10000 um"
+  },
+  {
+   "category": "2D CAD vs 3D model",
+   "check": "die Al film extents: GDS metal bbox vs mesh",
+   "status": "PASS",
+   "detail": "mesh x[-4.8000,4.8000] y[-4.8000,4.8000] mm (metal stops at the dicing frame)"
+  },
+  {
+   "category": "2D CAD vs 3D model",
+   "check": "F.Cu copper area: KiCad fill + routed copper vs mesh",
+   "status": "PASS",
+   "detail": "2D 1364.754 mm^2, mesh 1364.754 mm^2"
+  },
+  {
+   "category": "2D CAD vs 3D model",
+   "check": "In2.Cu copper area: KiCad fill + routed copper vs mesh",
+   "status": "PASS",
+   "detail": "2D 1323.409 mm^2, mesh 1323.409 mm^2"
+  },
+  {
+   "category": "2D CAD vs 3D model",
+   "check": "B.Cu copper area: KiCad fill + routed copper vs mesh",
+   "status": "PASS",
+   "detail": "2D 1400.152 mm^2, mesh 1400.152 mm^2"
+  },
+  {
+   "category": "2D CAD vs 3D model",
+   "check": "board outline: KiCad Edge.Cuts vs mesh",
+   "status": "PASS",
+   "detail": "KiCad 40.100 x 40.100 mm (incl. line width), mesh 40.000 x 40.000 mm"
+  },
+  {
+   "category": "2D CAD vs 3D model",
+   "check": "track geometry: KiCad board == 3D source model",
+   "status": "PASS",
+   "detail": "80 segment endpoints compared"
+  },
+  {
+   "category": "RF design",
+   "check": "line impedances",
+   "status": "PASS",
+   "detail": "gcpw_top 49.9 ohm; gcpw_bottom 49.9 ohm; stripline 49.3 ohm; die CPW 10/6 um on Si ~50.9 ohm"
+  }
+ ]
+}

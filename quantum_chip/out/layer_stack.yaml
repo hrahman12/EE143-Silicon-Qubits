@@ -1,0 +1,225 @@
+units: mm (thin films also given in nm)
+z_reference: z=0 at bottom face of B.Cu; +z up; die surface flush with top copper
+assembly_order_top_to_bottom:
+- sma_connectors  z=[-1.4590, 5.7410]  (connectors)
+- connector_ptfe  z=[-0.2590, 3.7410]  (connectors)
+- screws  z=[-3.9240, 2.9760]  (package)
+- connector_pins  z=[-5.0000, 2.7410]  (connectors)
+- solder_joints  z=[-0.3000, 1.7560]  (connectors)
+- wirebonds_signal  z=[1.4590, 1.6930]  (bonds)
+- wirebonds_ground  z=[1.4590, 1.6930]  (bonds)
+- F.Silk  z=[1.4760, 1.4880]  (pcb)
+- F.Mask_over_Cu  z=[1.4560, 1.4760]  (pcb)
+- F.Mask  z=[1.4210, 1.4680]  (pcb)
+- airbridges_Al  z=[1.4590, 1.4632]  (die)
+- jj_top_Al  z=[1.4591, 1.4616]  (die)
+- F.ENIG  z=[1.4560, 1.4600]  (pcb)
+- jj_AlOx  z=[1.4585, 1.4591]  (die)
+- die_Al_film  z=[1.4560, 1.4590]  (die)
+- jj_bottom_Al  z=[1.4560, 1.4585]  (die)
+- F.Cu_GND  z=[1.4210, 1.4560]  (pcb)
+- F.Cu_RF  z=[1.4210, 1.4560]  (pcb)
+- vias_through  z=[0.0000, 1.4560]  (vias)
+- vias_blind_top  z=[0.9820, 1.4560]  (vias)
+- die_substrate  z=[0.9310, 1.4560]  (die)
+- diel1  z=[1.2180, 1.4210]  (pcb)
+- In1.Cu_GND  z=[1.2000, 1.2180]  (pcb)
+- In1.Cu_RF  z=[1.2000, 1.2180]  (pcb)
+- diel2  z=[1.0000, 1.2000]  (pcb)
+- In2.Cu_GND  z=[0.9820, 1.0000]  (pcb)
+- In2.Cu_RF  z=[0.9820, 1.0000]  (pcb)
+- vias_blind_bottom  z=[0.0000, 1.0000]  (vias)
+- diel3  z=[0.7820, 0.9820]  (pcb)
+- die_attach  z=[0.9110, 0.9310]  (die)
+- package_base  z=[-4.0200, 0.9110]  (package)
+- In3.Cu_GND  z=[0.7640, 0.7820]  (pcb)
+- In3.Cu_RF  z=[0.7640, 0.7820]  (pcb)
+- diel4  z=[0.2560, 0.7640]  (pcb)
+- In4.Cu_GND  z=[0.2380, 0.2560]  (pcb)
+- In4.Cu_RF  z=[0.2380, 0.2560]  (pcb)
+- diel5  z=[0.0350, 0.2380]  (pcb)
+- B.Cu_GND  z=[0.0000, 0.0350]  (pcb)
+- B.Cu_RF  z=[0.0000, 0.0350]  (pcb)
+- B.Mask  z=[-0.0120, 0.0350]  (pcb)
+- B.ENIG  z=[-0.0040, 0.0000]  (pcb)
+- B.Mask_over_Cu  z=[-0.0200, 0.0000]  (pcb)
+- smp_connectors  z=[-5.2000, 0.0000]  (connectors)
+- B.Silk  z=[-0.0320, -0.0200]  (pcb)
+pcb:
+  name: rf_carrier.kicad_pcb
+  size_mm:
+  - 40.0
+  - 40.0
+  window_mm: 10.3
+  total_thickness_mm: 1.496
+  finish: ENIG (Ni 4 um / Au 0.08 um)
+  layers:
+  - name: F.Mask
+    kind: soldermask
+    thickness_mm: 0.02
+    z_mm:
+    - 1.456
+    - 1.476
+    material: LPI solder mask, red, eps_r 3.8
+  - name: F.Cu
+    kind: copper
+    thickness_mm: 0.035
+    z_mm:
+    - 1.421
+    - 1.456
+    material: 1 oz Cu + ENIG on exposed pads (Ni 4 um / Au 0.08 um)
+  - name: diel1
+    kind: dielectric
+    thickness_mm: 0.203
+    z_mm:
+    - 1.218
+    - 1.421
+    material: Rogers RO4003C core, eps_r 3.55, tan_d 0.0027
+  - name: In1.Cu
+    kind: copper
+    thickness_mm: 0.018
+    z_mm:
+    - 1.2
+    - 1.218
+    material: 0.5 oz Cu - solid GND plane
+  - name: diel2
+    kind: dielectric
+    thickness_mm: 0.2
+    z_mm:
+    - 1.0
+    - 1.2
+    material: Rogers RO4450F prepreg, eps_r 3.52
+  - name: In2.Cu
+    kind: copper
+    thickness_mm: 0.018
+    z_mm:
+    - 0.982
+    - 1.0
+    material: 0.5 oz Cu - flux-line stripline routing
+  - name: diel3
+    kind: dielectric
+    thickness_mm: 0.2
+    z_mm:
+    - 0.782
+    - 0.982
+    material: Rogers RO4450F prepreg, eps_r 3.52
+  - name: In3.Cu
+    kind: copper
+    thickness_mm: 0.018
+    z_mm:
+    - 0.764
+    - 0.782
+    material: 0.5 oz Cu - solid GND plane
+  - name: diel4
+    kind: dielectric
+    thickness_mm: 0.508
+    z_mm:
+    - 0.256
+    - 0.764
+    material: Rogers RO4003C core, eps_r 3.55
+  - name: In4.Cu
+    kind: copper
+    thickness_mm: 0.018
+    z_mm:
+    - 0.238
+    - 0.256
+    material: 0.5 oz Cu - GND reference plane for bottom routing
+  - name: diel5
+    kind: dielectric
+    thickness_mm: 0.203
+    z_mm:
+    - 0.035
+    - 0.238
+    material: Rogers RO4003C core, eps_r 3.55
+  - name: B.Cu
+    kind: copper
+    thickness_mm: 0.035
+    z_mm:
+    - 0.0
+    - 0.035
+    material: 1 oz Cu - SMP launch routing + GND pour
+  - name: B.Mask
+    kind: soldermask
+    thickness_mm: 0.02
+    z_mm:
+    - -0.02
+    - 0.0
+    material: LPI solder mask, red
+die:
+  name: quantum_die.gds
+  size_mm:
+  - 10.0
+  - 10.0
+  layers:
+  - name: die_attach
+    source: chip box
+    material: GE 7031 varnish, 20 um
+    true_thickness_mm: 0.02
+    true_thickness_nm: 20000.0
+    visual_thickness_mm: 0.02
+    z_mm:
+    - 0.911
+    - 0.931
+  - name: die_substrate
+    source: chip box
+    material: high-resistivity Si(100), >10 kOhm.cm
+    true_thickness_mm: 0.525
+    true_thickness_nm: 525000.0
+    visual_thickness_mm: 0.525
+    z_mm:
+    - 0.931
+    - 1.456
+  - name: die_Al_film
+    source: KQC 130/1 base_metal_gap_wo_grid (inverted) + 131/1 base_metal_addition - 158/1 dicing
+    material: 'Al 200 nm base metal: ground plane, CPWs, qubit islands, resonators (thickness x15 for display)'
+    true_thickness_mm: 0.00019999999999999998
+    true_thickness_nm: 200.0
+    visual_thickness_mm: 0.003
+    z_mm:
+    - 1.456
+    - 1.459
+  - name: jj_bottom_Al
+    source: KQC 136/1 SIS_junction
+    material: Manhattan JJ / SQUID bottom electrode (display x60)
+    true_thickness_mm: 3.9999999999999996e-05
+    true_thickness_nm: 40.0
+    visual_thickness_mm: 0.0025
+    z_mm:
+    - 1.456
+    - 1.4585
+  - name: jj_AlOx
+    source: overlap 136/1 AND 139/1
+    material: AlOx tunnel barrier = overlap of the two electrodes
+    true_thickness_mm: 1.5e-06
+    true_thickness_nm: 1.5
+    visual_thickness_mm: 0.0006
+    z_mm:
+    - 1.4585
+    - 1.4591
+  - name: jj_top_Al
+    source: KQC 139/1 SIS_junction_2
+    material: JJ / SQUID top electrode (display x30)
+    true_thickness_mm: 7.999999999999999e-05
+    true_thickness_nm: 80.0
+    visual_thickness_mm: 0.0025
+    z_mm:
+    - 1.4591
+    - 1.4616
+  - name: airbridges_Al
+    source: KQC 146/1 airbridge_pads + 147/1 airbridge_flyover
+    material: ground-strap airbridges across CPWs, 3 um span height
+    true_thickness_mm: 0.0006
+    true_thickness_nm: 600.0
+    visual_thickness_mm: 0.0042
+    z_mm:
+    - 1.459
+    - 1.4632
+package:
+  base: OFHC copper, 2 um Au over 2 um Ni (non-magnetic would use Ag)
+  base_thickness_mm: 4.0
+  die_attach: GE 7031 varnish, 20 um
+  wirebond: Al-1%Si wedge bond, 25 um
+  wire_diameter_um: 25.0
+  loop_height_um: 180.0
+visual_exaggeration_note: Films thinner than 3 um are drawn thicker in the 3D model so they are visible; true_thickness is
+  the fabrication value, visual_thickness the mesh value. XY geometry is never altered.

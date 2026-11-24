@@ -1,0 +1,777 @@
+{
+ "units": "mm",
+ "z_reference": "z=0 at bottom face of B.Cu; +z up; die surface flush with top copper",
+ "Z": {
+  "B.Mask": [
+   -0.02,
+   0.0
+  ],
+  "B.Cu": [
+   0.0,
+   0.035
+  ],
+  "diel5": [
+   0.035,
+   0.23800000000000002
+  ],
+  "In4.Cu": [
+   0.23800000000000002,
+   0.256
+  ],
+  "diel4": [
+   0.256,
+   0.764
+  ],
+  "In3.Cu": [
+   0.764,
+   0.782
+  ],
+  "diel3": [
+   0.782,
+   0.982
+  ],
+  "In2.Cu": [
+   0.982,
+   1.0
+  ],
+  "diel2": [
+   1.0,
+   1.2
+  ],
+  "In1.Cu": [
+   1.2,
+   1.218
+  ],
+  "diel1": [
+   1.218,
+   1.421
+  ],
+  "F.Cu": [
+   1.421,
+   1.456
+  ],
+  "F.Mask": [
+   1.456,
+   1.476
+  ]
+ },
+ "z_die_top": 1.456,
+ "z_substrate": [
+  0.9309999999999999,
+  1.456
+ ],
+ "z_attach": [
+  0.9109999999999999,
+  0.9309999999999999
+ ],
+ "z_base": [
+  -4.02,
+  -0.02
+ ],
+ "layers": [
+  {
+   "name": "F.Cu_GND",
+   "group": "pcb",
+   "material": "copper",
+   "eng_color": "#7a2a1a",
+   "explode": 3.8,
+   "z": [
+    1.421,
+    1.456
+   ],
+   "true_thickness_mm": 0.035,
+   "visual_thickness_mm": 0.035,
+   "note": "1 oz Cu + ENIG on exposed pads (Ni 4 um / Au 0.08 um) - GND pour / plane",
+   "eng_opacity": 0.55,
+   "triangles": 26140
+  },
+  {
+   "name": "F.Cu_RF",
+   "group": "pcb",
+   "material": "copper",
+   "eng_color": "#ff2a2a",
+   "explode": 3.8,
+   "z": [
+    1.421,
+    1.456
+   ],
+   "true_thickness_mm": 0.035,
+   "visual_thickness_mm": 0.035,
+   "note": "1 oz Cu + ENIG on exposed pads (Ni 4 um / Au 0.08 um) - RF signal conductors (tracks, pads, via lands)",
+   "eng_opacity": 1.0,
+   "triangles": 808
+  },
+  {
+   "name": "In1.Cu_GND",
+   "group": "pcb",
+   "material": "copper",
+   "eng_color": "#c9a227",
+   "explode": 1.4,
+   "z": [
+    1.2,
+    1.218
+   ],
+   "true_thickness_mm": 0.018,
+   "visual_thickness_mm": 0.018,
+   "note": "0.5 oz Cu - solid GND plane - GND pour / plane",
+   "eng_opacity": 0.5,
+   "triangles": 24486
+  },
+  {
+   "name": "In1.Cu_RF",
+   "group": "pcb",
+   "material": "copper",
+   "eng_color": "#c9a227",
+   "explode": 1.4,
+   "z": [
+    1.2,
+    1.218
+   ],
+   "true_thickness_mm": 0.018,
+   "visual_thickness_mm": 0.018,
+   "note": "0.5 oz Cu - solid GND plane - RF signal conductors (tracks, pads, via lands)",
+   "eng_opacity": 1.0,
+   "triangles": 576
+  },
+  {
+   "name": "In2.Cu_GND",
+   "group": "pcb",
+   "material": "copper",
+   "eng_color": "#155c3a",
+   "explode": -1.0,
+   "z": [
+    0.982,
+    1.0
+   ],
+   "true_thickness_mm": 0.018,
+   "visual_thickness_mm": 0.018,
+   "note": "0.5 oz Cu - flux-line stripline routing - GND pour / plane",
+   "eng_opacity": 0.55,
+   "triangles": 26912
+  },
+  {
+   "name": "In2.Cu_RF",
+   "group": "pcb",
+   "material": "copper",
+   "eng_color": "#22d07a",
+   "explode": -1.0,
+   "z": [
+    0.982,
+    1.0
+   ],
+   "true_thickness_mm": 0.018,
+   "visual_thickness_mm": 0.018,
+   "note": "0.5 oz Cu - flux-line stripline routing - RF signal conductors (tracks, pads, via lands)",
+   "eng_opacity": 1.0,
+   "triangles": 1220
+  },
+  {
+   "name": "In3.Cu_GND",
+   "group": "pcb",
+   "material": "copper",
+   "eng_color": "#c97a27",
+   "explode": -3.4,
+   "z": [
+    0.764,
+    0.782
+   ],
+   "true_thickness_mm": 0.018,
+   "visual_thickness_mm": 0.018,
+   "note": "0.5 oz Cu - solid GND plane - GND pour / plane",
+   "eng_opacity": 0.5,
+   "triangles": 24482
+  },
+  {
+   "name": "In3.Cu_RF",
+   "group": "pcb",
+   "material": "copper",
+   "eng_color": "#c97a27",
+   "explode": -3.4,
+   "z": [
+    0.764,
+    0.782
+   ],
+   "true_thickness_mm": 0.018,
+   "visual_thickness_mm": 0.018,
+   "note": "0.5 oz Cu - solid GND plane - RF signal conductors (tracks, pads, via lands)",
+   "eng_opacity": 1.0,
+   "triangles": 576
+  },
+  {
+   "name": "In4.Cu_GND",
+   "group": "pcb",
+   "material": "copper",
+   "eng_color": "#9a6bd6",
+   "explode": -5.8,
+   "z": [
+    0.238,
+    0.256
+   ],
+   "true_thickness_mm": 0.018,
+   "visual_thickness_mm": 0.018,
+   "note": "0.5 oz Cu - GND reference plane for bottom routing - GND pour / plane",
+   "eng_opacity": 0.5,
+   "triangles": 24482
+  },
+  {
+   "name": "In4.Cu_RF",
+   "group": "pcb",
+   "material": "copper",
+   "eng_color": "#9a6bd6",
+   "explode": -5.8,
+   "z": [
+    0.238,
+    0.256
+   ],
+   "true_thickness_mm": 0.018,
+   "visual_thickness_mm": 0.018,
+   "note": "0.5 oz Cu - GND reference plane for bottom routing - RF signal conductors (tracks, pads, via lands)",
+   "eng_opacity": 1.0,
+   "triangles": 576
+  },
+  {
+   "name": "B.Cu_GND",
+   "group": "pcb",
+   "material": "copper",
+   "eng_color": "#1a2f6a",
+   "explode": -8.5,
+   "z": [
+    0.0,
+    0.035
+   ],
+   "true_thickness_mm": 0.035,
+   "visual_thickness_mm": 0.035,
+   "note": "1 oz Cu - SMP launch routing + GND pour - GND pour / plane",
+   "eng_opacity": 0.55,
+   "triangles": 25002
+  },
+  {
+   "name": "B.Cu_RF",
+   "group": "pcb",
+   "material": "copper",
+   "eng_color": "#2f6bff",
+   "explode": -8.5,
+   "z": [
+    0.0,
+    0.035
+   ],
+   "true_thickness_mm": 0.035,
+   "visual_thickness_mm": 0.035,
+   "note": "1 oz Cu - SMP launch routing + GND pour - RF signal conductors (tracks, pads, via lands)",
+   "eng_opacity": 1.0,
+   "triangles": 976
+  },
+  {
+   "name": "diel1",
+   "group": "pcb",
+   "material": "rogers_ro4003c",
+   "eng_color": "#e9dfc6",
+   "explode": 2.6,
+   "z": [
+    1.218,
+    1.421
+   ],
+   "true_thickness_mm": 0.203,
+   "visual_thickness_mm": 0.203,
+   "note": "Rogers RO4003C core, eps_r 3.55, tan_d 0.0027",
+   "eng_opacity": 0.18,
+   "triangles": 23320
+  },
+  {
+   "name": "diel2",
+   "group": "pcb",
+   "material": "rogers_ro4450f",
+   "eng_color": "#e9dfc6",
+   "explode": 0.2,
+   "z": [
+    1.0,
+    1.2
+   ],
+   "true_thickness_mm": 0.2,
+   "visual_thickness_mm": 0.2,
+   "note": "Rogers RO4450F prepreg, eps_r 3.52",
+   "eng_opacity": 0.18,
+   "triangles": 23320
+  },
+  {
+   "name": "diel3",
+   "group": "pcb",
+   "material": "rogers_ro4450f",
+   "eng_color": "#e9dfc6",
+   "explode": -2.2,
+   "z": [
+    0.782,
+    0.982
+   ],
+   "true_thickness_mm": 0.2,
+   "visual_thickness_mm": 0.2,
+   "note": "Rogers RO4450F prepreg, eps_r 3.52",
+   "eng_opacity": 0.18,
+   "triangles": 23318
+  },
+  {
+   "name": "diel4",
+   "group": "pcb",
+   "material": "rogers_ro4003c",
+   "eng_color": "#e9dfc6",
+   "explode": -4.6,
+   "z": [
+    0.256,
+    0.764
+   ],
+   "true_thickness_mm": 0.508,
+   "visual_thickness_mm": 0.508,
+   "note": "Rogers RO4003C core, eps_r 3.55",
+   "eng_opacity": 0.18,
+   "triangles": 23318
+  },
+  {
+   "name": "diel5",
+   "group": "pcb",
+   "material": "rogers_ro4003c",
+   "eng_color": "#e9dfc6",
+   "explode": -7.0,
+   "z": [
+    0.035,
+    0.238
+   ],
+   "true_thickness_mm": 0.203,
+   "visual_thickness_mm": 0.203,
+   "note": "Rogers RO4003C core, eps_r 3.55",
+   "eng_opacity": 0.18,
+   "triangles": 23318
+  },
+  {
+   "name": "F.ENIG",
+   "group": "pcb",
+   "material": "gold",
+   "eng_color": "#ffd34d",
+   "explode": 3.8,
+   "z": [
+    1.456,
+    1.46
+   ],
+   "true_thickness_mm": 0.004,
+   "visual_thickness_mm": 0.004,
+   "note": "ENIG on exposed top copper (bond pads, bond ring, SMA pads)",
+   "eng_opacity": 1.0,
+   "triangles": 3696
+  },
+  {
+   "name": "B.ENIG",
+   "group": "pcb",
+   "material": "gold",
+   "eng_color": "#ffd34d",
+   "explode": -8.6,
+   "z": [
+    -0.004,
+    0.0
+   ],
+   "true_thickness_mm": 0.004,
+   "visual_thickness_mm": 0.004,
+   "note": "ENIG on exposed bottom copper (SMP pads, SMA ground pads)",
+   "eng_opacity": 1.0,
+   "triangles": 2624
+  },
+  {
+   "name": "F.Mask",
+   "group": "pcb",
+   "material": "soldermask_red",
+   "eng_color": "#b3121b",
+   "explode": 5.2,
+   "z": [
+    1.421,
+    1.468
+   ],
+   "true_thickness_mm": 0.020000000000000018,
+   "visual_thickness_mm": 0.047,
+   "note": "red LPI mask over laminate (fills between traces)",
+   "eng_opacity": 0.35,
+   "triangles": 22924
+  },
+  {
+   "name": "F.Mask_over_Cu",
+   "group": "pcb",
+   "material": "soldermask_red_over_cu",
+   "eng_color": "#b3121b",
+   "explode": 5.2,
+   "z": [
+    1.456,
+    1.476
+   ],
+   "true_thickness_mm": 0.020000000000000018,
+   "visual_thickness_mm": 0.02,
+   "note": "red LPI mask riding on top-copper traces and pour",
+   "eng_opacity": 0.35,
+   "triangles": 25644
+  },
+  {
+   "name": "B.Mask",
+   "group": "pcb",
+   "material": "soldermask_red",
+   "eng_color": "#b3121b",
+   "explode": -9.5,
+   "z": [
+    -0.012,
+    0.035
+   ],
+   "true_thickness_mm": 0.020000000000000018,
+   "visual_thickness_mm": 0.047,
+   "note": "red LPI mask over laminate",
+   "eng_opacity": 0.35,
+   "triangles": 22772
+  },
+  {
+   "name": "B.Mask_over_Cu",
+   "group": "pcb",
+   "material": "soldermask_red_over_cu",
+   "eng_color": "#b3121b",
+   "explode": -9.5,
+   "z": [
+    -0.02,
+    0.0
+   ],
+   "true_thickness_mm": 0.020000000000000018,
+   "visual_thickness_mm": 0.02,
+   "note": "red LPI mask under bottom copper",
+   "eng_opacity": 0.35,
+   "triangles": 25930
+  },
+  {
+   "name": "F.Silk",
+   "group": "pcb",
+   "material": "silkscreen",
+   "eng_color": "#ffffff",
+   "explode": 5.3,
+   "z": [
+    1.476,
+    1.488
+   ],
+   "true_thickness_mm": 0.012,
+   "visual_thickness_mm": 0.012,
+   "note": "",
+   "eng_opacity": 1.0,
+   "triangles": 4476
+  },
+  {
+   "name": "B.Silk",
+   "group": "pcb",
+   "material": "silkscreen",
+   "eng_color": "#ffffff",
+   "explode": -9.6,
+   "z": [
+    -0.032,
+    -0.02
+   ],
+   "true_thickness_mm": 0.012,
+   "visual_thickness_mm": 0.012,
+   "note": "",
+   "eng_opacity": 1.0,
+   "triangles": 1460
+  },
+  {
+   "name": "vias_through",
+   "group": "vias",
+   "material": "copper",
+   "eng_color": "#ffe600",
+   "explode": 0.0,
+   "z": [
+    0.0,
+    1.456
+   ],
+   "true_thickness_mm": 1.456,
+   "visual_thickness_mm": 1.456,
+   "note": "PTH, 0.25 drill, 25 um plating, F.Cu-B.Cu",
+   "eng_opacity": 1.0,
+   "triangles": 43008
+  },
+  {
+   "name": "vias_blind_top",
+   "group": "vias",
+   "material": "copper",
+   "eng_color": "#ff7bf2",
+   "explode": 0.0,
+   "z": [
+    0.982,
+    1.456
+   ],
+   "true_thickness_mm": 0.474,
+   "visual_thickness_mm": 0.474,
+   "note": "blind 0.15 drill F.Cu-In2.Cu (flux-line transition, bond pad side)",
+   "eng_opacity": 1.0,
+   "triangles": 512
+  },
+  {
+   "name": "vias_blind_bottom",
+   "group": "vias",
+   "material": "copper",
+   "eng_color": "#00e5ff",
+   "explode": 0.0,
+   "z": [
+    0.0,
+    1.0
+   ],
+   "true_thickness_mm": 1.0,
+   "visual_thickness_mm": 1.0,
+   "note": "blind 0.15 drill In2.Cu-B.Cu (flux-line transition, SMP side)",
+   "eng_opacity": 1.0,
+   "triangles": 512
+  },
+  {
+   "name": "die_attach",
+   "group": "die",
+   "material": "ge_varnish",
+   "eng_color": "#f2f2f2",
+   "explode": 7.5,
+   "z": [
+    0.911,
+    0.931
+   ],
+   "true_thickness_mm": 0.02,
+   "visual_thickness_mm": 0.02,
+   "note": "GE 7031 varnish, 20 um",
+   "eng_opacity": 1.0,
+   "triangles": 12
+  },
+  {
+   "name": "die_substrate",
+   "group": "die",
+   "material": "silicon",
+   "eng_color": "#3b4a63",
+   "explode": 9.0,
+   "z": [
+    0.931,
+    1.456
+   ],
+   "true_thickness_mm": 0.525,
+   "visual_thickness_mm": 0.525,
+   "note": "high-resistivity Si(100), >10 kOhm.cm",
+   "eng_opacity": 1.0,
+   "triangles": 12
+  },
+  {
+   "name": "die_Al_film",
+   "group": "die",
+   "material": "aluminium",
+   "eng_color": "#9fd8ff",
+   "explode": 10.5,
+   "z": [
+    1.456,
+    1.459
+   ],
+   "true_thickness_mm": 0.00019999999999999998,
+   "visual_thickness_mm": 0.003,
+   "note": "Al 200 nm base metal: ground plane, CPWs, qubit islands, resonators (thickness x15 for display)",
+   "eng_opacity": 1.0,
+   "triangles": 68112
+  },
+  {
+   "name": "jj_bottom_Al",
+   "group": "die",
+   "material": "aluminium",
+   "eng_color": "#ff40ff",
+   "explode": 11.0,
+   "z": [
+    1.456,
+    1.4585
+   ],
+   "true_thickness_mm": 3.9999999999999996e-05,
+   "visual_thickness_mm": 0.0025,
+   "note": "Manhattan JJ / SQUID bottom electrode (display x60)",
+   "eng_opacity": 1.0,
+   "triangles": 2160
+  },
+  {
+   "name": "jj_AlOx",
+   "group": "die",
+   "material": "alox",
+   "eng_color": "#ffffff",
+   "explode": 11.3,
+   "z": [
+    1.4585,
+    1.4591
+   ],
+   "true_thickness_mm": 1.5e-06,
+   "visual_thickness_mm": 0.0006,
+   "note": "AlOx tunnel barrier = overlap of the two electrodes",
+   "eng_opacity": 1.0,
+   "triangles": 188
+  },
+  {
+   "name": "jj_top_Al",
+   "group": "die",
+   "material": "aluminium",
+   "eng_color": "#ff40ff",
+   "explode": 11.6,
+   "z": [
+    1.4591,
+    1.4616
+   ],
+   "true_thickness_mm": 7.999999999999999e-05,
+   "visual_thickness_mm": 0.0025,
+   "note": "JJ / SQUID top electrode (display x30)",
+   "eng_opacity": 1.0,
+   "triangles": 352
+  },
+  {
+   "name": "airbridges_Al",
+   "group": "die",
+   "material": "aluminium",
+   "eng_color": "#7fffd4",
+   "explode": 11.0,
+   "z": [
+    1.459,
+    1.4632
+   ],
+   "true_thickness_mm": 0.0006,
+   "visual_thickness_mm": 0.0042,
+   "note": "ground-strap airbridges across CPWs, 3 um span height",
+   "eng_opacity": 1.0,
+   "triangles": 3488
+  },
+  {
+   "name": "wirebonds_signal",
+   "group": "bonds",
+   "material": "aluminium_wire",
+   "eng_color": "#ff9b26",
+   "explode": 13.5,
+   "z": [
+    1.459,
+    1.693
+   ],
+   "true_thickness_mm": 0.025,
+   "visual_thickness_mm": 0.234,
+   "note": "Al-1%Si wedge bond, 25 um - signal, 2 per line",
+   "eng_opacity": 1.0,
+   "triangles": 12000
+  },
+  {
+   "name": "wirebonds_ground",
+   "group": "bonds",
+   "material": "aluminium_wire",
+   "eng_color": "#b0b0b0",
+   "explode": 13.5,
+   "z": [
+    1.459,
+    1.693
+   ],
+   "true_thickness_mm": 0.025,
+   "visual_thickness_mm": 0.234,
+   "note": "ground bonds: die ground plane -> PCB ENIG ring",
+   "eng_opacity": 1.0,
+   "triangles": 40200
+  },
+  {
+   "name": "sma_connectors",
+   "group": "connectors",
+   "material": "stainless",
+   "eng_color": "#c0c4c8",
+   "explode": 3.8,
+   "z": [
+    -1.459,
+    5.741
+   ],
+   "true_thickness_mm": 7.2,
+   "visual_thickness_mm": 7.2,
+   "note": "6x generic end-launch SMA, body passivated stainless (geometry representative)",
+   "eng_opacity": 1.0,
+   "triangles": 12720
+  },
+  {
+   "name": "connector_pins",
+   "group": "connectors",
+   "material": "gold",
+   "eng_color": "#ffd34d",
+   "explode": 3.8,
+   "z": [
+    -5,
+    2.741
+   ],
+   "true_thickness_mm": 7.741,
+   "visual_thickness_mm": 7.741,
+   "note": "gold-plated BeCu centre contacts",
+   "eng_opacity": 1.0,
+   "triangles": 2240
+  },
+  {
+   "name": "connector_ptfe",
+   "group": "connectors",
+   "material": "ptfe",
+   "eng_color": "#ffffff",
+   "explode": 3.8,
+   "z": [
+    -0.259,
+    3.741
+   ],
+   "true_thickness_mm": 4.0,
+   "visual_thickness_mm": 4.0,
+   "note": "",
+   "eng_opacity": 1.0,
+   "triangles": 864
+  },
+  {
+   "name": "smp_connectors",
+   "group": "connectors",
+   "material": "gold",
+   "eng_color": "#ffd34d",
+   "explode": -8.5,
+   "z": [
+    -5.2,
+    0
+   ],
+   "true_thickness_mm": 5.2,
+   "visual_thickness_mm": 5.2,
+   "note": "4x generic vertical SMP (bottom side) for flux lines",
+   "eng_opacity": 1.0,
+   "triangles": 2640
+  },
+  {
+   "name": "solder_joints",
+   "group": "connectors",
+   "material": "solder",
+   "eng_color": "#d8dde0",
+   "explode": 0.0,
+   "z": [
+    -0.3,
+    1.756
+   ],
+   "true_thickness_mm": 2.056,
+   "visual_thickness_mm": 2.056,
+   "note": "SAC305 fillets, one per connector pad (50)",
+   "eng_opacity": 1.0,
+   "triangles": 7200
+  },
+  {
+   "name": "package_base",
+   "group": "package",
+   "material": "gold_plated_copper",
+   "eng_color": "#d9b45a",
+   "explode": -16,
+   "z": [
+    -4.02,
+    0.911
+   ],
+   "true_thickness_mm": 4.931,
+   "visual_thickness_mm": 4.931,
+   "note": "OFHC copper, 2 um Au over 2 um Ni (non-magnetic would use Ag); raised pedestal carries the die through the PCB window",
+   "eng_opacity": 1.0,
+   "triangles": 2484
+  },
+  {
+   "name": "screws",
+   "group": "package",
+   "material": "stainless",
+   "eng_color": "#c0c4c8",
+   "explode": 6.2,
+   "z": [
+    -3.924,
+    2.976
+   ],
+   "true_thickness_mm": 6.9,
+   "visual_thickness_mm": 6.9,
+   "note": "4x M2.5 A2 stainless pan head, clamp carrier to base",
+   "eng_opacity": 1.0,
+   "triangles": 1536
+  }
+ ]
+}

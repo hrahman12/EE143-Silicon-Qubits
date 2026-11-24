@@ -1,0 +1,10 @@
+(version 1)
+# Wire-bond pads sit 0.10 mm from the milled die window by design.
+(rule "bondpad_to_window"
+  (constraint edge_clearance (min 0.05mm))
+  (condition "A.Type == 'Pad' && A.Pad_Type == 'SMD' && A.Width < 0.5mm"))
+# Stripline on In2: wider coplanar clearance.
+(rule "stripline_clearance"
+  (constraint clearance (min 0.35mm))
+  (layer "In2.Cu")
+  (condition "A.NetName != 'GND' || B.NetName != 'GND'"))

@@ -1,0 +1,1310 @@
+{
+ "description": "Every electrical path from RF connector to quantum device. Coordinates: mm, board frame, Y up, origin = board centre = die centre. Die coordinates also given in um in the GDS frame (0..10000).",
+ "signal_nets": [
+  {
+   "net": "Q1_FLUX",
+   "function": "Z flux bias",
+   "path": [
+    {
+     "stage": "rf_connector",
+     "ref": "J7",
+     "type": "vertical SMP (bottom side)",
+     "at_mm": [
+      -7.5,
+      -14.5
+     ],
+     "signal_pad_layer": "B.Cu",
+     "solder_joint": true
+    },
+    {
+     "stage": "pcb_trace",
+     "layer": "B.Cu",
+     "geometry": "grounded CPW",
+     "width_mm": 0.43,
+     "gap_mm": 0.2,
+     "z0_ohm": 49.87,
+     "length_mm": 3.0,
+     "points_mm": [
+      [
+       -7.5,
+       -11.5
+      ],
+      [
+       -7.5,
+       -14.5
+      ]
+     ]
+    },
+    {
+     "stage": "via",
+     "kind": "blind",
+     "layers": [
+      "In2.Cu",
+      "B.Cu"
+     ],
+     "drill_mm": 0.15,
+     "pad_mm": 0.35,
+     "at_mm": [
+      -7.5,
+      -11.5
+     ]
+    },
+    {
+     "stage": "pcb_trace",
+     "layer": "In2.Cu",
+     "geometry": "symmetric stripline (In1/In3 GND)",
+     "width_mm": 0.19,
+     "gap_mm": 0.35,
+     "z0_ohm": 49.3,
+     "length_mm": 23.75,
+     "points_mm": [
+      [
+       -3.0,
+       6.25
+      ],
+      [
+       -3.0,
+       7.0
+      ],
+      [
+       -7.5,
+       7.0
+      ],
+      [
+       -7.5,
+       -11.5
+      ]
+     ]
+    },
+    {
+     "stage": "via",
+     "kind": "blind",
+     "layers": [
+      "F.Cu",
+      "In2.Cu"
+     ],
+     "drill_mm": 0.15,
+     "pad_mm": 0.35,
+     "at_mm": [
+      -3.0,
+      6.25
+     ]
+    },
+    {
+     "stage": "pcb_trace",
+     "layer": "F.Cu",
+     "geometry": "grounded CPW",
+     "width_mm": 0.43,
+     "gap_mm": 0.2,
+     "z0_ohm": 49.87,
+     "length_mm": 0.4,
+     "points_mm": [
+      [
+       -3.0,
+       5.85
+      ],
+      [
+       -3.0,
+       6.25
+      ]
+     ]
+    },
+    {
+     "stage": "pcb_bond_pad",
+     "layer": "F.Cu + ENIG",
+     "center_mm": [
+      -3.0,
+      5.55
+     ],
+     "size_mm": [
+      0.43,
+      0.6
+     ]
+    },
+    {
+     "stage": "wire_bonds",
+     "count": 2,
+     "material": "Al-1%Si wedge bond, 25 um",
+     "lengths_mm": [
+      0.9481,
+      0.9481
+     ]
+    },
+    {
+     "stage": "die_launcher_pad",
+     "kqc_port_id": 1,
+     "side": "N",
+     "center_um": [
+      2000.0,
+      9680.0
+     ],
+     "size_um": [
+      240.0,
+      240.0
+     ],
+     "metal": "Al 200 nm"
+    },
+    {
+     "stage": "die_cpw",
+     "centre_um": 10.0,
+     "gap_um": 6.0,
+     "z0_ohm": 50.9,
+     "structure": "FL1: CPW shorted to ground next to the QB1 SQUID loop (mutual inductance)"
+    },
+    {
+     "stage": "quantum_device",
+     "target": "QB1",
+     "qubit_positions_um": [
+      2600.0,
+      6000.0
+     ]
+    }
+   ]
+  },
+  {
+   "net": "Q2_DRIVE",
+   "function": "XY drive",
+   "path": [
+    {
+     "stage": "rf_connector",
+     "ref": "J5",
+     "type": "end-launch SMA (top side)",
+     "at_mm": [
+      -6.0,
+      20.0
+     ],
+     "signal_pad_layer": "F.Cu",
+     "solder_joint": true
+    },
+    {
+     "stage": "pcb_trace",
+     "layer": "F.Cu",
+     "geometry": "grounded CPW",
+     "width_mm": 0.43,
+     "gap_mm": 0.2,
+     "z0_ohm": 49.87,
+     "length_mm": 14.54,
+     "points_mm": [
+      [
+       -1.8,
+       5.85
+      ],
+      [
+       -1.8,
+       9.0
+      ],
+      [
+       -6.0,
+       13.2
+      ],
+      [
+       -6.0,
+       18.65
+      ]
+     ]
+    },
+    {
+     "stage": "pcb_bond_pad",
+     "layer": "F.Cu + ENIG",
+     "center_mm": [
+      -1.8,
+      5.55
+     ],
+     "size_mm": [
+      0.43,
+      0.6
+     ]
+    },
+    {
+     "stage": "wire_bonds",
+     "count": 2,
+     "material": "Al-1%Si wedge bond, 25 um",
+     "lengths_mm": [
+      0.9481,
+      0.9481
+     ]
+    },
+    {
+     "stage": "die_launcher_pad",
+     "kqc_port_id": 2,
+     "side": "N",
+     "center_um": [
+      3200.0,
+      9680.0
+     ],
+     "size_um": [
+      240.0,
+      240.0
+     ],
+     "metal": "Al 200 nm"
+    },
+    {
+     "stage": "die_cpw",
+     "centre_um": 10.0,
+     "gap_um": 6.0,
+     "z0_ohm": 50.9,
+     "structure": "DL_Q2_DRIVE: open-ended charge line, capacitive coupling to the QB2 island"
+    },
+    {
+     "stage": "quantum_device",
+     "target": "QB2",
+     "qubit_positions_um": [
+      4200.0,
+      6000.0
+     ]
+    }
+   ]
+  },
+  {
+   "net": "Q2_FLUX",
+   "function": "Z flux bias",
+   "path": [
+    {
+     "stage": "rf_connector",
+     "ref": "J8",
+     "type": "vertical SMP (bottom side)",
+     "at_mm": [
+      -11.5,
+      -14.5
+     ],
+     "signal_pad_layer": "B.Cu",
+     "solder_joint": true
+    },
+    {
+     "stage": "pcb_trace",
+     "layer": "B.Cu",
+     "geometry": "grounded CPW",
+     "width_mm": 0.43,
+     "gap_mm": 0.2,
+     "z0_ohm": 49.87,
+     "length_mm": 2.2,
+     "points_mm": [
+      [
+       -11.5,
+       -12.3
+      ],
+      [
+       -11.5,
+       -14.5
+      ]
+     ]
+    },
+    {
+     "stage": "via",
+     "kind": "blind",
+     "layers": [
+      "In2.Cu",
+      "B.Cu"
+     ],
+     "drill_mm": 0.15,
+     "pad_mm": 0.35,
+     "at_mm": [
+      -11.5,
+      -12.3
+     ]
+    },
+    {
+     "stage": "pcb_trace",
+     "layer": "In2.Cu",
+     "geometry": "symmetric stripline (In1/In3 GND)",
+     "width_mm": 0.19,
+     "gap_mm": 0.35,
+     "z0_ohm": 49.3,
+     "length_mm": 31.71,
+     "points_mm": [
+      [
+       -0.6,
+       6.25
+      ],
+      [
+       -0.6,
+       8.2
+      ],
+      [
+       -8.7,
+       8.2
+      ],
+      [
+       -8.7,
+       -9.5
+      ],
+      [
+       -11.5,
+       -12.3
+      ]
+     ]
+    },
+    {
+     "stage": "via",
+     "kind": "blind",
+     "layers": [
+      "F.Cu",
+      "In2.Cu"
+     ],
+     "drill_mm": 0.15,
+     "pad_mm": 0.35,
+     "at_mm": [
+      -0.6,
+      6.25
+     ]
+    },
+    {
+     "stage": "pcb_trace",
+     "layer": "F.Cu",
+     "geometry": "grounded CPW",
+     "width_mm": 0.43,
+     "gap_mm": 0.2,
+     "z0_ohm": 49.87,
+     "length_mm": 0.4,
+     "points_mm": [
+      [
+       -0.6,
+       5.85
+      ],
+      [
+       -0.6,
+       6.25
+      ]
+     ]
+    },
+    {
+     "stage": "pcb_bond_pad",
+     "layer": "F.Cu + ENIG",
+     "center_mm": [
+      -0.6,
+      5.55
+     ],
+     "size_mm": [
+      0.43,
+      0.6
+     ]
+    },
+    {
+     "stage": "wire_bonds",
+     "count": 2,
+     "material": "Al-1%Si wedge bond, 25 um",
+     "lengths_mm": [
+      0.9481,
+      0.9481
+     ]
+    },
+    {
+     "stage": "die_launcher_pad",
+     "kqc_port_id": 3,
+     "side": "N",
+     "center_um": [
+      4400.0,
+      9680.0
+     ],
+     "size_um": [
+      240.0,
+      240.0
+     ],
+     "metal": "Al 200 nm"
+    },
+    {
+     "stage": "die_cpw",
+     "centre_um": 10.0,
+     "gap_um": 6.0,
+     "z0_ohm": 50.9,
+     "structure": "FL2: CPW shorted to ground next to the QB2 SQUID loop"
+    },
+    {
+     "stage": "quantum_device",
+     "target": "QB2",
+     "qubit_positions_um": [
+      4200.0,
+      6000.0
+     ]
+    }
+   ]
+  },
+  {
+   "net": "Q3_FLUX",
+   "function": "Z flux bias",
+   "path": [
+    {
+     "stage": "rf_connector",
+     "ref": "J9",
+     "type": "vertical SMP (bottom side)",
+     "at_mm": [
+      11.5,
+      -14.5
+     ],
+     "signal_pad_layer": "B.Cu",
+     "solder_joint": true
+    },
+    {
+     "stage": "pcb_trace",
+     "layer": "B.Cu",
+     "geometry": "grounded CPW",
+     "width_mm": 0.43,
+     "gap_mm": 0.2,
+     "z0_ohm": 49.87,
+     "length_mm": 2.2,
+     "points_mm": [
+      [
+       11.5,
+       -12.3
+      ],
+      [
+       11.5,
+       -14.5
+      ]
+     ]
+    },
+    {
+     "stage": "via",
+     "kind": "blind",
+     "layers": [
+      "In2.Cu",
+      "B.Cu"
+     ],
+     "drill_mm": 0.15,
+     "pad_mm": 0.35,
+     "at_mm": [
+      11.5,
+      -12.3
+     ]
+    },
+    {
+     "stage": "pcb_trace",
+     "layer": "In2.Cu",
+     "geometry": "symmetric stripline (In1/In3 GND)",
+     "width_mm": 0.19,
+     "gap_mm": 0.35,
+     "z0_ohm": 49.3,
+     "length_mm": 31.71,
+     "points_mm": [
+      [
+       0.6,
+       6.25
+      ],
+      [
+       0.6,
+       8.2
+      ],
+      [
+       8.7,
+       8.2
+      ],
+      [
+       8.7,
+       -9.5
+      ],
+      [
+       11.5,
+       -12.3
+      ]
+     ]
+    },
+    {
+     "stage": "via",
+     "kind": "blind",
+     "layers": [
+      "F.Cu",
+      "In2.Cu"
+     ],
+     "drill_mm": 0.15,
+     "pad_mm": 0.35,
+     "at_mm": [
+      0.6,
+      6.25
+     ]
+    },
+    {
+     "stage": "pcb_trace",
+     "layer": "F.Cu",
+     "geometry": "grounded CPW",
+     "width_mm": 0.43,
+     "gap_mm": 0.2,
+     "z0_ohm": 49.87,
+     "length_mm": 0.4,
+     "points_mm": [
+      [
+       0.6,
+       5.85
+      ],
+      [
+       0.6,
+       6.25
+      ]
+     ]
+    },
+    {
+     "stage": "pcb_bond_pad",
+     "layer": "F.Cu + ENIG",
+     "center_mm": [
+      0.6,
+      5.55
+     ],
+     "size_mm": [
+      0.43,
+      0.6
+     ]
+    },
+    {
+     "stage": "wire_bonds",
+     "count": 2,
+     "material": "Al-1%Si wedge bond, 25 um",
+     "lengths_mm": [
+      0.9481,
+      0.9481
+     ]
+    },
+    {
+     "stage": "die_launcher_pad",
+     "kqc_port_id": 4,
+     "side": "N",
+     "center_um": [
+      5600.0,
+      9680.0
+     ],
+     "size_um": [
+      240.0,
+      240.0
+     ],
+     "metal": "Al 200 nm"
+    },
+    {
+     "stage": "die_cpw",
+     "centre_um": 10.0,
+     "gap_um": 6.0,
+     "z0_ohm": 50.9,
+     "structure": "FL3: CPW shorted to ground next to the QB3 SQUID loop"
+    },
+    {
+     "stage": "quantum_device",
+     "target": "QB3",
+     "qubit_positions_um": [
+      5800.0,
+      6000.0
+     ]
+    }
+   ]
+  },
+  {
+   "net": "Q3_DRIVE",
+   "function": "XY drive",
+   "path": [
+    {
+     "stage": "rf_connector",
+     "ref": "J6",
+     "type": "end-launch SMA (top side)",
+     "at_mm": [
+      6.0,
+      20.0
+     ],
+     "signal_pad_layer": "F.Cu",
+     "solder_joint": true
+    },
+    {
+     "stage": "pcb_trace",
+     "layer": "F.Cu",
+     "geometry": "grounded CPW",
+     "width_mm": 0.43,
+     "gap_mm": 0.2,
+     "z0_ohm": 49.87,
+     "length_mm": 14.54,
+     "points_mm": [
+      [
+       1.8,
+       5.85
+      ],
+      [
+       1.8,
+       9.0
+      ],
+      [
+       6.0,
+       13.2
+      ],
+      [
+       6.0,
+       18.65
+      ]
+     ]
+    },
+    {
+     "stage": "pcb_bond_pad",
+     "layer": "F.Cu + ENIG",
+     "center_mm": [
+      1.8,
+      5.55
+     ],
+     "size_mm": [
+      0.43,
+      0.6
+     ]
+    },
+    {
+     "stage": "wire_bonds",
+     "count": 2,
+     "material": "Al-1%Si wedge bond, 25 um",
+     "lengths_mm": [
+      0.9481,
+      0.9481
+     ]
+    },
+    {
+     "stage": "die_launcher_pad",
+     "kqc_port_id": 5,
+     "side": "N",
+     "center_um": [
+      6800.0,
+      9680.0
+     ],
+     "size_um": [
+      240.0,
+      240.0
+     ],
+     "metal": "Al 200 nm"
+    },
+    {
+     "stage": "die_cpw",
+     "centre_um": 10.0,
+     "gap_um": 6.0,
+     "z0_ohm": 50.9,
+     "structure": "DL_Q3_DRIVE: open-ended charge line, capacitive coupling to the QB3 island"
+    },
+    {
+     "stage": "quantum_device",
+     "target": "QB3",
+     "qubit_positions_um": [
+      5800.0,
+      6000.0
+     ]
+    }
+   ]
+  },
+  {
+   "net": "Q4_FLUX",
+   "function": "Z flux bias",
+   "path": [
+    {
+     "stage": "rf_connector",
+     "ref": "J10",
+     "type": "vertical SMP (bottom side)",
+     "at_mm": [
+      7.5,
+      -14.5
+     ],
+     "signal_pad_layer": "B.Cu",
+     "solder_joint": true
+    },
+    {
+     "stage": "pcb_trace",
+     "layer": "B.Cu",
+     "geometry": "grounded CPW",
+     "width_mm": 0.43,
+     "gap_mm": 0.2,
+     "z0_ohm": 49.87,
+     "length_mm": 3.0,
+     "points_mm": [
+      [
+       7.5,
+       -11.5
+      ],
+      [
+       7.5,
+       -14.5
+      ]
+     ]
+    },
+    {
+     "stage": "via",
+     "kind": "blind",
+     "layers": [
+      "In2.Cu",
+      "B.Cu"
+     ],
+     "drill_mm": 0.15,
+     "pad_mm": 0.35,
+     "at_mm": [
+      7.5,
+      -11.5
+     ]
+    },
+    {
+     "stage": "pcb_trace",
+     "layer": "In2.Cu",
+     "geometry": "symmetric stripline (In1/In3 GND)",
+     "width_mm": 0.19,
+     "gap_mm": 0.35,
+     "z0_ohm": 49.3,
+     "length_mm": 23.75,
+     "points_mm": [
+      [
+       3.0,
+       6.25
+      ],
+      [
+       3.0,
+       7.0
+      ],
+      [
+       7.5,
+       7.0
+      ],
+      [
+       7.5,
+       -11.5
+      ]
+     ]
+    },
+    {
+     "stage": "via",
+     "kind": "blind",
+     "layers": [
+      "F.Cu",
+      "In2.Cu"
+     ],
+     "drill_mm": 0.15,
+     "pad_mm": 0.35,
+     "at_mm": [
+      3.0,
+      6.25
+     ]
+    },
+    {
+     "stage": "pcb_trace",
+     "layer": "F.Cu",
+     "geometry": "grounded CPW",
+     "width_mm": 0.43,
+     "gap_mm": 0.2,
+     "z0_ohm": 49.87,
+     "length_mm": 0.4,
+     "points_mm": [
+      [
+       3.0,
+       5.85
+      ],
+      [
+       3.0,
+       6.25
+      ]
+     ]
+    },
+    {
+     "stage": "pcb_bond_pad",
+     "layer": "F.Cu + ENIG",
+     "center_mm": [
+      3.0,
+      5.55
+     ],
+     "size_mm": [
+      0.43,
+      0.6
+     ]
+    },
+    {
+     "stage": "wire_bonds",
+     "count": 2,
+     "material": "Al-1%Si wedge bond, 25 um",
+     "lengths_mm": [
+      0.9481,
+      0.9481
+     ]
+    },
+    {
+     "stage": "die_launcher_pad",
+     "kqc_port_id": 6,
+     "side": "N",
+     "center_um": [
+      8000.0,
+      9680.0
+     ],
+     "size_um": [
+      240.0,
+      240.0
+     ],
+     "metal": "Al 200 nm"
+    },
+    {
+     "stage": "die_cpw",
+     "centre_um": 10.0,
+     "gap_um": 6.0,
+     "z0_ohm": 50.9,
+     "structure": "FL4: CPW shorted to ground next to the QB4 SQUID loop"
+    },
+    {
+     "stage": "quantum_device",
+     "target": "QB4",
+     "qubit_positions_um": [
+      7400.0,
+      6000.0
+     ]
+    }
+   ]
+  },
+  {
+   "net": "Q4_DRIVE",
+   "function": "XY drive",
+   "path": [
+    {
+     "stage": "rf_connector",
+     "ref": "J3",
+     "type": "end-launch SMA (top side)",
+     "at_mm": [
+      20.0,
+      6.0
+     ],
+     "signal_pad_layer": "F.Cu",
+     "solder_joint": true
+    },
+    {
+     "stage": "pcb_trace",
+     "layer": "F.Cu",
+     "geometry": "grounded CPW",
+     "width_mm": 0.43,
+     "gap_mm": 0.2,
+     "z0_ohm": 49.87,
+     "length_mm": 15.037,
+     "points_mm": [
+      [
+       5.85,
+       0.6
+      ],
+      [
+       8.0,
+       0.6
+      ],
+      [
+       13.4,
+       6.0
+      ],
+      [
+       18.65,
+       6.0
+      ]
+     ]
+    },
+    {
+     "stage": "pcb_bond_pad",
+     "layer": "F.Cu + ENIG",
+     "center_mm": [
+      5.55,
+      0.6
+     ],
+     "size_mm": [
+      0.6,
+      0.43
+     ]
+    },
+    {
+     "stage": "wire_bonds",
+     "count": 2,
+     "material": "Al-1%Si wedge bond, 25 um",
+     "lengths_mm": [
+      0.9481,
+      0.9481
+     ]
+    },
+    {
+     "stage": "die_launcher_pad",
+     "kqc_port_id": 7,
+     "side": "E",
+     "center_um": [
+      9680.0,
+      5600.0
+     ],
+     "size_um": [
+      240.0,
+      240.0
+     ],
+     "metal": "Al 200 nm"
+    },
+    {
+     "stage": "die_cpw",
+     "centre_um": 10.0,
+     "gap_um": 6.0,
+     "z0_ohm": 50.9,
+     "structure": "DL_Q4_DRIVE: open-ended charge line, capacitive coupling to the QB4 island"
+    },
+    {
+     "stage": "quantum_device",
+     "target": "QB4",
+     "qubit_positions_um": [
+      7400.0,
+      6000.0
+     ]
+    }
+   ]
+  },
+  {
+   "net": "PROBE_OUT",
+   "function": "readout probe line out",
+   "path": [
+    {
+     "stage": "rf_connector",
+     "ref": "J4",
+     "type": "end-launch SMA (top side)",
+     "at_mm": [
+      20.0,
+      -6.0
+     ],
+     "signal_pad_layer": "F.Cu",
+     "solder_joint": true
+    },
+    {
+     "stage": "pcb_trace",
+     "layer": "F.Cu",
+     "geometry": "grounded CPW",
+     "width_mm": 0.43,
+     "gap_mm": 0.2,
+     "z0_ohm": 49.87,
+     "length_mm": 15.037,
+     "points_mm": [
+      [
+       5.85,
+       -0.6
+      ],
+      [
+       8.0,
+       -0.6
+      ],
+      [
+       13.4,
+       -6.0
+      ],
+      [
+       18.65,
+       -6.0
+      ]
+     ]
+    },
+    {
+     "stage": "pcb_bond_pad",
+     "layer": "F.Cu + ENIG",
+     "center_mm": [
+      5.55,
+      -0.6
+     ],
+     "size_mm": [
+      0.6,
+      0.43
+     ]
+    },
+    {
+     "stage": "wire_bonds",
+     "count": 2,
+     "material": "Al-1%Si wedge bond, 25 um",
+     "lengths_mm": [
+      0.9481,
+      0.9481
+     ]
+    },
+    {
+     "stage": "die_launcher_pad",
+     "kqc_port_id": 8,
+     "side": "E",
+     "center_um": [
+      9680.0,
+      4400.0
+     ],
+     "size_um": [
+      240.0,
+      240.0
+     ],
+     "metal": "Al 200 nm"
+    },
+    {
+     "stage": "die_cpw",
+     "centre_um": 10.0,
+     "gap_um": 6.0,
+     "z0_ohm": 50.9,
+     "structure": "PL_OUT: same continuous probe-line conductor as PROBE_IN"
+    },
+    {
+     "stage": "quantum_device",
+     "target": "QB1-QB4",
+     "qubit_positions_um": {
+      "QB1": [
+       2600.0,
+       6000.0
+      ],
+      "QB2": [
+       4200.0,
+       6000.0
+      ],
+      "QB3": [
+       5800.0,
+       6000.0
+      ],
+      "QB4": [
+       7400.0,
+       6000.0
+      ]
+     }
+    }
+   ],
+   "readout_resonators": [
+    {
+     "name": "RR1",
+     "f_design_GHz": 6.8,
+     "qubit": "QB1"
+    },
+    {
+     "name": "RR2",
+     "f_design_GHz": 7.0,
+     "qubit": "QB2"
+    },
+    {
+     "name": "RR3",
+     "f_design_GHz": 7.2,
+     "qubit": "QB3"
+    },
+    {
+     "name": "RR4",
+     "f_design_GHz": 7.4,
+     "qubit": "QB4"
+    }
+   ]
+  },
+  {
+   "net": "PROBE_IN",
+   "function": "readout probe line in",
+   "path": [
+    {
+     "stage": "rf_connector",
+     "ref": "J2",
+     "type": "end-launch SMA (top side)",
+     "at_mm": [
+      -20.0,
+      -6.0
+     ],
+     "signal_pad_layer": "F.Cu",
+     "solder_joint": true
+    },
+    {
+     "stage": "pcb_trace",
+     "layer": "F.Cu",
+     "geometry": "grounded CPW",
+     "width_mm": 0.43,
+     "gap_mm": 0.2,
+     "z0_ohm": 49.87,
+     "length_mm": 15.037,
+     "points_mm": [
+      [
+       -5.85,
+       -0.6
+      ],
+      [
+       -8.0,
+       -0.6
+      ],
+      [
+       -13.4,
+       -6.0
+      ],
+      [
+       -18.65,
+       -6.0
+      ]
+     ]
+    },
+    {
+     "stage": "pcb_bond_pad",
+     "layer": "F.Cu + ENIG",
+     "center_mm": [
+      -5.55,
+      -0.6
+     ],
+     "size_mm": [
+      0.6,
+      0.43
+     ]
+    },
+    {
+     "stage": "wire_bonds",
+     "count": 2,
+     "material": "Al-1%Si wedge bond, 25 um",
+     "lengths_mm": [
+      0.9481,
+      0.9481
+     ]
+    },
+    {
+     "stage": "die_launcher_pad",
+     "kqc_port_id": 9,
+     "side": "W",
+     "center_um": [
+      320.0,
+      4400.0
+     ],
+     "size_um": [
+      240.0,
+      240.0
+     ],
+     "metal": "Al 200 nm"
+    },
+    {
+     "stage": "die_cpw",
+     "centre_um": 10.0,
+     "gap_um": 6.0,
+     "z0_ohm": 50.9,
+     "structure": "PL_IN -> tees PLT1..4 -> interdigital caps RRC1..4 -> lambda/2 resonators RR1..4 -> QBn readout couplers"
+    },
+    {
+     "stage": "quantum_device",
+     "target": "QB1-QB4",
+     "qubit_positions_um": {
+      "QB1": [
+       2600.0,
+       6000.0
+      ],
+      "QB2": [
+       4200.0,
+       6000.0
+      ],
+      "QB3": [
+       5800.0,
+       6000.0
+      ],
+      "QB4": [
+       7400.0,
+       6000.0
+      ]
+     }
+    }
+   ],
+   "readout_resonators": [
+    {
+     "name": "RR1",
+     "f_design_GHz": 6.8,
+     "qubit": "QB1"
+    },
+    {
+     "name": "RR2",
+     "f_design_GHz": 7.0,
+     "qubit": "QB2"
+    },
+    {
+     "name": "RR3",
+     "f_design_GHz": 7.2,
+     "qubit": "QB3"
+    },
+    {
+     "name": "RR4",
+     "f_design_GHz": 7.4,
+     "qubit": "QB4"
+    }
+   ]
+  },
+  {
+   "net": "Q1_DRIVE",
+   "function": "XY drive",
+   "path": [
+    {
+     "stage": "rf_connector",
+     "ref": "J1",
+     "type": "end-launch SMA (top side)",
+     "at_mm": [
+      -20.0,
+      6.0
+     ],
+     "signal_pad_layer": "F.Cu",
+     "solder_joint": true
+    },
+    {
+     "stage": "pcb_trace",
+     "layer": "F.Cu",
+     "geometry": "grounded CPW",
+     "width_mm": 0.43,
+     "gap_mm": 0.2,
+     "z0_ohm": 49.87,
+     "length_mm": 15.037,
+     "points_mm": [
+      [
+       -5.85,
+       0.6
+      ],
+      [
+       -8.0,
+       0.6
+      ],
+      [
+       -13.4,
+       6.0
+      ],
+      [
+       -18.65,
+       6.0
+      ]
+     ]
+    },
+    {
+     "stage": "pcb_bond_pad",
+     "layer": "F.Cu + ENIG",
+     "center_mm": [
+      -5.55,
+      0.6
+     ],
+     "size_mm": [
+      0.6,
+      0.43
+     ]
+    },
+    {
+     "stage": "wire_bonds",
+     "count": 2,
+     "material": "Al-1%Si wedge bond, 25 um",
+     "lengths_mm": [
+      0.9481,
+      0.9481
+     ]
+    },
+    {
+     "stage": "die_launcher_pad",
+     "kqc_port_id": 10,
+     "side": "W",
+     "center_um": [
+      320.0,
+      5600.0
+     ],
+     "size_um": [
+      240.0,
+      240.0
+     ],
+     "metal": "Al 200 nm"
+    },
+    {
+     "stage": "die_cpw",
+     "centre_um": 10.0,
+     "gap_um": 6.0,
+     "z0_ohm": 50.9,
+     "structure": "DL_Q1_DRIVE: open-ended charge line, capacitive coupling to the QB1 island"
+    },
+    {
+     "stage": "quantum_device",
+     "target": "QB1",
+     "qubit_positions_um": [
+      2600.0,
+      6000.0
+     ]
+    }
+   ]
+  }
+ ],
+ "ground": {
+  "die_ground_plane": "largest Al island (ground plane) - flux lines terminate into it at each SQUID",
+  "ground_wire_bonds": 67,
+  "ground_bonds_per_side": {
+   "N": 9,
+   "E": 18,
+   "S": 22,
+   "W": 18
+  },
+  "pcb_ground_ring": "exposed ENIG ring around the die window, F.Cu GND",
+  "stitching_vias": 324,
+  "planes": [
+   "F.Cu pour",
+   "In1.Cu plane",
+   "In2.Cu coplanar pour",
+   "In3.Cu plane",
+   "In4.Cu plane",
+   "B.Cu pour"
+  ],
+  "package_return": "B.Cu pour contacts the gold-plated base; M2.5 screws through plated mounting holes"
+ }
+}
