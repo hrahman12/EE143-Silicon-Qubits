@@ -384,6 +384,18 @@ def _graded_axis(segments):
     return np.concatenate(pts)
 
 
+def _merge_axis(a, tol=1e-6):
+    """sorted grid coordinates with near-duplicates (closer than tol um) merged"""
+    a = np.sort(np.asarray(a, float))
+    out = [a[0]]
+    for v in a[1:]:
+        if v - out[-1] > tol:
+            out.append(v)
+        else:
+            out[-1] = v if abs(v) < abs(out[-1]) or v in (0.0,) else out[-1]
+    return np.array(out)
+
+
 def fv_solve_2d(xs, zs, eps_cells, fixed, val):
     """finite-volume Laplace solve div(eps grad V) = 0 on a tensor grid (nodes xs x zs), cell permittivities
     eps_cells (len(xs)-1, len(zs)-1), Dirichlet nodes `fixed` with values `val`, Neumann outer boundary.
@@ -437,7 +449,7 @@ def fv_solve_2d(xs, zs, eps_cells, fixed, val):
     return V, charge
 
 
-def crossover_edge_term(kind="top_edge", eps_d=None, d_nm=None, enclosure_um=0.2, box_um=0.5, h_um=0.0025,
+def crossover_edge_term(kind="top_edge", eps_d=None, d_nm=None, enclosure_um=0.2, box_um=0.5, h_um=0.001,
                         homogeneous=False):
     """excess capacitance per unit edge length (fF/um) of a crossover edge, relative to eps0 eps_d (overlap)/d.
 
@@ -457,8 +469,8 @@ def crossover_edge_term(kind="top_edge", eps_d=None, d_nm=None, enclosure_um=0.2
     B, h, hc = box_um, h_um, 0.05
     xs = _graded_axis([(-B, -3 * d, hc, h), (-3 * d, 3 * d, h, h), (3 * d, B, h, hc)])
     zs = _graded_axis([(-B, -d, hc, h), (-d, 2 * d, h, h), (2 * d, B, h, hc)])
-    zs = np.unique(np.concatenate([zs, [0.0, d]]))
-    xs = np.unique(np.concatenate([xs, [0.0]]))
+    zs = _merge_axis(np.concatenate([zs, [0.0, d]]))
+    xs = _merge_axis(np.concatenate([xs, [0.0]]))
     XC = 0.5 * (xs[1:] + xs[:-1])[:, None] * np.ones((1, len(zs) - 1))
     ZC = np.ones((len(xs) - 1, 1)) * 0.5 * (zs[1:] + zs[:-1])[None, :]
     if homogeneous:
@@ -590,3 +602,1296 @@ def qps_amplitude_GHz(EJ_GHz, EC_GHz):
 
 def EC_GHz_from_fF(C_fF):
     return E_CHARGE ** 2 / (2 * C_fF * 1e-15) / 6.62607015e-34 / 1e9
+
+
+# ====================================================================================================================
+# layout-level extraction: periodic context windows taken from the drawn geometry (hardware/layout.py primitives)
+# ====================================================================================================================
+SIZING_VERSION = 9
+G_NOCAP = 0.12                   # below this envelope value no coupling capacitor is drawn (target < 0.025 fF)
+SIZING_MESH = dict(h0=0.04, hmax=0.40, hmax_ground=1.2)
+MESH = dict(h0=0.03, hmax=0.30, hmax_ground=1.0, growth=1.6, ymargin=12.0, delta_jj=0.10, delta_cap=0.30, K=20)
+
+
+def _parity_net(net, n0, P):
+    """map a node label of cell m to its class in a period of P cells starting at n0 ('A1_17' -> 'A1|1')"""
+    if net is None or net == "G" or net.startswith("S_"):
+        return net
+    head, _, idx = net.rpartition("_")
+    if not idx.isdigit():
+        return net
+    return f"{head}|{(int(idx) - n0) % P}"
+
+
+def context_panels(block, n0, P=2, rows=None, mesh=None):
+    """Panels of the periodic window [x_n0 - p/2, x_n0 + (P - 1/2) p) of the drawn block. Node labels are folded to
+    their class in the period; junction and crossover overlaps are excluded from the interface model (their
+    capacitance is added analytically: Cj for junctions, crossover_capacitance() for plates and crossings)."""
+    m = dict(MESH)
+    if mesh:
+        m.update(mesh)
+    p = block.p
+    xa = block.xn(n0) - p / 2
+    xb = xa + P * p
+    ys = [block.yc[r] for r in (rows or ROWS_ALL)]
+    y_lo, y_hi = min(ys) - m["ymargin"], max(ys) + m["ymargin"]
+    rects = [r for r in block.geo.window(xa, xb) if r[4] > y_lo and r[2] < y_hi]
+    excl = []                                              # (x1, y1, x2, y2, net_to_drop)
+    for j in getattr(block.geo, "junctions", []):
+        bx = j["box"]
+        dj = m["delta_jj"]
+        excl.append((bx[0] - dj, bx[1] - dj, bx[2] + dj, bx[3] + dj, j["b"], "AL2"))
+    caps = []
+    for c in getattr(block.geo, "caps", []):
+        bx = c["box"]
+        if bx[2] <= xa or bx[0] >= xb:
+            continue
+        dc = m["delta_cap"]
+        layer = "AL1" if c["kind"] == "crossing" else "AL2"
+        excl.append((bx[0] - dc, bx[1] - dc, bx[2] + dc, bx[3] + dc, c["drop"], layer))
+        caps.append(c)
+    from hardware.layout import L_NB, L_AL1, L_AL2, L_GRAL
+    lname = {L_NB: "NB", L_AL1: "AL1", L_AL2: "AL2", L_GRAL: "GRAL"}
+    # merge each net's footprint per layer is not needed: overlapping rectangles of the SAME net would double-count
+    # charge, so rectangles are first cut into non-overlapping pieces per net (grid decomposition)
+    pieces = {}
+    for (ly, x1, y1, x2, y2, net, role) in rects:
+        if ly not in lname:
+            continue
+        y1c, y2c = max(y1, y_lo), min(y2, y_hi)
+        if y2c <= y1c:
+            continue
+        if role == "gral":                                 # only the unshielded part (the ends are under the pads)
+            from hardware.layout import GRAL_OV
+            full = [r for r in block.geo.rects if r[6] == "gral" and r[5] == net]
+            if full:
+                fx1, fx2 = full[0][1] + GRAL_OV, full[0][3] - GRAL_OV
+                x1, x2 = max(x1, fx1), min(x2, fx2)
+                if x2 - x1 < 1e-6:
+                    continue
+        if isinstance(net, tuple):
+            key = ("lin",) + tuple(_parity_net(nn, n0, P) for nn in net)
+        else:
+            key = _parity_net(net, n0, P)
+        pieces.setdefault(key, []).append((x1, y1c, x2, y2c, lname[ly], role))
+    pan = Panels()
+    for key, rl in pieces.items():
+        for (x1, y1, x2, y2, ly, role) in _disjoint(rl):
+            # exclusion zones
+            sub = [(x1, y1, x2, y2)]
+            for (ex1, ey1, ex2, ey2, enet, elay) in excl:
+                if _parity_net(enet, n0, P) != key or ly != elay:
+                    continue
+                sub = [s for r in sub for s in _subtract(r, (ex1, ey1, ex2, ey2))]
+            for (a1, b1, a2, b2) in sub:
+                if a2 - a1 < 1e-4 or b2 - b1 < 1e-4:
+                    continue
+                big = (a2 - a1) > 3 and (b2 - b1) > 3
+                hm = m["hmax_ground"] if big or role == "ground" else m["hmax"]
+                if isinstance(key, tuple):
+                    w = ("lin", "x", key[1], key[2], a1 if False else None, None)
+                    # linear potential along the inductor between its unshielded ends (the drawn rect minus the
+                    # contact overlaps): s from 0 at x_left + GRAL_OV to 1 at x_right - GRAL_OV of the full rect
+                    full = [r for r in rects if r[6] == "gral" and isinstance(r[5], tuple)
+                            and abs(r[2] - b1) < 1e-6 and r[1] <= a1 + 1e-9 and r[3] >= a2 - 1e-9]
+                    if full:
+                        fx1, fx2 = full[0][1], full[0][3]
+                    else:
+                        fx1, fx2 = a1, a2
+                    from hardware.layout import GRAL_OV
+                    w = ("lin", "x", key[1], key[2], fx1 + GRAL_OV, fx2 - GRAL_OV)
+                    pan.add_rect(a1, a2, b1, b2, w, h0=m["h0"], hmax=m["hmax"], growth=m["growth"], tag=role)
+                else:
+                    pan.add_rect(a1, a2, b1, b2, {key: 1.0} if key is not None else {}, h0=m["h0"], hmax=hm,
+                                 growth=m["growth"], tag=role)
+    return pan, caps, (xa, xb, y_lo, y_hi)
+
+
+ROWS_ALL = ["D_A", "A0", "A1", "B1", "B0", "D_B"]
+
+
+def _subtract(r, e):
+    """rectangle r minus rectangle e -> list of rectangles"""
+    x1, y1, x2, y2 = r
+    ex1, ey1, ex2, ey2 = e
+    if ex2 <= x1 or ex1 >= x2 or ey2 <= y1 or ey1 >= y2:
+        return [r]
+    out = []
+    if ey1 > y1:
+        out.append((x1, y1, x2, ey1))
+    if ey2 < y2:
+        out.append((x1, ey2, x2, y2))
+    yy1, yy2 = max(y1, ey1), min(y2, ey2)
+    if ex1 > x1:
+        out.append((x1, yy1, ex1, yy2))
+    if ex2 < x2:
+        out.append((ex2, yy1, x2, yy2))
+    return out
+
+
+def _disjoint(rl):
+    """cut a list of possibly overlapping rectangles (same net) into disjoint rectangles, keeping layer/role of the
+    first rectangle covering each piece (grid decomposition on the rectangles' own coordinates)"""
+    if len(rl) == 1:
+        return rl
+    xs = sorted(set([r[0] for r in rl] + [r[2] for r in rl]))
+    ys = sorted(set([r[1] for r in rl] + [r[3] for r in rl]))
+    out = []
+    for i in range(len(xs) - 1):
+        cx = 0.5 * (xs[i] + xs[i + 1])
+        col = None
+        for j in range(len(ys) - 1):
+            cy = 0.5 * (ys[j] + ys[j + 1])
+            hit = None
+            for r in rl:
+                if r[0] <= cx <= r[2] and r[1] <= cy <= r[3]:
+                    hit = r
+                    break
+            if hit is None:
+                col = None
+                continue
+            if col is not None and col[4] == hit[4] and col[5] == hit[5] and abs(col[3] - ys[j]) < 1e-12 \
+                    and abs(col[0] - xs[i]) < 1e-12:
+                col = (col[0], col[1], col[2], ys[j + 1], col[4], col[5])
+                out[-1] = col
+            else:
+                col = (xs[i], ys[j], xs[i + 1], ys[j + 1], hit[4], hit[5])
+                out.append(col)
+    # merge horizontally adjacent identical columns
+    out.sort(key=lambda r: (r[1], r[3], r[0]))
+    merged = []
+    for r in out:
+        if merged and abs(merged[-1][1] - r[1]) < 1e-12 and abs(merged[-1][3] - r[3]) < 1e-12 \
+                and abs(merged[-1][2] - r[0]) < 1e-12 and merged[-1][4] == r[4] and merged[-1][5] == r[5]:
+            merged[-1] = (merged[-1][0], r[1], r[2], r[3], r[4], r[5])
+        else:
+            merged.append(r)
+    return merged
+
+
+def analytic_caps(caps, n0, P):
+    """{(net_a, net_b): C} of the crossover capacitors in the window (folded labels)"""
+    out = {}
+    for c in caps:
+        a, b = _parity_net(c["a"], n0, P), _parity_net(c["b"], n0, P)
+        C = crossover_capacitance(c["w_x"], c["w_y"], edges=c["edges"])
+        out[(a, b)] = out.get((a, b), 0.0) + C
+    return out
+
+
+def context_capacitance(block, n0, P=2, rows=None, mesh=None, islands=True, kpi=True):
+    """periodic extraction around cell n0. Returns per-row quantities per node (fF):
+    C0 (k = 0 node capacitance: to everything except the same row), Cpi (k = pi), cross[s] (k = 0 coupling to row s,
+    summed over the cells of s), toS, C_gnd (= C0 - sum over other rails); for islands: diag, C_m (to one neighbour),
+    C_2t (two-terminal across a middle junction, everything else grounded)."""
+    rows = rows or ROWS_ALL
+    pan, caps, box = context_panels(block, n0, P, rows, mesh)
+    nets = sorted({k for w in pan.w for k in w.keys() if k not in ("G", None)})
+    nodes = [nd for nd in nets]
+    ex, tags = [], []
+    for r in rows:
+        cls = [f"{r}|{i}" for i in range(P)]
+        if not all(c in nodes for c in cls):
+            continue
+        ex.append({c: 1.0 for c in cls}); tags.append(("k0", r))
+        if kpi:
+            ex.append({c: (1.0 if i % 2 == 0 else -1.0) for i, c in enumerate(cls)}); tags.append(("kpi", r))
+    isl = [nd for nd in nodes if nd.startswith("M")]
+    if islands and isl:
+        ex.append({isl[0]: 1.0}); tags.append(("isl", isl[0]))
+    m = dict(MESH)
+    if mesh:
+        m.update(mesh)
+    Q, info = periodic_charges(pan, nodes, ex, (1 + EPS_SI) / 2, P * block.p, m["K"])
+    an = analytic_caps(caps, n0, P)
+    idx = {nd: i for i, nd in enumerate(nodes)}
+    Can = np.zeros((len(nodes), len(nodes)))
+    for (a, b), C in an.items():
+        if a in idx:
+            Can[idx[a], idx[a]] += C
+        if b in idx:
+            Can[idx[b], idx[b]] += C
+        if a in idx and b in idx:
+            Can[idx[a], idx[b]] -= C
+            Can[idx[b], idx[a]] -= C
+    out = dict(panels=info["panels"], rows={}, islands={}, analytic={f"{a}~{b}": C for (a, b), C in an.items()})
+    for e, (kind, r) in enumerate(tags):
+        v = np.array([ex[e].get(nd, 0.0) for nd in nodes])
+        q = Q[e] + Can @ v
+        if kind == "k0":
+            cls = [f"{r}|{i}" for i in range(P)]
+            d = out["rows"].setdefault(r, {})
+            d["C0"] = float(sum(q[idx[c]] for c in cls) / P)
+            d["C0_class"] = [float(q[idx[c]]) for c in cls]
+            d["cross"] = {}
+            for s in rows:
+                if s == r:
+                    continue
+                cs = [f"{s}|{i}" for i in range(P) if f"{s}|{i}" in idx]
+                if cs:
+                    d["cross"][s] = float(-sum(q[idx[c]] for c in cs) / P)
+            d["toS"] = {nd: float(-q[idx[nd]] / P) for nd in nodes if nd.startswith("S_")}
+            d["toM"] = float(-sum(q[idx[nd]] for nd in isl) / P) if isl else 0.0
+            d["C_gnd"] = d["C0"] - sum(d["cross"].values())
+        elif kind == "kpi":
+            cls = [f"{r}|{i}" for i in range(P)]
+            out["rows"].setdefault(r, {})["Cpi"] = float(sum(q[idx[c]] * (1 if i % 2 == 0 else -1)
+                                                            for i, c in enumerate(cls)) / P)
+        else:
+            i0 = r
+            other = [nd for nd in isl if nd != i0]
+            diag = float(q[idx[i0]])
+            Cm = float(-sum(q[idx[o]] for o in other) / 2) if P == 2 else float(-q[idx[other[0]]])
+            out["islands"] = dict(diag=diag, C_m=Cm, C_2t=0.5 * (diag + Cm) if P == 2 else None,
+                                  to_rails={r: float(-sum(q[idx[f"{r}|{i}"]] for i in range(P)
+                                                         if f"{r}|{i}" in idx)) for r in rows})
+    return out
+
+
+# ====================================================================================================================
+# 2D cross-section of a layout column: geometric (and kinetic) inductance per unit length, mesh inductances
+# ====================================================================================================================
+def column_xsec(block, n, extra=None, extra_slots=()):
+    """strips (y_lo, y_hi, 0, conductor) of the cross-section through column n (perpendicular to the rows) and the
+    mesh return conductor of every row. Ground pieces: the outermost two are the reference 'G', the inner ones
+    'I0', 'I1', ... (inner ground strips, connected to G only at the row ends, so they carry the local returns)."""
+    from hardware.layout import ROWS, PAIR_OF, PAIRS, QUBIT_ROWS, RUNG_DIR, ISL_H, W_GRAL
+    iv = block.openings(n)
+    ground = []
+    y = 0.0
+    for (lo, hi) in iv:
+        if lo > y:
+            ground.append((y, lo))
+        y = max(y, hi)
+    if y < block.H:
+        ground.append((y, block.H))
+    # slots (control-line / gate keep-outs) crossing the column centre
+    xc = block.xn(n) + block.p / 2
+    slots = sorted([(ko[1], ko[3]) for ko in getattr(block.geo, "keepout", []) if ko[0] <= xc <= ko[2]]
+                   + list(extra_slots))
+    strips, kin = [], {}
+    names = []
+    for i, (a, b) in enumerate(ground):
+        outer = i in (0, len(ground) - 1)
+        cuts = [(lo, hi) for (lo, hi) in slots if lo < b and hi > a]
+        if cuts:
+            y = a
+            for (lo, hi) in cuts:
+                if lo > y:
+                    strips.append((y, lo, 0.0, "G"))
+                y = max(y, hi)
+            if y < b:
+                strips.append((y, b, 0.0, "G"))
+            names.append("G")
+            continue
+        nm = "G" if outer else f"I{i - 1}"
+        strips.append((a, b, 0.0, nm))
+        names.append(nm)
+        if nm != "G":
+            kin[nm] = nb_Lsq_pH() / (b - a)
+    p = block.p
+    ret = {}
+    for row in ROWS:
+        yc = block.yc[row]
+        l_g = block.l_gral(row, n) if n < block.N - 1 else block.l_gral(row, n - 1)
+        w_eq = (l_g * W_GRAL + (p - l_g) * block.pad_w(row, n)) / p
+        strips.append((yc - w_eq / 2, yc + w_eq / 2, 0.0, row))
+        k = block.ret[row][n]
+        d = RUNG_DIR[row][k]
+        if k == "S":
+            ret[row] = f"S_{PAIR_OF[row]}"
+        elif k == "M":
+            ret[row] = "M_" + ("A" if row in QUBIT_ROWS["A"] else "B")
+        else:
+            # the ground piece on the return side
+            y_edge = yc + d * (block.pad_w(row, n) / 2 + 1e-3)
+            cand = [(a, b, nm) for (a, b, z, nm) in strips if nm.startswith(("G", "I")) and (a > yc if d > 0 else b < yc)]
+            cand.sort(key=lambda t: abs((t[0] if d > 0 else t[1]) - yc))
+            ret[row] = cand[0][2]
+    for pair in PAIRS:
+        if block.g[n] > 0:
+            ws = block.w_strip(pair, n)
+            ys = block.strip_y(pair)
+            strips.append((ys - ws / 2, ys + ws / 2, 0.0, f"S_{pair}"))
+            Lsq = nb_Lsq_pH() if block.strip_mat(pair, n) == "NB" else al_Lsq_pH()
+            from hardware.layout import L_NECK
+            wn = block.neck_w(pair, n)
+            l_n = L_NECK if wn < ws else 0.0
+            kin[f"S_{pair}"] = Lsq * ((block.p - l_n) / ws + l_n / wn) / block.p     # per unit length, neck included
+    for q in ("A", "B"):
+        if any(ret.get(r) == f"M_{q}" for r in ROWS):
+            ys = block.bs_y(q)
+            strips.append((ys - ISL_H / 2, ys + ISL_H / 2, 0.0, f"M_{q}"))
+    for ln in getattr(block.geo, "lines", []):
+        pass
+    for (ly_, x1, y1, x2, y2, net, role) in getattr(block, "_line_rects", []):
+        if x1 <= xc <= x2 and net not in [s_[3] for s_ in strips]:
+            strips.append((y1, y2, 0.0, net))
+    for s in (extra or []):
+        strips.append(s)
+    conds = []
+    for s in strips:
+        if s[3] not in conds:
+            conds.append(s[3])
+    return strips, conds, ret, kin
+
+
+def column_inductance(block, n, extra=None, lines=(), extra_slots=()):
+    """per-cell mesh inductances (pH) of column n from the 2D cross-section: geometric loop self-inductance of each
+    row's mesh (rail -> its return conductor), mutuals between meshes, kinetic inductance of the shared/own return
+    per cell, and mutuals to control lines (conductor names in `lines`, current returning in the ground)."""
+    strips, conds, ret, kin = column_xsec(block, n, extra, extra_slots)
+    L, names = inductance_2d(strips, conds, "G")
+    for nm, lk in kin.items():
+        if nm in names:
+            i = names.index(nm)
+            L[i, i] += lk                       # kinetic inductance per unit length of the return conductors
+    idx = {nm: i for i, nm in enumerate(names)}
+    p = block.p
+    E = {}
+    for row, rc in ret.items():
+        e = np.zeros(len(names))
+        e[idx[row]] = 1.0
+        if rc != "G":
+            e[idx[rc]] -= 1.0
+        E[row] = e
+    out = dict(self={}, mutual={}, ret=ret, lines={})
+    rows = list(E)
+    for i, r in enumerate(rows):
+        out["self"][r] = float(p * E[r] @ L @ E[r])
+        for s in rows[i + 1:]:
+            out["mutual"][f"{r}~{s}"] = float(p * E[r] @ L @ E[s])
+        for ln in lines:
+            if ln in idx:
+                el = np.zeros(len(names)); el[idx[ln]] = 1.0
+                out["lines"][f"{r}~{ln}"] = float(p * E[r] @ L @ el)
+    return out
+
+
+def rail_kinetic_pH(block, row, n):
+    """kinetic inductance of mesh n of a row along the rail: granular Al (unshielded squares) + AL1 pad paths from
+    the rung finger to the granular-Al contact midpoint on both nodes"""
+    from hardware.layout import X_JJ, GRAL_OV, W_GRAL
+    p = block.p
+    l_g = block.l_gral(row, n)
+    sq_g = l_g / W_GRAL
+    xl0, xr0 = block.pad_extent(row, n)
+    xl1, xr1 = block.pad_extent(row, n + 1)
+    path0 = (xr0 - GRAL_OV / 2) - (block.xn(n) + X_JJ)
+    path1 = (block.xn(n + 1) + X_JJ) - (xl1 + GRAL_OV / 2)
+    sq_al = path0 / block.pad_w(row, n) + path1 / block.pad_w(row, n + 1)
+    return sq_g * gral_Lsq_pH() + sq_al * al_Lsq_pH(), dict(squares_gral=sq_g, squares_al=sq_al)
+
+
+# ====================================================================================================================
+# sizing: solve the layout knobs from the architecture targets (periodic BEM + 2D cross-sections)
+# ====================================================================================================================
+def _secant(f, x0, x1, target, lo, hi, tol, maxit=6, log=None):
+    """solve f(x) = target on [lo, hi] (monotonic f) by secant steps; returns (x, f(x), history)"""
+    hist = []
+    f0 = f(x0); hist.append((x0, f0))
+    if abs(f0 - target) <= tol:
+        return x0, f0, hist
+    f1 = f(x1); hist.append((x1, f1))
+    for _ in range(maxit):
+        if abs(f1 - target) <= tol:
+            break
+        if f1 == f0:
+            break
+        x2 = x1 + (target - f1) * (x1 - x0) / (f1 - f0)
+        x2 = min(max(x2, lo), hi)
+        if abs(x2 - x1) < 1e-4:
+            break
+        x0, f0, x1 = x1, f1, x2
+        f1 = f(x1); hist.append((x1, f1))
+    best = min(hist, key=lambda h: abs(h[1] - target))
+    return best[0], best[1], hist
+
+
+def _bracket_solve(f, lo, hi, x0, target, tol, maxit=7):
+    """monotonic increasing f on [lo, hi]: regula falsi (Illinois) from x0; returns (x, f(x)) closest to target.
+    Robust to a jump (e.g. a structure that appears at a knob threshold)."""
+    pts = []
+    f0 = f(x0); pts.append((x0, f0))
+    if abs(f0 - target) <= tol:
+        return x0, f0
+    # bracket
+    if f0 < target:
+        a, fa = x0, f0
+        b = min(hi, x0 + max(0.3, 0.3 * (hi - lo)))
+        fb = f(b); pts.append((b, fb))
+        while fb < target and b < hi - 1e-9:
+            a, fa = b, fb
+            b = min(hi, b + 0.5 * (hi - lo))
+            fb = f(b); pts.append((b, fb))
+    else:
+        b, fb = x0, f0
+        a = max(lo, x0 - max(0.3, 0.3 * (hi - lo)))
+        fa = f(a); pts.append((a, fa))
+        while fa > target and a > lo + 1e-9:
+            b, fb = a, fa
+            a = max(lo, a - 0.5 * (hi - lo))
+            fa = f(a); pts.append((a, fa))
+    if not (fa <= target <= fb):
+        best = min(pts, key=lambda q: abs(q[1] - target))
+        return best
+    side = 0
+    for _ in range(maxit):
+        if fb == fa:
+            break
+        c = (a * (fb - target) - b * (fa - target)) / (fb - fa)
+        if not (min(a, b) < c < max(a, b)):
+            c = 0.5 * (a + b)
+        fc = f(c); pts.append((c, fc))
+        if abs(fc - target) <= tol:
+            break
+        if fc < target:
+            a, fa = c, fc
+            if side == -1:
+                fb = target + (fb - target) / 2
+            side = -1
+        else:
+            b, fb = c, fc
+            if side == +1:
+                fa = target + (fa - target) / 2
+            side = +1
+    best = min(pts, key=lambda q: abs(q[1] - target))
+    return best
+
+
+def _block(arch, sz):
+    from hardware import layout as LY
+    B = LY.Block(arch, sz)
+    B.draw()
+    return B
+
+
+def size_layout(arch, t=None, verbose=True):
+    """solve every sizing knob of hardware/layout.py from the targets. Knobs (all um):
+      trim[row|n]   overlap of the trim capacitor to ground (plain cells: return side; coupler/BS: free side)
+      s_free[row|n] free-side ground gap (raised above S_FREE when a node is over target without trim)
+      w_strip, strip_mat [pair|n]  coupler strip width and material (AL2 or NB) per mesh n -> L_s (k)
+      cap[pair|n]   (w_t, l_ov) of the coupling capacitor -> C_c
+      island[q|sec] island shunt overlap -> C_M
+      l_gral[row|n] unshielded granular-Al length of mesh n -> L per cell
+    Taper cells are interpolated in g between solved samples; dummy couplers use the gate coupler's solution
+    mirrored (their geometry is the mirror image)."""
+    import copy
+    import time as _time
+    from hardware import layout as LY
+    t = t or LY.targets(arch)
+    T0 = _time.time()
+    sz = LY.default_sizing(arch)
+    N = t["N"]
+    p = t["pitch_um"]
+    secs = {}
+    for d in t["sections"]:
+        secs.setdefault(d["name"], d)
+    shunt, Cc, Ls, Lt = t["shunt_fF"], t["C_c_fF"], t["L_s_pH"], t["L_pH"]
+    tolC = 0.002                                            # fF, sizing tolerance (well inside +-5 %)
+    log = dict(steps=[])
+
+    def say(*a):
+        if verbose:
+            print(f"[size {(_time.time() - T0):6.1f}s]", *a, flush=True)
+
+    rows_all = LY.ROWS
+    # ---------------------------------------------------------------- 1. plain cells: return-side trim
+    n_pl = secs["accelerate"]["start"] + secs["accelerate"]["cells"] // 2
+
+    def plain_C(l):
+        s = copy.deepcopy(sz); s["defaults"]["trim"] = l
+        r = context_capacitance(_block(arch, s), n_pl, rows=["A0", "A1"], kpi=False, islands=False)
+        return r["rows"]["A0"]["C_gnd"]
+    l_pl, c_pl, h = _secant(plain_C, 0.2, 0.5, shunt, -0.3, 0.95, tolC)
+    sz["defaults"]["trim"] = l_pl
+    say(f"plain trim {l_pl:.3f} um -> C_gnd {c_pl:.4f} fF (target {shunt:.4f})")
+    log["plain"] = dict(trim=l_pl, C_gnd=c_pl, history=h)
+    # ---------------------------------------------------------------- 2. beam splitter: free-side trim + island shunt
+    bs = LY.bs_sections(arch)
+    q0, sec0, ns0 = bs[0]
+    n_bs = ns0[len(ns0) // 2]
+    rows_q = list(LY.QUBIT_ROWS[q0])
+
+    def bs_eval(l, ov):
+        s = copy.deepcopy(sz)
+        for (q, sec, ns) in bs:
+            s["island"][f"{q}|{sec}"] = ov
+            for r_ in LY.QUBIT_ROWS[q]:
+                for n in ns:
+                    s["trim"][f"{r_}|{n}"] = l
+        r = context_capacitance(_block(arch, s), n_bs, rows=rows_q, kpi=False)
+        return r
+    r0 = bs_eval(0.0, 0.0)
+    Cgnd0, C2t0, Cm0 = r0["rows"][rows_q[0]]["C_gnd"], r0["islands"]["C_2t"], r0["islands"]["C_m"]
+    tgtM = t["shunt_M_fF"]
+    ov = 0.0
+    if C2t0 < tgtM:
+        ov, _, _ = _secant(lambda o: bs_eval(0.0, o)["islands"]["C_2t"], 0.1, 0.3, tgtM, 0.0, 0.6, tolC)
+    l_bs, c_bs, h = _secant(lambda l: bs_eval(l, ov)["rows"][rows_q[0]]["C_gnd"], 0.2, 0.5, shunt, -0.3, 0.95, tolC)
+    rb = bs_eval(l_bs, ov)
+    say(f"BS: island shunt overlap {ov:.3f} (natural C_2t {C2t0:.4f}, C_m {Cm0:.4f}; target {tgtM:.4f}), "
+        f"trim {l_bs:.3f} -> C_gnd {rb['rows'][rows_q[0]]['C_gnd']:.4f}, C_2t {rb['islands']['C_2t']:.4f}")
+    log["bs"] = dict(island_overlap=ov, natural=r0["islands"], final=rb["islands"], trim=l_bs,
+                     C_gnd=rb["rows"][rows_q[0]]["C_gnd"])
+    for (q, sec, ns) in bs:
+        sz["island"][f"{q}|{sec}"] = ov
+        for r_ in LY.QUBIT_ROWS[q]:
+            for n in ns:
+                sz["trim"][f"{r_}|{n}"] = l_bs
+    # ---------------------------------------------------------------- 3. couplers: samples in g
+    g_all = [ _g for _g in (LY._env(arch, n) for n in range(N))]
+    ncpl = [n for n in range(N) if g_all[n] > 0]
+    n_plateau = secs["coupler"]["start"] + secs["coupler"]["cells"] // 2
+    samples = [1.0, 0.8, 0.6, 0.4, 0.25, 0.15, 0.08, 0.04]
+    pair, (ra, rb_) = "G", LY.PAIRS["G"]
+    plate, cross = (ra, rb_) if LY.CPL_ROLE[ra] == "plate" else (rb_, ra)
+    res_g = {}
+    W_MAX = 6.0
+    for gs in samples:
+        # representative cell: plateau for g = 1, else the taper_in cell with the closest g
+        if gs >= 1.0:
+            nc = n_plateau
+        else:
+            nc = min(secs["taper_in"]["start"] + j for j in range(secs["taper_in"]["cells"])
+                     ) if False else min(range(secs["taper_in"]["start"], secs["taper_in"]["start"] + secs["taper_in"]["cells"]),
+                                         key=lambda n: abs(g_all[n] - gs))
+        gc = g_all[nc]
+        cells = [nc - 2, nc - 1, nc, nc + 1, nc + 2, nc + 3]
+        # (a) strip width / material from the 2D cross-section: mutual(plate, cross) = k L g
+        def M_of(w, mat):
+            s = copy.deepcopy(sz)
+            for n in cells:
+                s["w_strip"][f"{pair}|{n}"] = w
+                s["strip_mat"] = dict(s.get("strip_mat", {}))
+                s["strip_mat"][f"{pair}|{n}"] = mat
+            B = LY.Block(arch, s)
+            return column_inductance(B, nc)["mutual"][f"{ra}~{rb_}"]
+        tgtL = Ls * gc
+        mat = "AL2"
+        if M_of(W_MAX, "AL2") > tgtL:
+            mat = "NB"
+        f_log = lambda lw: M_of(math.exp(lw), mat)
+        lw, Mv, _ = _secant(f_log, math.log(0.25), math.log(0.5), tgtL, math.log(0.12), math.log(W_MAX), 0.01 * Ls)
+        w = math.exp(lw)
+        # (b) capacitor (overlap > 0, or end gap < 0) and the two nodes' C_gnd: simultaneous secant with a diagonal
+        # Jacobian (each target depends mainly on its own knob). Node knob u: u >= 0 -> trim overlap u at the
+        # standard free gap; u < 0 -> no trim, free gap S_FREE - u (wider gap = less capacitance), u >= S_FREE - S_MAX
+        tgtC = Cc * gc
+        tgtG = shunt - Cc * gc
+        wt = 0.20 if gc > 0.5 else 0.10
+        S_MAX = 6.0
+        u_lo = -0.30 - (S_MAX - LY.S_FREE)                  # u in [-0.3, 0.95]: trim knob; below: wider free gap
+
+        def knobs(x):
+            lov, up, uc = x
+            tr = lambda u: None if float(u) < -0.30 else max(float(u), -0.30)   # no trim structure below -0.3
+            sf = lambda u: LY.S_FREE + max(0.0, -0.30 - float(u))
+            return dict(cap=True, wt=wt, lov=float(lov), tp=tr(up), tc=tr(uc), sp=sf(up), sc=sf(uc))
+
+        def ev(x):
+            kb_ = knobs(x)
+            s = copy.deepcopy(sz)
+            s.setdefault("strip_mat", {})
+            for n in cells:
+                s["w_strip"][f"{pair}|{n}"] = w
+                s["strip_mat"][f"{pair}|{n}"] = mat
+                s["cap"][f"{pair}|{n}"] = (wt, kb_["lov"])
+                s["trim"][f"{plate}|{n}"] = kb_["tp"]; s["trim"][f"{cross}|{n}"] = kb_["tc"]
+                s["s_free"][f"{plate}|{n}"] = kb_["sp"]; s["s_free"][f"{cross}|{n}"] = kb_["sc"]
+            r = context_capacitance(_block(arch, s), nc, rows=[plate, cross], kpi=False, islands=False,
+                                    mesh=SIZING_MESH)
+            return np.array([r["rows"][plate]["cross"][cross], r["rows"][plate]["C_gnd"], r["rows"][cross]["C_gnd"]])
+        nocap = gc < G_NOCAP or mat == "NB"                 # no capacitor: |C_c - target| stays below 5 % of C_c
+        if nocap:
+            _ev_cap = ev
+
+            def ev(x):
+                s = copy.deepcopy(sz)
+                kb_ = knobs(x)
+                s.setdefault("strip_mat", {})
+                for n in cells:
+                    s["w_strip"][f"{pair}|{n}"] = w
+                    s["strip_mat"][f"{pair}|{n}"] = mat
+                    s["cap"][f"{pair}|{n}"] = None
+                    s["trim"][f"{plate}|{n}"] = kb_["tp"]; s["trim"][f"{cross}|{n}"] = kb_["tc"]
+                    s["s_free"][f"{plate}|{n}"] = kb_["sp"]; s["s_free"][f"{cross}|{n}"] = kb_["sc"]
+                r = context_capacitance(_block(arch, s), nc, rows=[plate, cross], kpi=False, islands=False,
+                                        mesh=SIZING_MESH)
+                return np.array([r["rows"][plate]["cross"][cross], r["rows"][plate]["C_gnd"], r["rows"][cross]["C_gnd"]])
+        x = [0.40 * gc if gc > 0.5 else -0.8, -0.3, -0.3]
+        cache = {}
+
+        def evc(xx):
+            key = tuple(round(v, 4) for v in xx)
+            if key not in cache:
+                cache[key] = ev(list(xx))
+            return cache[key]
+        bounds = [(-2.5, 2.0), (u_lo, 0.95), (u_lo, 0.95)]
+        tgt = np.array([tgtC, tgtG, tgtG])
+        for sweep in range(2):
+            for i in ((1, 2) if nocap else (0, 1, 2)):
+                def f1(v, i=i):
+                    xx = list(x); xx[i] = v
+                    return float(evc(xx)[i])
+                x[i], _ = _bracket_solve(f1, bounds[i][0], bounds[i][1], x[i], float(tgt[i]),
+                                         tolC if i == 0 else 2 * tolC)
+        fx = evc(x)
+        cv, gpv, gcv = fx
+        kb = knobs(x)
+        if nocap:
+            kb["cap"] = False
+        res_g[gs] = dict(n=nc, g=gc, w_strip=w, mat=mat, M_pH=Mv, M_target=tgtL,
+                         cap=(kb["wt"], kb["lov"]) if kb["cap"] else None,
+                         trim_plate=kb["tp"], trim_cross=kb["tc"], s_plate=kb["sp"], s_cross=kb["sc"],
+                         C_c=float(cv), C_c_target=tgtC, C_gnd_plate=float(gpv), C_gnd_cross=float(gcv), C_gnd_target=tgtG,
+                         iters=len(cache))
+        say(f"g={gc:.3f} n={nc}: strip {mat} {w:.3f} um (M {Mv:.2f}/{tgtL:.2f} pH), cap {res_g[gs]['cap']}, "
+            f"C_c {cv:.4f}/{tgtC:.4f}, C_gnd plate {gpv:.4f} cross {gcv:.4f} / {tgtG:.4f} "
+            f"(trim p {kb['tp']} c {kb['tc']}, s_free p {kb['sp']:.2f} c {kb['sc']:.2f})")
+    log["coupler_samples"] = res_g
+    # interpolate the coupler knobs over all coupler cells (in g), and mirror to the dummy pairs
+    gs_sorted = sorted(res_g)
+    def interp(key, gv):
+        xs = np.array(gs_sorted); ys = np.array([res_g[x][key] for x in gs_sorted], float)
+        return float(np.interp(gv, xs, ys))
+    mirror = {"G": {plate: plate, cross: cross}}
+    for pk, (a, b) in LY.PAIRS.items():
+        if pk == "G":
+            continue
+        mirror[pk] = {(a if LY.CPL_ROLE[a] == "plate" else b): plate, (a if LY.CPL_ROLE[a] == "cross" else b): cross}
+    sz.setdefault("strip_mat", {})
+    for n in ncpl:
+        gv = g_all[n]
+        # nearest-sample material, interpolated width (in log) and knobs
+        gbelow = [x for x in gs_sorted if x <= gv + 1e-12]
+        mat = res_g[min(gs_sorted, key=lambda x: abs(x - gv))]["mat"]
+        mats_al = [x for x in gs_sorted if res_g[x]["mat"] == "AL2"]
+        if mat == "AL2":
+            xs = np.array(mats_al); ys = np.log([res_g[x]["w_strip"] for x in mats_al])
+        else:
+            nb_ = [x for x in gs_sorted if res_g[x]["mat"] == "NB"]
+            xs = np.array(nb_); ys = np.log([res_g[x]["w_strip"] for x in nb_])
+        w = float(np.exp(np.interp(gv, xs, ys))) if len(xs) > 1 else float(np.exp(ys[0]))
+        wt = 0.20 if gv > 0.5 else 0.10
+        with_cap = [x for x in gs_sorted if res_g[x]["cap"]]
+        capd = None
+        if with_cap and gv >= G_NOCAP and mat == "AL2":
+            same = [x for x in with_cap if res_g[x]["cap"][0] == wt]
+            xs = np.array(same if len(same) > 1 else with_cap)
+            lov = float(np.interp(gv, xs, [res_g[x]["cap"][1] for x in xs]))
+            capd = (wt, lov)
+        for pk, (a, b) in LY.PAIRS.items():
+            sz["w_strip"][f"{pk}|{n}"] = w
+            sz["strip_mat"][f"{pk}|{n}"] = mat
+            sz["cap"][f"{pk}|{n}"] = capd
+            for row in (a, b):
+                role = mirror[pk][row]
+                key_t = "trim_plate" if role == plate else "trim_cross"
+                nearest = sorted(gs_sorted, key=lambda x: abs(x - gv))[:2]
+                if all(res_g[x][key_t] is None for x in nearest):
+                    sz["trim"][f"{row}|{n}"] = None
+                else:
+                    xs_ = [x for x in gs_sorted if res_g[x][key_t] is not None]
+                    sz["trim"][f"{row}|{n}"] = float(np.interp(gv, xs_, [res_g[x][key_t] for x in xs_]))
+                sz["s_free"][f"{row}|{n}"] = interp("s_plate" if role == plate else "s_cross", gv)
+    say("coupler knobs interpolated over", len(ncpl), "cells")
+    # ---------------------------------------------------------------- 4. launcher control lines (if any)
+    sz, linfo = size_lines(arch, sz, t, say)
+    log["lines"] = linfo
+    # ---------------------------------------------------------------- 5. granular-Al lengths: L per cell
+    sz = size_gral(arch, sz, t, say)
+    sz["log"] = log
+    sz["targets"] = {k: v for k, v in t.items() if k not in ("launcher", "sections")}
+    sz["runtime_s"] = _time.time() - T0
+    return sz
+
+
+def resize_lines_and_gral(arch, sz, verbose=True):
+    """re-run the launcher-line and granular-Al steps on an existing sizing"""
+    import time as _time
+    from hardware import layout as LY
+    T0 = _time.time()
+    say = (lambda *a: print(f"[resize {(_time.time() - T0):6.1f}s]", *a, flush=True)) if verbose else (lambda *a: None)
+    t = LY.targets(arch)
+    sz, linfo = size_lines(arch, sz, t, say)
+    sz.setdefault("log", {})["lines"] = linfo
+    sz = size_gral(arch, sz, t, say)
+    return sz
+
+
+def size_gral(arch, sz, t, say=print):
+    """unshielded granular-Al length per mesh so that the extracted mesh self-inductance (kinetic rail + kinetic
+    return + 2D geometric loop) equals L. Columns are grouped by signature (return kinds, g, strip, line positions)
+    and the 2D solve is done once per group."""
+    from hardware import layout as LY
+    N, Lt = t["N"], t["L_pH"]
+    B = LY.Block(arch, sz)
+    sig_cache = {}
+    loopL = {}
+    for n in range(N - 1):
+        sig = (tuple(B.ret[r][n] for r in LY.ROWS), round(B.g[n], 3),
+               tuple(round(B.w_strip(pk, n), 4) for pk in LY.PAIRS) if B.g[n] > 0 else (),
+               tuple(round(B.s_free(r, n), 3) for r in LY.ROWS))
+        if sig not in sig_cache:
+            sig_cache[sig] = column_inductance(B, n)["self"]
+        loopL[n] = sig_cache[sig]
+    say(f"granular Al: {len(sig_cache)} distinct column cross-sections")
+    for it in range(3):
+        newl = {}
+        for row in LY.ROWS:
+            for n in range(N - 1):
+                Lk, info = rail_kinetic_pH(B, row, n)
+                Lg = Lk - info["squares_gral"] * gral_Lsq_pH()
+                need = Lt - loopL[n][row] - Lg
+                newl[f"{row}|{n}"] = need / gral_Lsq_pH() * LY.W_GRAL
+        sz["l_gral"] = newl
+        B = LY.Block(arch, sz)
+    return sz
+
+
+def size_lines(arch, sz, t=None, say=print):
+    """control-line depths (line centre from the row's free-side ground edge, um) per rail cell so that the 2D
+    cross-section mutual M_n (line -> cell loop) equals the launcher targets. The trap line runs on the inner track
+    (closer to the rail) while both lines exist, the accelerator line on the outer track; after the trap line ends
+    the accelerator line may use the whole strip. Tables M(depth) are computed for one row of each strip type (A0:
+    strip between a return side and a free side; A1: strip between two free sides) and reused for the mirrored B
+    rows. Valid for slowly varying depth (2D cross-section per cell)."""
+    import copy
+    from hardware import layout as LY
+    lt = LY.launcher_targets(arch)
+    if not lt:
+        return sz, {}
+    s0 = copy.deepcopy(sz)
+    s0["lines"] = {}
+    B = LY.Block(arch, s0)
+    B.draw()
+    WL, GL = LY.Block.W_LINE, LY.Block.G_LINE
+    dmin = B.depth_min()
+    tables = {}
+    rep = {"A0": "A0", "A1": "A1", "B0": "A0", "B1": "A1"}
+    info = {}
+
+    def mutuals(row, c, dt, da):
+        df = -LY.RUNG_DIR[row]["G"]
+        y_near, _ = B.strip_bounds(row, c, df)
+        extra, slots = [], []
+        for nm, dpt in (("TRL", dt), ("ACL", da)):
+            if dpt is None:
+                continue
+            y = y_near + df * dpt
+            extra.append((y - WL / 2, y + WL / 2, 0.0, nm))
+            slots.append((y - WL / 2 - GL, y + WL / 2 + GL))
+        r = column_inductance(B, c, extra=extra, lines=("TRL", "ACL"), extra_slots=slots)
+        return abs(r["lines"].get(f"{row}~TRL", 0.0)), abs(r["lines"].get(f"{row}~ACL", 0.0)), r
+    for row0 in ("A0", "A1"):
+        if row0 not in lt:
+            continue
+        c = 30
+        df = -LY.RUNG_DIR[row0]["G"]
+        dmax = B.depth_max(row0, c, df)
+        dts = np.linspace(dmin, dmax - 2.4, 6)
+        das2 = np.linspace(dmin + 2.4, dmax, 7)
+        T2t = np.full((len(dts), len(das2)), np.nan); T2a = np.full_like(T2t, np.nan)
+        for i, dt in enumerate(dts):
+            for j, da in enumerate(das2):
+                if da - dt < 2.4 - 1e-9:
+                    continue
+                mt, ma, _ = mutuals(row0, c, dt, da)
+                T2t[i, j], T2a[i, j] = mt, ma
+        das1 = np.linspace(dmin, dmax, 9)
+        T1 = np.array([mutuals(row0, c, None, da)[1] for da in das1])
+        tables[row0] = dict(dts=dts, das2=das2, T2t=T2t, T2a=T2a, das1=das1, T1=T1)
+        say(f"line tables {row0}: trap M {np.nanmin(T2t):.4f}..{np.nanmax(T2t):.4f} pH, acc M (both) "
+            f"{np.nanmin(T2a):.4f}..{np.nanmax(T2a):.4f}, acc alone {T1.min():.4f}..{T1.max():.4f} pH")
+    from scipy.interpolate import RegularGridInterpolator
+    lines = {}
+    for row, tg in lt.items():
+        tb = tables[rep[row]]
+        m = LY.mirrored(row)
+        Mt, Ma = np.asarray(tg["trap"]), np.asarray(tg["acc"])
+        act_t = np.nonzero(Mt > 1e-6 * Mt.max())[0]
+        act_a = np.nonzero(Ma > 1e-6 * Ma.max())[0]
+        # cells each line passes through: from the launch end to one cell beyond its last active cell
+        if not m:
+            cells_t = set(range(0, act_t.max() + 2)) if len(act_t) else set()
+            cells_a = set(range(0, act_a.max() + 2)) if len(act_a) else set()
+        else:
+            cells_t = set(range(act_t.min() - 1, B.N - 1)) if len(act_t) else set()
+            cells_a = set(range(act_a.min() - 1, B.N - 1)) if len(act_a) else set()
+        dep = {"trap": {}, "acc": {}}
+        T2t = tb["T2t"].copy(); T2a = tb["T2a"].copy()
+        for T in (T2t, T2a):
+            for i in range(T.shape[0]):
+                row_ = T[i]
+                good = ~np.isnan(row_)
+                if good.any():
+                    row_[~good] = np.interp(np.nonzero(~good)[0], np.nonzero(good)[0], row_[good])
+        ft = RegularGridInterpolator((tb["dts"], tb["das2"]), T2t, bounds_error=False, fill_value=None)
+        fa = RegularGridInterpolator((tb["dts"], tb["das2"]), T2a, bounds_error=False, fill_value=None)
+        grid = [(dt, da) for dt in np.linspace(tb["dts"][0], tb["dts"][-1], 45)
+                for da in np.linspace(tb["das2"][0], tb["das2"][-1], 45) if da >= dt + 2.4 - 1e-9]
+        G = np.array(grid)
+        GT, GA = ft(G), fa(G)
+        for n in sorted(cells_a | cells_t):
+            if n < 0 or n > B.N - 2:
+                continue
+            tgt_t, tgt_a = Mt[n], Ma[n]
+            if n in cells_t:
+                sc = np.abs(GT - tgt_t) / max(Mt.max(), 1e-9) + np.abs(GA - tgt_a) / max(Ma.max(), 1e-9)
+                k = int(np.argmin(sc))
+                dep["trap"][str(n)] = float(G[k, 0]); dep["acc"][str(n)] = float(G[k, 1])
+            else:
+                # T1 decreases with depth; below the deepest value the line sits at the deepest allowed depth
+                if tgt_a <= tb["T1"][-1]:
+                    da = float(tb["das1"][-1])
+                else:
+                    da = float(np.interp(-tgt_a, -np.asarray(tb["T1"]), tb["das1"]))
+                dep["acc"][str(n)] = da
+        lines[row] = dep
+        info[row] = dict(trap_cells=len(dep["trap"]), acc_cells=len(dep["acc"]),
+                         residual_at_deepest_pH=dict(trap=float(np.min(GT)), acc_alone=float(np.min(tb["T1"]))))
+    sz["lines"] = lines
+    sz["line_tables"] = {k: {kk: (vv.tolist() if hasattr(vv, "tolist") else vv) for kk, vv in v.items()}
+                         for k, v in tables.items()}
+    return sz, info
+
+
+# ====================================================================================================================
+# verification: DRC + extraction of the drawn block vs the architecture targets
+# ====================================================================================================================
+TOL = 0.05
+
+
+def _pf(val, tgt, tol=TOL, absolute=None):
+    """pass/fail dict; absolute: tolerance in absolute units (for targets near zero)"""
+    if absolute is not None:
+        dev = val - tgt
+        return dict(extracted=float(val), target=float(tgt), deviation=float(dev), tolerance_abs=float(absolute),
+                    passed=bool(abs(dev) <= absolute))
+    dev = (val - tgt) / tgt if tgt else float("nan")
+    return dict(extracted=float(val), target=float(tgt), rel_dev=float(dev), passed=bool(abs(dev) <= tol))
+
+
+def _inter_qubit(r, s):
+    """True if the two rows belong to different qubits (A side: D_A, A0, A1; B side: B1, B0, D_B) and neither is a
+    dummy: a coupling between them acts on the two-qubit state"""
+    a = {"A0", "A1"}; b = {"B1", "B0"}
+    return (r in a and s in b) or (r in b and s in a)
+
+
+def gds_consistency(block, gds_path):
+    """area per layer of the GDS on disk vs the primitives used for the extraction (same geometry check)"""
+    import gdstk
+    from hardware.layout import build_block, L_NB, L_GRAL, L_AL1, L_AL2, L_DIEL
+    lib = gdstk.read_gds(gds_path)
+    top = lib.top_level()[0]
+    area = {}
+    for poly in top.polygons:
+        area[(poly.layer, poly.datatype)] = area.get((poly.layer, poly.datatype), 0.0) + poly.area()
+    lib2, cell2, _, _ = build_block(block.arch, block.sz)
+    area2 = {}
+    for poly in cell2.polygons:
+        area2[(poly.layer, poly.datatype)] = area2.get((poly.layer, poly.datatype), 0.0) + poly.area()
+    out = {}
+    for ly in (L_NB, L_GRAL, L_AL1, L_AL2, L_DIEL):
+        a1, a2 = area.get(ly, 0.0), area2.get(ly, 0.0)
+        out[f"{ly[0]}/{ly[1]}"] = dict(gds_um2=a1, primitives_um2=a2, match=bool(abs(a1 - a2) <= 1e-6 * max(a1, 1.0) + 1e-3))
+    return out
+
+
+def verify(arch, gds_path: str, out_dir: str | None = None, sizing: dict | None = None, fast: bool = False,
+           verbose: bool = True) -> dict:
+    """Run the DRC and the EM extraction of the drawn row block and compare every extracted quantity with the
+    architecture target (+-5 %). Writes <out_dir>/extraction.json and <out_dir>/drc_report.json (out_dir defaults
+    to the directory of gds_path). Returns the result dict; result['passed'] is the milestone-D layout check."""
+    import time as _time
+    from hardware import layout as LY
+    from hardware import drc as DRC
+    T0 = _time.time()
+    out_dir = out_dir or os.path.dirname(os.path.abspath(gds_path))
+    say = (lambda *a: print(f"[verify {(_time.time() - T0):6.1f}s]", *a, flush=True)) if verbose else (lambda *a: None)
+    t = LY.targets(arch)
+    sz = sizing if sizing is not None else LY.get_sizing(arch)
+    B = LY.Block(arch, sz)
+    B.draw()
+    p, N = B.p, B.N
+    res = dict(targets={k: v for k, v in t.items() if k not in ("launcher",)}, materials=MATERIALS,
+               method=__doc__.split("Electrostatics (3D)")[1].strip() if "Electrostatics (3D)" in __doc__ else "",
+               mesh=MESH, tolerance=TOL)
+    # ---------------------------------------------------------------- DRC
+    drc = DRC.run(gds_path, arch, report_path=os.path.join(out_dir, "drc_report.json"))
+    res["drc"] = dict(violations_total=drc["violations_total"], summary=drc["summary"], junctions=drc["junctions"])
+    say("DRC", drc["violations_total"], "violations")
+    res["gds_consistency"] = gds_consistency(B, gds_path)
+    secs = {}
+    for d in arch.sections():
+        secs.setdefault(d["name"], d)
+    Cj, CjM = t["Cj_fF"], t["CjM_fF"]
+    Cn, Cc, shunt = t["C_node_fF"], t["C_c_fF"], t["shunt_fF"]
+    Lt, Ls = t["L_pH"], t["L_s_pH"]
+    checks = []
+
+    def chk(name, d, where="", informational=False):
+        d = dict(d); d["quantity"] = name; d["where"] = where; d["informational"] = informational
+        checks.append(d)
+        return d
+    # ---------------------------------------------------------------- capacitance at sampled contexts
+    samples = []
+    plain_n = next(n for n in range(N) if all(B.ret[r][n] == "G" for r in LY.ROWS) and B.g[n] == 0
+                   and 60 < n < N - 60 and all(not B.is_strap(r, n) for r in LY.ROWS)
+                   and not any(str(n) in B.sz.get("lines", {}).get(r, {}).get("acc", {}) for r in B.sz.get("lines", {})))
+    samples.append(("plain (all rows ground return)", plain_n))
+    for (q, sec, ns) in B.bs:
+        samples.append((f"beam splitter {q} {sec}", ns[len(ns) // 2]))
+        if fast:
+            break
+    samples.append(("coupler plateau", secs["coupler"]["start"] + secs["coupler"]["cells"] // 2))
+    tin = secs["taper_in"]
+    taper_cells = [tin["start"] + j for j in (range(0, tin["cells"], 5) if not fast else (10, 20, 30))]
+    for n in taper_cells:
+        samples.append((f"taper_in g={B.g[n]:.3f}", n))
+    tout = secs["taper_out"]
+    for j in ((5, 20, 35) if not fast else (20,)):
+        samples.append((f"taper_out g={B.g[tout['start'] + j]:.3f}", tout["start"] + j))
+    lt_rows = list(B.sz.get("lines", {}).keys())
+    if lt_rows and not fast:
+        samples.append(("launcher: trap + accelerator lines (A rows)", 30))
+        samples.append(("launcher: accelerator plateau (A rows)", 180))
+    strap_rows = {}
+    if not fast:
+        for (q, row, n) in B.strap_cells():
+            samples.append((f"strap over {row} (special cell, 4-cell period)", n))
+            strap_rows[n] = row
+    ctx = {}
+    for name, n0 in samples:
+        P_ = 4 if n0 in strap_rows else 2
+        r = context_capacitance(B, n0, P=P_, rows=LY.ROWS, kpi=True, islands=True)
+        if n0 in strap_rows:
+            # only the strap node (class 0) is special; report it alone
+            rr = r["rows"][strap_rows[n0]]
+            ctx[name] = dict(n=n0, g=0.0, **r)
+            c_strap = rr["C0_class"][0]
+            chk("node capacitance (Cj + geometric, k = 0)", _pf(Cj + c_strap, Cn), f"{strap_rows[n0]} n={n0} [{name}]")
+            say(f"context {name}: strap node C0 = {c_strap:.4f} fF (neighbours {rr['C0_class'][1:]})")
+            continue
+        ctx[name] = dict(n=n0, g=B.g[n0], **r)
+        say(f"context {name} (n={n0}, {r['panels']} panels)")
+        for row in LY.ROWS:
+            d = r["rows"][row]
+            k = B.ret[row][n0]
+            g = B.g[n0]
+            partner = None
+            if k == "S":
+                a, b = LY.PAIRS[LY.PAIR_OF[row]]
+                partner = b if row == a else a
+            Ctot = Cj + d["C0"]
+            chk("node capacitance (Cj + geometric, k = 0)", _pf(Ctot, Cn), f"{row} n={n0} [{name}]")
+            tgt_sh = shunt - Cc * g if partner else shunt
+            Cpart = d["cross"].get(partner, 0.0) if partner else 0.0
+            chk("node shunt to ground/return (geometric, excl. coupled partner) [informational: the requirement "
+                "is the total node capacitance]", _pf(d["C0"] - Cpart, tgt_sh), f"{row} n={n0} [{name}]",
+                informational=True)
+            if partner and LY.CPL_ROLE[row] == "plate":
+                if g >= 0.999:
+                    chk("C_c (coupling capacitance, k = 0 sum over partner nodes)", _pf(Cpart, Cc * g), f"{row}-{partner} n={n0}")
+                else:
+                    chk("C_c taper profile (|C_c - g C_c| <= 5 % of C_c)", _pf(Cpart, Cc * g, absolute=TOL * Cc),
+                        f"{row}-{partner} n={n0} g={g:.3f}")
+            # strays: couplings the model does not have. Between the two qubits (an A row and a B row) they add a
+            # conditional phase -> budget 5 % of C_c; within a qubit or to a dummy they only shift single-rail
+            # dynamics -> budget 5 % of the node capacitance
+            for s_, v in d["cross"].items():
+                if s_ == partner:
+                    continue
+                if _inter_qubit(row, s_):
+                    chk("stray capacitance between the qubits (A row - B row) (<= 5 % of C_c)",
+                        _pf(v, 0.0, absolute=TOL * Cc), f"{row}-{s_} n={n0} [{name}]")
+                else:
+                    chk("stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
+                        _pf(v, 0.0, absolute=TOL * Cn), f"{row}-{s_} n={n0} [{name}]")
+            d["C_across_L"] = (d.get("Cpi", d["C0"]) - d["C0"]) / 4
+        if r.get("islands"):
+            isl = r["islands"]
+            ctx[name]["E"] = {}
+    # ---------------------------------------------------------------- beam splitter: C_M, E_C,M, E_S
+    bs_ctx = [v for k, v in ctx.items() if k.startswith("beam splitter")]
+    if bs_ctx:
+        isl = bs_ctx[0]["islands"]
+        C_M = CjM + isl["C_2t"]
+        EC = EC_GHz_from_fF(C_M)
+        ES = qps_amplitude_GHz(t["EJ_M_GHz"], EC)
+        chk("C_M = Cj,M + island two-terminal capacitance", _pf(C_M, t["C_M_fF"]), "beam-splitter middle junction")
+        chk("E_C,M", _pf(EC, t["EC_M_GHz"]), "beam-splitter middle junction")
+        chk("E_S (scqubits charge dispersion / 4, as companion 2)", _pf(ES, t["E_S_GHz"]), "beam-splitter middle junction")
+        # model gap: rail-junction capacitances seen by the middle junction (not in the single-junction estimate)
+        C_a = isl["diag"] - isl["C_m"] + 2 * Cj
+        C_sig = CjM + isl["C_m"] + C_a / 2
+        res["beam_splitter"] = dict(C_m_direct_fF=isl["C_m"], C_island_diag_fF=isl["diag"], C_2t_fF=isl["C_2t"],
+                                    C_M_fF=C_M, EC_M_GHz=EC, E_S_GHz=ES,
+                                    with_rail_junction_capacitances=dict(
+                                        C_sigma_fF=C_sig, EC_GHz=EC_GHz_from_fF(C_sig),
+                                        E_S_GHz=qps_amplitude_GHz(t["EJ_M_GHz"], EC_GHz_from_fF(C_sig)),
+                                        note="if the two rail junctions (2 x Cj) on each island are counted as "
+                                             "grounded capacitance; the architecture's single-junction estimate omits "
+                                             "them (vortex hopping beyond the single-junction estimate is unresolved)"),
+                                    gates=getattr(B, "gates", []))
+    # ---------------------------------------------------------------- inductance: every column (2D), grouped
+    sig_cache = {}
+    L_rows = {r: [] for r in LY.ROWS}
+    Ls_list = []
+    strayM = []
+    for n in range(N - 1):
+        sig = (tuple(B.ret[r][n] for r in LY.ROWS), round(B.g[n], 4),
+               tuple(round(B.w_strip(pk, n), 4) for pk in LY.PAIRS) if B.g[n] > 0 else (),
+               tuple(round(B.s_free(r, n), 3) for r in LY.ROWS),
+               tuple(sorted((round(k[1], 2), round(k[3], 2)) for k in getattr(B.geo, "keepout", [])
+                            if k[0] <= B.xn(n) + p / 2 <= k[2])))
+        if sig not in sig_cache:
+            sig_cache[sig] = column_inductance(B, n)
+        ci = sig_cache[sig]
+        for r in LY.ROWS:
+            Lk, _ = rail_kinetic_pH(B, r, n)
+            L_rows[r].append(Lk + ci["self"][r])
+        if B.g[n] > 0:
+            for pk, (a, b) in LY.PAIRS.items():
+                M = ci["mutual"].get(f"{a}~{b}", ci["mutual"].get(f"{b}~{a}"))
+                Lk, _ = rail_kinetic_pH(B, a, n)
+                Ls_list.append((pk, n, B.g[n], M, M / (Lk + ci["self"][a])))
+        for key, M in ci["mutual"].items():
+            a, b = key.split("~")
+            if B.g[n] > 0 and {a, b} == set(LY.PAIRS[LY.PAIR_OF.get(a, "G")]) and B.ret[a][n] == "S":
+                continue
+            strayM.append((key, n, M))
+    say(f"inductance: {len(sig_cache)} distinct cross-sections over {N - 1} columns")
+    Lall = np.array([v for r in LY.ROWS for v in L_rows[r]])
+    i_worst = int(np.argmax(np.abs(Lall - Lt)))
+    chk("L per cell (mesh self-inductance: kinetic + geometric), worst cell of all rows", _pf(Lall[i_worst], Lt),
+        f"{LY.ROWS[i_worst // (N - 1)]} n={i_worst % (N - 1)}")
+    pl = [x for x in Ls_list if x[2] >= 0.999]
+    if pl:
+        Mp = np.array([x[3] for x in pl]); kp = np.array([x[4] for x in pl])
+        iw = int(np.argmax(np.abs(Mp - Ls)))
+        chk("L_s (shared-return mutual incl. direct magnetic coupling), plateau worst cell", _pf(Mp[iw], Ls),
+            f"{pl[iw][0]} n={pl[iw][1]}")
+        iw = int(np.argmax(np.abs(kp - t["k"])))
+        chk("k = M / L_self, plateau worst cell", _pf(kp[iw], t["k"]), f"{pl[iw][0]} n={pl[iw][1]}")
+    tp = [x for x in Ls_list if x[2] < 0.999]
+    if tp:
+        dev = np.array([x[3] - Ls * x[2] for x in tp])
+        iw = int(np.argmax(np.abs(dev)))
+        chk("L_s taper profile (|M - g L_s| <= 5 % of L_s), worst cell", _pf(tp[iw][3], Ls * tp[iw][2], absolute=TOL * Ls),
+            f"{tp[iw][0]} n={tp[iw][1]} g={tp[iw][2]:.3f}")
+    # stray mutuals: between the qubits budget 5 % of L_s, within a qubit / to a dummy 5 % of L
+    if strayM:
+        Ms = np.array([abs(x[2]) for x in strayM])
+        inter = [x for x in strayM if _inter_qubit(*x[0].split("~"))]
+        intra = [x for x in strayM if not _inter_qubit(*x[0].split("~"))]
+        if inter:
+            w = max(inter, key=lambda x: abs(x[2]))
+            chk("stray mutual inductance between the qubits (<= 5 % of L_s), worst", _pf(w[2], 0.0, absolute=TOL * Ls),
+                f"{w[0]} n={w[1]}")
+        if intra:
+            w = max(intra, key=lambda x: abs(x[2]))
+            chk("stray mutual inductance within a qubit / to a dummy (<= 5 % of L_s), worst",
+                _pf(w[2], 0.0, absolute=TOL * Ls), f"{w[0]} n={w[1]}")
+    res["inductance"] = dict(L_cell_pH=dict(min=float(Lall.min()), max=float(Lall.max()), mean=float(Lall.mean())),
+                             L_s_plateau_pH=[float(x) for x in (Mp.min(), Mp.max())] if pl else None,
+                             k_plateau=[float(x) for x in (kp.min(), kp.max())] if pl else None,
+                             taper=[dict(pair=x[0], n=x[1], g=x[2], M_pH=x[3], target_pH=Ls * x[2]) for x in tp[::4]],
+                             stray_max_pH=float(Ms.max()) if strayM else 0.0,
+                             junction_lead_inductance_pH=junction_lead_inductance(B))
+    # ---------------------------------------------------------------- launcher control lines
+    if lt_rows:
+        res["launcher"] = launcher_check(B, chk, say)
+    # ---------------------------------------------------------------- sensitivity, convergence
+    res["sensitivity"] = sensitivity(B, ctx, res, t)
+    if not fast:
+        res["convergence"] = convergence_study(B, secs["coupler"]["start"] + secs["coupler"]["cells"] // 2, say)
+    # ---------------------------------------------------------------- summary
+    res["contexts"] = {k: dict(n=v["n"], g=v["g"], panels=v["panels"], rows=v["rows"], islands=v.get("islands", {}),
+                               analytic=v.get("analytic", {})) for k, v in ctx.items()}
+    res["checks"] = checks
+    groups = {}
+    for c in checks:
+        q = c["quantity"]
+        g = groups.setdefault(q, dict(n=0, failed=0, worst=None))
+        g["n"] += 1
+        if not c["passed"]:
+            g["failed"] += 1
+        dev = abs(c.get("rel_dev", c.get("deviation", 0.0) / max(c.get("tolerance_abs", 1.0), 1e-12) * TOL))
+        if g["worst"] is None or dev > g["worst"][0]:
+            g["worst"] = (dev, c)
+    res["summary"] = {q: dict(checked=g["n"], failed=g["failed"], worst=g["worst"][1],
+                              informational=g["worst"][1].get("informational", False)) for q, g in groups.items()}
+    res["drc_clean"] = drc["violations_total"] == 0
+    res["passed"] = bool(res["drc_clean"] and all(c["passed"] for c in checks if not c.get("informational"))
+                         and all(v["match"] for v in res["gds_consistency"].values()))
+    res["runtime_s"] = _time.time() - T0
+    json.dump(res, open(os.path.join(out_dir, "extraction.json"), "w"), indent=1, default=float)
+    say("done:", "PASS" if res["passed"] else "FAIL")
+    return res
+
+
+import json  # noqa: E402
+import os  # noqa: E402
+
+
+def junction_lead_inductance(B):
+    """kinetic + geometric (Grover) inductance of the rung leads in series with a rail junction, for a plain, a
+    coupler and a beam-splitter cell: AL1 finger from the pad edge to the junction, AL2 bar and return lead"""
+    from hardware import layout as LY
+    out = {}
+    Lsq = al_Lsq_pH()
+    LJ = (2.067833848e-15 / (2 * math.pi)) ** 2 / (B.arch.rail.EJ_GHz * 1e9 * 6.62607015e-34) * 1e12
+    secs = {d["name"]: d for d in B.arch.sections()}
+    for name, n in (("plain", secs["accelerate"]["start"] + 60), ("coupler", secs["coupler"]["start"] + 50),
+                    ("beam_splitter", secs["BS_prep"]["start"] + 20)):
+        row = "A1"
+        rects = [r for r in B.geo.rects if r[5] == B.node(row, n) and r[6] == "jj_finger"]
+        bar = [r for r in B.geo.rects if r[6] == "jj_bar" and abs(r[1] - (B.xn(n) + LY.X_JJ - LY.JJ_A / 2 - LY.E1)) < 1e-6
+               and abs((r[2] + r[4]) / 2 - [j for j in B.geo.junctions if j.get("row") == row and j["n"] == n][0]["y"]) < 1e-3]
+        lead = [r for r in B.geo.rects if r[6] == "ret_lead" and abs((r[1] + r[3]) / 2 - (B.xn(n) + LY.X_RET)) < 1e-6
+                and r[2] < B.yc[row] + 6 and r[4] > B.yc[row] - 6]
+        Lk = 0.0; Lg = 0.0
+        for (ly, x1, y1, x2, y2, *_ ) in rects + lead:
+            l, w = (y2 - y1), (x2 - x1)
+            Lk += Lsq * l / w
+            Lg += grover_bar_pH(max(l, 2 * w), w, 0.03) if l > w else 0.0
+        for (ly, x1, y1, x2, y2, *_ ) in bar:
+            Lk += Lsq * (x2 - x1) / (y2 - y1) / 2
+        out[name] = dict(kinetic_pH=Lk, geometric_pH=Lg, total_pH=Lk + Lg, fraction_of_LJ=(Lk + Lg) / LJ,
+                         note="in series with the junction: effective E_J lowered by this fraction (not in the model)")
+    return out
+
+
+def launcher_check(B, chk, say, stride=2):
+    """M_n (2D cross-section per cell) of the drawn control lines vs the targets; tolerance 5 % of each line's peak
+    target (absolute; the profile tails are ~1e-5 pH). Also the cross-talk to the qubit's other rail and the dummy."""
+    from hardware import layout as LY
+    out = {}
+    for row, tg in B.lt.items():
+        m = LY.mirrored(row)
+        Mt, Ma = np.asarray(tg["trap"]), np.asarray(tg["acc"])
+        dep = B.sz.get("lines", {}).get(row, {})
+        cells = sorted(set(int(c) for c in dep.get("trap", {})) | set(int(c) for c in dep.get("acc", {})))
+        cells = [c for i, c in enumerate(cells) if (str(c) in dep.get("trap", {})) or i % stride == 0]
+        rows_rec = []
+        for c in cells:
+            ci = column_inductance(B, c, lines=(f"TR_{row}", f"AC_{row}"))
+            mt = abs(ci["lines"].get(f"{row}~TR_{row}", 0.0))
+            ma = abs(ci["lines"].get(f"{row}~AC_{row}", 0.0))
+            xt = {r: ci["lines"].get(f"{r}~AC_{row}", 0.0) for r in LY.ROWS if r != row}
+            rows_rec.append((c, mt, Mt[c], ma, Ma[c], xt))
+        dt = np.array([r[1] - r[2] for r in rows_rec]); da = np.array([r[3] - r[4] for r in rows_rec])
+        it, ia = int(np.argmax(np.abs(dt))), int(np.argmax(np.abs(da)))
+        chk(f"launcher trap-line M_n (|M - M_target| <= 5 % of peak)", _pf(rows_rec[it][1], rows_rec[it][2], absolute=TOL * Mt.max()),
+            f"{row} cell n={rows_rec[it][0]}")
+        chk(f"launcher accelerator-line M_n (|M - M_target| <= 5 % of peak)",
+            _pf(rows_rec[ia][3], rows_rec[ia][4], absolute=TOL * Ma.max()), f"{row} cell n={rows_rec[ia][0]}")
+        q_other = [r for r in ("A0", "A1", "B1", "B0") if r != row and r[0] == row[0]]
+        xt_max = max(abs(r[5].get(q_other[0], 0.0)) for r in rows_rec) if q_other else 0.0
+        out[row] = dict(cells_checked=len(rows_rec), trap_peak_target_pH=float(Mt.max()), acc_peak_target_pH=float(Ma.max()),
+                        trap_max_dev_pH=float(dt[it]), acc_max_dev_pH=float(da[ia]),
+                        crosstalk_to_other_rail_max_pH=float(xt_max),
+                        profile=[dict(n=r[0], M_trap=r[1], target_trap=r[2], M_acc=r[3], target_acc=r[4]) for r in rows_rec[::3]])
+        say(f"launcher {row}: trap dev {dt[it]:+.4f} pH (peak {Mt.max():.4f}), acc dev {da[ia]:+.4f} pH "
+            f"(peak {Ma.max():.4f}), cross-talk to {q_other} {xt_max:.4f} pH")
+    return out
+
+
+def sensitivity(B, ctx, res, t):
+    """material uncertainties (+-10 %) that the layout cannot remove; they need in-situ calibration (test
+    structures on the same wafer, then a re-size of the granular-Al length / plate overlaps)"""
+    out = {}
+    Lt = t["L_pH"]
+    # granular Al sheet inductance
+    from hardware import layout as LY
+    secs = {d["name"]: d for d in B.arch.sections()}
+    n_pl = secs["accelerate"]["start"] + 60
+    n_cp = secs["coupler"]["start"] + 50
+    Lk, info = rail_kinetic_pH(B, "A1", n_pl)
+    Lg = info["squares_gral"] * gral_Lsq_pH()
+    ci_pl = column_inductance(B, n_pl)
+    ci_cp = column_inductance(B, n_cp)
+    Lk_c, info_c = rail_kinetic_pH(B, "A1", n_cp)
+    L0 = Lk + ci_pl["self"]["A1"]
+    Lc0 = Lk_c + ci_cp["self"]["A1"]
+    M0 = ci_cp["mutual"].get("A1~B1")
+    for f in (0.9, 1.1):
+        L1 = L0 + (f - 1) * Lg
+        Lc1 = Lc0 + (f - 1) * info_c["squares_gral"] * gral_Lsq_pH()
+        out[f"grAl L_sq x{f}"] = dict(L_cell_rel=(L1 - Lt) / Lt, k_rel=(M0 / Lc1) / (M0 / Lc0) - 1,
+                                      passed_5pct=bool(abs((L1 - Lt) / Lt) <= TOL))
+    # thin-Al R_sq: strip kinetic inductance (and the AL1 pad paths)
+    ws = B.w_strip("G", n_cp)
+    Lkin_strip = al_Lsq_pH() * B.p / ws
+    for f in (0.9, 1.1):
+        M1 = M0 + (f - 1) * Lkin_strip
+        Lc1 = Lc0 + (f - 1) * (Lkin_strip + info_c["squares_al"] * al_Lsq_pH())
+        out[f"thin-Al R_sq x{f}"] = dict(L_s_rel=M1 / M0 - 1, k_rel=(M1 / Lc1) / (M0 / Lc0) - 1,
+                                         passed_5pct=bool(abs(M1 / M0 - 1) <= TOL))
+    # dielectric thickness: recompute the analytic crossover capacitors of the plateau and plain contexts
+    d0 = MATERIALS["diel"]["d_nm"]
+    for f in (0.9, 1.1):
+        rec = {}
+        for cname, v in ctx.items():
+            if not (cname.startswith("coupler plateau") or cname.startswith("plain") or cname.startswith("beam")):
+                continue
+            n0 = v["n"]
+            dC = {}
+            _, caps, _ = context_panels(B, n0, 2, LY.ROWS)
+            for c in caps:
+                a, b = _parity_net(c["a"], n0, 2), _parity_net(c["b"], n0, 2)
+                C0_ = crossover_capacitance(c["w_x"], c["w_y"], edges=c["edges"])
+                C1_ = crossover_capacitance(c["w_x"], c["w_y"], edges=c["edges"], d_nm=d0 * f)
+                dC[(a, b, c["kind"])] = dC.get((a, b, c["kind"]), 0.0) + (C1_ - C0_)
+            # per node (average over the two classes): change of C0 and of C_c
+            for row in LY.ROWS:
+                dnode = sum(v_ for (a, b, k), v_ in dC.items() if a.startswith(row + "|") or b.startswith(row + "|")) / 2
+                dcc = sum(v_ for (a, b, k), v_ in dC.items() if k == "coupler" and (a.startswith(row + "|") or b.startswith(row + "|"))) / 2
+                d = v["rows"][row]
+                rec[f"{cname}|{row}"] = dict(node_C_rel=dnode / (t["Cj_fF"] + d["C0"]),
+                                             C_c_rel=(dcc / d["cross"][next(iter([s for s in d["cross"] if abs(d["cross"][s]) > 0.05]), row)]
+                                                      if dcc and any(abs(x) > 0.05 for x in d["cross"].values()) else 0.0))
+        worst_node = max(abs(x["node_C_rel"]) for x in rec.values())
+        worst_cc = max(abs(x["C_c_rel"]) for x in rec.values())
+        out[f"dielectric d x{f}"] = dict(node_C_rel_max=worst_node, C_c_rel_max=worst_cc,
+                                         passed_5pct=bool(worst_node <= TOL and worst_cc <= TOL))
+    out["note"] = ("material parameters (grAl sheet inductance, thin-Al R_sq and T_c, SiNx thickness and eps_r) are "
+                   "process inputs: they must be calibrated in situ on test structures of the same wafer, after which "
+                   "the granular-Al length, strip width and plate overlaps are re-sized by regenerating the layout "
+                   "with the measured values (extract.MATERIALS)")
+    return out
+
+
+def convergence_study(B, n0, say):
+    """plateau context: dependence of the extracted node capacitance and C_c on the numerical parameters"""
+    from hardware import layout as LY
+    rows = ["A0", "A1", "B1", "B0"]
+    base = context_capacitance(B, n0, rows=rows, kpi=False, islands=False)
+    def q(r):
+        return dict(C0_A1=r["rows"]["A1"]["C0"], C0_B1=r["rows"]["B1"]["C0"], C_c=r["rows"]["A1"]["cross"]["B1"],
+                    panels=r["panels"])
+    out = dict(base=q(base))
+    variants = [("mesh finer (h0 x0.6, hmax x0.6)", dict(h0=0.018, hmax=0.18, hmax_ground=0.6)),
+                ("mesh coarser (h0 x1.5, hmax x1.5)", dict(h0=0.045, hmax=0.45, hmax_ground=1.5)),
+                ("images K = 10", dict(K=10)), ("images K = 40", dict(K=40)),
+                ("window margin 8 um", dict(ymargin=8.0)), ("window margin 20 um", dict(ymargin=20.0)),
+                ("junction exclusion 0.05 um", dict(delta_jj=0.05)), ("junction exclusion 0.20 um", dict(delta_jj=0.20)),
+                ("crossover exclusion 0.20 um", dict(delta_cap=0.20)), ("crossover exclusion 0.45 um", dict(delta_cap=0.45))]
+    for name, mv in variants:
+        r = context_capacitance(B, n0, rows=rows, mesh=mv, kpi=False, islands=False)
+        out[name] = q(r)
+        say(f"convergence: {name}: {out[name]}")
+    r = context_capacitance(B, n0, P=4, rows=rows, kpi=False, islands=False)
+    out["period 4 cells"] = q(r)
+    # crossover edge-term box
+    e0 = {k: crossover_edge_term(k) for k in ("top_edge", "bottom_edge")}
+    e1 = {k: crossover_edge_term(k, box_um=0.8) for k in ("top_edge", "bottom_edge")}
+    out["crossover edge term fF/um (box 0.5 / 0.8 um)"] = dict(box05=e0, box08=e1)
+    b = out["base"]
+    out["max_rel_change"] = {k: max(abs(v[k] / b[k] - 1) for kk, v in out.items()
+                                    if isinstance(v, dict) and k in v and kk not in ("base",))
+                             for k in ("C0_A1", "C0_B1", "C_c")}
+    return out
