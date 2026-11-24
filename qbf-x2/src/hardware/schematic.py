@@ -14,8 +14,10 @@ def draw(arch: Architecture, path_png: str, path_svg: str):
     Ls = ev["coupler_shared_inductor"]["L_s_pH"]
     Cc = ev["coupler_capacitor"]["C_c_fF"]
     Ic = ev["rail_junction"]["Ic_nA"]
-    Cn = ev["rail_junction"]["C_fF"]
-    IcM = ev["middle_rail_junction"]["EJ_GHz"] * 2.0128
+    Cj = ev["rail_junction"]["Cj_fF"]
+    Csh = ev["rail_junction"]["shunt_fF"]
+    Csh_p = ev["rail_junction"]["shunt_on_coupler_plateau_fF"]
+    mj = ev["middle_rail_junction"]
     with schemdraw.Drawing(show=False) as d:
         d.config(fontsize=9, unit=2.2)
         # (a) rail cell
@@ -23,7 +25,10 @@ def draw(arch: Architecture, path_png: str, path_svg: str):
         d += (n0 := elm.Dot().at((0, 1)))
         d += elm.Inductor2(loops=3).right().label(f"L = {L:.2f} nH\n(granular Al)")
         d += (n1 := elm.Dot())
-        d += elm.Josephson().down().at(n1.center).label(f"{Ic:.0f} nA\n{Cn:.2f} fF", loc="bottom")
+        d += elm.Josephson().down().at(n1.center).label(f"{Ic:.0f} nA\n{Cj:.2f} fF", loc="bottom")
+        d += elm.Ground()
+        d += elm.Line().right(2.0).at(n1.center)
+        d += elm.Capacitor().down().label(f"shunt\n{Csh:.2f} fF\n({Csh_p:.2f} fF on\ncoupler plateau)", loc="bottom")
         d += elm.Ground()
         # (b) coupler cell
         d += elm.Label().label("(b) gate coupler cell (A1-B1), x g(n)", fontsize=10).at((6.5, 2.6))
@@ -50,7 +55,9 @@ def draw(arch: Architecture, path_png: str, path_svg: str):
         d += elm.Josephson().down().label("rail JJ", loc="top")
         d += elm.Dot().label("A1_n", loc="left")
         d += elm.Josephson().right(3.0).at(m.center)
-        d += elm.Label().at((m.center[0] + 3.4, m.center[1] - 0.95)).label(f"middle-rail JJ: E_J/E_C = 2,\n{IcM:.0f} nA, E_S = {arch.E_S_GHz:.2f} GHz", fontsize=9)
+        d += elm.Label().at((m.center[0] + 3.4, m.center[1] - 1.1)).label(
+            f"middle-rail JJ: E_J/E_C = 2, {mj['Ic_nA']:.0f} nA,\n{mj['Cj_fF']:.2f} fF + {mj['shunt_fF']:.2f} fF island shunt,\n"
+            f"E_S = {arch.E_S_GHz:.2f} GHz", fontsize=9)
         d += elm.Dot().label("M_n+1", loc="right")
         # (d) injector and catcher
         d += elm.Label().label("(d) injector / catcher (proposed)", fontsize=10).at((7.2, -4.0))

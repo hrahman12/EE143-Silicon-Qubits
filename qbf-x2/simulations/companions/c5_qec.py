@@ -151,9 +151,16 @@ ax[1].text(0.0, 0.95, "Syndrome-extraction cycle (simulated):\n"
            "racetrack dephasing per lap, measurement back-action timing.",
            va="top", family="monospace", fontsize=8)
 savefig(fig, "companion5_qec.png")
-res["verdict"] = ("Density-matrix simulation of one fluxon-driven syndrome-extraction cycle of a 3-qubit phase-flip code. "
-                  "With the CZ error of the QBF-X2 budget the code beats an unencoded qubit over the memory-error range listed "
-                  "in break_even_range_p. A full QEC module (larger codes, repeated cycles, real-time decoding, leakage "
-                  "handling) is beyond this study; no fluxon-driven syndrome extraction has been reported experimentally.")
+be_opt, be_1e3 = be[f"{e_opt:.1e}"], be["1.0e-03"]
+res["verdict"] = (
+    "Density-matrix simulation of one fluxon-driven syndrome-extraction cycle of a 3-qubit phase-flip code. "
+    + (f"With the CZ error of the QBF-X2 budget ({e_opt:.1e}) the code beats an unencoded qubit for memory errors of "
+       f"{be_opt[0]:.2g}-{be_opt[1]:.2g} per cycle. " if be_opt else
+       f"With the CZ error of the QBF-X2 budget ({e_opt:.1e}) the code never beats an unencoded qubit (memory errors "
+       f"{ps[0]:.0e}-{ps[-1]:.0e} per cycle tested). ")
+    + (f"With a 1e-3 CZ error it breaks even for memory errors of {be_1e3[0]:.2g}-{be_1e3[1]:.2g} per cycle (upper end = "
+       f"edge of the tested range). " if be_1e3 else "")
+    + "A full QEC module (larger codes, repeated cycles, real-time decoding, leakage handling) is beyond this study; "
+      "no fluxon-driven syndrome extraction has been reported experimentally.")
 save_json("companion5_qec.json", res)
 print("done")

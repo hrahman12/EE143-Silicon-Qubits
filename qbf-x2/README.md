@@ -52,7 +52,7 @@ both per cell.
   calibrated, but it scales ∝ 1/v, so the thermal launch-speed spread turns it into dephasing.
 - Faster fluxons help a lot: the error falls roughly ∝ β⁻⁴. The optimiser (restricted to β ≤ 0.45, where the
   effective model is validated) picks β = 0.45. It was validated there by a circuit zero-crossing check (0.454) and
-  an exact 2D calibration: Δ = π to 1.4×10⁻⁴ rad, CZ fidelity 1.000000.
+  an exact 2D calibration: Δ = π to 1.3×10⁻⁴ rad, CZ fidelity 1.000000.
 - A sub-1 % gate needs either junction disorder ≤ 1 % (0.73 % over the full 362-cell rows) or flights ≤ 150 cells at
   2 % disorder (0.97 %). At 0.5 % disorder the total is 0.13–0.32 % (`results/D_feasibility.json`).
 
@@ -117,8 +117,8 @@ results/ figures/ circuits/ paper/ tests/
   - quasiparticles and 1/f noise beyond a damping estimate;
   - offset-charge drift of the beam-splitter islands;
   - EM extraction of k, c and E_S for the drawn geometry.
-- **Layout.** Preliminary, not fabrication-ready: no DRC, and the crossover process for the coupling capacitors is
-  unverified.
+- **Layout.** Preliminary, not fabrication-ready: no DRC, the crossover process for the coupling capacitors is
+  unverified, and the node and island shunt capacitors are not drawn (EM extraction is to set them).
 
 See [FEASIBILITY.md](FEASIBILITY.md) for the parameter-status table, cryogenic test requirements and a staged
 measurement protocol, and `paper/main.pdf` for the full write-up.

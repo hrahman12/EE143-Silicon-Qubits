@@ -98,6 +98,6 @@
   "total": 1.2772619999272721e-21,
   "note": "2 ancilla fluxons created and destroyed per cycle; data fluxons circulate; control, amplification and refrigeration excluded"
  },
- "verdict": "Density-matrix simulation of one fluxon-driven syndrome-extraction cycle of a 3-qubit phase-flip code. With the CZ error of the QBF-X2 budget the code beats an unencoded qubit over the memory-error range listed in break_even_range_p. A full QEC module (larger codes, repeated cycles, real-time decoding, leakage handling) is beyond this study; no fluxon-driven syndrome extraction has been reported experimentally.",
- "_generated": "2026-11-24 12:51:27"
+ "verdict": "Density-matrix simulation of one fluxon-driven syndrome-extraction cycle of a 3-qubit phase-flip code. With the CZ error of the QBF-X2 budget (1.9e-02) the code never beats an unencoded qubit (memory errors 1e-04-1e-01 per cycle tested). With a 1e-3 CZ error it breaks even for memory errors of 0.01-0.1 per cycle (upper end = edge of the tested range). A full QEC module (larger codes, repeated cycles, real-time decoding, leakage handling) is beyond this study; no fluxon-driven syndrome extraction has been reported experimentally.",
+ "_generated": "2026-11-24 13:55:58"
 }

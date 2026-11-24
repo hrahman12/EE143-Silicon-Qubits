@@ -5,13 +5,18 @@ Layers: 1/0 Nb ground plane and strips | 2/0 granular-Al rail inductors | 3/0 Al
 strips) | 4/0 Al top electrode | 5/0 Cu injector resistors | 6/0 crossover dielectric (coupling capacitors) |
 10/0 annotation. Rows (top to bottom): D_A, A0, A1, B1, B0, D_B; each row is an opening in the ground plane with a
 granular-Al signal line on its centre line and one junction rung per 2 um cell to the edge selected by the section.
+Coupling capacitors (crossover dielectric) are drawn on all three couplers: the gate coupler A1-B1 and the dummy
+couplers D_A-A0 and B0-D_B, which must match it. Junction overlaps follow the architecture (one Jc for the chip).
+Not drawn: the node shunt capacitors (0.50 fF, reduced to 0.29 fF on the coupler plateaus) and the middle-rail
+island shunts (0.31 fF); they are to come from the geometric capacitance of the node pads, lines and islands plus a
+trim, fixed by EM extraction.
 """
 from __future__ import annotations
 
 import gdstk
 
 from hardware.architecture import Architecture, jj_area_for
-from hardware.netlist import ROWS, _env, _in_section
+from hardware.netlist import PAIRS, ROWS, _env, _in_section
 
 L_NB, L_GRAL, L_AL1, L_AL2, L_CU, L_DIEL, L_TXT = (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (10, 0)
 ROW_H = 8.0          # opening height (um)
@@ -61,6 +66,9 @@ def build(arch: Architecture, path: str):
         _rect(top, x0 + 1, ya + 0.8, x1 - 1, ya + 1.2, L_AL1)                 # thin-Al shared strip, 0.4 um wide
         _rect(top, x0 - 1, ya + 0.8, x0 + 1, ya + 1.2, L_AL1)                 # ends tied to ground
         _rect(top, x1 - 1, ya + 0.8, x1 + 1, ya + 1.2, L_AL1)
+    AM = jj_area_for(arch.EJ_M_GHz)
+    jm_w = 0.18                                                                    # middle-rail junction overlap width
+    jm_l = AM / jm_w
     for q, (r_up, r_dn), mirrored in (("A", ("A0", "A1"), False), ("B", ("B1", "B0"), True)):
         ya, yb = strip_between(r_up, r_dn)
         for sec in ("BS_prep", "BS_analysis"):
@@ -70,7 +78,7 @@ def build(arch: Architecture, path: str):
             for n in ns:                                                         # middle-rail islands + series junctions
                 xa = MARGIN + n * p
                 pieces.append(gdstk.rectangle((xa + 0.15, ya + 0.3), (xa + p - 0.35, yb - 0.3), layer=1))
-                _rect(top, xa + p - 0.55, ya + 0.9, xa + p - 0.12, ya + 1.08, L_AL1)
+                _rect(top, xa + p - 0.55, ya + 0.9, xa + p - 0.25 + jm_l, ya + 0.9 + jm_w, L_AL1)
                 _rect(top, xa + p - 0.25, ya + 0.85, xa + p + 0.35, ya + 1.13, L_AL2)
     gp = gdstk.boolean(ground, holes + cut, "not", layer=1)
     for g in gp + pieces:
@@ -96,15 +104,18 @@ def build(arch: Architecture, path: str):
             _rect(top, x - jw / 2, lo, x + jw / 2, hi, L_AL1)                                # bottom electrode lead
             lo2, hi2 = sorted((y_j - d * jl, edge + d * 0.3))
             _rect(top, x - 0.3, lo2, x + 0.3, hi2, L_AL2)                                    # top electrode to return
-        # coupling capacitors across the gate coupler strip (crossover dielectric, proposed)
-    for n in range(N):
-        g = _env(arch, n)
-        if g > 0:
-            x = MARGIN + n * p
-            ya = yc["A1"] - 0.3
-            yb = yc["B1"] + 0.3
-            wcap = 0.15 + 0.5 * g
-            _rect(top, x + 0.7, yb, x + 0.7 + wcap, ya, L_DIEL)
+    # coupling capacitors across the gate and dummy coupler strips (crossover dielectric, proposed)
+    n_caps = 0
+    for r_up, r_dn in PAIRS.values():
+        for n in range(N):
+            g = _env(arch, n)
+            if g > 0:
+                x = MARGIN + n * p
+                ya = yc[r_up] - 0.3
+                yb = yc[r_dn] + 0.3
+                wcap = 0.15 + 0.5 * g
+                _rect(top, x + 0.7, yb, x + 0.7 + wcap, ya, L_DIEL)
+                n_caps += 1
     # injectors and catchers (blocks), labels
     for row in ("A0", "A1", "B1", "B0"):
         mirrored = row in ("B1", "B0")
@@ -123,6 +134,8 @@ def build(arch: Architecture, path: str):
     lib.write_gds(path)
     dims = dict(width_um=W, height_um=Hh, rows=len(ROWS), row_opening_um=ROW_H, strip_um=STRIP_W, pitch_um=p,
                 cells_per_row=N, junction_overlap_um=(jw, round(jl, 4)), junction_area_um2=round(A_rail, 4),
+                middle_junction_overlap_um=(jm_w, round(jm_l, 4)), middle_junction_area_um2=round(AM, 4),
+                coupling_capacitors_drawn=n_caps,
                 coupler_span_um=(ce - cs) * p, bs_length_um=arch.n_bs * p, status="PRELIMINARY - not fabrication-ready")
     return dims
 

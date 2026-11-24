@@ -22,7 +22,9 @@ from dataclasses import dataclass, field, asdict
 
 from hardware.params import RailParams, CouplerParams, PHI0, H, E_CHARGE
 
-JC_UA_PER_UM2 = 1.665          # same Al/AlOx/Al process as QFX-1 (quantum_chip/)
+JC_UA_PER_UM2 = 2.1            # one Al/AlOx/Al oxidation for every junction on the chip. Higher than QFX-1's
+                               # 1.665 uA/um^2, so each junction carries less capacitance than its node needs and
+                               # the rest is an explicit shunt: the couplers compensate C_c by reducing that shunt
 C_SPEC_FF_PER_UM2 = 50.0
 GRAL_NH_PER_SQ = 0.5           # granular Al sheet kinetic inductance (assumption, typical 20 nm film)
 
@@ -95,15 +97,23 @@ class Architecture:
         L = r.L_cell_H
         A = jj_area_for(r.EJ_GHz)
         AM = jj_area_for(self.EJ_M_GHz)
+        C_node = r.C_F * 1e15                                             # total node capacitance (sets E_C)
+        Cj = A * C_SPEC_FF_PER_UM2
+        C_c = self.c * C_node
+        C_M = E_CHARGE ** 2 / (2 * H * self.EC_M_GHz * 1e9) * 1e15        # middle-rail capacitance for E_C,M
+        CjM = AM * C_SPEC_FF_PER_UM2
         return dict(
-            rail_junction=dict(EJ_GHz=r.EJ_GHz, Ic_nA=r.Ic_A * 1e9, area_um2=A, C_fF=r.C_F * 1e15,
-                               C_from_area_fF=A * C_SPEC_FF_PER_UM2, status="validated by simulation (design point)"),
+            rail_junction=dict(EJ_GHz=r.EJ_GHz, Ic_nA=r.Ic_A * 1e9, area_um2=A, C_fF=C_node, Cj_fF=Cj,
+                               shunt_fF=C_node - Cj, shunt_on_coupler_plateau_fF=C_node - Cj - C_c,
+                               status="validated by simulation (design point); node shunt = geometric node "
+                                      "capacitance + trim, to be set by EM extraction"),
             rail_inductor=dict(L_nH=L * 1e9, squares_grAl=L * 1e9 / GRAL_NH_PER_SQ, status="proposed (granular Al)"),
             coupler_shared_inductor=dict(L_s_pH=self.k * L * 1e12, k=self.k, status="validated value; geometry proposed"),
             coupler_capacitor=dict(C_c_fF=self.c * r.C_F * 1e15, c=self.c, status="validated value; geometry proposed"),
             compensated_series_L_nH=(1 - self.k) * L * 1e9,
             compensated_node_C_fF=(1 - self.c) * r.C_F * 1e15,
-            middle_rail_junction=dict(EJ_GHz=self.EJ_M_GHz, EC_GHz=self.EC_M_GHz, area_um2=AM, E_S_GHz=self.E_S_GHz,
+            middle_rail_junction=dict(EJ_GHz=self.EJ_M_GHz, EC_GHz=self.EC_M_GHz, Ic_nA=AM * JC_UA_PER_UM2 * 1e3,
+                                      area_um2=AM, C_fF=C_M, Cj_fF=CjM, shunt_fF=C_M - CjM, E_S_GHz=self.E_S_GHz,
                                       status="E_S from exact charge dispersion (scqubits); vortex hopping = single-junction estimate"),
             injection_junction=dict(Ic_nA=2 * r.Ic_A * 1e9, area_um2=2 * A, status="UNRESOLVED: coherent single-fluxon launcher"),
             detector=dict(kind="fluxon catcher loop + dispersive lambda/4 readout (QFX-1 heritage)", status="proposed"),

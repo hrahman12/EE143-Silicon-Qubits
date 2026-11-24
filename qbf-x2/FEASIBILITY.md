@@ -35,10 +35,10 @@ result files.
 
 | Quantity | Value | Status |
 |---|---|---|
-| Rail junction E_J, E_C | 40 GHz (80 nA), 8 GHz (2.42 fF) | design; quantum regime validated (β² = 0.51, Peierls–Nabarro barrier 3×10⁻⁶ GHz) |
+| Rail junction E_J, E_C | 40 GHz (80 nA), 8 GHz (2.42 fF = 1.92 fF junction + 0.50 fF node shunt) | design; quantum regime validated (β² = 0.51, Peierls–Nabarro barrier 3×10⁻⁶ GHz) |
 | Rail inductance per cell | 0.66 nH (Λ = 2.5), granular Al ≈ 1.3 □ | proposed (sheet inductance assumed 0.5 nH/□) |
 | Gate coupler k, c (reference β* = 0.30) | k = 0.01189, c = 0.1266 (L_s ≈ 7.8 pH, C_c ≈ 0.31 fF) | **validated by exact 2D calibration**: Δ = π, dΔ/dβ = 0 |
-| Gate coupler at the optimum β = 0.45 | k = 0.01778, c = 0.0875 (L_s ≈ 11.7 pH, C_c ≈ 0.21 fF) | **validated**: 2D calibration (Δ = π to 1.4×10⁻⁴ rad, dΔ/dβ = 2×10⁻⁵); circuit zero crossing at β = 0.454 |
+| Gate coupler at the optimum β = 0.45 | k = 0.01778, c = 0.0875 (L_s ≈ 11.6 pH, C_c ≈ 0.21 fF) | **validated**: 2D calibration (Δ = π to 1.3×10⁻⁴ rad, dΔ/dβ = 2×10⁻⁵); circuit zero crossing at β = 0.454 |
 | Dummy couplers on A0 and B0 | identical to the gate coupler | proposed; they cancel single-particle phases and delays between rails |
 | Beam splitter | middle-rail junctions with E_J/E_C = 2; E_S from exact charge dispersion | E_S validated (scqubits); vortex hopping uses the single-junction estimate (unresolved) |
 | Launcher | injection junction (2 I_c) + current pulse + 40-cell accelerator | **UNRESOLVED**: motional-state preparation and timing (≤ 10 ps) not modelled |
@@ -79,15 +79,19 @@ Totals:
 ## 5. Fabrication assumptions (preliminary)
 
 - **Substrate and ground:** high-resistivity Si with a 150 nm Nb ground plane, as in QFX-1.
-- **Junctions:** Al/AlOx/Al double-angle (Manhattan or Dolan).
-  - Rail junctions: about 0.038 µm² at Jc ≈ 2.1 µA/µm², plus a 0.5 fF shunt. The shunt is reduced inside couplers to
-    compensate C_c.
-  - Middle-rail junctions: about 0.03 µm².
+- **Junctions:** Al/AlOx/Al double-angle (Manhattan or Dolan), one oxidation for the whole chip (Jc ≈ 2.1 µA/µm²,
+  50 fF/µm²). The higher Jc than QFX-1's leaves room for explicit shunts.
+  - Rail junctions: about 0.038 µm² (1.92 fF), plus a 0.50 fF node shunt. The shunt is reduced to 0.29 fF on the
+    coupler plateaus to compensate C_c.
+  - Middle-rail junctions: about 0.024 µm² (1.21 fF), plus a 0.31 fF island shunt (E_C,M = 12.7 GHz).
+  - Injection junctions: about 0.077 µm² (2 I_c).
+  - The shunts are to come from the geometric capacitance of the node pads, lines and islands plus a trim. They are
+    not drawn in the layout; EM extraction sets them.
 - **Inductors and couplers:**
   - rail inductors: 20 nm granular Al;
   - shared coupler strips: 0.4 µm thin Al;
   - coupling capacitors: a crossover dielectric (extra process, unverified).
-- **Disorder:** junction spread of 1 % or better, across arrays of about 2,000 junctions per qubit.
+- **Disorder:** junction spread of 1 % or better across the 2,336 junctions of the chip (about 1,170 per qubit).
 
 ## 6. Cryogenic test requirements
 
@@ -119,6 +123,6 @@ Totals:
 ## 8. What would change the verdict on milestone D
 
 - A demonstrated coherent single-fluxon injector with thermal-limited speed spread and ≤ 10 ps timing.
-- Junction arrays with ≤ 1 % disorder over about 2,000 junctions.
+- Junction arrays with ≤ 1 % disorder over about 2,300 junctions.
 - EM extraction of k, c and E_S for the drawn geometry, plus a DRC-clean layout.
 - A measured damping α ≤ 10⁻⁶ at 20 mK.

@@ -151,15 +151,18 @@ for r_ in (base, ind):
     print({k: (round(v, 6) if isinstance(v, float) else v) for k, v in r_.items()
            if k in ("phase", "overlap_abs", "reflection", "norm_drift", "dXA_quantum", "motional_purity_out")})
 x = base["x"]
-fig, ax = plt.subplots(1, 4, figsize=(13, 3.5))
-for a, (tt, ps) in zip(ax, sorted(base["snaps"].items())):
+fig, ax = plt.subplots(1, 4, figsize=(13, 3.6))
+panels = [(f"({'abc'[i]}) t = {tt:.3f} ns", ps) for i, (tt, ps) in enumerate(sorted(base["snaps"].items())[:3])]
+panels.append((f"(d) end of run, t = {base['t_final']:.3f} ns", base["psi"]))   # same time as the free branch
+for a, (title, ps) in zip(ax, panels):
     a.imshow(np.abs(ps.T) ** 2, origin="lower", cmap="magma", extent=[x[0], x[-1], x[0], x[-1]])
     a.plot([x[0], x[-1]], [x[0], x[-1]], color="w", lw=0.6, ls=":")
-    a.set(xlabel="X_A (cells)", ylabel="X_B (cells)", title=f"t = {tt:.3f} ns")
+    a.set(xlabel="X_A (cells)", ylabel="X_B (cells)", title=title)
     a.grid(False)
 ax[0].set_title("(a) |psi_11(X_A, X_B)|^2, t = 0")
 ax[-1].contour(x, x, np.abs(base["free"].T) ** 2, levels=3, colors="c", linewidths=0.6)
-ax[-1].set_title(f"after: |psi_11|^2 (map) vs free branch (cyan); overlap {base['overlap_abs']:.6f}")
+ax[-1].text(0.03, 0.04, f"cyan: free branch, same time\n|<free|psi_11>| = {base['overlap_abs']:.6f}",
+            transform=ax[-1].transAxes, color="w", fontsize=7.5, va="bottom")
 savefig(fig, "fig03_joint_probability.png")
 
 fig, ax = plt.subplots(1, 3, figsize=(13, 3.6))

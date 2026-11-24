@@ -45,14 +45,15 @@ def build(arch: Architecture) -> tuple[str, dict]:
     r = arch.rail
     N = arch.n_cells
     L = r.L_cell_H
-    Cj = 1.92e-15                                    # junction capacitance at Jc = 2.08 uA/um^2 (see FEASIBILITY)
-    Csh = r.C_F - Cj                                 # node shunt, reduced by C_c inside couplers (compensation)
+    Cj = ev["rail_junction"]["Cj_fF"] * 1e-15        # junction capacitance (architecture: Jc, specific capacitance)
+    Csh = ev["rail_junction"]["shunt_fF"] * 1e-15    # node shunt, reduced by C_c inside couplers (compensation)
+    mj = ev["middle_rail_junction"]
     lines = [f"* QBF-X2 two-flying-fluxon collision processor - PRELIMINARY design netlist (not fabrication-ready)",
              f"* rows {ROWS}; {N} cells per row, pitch {r.pitch_um} um; design speed beta = {arch.beta:.3f}",
              f"* coupler k = {arch.k:.5f} (L_s = {arch.k * L * 1e12:.2f} pH), c = {arch.c:.4f} (C_c = {arch.c * r.C_F * 1e15:.3f} fF)",
              f".model JJR jj(rtype=0, cap={Cj:.4g}, icrit={r.Ic_A:.4g})",
-             f".model JJM jj(rtype=0, cap={ev['middle_rail_junction']['area_um2'] * 50e-15:.4g}, "
-             f"icrit={ev['middle_rail_junction']['EJ_GHz'] * 1e9 * 6.62607015e-34 * 2 * math.pi / 2.067833848e-15:.4g})",
+             f".model JJM jj(rtype=0, cap={mj['Cj_fF'] * 1e-15:.4g}, "
+             f"icrit={mj['EJ_GHz'] * 1e9 * 6.62607015e-34 * 2 * math.pi / 2.067833848e-15:.4g})",
              f".model JJI jj(rtype=1, cap={2 * Cj:.4g}, icrit={2 * r.Ic_A:.4g}, rn=2k, r0=200k)"]
     count = Counter()
     pair_of = {row: key for key, (a, b) in PAIRS.items() for row in (a, b)}
@@ -110,6 +111,8 @@ def build(arch: Architecture) -> tuple[str, dict]:
             for a_, b_ in zip(ns[:-1], ns[1:]):
                 lines.append(f"BM{q}_{a_} M{q}_{a_} M{q}_{b_} JJM area=1")
                 count["junction (BS middle rail)"] += 1
+                lines.append(f"CM{q}_{a_} M{q}_{a_} M{q}_{b_} {mj['shunt_fF'] * 1e-15:.4g}")
+                count["capacitor (BS middle-rail shunt)"] += 1
             lines.append(f"LM{q}_{sec}_end M{q}_{ns[-1]} 0 1p")
             lines.append(f"LM{q}_{sec}_start M{q}_{ns[0]} 0 1p")
     lines += [".tran 0.1p 3000p 0 0.1p",
@@ -117,6 +120,7 @@ def build(arch: Architecture) -> tuple[str, dict]:
     text = "\n".join(lines) + "\n"
     summary = dict(elements=dict(count), total_elements=sum(count.values()), cells_per_row=N, rows=ROWS,
                    junction_model_rail=dict(Ic_nA=r.Ic_A * 1e9, Cj_fF=Cj * 1e15, shunt_fF=Csh * 1e15),
+                   junction_model_middle_rail=dict(Ic_nA=mj["Ic_nA"], Cj_fF=mj["Cj_fF"], shunt_fF=mj["shunt_fF"]),
                    source=arch.source)
     return text, summary
 

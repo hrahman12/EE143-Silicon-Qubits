@@ -129,7 +129,7 @@
    "overlap_abs": 0.9999989128922695,
    "reflection": 7.131790813463823e-08,
    "norm_drift": -2.9821344726954635e-08,
-   "seconds": 37.27868103981018
+   "seconds": 29.537710428237915
   },
   {
    "case": "dt = 1 ps",
@@ -137,7 +137,7 @@
    "overlap_abs": 0.9999989185903378,
    "reflection": 3.759044364670672e-08,
    "norm_drift": -9.36394517481176e-10,
-   "seconds": 83.10462355613708
+   "seconds": 56.27140522003174
   },
   {
    "case": "dt = 0.5 ps",
@@ -145,7 +145,7 @@
    "overlap_abs": 0.999998915650942,
    "reflection": 3.6682377912988784e-08,
    "norm_drift": -2.9056757000489597e-11,
-   "seconds": 156.40014123916626
+   "seconds": 116.80650877952576
   },
   {
    "case": "dx = 0.25 (k cut-off x2), n = 1024",
@@ -153,7 +153,7 @@
    "overlap_abs": 0.9999989130818686,
    "reflection": 7.10979014550972e-08,
    "norm_drift": -2.982134372775391e-08,
-   "seconds": 161.57743167877197
+   "seconds": 127.5121214389801
   },
   {
    "case": "domain x1.25 (n = 640)",
@@ -161,7 +161,7 @@
    "overlap_abs": 0.9999989548008285,
    "reflection": 2.9847611160427334e-08,
    "norm_drift": -2.982133140427834e-08,
-   "seconds": 51.75760817527771
+   "seconds": 42.996521949768066
   },
   {
    "case": "Taylor order 6",
@@ -169,7 +169,7 @@
    "overlap_abs": 0.9999989277703716,
    "reflection": 4.1491237001700654e-08,
    "norm_drift": 5.31841237716435e-12,
-   "seconds": 50.86295032501221
+   "seconds": 37.919830083847046
   }
  ],
  "quantum_classical": [
@@ -274,7 +274,7 @@
    "dX_first_order": 0.23395436744878548
   }
  ],
- "runtime_s_physics": 809.9183504581451,
+ "runtime_s_physics": 585.8412520885468,
  "milestone_B": {
   "milestone": "B (quantum ballistic physics)",
   "passed": true,
@@ -336,6 +336,6 @@
    "quantum mass renormalisation ~ beta^2/8pi = 0.020"
   ]
  },
- "runtime_s": 809.9188284873962,
- "_generated": "2026-11-24 12:55:02"
+ "runtime_s": 585.8416967391968,
+ "_generated": "2026-11-24 14:07:48"
 }

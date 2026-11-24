@@ -71,10 +71,12 @@
    "rail_junction": {
     "EJ_GHz": 40.0,
     "Ic_nA": 80.53418149004195,
-    "area_um2": 0.048368877771796964,
+    "area_um2": 0.03834961023335331,
     "C_fF": 2.4212786655823906,
-    "C_from_area_fF": 2.4184438885898483,
-    "status": "validated by simulation (design point)"
+    "Cj_fF": 1.9174805116676654,
+    "shunt_fF": 0.5037981539147252,
+    "shunt_on_coupler_plateau_fF": 0.2920166066455615,
+    "status": "validated by simulation (design point); node shunt = geometric node capacitance + trim, to be set by EM extraction"
    },
    "rail_inductor": {
     "L_nH": 0.6538460512271247,
@@ -96,13 +98,17 @@
    "middle_rail_junction": {
     "EJ_GHz": 25.3,
     "EC_GHz": 12.7,
-    "area_um2": 0.030593315190661583,
+    "Ic_nA": 50.93786979245154,
+    "area_um2": 0.02425612847259597,
+    "C_fF": 1.5252149074534742,
+    "Cj_fF": 1.2128064236297986,
+    "shunt_fF": 0.3124084838236756,
     "E_S_GHz": 1.095025074091242,
     "status": "E_S from exact charge dispersion (scqubits); vortex hopping = single-junction estimate"
    },
    "injection_junction": {
     "Ic_nA": 161.0683629800839,
-    "area_um2": 0.09673775554359393,
+    "area_um2": 0.07669922046670662,
     "status": "UNRESOLVED: coherent single-fluxon launcher"
    },
    "detector": {
@@ -123,9 +129,10 @@
    "accelerator bias source": 160,
    "inductor (shared coupler strip)": 540,
    "capacitor (coupler)": 540,
-   "junction (BS middle rail)": 160
+   "junction (BS middle rail)": 160,
+   "capacitor (BS middle-rail shunt)": 160
   },
-  "total_elements": 7922,
+  "total_elements": 8082,
   "cells_per_row": 362,
   "rows": [
    "D_A",
@@ -137,14 +144,19 @@
   ],
   "junction_model_rail": {
    "Ic_nA": 80.53418149004195,
-   "Cj_fF": 1.92,
-   "shunt_fF": 0.5012786655823903
+   "Cj_fF": 1.9174805116676654,
+   "shunt_fF": 0.5037981539147252
+  },
+  "junction_model_middle_rail": {
+   "Ic_nA": 50.93786979245154,
+   "Cj_fF": 1.2128064236297986,
+   "shunt_fF": 0.3124084838236756
   },
   "source": "results/C_gate.json optimum_validation (2D-calibrated)",
   "parse": {
    "kinds": {
     "B": 2336,
-    "C": 2712,
+    "C": 2872,
     "L": 2721,
     "I": 164
    },
@@ -162,9 +174,15 @@
   "cells_per_row": 362,
   "junction_overlap_um": [
    0.2,
-   0.2418
+   0.1917
   ],
-  "junction_area_um2": 0.0484,
+  "junction_area_um2": 0.0383,
+  "middle_junction_overlap_um": [
+   0.18,
+   0.1348
+  ],
+  "middle_junction_area_um2": 0.0243,
+  "coupling_capacitors_drawn": 540,
   "coupler_span_um": 360.0,
   "bs_length_um": 82.0,
   "status": "PRELIMINARY - not fabrication-ready"
@@ -499,12 +517,12 @@
    {
     "check": "circuit parameters inside demonstrated fabrication ranges (junction >= 0.01 um^2, C_c >= 0.1 fF, L_s >= 1 pH, granular Al >= 1 square)",
     "passed": true,
-    "detail": "rail JJ 0.048 um^2, middle JJ 0.031 um^2, C_c 0.21 fF, L_s 11.6 pH, grAl 1.31 sq"
+    "detail": "rail JJ 0.038 um^2, middle JJ 0.024 um^2, C_c 0.21 fF, L_s 11.6 pH, grAl 1.31 sq"
    },
    {
     "check": "complete netlist with no floating nodes; every logical row has an injector and a catcher",
     "passed": true,
-    "detail": "7922 elements, 2877 nodes, isolated 0"
+    "detail": "8082 elements, 2877 nodes, isolated 0"
    },
    {
     "check": "flight time << coherence times reported for vortex qubits (us range)",
@@ -557,6 +575,6 @@
    "vortex hopping beyond the single-junction phase-slip estimate"
   ]
  },
- "runtime_s": 66.59254264831543,
- "_generated": "2026-11-24 12:54:32"
+ "runtime_s": 70.1430971622467,
+ "_generated": "2026-11-24 13:57:52"
 }
