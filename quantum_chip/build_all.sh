@@ -2,13 +2,14 @@
 # Rebuild the whole assembly from design_params.py. Each step reads only the previous steps' files.
 #   ./build_all.sh            full pipeline incl. final renders (~25 min on 4 CPUs)
 #   ./build_all.sh --quick    preview-quality renders
-# Needs: python3 with kqcircuits, klayout, gdstk, trimesh, scipy, pyyaml, cadquery-ocp, bpy (Blender 4.x/5.x module);
+# Needs: python3 with klayout, matplotlib, (kqcircuits only for the legacy transmon die), gdstk, trimesh, scipy, pyyaml, cadquery-ocp, bpy (Blender 4.x/5.x module);
 #        KiCad 7 (pcbnew python module + kicad-cli).
 set -euo pipefail
 cd "$(dirname "$0")"
-python3 src/make_kqc_font.py          # KQC pip wheel lacks its label font; regenerate once
-python3 src/build_die.py              # KQCircuits  -> out/quantum_die.gds, die_ports.json
-python3 src/preview_gds.py out/quantum_die.gds docs/die_preview.png "2100,5500,3100,6500"   # KLayout inspection
+python3 src/rfl_sim.py                # fluxon physics: ballistic LJJ + controlled barrier -> out/rfl_sim.json
+python3 src/build_die.py              # RFL die (KLayout) -> out/quantum_die.gds, die_ports.json, die_cells.json
+python3 src/preview_gds.py out/quantum_die.gds docs/die_preview.png "4750,6150,5250,6650" "3050,7450,3350,8400" "1550,5450,2100,5800"
+# (legacy transmon die: python3 src/make_kqc_font.py && python3 src/build_die_transmon.py)
 python3 src/build_pcb.py              # routed design -> rf_carrier_unfilled.kicad_pcb, pcb_model.json, rules
 python3 src/finalize_pcb.py           # KiCad: zone fill, save rf_carrier.kicad_pcb, DRC report
 mkdir -p out/gerbers out/svg

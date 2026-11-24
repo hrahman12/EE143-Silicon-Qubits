@@ -18,7 +18,7 @@ import klayout.db as db
 import trimesh
 
 sys.path.insert(0, os.path.dirname(__file__))
-from design_params import DIE, STACKUP, PCB, PACKAGE
+from design_params import DIE, STACKUP, PCB, PACKAGE, RFL_STACK
 import meshlib as ml
 from meshlib import Mesh, extrude_region, to_i, DBU_MM
 
@@ -180,8 +180,9 @@ EXP = {  # explode offsets (mm) per layer
     "package_base": -16, "B.Silk": -9.6, "B.Mask": -9.5, "B.ENIG": -8.6, "B.Cu": -8.5, "diel5": -7.0, "In4.Cu": -5.8,
     "diel4": -4.6, "In3.Cu": -3.4, "diel3": -2.2, "In2.Cu": -1.0, "diel2": 0.2, "In1.Cu": 1.4, "diel1": 2.6,
     "F.Cu": 3.8, "F.ENIG": 3.8, "F.Mask": 5.2, "F.Silk": 5.3,
-    "die_attach": 7.5, "die_substrate": 9.0, "die_Al_film": 10.5, "jj_bottom_Al": 11.0, "jj_AlOx": 11.3,
-    "jj_top_Al": 11.6, "airbridges_Al": 11.0, "wirebonds_signal": 13.5, "wirebonds_ground": 13.5,
+    "die_attach": 7.5, "die_substrate": 9.0, "die_GP_Nb": 10.0, "die_ILD0_SiO2": 10.6, "die_M1_Nb_LJJ": 11.2,
+    "die_JJ_trilayer": 11.6, "die_vias_Nb": 10.6, "die_ILD1_SiO2": 12.2, "die_R_Mo": 12.6, "die_M2_Nb": 13.0,
+    "die_pad_Au": 13.4, "wirebonds_signal": 15.0, "wirebonds_ground": 15.0,
 }
 ENG = {
     "F.Cu": "#ff2a2a", "B.Cu": "#2f6bff", "In2.Cu": "#22d07a", "In1.Cu": "#c9a227", "In3.Cu": "#c97a27",
@@ -282,37 +283,52 @@ def G(l, d):
 
 half = DIE["size_um"] / 2000
 die_box = ml.box_region(-half, -half, half, half)
-die_metal = ((die_box - G(130, 1) - G(158, 1)) + G(131, 1)).merged() & die_box
-jj1, jj2 = G(136, 1), G(139, 1)
-ab_pad, ab_fly = G(146, 1), G(147, 1)
 zf = Z_DIE_TOP
-add_layer("die_attach", extrude_region(ml.box_region(-half, -half, half, half), *Z_ATT), "die", "ge_varnish",
-          ENG["attach"], EXP["die_attach"], *Z_ATT, note=PACKAGE["die_attach"])
+RL = {name: G(*g) for name, g, _, _ in RFL_STACK}
+# junctions are 0.8 um discs drawn as 16-gons in the GDS; mesh them as octagons (same centre and area)
+_oct = db.Region()
+for p in RL["JJ"].each():
+    c, rr = p.bbox().center(), math.sqrt(p.area() / (2 * math.sqrt(2)))
+    _oct.insert(db.Polygon([db.Point(round(c.x + rr * math.cos(math.pi / 8 + i * math.pi / 4)),
+                                     round(c.y + rr * math.sin(math.pi / 8 + i * math.pi / 4))) for i in range(8)]))
+JJ_GDS = RL["JJ"]
+RL["JJ"] = _oct
+TRUE = {name: t * 1e-6 for name, _, _, t in RFL_STACK}
+MAT = {name: m for name, _, m, _ in RFL_STACK}
+# visual z-stack of the Nb process on top of the Si (true thicknesses in the manifest / STEP)
+DZ = dict(GP=(0.0, 0.003), I0=(0.003, 0.005), M1=(0.005, 0.0075), JJ=(0.0075, 0.009), I1=(0.0075, 0.0095),
+          R=(0.0095, 0.0105), M2=(0.0095, 0.0135), PAD=(0.0135, 0.015), VIA=(0.003, 0.0095))
+add_layer("die_attach", extrude_region(die_box, *Z_ATT), "die", "ge_varnish", ENG["attach"], EXP["die_attach"], *Z_ATT,
+          note=PACKAGE["die_attach"])
 add_layer("die_substrate", extrude_region(die_box, *Z_SUB), "die", "silicon", ENG["die_sub"], EXP["die_substrate"],
           *Z_SUB, note=DIE["substrate"])
-add_layer("die_Al_film", extrude_region(die_metal, zf, zf + FILM_VIS), "die", "aluminium", ENG["die_film"],
-          EXP["die_Al_film"], zf, zf + FILM_VIS, true_t=FILM_TRUE,
-          note="Al 200 nm base metal: ground plane, CPWs, qubit islands, resonators (thickness x15 for display)")
-add_layer("jj_bottom_Al", extrude_region(jj1, zf, zf + 0.0025), "die", "aluminium", ENG["jj"], EXP["jj_bottom_Al"],
-          zf, zf + 0.0025, true_t=DIE["jj_bottom_nm"] * 1e-6, note="Manhattan JJ / SQUID bottom electrode (display x60)")
-ox = (jj1 & jj2).merged()
-add_layer("jj_AlOx", extrude_region(ox, zf + 0.0025, zf + 0.0031), "die", "alox", ENG["ox"], EXP["jj_AlOx"],
-          zf + 0.0025, zf + 0.0031, true_t=DIE["jj_oxide_nm"] * 1e-6, note="AlOx tunnel barrier = overlap of the two electrodes")
-add_layer("jj_top_Al", extrude_region(jj2, zf + 0.0031, zf + 0.0056), "die", "aluminium", ENG["jj"], EXP["jj_top_Al"],
-          zf + 0.0031, zf + 0.0056, true_t=DIE["jj_top_nm"] * 1e-6, note="JJ / SQUID top electrode (display x30)")
-ab = Mesh()
-h_ab = DIE["airbridge_height_um"] * 1e-3
-extrude_region(ab_pad, zf + FILM_VIS, zf + FILM_VIS + h_ab, ab)
-extrude_region((ab_fly - ab_pad).merged(), zf + FILM_VIS + h_ab, zf + FILM_VIS + h_ab + 0.0012, ab)
-add_layer("airbridges_Al", ab, "die", "aluminium", ENG["ab"], EXP["airbridges_Al"], zf + FILM_VIS,
-          zf + FILM_VIS + h_ab + 0.0012, true_t=DIE["airbridge_thickness_nm"] * 1e-6,
-          note="ground-strap airbridges across CPWs, 3 um span height")
-
+SPEC = [  # object name, region, stack key, material, eng colour
+    ("die_GP_Nb", RL["GP"], "GP", "niobium", "#8b93a6"),
+    ("die_ILD0_SiO2", die_box, "I0", "sio2", "#cfe8ff"),
+    ("die_M1_Nb_LJJ", RL["M1"], "M1", "niobium", "#2f6bff"),
+    ("die_JJ_trilayer", RL["JJ"], "JJ", "niobium_jj", "#ff2aff"),
+    ("die_ILD1_SiO2", die_box, "I1", "sio2", "#cfe8ff"),
+    ("die_R_Mo", RL["R"], "R", "molybdenum", "#22c060"),
+    ("die_M2_Nb", RL["M2"], "M2", "niobium", "#ff3b3b"),
+    ("die_pad_Au", RL["PAD"], "PAD", "gold", "#ffd34d"),
+]
+for name, reg, key, mat, col in SPEC:
+    z0, z1 = zf + DZ[key][0], zf + DZ[key][1]
+    add_layer(name, extrude_region(reg, z0, z1), "die", mat, col, EXP[name], z0, z1, true_t=TRUE[key],
+              note=MAT[key] + f" ({TRUE[key] * 1e6:.0f} nm; drawn {(z1 - z0) * 1e6:.0f} nm)",
+              opacity_eng=0.15 if key in ("I0", "I1") else 1.0)
+vm = Mesh()
+extrude_region(RL["VIA"], zf + DZ["VIA"][0], zf + DZ["VIA"][1], vm)
+extrude_region(RL["I1"], zf + 0.009, zf + DZ["I1"][1], vm)
+add_layer("die_vias_Nb", vm, "die", "niobium", "#ffe600", EXP["die_vias_Nb"], zf + DZ["VIA"][0], zf + DZ["VIA"][1],
+          true_t=TRUE["VIA"], note="stacked GP contacts (JJ ground straps, resistor returns, ring fence) + I1 contacts")
+die_metal = RL["M2"]                  # pad / wiring islands used for the bond + netlist checks
 # ------------------------------------------------------------------ wire bonds
 print("building wire bonds")
 # Die ground = every large Al island (the edge-to-edge probe line splits the plane into a north and a
 # south part; airbridges + ground bonds tie them together). Signal islands are all < 1 mm^2.
-ground_reg = db.Region([p for p in die_metal.each() if p.area() * DBU_MM ** 2 > 2.0])
+# Die ground for bonding = the M2 + Au ground ring around the die edge (stitched into GP by a via fence)
+ground_reg = db.Region([p for p in die_metal.each() if p.bbox().width() * DBU_MM > 9.0])
 gnd_F = db.Region()
 for zn in board.Zones():
     pass
@@ -321,7 +337,7 @@ sig_pads = {p["net"]: p for p in model["pads"] if p.get("role") == "bond_pad"}
 WIRE_R = PACKAGE["wire_d_um"] * 1e-3 / 2
 LOOP = PACKAGE["loop_height_um"] * 1e-3
 Z_PCB_PAD = T + ENIG_T
-Z_DIE_PAD = zf + FILM_VIS
+Z_DIE_PAD = zf + DZ["PAD"][1]
 
 
 def bond_curve(a, b, n=36):
@@ -375,7 +391,7 @@ for side, (ux, uy) in {"N": (0, 1), "S": (0, -1), "E": (1, 0), "W": (-1, 0)}.ite
     while lat <= 4.3 + 1e-9:
         if all(abs(lat - s) > 0.50 for s in sig_lat):
             die_d = None
-            for d_in in (half - 0.30, half - 0.35, half - 0.40, half - 0.45):
+            for d_in in (half - 0.095,):
                 x, y = (ux * d_in + (lat if uy else 0), uy * d_in + (lat if ux else 0))
                 if pt_in(ground_reg, x, y):
                     die_d = (x, y)
@@ -541,8 +557,7 @@ def reg_json(r):
 
 
 os.makedirs(os.path.join(OUT, "_cache"), exist_ok=True)
-json.dump(dict(copper={k: reg_json(v) for k, v in copper.items()}, die_metal=reg_json(die_metal), jj1=reg_json(jj1),
-               jj2=reg_json(jj2), ab_pad=reg_json(ab_pad), ab_fly=reg_json((ab_fly - ab_pad).merged()),
+json.dump(dict(copper={k: reg_json(v) for k, v in copper.items()}, die={k: reg_json(v) for k, v in RL.items()},   # JJs as equal-area octagons
                enig_F=reg_json(enig_F), outline=reg_json(outline)),
           open(os.path.join(OUT, "_cache", "regions_2d.json"), "w"))
 json.dump([dict(net=b["net"], kind=b["kind"]) for b in bonds], open(os.path.join(OUT, "_cache", "bond_meta.json"), "w"))

@@ -1,103 +1,113 @@
-# Q4-FLUX: superconducting quantum die on a 6-layer RF carrier
+# RFL-RE1: reversible fluxon logic die on a 6-layer RF carrier
 
-A four-qubit, flux-tunable transmon die (KQCircuits → GDSII) wire-bonded into a red-mask, 6-layer Rogers RF carrier
-(KiCad 7), on a gold-plated copper package. Every 3D layer is extruded from the exported CAD polygons, then
-rendered in Blender Cycles and explorable in a browser. One parameter file drives the whole thing:
-`src/design_params.py` → `./build_all.sh`.
+A superconducting **Reversible Fluxon Logic** (RFL) test chip — the ballistic, flux-quantum style of reversible
+computing from Sandia (M. Frank et al., asynchronous ballistic reversible computing) and LPS (K. Osborn, W. Wustmann,
+RFL) — wire-bonded into a red-mask, 6-layer Rogers RF carrier (KiCad 7) on a gold-plated copper package. Every 3D
+layer is extruded from the exported CAD polygons, rendered in Blender Cycles, and explorable in a browser.
+One parameter file drives everything: `src/design_params.py` → `./build_all.sh`.
 
 ![assembled](renders/assembled_chip.png)
 
+## What the die does
+
+Information is carried by single flux quanta (fluxons, Φ0 = h/2e) moving **ballistically** along discrete long
+Josephson junctions (LJJs): chains of unbiased, unshunted Nb junctions. The logic itself draws no bias power; a fluxon
+keeps its energy as it passes through the gates. Only the conventional SFQ converters at the chip edge are biased.
+
+```
+TRIG_A ─ DC/SFQ_A ─ LJJ_A ─ [controlled barrier CB] ─ LJJ_A2 ─┐            ┌─ LJJ_O0 ─ SFQ/DC_0 ─ OUT_0
+                                    ▲ CTRL_CB               I0 [ rotary   ] O0
+TRIG_B ─ DC/SFQ_B ─ LJJ_B ─────────────────────────────────── I1 [ element ] O1 ─ LJJ_O1 ─ SFQ/DC_1 ─ OUT_1
+                                                                    ▲ CTRL_RE (state set/reset)
+TEST_IN ─ DC/SFQ_T ─ 18 mm ballistic LJJ racetrack (1761 cells) ─ SFQ/DC_T ─ TEST_OUT     (time of flight)
+VB_W, VB_E: DC bias for the six converters only
+```
+
+- **Controlled barrier (CB):** one LJJ node replaced by a symmetric dc SQUID (2 × 4 Ic). Flux from CTRL_CB sets its
+  effective critical current, so a fluxon is either reflected or passed.
+- **Rotary element (RE):** an LJJ ring with two storage junctions and four ports; the stored fluxon state steers
+  incoming fluxons to O0 or O1 (Frank/Sandia ballistic rotary element). CTRL_RE sets and resets the state.
+- **Racetrack:** 18 mm of LJJ between a DC/SFQ and an SFQ/DC converter, for measuring fluxon speed and loss.
+
+3270 junctions in total; Jc 10 kA/cm², LJJ junctions 50 µA (0.5 µm²), one cell per 10 µm of 10 µm-wide M1 strip.
+
+### Physics check (`src/rfl_sim.py`, discrete sine-Gordon model)
+
+![sim](docs/rfl_sim.png)
+
+| Quantity | Value |
+|---|---|
+| Josephson inductance L_J | 6.58 pH; cell inductance 0.48 pH → Josephson length Λ = 3.7 cells (37 µm) |
+| Plasma frequency | 392 GHz; fluxon speed at 0.6 c0 ≈ 55 µm/ps |
+| Racetrack, design damping (T < 1 K, α = 1e-4) | fluxon crosses 1800 cells, keeps 97 % of its energy (v 0.60 → 0.57 c0) |
+| Same line at 4.2 K (α ≈ 0.03) | fluxon stalls: the kinetic energy is gone within ~30 ps |
+| Controlled barrier | reflects below ≈ 0.31 Φ0 of control flux, transmits above |
+
+So the gates are meant to run **below 1 K**, which is why the die sits on a cryogenic RF carrier. This is a model of
+the LJJ physics, not a full circuit simulation of the converters, the RE, or the control-line coupling (see below).
+
+## Process stack on the die (`out/layer_stack.yaml`)
+
+| Layer (GDS) | Material | Thickness |
+|---|---|---|
+| GP (1/0) | Nb ground plane | 200 nm |
+| ILD0 | SiO2 | 200 nm |
+| M1 (3/0) | Nb: LJJ strips, JJ base electrode | 150 nm |
+| JJ (4/0) | AlOx barrier + Nb counter-electrode | 100 nm |
+| ILD1, contacts I1 (5/0) | SiO2 | 200 nm |
+| R (6/0) | Mo resistor, 2 Ω/sq (converter shunts and bias) | 40 nm |
+| M2 (7/0) | Nb: I/O microstrip, bias, control lines, pads, JJ ground straps | 300 nm |
+| PAD (8/0) | Ti/Au bond metallisation (pads + ground ring) | 100 nm |
+| VIA (9/0) | stacked Nb contacts into GP | — |
+
+Substrate: 525 µm high-resistivity Si. Each LJJ junction returns to ground through its own M2 strap and stacked via.
+
+## The carrier (unchanged hardware, renamed nets)
+
+40 × 40 × 1.496 mm, ENIG, red LPI mask. F.Cu GCPW (0.43/0.20 mm, 49.9 Ω) carries triggers, outputs and the racetrack
+to six end-launch SMAs. VB_W, VB_E, CTRL_CB and CTRL_RE go bond pad → blind via → In2 stripline (49.3 Ω) → blind via →
+B.Cu → four bottom SMPs. In1/In3 are solid GND around the stripline; In4 references the bottom routing. 324 stitching
+vias, 20 signal bonds (two per pad) and 67 ground bonds onto the die's Au ground ring. KiCad DRC: 0 violations,
+0 unconnected items.
+
 ## Deliverables
 
-| Requested | File | Made by |
-|---|---|---|
-| quantum_die.gds | `out/quantum_die.gds` | KQCircuits 4.9 PCell `Q4FluxTransmon` (`src/build_die.py`), checked in KLayout (`docs/die_preview*.png`) |
-| rf_carrier.kicad_pcb | `out/rf_carrier.kicad_pcb` (+ `.kicad_pro`, `.kicad_dru`, Gerbers, drill, SVG) | generated S-expression, zones filled + DRC by KiCad 7 itself |
-| assembly.step | `out/assembly.stpZ` (gzip STEP AP214, 28 named and coloured parts, true thicknesses) and `out/rf_carrier.step` (KiCad board body) | OpenCascade (`src/build_step.py`) |
-| quantum_assembly.blend | `out/quantum_assembly.blend` | Blender 5.3 (bpy), one object per layer, grouped in collections; explode offsets stored as custom properties |
-| layer_stack.yaml | `out/layer_stack.yaml` | `src/build_reports.py` |
-| connections.json | `out/connections.json` | `src/build_reports.py` (from the KiCad routes, die ports and bond geometry) |
-| assembled_chip.png | `renders/assembled_chip.png` | Cycles |
-| red_pcb_view.png | `renders/red_pcb_view.png` | Cycles |
-| exploded_layers.png | `renders/exploded_layers.png` | Cycles |
-| internal_trace_cutaway.png | `renders/internal_trace_cutaway.png` | Cycles (stepped peel-back that exposes the In2 striplines) |
-| wirebond_macro.png | `renders/wirebond_macro.png` | Cycles |
-| (extra) qubit macro, technical CAD view | `renders/qubit_macro.png`, `renders/technical_cad_view.png` | Cycles |
-| interactive_3d_view.html | `out/interactive_3d_view.html` + `out/assembly.glb` | three.js; real layer visibility, Fabrication/Engineering modes, explode, section cut, click-to-inspect |
-| validation | `docs/VALIDATION.md`, `out/validation_report.json` | `src/validate.py`: **54 checks, 54 pass** |
+| Requested | File |
+|---|---|
+| quantum_die.gds | `out/quantum_die.gds` (cell `RFL_RE1`), KLayout previews `docs/die_preview*.png` |
+| rf_carrier.kicad_pcb | `out/rf_carrier.kicad_pcb` + `.kicad_pro` / `.kicad_dru`, Gerbers + drill (blind spans separate), SVG |
+| assembly.step | `out/assembly.stpZ` (gzip STEP AP214, 32 named parts, true thicknesses); `out/rf_carrier.step` (KiCad board body) |
+| quantum_assembly.blend | `out/quantum_assembly.blend` |
+| layer_stack.yaml / connections.json | `out/layer_stack.yaml`, `out/connections.json` |
+| renders | `renders/assembled_chip.png`, `red_pcb_view.png`, `exploded_layers.png`, `internal_trace_cutaway.png`, `wirebond_macro.png`, `fluxon_gate_macro.png`, `technical_cad_view.png` |
+| interactive_3d_view.html | `out/interactive_3d_view.html` + `out/assembly.glb` (serve the folder: `cd out && python3 -m http.server`) |
+| validation | `docs/VALIDATION.md`: **62 checks, 62 pass** (PCB continuity, die netlist from GDS, fluxon physics, bonds, stack, 2D↔3D) |
 
-Open the viewer by serving the folder (`cd out && python3 -m http.server`, then open `interactive_3d_view.html`);
-opened straight from disk it asks you to pick `assembly.glb`.
+The earlier 4-transmon die is kept as `src/build_die_transmon.py` (writes `transmon_die.gds`).
 
-## The hardware
+## Not settled (read before fabricating)
 
-**Die (10 × 10 mm, 525 µm high-ρ Si, 200 nm Al).** Four Swissmon transmons in a chain, each with a Manhattan-junction
-SQUID (flux-tunable), so each qubit has an XY charge line and a Z flux line. Nearest neighbours share a floating CPW bus
-coupler. Each qubit has its own λ/2 readout resonator (design 6.8 / 7.0 / 7.2 / 7.4 GHz, lengths from ε_eff = (ε_r+1)/2)
-hanging off one probe line through an interdigital capacitor. Ten launchers: six north, two east, two west. CPWs are
-10/6 µm (≈51 Ω), with Al airbridges tying the ground plane across lines.
+- **Simulated:** LJJ propagation and the barrier, in a 1D sine-Gordon model. **Not simulated:** the DC/SFQ and SFQ/DC
+  converters, the rotary element's state switching, control-line mutual inductances, and junction spreads. Run JoSIM or
+  WRspice with extracted inductances (InductEx) before tape-out.
+- **Cell layouts are representative:** junction areas, loop shapes and resistor values follow the topology but are not
+  tuned to a foundry PDK. Map the layers to the target process (e.g. MIT LL SFQ5ee) and run its DRC.
+- **Temperature:** ballistic operation needs sub-gap damping α ≲ 1e-4, i.e. well below 4.2 K (dilution-fridge or ³He stage).
+- **Carrier:** ENIG contains magnetic nickel and should be replaced by a Ni-free finish near superconducting circuits;
+  flux trapping also calls for magnetic shielding and moats in the GP (not drawn). The connectors are generic, not
+  vendor parts. Line impedances are closed-form and ignore the mask.
+- **Display exaggeration:** films under 3 µm are drawn thicker in the GLB/.blend so they can be seen; the STEP and the
+  thickness readouts use the true values. XY geometry is never changed.
 
-**Carrier (40 × 40 mm, 1.496 mm, ENIG, red LPI mask).**
+## References
 
-| Layer | Thickness | Job |
-|---|---|---|
-| F.Cu | 35 µm | GCPW drive + probe lines (w 0.43 / g 0.20 mm, 49.9 Ω), bond pads, exposed bond ring |
-| RO4003C | 203 µm | |
-| In1.Cu | 18 µm | solid GND |
-| RO4450F | 200 µm | |
-| In2.Cu | 18 µm | flux lines as stripline (w 0.19 mm, 49.3 Ω); they cross under the top-layer lines |
-| RO4450F | 200 µm | |
-| In3.Cu | 18 µm | solid GND |
-| RO4003C | 508 µm | |
-| In4.Cu | 18 µm | GND reference for the bottom routing |
-| RO4003C | 203 µm | |
-| B.Cu | 35 µm | short GCPW stubs to the bottom SMPs, GND pour |
-
-Blind vias (0.15 mm) are used only where a flux line changes layer: F.Cu→In2 next to its bond pad and In2→B.Cu next
-to its SMP. No buried vias: no route needs an inner-to-inner transition. 324 through vias stitch the grounds, fenced
-at 1 mm pitch along every RF line.
-
-**Package.** The die sits on GE varnish on a pedestal of the gold-plated copper base that rises through the 10.3 mm
-PCB window, so the die surface is flush with the PCB copper. 20 Al wedge bonds carry signals (2 per line) and 67 more
-tie the die ground to the ENIG ring. Six edge-launch SMAs (drive, probe) on top, four vertical SMPs (flux) underneath
-through holes in the base, four M2.5 screws.
-
-**Signal path (every net is listed in full in `connections.json`):**
-SMA/SMP → solder joint → GCPW (or B.Cu stub → blind via → In2 stripline → blind via) → ENIG bond pad →
-2 × Al wire bond → Al launcher pad → on-chip CPW → charge line / flux line / probe line → qubit.
-
-## Engineering vs fabrication colours
-
-Fabrication mode uses physical materials: copper, ENIG gold, red mask (darker over laminate and brighter over copper,
-so traces read through it), Si, Al. Engineering mode is a convention: top copper red, In2 green, bottom blue, planes
-translucent, vias yellow (through) / magenta and cyan (blind). The red is a display colour; the metal is copper.
-
-## What is not settled (read before fabricating)
-
-- **No EM simulation was run.** Resonator lengths come from a closed-form ε_eff; qubit frequency, E_J/E_C, couplings
-  and package/box modes are unverified. Run Sonnet, HFSS or Palace on `quantum_die.gds` and the carrier first.
-- **Line impedances** use closed-form GCPW/stripline formulas that ignore the solder mask over the lines. Many
-  cryogenic carriers leave RF lines unmasked; the mask here follows the requested look.
-- **ENIG contains nickel**, which is magnetic and lossy near qubits. For a real cryogenic build use a Ni-free finish
-  (immersion silver or direct gold) and a non-magnetic base finish.
-- **Connectors are generic**: footprints and 3D bodies are representative, not vendor parts. Swap in the real part's
-  footprint and STEP model before ordering.
-- **Fab-house inputs still needed**: stackup confirmation and impedance-control tolerance, blind-via aspect ratio
-  approval (0.15 mm drill through 0.44 mm), via fill/tenting choice, panelisation, edge plating at the SMA edges.
-- **Display exaggeration**: films under 3 µm are drawn thicker in the GLB and .blend so they can be seen. `assembly.stpZ`
-  uses the true thicknesses. XY geometry is never changed.
-- KQC's vortex-pinning ground grid is turned off (it would add ~250k holes to every mesh). Turn on `with_grid` for tape-out.
-- Request wording said "fluxon"; the spec asked for SQUID transmons, so the qubits are flux-tunable transmons. A fluxonium
-  variant would swap the Swissmon element for a junction-array qubit.
-
-## Further reading
-
-- S. Huang et al., "Microwave Package Design for Superconducting Quantum Processors", PRX Quantum 2, 020306 (2021), arXiv:2012.01438.
-- "Identification and Mitigation of Conducting Package Losses for Quantum Superconducting Devices", arXiv:2304.08629 (2023).
-- "High-Throughput Microwave Package for Precise Superconducting Device Measurement", arXiv:2512.18198 (2025).
+- K. D. Osborn, W. Wustmann, "Reversible Fluxon Logic: Topological particles allow ballistic gates along 1D paths", arXiv:1711.04339.
+- M. P. Frank et al., "Asynchronous Ballistic Reversible Fluxon Logic", Sandia National Laboratories (2019).
+- S. Kaplan et al., "Superconducting Elements for Ballistic Reversible Computing", APS March Meeting 2025.
+- IEEE Spectrum, "Reversible Computing Escapes the Lab in 2025" (Vaire Computing; reversible CMOS).
+- S. Huang et al., "Microwave Package Design for Superconducting Quantum Processors", PRX Quantum 2, 020306 (2021).
 
 ## Tools
 
-KQCircuits 4.9 + KLayout 0.30 (die), KiCad 7.0 (board, DRC, Gerber, STEP), OpenCascade/OCP (assembly STEP),
-trimesh (GLB), Blender 5.3 Cycles via `bpy` (renders), three.js 0.160 (viewer). The KQC pip wheel is missing its label font;
-`src/make_kqc_font.py` regenerates it.
+KLayout 0.30 (die layout, previews), KiCad 7.0 (board, DRC, Gerber, STEP), own discrete sine-Gordon solver (numpy),
+OpenCascade/OCP (assembly STEP), trimesh (GLB), Blender 5.3 Cycles via `bpy` (renders), three.js 0.160 (viewer).

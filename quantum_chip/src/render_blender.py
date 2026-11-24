@@ -130,6 +130,10 @@ REAL = {
     "ptfe": principled("PTFE", (0.92, 0.92, 0.9), 0.0, 0.5, sss=0.3),
     "solder": principled("SAC305", (0.82, 0.83, 0.84), 1.0, 0.18),
     "gold_plated_copper": principled("Au_on_OFHC", (1.0, 0.78, 0.40), 1.0, 0.32),
+    "niobium": principled("Nb", (0.62, 0.63, 0.68), 1.0, 0.22),
+    "niobium_jj": principled("Nb_JJ", (0.72, 0.62, 0.78), 1.0, 0.18),
+    "sio2": principled("SiO2_ILD", (0.85, 0.9, 0.95), 0.0, 0.05, trans=0.97, ior=1.46),
+    "molybdenum": principled("Mo_R", (0.55, 0.55, 0.58), 1.0, 0.3),
 }
 ENGM = {}
 
@@ -344,8 +348,8 @@ show_all()
 apply_mode("real")
 
 # 5. macro close-up of qubit interconnections (Q2/Q3 region of the die)
-look((0.25, 2.55, ZD + 0.55), (-0.8, 0.95, ZD), lens=100, dof=math.dist((0.25, 2.55, ZD + 0.55), (-0.8, 0.95, ZD)), fstop=16)
-render("qubit_macro")
+look((0.55, 0.55, ZD + 0.55), (0.0, 1.4, ZD), lens=100, dof=math.dist((0.55, 0.55, ZD + 0.55), (0.0, 1.4, ZD)), fstop=16)
+render("fluxon_gate_macro")
 
 # 6. bond pads + wire bonds (north edge of die, Q2 drive / flux pads)
 look((-1.5, 7.9, ZD + 1.7), (-1.2, 4.95, ZD + 0.05), lens=85,
@@ -355,7 +359,7 @@ render("wirebond_macro")
 # 7. technical CAD view, engineering colours (red top / green stripline / blue bottom)
 apply_mode("eng")
 hide("F.Mask", "F.Mask_over_Cu", "B.Mask", "B.Mask_over_Cu", "F.Silk", "B.Silk", "screws", "package_base",
-     "F.ENIG", "B.ENIG", "In1.Cu_GND", "In3.Cu_GND", "In4.Cu_GND", "die_attach")
+     "F.ENIG", "B.ENIG", "In1.Cu_GND", "In3.Cu_GND", "In4.Cu_GND", "die_attach", "die_ILD0_SiO2", "die_ILD1_SiO2")
 explode(0.8)
 floor.hide_render = True
 world.node_tree.nodes["Background"].inputs["Strength"].default_value = 0.35

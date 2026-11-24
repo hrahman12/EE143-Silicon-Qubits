@@ -1,0 +1,191 @@
+{
+ "ballistic_design_subK": {
+  "cells": 1800,
+  "alpha": 0.0001,
+  "launch_v": 0.6,
+  "final_v": 0.5702,
+  "energy_retained": 0.9736,
+  "sim_time_ps": 317.7
+ },
+ "ballistic_at_4K2": {
+  "cells": 1800,
+  "alpha": 0.03,
+  "launch_v": 0.6,
+  "final_v": 0.0,
+  "energy_retained": 0.8005,
+  "sim_time_ps": 317.7
+ },
+ "controlled_barrier": {
+  "bmax": 8.0,
+  "launch_v": 0.6,
+  "sweep": [
+   {
+    "phi_ctrl_over_phi0": 0.0,
+    "ic_eff_over_ic": 8.0,
+    "outcome": "reflect",
+    "final_kink_cell": 32
+   },
+   {
+    "phi_ctrl_over_phi0": 0.02,
+    "ic_eff_over_ic": 7.984,
+    "outcome": "reflect",
+    "final_kink_cell": 32
+   },
+   {
+    "phi_ctrl_over_phi0": 0.04,
+    "ic_eff_over_ic": 7.937,
+    "outcome": "reflect",
+    "final_kink_cell": 32
+   },
+   {
+    "phi_ctrl_over_phi0": 0.06,
+    "ic_eff_over_ic": 7.858,
+    "outcome": "reflect",
+    "final_kink_cell": 32
+   },
+   {
+    "phi_ctrl_over_phi0": 0.08,
+    "ic_eff_over_ic": 7.749,
+    "outcome": "reflect",
+    "final_kink_cell": 33
+   },
+   {
+    "phi_ctrl_over_phi0": 0.1,
+    "ic_eff_over_ic": 7.608,
+    "outcome": "reflect",
+    "final_kink_cell": 33
+   },
+   {
+    "phi_ctrl_over_phi0": 0.12,
+    "ic_eff_over_ic": 7.438,
+    "outcome": "reflect",
+    "final_kink_cell": 33
+   },
+   {
+    "phi_ctrl_over_phi0": 0.14,
+    "ic_eff_over_ic": 7.239,
+    "outcome": "reflect",
+    "final_kink_cell": 33
+   },
+   {
+    "phi_ctrl_over_phi0": 0.16,
+    "ic_eff_over_ic": 7.01,
+    "outcome": "reflect",
+    "final_kink_cell": 34
+   },
+   {
+    "phi_ctrl_over_phi0": 0.18,
+    "ic_eff_over_ic": 6.755,
+    "outcome": "reflect",
+    "final_kink_cell": 34
+   },
+   {
+    "phi_ctrl_over_phi0": 0.2,
+    "ic_eff_over_ic": 6.472,
+    "outcome": "reflect",
+    "final_kink_cell": 35
+   },
+   {
+    "phi_ctrl_over_phi0": 0.22,
+    "ic_eff_over_ic": 6.164,
+    "outcome": "reflect",
+    "final_kink_cell": 36
+   },
+   {
+    "phi_ctrl_over_phi0": 0.24,
+    "ic_eff_over_ic": 5.832,
+    "outcome": "reflect",
+    "final_kink_cell": 37
+   },
+   {
+    "phi_ctrl_over_phi0": 0.26,
+    "ic_eff_over_ic": 5.476,
+    "outcome": "reflect",
+    "final_kink_cell": 38
+   },
+   {
+    "phi_ctrl_over_phi0": 0.28,
+    "ic_eff_over_ic": 5.099,
+    "outcome": "reflect",
+    "final_kink_cell": 39
+   },
+   {
+    "phi_ctrl_over_phi0": 0.3,
+    "ic_eff_over_ic": 4.702,
+    "outcome": "reflect",
+    "final_kink_cell": 39
+   },
+   {
+    "phi_ctrl_over_phi0": 0.32,
+    "ic_eff_over_ic": 4.287,
+    "outcome": "transmit",
+    "final_kink_cell": 160
+   },
+   {
+    "phi_ctrl_over_phi0": 0.34,
+    "ic_eff_over_ic": 3.854,
+    "outcome": "transmit",
+    "final_kink_cell": 161
+   },
+   {
+    "phi_ctrl_over_phi0": 0.36,
+    "ic_eff_over_ic": 3.406,
+    "outcome": "transmit",
+    "final_kink_cell": 163
+   },
+   {
+    "phi_ctrl_over_phi0": 0.38,
+    "ic_eff_over_ic": 2.945,
+    "outcome": "transmit",
+    "final_kink_cell": 165
+   },
+   {
+    "phi_ctrl_over_phi0": 0.4,
+    "ic_eff_over_ic": 2.472,
+    "outcome": "transmit",
+    "final_kink_cell": 167
+   },
+   {
+    "phi_ctrl_over_phi0": 0.42,
+    "ic_eff_over_ic": 1.99,
+    "outcome": "transmit",
+    "final_kink_cell": 168
+   },
+   {
+    "phi_ctrl_over_phi0": 0.44,
+    "ic_eff_over_ic": 1.499,
+    "outcome": "transmit",
+    "final_kink_cell": 169
+   },
+   {
+    "phi_ctrl_over_phi0": 0.46,
+    "ic_eff_over_ic": 1.003,
+    "outcome": "transmit",
+    "final_kink_cell": 170
+   },
+   {
+    "phi_ctrl_over_phi0": 0.48,
+    "ic_eff_over_ic": 0.502,
+    "outcome": "transmit",
+    "final_kink_cell": 170
+   },
+   {
+    "phi_ctrl_over_phi0": 0.5,
+    "ic_eff_over_ic": 0.0,
+    "outcome": "transmit",
+    "final_kink_cell": 170
+   }
+  ],
+  "transmits_from_phi_ctrl": 0.32
+ },
+ "parameters": {
+  "Ic_uA": 50.0,
+  "L_J_pH": 6.582,
+  "cell_L_pH": 0.48,
+  "Lambda_cells": 3.703,
+  "C_fF": 25.0,
+  "f_plasma_GHz": 392.3,
+  "lambda_J_um": 37.0,
+  "fluxon_speed_um_per_ps": 54.772
+ }
+}

@@ -16,6 +16,7 @@ model = json.load(open(os.path.join(OUT, "pcb_model.json")))
 man = json.load(open(os.path.join(OUT, "layer_manifest.json")))
 geo = json.load(open(os.path.join(OUT, "geometry_regions.json")))
 die_ports = json.load(open(os.path.join(OUT, "die_ports.json")))
+cells = json.load(open(os.path.join(OUT, "die_cells.json")))
 
 # ------------------------------------------------------------------ layer_stack.yaml
 stack = dict(
@@ -25,7 +26,7 @@ stack = dict(
     pcb=dict(name="rf_carrier.kicad_pcb", size_mm=[PCB["size_mm"], PCB["size_mm"]], window_mm=PCB["window_mm"],
              total_thickness_mm=round(sum(t for _, _, t, _ in STACKUP), 4), finish="ENIG (Ni 4 um / Au 0.08 um)",
              layers=[]),
-    die=dict(name="quantum_die.gds", size_mm=[DIE["size_um"] / 1000] * 2, layers=[]),
+    die=dict(name="quantum_die.gds (cell RFL_RE1)", size_mm=[DIE["size_um"] / 1000] * 2, layers=[]),
     package=dict(base=PACKAGE["base_material"], base_thickness_mm=PACKAGE["base_thickness_mm"],
                  die_attach=PACKAGE["die_attach"], wirebond=PACKAGE["wirebond"],
                  wire_diameter_um=PACKAGE["wire_d_um"], loop_height_um=PACKAGE["loop_height_um"]),
@@ -37,12 +38,12 @@ Z = man["Z"]
 for name, kind, t, desc in STACKUP:
     stack["pcb"]["layers"].append(dict(name=name, kind=kind, thickness_mm=t, z_mm=[round(v, 4) for v in Z[name]],
                                        material=desc))
-GDS_LAYERS = {
-    "die_Al_film": "KQC 130/1 base_metal_gap_wo_grid (inverted) + 131/1 base_metal_addition - 158/1 dicing",
-    "jj_bottom_Al": "KQC 136/1 SIS_junction", "jj_top_Al": "KQC 139/1 SIS_junction_2",
-    "jj_AlOx": "overlap 136/1 AND 139/1", "airbridges_Al": "KQC 146/1 airbridge_pads + 147/1 airbridge_flyover",
-    "die_substrate": "chip box", "die_attach": "chip box",
-}
+GDS_LAYERS = {"die_GP_Nb": "1/0 GP", "die_ILD0_SiO2": "sheet (not drawn)", "die_M1_Nb_LJJ": "3/0 M1",
+              "die_JJ_trilayer": "4/0 JJ", "die_ILD1_SiO2": "sheet (5/0 = contacts)", "die_R_Mo": "6/0 R",
+              "die_M2_Nb": "7/0 M2", "die_pad_Au": "8/0 PAD", "die_vias_Nb": "9/0 VIA + 5/0 I1",
+              "die_substrate": "chip box", "die_attach": "chip box"}
+stack["die"]["process"] = "Nb/AlOx/Nb trilayer, GP + 2 wiring layers (SFQ5ee-like, simplified)"
+stack["die"]["junctions"] = cells["total_jj"]
 for L in man["layers"]:
     if L["group"] == "die":
         stack["die"]["layers"].append(dict(name=L["name"], source=GDS_LAYERS.get(L["name"], ""), material=L["note"],
@@ -55,19 +56,18 @@ yaml.safe_dump(stack, open(os.path.join(OUT, "layer_stack.yaml"), "w"), sort_key
 
 # ------------------------------------------------------------------ connections.json
 FUNC = {
-    "Q1_DRIVE": ("XY drive", "QB1", "DL_Q1_DRIVE: open-ended charge line, capacitive coupling to the QB1 island"),
-    "Q2_DRIVE": ("XY drive", "QB2", "DL_Q2_DRIVE: open-ended charge line, capacitive coupling to the QB2 island"),
-    "Q3_DRIVE": ("XY drive", "QB3", "DL_Q3_DRIVE: open-ended charge line, capacitive coupling to the QB3 island"),
-    "Q4_DRIVE": ("XY drive", "QB4", "DL_Q4_DRIVE: open-ended charge line, capacitive coupling to the QB4 island"),
-    "Q1_FLUX": ("Z flux bias", "QB1", "FL1: CPW shorted to ground next to the QB1 SQUID loop (mutual inductance)"),
-    "Q2_FLUX": ("Z flux bias", "QB2", "FL2: CPW shorted to ground next to the QB2 SQUID loop"),
-    "Q3_FLUX": ("Z flux bias", "QB3", "FL3: CPW shorted to ground next to the QB3 SQUID loop"),
-    "Q4_FLUX": ("Z flux bias", "QB4", "FL4: CPW shorted to ground next to the QB4 SQUID loop"),
-    "PROBE_IN": ("readout probe line in", "QB1-QB4",
-                 "PL_IN -> tees PLT1..4 -> interdigital caps RRC1..4 -> lambda/2 resonators RR1..4 -> QBn readout couplers"),
-    "PROBE_OUT": ("readout probe line out", "QB1-QB4", "PL_OUT: same continuous probe-line conductor as PROBE_IN"),
+    "TRIG_A": ("fluxon trigger A", "RE input I0 via controlled barrier",
+               "M2 microstrip -> DCSFQ_A (2 JJ) -> LJJ_A -> controlled barrier CB -> LJJ_A2 -> rotary element port I0"),
+    "TRIG_B": ("fluxon trigger B", "RE input I1", "M2 microstrip -> DCSFQ_B -> LJJ_B -> rotary element port I1"),
+    "OUT_0": ("fluxon output 0", "RE output O0", "RE port O0 -> LJJ_O0 -> SFQDC_0 (3 JJ) -> M2 microstrip -> pad"),
+    "OUT_1": ("fluxon output 1", "RE output O1", "RE port O1 -> LJJ_O1 -> SFQDC_1 -> M2 microstrip -> pad"),
+    "TEST_IN": ("racetrack input", "LJJ_TEST", "M2 microstrip -> DCSFQ_T -> 18 mm ballistic LJJ racetrack"),
+    "TEST_OUT": ("racetrack output", "LJJ_TEST", "LJJ_TEST -> SFQDC_T -> M2 microstrip -> pad"),
+    "CTRL_CB": ("barrier control flux", "CB SQUID", "M2 line shorted to GP beside the CB SQUID loop (sets Ic_eff)"),
+    "CTRL_RE": ("rotary-element state flux", "RE storage loop", "M2 line shorted to GP inside the RE ring (set/reset)"),
+    "VB_W": ("DC bias, west converters", "DCSFQ_A, SFQDC_0, DCSFQ_T", "M2 bias tree -> Mo bias resistors"),
+    "VB_E": ("DC bias, east converters", "DCSFQ_B, SFQDC_1, SFQDC_T", "M2 bias tree -> Mo bias resistors"),
 }
-z0_die = cpw_z0(DIE["cpw_a"], DIE["cpw_b"], DIE["substrate_eps_r"])[0]
 
 
 def plen(pts):
@@ -112,21 +112,16 @@ for p in die_ports["ports"]:
     wb = [b for b in geo["bonds"] if b["net"] == net]
     path.append(dict(stage="wire_bonds", count=len(wb), material=PACKAGE["wirebond"],
                      lengths_mm=[b["length_mm"] for b in wb]))
-    path.append(dict(stage="die_launcher_pad", kqc_port_id=p["kqc_port_id"], side=p["side"],
-                     center_um=p["pad_center_um"], size_um=p["pad_size_um"], metal="Al 200 nm"))
-    path.append(dict(stage="die_cpw", centre_um=DIE["cpw_a"], gap_um=DIE["cpw_b"], z0_ohm=round(float(z0_die), 1),
-                     structure=die_desc))
-    path.append(dict(stage="quantum_device", target=qb,
-                     qubit_positions_um={f"QB{i+1}": [QUBIT_X[i], QUBIT_Y] for i in range(4)} if qb == "QB1-QB4" else
-                     [QUBIT_X[int(qb[-1]) - 1], QUBIT_Y]))
+    path.append(dict(stage="die_bond_pad", pad_index=p["kqc_port_id"], side=p["side"],
+                     center_um=p["pad_center_um"], size_um=p["pad_size_um"], metal="Nb M2 300 nm + Ti/Au 100 nm"))
+    path.append(dict(stage="die_wiring", structure=die_desc))
+    path.append(dict(stage="fluxon_device", target=qb))
     entry = dict(net=net, function=func, path=path)
-    if net.startswith("PROBE"):
-        entry["readout_resonators"] = [dict(name=f"RR{i+1}", f_design_GHz=f, qubit=f"QB{i+1}") for i, f in
-                                       enumerate(READOUT_F_GHZ)]
     conns["signal_nets"].append(entry)
 gb = [b for b in geo["bonds"] if b["kind"] == "ground"]
 conns["ground"] = dict(
-    die_ground_plane="largest Al island (ground plane) - flux lines terminate into it at each SQUID",
+    die_ground_plane="Nb GP (M0) under the whole circuit; M2+Au bond ring stitched to it by a via fence; "
+                     "every LJJ junction returns to GP through its own stacked via",
     ground_wire_bonds=len(gb), ground_bonds_per_side={s: sum(1 for b in gb if b["side"] == s) for s in "NESW"},
     pcb_ground_ring="exposed ENIG ring around the die window, F.Cu GND",
     stitching_vias=sum(1 for v in model["vias"] if v["net"] == "GND"),

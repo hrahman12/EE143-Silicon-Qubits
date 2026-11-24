@@ -110,17 +110,17 @@ zs = man["z_substrate"]
 parts.append(("die_Si_substrate_525um", box(-5, -5, zs[0], 5, 5, zs[1]), (0.2, 0.22, 0.28)))
 za = man["z_attach"]
 parts.append(("die_attach_GE7031", box(-5, -5, za[0], 5, 5, za[1]), (0.66, 0.4, 0.12)))
-s, n = extrude(reg["die_metal"], T, T + FILM)
-parts.append(("die_Al_200nm (GDS base metal)", s, (0.85, 0.87, 0.9)))
-s, _ = extrude(reg["jj1"], T, T + DIE["jj_bottom_nm"] * 1e-6)
-parts.append(("die_JJ_bottom_Al_40nm", s, (1, 0.25, 1)))
-s, _ = extrude(reg["jj2"], T + DIE["jj_bottom_nm"] * 1e-6, T + (DIE["jj_bottom_nm"] + DIE["jj_top_nm"]) * 1e-6)
-parts.append(("die_JJ_top_Al_80nm", s, (1, 0.5, 1)))
-hab = DIE["airbridge_height_um"] * 1e-3
-s, _ = extrude(reg["ab_pad"], T + FILM, T + FILM + hab)
-parts.append(("die_airbridge_posts", s, (0.5, 1, 0.85)))
-s, _ = extrude(reg["ab_fly"], T + FILM + hab, T + FILM + hab + DIE["airbridge_thickness_nm"] * 1e-6)
-parts.append(("die_airbridge_spans", s, (0.5, 1, 0.85)))
+from design_params import RFL_STACK
+ZT = dict(GP=(0, 200), M1=(400, 550), JJ=(550, 650), R=(750, 790), M2=(750, 1050), PAD=(1050, 1150), VIA=(200, 750))
+for name, gds, mat, t in RFL_STACK:
+    if name in ("I0", "I1"):
+        continue
+    z0, z1 = ZT[name]
+    s, _ = extrude(reg["die"][name], T + z0 * 1e-6, T + z1 * 1e-6)
+    parts.append((f"die_{name} ({mat}, {t} nm)", s, {"GP": (0.55, 0.58, 0.65), "M1": (0.2, 0.4, 1), "JJ": (1, 0.2, 1),
+                  "R": (0.2, 0.75, 0.4), "M2": (1, 0.25, 0.25), "PAD": (1, 0.8, 0.3), "VIA": (1, 0.9, 0)}[name]))
+for name, z0, z1 in (("die_ILD0_SiO2_200nm", 200, 400), ("die_ILD1_SiO2_200nm", 550, 750)):
+    parts.append((name, box(-5, -5, T + z0 * 1e-6, 5, 5, T + z1 * 1e-6), (0.8, 0.9, 1.0)))
 
 # wire bonds: circular section swept along the same Bezier loop as the mesh
 bb = BRep_Builder()

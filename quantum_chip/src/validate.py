@@ -124,14 +124,15 @@ for v in [i for i in items if i["kind"] == "via" and i["net"] != "GND"]:
     check("Trace and via continuity", f"blind via {v['net']} {ends[0]}->{ends[1]} lands on copper at both ends",
           all(hit), f"at ({v['pts'][0][0]:.2f}, {v['pts'][0][1]:.2f}) mm, spans {', '.join(v['layers'])}")
 
-# ================================================================== 2. die netlist from GDS polygons
+# ================================================================== 2. die netlist from GDS polygons (RFL)
 ly = db.Layout()
 ly.read(os.path.join(OUT, "quantum_die.gds"))
 top = ly.top_cell()
-R = lambda l, d: db.Region(top.begin_shapes_rec(ly.layer(l, d)))
-box = db.Region(db.Box(0, 0, 10_000_000, 10_000_000))
-metal = ((box - R(130, 1) - R(158, 1)) + R(131, 1)).merged() & box
-polys = sorted(metal.each(), key=lambda p: -p.area())
+R = lambda l, d: db.Region(top.begin_shapes_rec(ly.layer(l, d))).merged()
+M1, JJr, I1r, Rr, M2, VIA = R(3, 0), R(4, 0), R(5, 0), R(6, 0), R(7, 0), R(9, 0)
+cells = J("die_cells.json")["cells"]
+polys = list(M2.each())
+metal = M2
 
 
 def island(xu, yu):
@@ -141,36 +142,87 @@ def island(xu, yu):
     return None
 
 
+def pt_um(x, y, r=1):
+    return db.Region(db.Box(int((x - r) * 1000), int((y - r) * 1000), int((x + r) * 1000), int((y + r) * 1000)))
+
+
 isl = {p["net"]: island(*p["pad_center_um"]) for p in ports["ports"]}
-gnd_ids = {i for i, p in enumerate(polys) if p.area() * 1e-12 > 2.0}   # nm^2 -> mm^2
-for net, i in isl.items():
-    if "FLUX" in net:
-        ok = i in gnd_ids
-        msg = "pad metal is galvanically tied to die ground (flux line shorted at the SQUID, by design)"
-    elif net.startswith("PROBE"):
-        ok = i is not None and i not in gnd_ids and isl["PROBE_IN"] == isl["PROBE_OUT"]
-        msg = f"probe-line island #{i}, same conductor for PROBE_IN and PROBE_OUT, isolated from ground"
-    else:
-        others = [isl[n] for n in isl if n != net]
-        ok = i is not None and i not in gnd_ids and i not in others
-        msg = f"own isolated island #{i} (open-ended capacitive drive line)"
-    check("Die netlist (GDS)", f"{net} launcher pad", ok, msg)
-# airbridges tie the ground islands together
-ab = R(146, 1).merged()
-links = set()
-for pad in ab.each():
-    for i in gnd_ids:
-        if not (db.Region(polys[i]) & db.Region(pad)).is_empty():
-            links.add((i, pad.bbox().center().x // 50000))
-bridged = len({i for i, _ in links}) == len(gnd_ids)
-check("Die netlist (GDS)", "ground-plane islands tied by airbridges", bridged,
-      f"{len(gnd_ids)} ground islands (probe line runs edge-to-edge); airbridge pads land on all of them")
+ring = [i for i, p in enumerate(polys) if p.bbox().width() > 9_000_000]
+gnd_ids = set(ring)
+check("Die netlist (GDS)", "each pad is its own M2 island, isolated from the ground ring",
+      len(set(isl.values())) == len(isl) and not (set(isl.values()) & gnd_ids) and None not in isl.values(),
+      f"{len(isl)} pads -> {len(set(isl.values()))} distinct M2 islands; ground ring = island {ring}")
+EXPECT = {"TRIG_A": ["DCSFQ_A"], "TRIG_B": ["DCSFQ_B"], "TEST_IN": ["DCSFQ_T"], "OUT_0": ["SFQDC_0"],
+          "OUT_1": ["SFQDC_1"], "TEST_OUT": ["SFQDC_T"], "VB_W": ["DCSFQ_A", "SFQDC_0", "DCSFQ_T"],
+          "VB_E": ["DCSFQ_B", "SFQDC_1", "SFQDC_T"]}
+for net, targets in EXPECT.items():
+    reg = db.Region(polys[isl[net]])
+    hits = []
+    for t in targets:
+        c = cells[t]
+        x, y = c["bias_tap"] if net.startswith("VB") else c["center"]
+        hits.append(not (reg & pt_um(x, y, 80 if not net.startswith("VB") else 2)).is_empty())
+    grounded = not (reg & VIA).is_empty()
+    check("Die netlist (GDS)", f"{net} reaches {', '.join(targets)}", all(hits) and not grounded,
+          f"M2 island #{isl[net]} touches {sum(hits)}/{len(targets)} target cells; no via to GP: {not grounded}")
+for net, cell in (("CTRL_CB", "CB"), ("CTRL_RE", "RE")):
+    reg = db.Region(polys[isl[net]])
+    x, y = cells[cell]["center"]
+    near = not (reg & pt_um(x, y, 120)).is_empty()
+    check("Die netlist (GDS)", f"{net} is a flux line shorted to GP beside {cell}", near and not (reg & VIA).is_empty(),
+          "M2 control line terminates in a stacked via to GP within 120 um of the device (current loop = flux bias)")
+# fluxon network: one continuous M1 conductor from both DC/SFQ inputs through CB and RE to both SFQ/DC outputs
+m1p = list(M1.each())
+
+
+def m1_of(x, y):
+    for i, p in enumerate(m1p):
+        if not (db.Region(p) & pt_um(x, y, 3)).is_empty():
+            return i
+    return None
+
+
+net_pts = {k: cells[k]["center"] for k in ("DCSFQ_A", "DCSFQ_B", "SFQDC_0", "SFQDC_1", "CB")}
+main = {k: m1_of(v[0] - (30 if "DCSFQ" in k else 35 if "SFQDC" in k else 20), v[1] - (20 if "DCSFQ" in k else 0))
+        for k, v in net_pts.items()}
+re_ports = cells["RE"]["ports"]
+main.update({f"RE.{k}": m1_of(*v) for k, v in re_ports.items()})
+test = {k: m1_of(cells[k]["center"][0] + 30, cells[k]["center"][1] - 20) if "DCSFQ" in k else
+        m1_of(cells[k]["center"][0] - 35, cells[k]["center"][1]) for k in ("DCSFQ_T", "SFQDC_T")}
+check("Die netlist (GDS)", "fluxon network continuous: DC/SFQ_A,B -> CB -> RE (I0,I1,O0,O1) -> SFQ/DC_0,1",
+      len(set(main.values())) == 1 and None not in main.values(),
+      f"all {len(main)} nodes on M1 conductor #{set(main.values())}")
+check("Die netlist (GDS)", "racetrack continuous and separate: DC/SFQ_T -> 18 mm LJJ -> SFQ/DC_T",
+      len(set(test.values())) == 1 and None not in test.values() and set(test.values()) != set(main.values()),
+      f"M1 conductor #{set(test.values())}, {cells['LJJ_TEST']['cells']} junction cells, {cells['LJJ_TEST']['length_um'] / 1000:.2f} mm")
+# every LJJ junction has its ground return (JJ -> I1 contact -> M2 strap -> stacked via -> GP)
+strap = M2.interacting(VIA)
+ljj_n = sum(v["cells"] for k, v in cells.items() if v["kind"] == "LJJ")
+grounded = JJr.interacting(I1r).interacting(strap.interacting(JJr)).count()
+check("Die netlist (GDS)", "LJJ junctions grounded through their strap + via", grounded >= ljj_n,
+      f"{grounded} JJs with a strap-to-via ground return; {ljj_n} LJJ cells drawn ({sum(v.get('skipped_under_crossings', 0) for v in cells.values() if v['kind'] == 'LJJ')} cells omitted under M2 crossings)")
+# no signal/bias M2 line touches a grounded strap (would short it)
+shorts = [n for n in isl if not n.startswith("CTRL") and not (db.Region(polys[isl[n]]) & VIA).is_empty()]
+check("Die netlist (GDS)", "no I/O or bias line shorted to ground", not shorts, f"shorted: {shorts}")
+sim = J("rfl_sim.json")
+bal = sim["ballistic_design_subK"]
+check("Fluxon physics (discrete sine-Gordon)", "ballistic transit of the longest LJJ at design damping",
+      bal["energy_retained"] > 0.95, f"{bal['cells']} cells, alpha {bal['alpha']}: v {bal['launch_v']} -> {bal['final_v']} c0, "
+      f"energy retained {bal['energy_retained'] * 100:.1f} %; at 4.2 K (alpha {sim['ballistic_at_4K2']['alpha']}) the fluxon "
+      f"stalls (v -> {sim['ballistic_at_4K2']['final_v']})")
+cb = sim["controlled_barrier"]
+outs = {s["outcome"] for s in cb["sweep"]}
+check("Fluxon physics (discrete sine-Gordon)", "controlled barrier switches reflect <-> transmit with control flux",
+      {"reflect", "transmit"} <= outs, f"reflects for Phi < {cb['transmits_from_phi_ctrl']} Phi0, transmits above (SQUID Ic_max {cb['bmax']} Ic)")
+check("Fluxon physics (discrete sine-Gordon)", "LJJ discreteness", 2.0 < sim["parameters"]["Lambda_cells"] < 6.0,
+      f"Josephson length {sim['parameters']['Lambda_cells']} cells ({sim['parameters']['lambda_J_um']} um): fluxon spans "
+      "several cells, so pinning by the lattice is weak")
 
 # ================================================================== 3. wire bonds
 pads_by_net = {p["net"]: p for p in model["pads"] if p.get("role") == "bond_pad"}
 SR = lambda x, y: ml.box_region(x - 1e-4, y - 1e-4, x + 1e-4, y + 1e-4)
 die_tr = db.ICplxTrans(ly.dbu * 1e-3 / ml.DBU_MM, 0, False, -ml.to_i(5.0), -ml.to_i(5.0))
-gnd_reg = db.Region([polys[i] for i in gnd_ids]).transformed(die_tr)
+gnd_reg = db.Region([polys[i] for i in gnd_ids]).transformed(die_tr)   # M2 + Au ground ring
 bad = []
 for b, bi in zip(geo["bonds"], geo["bond_die_island"]):
     if b["kind"] == "signal":
@@ -277,18 +329,19 @@ def top_area_and_bounds(name):
     return 0.5 * np.linalg.norm(n[up], axis=1).sum(), v.min(0), v.max(0)
 
 
-a3d, lo, hi = top_area_and_bounds("die_Al_film")
-a2d = metal.area() * 1e-12   # nm^2 -> mm^2 (GDS dbu 1 nm)
-check("2D CAD vs 3D model", "die Al film area: GDS vs mesh", abs(a3d - a2d) / a2d < 0.002,
+a3d, lo, hi = top_area_and_bounds("die_M2_Nb")
+a2d = M2.area() * 1e-12   # nm^2 -> mm^2 (GDS dbu 1 nm)
+check("2D CAD vs 3D model", "die M2 area: GDS vs mesh", abs(a3d - a2d) / a2d < 0.002,
       f"GDS {a2d:.4f} mm^2, mesh top face {a3d:.4f} mm^2 ({(a3d - a2d) / a2d * 100:+.3f} %)")
+a3d, *_ = top_area_and_bounds("die_M1_Nb_LJJ")
+a2d = M1.area() * 1e-12
+check("2D CAD vs 3D model", "die M1 (LJJ) area: GDS vs mesh", abs(a3d - a2d) / a2d < 0.002,
+      f"GDS {a2d:.4f} mm^2, mesh {a3d:.4f} mm^2")
+n3 = len(glb.geometry["die_JJ_trilayer"].split(only_watertight=False))
+check("2D CAD vs 3D model", "junction count: GDS vs mesh", n3 == JJr.count(), f"GDS {JJr.count()} junctions, mesh {n3} bodies")
 _, lo, hi = top_area_and_bounds("die_substrate")
 check("2D CAD vs 3D model", "die substrate mesh extents == GDS chip box", np.allclose([lo[0], lo[1], hi[0], hi[1]], [-5, -5, 5, 5], atol=2e-3),
       f"mesh x[{lo[0]:.4f},{hi[0]:.4f}] y[{lo[1]:.4f},{hi[1]:.4f}] mm; GDS box 0..10000 um")
-mb = metal.bbox()
-_, lo, hi = top_area_and_bounds("die_Al_film")
-check("2D CAD vs 3D model", "die Al film extents: GDS metal bbox vs mesh",
-      np.allclose([lo[0], lo[1], hi[0], hi[1]], [mb.left * 1e-6 - 5, mb.bottom * 1e-6 - 5, mb.right * 1e-6 - 5, mb.top * 1e-6 - 5], atol=1e-3),
-      f"mesh x[{lo[0]:.4f},{hi[0]:.4f}] y[{lo[1]:.4f},{hi[1]:.4f}] mm (metal stops at the dicing frame)")
 for lay in ("F.Cu", "In2.Cu", "B.Cu"):
     a_rf, *_ = top_area_and_bounds(lay + "_RF")
     a_g, *_ = top_area_and_bounds(lay + "_GND")
@@ -308,7 +361,7 @@ check("2D CAD vs 3D model", "track geometry: KiCad board == 3D source model", kt
 
 # ================================================================== 9. RF sanity
 check("RF design", "line impedances", all(abs(v - 50) < 1.5 for v in model["z0"].values()),
-      "; ".join(f"{k} {v:.1f} ohm" for k, v in model["z0"].items()) + "; die CPW 10/6 um on Si ~50.9 ohm")
+      "; ".join(f"{k} {v:.1f} ohm" for k, v in model["z0"].items()) )
 
 # ------------------------------------------------------------------ write
 summary = {s: sum(r["status"] == s for r in results) for s in ("PASS", "WARN", "FAIL")}

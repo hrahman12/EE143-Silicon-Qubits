@@ -17,7 +17,7 @@
  },
  "pads": [
   {
-   "net": "Q1_FLUX",
+   "net": "VB_W",
    "layer": "F.Cu",
    "shape": "rect",
    "center": [
@@ -31,7 +31,7 @@
    "role": "bond_pad"
   },
   {
-   "net": "Q2_DRIVE",
+   "net": "TRIG_A",
    "layer": "F.Cu",
    "shape": "rect",
    "center": [
@@ -45,7 +45,7 @@
    "role": "bond_pad"
   },
   {
-   "net": "Q2_FLUX",
+   "net": "CTRL_CB",
    "layer": "F.Cu",
    "shape": "rect",
    "center": [
@@ -59,7 +59,7 @@
    "role": "bond_pad"
   },
   {
-   "net": "Q3_FLUX",
+   "net": "CTRL_RE",
    "layer": "F.Cu",
    "shape": "rect",
    "center": [
@@ -73,7 +73,7 @@
    "role": "bond_pad"
   },
   {
-   "net": "Q3_DRIVE",
+   "net": "TRIG_B",
    "layer": "F.Cu",
    "shape": "rect",
    "center": [
@@ -87,7 +87,7 @@
    "role": "bond_pad"
   },
   {
-   "net": "Q4_FLUX",
+   "net": "VB_E",
    "layer": "F.Cu",
    "shape": "rect",
    "center": [
@@ -101,7 +101,7 @@
    "role": "bond_pad"
   },
   {
-   "net": "Q4_DRIVE",
+   "net": "OUT_1",
    "layer": "F.Cu",
    "shape": "rect",
    "center": [
@@ -115,7 +115,7 @@
    "role": "bond_pad"
   },
   {
-   "net": "PROBE_OUT",
+   "net": "TEST_OUT",
    "layer": "F.Cu",
    "shape": "rect",
    "center": [
@@ -129,7 +129,7 @@
    "role": "bond_pad"
   },
   {
-   "net": "PROBE_IN",
+   "net": "TEST_IN",
    "layer": "F.Cu",
    "shape": "rect",
    "center": [
@@ -143,7 +143,7 @@
    "role": "bond_pad"
   },
   {
-   "net": "Q1_DRIVE",
+   "net": "OUT_0",
    "layer": "F.Cu",
    "shape": "rect",
    "center": [
@@ -157,7 +157,7 @@
    "role": "bond_pad"
   },
   {
-   "net": "Q1_DRIVE",
+   "net": "OUT_0",
    "layer": "F.Cu",
    "shape": "rect",
    "fp": "J1",
@@ -237,7 +237,7 @@
    "role": "sma_gnd"
   },
   {
-   "net": "PROBE_IN",
+   "net": "TEST_IN",
    "layer": "F.Cu",
    "shape": "rect",
    "fp": "J2",
@@ -317,7 +317,7 @@
    "role": "sma_gnd"
   },
   {
-   "net": "Q4_DRIVE",
+   "net": "OUT_1",
    "layer": "F.Cu",
    "shape": "rect",
    "fp": "J3",
@@ -397,7 +397,7 @@
    "role": "sma_gnd"
   },
   {
-   "net": "PROBE_OUT",
+   "net": "TEST_OUT",
    "layer": "F.Cu",
    "shape": "rect",
    "fp": "J4",
@@ -477,7 +477,7 @@
    "role": "sma_gnd"
   },
   {
-   "net": "Q2_DRIVE",
+   "net": "TRIG_A",
    "layer": "F.Cu",
    "shape": "rect",
    "fp": "J5",
@@ -557,7 +557,7 @@
    "role": "sma_gnd"
   },
   {
-   "net": "Q3_DRIVE",
+   "net": "TRIG_B",
    "layer": "F.Cu",
    "shape": "rect",
    "fp": "J6",
@@ -637,7 +637,7 @@
    "role": "sma_gnd"
   },
   {
-   "net": "Q1_FLUX",
+   "net": "VB_W",
    "layer": "B.Cu",
    "shape": "circle",
    "fp": "J7",
@@ -712,7 +712,7 @@
    "role": "smp_gnd"
   },
   {
-   "net": "Q2_FLUX",
+   "net": "CTRL_CB",
    "layer": "B.Cu",
    "shape": "circle",
    "fp": "J8",
@@ -787,7 +787,7 @@
    "role": "smp_gnd"
   },
   {
-   "net": "Q3_FLUX",
+   "net": "CTRL_RE",
    "layer": "B.Cu",
    "shape": "circle",
    "fp": "J9",
@@ -862,7 +862,7 @@
    "role": "smp_gnd"
   },
   {
-   "net": "Q4_FLUX",
+   "net": "VB_E",
    "layer": "B.Cu",
    "shape": "circle",
    "fp": "J10",
@@ -940,7 +940,7 @@
  "tracks": [
   {
    "layer": "F.Cu",
-   "net": "Q1_DRIVE",
+   "net": "OUT_0",
    "w": 0.43,
    "pts": [
     [
@@ -963,7 +963,7 @@
   },
   {
    "layer": "F.Cu",
-   "net": "PROBE_IN",
+   "net": "TEST_IN",
    "w": 0.43,
    "pts": [
     [
@@ -986,7 +986,7 @@
   },
   {
    "layer": "F.Cu",
-   "net": "Q4_DRIVE",
+   "net": "OUT_1",
    "w": 0.43,
    "pts": [
     [
@@ -1009,7 +1009,7 @@
   },
   {
    "layer": "F.Cu",
-   "net": "PROBE_OUT",
+   "net": "TEST_OUT",
    "w": 0.43,
    "pts": [
     [
@@ -1032,7 +1032,7 @@
   },
   {
    "layer": "F.Cu",
-   "net": "Q2_DRIVE",
+   "net": "TRIG_A",
    "w": 0.43,
    "pts": [
     [
@@ -1055,7 +1055,7 @@
   },
   {
    "layer": "F.Cu",
-   "net": "Q3_DRIVE",
+   "net": "TRIG_B",
    "w": 0.43,
    "pts": [
     [
@@ -1078,7 +1078,7 @@
   },
   {
    "layer": "F.Cu",
-   "net": "Q1_FLUX",
+   "net": "VB_W",
    "w": 0.43,
    "pts": [
     [
@@ -1093,7 +1093,7 @@
   },
   {
    "layer": "In2.Cu",
-   "net": "Q1_FLUX",
+   "net": "VB_W",
    "w": 0.19,
    "pts": [
     [
@@ -1116,7 +1116,7 @@
   },
   {
    "layer": "B.Cu",
-   "net": "Q1_FLUX",
+   "net": "VB_W",
    "w": 0.43,
    "pts": [
     [
@@ -1131,7 +1131,7 @@
   },
   {
    "layer": "F.Cu",
-   "net": "Q2_FLUX",
+   "net": "CTRL_CB",
    "w": 0.43,
    "pts": [
     [
@@ -1146,7 +1146,7 @@
   },
   {
    "layer": "In2.Cu",
-   "net": "Q2_FLUX",
+   "net": "CTRL_CB",
    "w": 0.19,
    "pts": [
     [
@@ -1173,7 +1173,7 @@
   },
   {
    "layer": "B.Cu",
-   "net": "Q2_FLUX",
+   "net": "CTRL_CB",
    "w": 0.43,
    "pts": [
     [
@@ -1188,7 +1188,7 @@
   },
   {
    "layer": "F.Cu",
-   "net": "Q3_FLUX",
+   "net": "CTRL_RE",
    "w": 0.43,
    "pts": [
     [
@@ -1203,7 +1203,7 @@
   },
   {
    "layer": "In2.Cu",
-   "net": "Q3_FLUX",
+   "net": "CTRL_RE",
    "w": 0.19,
    "pts": [
     [
@@ -1230,7 +1230,7 @@
   },
   {
    "layer": "B.Cu",
-   "net": "Q3_FLUX",
+   "net": "CTRL_RE",
    "w": 0.43,
    "pts": [
     [
@@ -1245,7 +1245,7 @@
   },
   {
    "layer": "F.Cu",
-   "net": "Q4_FLUX",
+   "net": "VB_E",
    "w": 0.43,
    "pts": [
     [
@@ -1260,7 +1260,7 @@
   },
   {
    "layer": "In2.Cu",
-   "net": "Q4_FLUX",
+   "net": "VB_E",
    "w": 0.19,
    "pts": [
     [
@@ -1283,7 +1283,7 @@
   },
   {
    "layer": "B.Cu",
-   "net": "Q4_FLUX",
+   "net": "VB_E",
    "w": 0.43,
    "pts": [
     [
@@ -1301,7 +1301,7 @@
   {
    "x": -3.0,
    "y": 6.25,
-   "net": "Q1_FLUX",
+   "net": "VB_W",
    "kind": "blind",
    "drill": 0.15,
    "size": 0.35,
@@ -1313,7 +1313,7 @@
   {
    "x": -7.5,
    "y": -11.5,
-   "net": "Q1_FLUX",
+   "net": "VB_W",
    "kind": "blind",
    "drill": 0.15,
    "size": 0.35,
@@ -1325,7 +1325,7 @@
   {
    "x": -0.6,
    "y": 6.25,
-   "net": "Q2_FLUX",
+   "net": "CTRL_CB",
    "kind": "blind",
    "drill": 0.15,
    "size": 0.35,
@@ -1337,7 +1337,7 @@
   {
    "x": -11.5,
    "y": -12.3,
-   "net": "Q2_FLUX",
+   "net": "CTRL_CB",
    "kind": "blind",
    "drill": 0.15,
    "size": 0.35,
@@ -1349,7 +1349,7 @@
   {
    "x": 0.6,
    "y": 6.25,
-   "net": "Q3_FLUX",
+   "net": "CTRL_RE",
    "kind": "blind",
    "drill": 0.15,
    "size": 0.35,
@@ -1361,7 +1361,7 @@
   {
    "x": 11.5,
    "y": -12.3,
-   "net": "Q3_FLUX",
+   "net": "CTRL_RE",
    "kind": "blind",
    "drill": 0.15,
    "size": 0.35,
@@ -1373,7 +1373,7 @@
   {
    "x": 3.0,
    "y": 6.25,
-   "net": "Q4_FLUX",
+   "net": "VB_E",
    "kind": "blind",
    "drill": 0.15,
    "size": 0.35,
@@ -1385,7 +1385,7 @@
   {
    "x": 7.5,
    "y": -11.5,
-   "net": "Q4_FLUX",
+   "net": "VB_E",
    "kind": "blind",
    "drill": 0.15,
    "size": 0.35,
@@ -5287,7 +5287,7 @@
   {
    "ref": "J1",
    "kind": "SMA_EDGE",
-   "net": "Q1_DRIVE",
+   "net": "OUT_0",
    "x": -20.0,
    "y": 6.0,
    "rot": 90
@@ -5295,7 +5295,7 @@
   {
    "ref": "J2",
    "kind": "SMA_EDGE",
-   "net": "PROBE_IN",
+   "net": "TEST_IN",
    "x": -20.0,
    "y": -6.0,
    "rot": 90
@@ -5303,7 +5303,7 @@
   {
    "ref": "J3",
    "kind": "SMA_EDGE",
-   "net": "Q4_DRIVE",
+   "net": "OUT_1",
    "x": 20.0,
    "y": 6.0,
    "rot": -90
@@ -5311,7 +5311,7 @@
   {
    "ref": "J4",
    "kind": "SMA_EDGE",
-   "net": "PROBE_OUT",
+   "net": "TEST_OUT",
    "x": 20.0,
    "y": -6.0,
    "rot": -90
@@ -5319,7 +5319,7 @@
   {
    "ref": "J5",
    "kind": "SMA_EDGE",
-   "net": "Q2_DRIVE",
+   "net": "TRIG_A",
    "x": -6.0,
    "y": 20.0,
    "rot": 0
@@ -5327,7 +5327,7 @@
   {
    "ref": "J6",
    "kind": "SMA_EDGE",
-   "net": "Q3_DRIVE",
+   "net": "TRIG_B",
    "x": 6.0,
    "y": 20.0,
    "rot": 0
@@ -5335,7 +5335,7 @@
   {
    "ref": "J7",
    "kind": "SMP_VERT_BOTTOM",
-   "net": "Q1_FLUX",
+   "net": "VB_W",
    "x": -7.5,
    "y": -14.5,
    "rot": 0
@@ -5343,7 +5343,7 @@
   {
    "ref": "J8",
    "kind": "SMP_VERT_BOTTOM",
-   "net": "Q2_FLUX",
+   "net": "CTRL_CB",
    "x": -11.5,
    "y": -14.5,
    "rot": 0
@@ -5351,7 +5351,7 @@
   {
    "ref": "J9",
    "kind": "SMP_VERT_BOTTOM",
-   "net": "Q3_FLUX",
+   "net": "CTRL_RE",
    "x": 11.5,
    "y": -14.5,
    "rot": 0
@@ -5359,7 +5359,7 @@
   {
    "ref": "J10",
    "kind": "SMP_VERT_BOTTOM",
-   "net": "Q4_FLUX",
+   "net": "VB_E",
    "x": 7.5,
    "y": -14.5,
    "rot": 0
@@ -5388,7 +5388,7 @@
   "outer": 5.95
  },
  "bond": {
-  "Q1_FLUX": {
+  "VB_W": {
    "center": [
     -3.0,
     5.55
@@ -5410,7 +5410,7 @@
     4.68
    ]
   },
-  "Q2_DRIVE": {
+  "TRIG_A": {
    "center": [
     -1.8,
     5.55
@@ -5432,7 +5432,7 @@
     4.68
    ]
   },
-  "Q2_FLUX": {
+  "CTRL_CB": {
    "center": [
     -0.6,
     5.55
@@ -5454,7 +5454,7 @@
     4.68
    ]
   },
-  "Q3_FLUX": {
+  "CTRL_RE": {
    "center": [
     0.6,
     5.55
@@ -5476,7 +5476,7 @@
     4.68
    ]
   },
-  "Q3_DRIVE": {
+  "TRIG_B": {
    "center": [
     1.8,
     5.55
@@ -5498,7 +5498,7 @@
     4.68
    ]
   },
-  "Q4_FLUX": {
+  "VB_E": {
    "center": [
     3.0,
     5.55
@@ -5520,7 +5520,7 @@
     4.68
    ]
   },
-  "Q4_DRIVE": {
+  "OUT_1": {
    "center": [
     5.55,
     0.6
@@ -5542,7 +5542,7 @@
     0.6
    ]
   },
-  "PROBE_OUT": {
+  "TEST_OUT": {
    "center": [
     5.55,
     -0.6
@@ -5564,7 +5564,7 @@
     -0.6
    ]
   },
-  "PROBE_IN": {
+  "TEST_IN": {
    "center": [
     -5.55,
     -0.6
@@ -5586,7 +5586,7 @@
     -0.6
    ]
   },
-  "Q1_DRIVE": {
+  "OUT_0": {
    "center": [
     -5.55,
     0.6
@@ -5610,7 +5610,7 @@
   }
  },
  "flux": {
-  "Q1_FLUX": {
+  "VB_W": {
    "v1": [
     -3.0,
     6.25
@@ -5625,7 +5625,7 @@
    ],
    "ref": "J7"
   },
-  "Q2_FLUX": {
+  "CTRL_CB": {
    "v1": [
     -0.6,
     6.25
@@ -5640,7 +5640,7 @@
    ],
    "ref": "J8"
   },
-  "Q3_FLUX": {
+  "CTRL_RE": {
    "v1": [
     0.6,
     6.25
@@ -5655,7 +5655,7 @@
    ],
    "ref": "J9"
   },
-  "Q4_FLUX": {
+  "VB_E": {
    "v1": [
     3.0,
     6.25
@@ -5672,37 +5672,37 @@
   }
  },
  "connectors": {
-  "Q1_DRIVE": {
+  "OUT_0": {
    "ref": "J1",
    "x": -20.0,
    "y": 6.0,
    "rot": 90
   },
-  "PROBE_IN": {
+  "TEST_IN": {
    "ref": "J2",
    "x": -20.0,
    "y": -6.0,
    "rot": 90
   },
-  "Q4_DRIVE": {
+  "OUT_1": {
    "ref": "J3",
    "x": 20.0,
    "y": 6.0,
    "rot": -90
   },
-  "PROBE_OUT": {
+  "TEST_OUT": {
    "ref": "J4",
    "x": 20.0,
    "y": -6.0,
    "rot": -90
   },
-  "Q2_DRIVE": {
+  "TRIG_A": {
    "ref": "J5",
    "x": -6.0,
    "y": 20.0,
    "rot": 0
   },
-  "Q3_DRIVE": {
+  "TRIG_B": {
    "ref": "J6",
    "x": 6.0,
    "y": 20.0,
@@ -5712,7 +5712,7 @@
  "texts": [
   {
    "layer": "F.SilkS",
-   "text": "J1 Q1 XY",
+   "text": "J1 OUT 0",
    "x": -15.0,
    "y": 6.0,
    "rot": 0,
@@ -5720,7 +5720,7 @@
   },
   {
    "layer": "F.SilkS",
-   "text": "J2 RO IN",
+   "text": "J2 TEST IN",
    "x": -15.0,
    "y": -6.0,
    "rot": 0,
@@ -5728,7 +5728,7 @@
   },
   {
    "layer": "F.SilkS",
-   "text": "J3 Q4 XY",
+   "text": "J3 OUT 1",
    "x": 15.0,
    "y": 6.0,
    "rot": 0,
@@ -5736,7 +5736,7 @@
   },
   {
    "layer": "F.SilkS",
-   "text": "J4 RO OUT",
+   "text": "J4 TEST OUT",
    "x": 15.0,
    "y": -6.0,
    "rot": 0,
@@ -5744,7 +5744,7 @@
   },
   {
    "layer": "F.SilkS",
-   "text": "J5 Q2 XY",
+   "text": "J5 TRIG A",
    "x": -6.0,
    "y": 15.0,
    "rot": 0,
@@ -5752,7 +5752,7 @@
   },
   {
    "layer": "F.SilkS",
-   "text": "J6 Q3 XY",
+   "text": "J6 TRIG B",
    "x": 6.0,
    "y": 15.0,
    "rot": 0,
@@ -5760,7 +5760,7 @@
   },
   {
    "layer": "B.SilkS",
-   "text": "J7 Q1 Z",
+   "text": "J7 VB W",
    "x": -7.5,
    "y": -12.1,
    "rot": 0,
@@ -5769,7 +5769,7 @@
   },
   {
    "layer": "B.SilkS",
-   "text": "J8 Q2 Z",
+   "text": "J8 CTRL CB",
    "x": -11.5,
    "y": -12.1,
    "rot": 0,
@@ -5778,7 +5778,7 @@
   },
   {
    "layer": "B.SilkS",
-   "text": "J9 Q3 Z",
+   "text": "J9 CTRL RE",
    "x": 11.5,
    "y": -12.1,
    "rot": 0,
@@ -5787,7 +5787,7 @@
   },
   {
    "layer": "B.SilkS",
-   "text": "J10 Q4 Z",
+   "text": "J10 VB E",
    "x": 7.5,
    "y": -12.1,
    "rot": 0,
@@ -5796,7 +5796,7 @@
   },
   {
    "layer": "F.SilkS",
-   "text": "Q4-FLUX CARRIER rev A  6L RO4003C",
+   "text": "RFL-RE1 CARRIER rev B  6L RO4003C",
    "x": 0,
    "y": -17.6,
    "rot": 0,

@@ -1,6 +1,6 @@
 {
  "summary": {
-  "PASS": 54,
+  "PASS": 62,
   "WARN": 0,
   "FAIL": 0
  },
@@ -19,177 +19,219 @@
   },
   {
    "category": "Trace and via continuity",
-   "check": "Q1_FLUX: connector -> bond pad",
+   "check": "VB_W: connector -> bond pad",
    "status": "PASS",
    "detail": "9 KiCad items in one connected chain; layers F.Cu+In2.Cu+B.Cu; 2 via(s)"
   },
   {
    "category": "Trace and via continuity",
-   "check": "Q2_DRIVE: connector -> bond pad",
+   "check": "TRIG_A: connector -> bond pad",
    "status": "PASS",
    "detail": "5 KiCad items in one connected chain; layers F.Cu; 0 via(s)"
   },
   {
    "category": "Trace and via continuity",
-   "check": "Q2_FLUX: connector -> bond pad",
+   "check": "CTRL_CB: connector -> bond pad",
    "status": "PASS",
    "detail": "10 KiCad items in one connected chain; layers F.Cu+In2.Cu+B.Cu; 2 via(s)"
   },
   {
    "category": "Trace and via continuity",
-   "check": "Q3_FLUX: connector -> bond pad",
+   "check": "CTRL_RE: connector -> bond pad",
    "status": "PASS",
    "detail": "10 KiCad items in one connected chain; layers F.Cu+In2.Cu+B.Cu; 2 via(s)"
   },
   {
    "category": "Trace and via continuity",
-   "check": "Q3_DRIVE: connector -> bond pad",
+   "check": "TRIG_B: connector -> bond pad",
    "status": "PASS",
    "detail": "5 KiCad items in one connected chain; layers F.Cu; 0 via(s)"
   },
   {
    "category": "Trace and via continuity",
-   "check": "Q4_FLUX: connector -> bond pad",
+   "check": "VB_E: connector -> bond pad",
    "status": "PASS",
    "detail": "9 KiCad items in one connected chain; layers F.Cu+In2.Cu+B.Cu; 2 via(s)"
   },
   {
    "category": "Trace and via continuity",
-   "check": "Q4_DRIVE: connector -> bond pad",
+   "check": "OUT_1: connector -> bond pad",
    "status": "PASS",
    "detail": "5 KiCad items in one connected chain; layers F.Cu; 0 via(s)"
   },
   {
    "category": "Trace and via continuity",
-   "check": "PROBE_OUT: connector -> bond pad",
+   "check": "TEST_OUT: connector -> bond pad",
    "status": "PASS",
    "detail": "5 KiCad items in one connected chain; layers F.Cu; 0 via(s)"
   },
   {
    "category": "Trace and via continuity",
-   "check": "PROBE_IN: connector -> bond pad",
+   "check": "TEST_IN: connector -> bond pad",
    "status": "PASS",
    "detail": "5 KiCad items in one connected chain; layers F.Cu; 0 via(s)"
   },
   {
    "category": "Trace and via continuity",
-   "check": "Q1_DRIVE: connector -> bond pad",
+   "check": "OUT_0: connector -> bond pad",
    "status": "PASS",
    "detail": "5 KiCad items in one connected chain; layers F.Cu; 0 via(s)"
   },
   {
    "category": "Trace and via continuity",
-   "check": "blind via Q1_FLUX F.Cu->In2.Cu lands on copper at both ends",
+   "check": "blind via VB_W F.Cu->In2.Cu lands on copper at both ends",
    "status": "PASS",
    "detail": "at (-3.00, 6.25) mm, spans F.Cu, In1.Cu, In2.Cu"
   },
   {
    "category": "Trace and via continuity",
-   "check": "blind via Q1_FLUX In2.Cu->B.Cu lands on copper at both ends",
+   "check": "blind via VB_W In2.Cu->B.Cu lands on copper at both ends",
    "status": "PASS",
    "detail": "at (-7.50, -11.50) mm, spans In2.Cu, In3.Cu, In4.Cu, B.Cu"
   },
   {
    "category": "Trace and via continuity",
-   "check": "blind via Q2_FLUX F.Cu->In2.Cu lands on copper at both ends",
+   "check": "blind via CTRL_CB F.Cu->In2.Cu lands on copper at both ends",
    "status": "PASS",
    "detail": "at (-0.60, 6.25) mm, spans F.Cu, In1.Cu, In2.Cu"
   },
   {
    "category": "Trace and via continuity",
-   "check": "blind via Q2_FLUX In2.Cu->B.Cu lands on copper at both ends",
+   "check": "blind via CTRL_CB In2.Cu->B.Cu lands on copper at both ends",
    "status": "PASS",
    "detail": "at (-11.50, -12.30) mm, spans In2.Cu, In3.Cu, In4.Cu, B.Cu"
   },
   {
    "category": "Trace and via continuity",
-   "check": "blind via Q3_FLUX F.Cu->In2.Cu lands on copper at both ends",
+   "check": "blind via CTRL_RE F.Cu->In2.Cu lands on copper at both ends",
    "status": "PASS",
    "detail": "at (0.60, 6.25) mm, spans F.Cu, In1.Cu, In2.Cu"
   },
   {
    "category": "Trace and via continuity",
-   "check": "blind via Q3_FLUX In2.Cu->B.Cu lands on copper at both ends",
+   "check": "blind via CTRL_RE In2.Cu->B.Cu lands on copper at both ends",
    "status": "PASS",
    "detail": "at (11.50, -12.30) mm, spans In2.Cu, In3.Cu, In4.Cu, B.Cu"
   },
   {
    "category": "Trace and via continuity",
-   "check": "blind via Q4_FLUX F.Cu->In2.Cu lands on copper at both ends",
+   "check": "blind via VB_E F.Cu->In2.Cu lands on copper at both ends",
    "status": "PASS",
    "detail": "at (3.00, 6.25) mm, spans F.Cu, In1.Cu, In2.Cu"
   },
   {
    "category": "Trace and via continuity",
-   "check": "blind via Q4_FLUX In2.Cu->B.Cu lands on copper at both ends",
+   "check": "blind via VB_E In2.Cu->B.Cu lands on copper at both ends",
    "status": "PASS",
    "detail": "at (7.50, -11.50) mm, spans In2.Cu, In3.Cu, In4.Cu, B.Cu"
   },
   {
    "category": "Die netlist (GDS)",
-   "check": "Q1_FLUX launcher pad",
+   "check": "each pad is its own M2 island, isolated from the ground ring",
    "status": "PASS",
-   "detail": "pad metal is galvanically tied to die ground (flux line shorted at the SQUID, by design)"
+   "detail": "10 pads -> 10 distinct M2 islands; ground ring = island [3]"
   },
   {
    "category": "Die netlist (GDS)",
-   "check": "Q2_DRIVE launcher pad",
+   "check": "TRIG_A reaches DCSFQ_A",
    "status": "PASS",
-   "detail": "own isolated island #3 (open-ended capacitive drive line)"
+   "detail": "M2 island #833 touches 1/1 target cells; no via to GP: True"
   },
   {
    "category": "Die netlist (GDS)",
-   "check": "Q2_FLUX launcher pad",
+   "check": "TRIG_B reaches DCSFQ_B",
    "status": "PASS",
-   "detail": "pad metal is galvanically tied to die ground (flux line shorted at the SQUID, by design)"
+   "detail": "M2 island #84 touches 1/1 target cells; no via to GP: True"
   },
   {
    "category": "Die netlist (GDS)",
-   "check": "Q3_FLUX launcher pad",
+   "check": "TEST_IN reaches DCSFQ_T",
    "status": "PASS",
-   "detail": "pad metal is galvanically tied to die ground (flux line shorted at the SQUID, by design)"
+   "detail": "M2 island #1788 touches 1/1 target cells; no via to GP: True"
   },
   {
    "category": "Die netlist (GDS)",
-   "check": "Q3_DRIVE launcher pad",
+   "check": "OUT_0 reaches SFQDC_0",
    "status": "PASS",
-   "detail": "own isolated island #4 (open-ended capacitive drive line)"
+   "detail": "M2 island #885 touches 1/1 target cells; no via to GP: True"
   },
   {
    "category": "Die netlist (GDS)",
-   "check": "Q4_FLUX launcher pad",
+   "check": "OUT_1 reaches SFQDC_1",
    "status": "PASS",
-   "detail": "pad metal is galvanically tied to die ground (flux line shorted at the SQUID, by design)"
+   "detail": "M2 island #739 touches 1/1 target cells; no via to GP: True"
   },
   {
    "category": "Die netlist (GDS)",
-   "check": "Q4_DRIVE launcher pad",
+   "check": "TEST_OUT reaches SFQDC_T",
    "status": "PASS",
-   "detail": "own isolated island #6 (open-ended capacitive drive line)"
+   "detail": "M2 island #2409 touches 1/1 target cells; no via to GP: True"
   },
   {
    "category": "Die netlist (GDS)",
-   "check": "PROBE_OUT launcher pad",
+   "check": "VB_W reaches DCSFQ_A, SFQDC_0, DCSFQ_T",
    "status": "PASS",
-   "detail": "probe-line island #2, same conductor for PROBE_IN and PROBE_OUT, isolated from ground"
+   "detail": "M2 island #0 touches 3/3 target cells; no via to GP: True"
   },
   {
    "category": "Die netlist (GDS)",
-   "check": "PROBE_IN launcher pad",
+   "check": "VB_E reaches DCSFQ_B, SFQDC_1, SFQDC_T",
    "status": "PASS",
-   "detail": "probe-line island #2, same conductor for PROBE_IN and PROBE_OUT, isolated from ground"
+   "detail": "M2 island #2 touches 3/3 target cells; no via to GP: True"
   },
   {
    "category": "Die netlist (GDS)",
-   "check": "Q1_DRIVE launcher pad",
+   "check": "CTRL_CB is a flux line shorted to GP beside CB",
    "status": "PASS",
-   "detail": "own isolated island #5 (open-ended capacitive drive line)"
+   "detail": "M2 control line terminates in a stacked via to GP within 120 um of the device (current loop = flux bias)"
   },
   {
    "category": "Die netlist (GDS)",
-   "check": "ground-plane islands tied by airbridges",
+   "check": "CTRL_RE is a flux line shorted to GP beside RE",
    "status": "PASS",
-   "detail": "2 ground islands (probe line runs edge-to-edge); airbridge pads land on all of them"
+   "detail": "M2 control line terminates in a stacked via to GP within 120 um of the device (current loop = flux bias)"
+  },
+  {
+   "category": "Die netlist (GDS)",
+   "check": "fluxon network continuous: DC/SFQ_A,B -> CB -> RE (I0,I1,O0,O1) -> SFQ/DC_0,1",
+   "status": "PASS",
+   "detail": "all 9 nodes on M1 conductor #{1}"
+  },
+  {
+   "category": "Die netlist (GDS)",
+   "check": "racetrack continuous and separate: DC/SFQ_T -> 18 mm LJJ -> SFQ/DC_T",
+   "status": "PASS",
+   "detail": "M1 conductor #{0}, 1761 junction cells, 17.62 mm"
+  },
+  {
+   "category": "Die netlist (GDS)",
+   "check": "LJJ junctions grounded through their strap + via",
+   "status": "PASS",
+   "detail": "3251 JJs with a strap-to-via ground return; 3251 LJJ cells drawn (12 cells omitted under M2 crossings)"
+  },
+  {
+   "category": "Die netlist (GDS)",
+   "check": "no I/O or bias line shorted to ground",
+   "status": "PASS",
+   "detail": "shorted: []"
+  },
+  {
+   "category": "Fluxon physics (discrete sine-Gordon)",
+   "check": "ballistic transit of the longest LJJ at design damping",
+   "status": "PASS",
+   "detail": "1800 cells, alpha 0.0001: v 0.6 -> 0.5702 c0, energy retained 97.4 %; at 4.2 K (alpha 0.03) the fluxon stalls (v -> 0.0)"
+  },
+  {
+   "category": "Fluxon physics (discrete sine-Gordon)",
+   "check": "controlled barrier switches reflect <-> transmit with control flux",
+   "status": "PASS",
+   "detail": "reflects for Phi < 0.32 Phi0, transmits above (SQUID Ic_max 8.0 Ic)"
+  },
+  {
+   "category": "Fluxon physics (discrete sine-Gordon)",
+   "check": "LJJ discreteness",
+   "status": "PASS",
+   "detail": "Josephson length 3.703 cells (37.0 um): fluxon spans several cells, so pinning by the lattice is weak"
   },
   {
    "category": "Pad and wire-bond alignment",
@@ -201,7 +243,7 @@
    "category": "Pad and wire-bond alignment",
    "check": "bond lengths within 0.5-1.6 mm",
    "status": "PASS",
-   "detail": "min 0.948 mm, max 1.023 mm (short bonds keep series inductance ~1 nH/mm low)"
+   "detail": "min 0.832 mm, max 0.949 mm (short bonds keep series inductance ~1 nH/mm low)"
   },
   {
    "category": "Physical clearance and grounding",
@@ -267,7 +309,7 @@
    "category": "Layer dimensions and materials",
    "check": "every 3D layer has material + thickness",
    "status": "PASS",
-   "detail": "44 layer objects; missing: []"
+   "detail": "48 layer objects; missing: []"
   },
   {
    "category": "Cross-section consistency",
@@ -277,21 +319,27 @@
   },
   {
    "category": "2D CAD vs 3D model",
-   "check": "die Al film area: GDS vs mesh",
+   "check": "die M2 area: GDS vs mesh",
    "status": "PASS",
-   "detail": "GDS 88.9477 mm^2, mesh top face 88.9478 mm^2 (+0.000 %)"
+   "detail": "GDS 5.7018 mm^2, mesh top face 5.7018 mm^2 (+0.000 %)"
+  },
+  {
+   "category": "2D CAD vs 3D model",
+   "check": "die M1 (LJJ) area: GDS vs mesh",
+   "status": "PASS",
+   "detail": "GDS 0.3374 mm^2, mesh 0.3374 mm^2"
+  },
+  {
+   "category": "2D CAD vs 3D model",
+   "check": "junction count: GDS vs mesh",
+   "status": "PASS",
+   "detail": "GDS 3270 junctions, mesh 3270 bodies"
   },
   {
    "category": "2D CAD vs 3D model",
    "check": "die substrate mesh extents == GDS chip box",
    "status": "PASS",
    "detail": "mesh x[-5.0000,5.0000] y[-5.0000,5.0000] mm; GDS box 0..10000 um"
-  },
-  {
-   "category": "2D CAD vs 3D model",
-   "check": "die Al film extents: GDS metal bbox vs mesh",
-   "status": "PASS",
-   "detail": "mesh x[-4.8000,4.8000] y[-4.8000,4.8000] mm (metal stops at the dicing frame)"
   },
   {
    "category": "2D CAD vs 3D model",
@@ -327,7 +375,7 @@
    "category": "RF design",
    "check": "line impedances",
    "status": "PASS",
-   "detail": "gcpw_top 49.9 ohm; gcpw_bottom 49.9 ohm; stripline 49.3 ohm; die CPW 10/6 um on Si ~50.9 ohm"
+   "detail": "gcpw_top 49.9 ohm; gcpw_bottom 49.9 ohm; stripline 49.3 ohm"
   }
  ]
 }

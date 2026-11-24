@@ -1,178 +1,317 @@
-"""Generate the 4-qubit flux-tunable transmon die with KQCircuits.
+"""Reversible Fluxon Logic (RFL) test die, drawn with KLayout (positive Nb layers, SFQ-style process).
 
-Outputs
-  out/quantum_die.gds   - KQC layer set, cell Q4_FLUX_TRANSMON
-  out/die_ports.json    - launcher pad geometry + net names (used by the PCB / bonds)
+Circuit (see README):
+  TRIG_A -> DC/SFQ_A -> LJJ_A -> controlled barrier CB (flux CTRL_CB) -> rotary element RE input I0
+  TRIG_B -> DC/SFQ_B -> LJJ_B ------------------------------------------> RE input I1
+  RE output O0 -> LJJ -> SFQ/DC_0 -> OUT_0          RE output O1 -> LJJ -> SFQ/DC_1 -> OUT_1
+  RE state set/reset flux: CTRL_RE
+  TEST_IN -> DC/SFQ_T -> 18 mm ballistic LJJ racetrack -> SFQ/DC_T -> TEST_OUT   (fluxon time-of-flight)
+  VB_W / VB_E: DC bias for the converters only. The ballistic lines and gates are unpowered.
+
+Outputs: out/quantum_die.gds (cell RFL_RE1), out/die_ports.json, out/die_cells.json
 """
 import json
 import math
 import os
 import sys
 
+import klayout.db as db
+
 sys.path.insert(0, os.path.dirname(__file__))
-from design_params import (DIE, QUBIT_X, QUBIT_Y, READOUT_F_GHZ, FEEDLINE_Y,
-                           LAUNCHERS_PER_SIDE, LAUNCHER, LAUNCHER_NETS)
+from design_params import DIE, LAUNCHER, LAUNCHER_NETS, RFL, RFL_STACK
 
-from kqcircuits.pya_resolver import pya
-from kqcircuits.chips.chip import Chip
-from kqcircuits.qubits.swissmon import Swissmon
-from kqcircuits.elements.waveguide_composite import WaveguideComposite
-from kqcircuits.elements.waveguide_coplanar_splitter import WaveguideCoplanarSplitter
-from kqcircuits.elements.meander import Meander
-from kqcircuits.util.node import Node
-from kqcircuits.util.coupler_lib import cap_params
-
-OUT = os.path.join(os.path.dirname(__file__), "..", "out")
-C0 = 299792458.0
+OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "out")
+S = DIE["size_um"]
+ly = db.Layout()
+ly.dbu = 0.001
+top = ly.create_cell("RFL_RE1")
+LI = {name: ly.layer(g[0], g[1], name) for name, g, _, _ in RFL_STACK}
+CELLS = {}
 
 
-def half_wave_len_um(f_ghz):
-    eps_eff = (DIE["substrate_eps_r"] + 1) / 2
-    return C0 / (2 * f_ghz * 1e9 * math.sqrt(eps_eff)) * 1e6
+def P(x, y):
+    return db.DPoint(x, y)
 
 
-class Q4FluxTransmon(Chip):
-    """Four flux-tunable (SQUID) Swissmon transmons in a chain, bus-coupled nearest neighbours,
-    individual lambda/2 readout resonators on a common probe line, individual XY drive and Z flux lines."""
-
-    def build(self):
-        L = LAUNCHER
-        self.launchers = self.produce_n_launchers(
-            LAUNCHERS_PER_SIDE, "RF", L["width"], L["gap"], L["indent"], L["pitch"],
-            launcher_assignments=LAUNCHER_NETS,
-        )
-        # ---------------- qubits
-        qb_kw = dict(
-            fluxline_type="Fluxline Standard",
-            junction_type="Manhattan",
-            arm_length=[146] * 4, arm_width=[24] * 4, gap_width=[24] * 4,
-            cpl_length=[120, 140, 120], cpl_width=[60, 24, 60], cpl_gap=[102, 90, 102],
-            port_width=[10, 10, 10],
-        )
-        qb_mid = self.add_element(Swissmon, **qb_kw)
-        # chain ends: no outward-facing coupler (cplr0 faces outward for both M0 and R180 placements)
-        qb_end = self.add_element(Swissmon, **{**qb_kw, "cpl_length": [0, 140, 120]})
-        self.qref = []
-        for i, x in enumerate(QUBIT_X):
-            # Q1,Q2: mirror about x-axis (SQUID north, drive port NW); Q3,Q4: rotate 180 (drive port NE)
-            rot = pya.DTrans.M0 if i < 2 else pya.DTrans.R180
-            qb = qb_end if i in (0, 3) else qb_mid
-            _, ref = self.insert_cell(qb, pya.DTrans(x, QUBIT_Y) * rot, inst_name=f"QB{i+1}", rec_levels=None)
-            self.qref.append(ref)
-
-        # ---------------- nearest-neighbour bus couplers (floating CPW between coupler pads)
-        for i in range(3):
-            a, b = self.qref[i], self.qref[i + 1]
-            # east-facing coupler of qubit i / west-facing coupler of qubit i+1
-            pa = max((a["port_cplr0"], a["port_cplr2"]), key=lambda p: p.x)
-            pb = min((b["port_cplr0"], b["port_cplr2"]), key=lambda p: p.x)
-            self.insert_cell(WaveguideComposite, nodes=[Node(pa), Node(pb)], inst_name=f"BUS{i+1}{i+2}")
-
-        # ---------------- probe line with T-splitters + finger caps + meandered resonators
-        half = self.a / 2 + self.b
-        tees = []
-        for i, x in enumerate(QUBIT_X):
-            _, t = self.insert_cell(
-                WaveguideCoplanarSplitter, pya.DTrans(x, FEEDLINE_Y), inst_name=f"PLT{i+1}",
-                lengths=[half, half, half + 20], angles=[0, 180, 90], port_names=["right", "left", "top"],
-            )
-            tees.append(t)
-            cap = self.add_element(**cap_params(4, 40, "interdigital"))
-            cref = self.get_refpoints(cap, pya.DTrans.R270)
-            _, c = self.insert_cell(cap, pya.DTrans(t["port_top"] - cref["port_b"]) * pya.DTrans.R270,
-                                    inst_name=f"RRC{i+1}")
-            q = self.qref[i]
-            top = q["port_cplr1"]
-            straight = (top - c["port_a"]).length()
-            target = half_wave_len_um(READOUT_F_GHZ[i])
-            self.insert_cell(Meander, start_point=c["port_a"], end_point=top, length=target,
-                             meanders=-1, n_bridges=6, inst_name=f"RR{i+1}")
-            self.rr_lengths = getattr(self, "rr_lengths", []) + [(target, straight)]
-
-        fl = [self.launchers["PROBE_IN"][0]]
-        self.insert_cell(WaveguideComposite, inst_name="PL_IN", nodes=[
-            Node(fl[0]), Node((fl[0].x + 600, fl[0].y)), Node((fl[0].x + 600, FEEDLINE_Y)),
-            Node(tees[0]["port_left"], n_bridges=2)])
-        for i in range(3):
-            self.insert_cell(WaveguideComposite, inst_name=f"PL_{i+1}{i+2}", nodes=[
-                Node(tees[i]["port_right"]), Node(tees[i + 1]["port_left"], n_bridges=2)])
-        po = self.launchers["PROBE_OUT"][0]
-        self.insert_cell(WaveguideComposite, inst_name="PL_OUT", nodes=[
-            Node(tees[3]["port_right"], n_bridges=2), Node((po.x - 600, FEEDLINE_Y)),
-            Node((po.x - 600, po.y)), Node(po)])
-
-        # ---------------- flux lines (north launchers -> SQUID fluxline port)
-        for i in range(4):
-            n = f"Q{i+1}_FLUX"
-            p = self.launchers[n][0]
-            q = self.qref[i]
-            jog_y = 8300 - 250 * (i % 2)
-            self.insert_cell(WaveguideComposite, inst_name=f"FL{i+1}", nodes=[
-                Node(p), Node((p.x, jog_y)), Node((q["port_flux"].x, jog_y), n_bridges=1),
-                Node(q["port_flux_corner"]), Node(q["port_flux"])])
-
-        # ---------------- XY drive lines (open-ended capacitive charge lines)
-        def drive(net, pts):
-            self.insert_cell(WaveguideComposite, inst_name=f"DL_{net}", term2=self.b,
-                             nodes=[Node(p) for p in pts])
-
-        for i, net in ((1, "Q2_DRIVE"), (2, "Q3_DRIVE")):
-            p = self.launchers[net][0]
-            d = self.qref[i]["port_drive"]
-            drive(net, [p, (p.x, 7000), (d.x, 7000), d])
-        p = self.launchers["Q1_DRIVE"][0]
-        d = self.qref[0]["port_drive"]
-        drive("Q1_DRIVE", [p, (d.x - 500, p.y), (d.x - 500, d.y + 450), (d.x, d.y + 450), d])
-        p = self.launchers["Q4_DRIVE"][0]
-        d = self.qref[3]["port_drive"]
-        drive("Q4_DRIVE", [p, (d.x + 500, p.y), (d.x + 500, d.y + 450), (d.x, d.y + 450), d])
+def add(layer, shape):
+    top.shapes(LI[layer]).insert(shape)
 
 
-L_PAD = LAUNCHER["width"]    # KQC Launcher: s = l = launcher_width (square pad)
-L_TAPER = LAUNCHER["width"]
+def box(layer, x0, y0, x1, y1):
+    add(layer, db.DBox(min(x0, x1), min(y0, y1), max(x0, x1), max(y0, y1)))
 
 
-def main():
-    os.makedirs(OUT, exist_ok=True)
-    from kqcircuits.util.library_helper import load_libraries, _register_pcell
-    lib = load_libraries(path=Chip.LIBRARY_PATH)[Chip.LIBRARY_NAME]
-    _register_pcell(Q4FluxTransmon, lib, Chip.LIBRARY_NAME)
-    layout = pya.Layout()
-    layout.dbu = 0.001
-    cell = Q4FluxTransmon.create(layout, name_chip="", name_mask="EE143", name_brand="Q4 FLUX", name_copy="A1", with_grid=False,
-                                 frames_enabled=[0])
-    top = layout.create_cell("Q4_FLUX_TRANSMON")
-    top.insert(pya.DCellInstArray(cell.cell_index(), pya.DTrans()))
-    top.flatten(-1, True)
-
-    # ---- launcher pads: pull from KQC refpoints layer
-    refs = {}
-    rp_layer = layout.layer(pya.LayerInfo(225, 0, "refpoints"))
-    for sh in top.shapes(rp_layer).each():
-        if sh.is_text():
-            refs[sh.text.string] = (sh.text.x * layout.dbu, sh.text.y * layout.dbu)
-    ports = []
-    for pid, net in LAUNCHER_NETS.items():
-        px, py = refs[f"{net}_port"]
-        cx, cy = refs[f"{net}_port_corner"]
-        # direction from inner corner toward pad (outward)
-        dx, dy = px - cx, py - cy
-        nrm = math.hypot(dx, dy)
-        ux, uy = dx / nrm, dy / nrm
-        side = "N" if uy > 0.5 else "S" if uy < -0.5 else "E" if ux > 0.5 else "W"
-        off = L_TAPER + L_PAD / 2  # launcher taper length + half pad
-        ports.append(dict(net=net, kqc_port_id=pid, side=side, port_um=[px, py],
-                          outward=[round(ux), round(uy)],
-                          pad_center_um=[round(px + ux * off, 3), round(py + uy * off, 3)],
-                          pad_size_um=[L_PAD, L_PAD]))
-    with open(os.path.join(OUT, "die_ports.json"), "w") as f:
-        json.dump(dict(ports=ports, refpoints={k: v for k, v in refs.items()
-                                               if k.endswith("_port") or k.startswith("QB")}), f, indent=1)
-    layout.write(os.path.join(OUT, "quantum_die.gds"))
-    print("wrote quantum_die.gds; bbox um:", top.dbbox())
-    for p in ports:
-        print(p)
+def circle(layer, x, y, r, n=32):
+    add(layer, db.DPolygon([P(x + r * math.cos(2 * math.pi * i / n), y + r * math.sin(2 * math.pi * i / n)) for i in range(n)]))
 
 
-if __name__ == "__main__":
-    main()
+def rounded(pts, r):
+    """polyline with circular fillets of radius r at every interior corner"""
+    out = [pts[0]]
+    for a, b, c in zip(pts[:-2], pts[1:-1], pts[2:]):
+        v1 = (b[0] - a[0], b[1] - a[1])
+        v2 = (c[0] - b[0], c[1] - b[1])
+        l1, l2 = math.hypot(*v1), math.hypot(*v2)
+        u1, u2 = (v1[0] / l1, v1[1] / l1), (v2[0] / l2, v2[1] / l2)
+        ang = math.acos(max(-1, min(1, u1[0] * u2[0] + u1[1] * u2[1])))
+        if ang < 1e-6:
+            out.append(b)
+            continue
+        rr = min(r, 0.45 * l1, 0.45 * l2)
+        d = rr * math.tan(ang / 2)
+        p1 = (b[0] - u1[0] * d, b[1] - u1[1] * d)
+        turn = 1 if u1[0] * u2[1] - u1[1] * u2[0] > 0 else -1
+        cx, cy = p1[0] - u1[1] * rr * turn, p1[1] + u1[0] * rr * turn
+        a0 = math.atan2(p1[1] - cy, p1[0] - cx)
+        n = max(4, int(ang / (math.pi / 24)))
+        for i in range(n + 1):
+            t = a0 + turn * ang * i / n
+            out.append((cx + rr * math.cos(t), cy + rr * math.sin(t)))
+    out.append(pts[-1])
+    return out
+
+
+def path(layer, pts, w):
+    add(layer, db.DPath([P(*p) for p in pts], w).polygon())
+
+
+def plen(pts):
+    return sum(math.dist(a, b) for a, b in zip(pts[:-1], pts[1:]))
+
+
+def ljj(name, pts, radius=120.0):
+    """Discrete long Josephson junction: 10 um wide M1 strip over GP, one unshunted JJ per cell to ground
+    (JJ on the strip, counter-electrode strapped on M2 to a stacked via into GP)."""
+    pr = rounded(pts, radius)
+    w = 10.0
+    path("M1", pr, w)
+    pitch = RFL["cell_pitch_um"]
+    r_jj = math.sqrt(RFL["jj_area_um2"] / math.pi)
+    L = plen(pr)
+    n = int(L // pitch)
+    seg = list(zip(pr[:-1], pr[1:]))
+    acc, k, s_next = 0.0, 0, pitch / 2
+    side, skipped = 1, 0
+    for a, b in seg:
+        l = math.dist(a, b)
+        while s_next <= acc + l and k < n:
+            t = (s_next - acc) / l
+            x, y = a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t
+            ux, uy = (b[0] - a[0]) / l, (b[1] - a[1]) / l
+            nx, ny = -uy * side, ux * side
+            sx, sy = x + nx * 9.5, y + ny * 9.5
+            if near_m2(x, y, 14) or near_m2(sx, sy, 6):   # no grounded strap under a crossing M2 line
+                skipped += 1
+                k += 1
+                s_next += pitch
+                continue
+            circle("JJ", x, y, r_jj, 16)
+            box("I1", x - 0.6, y - 0.6, x + 0.6, y + 0.6)
+            sx, sy = x + nx * 9.5, y + ny * 9.5
+            path("M2", [(x, y), (sx, sy)], 2.5)
+            box("VIA", sx - 1.6, sy - 1.6, sx + 1.6, sy + 1.6)
+            side = -side
+            k += 1
+            s_next += pitch
+        acc += l
+    CELLS[name] = dict(kind="LJJ", cells=n - skipped, skipped_under_crossings=skipped, length_um=round(L, 1),
+                       start=pr[0], end=pr[-1])
+    return n - skipped
+
+
+M2_LINES = []
+
+
+def microstrip(pts, w=10.0, layer="M2", r=60.0):
+    pr = rounded(pts, r) if r else list(pts)
+    path(layer, pr, w)
+    M2_LINES.append((pr, w))
+
+
+def seg_dist(p, a, b):
+    dx, dy = b[0] - a[0], b[1] - a[1]
+    L2 = dx * dx + dy * dy
+    t = 0 if L2 == 0 else max(0, min(1, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / L2))
+    return math.hypot(p[0] - a[0] - t * dx, p[1] - a[1] - t * dy)
+
+
+def near_m2(x, y, clr):
+    return any(seg_dist((x, y), a, b) < w / 2 + clr for pts, w in M2_LINES for a, b in zip(pts[:-1], pts[1:]))
+
+
+def gnd_via(x, y, s=4.0):
+    box("VIA", x - s / 2, y - s / 2, x + s / 2, y + s / 2)
+
+
+def jj(x, y, area, shunt=None):
+    r = math.sqrt(area / math.pi)
+    circle("JJ", x, y, r, 24)
+    box("I1", x - r * 0.6, y - r * 0.6, x + r * 0.6, y + r * 0.6)
+    if shunt:  # (dx, dy) direction of the shunt resistor to ground
+        dx, dy = shunt
+        box("R", x + dx * 4 - 3, y + dy * 4 - 3, x + dx * 18 + 3, y + dy * 18 + 3)
+        gnd_via(x + dx * 22, y + dy * 22)
+
+
+def dcsfq(name, cx, cy, bias_side):
+    """DC/SFQ converter (2 JJs, shunted). Input from +y (north) or -x (west); fluxon out on M1 at south/east."""
+    path("M1", [(cx - 30, cy + 20), (cx + 30, cy + 20), (cx + 30, cy - 20), (cx - 30, cy - 20), (cx - 30, cy + 20)], 6)
+    jj(cx - 30, cy - 20, 1.6, (-1, 0))
+    jj(cx + 30, cy - 20, 1.2, (1, 0))
+    gnd_via(cx - 30, cy + 34)
+    path("M1", [(cx - 30, cy + 20), (cx - 30, cy + 34)], 6)
+    box("M2", cx - 22, cy + 10, cx + 22, cy + 30)          # input transformer primary over the loop
+    bx = cx + (60 if bias_side == "E" else -60 if bias_side == "W" else 0)
+    by = cy + (60 if bias_side == "N" else 0)
+    box("R", min(cx, bx) - 4 if bias_side in "EW" else cx - 4, min(cy, by) - 4 if bias_side == "N" else cy - 4,
+        max(cx, bx) + 4 if bias_side in "EW" else cx + 4, max(cy, by) + 4 if bias_side == "N" else cy + 4)
+    box("M2", bx - 8, by - 8, bx + 8, by + 8)
+    CELLS[name] = dict(kind="DC/SFQ", center=(cx, cy), jjs=2, bias_tap=(bx, by))
+    return (bx, by)
+
+
+def sfqdc(name, cx, cy, bias_side):
+    """SFQ/DC converter (toggle flip-flop style, 3 shunted JJs)."""
+    path("M1", [(cx - 35, cy - 25), (cx + 35, cy - 25), (cx + 35, cy + 25), (cx - 35, cy + 25), (cx - 35, cy - 25)], 6)
+    jj(cx - 35, cy, 1.0, (0, 1))
+    jj(cx + 35, cy, 1.0, (0, 1))
+    box("I1", cx - 38, cy - 3, cx - 32, cy + 3)            # M1 node -> M2 output contact
+    jj(cx, cy - 25, 1.4, (0, -1))
+    bx = cx + (60 if bias_side == "E" else -60 if bias_side == "W" else 0)
+    by = cy + (60 if bias_side == "N" else 0)
+    box("R", cx - 4, cy + 25, cx + 4, by + 4)
+    box("M2", bx - 8, by - 8, bx + 8, by + 8)
+    CELLS[name] = dict(kind="SFQ/DC", center=(cx, cy), jjs=3, bias_tap=(bx, by))
+    return (bx, by)
+
+
+def barrier(name, cx, cy):
+    """Controlled barrier: symmetric dc SQUID (2 x 4 Ic) replacing one LJJ node; control line couples flux."""
+    a = RFL["barrier_bmax"] / 2 * RFL["jj_area_um2"]
+    path("M1", [(cx - 20, cy - 15), (cx + 20, cy - 15), (cx + 20, cy + 15), (cx - 20, cy + 15), (cx - 20, cy - 15)], 5)
+    jj(cx - 20, cy, a)
+    jj(cx + 20, cy, a)
+    for x in (cx - 20, cx + 20):
+        path("M2", [(x, cy), (x + (-12 if x < cx else 12), cy)], 3)
+        gnd_via(x + (-14 if x < cx else 14), cy, 3.2)
+    CELLS[name] = dict(kind="controlled barrier (dc SQUID)", center=(cx, cy), jjs=2, ic_max_over_ic=RFL["barrier_bmax"])
+
+
+def rotary(name, cx, cy, s=150.0):
+    """Rotary element: LJJ ring with two stored-fluxon states, four LJJ ports at the corners, state flux bias."""
+    ring = [(cx - s, cy - s), (cx + s, cy - s), (cx + s, cy + s), (cx - s, cy + s), (cx - s, cy - s + 1)]
+    n = ljj(name + "_ring", ring, radius=0.5)   # sharp corners: the four ports land on them
+    # storage bar with two larger junctions (the two RE states)
+    path("M1", [(cx - s, cy), (cx + s, cy)], 8)
+    jj(cx - 40, cy, 2.0)
+    jj(cx + 40, cy, 2.0)
+    for x in (cx - 40, cx + 40):
+        path("M2", [(x, cy), (x, cy - 14)], 3)
+        gnd_via(x, cy - 16, 3.2)
+    CELLS[name] = dict(kind="rotary element", center=(cx, cy), ring_cells=n, storage_jjs=2,
+                       ports=dict(I0=(cx - s, cy + s), I1=(cx + s, cy + s), O0=(cx - s, cy - s), O1=(cx + s, cy - s)))
+    return CELLS[name]["ports"]
+
+
+# ------------------------------------------------------------------ ground plane, ILD sheets, frame
+EDGE = 20.0
+box("GP", EDGE, EDGE, S - EDGE, S - EDGE)
+# (ILD sheets are not drawn in GDS; the 3D model adds them. I1 = M1/JJ->M2 contacts, VIA = stacked GP contacts)
+# ground ring for ground bonds: M2 + Au over a fence of stacked vias into GP
+for x0, y0, x1, y1 in ((40, 40, S - 40, 150), (40, S - 150, S - 40, S - 40), (40, 40, 150, S - 40), (S - 150, 40, S - 40, S - 40)):
+    box("M2", x0, y0, x1, y1)
+    box("PAD", x0 + 10, y0 + 10, x1 - 10, y1 - 10)
+g = 70.0
+while g < S - 70:
+    for x, y in ((g, 95), (g, S - 95), (95, g), (S - 95, g)):
+        gnd_via(x, y, 6)
+    g += 50.0
+
+# ------------------------------------------------------------------ pads (same positions as the carrier's bond pads)
+n_side = {"N": 6, "E": 2, "S": 0, "W": 2}
+ports = []
+pitch = LAUNCHER["pitch"]
+order = []
+for side in ("N", "E", "S", "W"):
+    k = n_side[side]
+    for i in range(k):
+        off = (i - (k - 1) / 2) * pitch
+        if side == "N":
+            order.append((side, S / 2 + off, None))
+        elif side == "E":
+            order.append((side, None, S / 2 - off))
+        elif side == "W":
+            order.append((side, None, S / 2 + off))
+for pid, (side, x, y) in enumerate(order, start=1):
+    net = LAUNCHER_NETS[pid]
+    pad, taper, ind = LAUNCHER["width"], LAUNCHER["width"], LAUNCHER["indent"]
+    if side == "N":
+        c, port, u = (x, S - ind + taper + pad / 2), (x, S - ind), (0, 1)
+    elif side == "E":
+        c, port, u = (S - ind + taper + pad / 2, y), (S - ind, y), (1, 0)
+    else:
+        c, port, u = (ind - taper - pad / 2, y), (ind, y), (-1, 0)
+    box("M2", c[0] - pad / 2, c[1] - pad / 2, c[0] + pad / 2, c[1] + pad / 2)
+    box("PAD", c[0] - pad / 2 + 10, c[1] - pad / 2 + 10, c[0] + pad / 2 - 10, c[1] + pad / 2 - 10)
+    # taper pad -> 10 um microstrip
+    e = (c[0] - u[0] * pad / 2, c[1] - u[1] * pad / 2)
+    vx, vy = -u[1], u[0]
+    add("M2", db.DPolygon([P(e[0] + vx * pad / 2, e[1] + vy * pad / 2), P(e[0] - vx * pad / 2, e[1] - vy * pad / 2),
+                           P(port[0] - vx * 5, port[1] - vy * 5), P(port[0] + vx * 5, port[1] + vy * 5)]))
+    ports.append(dict(net=net, kqc_port_id=pid, side=side, port_um=list(port), outward=list(u),
+                      pad_center_um=[round(c[0], 3), round(c[1], 3)], pad_size_um=[pad, pad]))
+PT = {p["net"]: tuple(p["port_um"]) for p in ports}
+
+# ------------------------------------------------------------------ circuit
+ta = dcsfq("DCSFQ_A", 3200, 8250, "W")
+tb = dcsfq("DCSFQ_B", 6800, 8250, "E")
+tt = dcsfq("DCSFQ_T", 1700, 4400, "N")
+s0 = sfqdc("SFQDC_0", 1700, 5600, "N")
+s1 = sfqdc("SFQDC_1", 8300, 5600, "N")
+st = sfqdc("SFQDC_T", 8300, 4400, "N")
+
+# trigger + output microstrips (M2)
+microstrip([PT["TRIG_A"], (3200, 8280)])
+microstrip([PT["TRIG_B"], (6800, 8280)])
+microstrip([PT["TEST_IN"], (1678, 4410)])
+microstrip([(1665, 5600), PT["OUT_0"]])
+microstrip([(8335, 5600), PT["OUT_1"]])
+microstrip([(8335, 4400), PT["TEST_OUT"]])
+# DC bias trees (M2, 6 um, square corners so the branches meet the trunk)
+microstrip([PT["VB_W"], (2000, 8250), ta], 6, r=0)
+microstrip([(2000, 8250), (2000, 5750), (1700, 5750), s0], 6, r=0)
+microstrip([(2000, 5750), (2000, 4560), (1700, 4560), tt], 6, r=0)
+microstrip([PT["VB_E"], (8000, 8250), tb], 6, r=0)
+microstrip([(8000, 8250), (8000, 5750), (8300, 5750), s1], 6, r=0)
+microstrip([(8000, 5750), (8000, 4560), (8300, 4560), st], 6, r=0)
+# control lines: M2 loops shorted to GP next to the device they flux-bias
+microstrip([PT["CTRL_CB"], (4400, 7660), (3245, 7660), (3245, 7550)], 8)
+gnd_via(3245, 7550, 8)
+microstrip([PT["CTRL_RE"], (5600, 6720), (5000, 6720), (5000, 6420)], 8)
+gnd_via(5000, 6420, 8)
+re = rotary("RE", 5000, 6400)     # after the M2 lines so its ring skips straps under CTRL_RE
+barrier("CB", 3200, 7600)
+# ballistic lines (M1 LJJs)
+ljj("LJJ_A", [(3200, 8230), (3200, 7612)])
+ljj("LJJ_A2", [(3200, 7588), (3200, re["I0"][1]), re["I0"]])
+ljj("LJJ_B", [(6800, 8230), (6800, re["I1"][1]), re["I1"]])
+ljj("LJJ_O0", [re["O0"], (4600, re["O0"][1]), (4600, 5600), (1735, 5600)])
+ljj("LJJ_O1", [re["O1"], (5400, re["O1"][1]), (5400, 5600), (8265, 5600)])
+ljj("LJJ_TEST", [(1730, 4400), (2300, 4400), (2300, 1300), (3700, 1300), (3700, 4000), (5100, 4000), (5100, 1300),
+                 (6500, 1300), (6500, 4000), (7700, 4000), (7700, 4400), (8265, 4400)])
+# labels on M2
+gen = db.TextGenerator.default_generator()
+for txt, x, y, h in (("RFL-RE1", 400, 9050, 220), ("EE143", 8700, 9050, 220), ("NB 10KA", 400, 300 + 300, 160)):
+    r = gen.text(txt, ly.dbu, h / (gen.text("A", ly.dbu, 1).bbox().height() * ly.dbu))
+    r.move(int(x / ly.dbu), int(y / ly.dbu))
+    top.shapes(LI["M2"]).insert(r)
+
+os.makedirs(OUT, exist_ok=True)
+ly.write(os.path.join(OUT, "quantum_die.gds"))
+njj = sum(1 for _ in top.shapes(LI["JJ"]).each())
+json.dump(dict(ports=ports, refpoints={}), open(os.path.join(OUT, "die_ports.json"), "w"), indent=1)
+json.dump(dict(cells=CELLS, total_jj=njj, stack=[dict(layer=n, gds=list(g), material=m, thickness_nm=t)
+                                                 for n, g, m, t in RFL_STACK]),
+          open(os.path.join(OUT, "die_cells.json"), "w"), indent=1, default=list)
+print("wrote quantum_die.gds:", njj, "junctions;",
+      {k: v.get("cells", v.get("jjs")) for k, v in CELLS.items()})

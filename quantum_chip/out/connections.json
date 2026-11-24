@@ -2,8 +2,8 @@
  "description": "Every electrical path from RF connector to quantum device. Coordinates: mm, board frame, Y up, origin = board centre = die centre. Die coordinates also given in um in the GDS frame (0..10000).",
  "signal_nets": [
   {
-   "net": "Q1_FLUX",
-   "function": "Z flux bias",
+   "net": "VB_W",
+   "function": "DC bias, west converters",
    "path": [
     {
      "stage": "rf_connector",
@@ -126,13 +126,13 @@
      "count": 2,
      "material": "Al-1%Si wedge bond, 25 um",
      "lengths_mm": [
-      0.9481,
-      0.9481
+      0.9486,
+      0.9486
      ]
     },
     {
-     "stage": "die_launcher_pad",
-     "kqc_port_id": 1,
+     "stage": "die_bond_pad",
+     "pad_index": 1,
      "side": "N",
      "center_um": [
       2000.0,
@@ -142,28 +142,21 @@
       240.0,
       240.0
      ],
-     "metal": "Al 200 nm"
+     "metal": "Nb M2 300 nm + Ti/Au 100 nm"
     },
     {
-     "stage": "die_cpw",
-     "centre_um": 10.0,
-     "gap_um": 6.0,
-     "z0_ohm": 50.9,
-     "structure": "FL1: CPW shorted to ground next to the QB1 SQUID loop (mutual inductance)"
+     "stage": "die_wiring",
+     "structure": "M2 bias tree -> Mo bias resistors"
     },
     {
-     "stage": "quantum_device",
-     "target": "QB1",
-     "qubit_positions_um": [
-      2600.0,
-      6000.0
-     ]
+     "stage": "fluxon_device",
+     "target": "DCSFQ_A, SFQDC_0, DCSFQ_T"
     }
    ]
   },
   {
-   "net": "Q2_DRIVE",
-   "function": "XY drive",
+   "net": "TRIG_A",
+   "function": "fluxon trigger A",
    "path": [
     {
      "stage": "rf_connector",
@@ -220,13 +213,13 @@
      "count": 2,
      "material": "Al-1%Si wedge bond, 25 um",
      "lengths_mm": [
-      0.9481,
-      0.9481
+      0.9486,
+      0.9486
      ]
     },
     {
-     "stage": "die_launcher_pad",
-     "kqc_port_id": 2,
+     "stage": "die_bond_pad",
+     "pad_index": 2,
      "side": "N",
      "center_um": [
       3200.0,
@@ -236,28 +229,21 @@
       240.0,
       240.0
      ],
-     "metal": "Al 200 nm"
+     "metal": "Nb M2 300 nm + Ti/Au 100 nm"
     },
     {
-     "stage": "die_cpw",
-     "centre_um": 10.0,
-     "gap_um": 6.0,
-     "z0_ohm": 50.9,
-     "structure": "DL_Q2_DRIVE: open-ended charge line, capacitive coupling to the QB2 island"
+     "stage": "die_wiring",
+     "structure": "M2 microstrip -> DCSFQ_A (2 JJ) -> LJJ_A -> controlled barrier CB -> LJJ_A2 -> rotary element port I0"
     },
     {
-     "stage": "quantum_device",
-     "target": "QB2",
-     "qubit_positions_um": [
-      4200.0,
-      6000.0
-     ]
+     "stage": "fluxon_device",
+     "target": "RE input I0 via controlled barrier"
     }
    ]
   },
   {
-   "net": "Q2_FLUX",
-   "function": "Z flux bias",
+   "net": "CTRL_CB",
+   "function": "barrier control flux",
    "path": [
     {
      "stage": "rf_connector",
@@ -384,13 +370,13 @@
      "count": 2,
      "material": "Al-1%Si wedge bond, 25 um",
      "lengths_mm": [
-      0.9481,
-      0.9481
+      0.9486,
+      0.9486
      ]
     },
     {
-     "stage": "die_launcher_pad",
-     "kqc_port_id": 3,
+     "stage": "die_bond_pad",
+     "pad_index": 3,
      "side": "N",
      "center_um": [
       4400.0,
@@ -400,28 +386,21 @@
       240.0,
       240.0
      ],
-     "metal": "Al 200 nm"
+     "metal": "Nb M2 300 nm + Ti/Au 100 nm"
     },
     {
-     "stage": "die_cpw",
-     "centre_um": 10.0,
-     "gap_um": 6.0,
-     "z0_ohm": 50.9,
-     "structure": "FL2: CPW shorted to ground next to the QB2 SQUID loop"
+     "stage": "die_wiring",
+     "structure": "M2 line shorted to GP beside the CB SQUID loop (sets Ic_eff)"
     },
     {
-     "stage": "quantum_device",
-     "target": "QB2",
-     "qubit_positions_um": [
-      4200.0,
-      6000.0
-     ]
+     "stage": "fluxon_device",
+     "target": "CB SQUID"
     }
    ]
   },
   {
-   "net": "Q3_FLUX",
-   "function": "Z flux bias",
+   "net": "CTRL_RE",
+   "function": "rotary-element state flux",
    "path": [
     {
      "stage": "rf_connector",
@@ -548,13 +527,13 @@
      "count": 2,
      "material": "Al-1%Si wedge bond, 25 um",
      "lengths_mm": [
-      0.9481,
-      0.9481
+      0.9486,
+      0.9486
      ]
     },
     {
-     "stage": "die_launcher_pad",
-     "kqc_port_id": 4,
+     "stage": "die_bond_pad",
+     "pad_index": 4,
      "side": "N",
      "center_um": [
       5600.0,
@@ -564,28 +543,21 @@
       240.0,
       240.0
      ],
-     "metal": "Al 200 nm"
+     "metal": "Nb M2 300 nm + Ti/Au 100 nm"
     },
     {
-     "stage": "die_cpw",
-     "centre_um": 10.0,
-     "gap_um": 6.0,
-     "z0_ohm": 50.9,
-     "structure": "FL3: CPW shorted to ground next to the QB3 SQUID loop"
+     "stage": "die_wiring",
+     "structure": "M2 line shorted to GP inside the RE ring (set/reset)"
     },
     {
-     "stage": "quantum_device",
-     "target": "QB3",
-     "qubit_positions_um": [
-      5800.0,
-      6000.0
-     ]
+     "stage": "fluxon_device",
+     "target": "RE storage loop"
     }
    ]
   },
   {
-   "net": "Q3_DRIVE",
-   "function": "XY drive",
+   "net": "TRIG_B",
+   "function": "fluxon trigger B",
    "path": [
     {
      "stage": "rf_connector",
@@ -642,13 +614,13 @@
      "count": 2,
      "material": "Al-1%Si wedge bond, 25 um",
      "lengths_mm": [
-      0.9481,
-      0.9481
+      0.9486,
+      0.9486
      ]
     },
     {
-     "stage": "die_launcher_pad",
-     "kqc_port_id": 5,
+     "stage": "die_bond_pad",
+     "pad_index": 5,
      "side": "N",
      "center_um": [
       6800.0,
@@ -658,28 +630,21 @@
       240.0,
       240.0
      ],
-     "metal": "Al 200 nm"
+     "metal": "Nb M2 300 nm + Ti/Au 100 nm"
     },
     {
-     "stage": "die_cpw",
-     "centre_um": 10.0,
-     "gap_um": 6.0,
-     "z0_ohm": 50.9,
-     "structure": "DL_Q3_DRIVE: open-ended charge line, capacitive coupling to the QB3 island"
+     "stage": "die_wiring",
+     "structure": "M2 microstrip -> DCSFQ_B -> LJJ_B -> rotary element port I1"
     },
     {
-     "stage": "quantum_device",
-     "target": "QB3",
-     "qubit_positions_um": [
-      5800.0,
-      6000.0
-     ]
+     "stage": "fluxon_device",
+     "target": "RE input I1"
     }
    ]
   },
   {
-   "net": "Q4_FLUX",
-   "function": "Z flux bias",
+   "net": "VB_E",
+   "function": "DC bias, east converters",
    "path": [
     {
      "stage": "rf_connector",
@@ -802,13 +767,13 @@
      "count": 2,
      "material": "Al-1%Si wedge bond, 25 um",
      "lengths_mm": [
-      0.9481,
-      0.9481
+      0.9486,
+      0.9486
      ]
     },
     {
-     "stage": "die_launcher_pad",
-     "kqc_port_id": 6,
+     "stage": "die_bond_pad",
+     "pad_index": 6,
      "side": "N",
      "center_um": [
       8000.0,
@@ -818,28 +783,21 @@
       240.0,
       240.0
      ],
-     "metal": "Al 200 nm"
+     "metal": "Nb M2 300 nm + Ti/Au 100 nm"
     },
     {
-     "stage": "die_cpw",
-     "centre_um": 10.0,
-     "gap_um": 6.0,
-     "z0_ohm": 50.9,
-     "structure": "FL4: CPW shorted to ground next to the QB4 SQUID loop"
+     "stage": "die_wiring",
+     "structure": "M2 bias tree -> Mo bias resistors"
     },
     {
-     "stage": "quantum_device",
-     "target": "QB4",
-     "qubit_positions_um": [
-      7400.0,
-      6000.0
-     ]
+     "stage": "fluxon_device",
+     "target": "DCSFQ_B, SFQDC_1, SFQDC_T"
     }
    ]
   },
   {
-   "net": "Q4_DRIVE",
-   "function": "XY drive",
+   "net": "OUT_1",
+   "function": "fluxon output 1",
    "path": [
     {
      "stage": "rf_connector",
@@ -896,13 +854,13 @@
      "count": 2,
      "material": "Al-1%Si wedge bond, 25 um",
      "lengths_mm": [
-      0.9481,
-      0.9481
+      0.9486,
+      0.9486
      ]
     },
     {
-     "stage": "die_launcher_pad",
-     "kqc_port_id": 7,
+     "stage": "die_bond_pad",
+     "pad_index": 7,
      "side": "E",
      "center_um": [
       9680.0,
@@ -912,28 +870,21 @@
       240.0,
       240.0
      ],
-     "metal": "Al 200 nm"
+     "metal": "Nb M2 300 nm + Ti/Au 100 nm"
     },
     {
-     "stage": "die_cpw",
-     "centre_um": 10.0,
-     "gap_um": 6.0,
-     "z0_ohm": 50.9,
-     "structure": "DL_Q4_DRIVE: open-ended charge line, capacitive coupling to the QB4 island"
+     "stage": "die_wiring",
+     "structure": "RE port O1 -> LJJ_O1 -> SFQDC_1 -> M2 microstrip -> pad"
     },
     {
-     "stage": "quantum_device",
-     "target": "QB4",
-     "qubit_positions_um": [
-      7400.0,
-      6000.0
-     ]
+     "stage": "fluxon_device",
+     "target": "RE output O1"
     }
    ]
   },
   {
-   "net": "PROBE_OUT",
-   "function": "readout probe line out",
+   "net": "TEST_OUT",
+   "function": "racetrack output",
    "path": [
     {
      "stage": "rf_connector",
@@ -990,13 +941,13 @@
      "count": 2,
      "material": "Al-1%Si wedge bond, 25 um",
      "lengths_mm": [
-      0.9481,
-      0.9481
+      0.9486,
+      0.9486
      ]
     },
     {
-     "stage": "die_launcher_pad",
-     "kqc_port_id": 8,
+     "stage": "die_bond_pad",
+     "pad_index": 8,
      "side": "E",
      "center_um": [
       9680.0,
@@ -1006,64 +957,21 @@
       240.0,
       240.0
      ],
-     "metal": "Al 200 nm"
+     "metal": "Nb M2 300 nm + Ti/Au 100 nm"
     },
     {
-     "stage": "die_cpw",
-     "centre_um": 10.0,
-     "gap_um": 6.0,
-     "z0_ohm": 50.9,
-     "structure": "PL_OUT: same continuous probe-line conductor as PROBE_IN"
+     "stage": "die_wiring",
+     "structure": "LJJ_TEST -> SFQDC_T -> M2 microstrip -> pad"
     },
     {
-     "stage": "quantum_device",
-     "target": "QB1-QB4",
-     "qubit_positions_um": {
-      "QB1": [
-       2600.0,
-       6000.0
-      ],
-      "QB2": [
-       4200.0,
-       6000.0
-      ],
-      "QB3": [
-       5800.0,
-       6000.0
-      ],
-      "QB4": [
-       7400.0,
-       6000.0
-      ]
-     }
-    }
-   ],
-   "readout_resonators": [
-    {
-     "name": "RR1",
-     "f_design_GHz": 6.8,
-     "qubit": "QB1"
-    },
-    {
-     "name": "RR2",
-     "f_design_GHz": 7.0,
-     "qubit": "QB2"
-    },
-    {
-     "name": "RR3",
-     "f_design_GHz": 7.2,
-     "qubit": "QB3"
-    },
-    {
-     "name": "RR4",
-     "f_design_GHz": 7.4,
-     "qubit": "QB4"
+     "stage": "fluxon_device",
+     "target": "LJJ_TEST"
     }
    ]
   },
   {
-   "net": "PROBE_IN",
-   "function": "readout probe line in",
+   "net": "TEST_IN",
+   "function": "racetrack input",
    "path": [
     {
      "stage": "rf_connector",
@@ -1120,13 +1028,13 @@
      "count": 2,
      "material": "Al-1%Si wedge bond, 25 um",
      "lengths_mm": [
-      0.9481,
-      0.9481
+      0.9486,
+      0.9486
      ]
     },
     {
-     "stage": "die_launcher_pad",
-     "kqc_port_id": 9,
+     "stage": "die_bond_pad",
+     "pad_index": 9,
      "side": "W",
      "center_um": [
       320.0,
@@ -1136,64 +1044,21 @@
       240.0,
       240.0
      ],
-     "metal": "Al 200 nm"
+     "metal": "Nb M2 300 nm + Ti/Au 100 nm"
     },
     {
-     "stage": "die_cpw",
-     "centre_um": 10.0,
-     "gap_um": 6.0,
-     "z0_ohm": 50.9,
-     "structure": "PL_IN -> tees PLT1..4 -> interdigital caps RRC1..4 -> lambda/2 resonators RR1..4 -> QBn readout couplers"
+     "stage": "die_wiring",
+     "structure": "M2 microstrip -> DCSFQ_T -> 18 mm ballistic LJJ racetrack"
     },
     {
-     "stage": "quantum_device",
-     "target": "QB1-QB4",
-     "qubit_positions_um": {
-      "QB1": [
-       2600.0,
-       6000.0
-      ],
-      "QB2": [
-       4200.0,
-       6000.0
-      ],
-      "QB3": [
-       5800.0,
-       6000.0
-      ],
-      "QB4": [
-       7400.0,
-       6000.0
-      ]
-     }
-    }
-   ],
-   "readout_resonators": [
-    {
-     "name": "RR1",
-     "f_design_GHz": 6.8,
-     "qubit": "QB1"
-    },
-    {
-     "name": "RR2",
-     "f_design_GHz": 7.0,
-     "qubit": "QB2"
-    },
-    {
-     "name": "RR3",
-     "f_design_GHz": 7.2,
-     "qubit": "QB3"
-    },
-    {
-     "name": "RR4",
-     "f_design_GHz": 7.4,
-     "qubit": "QB4"
+     "stage": "fluxon_device",
+     "target": "LJJ_TEST"
     }
    ]
   },
   {
-   "net": "Q1_DRIVE",
-   "function": "XY drive",
+   "net": "OUT_0",
+   "function": "fluxon output 0",
    "path": [
     {
      "stage": "rf_connector",
@@ -1250,13 +1115,13 @@
      "count": 2,
      "material": "Al-1%Si wedge bond, 25 um",
      "lengths_mm": [
-      0.9481,
-      0.9481
+      0.9486,
+      0.9486
      ]
     },
     {
-     "stage": "die_launcher_pad",
-     "kqc_port_id": 10,
+     "stage": "die_bond_pad",
+     "pad_index": 10,
      "side": "W",
      "center_um": [
       320.0,
@@ -1266,28 +1131,21 @@
       240.0,
       240.0
      ],
-     "metal": "Al 200 nm"
+     "metal": "Nb M2 300 nm + Ti/Au 100 nm"
     },
     {
-     "stage": "die_cpw",
-     "centre_um": 10.0,
-     "gap_um": 6.0,
-     "z0_ohm": 50.9,
-     "structure": "DL_Q1_DRIVE: open-ended charge line, capacitive coupling to the QB1 island"
+     "stage": "die_wiring",
+     "structure": "RE port O0 -> LJJ_O0 -> SFQDC_0 (3 JJ) -> M2 microstrip -> pad"
     },
     {
-     "stage": "quantum_device",
-     "target": "QB1",
-     "qubit_positions_um": [
-      2600.0,
-      6000.0
-     ]
+     "stage": "fluxon_device",
+     "target": "RE output O0"
     }
    ]
   }
  ],
  "ground": {
-  "die_ground_plane": "largest Al island (ground plane) - flux lines terminate into it at each SQUID",
+  "die_ground_plane": "Nb GP (M0) under the whole circuit; M2+Au bond ring stitched to it by a via fence; every LJJ junction returns to GP through its own stacked via",
   "ground_wire_bonds": 67,
   "ground_bonds_per_side": {
    "N": 9,

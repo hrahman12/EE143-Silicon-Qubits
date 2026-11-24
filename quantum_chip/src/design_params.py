@@ -31,7 +31,7 @@ FEEDLINE_Y = 2600.0
 LAUNCHERS_PER_SIDE = (6, 2, 0, 2)
 LAUNCHER = dict(width=240.0, gap=179.0, indent=680.0, pitch=1200.0)
 # port id -> net name. N: 1..6 left->right, E: 7 (upper), 8 (lower), W: 9 (lower), 10 (upper)
-LAUNCHER_NETS = {
+TRANSMON_LAUNCHER_NETS = {
     1: "Q1_FLUX", 2: "Q2_DRIVE", 3: "Q2_FLUX", 4: "Q3_FLUX", 5: "Q3_DRIVE", 6: "Q4_FLUX",
     7: "Q4_DRIVE", 8: "PROBE_OUT", 9: "PROBE_IN", 10: "Q1_DRIVE",
 }
@@ -75,3 +75,35 @@ PACKAGE = dict(
     loop_height_um=180.0,
     bonds_per_signal=2,
 )
+
+# ---------------------------------------------------------------- Reversible Fluxon Logic die (active design)
+# Ballistic RFL (Wustmann & Osborn, LPS; Frank et al., Sandia ABRC): unpowered, undamped discrete LJJs
+# carry fluxons between gates; only the DC/SFQ inputs and SFQ/DC outputs need bias.
+RFL = dict(
+    process="Nb/AlOx/Nb trilayer, 2 Nb wiring layers over Nb ground plane (SFQ5ee-like, simplified)",
+    jc_kA_cm2=10.0,
+    jj_ic_uA=50.0,             # LJJ node junctions, area 0.5 um^2 at 10 kA/cm^2
+    jj_area_um2=0.5,
+    jj_c_fF_per_um2=50.0,
+    cell_pitch_um=10.0,        # one JJ per 10 um of 10 um wide M1 strip
+    cell_L_pH=0.48,            # ~1 square of Nb microstrip over GP (mu0 (d + 2 lambda_L))
+    alpha_qp=1e-4,             # design: sub-gap damping at T < 1 K (R_sg > 150 kOhm); alpha = 1/(w_p R_sg C)
+    alpha_4K2=0.03,            # same junctions at 4.2 K (R_sg ~ 15 R_n ~ 500 Ohm)
+    barrier_bmax=8.0,          # controlled-barrier SQUID Ic_max / Ic (two 200 uA JJs)
+    longest_line_cells=1800,   # TEST racetrack (~18 mm meander)
+)
+RFL_STACK = [  # (layer, gds, material, true thickness nm)
+    ("GP", (1, 0), "Nb ground plane M0", 200),
+    ("I0", (2, 0), "SiO2 ILD (sheet) / via GP-M1", 200),
+    ("M1", (3, 0), "Nb M1: LJJ strips, JJ base electrode", 150),
+    ("JJ", (4, 0), "AlOx barrier + Nb counter-electrode", 100),
+    ("I1", (5, 0), "SiO2 ILD (sheet) / via M1-M2", 200),
+    ("R", (6, 0), "Mo resistor, 2 ohm/sq", 40),
+    ("M2", (7, 0), "Nb M2: I/O microstrip, bias lines, pads, JJ straps", 300),
+    ("PAD", (8, 0), "Ti/Au bond-pad metallisation", 100),
+    ("VIA", (9, 0), "stacked Nb vias (I0+I1 contacts)", 400),
+]
+LAUNCHER_NETS = {
+    1: "VB_W", 2: "TRIG_A", 3: "CTRL_CB", 4: "CTRL_RE", 5: "TRIG_B", 6: "VB_E",
+    7: "OUT_1", 8: "TEST_OUT", 9: "TEST_IN", 10: "OUT_0",
+}
