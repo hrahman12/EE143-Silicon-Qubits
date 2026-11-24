@@ -68,7 +68,7 @@ fabricated or measured.
 | Tuning | f01 from 3.21 GHz (Φ_b = 0) up to 27.5 GHz (Φ_b = 0.48 Φ0) |
 | Flux noise | df01/dΦ_b = 0 at the operating point, against up to 81 GHz/Φ0 on the slope. Tilt couples only transversally (G00 − G11 = 5×10⁻⁹) |
 | Model check | pinning mode 32.763 GHz from the path vs 32.768 GHz from the full Hessian (0.015 %). Next internal mode 51.1 GHz, so the fluxon motion separates from the array modes |
-| Drive and tilt | G01 = 249 GHz/Φ0 on the barrier link; dε/dΦ = 625 GHz/Φ0 |
+| Drive and tilt | flux on one barrier link: G01 = 125 GHz/Φ0 (the transformer lands here). Differential flux across both barrier links: G01 = 249 GHz/Φ0, well tilt dε/dΦ = 625 GHz/Φ0 |
 | Qubit–qubit coupling | J = L_s·ΔI²/4 = **3.79 MHz per pH** of shared inductance (ΔI = 100 nA). ZZ in the fluxon-position basis, XX in the energy basis at the sweet spot |
 | Readout | 40 pH shared with a 7.0 GHz λ/4: g = 70.6 MHz, χ ≈ 1.3 MHz |
 | Kick line | I_c = 20 µA, C = 600 fF, f_p = 50.65 GHz. CPW 20/1 µm gives 0.229 pH/µm → L_cell = 2.29 pH at 10 µm pitch vs L_J = 16.46 pH → Λ = 2.68 cells. c0 = 8.53 µm/ps; rest energy 213 THz·h |

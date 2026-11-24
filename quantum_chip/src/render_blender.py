@@ -334,7 +334,7 @@ render("red_pcb_view")
 # 3. exploded layer stack
 explode(2.2)
 hide("screws")
-look((-80, -102, 68), (0, 0, 7.0), lens=58)
+look((-92, -118, 84), (0, 0, 10.5), lens=58)
 render("exploded_layers")
 show_all()
 

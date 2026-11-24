@@ -44,7 +44,7 @@ claim to check, not a proof. Nothing here has been fabricated or measured: all Q
      line's Swihart speed), where thermal dephasing is 9.7×10⁻⁴ per π/2 gate at 20 mK. Only that speed was run through
      the full dynamics.
    - Tapering the coupling (flared pickup ends, 200 µm ramps) keeps the gate adiabatic: non-adiabatic flips are
-     8×10⁻⁷, against 4×10⁻³ with abrupt ends.
+     8×10⁻⁷, against 1.2×10⁻³ with abrupt section ends on the same line.
    - The displacement law is checked against a classical discrete sine-Gordon run of the line, with a relative error of
      0.4 %.
 
