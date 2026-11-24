@@ -110,10 +110,15 @@ for r in runs:
     ax[0].plot(np.array(t), np.array(W) / r["KE0"], label=f"braking length {r['L_brake']} cells")
 ax[0].set(xlabel="time (1/omega_p)", ylabel="energy returned to the bias source / initial KE",
           title=f"(a) Regenerative braking of a fluxon (beta = {beta})")
+ax[0].text(0.02, 0.02, "peak = fluxon at rest; a constant bias then pushes it back\nand returns the energy (reversible). Capture = bias off at the peak.",
+           transform=ax[0].transAxes, fontsize=7)
 ax[0].legend(fontsize=7.5)
 ax[1].semilogx([r["L_brake"] for r in runs], [r["efficiency"] for r in runs], "o-", color=C_MIX, label="alpha = 0")
 ax[1].semilogx([320] * 3, [r["efficiency"] for r in damp_runs], "s", color=C_IND, label="alpha = 1e-6, 1e-5, 1e-4 (320 cells)")
 ax[1].set(xlabel="braking-section length (cells)", ylabel="kinetic energy recovered", title="(b) Recovery efficiency")
+ax[1].set_xticks([40, 80, 160, 320, 640])
+ax[1].set_xticklabels(["40", "80", "160", "320", "640"])
+ax[1].minorticks_off()
 ax[1].legend(fontsize=7.5)
 names = list(baselines.keys())
 ax[2].barh(range(len(names)), [baselines[k] for k in names], color=[C_MIX, C_MIX, C_MIX, C_TH, C_IND, "k"])

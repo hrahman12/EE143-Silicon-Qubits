@@ -15,6 +15,10 @@ version: a single quantum-fluxon qubit has been demonstrated before (KIT, 2023).
 momentum rule for that gate, and two coupled fluxon qubits on one chip are what we did not find. Nothing here has been
 fabricated or measured.
 
+**Follow-on project: [QBF-X2](../qbf-x2/README.md).** Here both fluxons are quantum and flying: two dual-rail fluxon
+qubits are entangled by a collision. That repository also simulates a Bell pair between the two QFX-1 qubits on this
+chip (companion device 1).
+
 ![assembled](renders/assembled_chip.png)
 
 ## How it works
