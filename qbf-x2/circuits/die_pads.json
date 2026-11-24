@@ -1,0 +1,473 @@
+{
+ "die_size_um": [
+  10000.0,
+  10000.0
+ ],
+ "die_thickness_um": 525.0,
+ "origin": "die bottom-left corner, y up (GDS coordinates)",
+ "launcher": {
+  "pad_um": [
+   240.0,
+   240.0
+  ],
+  "pad_center_from_edge_um": 320.0,
+  "pitch_um": 1200.0,
+  "cpw_center_um": 10.0,
+  "cpw_gap_um": 6.0,
+  "taper_len_um": 300.0,
+  "note": "KQCircuits-style launcher, same as QFX-1 (quantum_chip/out/die_ports.json)"
+ },
+ "row_block_centre_um": [
+  5000.0,
+  5000.0
+ ],
+ "pads": [
+  {
+   "id": 1,
+   "net": "GND",
+   "side": "N",
+   "kind": "ground",
+   "pad_center_um": [
+    2000,
+    9680.0
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    0,
+    1
+   ]
+  },
+  {
+   "id": 2,
+   "net": "GATE_BSA_PREP",
+   "side": "N",
+   "kind": "dc_gate",
+   "pad_center_um": [
+    3200,
+    9680.0
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    0,
+    1
+   ]
+  },
+  {
+   "id": 3,
+   "net": "GND",
+   "side": "N",
+   "kind": "ground",
+   "pad_center_um": [
+    4400,
+    9680.0
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    0,
+    1
+   ]
+  },
+  {
+   "id": 4,
+   "net": "GND",
+   "side": "N",
+   "kind": "ground",
+   "pad_center_um": [
+    5600,
+    9680.0
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    0,
+    1
+   ]
+  },
+  {
+   "id": 5,
+   "net": "GATE_BSA_AN",
+   "side": "N",
+   "kind": "dc_gate",
+   "pad_center_um": [
+    6800,
+    9680.0
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    0,
+    1
+   ]
+  },
+  {
+   "id": 6,
+   "net": "GND",
+   "side": "N",
+   "kind": "ground",
+   "pad_center_um": [
+    8000,
+    9680.0
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    0,
+    1
+   ]
+  },
+  {
+   "id": 7,
+   "net": "LOAD_B1",
+   "side": "E",
+   "kind": "dc_ramp",
+   "pad_center_um": [
+    9680.0,
+    8000
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    1,
+    0
+   ]
+  },
+  {
+   "id": 8,
+   "net": "TRAP_B1",
+   "side": "E",
+   "kind": "rf_fast",
+   "pad_center_um": [
+    9680.0,
+    6800
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    1,
+    0
+   ]
+  },
+  {
+   "id": 9,
+   "net": "ACC_B1",
+   "side": "E",
+   "kind": "rf_fast",
+   "pad_center_um": [
+    9680.0,
+    5600
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    1,
+    0
+   ]
+  },
+  {
+   "id": 10,
+   "net": "ACC_B0",
+   "side": "E",
+   "kind": "rf_fast",
+   "pad_center_um": [
+    9680.0,
+    4400
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    1,
+    0
+   ]
+  },
+  {
+   "id": 11,
+   "net": "TRAP_B0",
+   "side": "E",
+   "kind": "rf_fast",
+   "pad_center_um": [
+    9680.0,
+    3200
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    1,
+    0
+   ]
+  },
+  {
+   "id": 12,
+   "net": "LOAD_B0",
+   "side": "E",
+   "kind": "dc_ramp",
+   "pad_center_um": [
+    9680.0,
+    2000
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    1,
+    0
+   ]
+  },
+  {
+   "id": 13,
+   "net": "RO_IN",
+   "side": "S",
+   "kind": "rf_readout",
+   "pad_center_um": [
+    2000,
+    320.0
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    0,
+    -1
+   ]
+  },
+  {
+   "id": 14,
+   "net": "GATE_BSB_AN",
+   "side": "S",
+   "kind": "dc_gate",
+   "pad_center_um": [
+    3200,
+    320.0
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    0,
+    -1
+   ]
+  },
+  {
+   "id": 15,
+   "net": "GND",
+   "side": "S",
+   "kind": "ground",
+   "pad_center_um": [
+    4400,
+    320.0
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    0,
+    -1
+   ]
+  },
+  {
+   "id": 16,
+   "net": "GND",
+   "side": "S",
+   "kind": "ground",
+   "pad_center_um": [
+    5600,
+    320.0
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    0,
+    -1
+   ]
+  },
+  {
+   "id": 17,
+   "net": "GATE_BSB_PREP",
+   "side": "S",
+   "kind": "dc_gate",
+   "pad_center_um": [
+    6800,
+    320.0
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    0,
+    -1
+   ]
+  },
+  {
+   "id": 18,
+   "net": "RO_OUT",
+   "side": "S",
+   "kind": "rf_readout",
+   "pad_center_um": [
+    8000,
+    320.0
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    0,
+    -1
+   ]
+  },
+  {
+   "id": 19,
+   "net": "LOAD_A0",
+   "side": "W",
+   "kind": "dc_ramp",
+   "pad_center_um": [
+    320.0,
+    8000
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    -1,
+    0
+   ]
+  },
+  {
+   "id": 20,
+   "net": "TRAP_A0",
+   "side": "W",
+   "kind": "rf_fast",
+   "pad_center_um": [
+    320.0,
+    6800
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    -1,
+    0
+   ]
+  },
+  {
+   "id": 21,
+   "net": "ACC_A0",
+   "side": "W",
+   "kind": "rf_fast",
+   "pad_center_um": [
+    320.0,
+    5600
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    -1,
+    0
+   ]
+  },
+  {
+   "id": 22,
+   "net": "ACC_A1",
+   "side": "W",
+   "kind": "rf_fast",
+   "pad_center_um": [
+    320.0,
+    4400
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    -1,
+    0
+   ]
+  },
+  {
+   "id": 23,
+   "net": "TRAP_A1",
+   "side": "W",
+   "kind": "rf_fast",
+   "pad_center_um": [
+    320.0,
+    3200
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    -1,
+    0
+   ]
+  },
+  {
+   "id": 24,
+   "net": "LOAD_A1",
+   "side": "W",
+   "kind": "dc_ramp",
+   "pad_center_um": [
+    320.0,
+    2000
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    -1,
+    0
+   ]
+  }
+ ],
+ "signal_kinds": {
+  "rf_fast": "50 ohm CPW, DC to >= 10 GHz (trap: DC hold + <= 100 ps off edge; accelerator: ~0.6 ns pulse), shorted to ground on chip after the coupled cells (current-driven flux line)",
+  "rf_readout": "50 ohm CPW feedline for the four catcher-loop lambda/4 resonators (6-8 GHz)",
+  "dc_ramp": "load-loop flux ramp (0 -> Phi0 in ~1 us): DC line, bandwidth >= 5 MHz",
+  "dc_gate": "beam-splitter island gate voltage (Aharonov-Casher phase): DC line, heavy low-pass filtering",
+  "ground": "ground launcher (bonded to the carrier ground)"
+ },
+ "counts": {
+  "rf_fast": 8,
+  "rf_readout": 2,
+  "dc_ramp": 4,
+  "dc_gate": 4,
+  "ground": 6
+ },
+ "status": "interface specification: the die layout and the carrier PCB both follow this file"
+}
