@@ -1,8 +1,10 @@
-"""Single source of truth for the Q4 flux-tunable transmon assembly.
+"""Single source of truth for the assembly: die (QFX-1 quantum fluxon by default; RFL and the 4-transmon die are
+kept), RF carrier, package and process stacks.
 
 All lengths in micrometres unless the name ends in _mm.
-Edit values here and re-run `make all` (see README) to regenerate every output.
+Edit values here and re-run ./build_all.sh to regenerate every output.
 """
+import math
 
 # ---------------------------------------------------------------- die (KQCircuits)
 DIE = dict(
@@ -107,3 +109,59 @@ LAUNCHER_NETS = {
     1: "VB_W", 2: "TRIG_A", 3: "CTRL_CB", 4: "CTRL_RE", 5: "TRIG_B", 6: "VB_E",
     7: "OUT_1", 8: "TEST_OUT", 9: "TEST_IN", 10: "OUT_0",
 }
+
+# ---------------------------------------------------------------- QFX-1: quantum-fluxon processor (active design)
+# Qubit = one Josephson vortex (fluxon) in a double well of a discrete annular LJJ made of small Al/AlOx/Al
+# junctions and granular-aluminium (grAl) cell inductors. Classical heavy fluxons in a Nb ballistic line act on it.
+QFX = dict(
+    ring_cells=24,             # junctions around the annular array (winding number 1 = one trapped fluxon)
+    EJ_GHz=39.7,               # small Al junction, Ic = 80 nA (Wolfram-checked)
+    EC_GHz=8.07,               # C = 2.4 fF (Wolfram-checked)
+    Lambda=1.0,                # Josephson length in cells -> E_L = Lambda^2 E_J (grAl cell inductor ~4.1 nH)
+    well_weak=0.70,            # pinning junctions: E_J (1 - w)
+    well_sep=2,                # cells between the two pinning junctions
+    barrier_EJmax_ratio=1.35,  # barrier dc-SQUID, total E_J,max / E_J: f01 = 3.2 GHz at zero flux, tunable upward
+    phi_b_op=0.0,              # operate at zero SQUID flux: df01/dPhi_b = 0 (and eps = 0) -> double sweet spot
+    T_mK=20.0,
+    # one Al/AlOx/Al junction process for the whole die: Jc and the specific capacitance tie area, Ic and C together
+    jc_uA_per_um2=1.665,       # 166.5 A/cm^2
+    c_spec_fF_per_um2=50.0,    # Al/AlOx/Al
+    ring_jj_area_um2=0.048,    # 80 nA, 2.40 fF  (-> E_J 39.7 GHz, E_C 8.07 GHz above)
+    # classical "kick" line: Nb coplanar strip, one large Al junction per cell to the ground (heavy fluxon)
+    kick_Ic_uA=20.0, kick_jj_area_um2=12.0, kick_C_fF=600.0,   # 12 um^2 at the same Jc and C/area
+    kick_strip_w_um=20.0, kick_gap_um=1.0, kick_pitch_um=10.0,  # low-inductance CPW -> Lambda from geometry below
+    kick_section_cells=120,    # 1.2 mm section seen by each qubit's flux transformer
+    kick_taper_cells=20,       # flared pickup ends: coupling ramps up/down over 200 um (adiabatic gate edges)
+)
+
+
+def cpw_l_pH_per_um(w_um, gap_um, t_nm=150.0, lambda_nm=90.0):
+    """CPW inductance per length: conformal-mapping geometric part mu0/4 K(k')/K(k) + Nb strip kinetic part."""
+    def K(m):                                   # complete elliptic integral of the 1st kind, modulus m (AGM)
+        a, b = 1.0, math.sqrt(1 - m * m)
+        for _ in range(40):
+            a, b = (a + b) / 2, math.sqrt(a * b)
+        return math.pi / (2 * a)
+    k = w_um / (w_um + 2 * gap_um)
+    geo = 4e-7 * math.pi / 4 * K(math.sqrt(1 - k * k)) / K(k) * 1e6                    # pH/um
+    lk_sq = 4e-7 * math.pi * lambda_nm * 1e-9 / math.tanh(t_nm / lambda_nm) * 1e12      # pH/square
+    return geo + lk_sq / w_um
+
+
+QFX["kick_l_pH_per_um"] = cpw_l_pH_per_um(QFX["kick_strip_w_um"], QFX["kick_gap_um"])
+QFX["kick_LJ_pH"] = 2.067833848e-15 / (2 * math.pi * QFX["kick_Ic_uA"] * 1e-6) * 1e12
+QFX["kick_Lambda"] = math.sqrt(QFX["kick_LJ_pH"] / (QFX["kick_l_pH_per_um"] * QFX["kick_pitch_um"]))   # cells
+QFX_STACK = [  # (layer, gds, material, true thickness nm)
+    ("BASE", (1, 0), "Nb base: ground plane, feedline, resonators, drive/flux lines, kick strip, pads", 150),
+    ("GRAL", (2, 0), "granular Al superinductor rail of each fluxon ring (~2 nH/sq)", 20),
+    ("AL1", (3, 0), "Al bottom electrode (1st evaporation)", 30),
+    ("AL2", (4, 0), "Al top electrode (2nd evaporation); AL1 AND AL2 = AlOx junction", 60),
+    ("RES", (5, 0), "Cu: converter resistors and quasiparticle traps", 50),
+    ("ABP", (6, 0), "Al airbridge feet", 400),
+    ("ABS", (7, 0), "Al airbridge spans", 400),
+]
+QFX_LAUNCHER_NETS = {
+    1: "VB_IN", 2: "KICK_TRIG", 3: "QF1_FLUX", 4: "QF2_FLUX", 5: "KICK_OUT", 6: "VB_OUT",
+    7: "QF2_DRIVE", 8: "FEED_OUT", 9: "FEED_IN", 10: "QF1_DRIVE",
+}
+ACTIVE_DIE = "QFX"

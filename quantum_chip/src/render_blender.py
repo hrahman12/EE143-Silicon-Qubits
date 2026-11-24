@@ -20,6 +20,8 @@ ONLY = None
 if "--only" in ARGS:
     ONLY = ARGS[ARGS.index("--only") + 1].split(",")
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+from design_params import ACTIVE_DIE  # noqa: E402
 OUT = os.path.join(HERE, "..", "out")
 REN = os.path.join(HERE, "..", "renders")
 os.makedirs(REN, exist_ok=True)
@@ -134,6 +136,9 @@ REAL = {
     "niobium_jj": principled("Nb_JJ", (0.72, 0.62, 0.78), 1.0, 0.18),
     "sio2": principled("SiO2_ILD", (0.85, 0.9, 0.95), 0.0, 0.05, trans=0.97, ior=1.46),
     "molybdenum": principled("Mo_R", (0.55, 0.55, 0.58), 1.0, 0.3),
+    "gral": principled("grAl", (0.78, 0.72, 0.62), 0.85, 0.32),
+    "alox_jj": principled("AlOx_junction", (0.55, 0.45, 0.85), 0.6, 0.2),
+    "copper_film": principled("Cu_film", (0.955, 0.638, 0.538), 1.0, 0.3),
 }
 ENGM = {}
 
@@ -347,9 +352,18 @@ render("internal_trace_cutaway")
 show_all()
 apply_mode("real")
 
-# 5. macro close-up of qubit interconnections (Q2/Q3 region of the die)
-look((0.55, 0.55, ZD + 0.55), (0.0, 1.4, ZD), lens=100, dof=math.dist((0.55, 0.55, ZD + 0.55), (0.0, 1.4, ZD)), fstop=16)
-render("fluxon_gate_macro")
+# 5. macro close-up of the die's active element
+if ACTIVE_DIE == "QFX":
+    # quantum fluxon ring QF1 (24 Al/AlOx/Al rungs on grAl rails, barrier SQUID, flux-transformer and
+    # bus landings). QF1 centre = die (4800, 5200) um -> board (-0.2, 0.2) mm.
+    QF1 = (-0.2, 0.2, ZD)
+    CAM5 = (-0.2 + 0.16, 0.2 - 0.30, ZD + 0.30)
+    look(CAM5, QF1, lens=100, dof=math.dist(CAM5, QF1), fstop=11)
+    render("quantum_fluxon_macro")
+else:
+    # RFL rotary element at board (0, 1.4)
+    look((0.55, 0.55, ZD + 0.55), (0.0, 1.4, ZD), lens=100, dof=math.dist((0.55, 0.55, ZD + 0.55), (0.0, 1.4, ZD)), fstop=16)
+    render("fluxon_gate_macro")
 
 # 6. bond pads + wire bonds (north edge of die, Q2 drive / flux pads)
 look((-1.5, 7.9, ZD + 1.7), (-1.2, 4.95, ZD + 0.05), lens=85,

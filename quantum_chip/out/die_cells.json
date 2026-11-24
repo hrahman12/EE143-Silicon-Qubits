@@ -1,293 +1,871 @@
 {
+ "design": "QFX-1",
  "cells": {
-  "DCSFQ_A": {
-   "kind": "DC/SFQ",
+  "QF1": {
+   "kind": "quantum fluxon ring",
    "center": [
-    3200,
-    8250
+    4800.0,
+    5200.0
    ],
-   "jjs": 2,
-   "bias_tap": [
-    3140,
-    8250
-   ]
+   "junctions": [
+    {
+     "angle": -180.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": -165.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": -150.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": -135.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": -120.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": -105.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": -90.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": -75.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": -60.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": -45.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": -30.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": -15.0,
+     "area_um2": 0.0144,
+     "lateral": 0.0
+    },
+    {
+     "angle": 0.0,
+     "area_um2": 0.0324,
+     "lateral": -1.6
+    },
+    {
+     "angle": 0.0,
+     "area_um2": 0.0324,
+     "lateral": 1.6
+    },
+    {
+     "angle": 15.0,
+     "area_um2": 0.0144,
+     "lateral": 0.0
+    },
+    {
+     "angle": 30.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 45.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 60.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 75.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 90.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 105.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 120.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 135.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 150.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 165.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    }
+   ],
+   "rungs": 24,
+   "mid_deg": 0.0,
+   "sense": 1,
+   "hole_radius_um": 50.0,
+   "rail_radius_um": 37.5
   },
-  "DCSFQ_B": {
-   "kind": "DC/SFQ",
+  "QF2": {
+   "kind": "quantum fluxon ring",
    "center": [
-    6800,
-    8250
+    5200.0,
+    5200.0
    ],
-   "jjs": 2,
-   "bias_tap": [
-    6860,
-    8250
-   ]
+   "junctions": [
+    {
+     "angle": 360.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 345.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 330.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 315.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 300.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 285.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 270.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 255.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 240.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 225.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 210.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 195.0,
+     "area_um2": 0.0144,
+     "lateral": 0.0
+    },
+    {
+     "angle": 180.0,
+     "area_um2": 0.0324,
+     "lateral": -1.6
+    },
+    {
+     "angle": 180.0,
+     "area_um2": 0.0324,
+     "lateral": 1.6
+    },
+    {
+     "angle": 165.0,
+     "area_um2": 0.0144,
+     "lateral": 0.0
+    },
+    {
+     "angle": 150.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 135.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 120.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 105.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 90.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 75.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 60.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 45.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 30.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    },
+    {
+     "angle": 15.0,
+     "area_um2": 0.048,
+     "lateral": 0.0
+    }
+   ],
+   "rungs": 24,
+   "mid_deg": 180.0,
+   "sense": -1,
+   "hole_radius_um": 50.0,
+   "rail_radius_um": 37.5
   },
-  "DCSFQ_T": {
-   "kind": "DC/SFQ",
-   "center": [
-    1700,
-    4400
-   ],
-   "jjs": 2,
-   "bias_tap": [
-    1700,
-    4460
-   ]
-  },
-  "SFQDC_0": {
-   "kind": "SFQ/DC",
-   "center": [
-    1700,
-    5600
-   ],
-   "jjs": 3,
-   "bias_tap": [
-    1700,
-    5660
-   ]
-  },
-  "SFQDC_1": {
-   "kind": "SFQ/DC",
-   "center": [
-    8300,
-    5600
-   ],
-   "jjs": 3,
-   "bias_tap": [
-    8300,
-    5660
-   ]
-  },
-  "SFQDC_T": {
-   "kind": "SFQ/DC",
-   "center": [
-    8300,
-    4400
-   ],
-   "jjs": 3,
-   "bias_tap": [
-    8300,
-    4460
-   ]
-  },
-  "RE_ring": {
-   "kind": "LJJ",
-   "cells": 115,
-   "skipped_under_crossings": 4,
-   "length_um": 1198.4,
-   "start": [
-    4850.0,
-    6250.0
-   ],
-   "end": [
-    4850.0,
-    6251.0
-   ]
-  },
-  "RE": {
-   "kind": "rotary element",
-   "center": [
-    5000,
-    6400
-   ],
-   "ring_cells": 115,
-   "storage_jjs": 2,
-   "ports": {
-    "I0": [
-     4850.0,
-     6550.0
+  "KICK": {
+   "kind": "heavy-fluxon ballistic line",
+   "junctions": 783,
+   "length_um": 7830.9,
+   "junction_area_um2": 12.0,
+   "sections": {
+    "QF1": [
+     3500.0,
+     4700.0
     ],
-    "I1": [
-     5150.0,
-     6550.0
-    ],
-    "O0": [
-     4850.0,
-     6250.0
-    ],
-    "O1": [
-     5150.0,
-     6250.0
+    "QF2": [
+     5300.0,
+     6500.0
     ]
-   }
+   },
+   "strip_w_um": 20.0,
+   "gap_um": 1.0,
+   "pitch_um": 10.0,
+   "taper_um": 200.0
   },
-  "CB": {
-   "kind": "controlled barrier (dc SQUID)",
+  "DCSFQ_IN": {
+   "kind": "DC/SFQ launcher",
    "center": [
-    3200,
-    7600
+    3200.0,
+    8240.0
    ],
-   "jjs": 2,
-   "ic_max_over_ic": 8.0
-  },
-  "LJJ_A": {
-   "kind": "LJJ",
-   "cells": 61,
-   "skipped_under_crossings": 0,
-   "length_um": 618.0,
-   "start": [
-    3200,
-    8230
-   ],
-   "end": [
-    3200,
-    7612
+   "bias_tap": [
+    3136.0,
+    8240.0
    ]
   },
-  "LJJ_A2": {
-   "kind": "LJJ",
-   "cells": 263,
-   "skipped_under_crossings": 0,
-   "length_um": 2636.4,
-   "start": [
-    3200,
-    7588
+  "SFQDC_OUT": {
+   "kind": "SFQ/DC receiver",
+   "center": [
+    6800.0,
+    8240.0
    ],
-   "end": [
-    4850.0,
-    6550.0
+   "bias_tap": [
+    6864.0,
+    8240.0
    ]
   },
-  "LJJ_B": {
-   "kind": "LJJ",
-   "cells": 327,
-   "skipped_under_crossings": 0,
-   "length_um": 3278.4,
-   "start": [
-    6800,
-    8230
+  "XFMR1": {
+   "kind": "flux transformer",
+   "section": [
+    3500.0,
+    4700.0
    ],
-   "end": [
-    5150.0,
-    6550.0
+   "lands": [
+    [
+     4848.932847202974,
+     5202.5644618559045
+    ],
+    [
+     4847.929232435957,
+     5210.18767285007
+    ]
    ]
   },
-  "LJJ_O0": {
-   "kind": "LJJ",
-   "cells": 362,
-   "skipped_under_crossings": 4,
-   "length_um": 3664.9,
-   "start": [
-    4850.0,
-    6250.0
+  "XFMR2": {
+   "kind": "flux transformer",
+   "section": [
+    5300.0,
+    6500.0
    ],
-   "end": [
-    1735,
-    5600
+   "lands": [
+    [
+     5151.067152797026,
+     5202.5644618559045
+    ],
+    [
+     5152.070767564043,
+     5210.18767285007
+    ]
    ]
   },
-  "LJJ_O1": {
-   "kind": "LJJ",
-   "cells": 362,
-   "skipped_under_crossings": 4,
-   "length_um": 3664.9,
-   "start": [
-    5150.0,
-    6250.0
-   ],
-   "end": [
-    8265,
-    5600
+  "BUS": {
+   "kind": "galvanic ZZ coupler",
+   "lands": [
+    [
+     4848.580798207317,
+     5193.604216581218
+    ],
+    [
+     5151.419201792683,
+     5193.604216581218
+    ]
    ]
   },
-  "LJJ_TEST": {
-   "kind": "LJJ",
-   "cells": 1761,
-   "skipped_under_crossings": 0,
-   "length_um": 17618.6,
-   "start": [
-    1730,
-    4400
-   ],
-   "end": [
-    8265,
-    4400
-   ]
+  "RES1": {
+   "kind": "lambda/4 readout resonator",
+   "f_design_GHz": 7.0,
+   "length_um": 4291.3,
+   "target_length_um": 4291.3
+  },
+  "RES2": {
+   "kind": "lambda/4 readout resonator",
+   "f_design_GHz": 7.4,
+   "length_um": 4059.2,
+   "target_length_um": 4059.4
   }
  },
- "total_jj": 3270,
+ "routes": [
+  {
+   "name": "KICK",
+   "net": "kick",
+   "w": 20.0,
+   "gap": 1.0,
+   "start": [
+    3200.0,
+    8180.0
+   ],
+   "end": [
+    6800.0,
+    8180.0
+   ],
+   "pre_end": [
+    6800.0,
+    8175.0
+   ]
+  },
+  {
+   "name": "KICK_IN_STUB",
+   "net": "kick",
+   "w": 20.0,
+   "gap": 1.0,
+   "start": [
+    3200.0,
+    8180.0
+   ],
+   "end": [
+    3200.0,
+    8210.0
+   ],
+   "pre_end": [
+    3200.0,
+    8205.0
+   ]
+  },
+  {
+   "name": "KICK_OUT_STUB",
+   "net": "kick",
+   "w": 20.0,
+   "gap": 1.0,
+   "start": [
+    6800.0,
+    8180.0
+   ],
+   "end": [
+    6800.0,
+    8210.0
+   ],
+   "pre_end": [
+    6800.0,
+    8205.0
+   ]
+  },
+  {
+   "name": "XFMR1",
+   "net": "XFMR1",
+   "w": 3.0,
+   "gap": 2.5,
+   "start": [
+    4848.932847202974,
+    5202.5644618559045
+   ],
+   "end": [
+    4847.929232435957,
+    5210.18767285007
+   ],
+   "pre_end": [
+    4852.819970439626,
+    5211.227231304159
+   ]
+  },
+  {
+   "name": "XFMR2",
+   "net": "XFMR2",
+   "w": 3.0,
+   "gap": 2.5,
+   "start": [
+    5151.067152797026,
+    5202.5644618559045
+   ],
+   "end": [
+    5152.070767564043,
+    5210.18767285007
+   ],
+   "pre_end": [
+    5147.180029560374,
+    5211.227231304159
+   ]
+  },
+  {
+   "name": "BUS",
+   "net": "BUS",
+   "w": 2.0,
+   "gap": 2.0,
+   "start": [
+    4848.580798207317,
+    5193.604216581218
+   ],
+   "end": [
+    5151.419201792683,
+    5193.604216581218
+   ],
+   "pre_end": [
+    5146.461977485815,
+    5192.951585620118
+   ]
+  },
+  {
+   "name": "FEED",
+   "net": "FEED",
+   "w": 10.0,
+   "gap": 6.0,
+   "start": [
+    680.0,
+    4400.0
+   ],
+   "end": [
+    9320.0,
+    4400.0
+   ],
+   "pre_end": [
+    9315.0,
+    4400.0
+   ]
+  },
+  {
+   "name": "RES1",
+   "net": "RES1",
+   "w": 10.0,
+   "gap": 6.0,
+   "start": [
+    4450.0,
+    3020.0
+   ],
+   "end": [
+    4838.8743136742705,
+    5229.829310021427
+   ],
+   "pre_end": [
+    4842.841080375727,
+    5232.87311716647
+   ]
+  },
+  {
+   "name": "RES2",
+   "net": "RES2",
+   "w": 10.0,
+   "gap": 6.0,
+   "start": [
+    5550.0,
+    3020.0
+   ],
+   "end": [
+    5161.1256863257295,
+    5229.829310021428
+   ],
+   "pre_end": [
+    5157.158919624273,
+    5232.873117166471
+   ]
+  },
+  {
+   "name": "QF1_DRIVE",
+   "net": "QF1_DRIVE",
+   "w": 6.0,
+   "gap": 4.0,
+   "start": [
+    680.0,
+    5600.0
+   ],
+   "end": [
+    4845.270097093053,
+    5181.24851181411
+   ],
+   "pre_end": [
+    4849.889494755609,
+    5179.335094652285
+   ]
+  },
+  {
+   "name": "QF2_DRIVE",
+   "net": "QF2_DRIVE",
+   "w": 6.0,
+   "gap": 4.0,
+   "start": [
+    9320.0,
+    5600.0
+   ],
+   "end": [
+    5154.729902906947,
+    5181.24851181411
+   ],
+   "pre_end": [
+    5150.110505244391,
+    5179.335094652285
+   ]
+  },
+  {
+   "name": "QF1_FLUX",
+   "net": "QF1_FLUX",
+   "w": 6.0,
+   "gap": 4.0,
+   "start": [
+    4400.0,
+    9320.0
+   ],
+   "end": [
+    4818.75148818589,
+    5245.270097093053
+   ],
+   "pre_end": [
+    4820.664905347715,
+    5249.889494755609
+   ]
+  },
+  {
+   "name": "QF2_FLUX",
+   "net": "QF2_FLUX",
+   "w": 6.0,
+   "gap": 4.0,
+   "start": [
+    5600.0,
+    9320.0
+   ],
+   "end": [
+    5181.24851181411,
+    5245.270097093053
+   ],
+   "pre_end": [
+    5179.335094652285,
+    5249.889494755609
+   ]
+  },
+  {
+   "name": "KICK_TRIG",
+   "net": "KICK_TRIG",
+   "w": 10.0,
+   "gap": 6.0,
+   "start": [
+    3200.0,
+    9320.0
+   ],
+   "end": [
+    3200.0,
+    8262.0
+   ],
+   "pre_end": [
+    3200.0,
+    8267.0
+   ]
+  },
+  {
+   "name": "KICK_OUT",
+   "net": "KICK_OUT",
+   "w": 10.0,
+   "gap": 6.0,
+   "start": [
+    6800.0,
+    9320.0
+   ],
+   "end": [
+    6800.0,
+    8262.0
+   ],
+   "pre_end": [
+    6800.0,
+    8267.0
+   ]
+  },
+  {
+   "name": "VB_IN",
+   "net": "VB_IN",
+   "w": 6.0,
+   "gap": 6.0,
+   "start": [
+    2000.0,
+    9320.0
+   ],
+   "end": [
+    3136.0,
+    8240.0
+   ],
+   "pre_end": [
+    3131.0,
+    8240.0
+   ]
+  },
+  {
+   "name": "VB_OUT",
+   "net": "VB_OUT",
+   "w": 6.0,
+   "gap": 6.0,
+   "start": [
+    8000.0,
+    9320.0
+   ],
+   "end": [
+    6864.0,
+    8240.0
+   ],
+   "pre_end": [
+    6869.0,
+    8240.0
+   ]
+  }
+ ],
+ "bridges": [
+  {
+   "route": "RES1",
+   "over": [
+    "XFMR1"
+   ],
+   "at": [
+    4876.34,
+    5254.7
+   ],
+   "span_um": 35.9
+  },
+  {
+   "route": "RES1",
+   "over": [
+    "BUS"
+   ],
+   "at": [
+    4950.0,
+    5188.25
+   ],
+   "span_um": 32.0
+  },
+  {
+   "route": "RES2",
+   "over": [
+    "BUS"
+   ],
+   "at": [
+    5050.0,
+    5188.25
+   ],
+   "span_um": 32.0
+  },
+  {
+   "route": "RES2",
+   "over": [
+    "XFMR2"
+   ],
+   "at": [
+    5121.72,
+    5254.79
+   ],
+   "span_um": 35.9
+  },
+  {
+   "route": "QF1_FLUX",
+   "over": [
+    "KICK",
+    "XFMR1"
+   ],
+   "at": [
+    4400.0,
+    5966.0
+   ],
+   "span_um": 75.0
+  },
+  {
+   "route": "QF1_FLUX",
+   "over": [
+    "XFMR1"
+   ],
+   "at": [
+    4755.78,
+    5700.0
+   ],
+   "span_um": 36.1
+  },
+  {
+   "route": "QF1_FLUX",
+   "over": [
+    "XFMR1"
+   ],
+   "at": [
+    4834.44,
+    5409.45
+   ],
+   "span_um": 41.4
+  },
+  {
+   "route": "QF2_FLUX",
+   "over": [
+    "XFMR2"
+   ],
+   "at": [
+    5165.56,
+    5409.45
+   ],
+   "span_um": 41.4
+  },
+  {
+   "route": "QF2_FLUX",
+   "over": [
+    "XFMR2"
+   ],
+   "at": [
+    5242.13,
+    5700.0
+   ],
+   "span_um": 36.1
+  },
+  {
+   "route": "QF2_FLUX",
+   "over": [
+    "KICK",
+    "XFMR2"
+   ],
+   "at": [
+    5600.0,
+    5966.0
+   ],
+   "span_um": 75.0
+  }
+ ],
+ "total_jj": 837,
  "stack": [
   {
-   "layer": "GP",
+   "layer": "BASE",
    "gds": [
     1,
     0
    ],
-   "material": "Nb ground plane M0",
-   "thickness_nm": 200
+   "material": "Nb base: ground plane, feedline, resonators, drive/flux lines, kick strip, pads",
+   "thickness_nm": 150
   },
   {
-   "layer": "I0",
+   "layer": "GRAL",
    "gds": [
     2,
     0
    ],
-   "material": "SiO2 ILD (sheet) / via GP-M1",
-   "thickness_nm": 200
+   "material": "granular Al superinductor rail of each fluxon ring (~2 nH/sq)",
+   "thickness_nm": 20
   },
   {
-   "layer": "M1",
+   "layer": "AL1",
    "gds": [
     3,
     0
    ],
-   "material": "Nb M1: LJJ strips, JJ base electrode",
-   "thickness_nm": 150
+   "material": "Al bottom electrode (1st evaporation)",
+   "thickness_nm": 30
   },
   {
-   "layer": "JJ",
+   "layer": "AL2",
    "gds": [
     4,
     0
    ],
-   "material": "AlOx barrier + Nb counter-electrode",
-   "thickness_nm": 100
+   "material": "Al top electrode (2nd evaporation); AL1 AND AL2 = AlOx junction",
+   "thickness_nm": 60
   },
   {
-   "layer": "I1",
+   "layer": "RES",
    "gds": [
     5,
     0
    ],
-   "material": "SiO2 ILD (sheet) / via M1-M2",
-   "thickness_nm": 200
+   "material": "Cu: converter resistors and quasiparticle traps",
+   "thickness_nm": 50
   },
   {
-   "layer": "R",
+   "layer": "ABP",
    "gds": [
     6,
     0
    ],
-   "material": "Mo resistor, 2 ohm/sq",
-   "thickness_nm": 40
+   "material": "Al airbridge feet",
+   "thickness_nm": 400
   },
   {
-   "layer": "M2",
+   "layer": "ABS",
    "gds": [
     7,
     0
    ],
-   "material": "Nb M2: I/O microstrip, bias lines, pads, JJ straps",
-   "thickness_nm": 300
-  },
-  {
-   "layer": "PAD",
-   "gds": [
-    8,
-    0
-   ],
-   "material": "Ti/Au bond-pad metallisation",
-   "thickness_nm": 100
-  },
-  {
-   "layer": "VIA",
-   "gds": [
-    9,
-    0
-   ],
-   "material": "stacked Nb vias (I0+I1 contacts)",
+   "material": "Al airbridge spans",
    "thickness_nm": 400
   }
  ]

@@ -5,13 +5,13 @@
       "Application": "Pcbnew",
       "Version": "7.0.11+dfsg-1build4"
     },
-    "CreationDate": "2026-11-24T09:41:53+00:00"
+    "CreationDate": "2026-11-24T11:21:13+00:00"
   },
   "GeneralSpecs": {
     "ProjectId": {
       "Name": "rf_carrier",
       "GUID": "72665f63-6172-4726-9965-722e6b696361",
-      "Revision": "A"
+      "Revision": "C"
     },
     "Size": {
       "X": 40.1,

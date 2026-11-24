@@ -6,21 +6,20 @@ assembly_order_top_to_bottom:
 - screws  z=[-3.9240, 2.9760]  (package)
 - connector_pins  z=[-5.0000, 2.7410]  (connectors)
 - solder_joints  z=[-0.3000, 1.7560]  (connectors)
-- wirebonds_signal  z=[1.4710, 1.7050]  (bonds)
-- wirebonds_ground  z=[1.4710, 1.7050]  (bonds)
+- wirebonds_signal  z=[1.4590, 1.6930]  (bonds)
+- wirebonds_ground  z=[1.4590, 1.6930]  (bonds)
 - F.Silk  z=[1.4760, 1.4880]  (pcb)
 - F.Mask_over_Cu  z=[1.4560, 1.4760]  (pcb)
-- die_pad_Au  z=[1.4695, 1.4710]  (die)
-- die_M2_Nb  z=[1.4655, 1.4695]  (die)
 - F.Mask  z=[1.4210, 1.4680]  (pcb)
-- die_R_Mo  z=[1.4655, 1.4665]  (die)
-- die_ILD1_SiO2  z=[1.4635, 1.4655]  (die)
-- die_vias_Nb  z=[1.4590, 1.4655]  (die)
-- die_JJ_trilayer  z=[1.4635, 1.4650]  (die)
-- die_M1_Nb_LJJ  z=[1.4610, 1.4635]  (die)
-- die_ILD0_SiO2  z=[1.4590, 1.4610]  (die)
+- die_airbridge_spans  z=[1.4620, 1.4632]  (die)
+- die_airbridge_feet  z=[1.4590, 1.4620]  (die)
+- die_Al_top  z=[1.4581, 1.4601]  (die)
 - F.ENIG  z=[1.4560, 1.4600]  (pcb)
-- die_GP_Nb  z=[1.4560, 1.4590]  (die)
+- die_base_Nb  z=[1.4560, 1.4590]  (die)
+- die_junctions_AlOx  z=[1.4575, 1.4581]  (die)
+- die_grAl_rails  z=[1.4560, 1.4575]  (die)
+- die_Al_bottom  z=[1.4560, 1.4575]  (die)
+- die_Cu_res_traps  z=[1.4560, 1.4575]  (die)
 - F.Cu_GND  z=[1.4210, 1.4560]  (pcb)
 - F.Cu_RF  z=[1.4210, 1.4560]  (pcb)
 - vias_through  z=[0.0000, 1.4560]  (vias)
@@ -150,7 +149,7 @@ pcb:
     - 0.0
     material: LPI solder mask, red
 die:
-  name: quantum_die.gds (cell RFL_RE1)
+  name: quantum_die.gds (cell QFX1)
   size_mm:
   - 10.0
   - 10.0
@@ -173,89 +172,80 @@ die:
     z_mm:
     - 0.931
     - 1.456
-  - name: die_GP_Nb
-    source: 1/0 GP
-    material: Nb ground plane M0 (200 nm; drawn 3000 nm)
-    true_thickness_mm: 0.00019999999999999998
-    true_thickness_nm: 200.0
+  - name: die_base_Nb
+    source: 1/0 BASE
+    material: 'Nb 150 nm: ground plane, feedline, resonators, lines, kick strip, pads (150 nm; drawn 3000 nm)'
+    true_thickness_mm: 0.00015
+    true_thickness_nm: 150.0
     visual_thickness_mm: 0.003
     z_mm:
     - 1.456
     - 1.459
-  - name: die_ILD0_SiO2
-    source: sheet (not drawn)
-    material: SiO2 ILD (sheet) / via GP-M1 (200 nm; drawn 2000 nm)
-    true_thickness_mm: 0.00019999999999999998
-    true_thickness_nm: 200.0
+  - name: die_grAl_rails
+    source: 2/0 GRAL
+    material: granular Al 20 nm superinductor rails (20 nm; drawn 1500 nm)
+    true_thickness_mm: 1.9999999999999998e-05
+    true_thickness_nm: 20.0
+    visual_thickness_mm: 0.0015
+    z_mm:
+    - 1.456
+    - 1.4575
+  - name: die_Al_bottom
+    source: 3/0 AL1
+    material: Al 30 nm bottom electrodes / leads (30 nm; drawn 1500 nm)
+    true_thickness_mm: 2.9999999999999997e-05
+    true_thickness_nm: 30.0
+    visual_thickness_mm: 0.0015
+    z_mm:
+    - 1.456
+    - 1.4575
+  - name: die_junctions_AlOx
+    source: 3/0 AND 4/0
+    material: AlOx tunnel junctions (AL1 AND AL2) (2 nm; drawn 600 nm)
+    true_thickness_mm: 2.0e-06
+    true_thickness_nm: 2.0
+    visual_thickness_mm: 0.0006
+    z_mm:
+    - 1.4575
+    - 1.4581
+  - name: die_Al_top
+    source: 4/0 AL2
+    material: Al 60 nm top electrodes (60 nm; drawn 2000 nm)
+    true_thickness_mm: 5.9999999999999995e-05
+    true_thickness_nm: 60.0
     visual_thickness_mm: 0.002
+    z_mm:
+    - 1.4581
+    - 1.4601
+  - name: die_Cu_res_traps
+    source: 5/0 RES
+    material: Cu resistors + quasiparticle traps (50 nm; drawn 1500 nm)
+    true_thickness_mm: 4.9999999999999996e-05
+    true_thickness_nm: 50.0
+    visual_thickness_mm: 0.0015
+    z_mm:
+    - 1.456
+    - 1.4575
+  - name: die_airbridge_feet
+    source: 6/0 ABP
+    material: Al airbridge feet (3 um posts) (3000 nm; drawn 3000 nm)
+    true_thickness_mm: 0.003
+    true_thickness_nm: 3000.0
+    visual_thickness_mm: 0.003
     z_mm:
     - 1.459
-    - 1.461
-  - name: die_M1_Nb_LJJ
-    source: 3/0 M1
-    material: 'Nb M1: LJJ strips, JJ base electrode (150 nm; drawn 2500 nm)'
-    true_thickness_mm: 0.00015
-    true_thickness_nm: 150.0
-    visual_thickness_mm: 0.0025
-    z_mm:
-    - 1.461
-    - 1.4635
-  - name: die_JJ_trilayer
-    source: 4/0 JJ
-    material: AlOx barrier + Nb counter-electrode (100 nm; drawn 1500 nm)
-    true_thickness_mm: 9.999999999999999e-05
-    true_thickness_nm: 100.0
-    visual_thickness_mm: 0.0015
-    z_mm:
-    - 1.4635
-    - 1.465
-  - name: die_ILD1_SiO2
-    source: sheet (5/0 = contacts)
-    material: SiO2 ILD (sheet) / via M1-M2 (200 nm; drawn 2000 nm)
-    true_thickness_mm: 0.00019999999999999998
-    true_thickness_nm: 200.0
-    visual_thickness_mm: 0.002
-    z_mm:
-    - 1.4635
-    - 1.4655
-  - name: die_R_Mo
-    source: 6/0 R
-    material: Mo resistor, 2 ohm/sq (40 nm; drawn 1000 nm)
-    true_thickness_mm: 3.9999999999999996e-05
-    true_thickness_nm: 40.0
-    visual_thickness_mm: 0.001
-    z_mm:
-    - 1.4655
-    - 1.4665
-  - name: die_M2_Nb
-    source: 7/0 M2
-    material: 'Nb M2: I/O microstrip, bias lines, pads, JJ straps (300 nm; drawn 4000 nm)'
-    true_thickness_mm: 0.0003
-    true_thickness_nm: 300.0
-    visual_thickness_mm: 0.004
-    z_mm:
-    - 1.4655
-    - 1.4695
-  - name: die_pad_Au
-    source: 8/0 PAD
-    material: Ti/Au bond-pad metallisation (100 nm; drawn 1500 nm)
-    true_thickness_mm: 9.999999999999999e-05
-    true_thickness_nm: 100.0
-    visual_thickness_mm: 0.0015
-    z_mm:
-    - 1.4695
-    - 1.471
-  - name: die_vias_Nb
-    source: 9/0 VIA + 5/0 I1
-    material: stacked GP contacts (JJ ground straps, resistor returns, ring fence) + I1 contacts
+    - 1.462
+  - name: die_airbridge_spans
+    source: 7/0 ABS
+    material: Al airbridge spans (400 nm; drawn 1200 nm)
     true_thickness_mm: 0.00039999999999999996
     true_thickness_nm: 400.0
-    visual_thickness_mm: 0.0065
+    visual_thickness_mm: 0.0012
     z_mm:
-    - 1.459
-    - 1.4655
-  process: Nb/AlOx/Nb trilayer, GP + 2 wiring layers (SFQ5ee-like, simplified)
-  junctions: 3270
+    - 1.462
+    - 1.4632
+  process: Nb base + granular-Al superinductors + Al/AlOx/Al double-angle junctions + Cu + Al airbridges
+  junctions: 837
 package:
   base: OFHC copper, 2 um Au over 2 um Ni (non-magnetic would use Ag)
   base_thickness_mm: 4.0

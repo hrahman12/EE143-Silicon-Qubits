@@ -1,7 +1,7 @@
 {
  "ports": [
   {
-   "net": "VB_W",
+   "net": "VB_IN",
    "kqc_port_id": 1,
    "side": "N",
    "port_um": [
@@ -22,7 +22,7 @@
    ]
   },
   {
-   "net": "TRIG_A",
+   "net": "KICK_TRIG",
    "kqc_port_id": 2,
    "side": "N",
    "port_um": [
@@ -43,7 +43,7 @@
    ]
   },
   {
-   "net": "CTRL_CB",
+   "net": "QF1_FLUX",
    "kqc_port_id": 3,
    "side": "N",
    "port_um": [
@@ -64,7 +64,7 @@
    ]
   },
   {
-   "net": "CTRL_RE",
+   "net": "QF2_FLUX",
    "kqc_port_id": 4,
    "side": "N",
    "port_um": [
@@ -85,7 +85,7 @@
    ]
   },
   {
-   "net": "TRIG_B",
+   "net": "KICK_OUT",
    "kqc_port_id": 5,
    "side": "N",
    "port_um": [
@@ -106,7 +106,7 @@
    ]
   },
   {
-   "net": "VB_E",
+   "net": "VB_OUT",
    "kqc_port_id": 6,
    "side": "N",
    "port_um": [
@@ -127,7 +127,7 @@
    ]
   },
   {
-   "net": "OUT_1",
+   "net": "QF2_DRIVE",
    "kqc_port_id": 7,
    "side": "E",
    "port_um": [
@@ -148,7 +148,7 @@
    ]
   },
   {
-   "net": "TEST_OUT",
+   "net": "FEED_OUT",
    "kqc_port_id": 8,
    "side": "E",
    "port_um": [
@@ -169,7 +169,7 @@
    ]
   },
   {
-   "net": "TEST_IN",
+   "net": "FEED_IN",
    "kqc_port_id": 9,
    "side": "W",
    "port_um": [
@@ -190,7 +190,7 @@
    ]
   },
   {
-   "net": "OUT_0",
+   "net": "QF1_DRIVE",
    "kqc_port_id": 10,
    "side": "W",
    "port_um": [

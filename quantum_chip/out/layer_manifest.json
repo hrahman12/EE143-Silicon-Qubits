@@ -451,7 +451,7 @@
    "visual_thickness_mm": 0.012,
    "note": "",
    "eng_opacity": 1.0,
-   "triangles": 4354
+   "triangles": 4906
   },
   {
    "name": "B.Silk",
@@ -467,7 +467,7 @@
    "visual_thickness_mm": 0.012,
    "note": "",
    "eng_opacity": 1.0,
-   "triangles": 1630
+   "triangles": 1822
   },
   {
    "name": "vias_through",
@@ -550,7 +550,7 @@
    "triangles": 12
   },
   {
-   "name": "die_GP_Nb",
+   "name": "die_base_Nb",
    "group": "die",
    "material": "niobium",
    "eng_color": "#8b93a6",
@@ -559,139 +559,123 @@
     1.456,
     1.459
    ],
-   "true_thickness_mm": 0.00019999999999999998,
+   "true_thickness_mm": 0.00015,
    "visual_thickness_mm": 0.003,
-   "note": "Nb ground plane M0 (200 nm; drawn 3000 nm)",
+   "note": "Nb 150 nm: ground plane, feedline, resonators, lines, kick strip, pads (150 nm; drawn 3000 nm)",
    "eng_opacity": 1.0,
-   "triangles": 12
+   "triangles": 11870
   },
   {
-   "name": "die_ILD0_SiO2",
+   "name": "die_grAl_rails",
    "group": "die",
-   "material": "sio2",
-   "eng_color": "#cfe8ff",
+   "material": "gral",
+   "eng_color": "#ff8c1a",
    "explode": 10.6,
    "z": [
-    1.459,
-    1.461
+    1.456,
+    1.4575
    ],
-   "true_thickness_mm": 0.00019999999999999998,
-   "visual_thickness_mm": 0.002,
-   "note": "SiO2 ILD (sheet) / via GP-M1 (200 nm; drawn 2000 nm)",
-   "eng_opacity": 0.15,
-   "triangles": 12
+   "true_thickness_mm": 1.9999999999999998e-05,
+   "visual_thickness_mm": 0.0015,
+   "note": "granular Al 20 nm superinductor rails (20 nm; drawn 1500 nm)",
+   "eng_opacity": 1.0,
+   "triangles": 2056
   },
   {
-   "name": "die_M1_Nb_LJJ",
+   "name": "die_Al_bottom",
    "group": "die",
-   "material": "niobium",
+   "material": "aluminium",
    "eng_color": "#2f6bff",
    "explode": 11.2,
    "z": [
-    1.461,
-    1.4635
+    1.456,
+    1.4575
    ],
-   "true_thickness_mm": 0.00015,
-   "visual_thickness_mm": 0.0025,
-   "note": "Nb M1: LJJ strips, JJ base electrode (150 nm; drawn 2500 nm)",
-   "eng_opacity": 1.0,
-   "triangles": 2188
-  },
-  {
-   "name": "die_JJ_trilayer",
-   "group": "die",
-   "material": "niobium_jj",
-   "eng_color": "#ff2aff",
-   "explode": 11.6,
-   "z": [
-    1.4635,
-    1.465
-   ],
-   "true_thickness_mm": 9.999999999999999e-05,
+   "true_thickness_mm": 2.9999999999999997e-05,
    "visual_thickness_mm": 0.0015,
-   "note": "AlOx barrier + Nb counter-electrode (100 nm; drawn 1500 nm)",
+   "note": "Al 30 nm bottom electrodes / leads (30 nm; drawn 1500 nm)",
    "eng_opacity": 1.0,
-   "triangles": 91560
+   "triangles": 10084
   },
   {
-   "name": "die_ILD1_SiO2",
+   "name": "die_junctions_AlOx",
    "group": "die",
-   "material": "sio2",
-   "eng_color": "#cfe8ff",
-   "explode": 12.2,
+   "material": "alox_jj",
+   "eng_color": "#ff2aff",
+   "explode": 11.8,
    "z": [
-    1.4635,
-    1.4655
+    1.4575,
+    1.4581
    ],
-   "true_thickness_mm": 0.00019999999999999998,
+   "true_thickness_mm": 2e-06,
+   "visual_thickness_mm": 0.0006,
+   "note": "AlOx tunnel junctions (AL1 AND AL2) (2 nm; drawn 600 nm)",
+   "eng_opacity": 1.0,
+   "triangles": 10172
+  },
+  {
+   "name": "die_Al_top",
+   "group": "die",
+   "material": "aluminium",
+   "eng_color": "#9fd8ff",
+   "explode": 12.4,
+   "z": [
+    1.4581,
+    1.4601
+   ],
+   "true_thickness_mm": 5.9999999999999995e-05,
    "visual_thickness_mm": 0.002,
-   "note": "SiO2 ILD (sheet) / via M1-M2 (200 nm; drawn 2000 nm)",
-   "eng_opacity": 0.15,
-   "triangles": 12
-  },
-  {
-   "name": "die_R_Mo",
-   "group": "die",
-   "material": "molybdenum",
-   "eng_color": "#22c060",
-   "explode": 12.6,
-   "z": [
-    1.4655,
-    1.4665
-   ],
-   "true_thickness_mm": 3.9999999999999996e-05,
-   "visual_thickness_mm": 0.001,
-   "note": "Mo resistor, 2 ohm/sq (40 nm; drawn 1000 nm)",
+   "note": "Al 60 nm top electrodes (60 nm; drawn 2000 nm)",
    "eng_opacity": 1.0,
-   "triangles": 252
+   "triangles": 10044
   },
   {
-   "name": "die_M2_Nb",
+   "name": "die_Cu_res_traps",
    "group": "die",
-   "material": "niobium",
-   "eng_color": "#ff3b3b",
+   "material": "copper_film",
+   "eng_color": "#b8572a",
    "explode": 13.0,
    "z": [
-    1.4655,
-    1.4695
+    1.456,
+    1.4575
    ],
-   "true_thickness_mm": 0.0003,
-   "visual_thickness_mm": 0.004,
-   "note": "Nb M2: I/O microstrip, bias lines, pads, JJ straps (300 nm; drawn 4000 nm)",
-   "eng_opacity": 1.0,
-   "triangles": 41136
-  },
-  {
-   "name": "die_pad_Au",
-   "group": "die",
-   "material": "gold",
-   "eng_color": "#ffd34d",
-   "explode": 13.4,
-   "z": [
-    1.4695,
-    1.471
-   ],
-   "true_thickness_mm": 9.999999999999999e-05,
+   "true_thickness_mm": 4.9999999999999996e-05,
    "visual_thickness_mm": 0.0015,
-   "note": "Ti/Au bond-pad metallisation (100 nm; drawn 1500 nm)",
+   "note": "Cu resistors + quasiparticle traps (50 nm; drawn 1500 nm)",
    "eng_opacity": 1.0,
-   "triangles": 152
+   "triangles": 168
   },
   {
-   "name": "die_vias_Nb",
+   "name": "die_airbridge_feet",
    "group": "die",
-   "material": "niobium",
-   "eng_color": "#ffe600",
-   "explode": 10.6,
+   "material": "aluminium",
+   "eng_color": "#22c060",
+   "explode": 13.6,
    "z": [
     1.459,
-    1.4655
+    1.462
+   ],
+   "true_thickness_mm": 0.003,
+   "visual_thickness_mm": 0.003,
+   "note": "Al airbridge feet (3 um posts) (3000 nm; drawn 3000 nm)",
+   "eng_opacity": 1.0,
+   "triangles": 240
+  },
+  {
+   "name": "die_airbridge_spans",
+   "group": "die",
+   "material": "aluminium",
+   "eng_color": "#e03030",
+   "explode": 14.2,
+   "z": [
+    1.462,
+    1.4632
    ],
    "true_thickness_mm": 0.00039999999999999996,
-   "visual_thickness_mm": 0.0065,
-   "note": "stacked GP contacts (JJ ground straps, resistor returns, ring fence) + I1 contacts",
+   "visual_thickness_mm": 0.0012,
+   "note": "Al airbridge spans (400 nm; drawn 1200 nm)",
    "eng_opacity": 1.0,
-   "triangles": 88044
+   "triangles": 120
   },
   {
    "name": "wirebonds_signal",
@@ -700,8 +684,8 @@
    "eng_color": "#ff9b26",
    "explode": 15.0,
    "z": [
-    1.471,
-    1.705
+    1.459,
+    1.693
    ],
    "true_thickness_mm": 0.025,
    "visual_thickness_mm": 0.234,
@@ -716,8 +700,8 @@
    "eng_color": "#b0b0b0",
    "explode": 15.0,
    "z": [
-    1.471,
-    1.705
+    1.459,
+    1.693
    ],
    "true_thickness_mm": 0.025,
    "visual_thickness_mm": 0.234,

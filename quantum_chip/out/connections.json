@@ -2,8 +2,8 @@
  "description": "Every electrical path from RF connector to quantum device. Coordinates: mm, board frame, Y up, origin = board centre = die centre. Die coordinates also given in um in the GDS frame (0..10000).",
  "signal_nets": [
   {
-   "net": "VB_W",
-   "function": "DC bias, west converters",
+   "net": "VB_IN",
+   "function": "dc bias, launcher",
    "path": [
     {
      "stage": "rf_connector",
@@ -126,8 +126,8 @@
      "count": 2,
      "material": "Al-1%Si wedge bond, 25 um",
      "lengths_mm": [
-      0.9486,
-      0.9486
+      0.9481,
+      0.9481
      ]
     },
     {
@@ -146,17 +146,17 @@
     },
     {
      "stage": "die_wiring",
-     "structure": "M2 bias tree -> Mo bias resistors"
+     "structure": "Nb line -> Cu bias resistor"
     },
     {
      "stage": "fluxon_device",
-     "target": "DCSFQ_A, SFQDC_0, DCSFQ_T"
+     "target": "DCSFQ_IN"
     }
    ]
   },
   {
-   "net": "TRIG_A",
-   "function": "fluxon trigger A",
+   "net": "KICK_TRIG",
+   "function": "heavy-fluxon trigger",
    "path": [
     {
      "stage": "rf_connector",
@@ -213,8 +213,8 @@
      "count": 2,
      "material": "Al-1%Si wedge bond, 25 um",
      "lengths_mm": [
-      0.9486,
-      0.9486
+      0.9481,
+      0.9481
      ]
     },
     {
@@ -233,17 +233,17 @@
     },
     {
      "stage": "die_wiring",
-     "structure": "M2 microstrip -> DCSFQ_A (2 JJ) -> LJJ_A -> controlled barrier CB -> LJJ_A2 -> rotary element port I0"
+     "structure": "DC/SFQ launcher -> 7.8 mm ballistic line of 392 Al junctions"
     },
     {
      "stage": "fluxon_device",
-     "target": "RE input I0 via controlled barrier"
+     "target": "KICK line"
     }
    ]
   },
   {
-   "net": "CTRL_CB",
-   "function": "barrier control flux",
+   "net": "QF1_FLUX",
+   "function": "dc flux: fluxon trapping + barrier SQUID bias",
    "path": [
     {
      "stage": "rf_connector",
@@ -370,8 +370,8 @@
      "count": 2,
      "material": "Al-1%Si wedge bond, 25 um",
      "lengths_mm": [
-      0.9486,
-      0.9486
+      0.9481,
+      0.9481
      ]
     },
     {
@@ -390,17 +390,17 @@
     },
     {
      "stage": "die_wiring",
-     "structure": "M2 line shorted to GP beside the CB SQUID loop (sets Ic_eff)"
+     "structure": "Nb line (airbridge over the kick line) shorted onto the QF1 rim on link 16->17"
     },
     {
      "stage": "fluxon_device",
-     "target": "CB SQUID"
+     "target": "QF1"
     }
    ]
   },
   {
-   "net": "CTRL_RE",
-   "function": "rotary-element state flux",
+   "net": "QF2_FLUX",
+   "function": "dc flux: fluxon trapping + barrier SQUID bias",
    "path": [
     {
      "stage": "rf_connector",
@@ -527,8 +527,8 @@
      "count": 2,
      "material": "Al-1%Si wedge bond, 25 um",
      "lengths_mm": [
-      0.9486,
-      0.9486
+      0.9481,
+      0.9481
      ]
     },
     {
@@ -547,17 +547,17 @@
     },
     {
      "stage": "die_wiring",
-     "structure": "M2 line shorted to GP inside the RE ring (set/reset)"
+     "structure": "same for QF2"
     },
     {
      "stage": "fluxon_device",
-     "target": "RE storage loop"
+     "target": "QF2"
     }
    ]
   },
   {
-   "net": "TRIG_B",
-   "function": "fluxon trigger B",
+   "net": "KICK_OUT",
+   "function": "heavy-fluxon arrival",
    "path": [
     {
      "stage": "rf_connector",
@@ -614,8 +614,8 @@
      "count": 2,
      "material": "Al-1%Si wedge bond, 25 um",
      "lengths_mm": [
-      0.9486,
-      0.9486
+      0.9481,
+      0.9481
      ]
     },
     {
@@ -634,17 +634,17 @@
     },
     {
      "stage": "die_wiring",
-     "structure": "M2 microstrip -> DCSFQ_B -> LJJ_B -> rotary element port I1"
+     "structure": "SFQ/DC receiver at the far end of the kick line"
     },
     {
      "stage": "fluxon_device",
-     "target": "RE input I1"
+     "target": "KICK line"
     }
    ]
   },
   {
-   "net": "VB_E",
-   "function": "DC bias, east converters",
+   "net": "VB_OUT",
+   "function": "dc bias, receiver",
    "path": [
     {
      "stage": "rf_connector",
@@ -767,8 +767,8 @@
      "count": 2,
      "material": "Al-1%Si wedge bond, 25 um",
      "lengths_mm": [
-      0.9486,
-      0.9486
+      0.9481,
+      0.9481
      ]
     },
     {
@@ -787,17 +787,17 @@
     },
     {
      "stage": "die_wiring",
-     "structure": "M2 bias tree -> Mo bias resistors"
+     "structure": "Nb line -> Cu bias resistor"
     },
     {
      "stage": "fluxon_device",
-     "target": "DCSFQ_B, SFQDC_1, SFQDC_T"
+     "target": "SFQDC_OUT"
     }
    ]
   },
   {
-   "net": "OUT_1",
-   "function": "fluxon output 1",
+   "net": "QF2_DRIVE",
+   "function": "fast tilt / microwave drive",
    "path": [
     {
      "stage": "rf_connector",
@@ -854,8 +854,8 @@
      "count": 2,
      "material": "Al-1%Si wedge bond, 25 um",
      "lengths_mm": [
-      0.9486,
-      0.9486
+      0.9481,
+      0.9481
      ]
     },
     {
@@ -874,17 +874,17 @@
     },
     {
      "stage": "die_wiring",
-     "structure": "RE port O1 -> LJJ_O1 -> SFQDC_1 -> M2 microstrip -> pad"
+     "structure": "Nb CPW shorted onto the QF2 rim on link 10->11"
     },
     {
      "stage": "fluxon_device",
-     "target": "RE output O1"
+     "target": "QF2"
     }
    ]
   },
   {
-   "net": "TEST_OUT",
-   "function": "racetrack output",
+   "net": "FEED_OUT",
+   "function": "readout feedline out",
    "path": [
     {
      "stage": "rf_connector",
@@ -941,8 +941,8 @@
      "count": 2,
      "material": "Al-1%Si wedge bond, 25 um",
      "lengths_mm": [
-      0.9486,
-      0.9486
+      0.9481,
+      0.9481
      ]
     },
     {
@@ -961,17 +961,17 @@
     },
     {
      "stage": "die_wiring",
-     "structure": "LJJ_TEST -> SFQDC_T -> M2 microstrip -> pad"
+     "structure": "same continuous feedline"
     },
     {
      "stage": "fluxon_device",
-     "target": "LJJ_TEST"
+     "target": "RES1, RES2"
     }
    ]
   },
   {
-   "net": "TEST_IN",
-   "function": "racetrack input",
+   "net": "FEED_IN",
+   "function": "readout feedline in",
    "path": [
     {
      "stage": "rf_connector",
@@ -1028,8 +1028,8 @@
      "count": 2,
      "material": "Al-1%Si wedge bond, 25 um",
      "lengths_mm": [
-      0.9486,
-      0.9486
+      0.9481,
+      0.9481
      ]
     },
     {
@@ -1048,17 +1048,17 @@
     },
     {
      "stage": "die_wiring",
-     "structure": "M2 microstrip -> DCSFQ_T -> 18 mm ballistic LJJ racetrack"
+     "structure": "Nb CPW feedline -> lambda/4 resonators RES1 (7.0 GHz), RES2 (7.4 GHz)"
     },
     {
      "stage": "fluxon_device",
-     "target": "LJJ_TEST"
+     "target": "RES1, RES2"
     }
    ]
   },
   {
-   "net": "OUT_0",
-   "function": "fluxon output 0",
+   "net": "QF1_DRIVE",
+   "function": "fast tilt / microwave drive",
    "path": [
     {
      "stage": "rf_connector",
@@ -1115,8 +1115,8 @@
      "count": 2,
      "material": "Al-1%Si wedge bond, 25 um",
      "lengths_mm": [
-      0.9486,
-      0.9486
+      0.9481,
+      0.9481
      ]
     },
     {
@@ -1135,17 +1135,17 @@
     },
     {
      "stage": "die_wiring",
-     "structure": "RE port O0 -> LJJ_O0 -> SFQDC_0 (3 JJ) -> M2 microstrip -> pad"
+     "structure": "Nb CPW shorted onto the QF1 rim on link 10->11 (next to well A)"
     },
     {
      "stage": "fluxon_device",
-     "target": "RE output O0"
+     "target": "QF1"
     }
    ]
   }
  ],
  "ground": {
-  "die_ground_plane": "Nb GP (M0) under the whole circuit; M2+Au bond ring stitched to it by a via fence; every LJJ junction returns to GP through its own stacked via",
+  "die_ground_plane": "Nb base-layer ground plane; each qubit sits in a 100 um hole whose rim is one rail of the fluxon ring",
   "ground_wire_bonds": 67,
   "ground_bonds_per_side": {
    "N": 9,

@@ -4,8 +4,10 @@ gds, out = sys.argv[1], sys.argv[2]
 ly = db.Layout(); ly.read(gds); top = ly.top_cell()
 for li in ly.layer_indexes():
     print(ly.get_info(li), top.shapes(li).size())
-COL = {"1/0": (0x8a8f99, 0), "2/0": (0, -1), "5/0": (0, -1), "3/0": (0x2f6bff, 0), "4/0": (0xff2aff, 0),
-       "6/0": (0x22aa55, 0), "7/0": (0xe03030, 0), "8/0": (0xe2b54a, 2), "9/0": (0x111111, 0)}
+# QFX-1 layer colours (BASE grey hatch, grAl orange, AL1 blue, AL2 magenta, Cu brown, airbridges green/red)
+COL = {"1/0": (0x8a8f99, 0), "2/0": (0xff8c1a, 0), "3/0": (0x2f6bff, 0), "4/0": (0xff2aff, 0),
+       "5/0": (0x8b4513, 0), "6/0": (0x22aa55, 0), "7/0": (0xe03030, 0), "8/0": (0xe2b54a, 2), "9/0": (0x111111, 0),
+       "63/0": (0, -1)}
 v = lay.LayoutView(); v.load_layout(gds); v.max_hier()
 v.set_config("background-color", "#ffffff"); v.set_config("grid-visible", "false")
 it = v.begin_layers()

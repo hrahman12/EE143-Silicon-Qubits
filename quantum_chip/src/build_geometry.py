@@ -18,7 +18,7 @@ import klayout.db as db
 import trimesh
 
 sys.path.insert(0, os.path.dirname(__file__))
-from design_params import DIE, STACKUP, PCB, PACKAGE, RFL_STACK
+from design_params import DIE, STACKUP, PCB, PACKAGE, RFL_STACK, ACTIVE_DIE
 import meshlib as ml
 from meshlib import Mesh, extrude_region, to_i, DBU_MM
 
@@ -180,7 +180,7 @@ EXP = {  # explode offsets (mm) per layer
     "package_base": -16, "B.Silk": -9.6, "B.Mask": -9.5, "B.ENIG": -8.6, "B.Cu": -8.5, "diel5": -7.0, "In4.Cu": -5.8,
     "diel4": -4.6, "In3.Cu": -3.4, "diel3": -2.2, "In2.Cu": -1.0, "diel2": 0.2, "In1.Cu": 1.4, "diel1": 2.6,
     "F.Cu": 3.8, "F.ENIG": 3.8, "F.Mask": 5.2, "F.Silk": 5.3,
-    "die_attach": 7.5, "die_substrate": 9.0, "die_GP_Nb": 10.0, "die_ILD0_SiO2": 10.6, "die_M1_Nb_LJJ": 11.2,
+    "die_attach": 7.5, "die_substrate": 9.0, "_rfl_die_GP_Nb": 10.0, "die_ILD0_SiO2": 10.6, "die_M1_Nb_LJJ": 11.2,
     "die_JJ_trilayer": 11.6, "die_vias_Nb": 10.6, "die_ILD1_SiO2": 12.2, "die_R_Mo": 12.6, "die_M2_Nb": 13.0,
     "die_pad_Au": 13.4, "wirebonds_signal": 15.0, "wirebonds_ground": 15.0,
 }
@@ -284,45 +284,33 @@ def G(l, d):
 half = DIE["size_um"] / 2000
 die_box = ml.box_region(-half, -half, half, half)
 zf = Z_DIE_TOP
-RL = {name: G(*g) for name, g, _, _ in RFL_STACK}
-# junctions are 0.8 um discs drawn as 16-gons in the GDS; mesh them as octagons (same centre and area)
-_oct = db.Region()
-for p in RL["JJ"].each():
-    c, rr = p.bbox().center(), math.sqrt(p.area() / (2 * math.sqrt(2)))
-    _oct.insert(db.Polygon([db.Point(round(c.x + rr * math.cos(math.pi / 8 + i * math.pi / 4)),
-                                     round(c.y + rr * math.sin(math.pi / 8 + i * math.pi / 4))) for i in range(8)]))
-JJ_GDS = RL["JJ"]
-RL["JJ"] = _oct
-TRUE = {name: t * 1e-6 for name, _, _, t in RFL_STACK}
-MAT = {name: m for name, _, m, _ in RFL_STACK}
-# visual z-stack of the Nb process on top of the Si (true thicknesses in the manifest / STEP)
-DZ = dict(GP=(0.0, 0.003), I0=(0.003, 0.005), M1=(0.005, 0.0075), JJ=(0.0075, 0.009), I1=(0.0075, 0.0095),
-          R=(0.0095, 0.0105), M2=(0.0095, 0.0135), PAD=(0.0135, 0.015), VIA=(0.003, 0.0095))
+from die_stack import STACK as DSTACK, GDS as DGDS, EXPLODE as DEXP
+RL = {key: G(*g) for key, g in DGDS.items()}
+if "AL1" in RL and "AL2" in RL:
+    RL["JJ"] = (RL["AL1"] & RL["AL2"]).merged()
+JJ_GDS = RL.get("JJ", db.Region())
+if ACTIVE_DIE == "RFL":
+    # 0.8 um junction discs (16-gons) are meshed as equal-area octagons
+    _oct = db.Region()
+    for p in RL["JJ"].each():
+        c, rr = p.bbox().center(), math.sqrt(p.area() / (2 * math.sqrt(2)))
+        _oct.insert(db.Polygon([db.Point(round(c.x + rr * math.cos(math.pi / 8 + i * math.pi / 4)),
+                                         round(c.y + rr * math.sin(math.pi / 8 + i * math.pi / 4))) for i in range(8)]))
+    RL["JJ"] = _oct
 add_layer("die_attach", extrude_region(die_box, *Z_ATT), "die", "ge_varnish", ENG["attach"], EXP["die_attach"], *Z_ATT,
           note=PACKAGE["die_attach"])
 add_layer("die_substrate", extrude_region(die_box, *Z_SUB), "die", "silicon", ENG["die_sub"], EXP["die_substrate"],
           *Z_SUB, note=DIE["substrate"])
-SPEC = [  # object name, region, stack key, material, eng colour
-    ("die_GP_Nb", RL["GP"], "GP", "niobium", "#8b93a6"),
-    ("die_ILD0_SiO2", die_box, "I0", "sio2", "#cfe8ff"),
-    ("die_M1_Nb_LJJ", RL["M1"], "M1", "niobium", "#2f6bff"),
-    ("die_JJ_trilayer", RL["JJ"], "JJ", "niobium_jj", "#ff2aff"),
-    ("die_ILD1_SiO2", die_box, "I1", "sio2", "#cfe8ff"),
-    ("die_R_Mo", RL["R"], "R", "molybdenum", "#22c060"),
-    ("die_M2_Nb", RL["M2"], "M2", "niobium", "#ff3b3b"),
-    ("die_pad_Au", RL["PAD"], "PAD", "gold", "#ffd34d"),
-]
-for name, reg, key, mat, col in SPEC:
-    z0, z1 = zf + DZ[key][0], zf + DZ[key][1]
-    add_layer(name, extrude_region(reg, z0, z1), "die", mat, col, EXP[name], z0, z1, true_t=TRUE[key],
-              note=MAT[key] + f" ({TRUE[key] * 1e6:.0f} nm; drawn {(z1 - z0) * 1e6:.0f} nm)",
-              opacity_eng=0.15 if key in ("I0", "I1") else 1.0)
-vm = Mesh()
-extrude_region(RL["VIA"], zf + DZ["VIA"][0], zf + DZ["VIA"][1], vm)
-extrude_region(RL["I1"], zf + 0.009, zf + DZ["I1"][1], vm)
-add_layer("die_vias_Nb", vm, "die", "niobium", "#ffe600", EXP["die_vias_Nb"], zf + DZ["VIA"][0], zf + DZ["VIA"][1],
-          true_t=TRUE["VIA"], note="stacked GP contacts (JJ ground straps, resistor returns, ring fence) + I1 contacts")
-die_metal = RL["M2"]                  # pad / wiring islands used for the bond + netlist checks
+for name, key, mat, col, (v0, v1), (t0, t1), note in DSTACK:
+    reg = die_box if key == "SHEET" else RL[key]
+    z0, z1 = zf + v0 * 1e-3, zf + v1 * 1e-3
+    true_t = (t1 - t0) * 1e-6
+    add_layer(name, extrude_region(reg, z0, z1), "die", mat, col, DEXP[name], z0, z1, true_t=true_t,
+              note=note + f" ({t1 - t0:g} nm; drawn {(v1 - v0) * 1e3:.0f} nm)",
+              opacity_eng=0.15 if key == "SHEET" else 1.0)
+PAD_KEY = "PAD" if ACTIVE_DIE == "RFL" else "BASE"
+die_metal = RL["M2"] if ACTIVE_DIE == "RFL" else RL["BASE"]     # bond-pad islands for the bond/netlist checks
+PAD_TOP = [v1 for n_, k_, m_, c_, (v0, v1), t_, nt_ in DSTACK if k_ == PAD_KEY][0] * 1e-3
 # ------------------------------------------------------------------ wire bonds
 print("building wire bonds")
 # Die ground = every large Al island (the edge-to-edge probe line splits the plane into a north and a
@@ -337,7 +325,7 @@ sig_pads = {p["net"]: p for p in model["pads"] if p.get("role") == "bond_pad"}
 WIRE_R = PACKAGE["wire_d_um"] * 1e-3 / 2
 LOOP = PACKAGE["loop_height_um"] * 1e-3
 Z_PCB_PAD = T + ENIG_T
-Z_DIE_PAD = zf + DZ["PAD"][1]
+Z_DIE_PAD = zf + PAD_TOP
 
 
 def bond_curve(a, b, n=36):

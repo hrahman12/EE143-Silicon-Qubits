@@ -110,17 +110,14 @@ zs = man["z_substrate"]
 parts.append(("die_Si_substrate_525um", box(-5, -5, zs[0], 5, 5, zs[1]), (0.2, 0.22, 0.28)))
 za = man["z_attach"]
 parts.append(("die_attach_GE7031", box(-5, -5, za[0], 5, 5, za[1]), (0.66, 0.4, 0.12)))
-from design_params import RFL_STACK
-ZT = dict(GP=(0, 200), M1=(400, 550), JJ=(550, 650), R=(750, 790), M2=(750, 1050), PAD=(1050, 1150), VIA=(200, 750))
-for name, gds, mat, t in RFL_STACK:
-    if name in ("I0", "I1"):
+from die_stack import STACK as DSTACK
+for name, key, mat, col, vis, (t0, t1), note in DSTACK:
+    if key == "SHEET":
+        parts.append((f"{name} ({t1 - t0} nm)", box(-5, -5, T + t0 * 1e-6, 5, 5, T + t1 * 1e-6), (0.8, 0.9, 1.0)))
         continue
-    z0, z1 = ZT[name]
-    s, _ = extrude(reg["die"][name], T + z0 * 1e-6, T + z1 * 1e-6)
-    parts.append((f"die_{name} ({mat}, {t} nm)", s, {"GP": (0.55, 0.58, 0.65), "M1": (0.2, 0.4, 1), "JJ": (1, 0.2, 1),
-                  "R": (0.2, 0.75, 0.4), "M2": (1, 0.25, 0.25), "PAD": (1, 0.8, 0.3), "VIA": (1, 0.9, 0)}[name]))
-for name, z0, z1 in (("die_ILD0_SiO2_200nm", 200, 400), ("die_ILD1_SiO2_200nm", 550, 750)):
-    parts.append((name, box(-5, -5, T + z0 * 1e-6, 5, 5, T + z1 * 1e-6), (0.8, 0.9, 1.0)))
+    s_, _ = extrude(reg["die"][key], T + t0 * 1e-6, T + t1 * 1e-6)
+    rgb = tuple(int(col.lstrip("#")[i:i + 2], 16) / 255 for i in (0, 2, 4))
+    parts.append((f"{name} ({note}, {t1 - t0} nm)", s_, rgb))
 
 # wire bonds: circular section swept along the same Bezier loop as the mesh
 bb = BRep_Builder()

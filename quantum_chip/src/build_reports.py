@@ -7,7 +7,7 @@ import sys
 import yaml
 
 sys.path.insert(0, os.path.dirname(__file__))
-from design_params import DIE, STACKUP, PCB, PACKAGE, READOUT_F_GHZ, QUBIT_X, QUBIT_Y
+from design_params import DIE, STACKUP, PCB, PACKAGE, READOUT_F_GHZ, QUBIT_X, QUBIT_Y, ACTIVE_DIE
 from rf_calc import cpw_z0
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -26,7 +26,7 @@ stack = dict(
     pcb=dict(name="rf_carrier.kicad_pcb", size_mm=[PCB["size_mm"], PCB["size_mm"]], window_mm=PCB["window_mm"],
              total_thickness_mm=round(sum(t for _, _, t, _ in STACKUP), 4), finish="ENIG (Ni 4 um / Au 0.08 um)",
              layers=[]),
-    die=dict(name="quantum_die.gds (cell RFL_RE1)", size_mm=[DIE["size_um"] / 1000] * 2, layers=[]),
+    die=dict(name="quantum_die.gds (cell " + ("RFL_RE1" if ACTIVE_DIE == "RFL" else "QFX1") + ")", size_mm=[DIE["size_um"] / 1000] * 2, layers=[]),
     package=dict(base=PACKAGE["base_material"], base_thickness_mm=PACKAGE["base_thickness_mm"],
                  die_attach=PACKAGE["die_attach"], wirebond=PACKAGE["wirebond"],
                  wire_diameter_um=PACKAGE["wire_d_um"], loop_height_um=PACKAGE["loop_height_um"]),
@@ -38,12 +38,19 @@ Z = man["Z"]
 for name, kind, t, desc in STACKUP:
     stack["pcb"]["layers"].append(dict(name=name, kind=kind, thickness_mm=t, z_mm=[round(v, 4) for v in Z[name]],
                                        material=desc))
+GDS_LAYERS_QFX = {"die_base_Nb": "1/0 BASE", "die_grAl_rails": "2/0 GRAL", "die_Al_bottom": "3/0 AL1",
+                  "die_junctions_AlOx": "3/0 AND 4/0", "die_Al_top": "4/0 AL2", "die_Cu_res_traps": "5/0 RES",
+                  "die_airbridge_feet": "6/0 ABP", "die_airbridge_spans": "7/0 ABS", "die_substrate": "chip box",
+                  "die_attach": "chip box"}
 GDS_LAYERS = {"die_GP_Nb": "1/0 GP", "die_ILD0_SiO2": "sheet (not drawn)", "die_M1_Nb_LJJ": "3/0 M1",
               "die_JJ_trilayer": "4/0 JJ", "die_ILD1_SiO2": "sheet (5/0 = contacts)", "die_R_Mo": "6/0 R",
               "die_M2_Nb": "7/0 M2", "die_pad_Au": "8/0 PAD", "die_vias_Nb": "9/0 VIA + 5/0 I1",
               "die_substrate": "chip box", "die_attach": "chip box"}
-stack["die"]["process"] = "Nb/AlOx/Nb trilayer, GP + 2 wiring layers (SFQ5ee-like, simplified)"
+stack["die"]["process"] = ("Nb/AlOx/Nb trilayer, GP + 2 wiring layers (SFQ5ee-like, simplified)" if ACTIVE_DIE == "RFL"
+                           else "Nb base + granular-Al superinductors + Al/AlOx/Al double-angle junctions + Cu + Al airbridges")
 stack["die"]["junctions"] = cells["total_jj"]
+if ACTIVE_DIE == "QFX":
+    GDS_LAYERS = GDS_LAYERS_QFX
 for L in man["layers"]:
     if L["group"] == "die":
         stack["die"]["layers"].append(dict(name=L["name"], source=GDS_LAYERS.get(L["name"], ""), material=L["note"],
@@ -55,6 +62,20 @@ for L in sorted(man["layers"], key=lambda L: -L["z"][1]):
 yaml.safe_dump(stack, open(os.path.join(OUT, "layer_stack.yaml"), "w"), sort_keys=False, width=120)
 
 # ------------------------------------------------------------------ connections.json
+from design_params import ACTIVE_DIE
+FUNC_QFX = {
+    "FEED_IN": ("readout feedline in", "RES1, RES2", "Nb CPW feedline -> lambda/4 resonators RES1 (7.0 GHz), RES2 (7.4 GHz)"),
+    "FEED_OUT": ("readout feedline out", "RES1, RES2", "same continuous feedline"),
+    "QF1_DRIVE": ("fast tilt / microwave drive", "QF1", "Nb CPW shorted onto the QF1 rim on link 10->11 (next to well A)"),
+    "QF2_DRIVE": ("fast tilt / microwave drive", "QF2", "Nb CPW shorted onto the QF2 rim on link 10->11"),
+    "QF1_FLUX": ("dc flux: fluxon trapping + barrier SQUID bias", "QF1", "Nb line (airbridge over the kick line) shorted "
+                 "onto the QF1 rim on link 16->17"),
+    "QF2_FLUX": ("dc flux: fluxon trapping + barrier SQUID bias", "QF2", "same for QF2"),
+    "KICK_TRIG": ("heavy-fluxon trigger", "KICK line", "DC/SFQ launcher -> 7.8 mm ballistic line of 392 Al junctions"),
+    "KICK_OUT": ("heavy-fluxon arrival", "KICK line", "SFQ/DC receiver at the far end of the kick line"),
+    "VB_IN": ("dc bias, launcher", "DCSFQ_IN", "Nb line -> Cu bias resistor"),
+    "VB_OUT": ("dc bias, receiver", "SFQDC_OUT", "Nb line -> Cu bias resistor"),
+}
 FUNC = {
     "TRIG_A": ("fluxon trigger A", "RE input I0 via controlled barrier",
                "M2 microstrip -> DCSFQ_A (2 JJ) -> LJJ_A -> controlled barrier CB -> LJJ_A2 -> rotary element port I0"),
@@ -68,6 +89,10 @@ FUNC = {
     "VB_W": ("DC bias, west converters", "DCSFQ_A, SFQDC_0, DCSFQ_T", "M2 bias tree -> Mo bias resistors"),
     "VB_E": ("DC bias, east converters", "DCSFQ_B, SFQDC_1, SFQDC_T", "M2 bias tree -> Mo bias resistors"),
 }
+
+
+if ACTIVE_DIE == "QFX":
+    FUNC = FUNC_QFX
 
 
 def plen(pts):
@@ -120,8 +145,9 @@ for p in die_ports["ports"]:
     conns["signal_nets"].append(entry)
 gb = [b for b in geo["bonds"] if b["kind"] == "ground"]
 conns["ground"] = dict(
-    die_ground_plane="Nb GP (M0) under the whole circuit; M2+Au bond ring stitched to it by a via fence; "
-                     "every LJJ junction returns to GP through its own stacked via",
+    die_ground_plane=("Nb GP (M0) under the whole circuit; M2+Au bond ring stitched to it by a via fence; "
+                      "every LJJ junction returns to GP through its own stacked via") if ACTIVE_DIE == "RFL" else
+                     "Nb base-layer ground plane; each qubit sits in a 100 um hole whose rim is one rail of the fluxon ring",
     ground_wire_bonds=len(gb), ground_bonds_per_side={s: sum(1 for b in gb if b["side"] == s) for s in "NESW"},
     pcb_ground_ring="exposed ENIG ring around the die window, F.Cu GND",
     stitching_vias=sum(1 for v in model["vias"] if v["net"] == "GND"),
