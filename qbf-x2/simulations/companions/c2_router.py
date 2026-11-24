@@ -84,17 +84,31 @@ split = [abs(transfer(b, 0.0, L, 0.0)[1, 0]) ** 2 for b in betas]
 # Mach-Zehnder fringes
 chis = np.linspace(0, 2 * math.pi, 73)
 ideal = [p_row1(BETA, c, L, GAP) for c in chis]
-rng = np.random.default_rng(1)
+GH_X, GH_W = np.polynomial.hermite_e.hermegauss(16)        # standard-normal quadrature: launch-speed spread
+GH_W = GH_W / GH_W.sum()
+GH_XC, GH_WC = np.polynomial.hermite_e.hermegauss(8)       # charge noise on chi
+GH_WC = GH_WC / GH_WC.sum()
+dropped = {}
 
 
-def thermal_avg(chi, T_K, n=200, sigma_chi=0.0):
-    s = model.thermal_beta_spread(BETA, T_K) * BETA
-    bs = BETA + s * rng.standard_normal(n)
-    return float(np.mean([p_row1(b, chi, L, GAP, sigma_chi=sigma_chi, rng=rng) for b in bs]))
+def thermal_avg(chi, T_K, beta=BETA, L_bs=None, sigma_chi=0.0):
+    """P(row 1) averaged over a Gaussian launch-speed spread (thermal source at T_K) and, optionally, Gaussian charge
+    noise on chi, by Gauss-Hermite quadrature. Deterministic: it replaces a 60-sample Monte Carlo average whose
+    sampling error in the contrast was ~1e-3. Nodes at non-physical speeds (beta <= 0 or >= 1) are dropped and the
+    weights renormalised; the dropped weight is recorded (largest 1.5e-5, beta 0.30 at 200 mK)."""
+    L_bs = L if L_bs is None else L_bs
+    s = model.thermal_beta_spread(beta, T_K) * beta
+    bn = beta + s * GH_X
+    keep = (bn > 0) & (bn < 1)
+    dropped[(beta, T_K)] = float(GH_W[~keep].sum())
+    wb = GH_W[keep] / GH_W[keep].sum()
+    cs, cw = (GH_XC * sigma_chi, GH_WC) if sigma_chi else (np.zeros(1), np.ones(1))
+    return float(sum(w * u * p_row1(b, chi + dc, L_bs, GAP)
+                     for b, w in zip(bn[keep], wb) for dc, u in zip(cs, cw)))
 
 
-th20 = [thermal_avg(c, 0.02, n=60) for c in chis]
-qn = [thermal_avg(c, 0.02, n=60, sigma_chi=2 * math.pi * 0.01) for c in chis]
+th20 = [thermal_avg(c, 0.02) for c in chis]
+qn = [thermal_avg(c, 0.02, sigma_chi=2 * math.pi * 0.01) for c in chis]
 
 
 def visibility(p):
@@ -107,15 +121,12 @@ Ts = [0.01, 0.02, 0.05, 0.1, 0.2]
 vis_T = {}
 for b in (0.30, 0.45, 0.60):
     Lb = bs_length(b)
-    vis_T[b] = []
-    for T in Ts:
-        s = model.thermal_beta_spread(b, T) * b
-        bs = b + s * rng.standard_normal(80)
-        pc = [float(np.mean([abs(transfer(bb, c, Lb, GAP)[1, 0]) ** 2 for bb in bs])) for c in (0.0, math.pi)]
-        vis_T[b].append(abs(pc[1] - pc[0]))
+    vis_T[b] = [abs(thermal_avg(0.0, T, beta=b, L_bs=Lb) - thermal_avg(math.pi, T, beta=b, L_bs=Lb)) for T in Ts]
 res["fringes"] = dict(chi=chis, ideal=ideal, thermal_20mK=th20, thermal_plus_charge_noise_0p01e=qn,
-                      contrast_ideal=visibility(ideal), contrast_20mK=visibility(th20), contrast_20mK_charge_noise=visibility(qn))
+                      contrast_ideal=visibility(ideal), contrast_20mK=visibility(th20), contrast_20mK_charge_noise=visibility(qn),
+                      averaging="Gauss-Hermite quadrature: 16 speed nodes x 8 charge-noise nodes")
 res["contrast_vs_T"] = {str(b): dict(T_K=Ts, contrast=v) for b, v in vis_T.items()}
+res["quadrature_dropped_weight_max"] = max(dropped.values())
 print("contrasts", res["fringes"]["contrast_ideal"], res["fringes"]["contrast_20mK"], res["fringes"]["contrast_20mK_charge_noise"])
 
 # ---------------------------------------------------------------- explicit wavepacket demonstration (split and recombine)
