@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qbf-x2"
+version = "0.1.0"
+description = "QBF-X2: a collision-powered entangling gate between two flying quantum fluxons (simulation study and preliminary design)"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = ["numpy>=1.26", "scipy>=1.11", "matplotlib>=3.8", "qutip>=5.0", "scqubits>=4.0", "schemdraw>=0.18",
+                "gdstk>=0.9", "klayout>=0.28"]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+jax = ["jax"]
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+packages = ["classical", "quantum", "scattering", "gates", "optimization", "hardware"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-q"

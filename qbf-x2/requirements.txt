@@ -1,0 +1,10 @@
+# versions used to produce every result and figure in this repository (Python 3.13; 3.11+ supported)
+numpy==2.5.3
+scipy==1.18.1
+matplotlib==3.11.2
+qutip==5.3.1
+scqubits==4.3.1
+schemdraw==0.23
+gdstk==1.0.2
+klayout==0.30.14
+pytest==9.1.1
