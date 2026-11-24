@@ -30,6 +30,12 @@ result files.
   - collision (3×10⁻⁶ to 1×10⁻⁵).
 
   It is applied to the gate (couplers + collision): 99.997 %. Both numbers are reported.
+- **Milestone D, error-budget check.** This check first assumed that the fluxon leaves the launcher with the speed
+  spread of a thermal source at 20 mK (4.3 % rms at β = 0.45), because the launcher was not modelled. That gave
+  1.9 %, and the check **failed**. The launcher is now designed and simulated (`results/D_launcher.json`). Its speed
+  spread at 20 mK is 1.02 %, set by the trap ground state and the accelerator's phase-space shear rather than by
+  k_B T. The check keeps its assumptions (2 % disorder, 20 mK, 10 ps jitter) and now uses the computed spread, which
+  gives 0.26 %. The thermal-source value is still computed and reported: 1.93 % on the same geometry.
 
 ## 2. Parameter status
 
@@ -41,31 +47,33 @@ result files.
 | Gate coupler at the optimum β = 0.45 | k = 0.01778, c = 0.0875 (L_s ≈ 11.6 pH, C_c ≈ 0.21 fF) | **validated**: 2D calibration (Δ = π to 1.3×10⁻⁴ rad, dΔ/dβ = 2×10⁻⁵); circuit zero crossing at β = 0.454 |
 | Dummy couplers on A0 and B0 | identical to the gate coupler | proposed; they cancel single-particle phases and delays between rails |
 | Beam splitter | middle-rail junctions with E_J/E_C = 2; E_S from exact charge dispersion | E_S validated (scqubits); vortex hopping uses the single-junction estimate (unresolved) |
-| Launcher | injection junction (2 I_c) + current pulse + 40-cell accelerator | **UNRESOLVED**: motional-state preparation and timing (≤ 10 ps) not modelled |
+| Launcher | flux-bias trap (3 GHz, 21.7 GHz deep) + flux-gradient accelerator (1.11 GHz/cell over 86 cells) + 120-cell plateau; control lines coupled by mutual inductance only (≤ 0.12 pH per cell at 50/200 µA); rail-end load loop | **validated by simulation**: quantum launch rms dv/v = 1.02 % at 20 mK; full circuit gives one fluxon at β = 0.4500 after a 1.5 % amplitude trim; relative timing jitter 3.2 ps with an assumed 2 ps trigger. Not measured |
 | Detector | catcher loop (20 nH) + dispersive λ/4 readout, as in QFX-1 | proposed |
-| Junction disorder | 2 % assumed; needs ≤ 1 % for a sub-1 % gate error | **open fabrication requirement** |
-| Damping α | 2×10⁻⁶ assumed (quasiparticle- and dielectric-limited at 20 mK) | unknown; each emitted plasma quantum is counted as which-rail information (upper bound) |
+| Junction disorder | 2 % assumed. With the launcher the gate stays below 1 % up to 5.7 % disorder; with a thermal-source launch, only up to 1.4 % | fabrication input |
+| Damping α | 2×10⁻⁶ assumed (quasiparticle- and dielectric-limited at 20 mK) | unknown, and now the largest error term (0.15 %). Each emitted plasma quantum is counted as which-rail information (upper bound). The gate stays below 1 % for α ≤ 1.2×10⁻⁵ |
 
 ## 3. Error budget
 
-Assumptions: 300 cells per rail, 2 % disorder in E_J/E_L/C, 20 mK launch, α = 2×10⁻⁶, 10 ps jitter, 100-cell
-coupler plateau.
+Assumptions: 302 dual-rail cells per rail (beam splitter to beam splitter), 2 % disorder in E_J/E_L/C, 20 mK,
+α = 2×10⁻⁶, 10 ps timing jitter, 100-cell coupler plateau with 40-cell tapers, β = 0.45. From
+`results/D_launcher.json`.
 
-| Error source | Effect |
-|---|---|
-| Thermal launch speed spread (gate) | second order at the sweet spot: 1.2×10⁻⁵ at β = 0.30 |
-| Junction disorder | dominant; the rail phase difference scales ∝ 1/v, so its dephasing falls ∝ β⁻⁴ |
-| Damping | about 10⁻³ |
-| Timing jitter | negligible while the meeting point stays on the coupler plateau |
-| Coupler strength error | needs calibration, a flux-tunable L_s, or speed retuning |
+| Error source | Launcher (modelled) | Thermal-source launch (old assumption) |
+|---|---|---|
+| Disorder dephasing | 1.0×10⁻³ | 1.8×10⁻² |
+| Damping (upper bound) | 1.5×10⁻³ | 1.5×10⁻³ |
+| Speed spread at the sweet spot (gate) | 4×10⁻⁹ | 1.3×10⁻⁶ |
+| Timing (10 ps jitter; meeting-point spread of the launched packets) | < 10⁻⁹ | < 10⁻⁹ |
+| Exact 2D gate with the launched packets on the finite coupler | 1.6×10⁻⁷ | not run |
+| **Total** | **0.26 %** | **1.93 %** |
 
-Totals:
-- Optimum, β = 0.45: **1.9 %**. Disorder 1.8 %, damping 0.15 %, thermal gate 1.3×10⁻⁶, timing 0.
-- Requirements, from the disorder/length scan in `results/D_feasibility.json` (`constraints`):
-  - < 1 % needs junction disorder ≤ 1 % (0.73 % over the full 362-cell design) or flights ≤ 150 cells at 2 % (0.97 %);
-  - 0.5 % disorder gives 0.13–0.32 %.
-- Per-speed totals: `results/C_gate.json` (`budget_scan_default`).
-
+- Disorder dephasing arises because each rail of a qubit picks up a different random phase. The static part is a
+  calibratable single-qubit phase. Because it scales ∝ 1/v, the launch speed spread turns it into dephasing ∝
+  (dv/v)², which is why the launcher matters.
+- Launch speed spread: 1.02 % (quantum, 20 mK) combined in quadrature with 0.04 % (classical, from 10⁻³ amplitude
+  noise), against 4.29 % for a thermal source. The launcher's spread barely depends on temperature: 1.39 % at
+  100 mK, where a thermal source gives 9.6 %.
+- Scans of disorder and length: `results/D_feasibility.json` (`constraints`), for both launch models.
 ## 4. Where the effective model breaks down
 
 | Regime | What fails | Evidence |
@@ -84,30 +92,41 @@ Totals:
   - Rail junctions: about 0.038 µm² (1.92 fF), plus a 0.50 fF node shunt. The shunt is reduced to 0.29 fF on the
     coupler plateaus to compensate C_c.
   - Middle-rail junctions: about 0.024 µm² (1.21 fF), plus a 0.31 fF island shunt (E_C,M = 12.7 GHz).
-  - Injection junctions: about 0.077 µm² (2 I_c).
   - The shunts are to come from the geometric capacitance of the node pads, lines and islands plus a trim. They are
     not drawn in the layout; EM extraction sets them.
 - **Inductors and couplers:**
   - rail inductors: 20 nm granular Al;
   - shared coupler strips: 0.4 µm thin Al;
   - coupling capacitors: a crossover dielectric (extra process, unverified).
-- **Disorder:** junction spread of 1 % or better across the 2,336 junctions of the chip (about 1,170 per qubit).
+- **Disorder:** 2 % junction spread assumed across the 3,544 junctions of the chip (about 1,770 per qubit). With
+  the launcher the gate stays below 1 % up to 5.7 %.
 
 ## 6. Cryogenic test requirements
 
 - **Temperature and shielding:** dilution refrigerator at 20 mK or below; μ-metal and superconducting shielding;
-  IR-tight sample box (quasiparticles); Cu quasiparticle traps near the injectors.
-- **Launch control:** fast lines for the injectors (rise time ≤ 20 ps, relative timing between the A and B launchers
-  ≤ 10 ps). This could come from on-chip SFQ clocking or cryo-CMOS pulse generators.
-- **Other lines:** dc lines for the accelerators and gate electrodes (Aharonov–Casher phase of the beam-splitter
-  islands).
+  IR-tight sample box (quasiparticles); Cu quasiparticle traps near the launchers.
+- **Launch control:** each launch row needs two 50 Ω lines with at least 10 GHz bandwidth. The carrier PCB is in
+  `pcb/`.
+  - A trap line: DC hold current, then switched off with an edge of 100 ps or less.
+  - An accelerator line: a pulse of about 0.6 ns, switched by the same trigger.
+
+  The simulated speed spread barely changes up to 100 ps edges (1.06 %). Assumed specs: trigger jitter of 2 ps or
+  less, giving 3.2 ps between the A and B launchers, and 10⁻³ shot-to-shot amplitude stability. A one-off 1.5 %
+  trim of the accelerator amplitude sets the speed.
+- **Other lines:**
+  - A slow flux line for each load loop: a ramp of about 1 µs inserts one fluxon. Allow about 7 µs to relax into the
+    trap at α = 2×10⁻⁶.
+  - Heavily filtered DC lines for the beam-splitter gate electrodes (Aharonov–Casher phase of the islands).
 - **Readout:** catcher-loop resonators on a feedline, read through a JPA or TWPA, single-shot.
 
 ## 7. Staged measurement protocol
 
-1. **Single-rail transit:** time of flight versus accelerator bias gives fluxon speed, effective mass and damping.
-2. **Velocity statistics:** the time-of-flight histogram gives the launch speed spread; compare it with the thermal
-   prediction at the base temperature.
+1. **Loading and launch:** a load-loop flux ramp, a hold, then a release. Time of flight versus accelerator
+   amplitude gives the fluxon speed, the amplitude trim, the effective mass and the damping.
+2. **Speed statistics:** the time-of-flight histogram gives the launch speed spread.
+   - The launcher predicts 1.0 % rms, nearly independent of the base temperature up to 50 mK (1.1 %).
+   - A thermal source would give 4.3 % at 20 mK, growing as √T.
+   - This directly tests the launcher model.
 3. **Beam splitter and router:** Mach–Zehnder fringes versus gate voltage give E_S, the beam-splitter angle and the
    fringe contrast (target ≥ 0.99; companion 2).
 4. **Dual-rail coherence:** Ramsey-type interferometry with variable delay lines gives the rail-dephasing rate. This

@@ -80,6 +80,7 @@ both per cell.
 | `fig08_noise_loss_sensitivity.png` | Temperature, speed mismatch, coupler error, junction disorder, error budget vs speed, damping |
 | `fig09_quantum_vs_classical.png` | Conditional phase, quantum ⟨ΔX⟩ vs classical shift, which-path distinguishability |
 | `fig10_energy_budget.png` | Energy retention, where the energy goes, cost per operation |
+| `fig11_launcher.png` | Coherent launcher: potentials, launch speed distribution vs a thermal source, temperature dependence, full-circuit launch, 2D gate with launched packets, error budget |
 | `companion1-5_*.png` | The five companion devices |
 | `circuits/` | `qbfx2_netlist.cir` (complete), `schematic_unit_cells.png/.svg`, `qbfx2_layout.gds` and previews |
 
@@ -91,8 +92,9 @@ pip install -r requirements.txt      # numpy, scipy, matplotlib, qutip 5, scqubi
 python -m pytest                      # 18 tests: sine-Gordon benchmarks, unitarity, eikonal limit, sweet spot, metrics, netlist
 ```
 
-Single stages: `cd simulations && python A_classical.py` (or `B_quantum.py`, `C_gate.py`, `D_feasibility.py`,
-`companions/c1_bell_pair.py` … `c5_qec.py`). Each stage writes `results/<stage>.json` with its acceptance checks.
+Single stages: `cd simulations && python A_classical.py` (or `B_quantum.py`, `C_gate.py`, `D_launcher.py`,
+`D_feasibility.py`, `companions/c1_bell_pair.py` … `c5_qec.py`). Each stage writes `results/<stage>.json` with its
+acceptance checks.
 
 ## Layout
 
