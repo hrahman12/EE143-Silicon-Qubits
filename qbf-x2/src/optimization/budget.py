@@ -33,10 +33,11 @@ def per_cell_disorder_phase(model, beta, sigma_EJ, sigma_EL=0.0, sigma_C=0.0):
     return 2 * math.pi * EJ * w / v
 
 
-def disorder_dephasing(model, beta, n_cells, sigma_EJ, sigma_EL=0.0, sigma_C=0.0, T_K=None):
+def disorder_dephasing(model, beta, n_cells, sigma_EJ, sigma_EL=0.0, sigma_C=0.0, T_K=None, spread_rel=None):
+    """spread_rel: relative launch-speed spread (rms dv/v); default = launch from a thermal source at T_K"""
     s_cell = per_cell_disorder_phase(model, beta, sigma_EJ, sigma_EL, sigma_C)
     Phi2 = 2 * n_cells * s_cell ** 2                                   # two independent rails of n_cells each
-    s = model.thermal_beta_spread(beta, T_K)
+    s = model.thermal_beta_spread(beta, T_K) if spread_rel is None else spread_rel
     return 1 - 1 / math.sqrt(1 + Phi2 * s * s), math.sqrt(Phi2)
 
 
@@ -50,7 +51,7 @@ def damping_decoherence(model, beta, n_cells, alpha):
     return min(1.0, dE_EJ * model.rail.EJ_GHz / model.rail.fp_GHz)
 
 
-def gate_thermal_infidelity(model, cp, beta, T_K=None, delta_target=math.pi, scale_to_target=True):
+def gate_thermal_infidelity(model, cp, beta, T_K=None, delta_target=math.pi, scale_to_target=True, spread_rel=None):
     """infidelity (1 - F_avg of CZ after best local phases) from thermal launch spread, for a coupler cp whose
     first-order phase is rescaled so that Delta(beta, beta) = delta_target (calibration)."""
     from gates.metrics import gram_from_overlap, best_process_fidelity, average_gate_fidelity
@@ -59,7 +60,7 @@ def gate_thermal_infidelity(model, cp, beta, T_K=None, delta_target=math.pi, sca
     d0 = float(eikonal.delta(model, cp, k0, -k0))
     s = delta_target / d0 if scale_to_target else 1.0
     cps = CouplerParams(k=cp.k * s, c=cp.c * s)
-    sb = model.thermal_beta_spread(beta, T_K) * beta
+    sb = (model.thermal_beta_spread(beta, T_K) if spread_rel is None else spread_rel) * beta
     om = eikonal.overlap_thermal(model, cps, beta, sb)
     G = gram_from_overlap(om)
     F, _ = best_process_fidelity(G)
@@ -106,14 +107,16 @@ def coupler_infidelity(rel_error):
 
 
 def budget(model, cp_design, beta, n_cells=300, sigma_EJ=0.02, sigma_EL=0.02, sigma_C=0.02, alpha=2e-6,
-           T_K=None, jitter_ps=10.0, plateau=100, taper=40, sigma=10.0, coupler_error=0.0):
-    """total error budget at speed beta for a coupler redesigned to have its sweet spot at beta."""
+           T_K=None, jitter_ps=10.0, plateau=100, taper=40, sigma=10.0, coupler_error=0.0, velocity_spread_rel=None):
+    """total error budget at speed beta for a coupler redesigned to have its sweet spot at beta.
+    velocity_spread_rel: rms dv/v of the launched fluxon (from a launcher model); None = thermal source at T_K.
+    sigma: wavepacket length (cells) at the coupler, which sets the spread of meeting points."""
     from classical.exact import coupler_for
     from hardware.params import CouplerParams
     k, c = coupler_for(math.pi, beta, model.rail.Lambda, model.rail.EJ_over_hfp)
     cp = CouplerParams(k=k, c=c)
-    e_gate, om = gate_thermal_infidelity(model, cp, beta, T_K)
-    p_dis, phi01 = disorder_dephasing(model, beta, n_cells, sigma_EJ, sigma_EL, sigma_C, T_K)
+    e_gate, om = gate_thermal_infidelity(model, cp, beta, T_K, spread_rel=velocity_spread_rel)
+    p_dis, phi01 = disorder_dephasing(model, beta, n_cells, sigma_EJ, sigma_EL, sigma_C, T_K, velocity_spread_rel)
     e_dis = cz_infidelity_from_dephasing(p_dis)
     p_damp = damping_decoherence(model, beta, n_cells, alpha)
     e_damp = cz_infidelity_from_dephasing(p_damp)
@@ -124,4 +127,6 @@ def budget(model, cp_design, beta, n_cells=300, sigma_EJ=0.02, sigma_EL=0.02, si
     parts = dict(gate_thermal=e_gate, disorder_dephasing=e_dis, damping=e_damp, timing=e_time, coupler=e_coup)
     return dict(beta=beta, k=k, c=c, parts=parts, total=sum(parts.values()), phi01_rms_rad=phi01,
                 p_dephase_disorder=p_dis, p_dephase_damping=p_damp, thermal_overlap=om,
-                velocity_spread_rel=model.thermal_beta_spread(beta, T_K), v_cells_per_ns=v)
+                velocity_spread_rel=(model.thermal_beta_spread(beta, T_K) if velocity_spread_rel is None
+                                     else velocity_spread_rel), v_cells_per_ns=v,
+                launch_model="thermal source" if velocity_spread_rel is None else "launcher model")

@@ -56,6 +56,7 @@ def build(arch: Architecture) -> tuple[str, dict]:
              f"icrit={mj['EJ_GHz'] * 1e9 * 6.62607015e-34 * 2 * math.pi / 2.067833848e-15:.4g})",
              f".model JJI jj(rtype=1, cap={2 * Cj:.4g}, icrit={2 * r.Ic_A:.4g}, rn=2k, r0=200k)"]
     count = Counter()
+    launcher_rows = []
     pair_of = {row: key for key, (a, b) in PAIRS.items() for row in (a, b)}
     for row in ROWS:
         mirrored = row.startswith("B") or row == "D_B"            # B and its dummy run from the right
@@ -79,19 +80,13 @@ def build(arch: Architecture) -> tuple[str, dict]:
                 lser = L * (1 - arch.k * 0.5 * (g + _env(arch, n + 1)))
                 lines.append(f"L{row}_{n} {node} {row}_{n + 1} {lser:.5g}")
                 count["inductor (rail, granular Al)"] += 1
-        # injector at the launch end, catcher loop at the far end
+        # launcher at the launch end (load loop + trap and accelerator control lines, mutual coupling only) and
+        # catcher loop at the far end
         start, end = (f"{row}_{N - 1}", f"{row}_0") if mirrored else (f"{row}_0", f"{row}_{N - 1}")
         if not row.startswith("D"):
-            lines.append(f"BINJ_{row} {start} 0 JJI area=1")
-            lines.append(f"IINJ_{row} 0 {start} pwl(0 0 20p 0 30p {1.2 * 2 * r.Ic_A:.4g} 50p 0)")
             lines.append(f"LCATCH_{row} {end} 0 20n")
-            count["injector junction"] += 1
-            count["injector pulse source"] += 1
             count["catcher loop inductor"] += 1
-            for j in range(arch.n_inject, arch.n_inject + arch.n_accel):
-                nn = N - 1 - j if mirrored else j
-                lines.append(f"IACC_{row}_{j} 0 {row}_{nn} pwl(0 0 50p 0 60p {0.05 * r.Ic_A:.4g} 200p {0.05 * r.Ic_A:.4g} 210p 0)")
-                count["accelerator bias source"] += 1
+            launcher_rows.append((row, mirrored, start))
     # coupler strips (shared ground return) and coupling capacitors
     for key, (ra, rb) in PAIRS.items():
         nodes = [n for n in range(N) if _env(arch, n) > 0]
@@ -115,7 +110,41 @@ def build(arch: Architecture) -> tuple[str, dict]:
                 count["capacitor (BS middle-rail shunt)"] += 1
             lines.append(f"LM{q}_{sec}_end M{q}_{ns[-1]} 0 1p")
             lines.append(f"LM{q}_{sec}_start M{q}_{ns[0]} 0 1p")
-    lines += [".tran 0.1p 3000p 0 0.1p",
+    # launchers: rail-end load loop (flux ramp inserts one fluxon), trap line (DC while holding, off at release),
+    # accelerator line (on at release, off at t_off). Control lines are chains of small inductors, each coupled (K) to
+    # the series inductor of one rail cell: theta_n = 2 pi M_n I / Phi0 (targets from hardware/launcher.py).
+    lv = ev["launcher"]
+    T_REL = 20000.0                                              # ns: loading and relaxation (~us) happen before
+    L_SEG = 2e-12
+    phi0 = 2.067833848e-15
+    tau = lv["tau_ps"] * 1e-3
+    t_off = lv["t_off_ns"]
+    for row, mirrored, start in launcher_rows:
+        lines.append(f"LLOAD_{row} {start} 0 {lv['load_loop']['L_nH']}n")
+        lines.append(f"ILOAD_{row} 0 {start} pwl(0 0 1000n {phi0 / (lv['load_loop']['L_nH'] * 1e-9):.4g})")
+        count["launcher load loop inductor"] += 1
+        count["launcher load flux source"] += 1
+        for tag, key, wave in (("TR", "trap_line", f"pwl(0 0 1n {{I}} {T_REL:.0f}n {{I}} {T_REL + tau:.4f}n 0)"),
+                               ("AC", "accelerator_line", f"pwl(0 0 {T_REL:.0f}n 0 {T_REL + tau:.4f}n {{I}} "
+                                                          f"{T_REL + t_off:.4f}n {{I}} {T_REL + t_off + tau:.4f}n 0)")):
+            line = lv[key]
+            I = line["I_uA"] * 1e-6
+            nodes = [f"{tag}{row}_{j}" for j in range(len(line["cells"]) + 1)]
+            lines.append(f"I{tag}_{row} 0 {nodes[0]} " + wave.format(I=f"{I:.4g}"))
+            count[f"{key.replace('_', ' ')} source"] += 1
+            for j, (cell, M) in enumerate(zip(line["cells"], line["M_pH"])):
+                rail_ind = f"L{row}_{N - 2 - cell}" if mirrored else f"L{row}_{cell}"
+                lines.append(f"L{tag}{row}_{cell} {nodes[j]} {nodes[j + 1]} {L_SEG:.3g}")
+                lser = L * (1 - arch.k * 0.5 * (_env(arch, N - 2 - cell if mirrored else cell)
+                                                + _env(arch, N - 1 - cell if mirrored else cell + 1)))
+                kc = M * 1e-12 / math.sqrt(L_SEG * lser)
+                lines.append(f"K{tag}{row}_{cell} L{tag}{row}_{cell} {rail_ind} {kc:.4g}")
+                count[f"{key.replace('_', ' ')} inductor"] += 1
+                count[f"{key.replace('_', ' ')} coupling (K)"] += 1
+            lines.append(f"L{tag}{row}_end {nodes[-1]} 0 {L_SEG:.3g}")
+            count[f"{key.replace('_', ' ')} inductor"] += 1
+    lines += [f"* release at t = {T_REL:.0f} ns; the transient below covers the launch and the gate",
+              f".tran 0.1p {T_REL + 3:.0f}n {T_REL:.0f}n 0.1p",
               ".print phase BA1_" + str(N // 2), ".print phase BB1_" + str(N // 2), ".end"]
     text = "\n".join(lines) + "\n"
     summary = dict(elements=dict(count), total_elements=sum(count.values()), cells_per_row=N, rows=ROWS,
@@ -134,6 +163,8 @@ def parse(text: str) -> dict:
             continue
         tok = ln.split()
         kinds[tok[0][0]] += 1
+        if tok[0][0] == "K":                       # mutual inductance: references two inductors, not nodes
+            continue
         for nd in tok[1:3]:
             deg[nd] += 1
     return dict(kinds=dict(kinds), nodes=len(deg), isolated=[n for n, d in deg.items() if d < 2 and n != "0"])

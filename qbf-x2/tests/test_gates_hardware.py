@@ -60,7 +60,8 @@ def test_netlist_complete_and_connected():
     text, summ = NL.build(arch)
     p = NL.parse(text)
     assert not p["isolated"]
-    assert summ["elements"]["injector junction"] == 4 and summ["elements"]["catcher loop inductor"] == 4
+    assert summ["elements"]["launcher load loop inductor"] == 4 and summ["elements"]["catcher loop inductor"] == 4
+    assert summ["elements"]["trap line source"] == 4 and summ["elements"]["accelerator line source"] == 4
     assert summ["elements"]["junction (rail)"] == 6 * arch.n_cells
 
 

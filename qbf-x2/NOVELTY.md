@@ -58,6 +58,11 @@ Lune and web/patent search.
 
 **Status of every result here:** it comes from simulation in this repository and has not been measured.
 
+**Not assessed: the launcher.** The coherent launcher was designed for milestone D: a flux-bias trap, followed by a
+flux-gradient accelerator whose phase-space shear gives a speed spread below thermal. Its ingredients are established:
+vortex pinning by applied flux and forces on vortices from field gradients. I did not run a prior-art search for the
+launcher itself, so no novelty is claimed for it.
+
 ## 3. What this project does *not* claim
 
 - Not that fluxon qubits, fluxon readout, fluxon-mediated gates or flying-qubit collision gates are new; see section 1.

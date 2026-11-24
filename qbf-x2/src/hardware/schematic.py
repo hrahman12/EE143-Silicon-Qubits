@@ -1,5 +1,5 @@
 """Unit-cell schematics of QBF-X2 drawn with schemdraw: rail cell, gate coupler cell, beam-splitter cell,
-injector and catcher. Values are filled in from the architecture."""
+launcher and catcher. Values are filled in from the architecture."""
 from __future__ import annotations
 
 import schemdraw
@@ -59,16 +59,25 @@ def draw(arch: Architecture, path_png: str, path_svg: str):
             f"middle-rail JJ: E_J/E_C = 2, {mj['Ic_nA']:.0f} nA,\n{mj['Cj_fF']:.2f} fF + {mj['shunt_fF']:.2f} fF island shunt,\n"
             f"E_S = {arch.E_S_GHz:.2f} GHz", fontsize=9)
         d += elm.Dot().label("M_n+1", loc="right")
-        # (d) injector and catcher
-        d += elm.Label().label("(d) injector / catcher (proposed)", fontsize=10).at((7.2, -4.0))
-        d += (i0 := elm.Dot().at((6.5, -5)))
-        d += elm.SourceI().down().label("pulse\n(UNRESOLVED:\ncoherent launch)", loc="bottom")
+        # (d) launcher and catcher
+        lv = ev["launcher"]
+        Mt, Ma = max(lv["trap_line"]["M_pH"]), max(lv["accelerator_line"]["M_pH"])
+        y0 = -6.4
+        d += elm.Label().label("(d) launcher / catcher (proposed)", fontsize=10).at((8.6, -4.3))
+        d += (i0 := elm.Dot().at((6.5, y0)))
+        d += elm.SourceI().down().label("flux\nramp", loc="bottom")
         d += elm.Ground()
-        d += elm.Line().right(3.2).at(i0.center)
+        d += elm.Line().right(2.0).at(i0.center)
         d += (ij := elm.Dot().label("row start", loc="top"))
-        d += elm.Josephson().down().at(ij.center).label("2 I_c", loc="bottom")
+        d += elm.Inductor2(loops=3).down().at(ij.center).label(f"load\nloop\n{lv['load_loop']['L_nH']:.0f} nH", loc="bottom")
         d += elm.Ground()
-        d += elm.Line().right(2.6).at(ij.center)
+        d += elm.Inductor2(loops=3).right(3.4).at(ij.center).label("rail cell L", loc="bottom")
+        d += (rn := elm.Dot())
+        d += elm.Josephson().down().at(rn.center)
+        d += elm.Ground()
+        d += elm.Inductor2(loops=3).right(3.4).at((ij.center[0], y0 + 1.25)).label(
+            f"trap / accelerator flux lines:\nM_n <= {max(Mt, Ma):.2f} pH per cell,\nmutual only (no bias taps)", loc="right")
+        d += elm.Line().right(1.8).at(rn.center)
         d += elm.Inductor2(loops=4).down().label("catcher loop\n20 nH -> dispersive\nreadout (QFX-1)", loc="bottom")
         d += elm.Ground()
         d.save(path_png, dpi=170)

@@ -3,8 +3,11 @@
 D1 architecture at the optimised, 2D-calibrated operating point (results/C_gate.json) with the beam splitter of
    companion 2; complete netlist, unit-cell schematic, preliminary layout (circuits/)
 D2 energy retention and dissipation of the collision gate on the circuit model (figure 10)
-D3 coherence and fabrication constraints: flight time, disorder budget, damping, launcher requirements
-D4 milestone-D checks (validated vs proposed vs unresolved, kept separate)
+D3 coherence and fabrication constraints: flight time, disorder budget, damping; the launcher study
+   (simulations/D_launcher.py -> results/D_launcher.json) supplies the launch speed spread, timing and the gate
+   run with launched wavepackets
+D4 layout verification: DRC and EM extraction of the drawn geometry (hardware/extract.py, hardware/drc.py)
+D5 milestone-D checks (validated vs proposed vs unresolved, kept separate)
 Writes results/D_feasibility.json, circuits/*
 """
 import json
@@ -142,14 +145,25 @@ bud = C["optimum_validation"]["budget"]
 v_ns = model.v_cells_per_ns(model.k_for_beta(arch.beta))
 flight_ns = arch.n_cells / v_ns
 scan_sigma = []
-for sig in (0.005, 0.01, 0.02):
-    for ncell in (150, 300, arch.n_cells):
-        b_ = B.budget(model, None, arch.beta, n_cells=ncell, sigma_EJ=sig, sigma_EL=sig, sigma_C=sig)
-        scan_sigma.append(dict(sigma=sig, n_cells=ncell, total=b_["total"], parts=b_["parts"]))
-res["constraints"] = dict(flight_time_ns=flight_ns, cells_per_row=arch.n_cells, speed_cells_per_ns=v_ns,
-                          budget_at_optimum=bud, disorder_length_scan=scan_sigma,
-                          required_for_99pct=[s for s in scan_sigma if s["total"] < 0.01])
-print("flight", flight_ns, "ns; budget total", bud["total"])
+Lr = load_json("D_launcher.json")                                     # launcher study (simulations/D_launcher.py)
+ql, cl, tm = Lr["quantum_launch_20mK"], Lr["classical"], Lr["timing"]
+s_launch = math.sqrt(ql["dv_over_v"] ** 2 + tm["classical_speed_spread_rel"] ** 2)
+n_dual = sum(s_["cells"] for s_ in arch.sections()
+             if s_["name"] in ("BS_prep", "gap", "taper_in", "coupler", "taper_out", "BS_analysis"))
+for launch, spread in (("thermal source", None), ("launcher", s_launch)):
+    for sig in (0.005, 0.01, 0.02):
+        for ncell in (150, n_dual, 450):
+            b_ = B.budget(model, None, arch.beta, n_cells=ncell, sigma_EJ=sig, sigma_EL=sig, sigma_C=sig,
+                          velocity_spread_rel=spread, sigma=ql["sigma_x_at_far"] if spread else 10.0)
+            scan_sigma.append(dict(launch=launch, sigma=sig, n_cells=ncell, total=b_["total"], parts=b_["parts"]))
+bud_l = Lr["budget_launcher"]
+res["constraints"] = dict(flight_time_ns=flight_ns, cells_per_row=arch.n_cells, dual_rail_cells=n_dual,
+                          speed_cells_per_ns=v_ns, budget_thermal_source_C=bud, budget_launcher=bud_l,
+                          budget_thermal_source_same_geometry=Lr["budget_thermal_source"],
+                          launch_speed_spread=dict(launcher=s_launch, thermal_source=ql["thermal_source_spread_20mK"]),
+                          disorder_length_scan=scan_sigma,
+                          required_for_99pct=[s_ for s_ in scan_sigma if s_["total"] < 0.01])
+print("flight", flight_ns, "ns; budget: launcher", bud_l["total"], "thermal source", bud["total"])
 
 # ---------------------------------------------------------------- D4 milestone D
 ev = arch.element_values()
@@ -159,8 +173,10 @@ checks = [
      and ev["coupler_shared_inductor"]["L_s_pH"] >= 1 and ev["rail_inductor"]["squares_grAl"] >= 1,
      f"rail JJ {ev['rail_junction']['area_um2']:.3f} um^2, middle JJ {ev['middle_rail_junction']['area_um2']:.3f} um^2, "
      f"C_c {ev['coupler_capacitor']['C_c_fF']:.2f} fF, L_s {ev['coupler_shared_inductor']['L_s_pH']:.1f} pH, grAl {ev['rail_inductor']['squares_grAl']:.2f} sq"),
-    ("complete netlist with no floating nodes; every logical row has an injector and a catcher",
-     nsum["parse"]["isolated_nodes"] == 0 and nsum["elements"].get("injector junction", 0) == 4 and nsum["elements"].get("catcher loop inductor", 0) == 4,
+    ("complete netlist with no floating nodes; every logical row has a launcher (load loop, trap and accelerator flux lines) and a catcher",
+     nsum["parse"]["isolated_nodes"] == 0 and nsum["elements"].get("launcher load loop inductor", 0) == 4
+     and nsum["elements"].get("trap line source", 0) == 4 and nsum["elements"].get("accelerator line source", 0) == 4
+     and nsum["elements"].get("catcher loop inductor", 0) == 4,
      f"{nsum['total_elements']} elements, {nsum['parse']['nodes']} nodes, isolated {nsum['parse']['isolated_nodes']}"),
     ("flight time << coherence times reported for vortex qubits (us range)", flight_ns < 50,
      f"{flight_ns:.2f} ns per pass"),
@@ -169,9 +185,20 @@ checks = [
      ", ".join(f"beta {e['beta']:.2f}: gate {e['gate_retention']:.5f} (whole flight incl. launch transient {e['retention_of_KE_absolute']:.5f})"
                for e in energy if e["alpha"] == 0)),
     ("error budget at the optimum < 1 % with 2 % junction disorder, 20 mK launch, 10 ps jitter (realistic assumptions)",
-     bud["total"] < 0.01, f"total {bud['total']:.4f}: " + ", ".join(f"{k} {v:.1e}" for k, v in bud["parts"].items())),
-    ("coherent single-fluxon launcher derived (timing <= 10 ps, thermal-limited speed spread)", False,
-     "UNRESOLVED: injector pulse + accelerator proposed, motional-state preparation not modelled"),
+     bud_l["total"] < 0.01,
+     f"total {bud_l['total']:.4f} with the modelled launcher (rms dv/v {s_launch:.4f}, {n_dual} dual-rail cells): "
+     + ", ".join(f"{k} {v:.1e}" for k, v in bud_l["parts"].items())
+     + f"; a thermal-source launch (dv/v {ql['thermal_source_spread_20mK']:.4f}) would give {Lr['budget_thermal_source']['total']:.4f}"),
+    ("coherent single-fluxon launcher derived (timing <= 10 ps, thermal-limited speed spread)",
+     ql["dv_over_v"] <= ql["thermal_source_spread_20mK"] and tm["relative_jitter_ps"] <= 10.0
+     and abs(cl["trimmed"]["winding"] - 1) < 0.01 and abs(cl["trimmed"]["beta"] / arch.beta - 1) < 0.005
+     and cl["hold_drift_cells_1ns"] < 0.01 and Lr["gate_with_launched_packets"]["report"]["average_gate_fidelity_CZ"] > 0.999,
+     f"flux-bias trap ({arch.launcher.f_trap_GHz:.1f} GHz) + flux-gradient accelerator, no bias taps: quantum launch at 20 mK "
+     f"dv/v {ql['dv_over_v']:.4f} (thermal source {ql['thermal_source_spread_20mK']:.4f}), packet {ql['sigma_x_at_far']:.1f} cells; "
+     f"circuit: one fluxon (winding {cl['trimmed']['winding']:.4f}), beta {cl['trimmed']['beta']:.4f} after a "
+     f"{(cl['accelerator_trim'] - 1) * 100:.1f} % amplitude trim, radiation {cl['trimmed']['radiation_GHz']:.3f} GHz; "
+     f"relative timing jitter {tm['relative_jitter_ps']:.1f} ps (assumed {tm['assumed_trigger_jitter_ps']:.0f} ps trigger); "
+     f"2D gate with launched packets F_avg {Lr['gate_with_launched_packets']['report']['average_gate_fidelity_CZ']:.6f}"),
     ("layout verified (DRC, EM extraction of k, c, E_S)", False, "NOT DONE: preliminary layout only"),
 ]
 res["milestone_D"] = milestone("D (device feasibility)", checks)

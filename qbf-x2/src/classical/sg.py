@@ -11,6 +11,8 @@ Lagrangian (units: energy E_J, time 1/omega_p, omega_p^2 = 2 e I_c / (hbar C)):
 Equations of motion:
     Mt_n phiddot_n = Lambda^2 (Kt_n a_n - Kt_{n-1} a_{n-1}) - sin phi_n - alpha_n phidot_n + gamma_n
 Free (open) ends: no current flows out of the first/last cell.
+External flux: a cell loop threaded by Phi_ext,n has a_n replaced by a_n - theta_n (theta_n = 2 pi Phi_ext,n / Phi0);
+theta can be set per cell and rail (array (N-1, R)) and changed in time with run(..., update=f(t, sim)).
 """
 from __future__ import annotations
 
@@ -31,8 +33,9 @@ class Coupler:
 
 class MultiRailSG:
     def __init__(self, n_nodes: int, n_rails: int, Lambda: float, alpha=0.0, couplers=(), bias=0.0,
-                 sponge: int = 0, sponge_alpha: float = 0.2):
+                 sponge: int = 0, sponge_alpha: float = 0.2, theta=None):
         self.N, self.R, self.Lam = n_nodes, n_rails, Lambda
+        self.theta = np.zeros((n_nodes - 1, n_rails)) if theta is None else np.asarray(theta, float).reshape(n_nodes - 1, n_rails)
         self.alpha = np.zeros(n_nodes) + alpha
         if sponge:
             ramp = np.linspace(1, 0, sponge) ** 2 * sponge_alpha
@@ -55,7 +58,7 @@ class MultiRailSG:
     # ------------------------------------------------------------ dynamics
     def force(self, phi: np.ndarray) -> np.ndarray:
         """phi: (N, R). returns generalized force (N, R) before the mass matrix."""
-        a = phi[1:] - phi[:-1]                              # (N-1, R)
+        a = phi[1:] - phi[:-1] - self.theta                 # (N-1, R), external flux subtracted
         Ka = np.einsum("nij,nj->ni", self.K, a)
         f = np.zeros_like(phi)
         f[:-1] += Ka
@@ -66,7 +69,7 @@ class MultiRailSG:
         return np.einsum("nij,nj->ni", self.Minv, self.force(phi) - self.alpha[:, None] * dphi)
 
     def energy(self, phi, dphi) -> float:
-        a = phi[1:] - phi[:-1]
+        a = phi[1:] - phi[:-1] - self.theta
         kin = 0.5 * np.einsum("ni,nij,nj->", dphi, self.M, dphi)
         ind = 0.5 * self.Lam ** 2 * np.einsum("ni,nij,nj->", a, self.K, a)
         jos = np.sum(1 - np.cos(phi))
@@ -75,25 +78,30 @@ class MultiRailSG:
     def energy_density(self, phi, dphi) -> np.ndarray:
         """per node and rail (cross terms split evenly); used to locate kinks and radiation"""
         a = np.zeros_like(phi)
-        a[:-1] = phi[1:] - phi[:-1]
+        a[:-1] = phi[1:] - phi[:-1] - self.theta
         Kfull = np.concatenate([self.K, self.K[-1:]], axis=0)
         kin = 0.5 * dphi * np.einsum("nij,nj->ni", self.M, dphi)
         ind = 0.5 * self.Lam ** 2 * a * np.einsum("nij,nj->ni", Kfull, a)
         return kin + ind + (1 - np.cos(phi))
 
-    def run(self, phi, dphi, t_end, dt=0.05, record_every=1.0, callback=None):
-        """velocity Verlet; damping treated semi-implicitly. Returns (phi, dphi, records)."""
+    def run(self, phi, dphi, t_end, dt=0.05, record_every=1.0, callback=None, update=None, t0=0.0):
+        """velocity Verlet; damping treated semi-implicitly. Returns (phi, dphi, records).
+        update(t, sim), if given, sets time-dependent theta/bias before each force evaluation (time t0 + s dt)."""
         n_steps = int(round(t_end / dt))
         rec_every = max(1, int(round(record_every / dt)))
+        if update is not None:
+            update(t0, self)
         acc = self.accel(phi, dphi)
         records = []
         for s in range(n_steps + 1):
             if s % rec_every == 0 and callback is not None:
-                records.append(callback(s * dt, phi, dphi))
+                records.append(callback(t0 + s * dt, phi, dphi))
             if s == n_steps:
                 break
             vh = dphi + 0.5 * dt * acc
             phi = phi + dt * vh
+            if update is not None:
+                update(t0 + (s + 1) * dt, self)
             fnew = np.einsum("nij,nj->ni", self.Minv, self.force(phi))
             dphi = (vh + 0.5 * dt * fnew) / (1 + 0.5 * dt * self.alpha[:, None])
             acc = fnew - self.alpha[:, None] * dphi

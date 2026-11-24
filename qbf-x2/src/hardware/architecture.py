@@ -2,6 +2,9 @@
 
 Topology (cross-section in the collision region, top to bottom):
     D_A | A0 | A1 || B1 | B0 | D_B
+Launch rows (A0, A1 from the left; B1, B0 mirrored from the right) start with a coherent launcher
+(hardware/launcher.py): rail-end load loop, a flux-bias trap and a flux-gradient accelerator, both driven by control
+lines coupled by mutual inductance only.
 Each row is a discrete long Josephson junction to the ground plane: a junction (E_J, C) from every node to ground,
 a granular-Al series inductor L between nodes. Couplers (A1-B1 gate coupler, D_A-A0 and B0-D_B dummy couplers): the
 two rows' ground returns share a narrow strip of inductance L_s = k L per cell (series L reduced to (1-k) L so the
@@ -9,7 +12,7 @@ self-inductance is unchanged) and facing nodes are joined by a coupling capacito
 reduced by C_c). Beam-splitter (BS) sections: rows 0 and 1 of one qubit merge into a ladder whose middle rail
 carries series junctions (E_J,M / E_C,M = 2); a vortex hops between the rows by a phase slip of a middle-rail
 junction (amplitude E_S). Along x (fluxon A moves +x, B moves -x):
-    [inj A | acc A | BS A-prep | gap | taper | coupler plateau | taper | gap | BS A-analysis | detectors A]
+    [load | launch (trap) | accelerate | BS A-prep | gap | taper | coupler plateau | taper | gap | BS A-analysis | detect]
 B mirrors this from the right. Everything here is a PROPOSAL: values marked 'validated' come from this repo's
 simulations, the rest are design assumptions (see FEASIBILITY.md).
 """
@@ -19,6 +22,8 @@ import json
 import math
 import os
 from dataclasses import dataclass, field, asdict
+
+import numpy as np
 
 from hardware.params import RailParams, CouplerParams, PHI0, H, E_CHARGE
 
@@ -43,7 +48,8 @@ class Architecture:
     E_S_GHz: float = 1.09
     EJ_M_GHz: float = 25.3
     EC_M_GHz: float = 12.7
-    n_inject: int = 10
+    n_load: int = 10
+    n_launch: int = 40
     n_accel: int = 40
     n_bs: int = 0
     n_gap: int = 20
@@ -51,6 +57,7 @@ class Architecture:
     n_plateau: int = 100
     n_detect: int = 10
     source: str = ""
+    launcher: object = None          # hardware.launcher.LauncherDesign (sized in from_results)
 
     @classmethod
     def from_results(cls, root: str) -> "Architecture":
@@ -75,11 +82,15 @@ class Architecture:
         m = FluxonModel(a.rail)
         v = m.v_cells_per_ns(m.k_for_beta(a.beta))
         a.n_bs = int(round(v / (8 * a.E_S_GHz)))                          # 50/50: 2 pi E_S tau = pi/4
+        from hardware.launcher import design
+        a.launcher = design(m, a.beta)
+        a.n_load, a.n_launch, a.n_accel = a.launcher.n_load, a.launcher.n_launch, a.launcher.n_accel
         return a
 
     # ---- sections along x (cells)
     def sections(self):
-        seq = [("inject", self.n_inject), ("accelerate", self.n_accel), ("BS_prep", self.n_bs), ("gap", self.n_gap),
+        seq = [("load", self.n_load), ("launch", self.n_launch), ("accelerate", self.n_accel), ("BS_prep", self.n_bs),
+               ("gap", self.n_gap),
                ("taper_in", self.n_taper), ("coupler", self.n_plateau), ("taper_out", self.n_taper), ("gap", self.n_gap),
                ("BS_analysis", self.n_bs), ("detect", self.n_detect)]
         out, x = [], 0
@@ -115,7 +126,7 @@ class Architecture:
             middle_rail_junction=dict(EJ_GHz=self.EJ_M_GHz, EC_GHz=self.EC_M_GHz, Ic_nA=AM * JC_UA_PER_UM2 * 1e3,
                                       area_um2=AM, C_fF=C_M, Cj_fF=CjM, shunt_fF=C_M - CjM, E_S_GHz=self.E_S_GHz,
                                       status="E_S from exact charge dispersion (scqubits); vortex hopping = single-junction estimate"),
-            injection_junction=dict(Ic_nA=2 * r.Ic_A * 1e9, area_um2=2 * A, status="UNRESOLVED: coherent single-fluxon launcher"),
+            launcher=self.launcher_values(),
             detector=dict(kind="fluxon catcher loop + dispersive lambda/4 readout (QFX-1 heritage)", status="proposed"),
         )
 
@@ -124,3 +135,22 @@ class Architecture:
                  length_um=self.n_cells * self.rail.pitch_um, rows=["D_A", "A0", "A1", "B1", "B0", "D_B"],
                  sections=self.sections(), elements=self.element_values(), source=self.source)
         return d
+
+    def launcher_values(self) -> dict:
+        """targets for the launch rows: control-line mutual inductances per rail cell (pH), currents, load loop"""
+        if self.launcher is None:
+            return dict(status="not sized")
+        d = self.launcher
+        n_cells = self.n_cells
+        M = d.mutual_targets_pH(n_cells)
+        cells_t = [int(i) for i in np.nonzero(M["trap"] > 1e-4 * M["trap"].max())[0]]
+        cells_a = [int(i) for i in np.nonzero(M["accelerator"] > 1e-4 * M["accelerator"].max())[0]]
+        return dict(rows=["A0", "A1", "B1", "B0"], mirrored_rows=["B1", "B0"],
+                    trap_line=dict(I_uA=d.I_trap_uA, cells=cells_t, M_pH=[float(M["trap"][i]) for i in cells_t],
+                                   waveform="DC while loading/holding; off at release (edge tau)"),
+                    accelerator_line=dict(I_uA=d.I_acc_uA, cells=cells_a, M_pH=[float(M["accelerator"][i]) for i in cells_a],
+                                          waveform="on at release (edge tau), off at t_off while the fluxon is on the plateau"),
+                    load_loop=dict(L_nH=1.0, flux_ramp="0 -> Phi0 in about 1 us (inserts one fluxon adiabatically)"),
+                    tau_ps=d.tau_ps, t_off_ns=d.t_off_ns, trap_frequency_GHz=d.f_trap_GHz,
+                    trap_depth_GHz=d.notes.get("trap_depth_GHz"), force_GHz_per_cell=d.notes.get("F_GHz_per_cell"),
+                    status="proposed; sized by simulation (simulations/D_launcher.py)")

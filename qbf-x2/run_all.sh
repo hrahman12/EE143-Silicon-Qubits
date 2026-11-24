@@ -12,7 +12,8 @@ python3 companions/c1_bell_pair.py  # device 1: vortex Bell pair (uses ../quantu
 python3 companions/c3_mediator.py   # device 3: reusable mediator gate (negative result)
 python3 companions/c4_reversible_cell.py   # device 4: reversible cell, energy recovery
 python3 companions/c5_qec.py        # device 5: fluxon syndrome-extraction cycle
-python3 D_feasibility.py            # milestone D: netlist, schematic, layout, energy -> results/D_feasibility.json, fig10, circuits/
+python3 D_launcher.py               # milestone D: coherent launcher (quantum + circuit), launched-packet gate -> results/D_launcher.json, fig11
+python3 D_feasibility.py            # milestone D: netlist, schematic, layout + DRC/extraction, energy -> results/D_feasibility.json, fig10, circuits/
 cd ..
 python3 -m pytest
 (cd paper && for pass in 1 2 3; do pdflatex -interaction=nonstopmode main.tex >/dev/null; done && echo "paper/main.pdf built")   # 3 passes settle labels
