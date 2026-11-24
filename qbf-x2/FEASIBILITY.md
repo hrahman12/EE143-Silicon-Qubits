@@ -123,6 +123,6 @@ Totals:
 ## 8. What would change the verdict on milestone D
 
 - A demonstrated coherent single-fluxon injector with thermal-limited speed spread and ≤ 10 ps timing.
-- Junction arrays with ≤ 1 % disorder over about 2,300 junctions.
+- Junction arrays with ≤ 1 % disorder across the 2,336 junctions of the chip.
 - EM extraction of k, c and E_S for the drawn geometry, plus a DRC-clean layout.
 - A measured damping α ≤ 10⁻⁶ at 20 mK.

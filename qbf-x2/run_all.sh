@@ -15,4 +15,4 @@ python3 companions/c5_qec.py        # device 5: fluxon syndrome-extraction cycle
 python3 D_feasibility.py            # milestone D: netlist, schematic, layout, energy -> results/D_feasibility.json, fig10, circuits/
 cd ..
 python3 -m pytest
-(cd paper && pdflatex -interaction=nonstopmode main.tex >/dev/null && pdflatex -interaction=nonstopmode main.tex >/dev/null && echo "paper/main.pdf built")
+(cd paper && for pass in 1 2 3; do pdflatex -interaction=nonstopmode main.tex >/dev/null; done && echo "paper/main.pdf built")   # 3 passes settle labels

@@ -194,14 +194,15 @@ detected by a catcher loop (20~nH) with dispersive $\lambda/4$ readout, as in QF
 {\footnotesize (e)}
 \end{minipage}
 \caption{Preliminary QBF-X2 unit cells with the element values of the optimised operating point $\beta=0.45$; none
-of this has been fabricated. (a)~Rail cell, one per 2~$\mu$m: $L=0.65$~nH (granular Al) and a junction (81~nA,
-2.42~fF) to ground. (b)~Gate-coupler cell between $A1$ and $B1$, scaled by $g(n)$: the ground returns of the two rail
+of this has been fabricated. (a)~Rail cell, one per 2~$\mu$m: $L=0.65$~nH (granular Al), a junction (81~nA, 1.92~fF)
+and a node shunt of 0.50~fF (0.29~fF on the coupler plateau) to ground. (b)~Gate-coupler cell between $A1$ and $B1$, scaled by $g(n)$: the ground returns of the two rail
 junctions share a strip $L_s=11.6$~pH, which produces the mutual inductance, the series inductance is reduced to
 $(1-k)L$, and $C_c=0.21$~fF joins the facing nodes; the dummy couplers are identical. (c)~Beam-splitter cell of
-qubit~A: a middle-rail junction with $E_J/E_C=2$ (51~nA, $E_S=1.10$~GHz). (d)~Proposed injector (current pulse into a
+qubit~A: a middle-rail junction with $E_J/E_C=2$ (51~nA, 1.21~fF plus a 0.31~fF island shunt, $E_S=1.10$~GHz).
+(d)~Proposed injector (current pulse into a
 $2I_c$ junction; coherent launch unresolved) and catcher loop. (e)~Layout zoom in the coupler section: dummy coupler
-$D_A$--$A0$ (top), gate coupler $A1$--$B1$ with the coupling-capacitor crossovers (middle, green) and dummy coupler
-$B0$--$D_B$ (bottom); the drawn dummy couplers have no capacitor crossovers.}
+$D_A$--$A0$ (top), gate coupler $A1$--$B1$ (middle) and dummy coupler $B0$--$D_B$ (bottom), each with coupling-capacitor
+crossovers (green); the node and island shunts are not drawn.}
 \label{fig:schematic}
 \end{figure*}
 
@@ -239,7 +240,7 @@ by the simulations of this project, not by measurement.}
 \toprule
 Quantity & Value & Status\\
 \midrule
-Rail junction $E_J$, $E_C$ & 40~GHz (80.5~nA), 8~GHz (2.42~fF) & design; quantum regime validated ($\beta^2=0.51$, Peierls--Nabarro barrier $2.9\ee{-6}$~GHz)\\
+Rail junction $E_J$, $E_C$ & 40~GHz (80.5~nA), 8~GHz (2.42~fF: 1.92~fF junction + 0.50~fF node shunt) & design; quantum regime validated ($\beta^2=0.51$, Peierls--Nabarro barrier $2.9\ee{-6}$~GHz)\\
 Rail inductance per cell & 0.654~nH ($\Lambda=2.5$), 1.31 squares of granular Al & proposed (sheet inductance 0.5~nH/$\square$ assumed)\\
 Gate coupler, reference $\beta^*=0.30$ & $k=0.01189$, $c=0.1266$ ($L_s\approx7.8$~pH, $C_c\approx0.31$~fF) & validated by exact 2D calibration: $\Delta=\pi$, $\ud\Delta/\ud\beta=0.002$\\
 Gate coupler, optimum $\beta=0.45$ & $k=0.01778$, $c=0.0875$ ($L_s=11.6$~pH, $C_c=0.21$~fF) & validated: 2D calibration ($|\Delta-\pi|=1.3\ee{-4}$~rad, $\ud\Delta/\ud\beta=2.2\ee{-5}$); circuit zero crossing at $\beta=0.454$\\
@@ -392,7 +393,7 @@ $-E_J\Lambda^2\kt Og$ in two half steps in position space, and the velocity coup
 fourth-order Taylor expansion of its exponential, each anticommutator costing two pairs of fast Fourier transforms.
 Every run records its norm drift. The reference grid has $n=512$ points per coordinate, spacing 0.5 cells and time step
 2~ps, and the initial state is a product of Gaussian wavepackets of width $\sigma=10$ cells on opposite sides of the
-meeting point, propagated for 0.587~ns. $O(r)$ is tabulated from the rest-frame kink profile, averaged over the sub-cell position of
+meeting point, propagated for 0.588~ns. $O(r)$ is tabulated from the rest-frame kink profile, averaged over the sub-cell position of
 the pair; the integral~\eqref{eq:sumrule}, which fixes the first-order phase, does not depend on this choice. The
 $\ket{11}$ branch is propagated with the interaction and the free branch without it for the same time, and $\omega$ is
 their overlap within the transmitted region selected by $P$.
@@ -502,11 +503,10 @@ law.}
 \centering
 \includegraphics[width=0.88\textwidth]{../figures/fig03_joint_probability.png}\\[2pt]
 \includegraphics[width=0.88\textwidth]{../figures/fig04_scattering_before_after.png}
-\caption{Sweet-spot collision at $\beta^*=0.30$ ($\sigma=10$ cells). Top: joint probability $|\psi_{11}(X_A,X_B)|^2$
-at $t=0$, 0.206~ns and 0.294~ns and at a later snapshot after the collision, with the diagonal $X_A=X_B$ dotted. In
-the right panel the cyan contours show the free branch at the end of the run, $t=0.587$~ns, so the offset between map
-and contours reflects the different times. At equal times the overlap is $|\omega|=0.999999$ (the panel title is
-truncated in the source figure). Bottom: (a), (b)~marginal of fluxon A before and after the collision for the free and
+\caption{Sweet-spot collision at $\beta^*=0.30$ ($\sigma=10$ cells). Top, (a)--(d): joint probability
+$|\psi_{11}(X_A,X_B)|^2$ at $t=0$, 0.206~ns, 0.294~ns and at the end of the run, $t=0.588$~ns, with the diagonal
+$X_A=X_B$ dotted. In (d) the cyan contours show the free branch at the same time; the two overlap, with
+$|\omega|=0.999999$. Bottom: (a), (b)~marginal of fluxon A before and after the collision for the free and
 the $\ket{11}$ branch, with the sweet-spot coupler and an inductive-only coupler of the same $k$ (shifts $-0.017$ and
 $+0.339$ cells). (c)~Momentum-resolved conditional phase $\arg(\chi_{11}/\chi_{\rm free})$ at $k_B=-k_0$, 2D (points)
 and first order (dotted).}
@@ -740,26 +740,29 @@ disorder & 150 cells & 300 cells & 362 cells\\
 \emph{Architecture and netlist.} The design uses the optimum with its 2D-calibrated coupler ($\beta=0.45$,
 $k=0.01778$, $c=0.0875$). Each of the six rows has 362 cells (724~$\mu$m). Along the path of fluxon A the sections are
 injection (10 cells), accelerator (40), preparation beam splitter (41), gap (20), taper (40), coupler plateau (100),
-taper (40), gap (20), analysis beam splitter (41) and detection (10), and qubit B mirrors this. The rail junctions
-have $I_c=80.5$~nA and an area of 0.048~$\mu$m$^2$, the middle-rail junctions $E_{J,M}=25.3$~GHz, $E_{C,M}=12.7$~GHz
-($E_S=1.10$~GHz) and 0.031~$\mu$m$^2$, the coupler strips $L_s=11.6$~pH and the coupling capacitors $C_c=0.21$~fF.
-Inside couplers the series inductance and node capacitance are compensated to 0.642~nH and 2.21~fF. The injection
-junction has 161~nA (0.097~$\mu$m$^2$), and its coherent operation is unresolved. The complete netlist
-(\file{circuits/\allowbreak{}qbfx2\_\allowbreak{}netlist.\allowbreak{}cir}) has 7922 elements: 2172 rail junctions and 2172 node shunt capacitors (junction
+taper (40), gap (20), analysis beam splitter (41) and detection (10), and qubit B mirrors this. All junctions come
+from one oxidation ($J_c\approx2.1~\mu$A/$\mu$m$^2$, 50~fF/$\mu$m$^2$). The rail junctions have $I_c=80.5$~nA and
+0.038~$\mu$m$^2$ (1.92~fF) with a 0.50~fF node shunt, reduced to 0.29~fF on the coupler plateaus, so the node capacitance
+is 2.42~fF outside and 2.21~fF inside the couplers, where the series inductance is 0.642~nH. The middle-rail junctions
+have $E_{J,M}=25.3$~GHz and 0.024~$\mu$m$^2$ (1.21~fF) with a 0.31~fF island shunt, which gives $E_{C,M}=12.7$~GHz and
+$E_S=1.10$~GHz. The coupler strips have $L_s=11.6$~pH and the coupling capacitors $C_c=0.21$~fF. The injection junction
+has 161~nA (0.077~$\mu$m$^2$), and its coherent operation is unresolved. The shunts are to come from the geometric node,
+line and island capacitance plus a trim, set by electromagnetic extraction. The complete netlist
+(\file{circuits/\allowbreak{}qbfx2\_\allowbreak{}netlist.\allowbreak{}cir}) has 8082 elements: 2172 rail junctions and 2172 node shunt capacitors (junction
 model $I_c=80.5$~nA, $C_j=1.92$~fF, shunt 0.50~fF), 2166 granular-Al inductors, 540 coupler-strip inductors and 540
-coupling capacitors (gate and dummy couplers), 160 middle-rail junctions, 4 injector junctions with 4 pulse sources,
-160 accelerator bias sources and 4 catcher-loop inductors. A parser finds 2877 nodes and no isolated node.
+coupling capacitors (gate and dummy couplers), 160 middle-rail junctions with 160 island shunt capacitors ($C_j=1.21$~fF,
+shunt 0.31~fF), 4 injector junctions with 4 pulse sources, 160 accelerator bias sources and 4 catcher-loop inductors. A
+parser finds 2877 nodes and no isolated node.
 
 \emph{Layout.} The preliminary layout (\file{circuits/\allowbreak{}qbfx2\_\allowbreak{}layout.\allowbreak{}gds}, Figs.~\ref{fig:schematic}e
 and~\ref{fig:layout}) measures $844\times182~\mu$m$^2$, with six rows (row opening 8~$\mu$m, strip 2~$\mu$m) at a
-2~$\mu$m pitch. Rail junctions are $0.2\times0.2418~\mu$m$^2$ overlaps, the coupler spans 360~$\mu$m and each beam
-splitter 82~$\mu$m. The layout has no design-rule check and no electromagnetic extraction of $k$, $c$ and $E_S$, and
-the crossover dielectric of the coupling capacitors is an extra, unverified process step, so it is not
-fabrication-ready. Only the gate coupler is drawn with capacitor crossovers (Fig.~\ref{fig:schematic}e), whereas the
-netlist gives the dummy couplers the same capacitors. The fabrication notes assume high-resistivity Si with a 150~nm Nb ground plane, Al/AlOx/Al
-double-angle junctions, 20~nm granular-Al inductors and 0.4~$\mu$m thin-Al coupler strips. They quote rail junctions of
-about 0.038~$\mu$m$^2$ at $J_c\approx2.1~\mu$A/$\mu$m$^2$ with a 0.5~fF shunt, consistent with the netlist model,
-whereas the architecture and the drawn layout use 0.048~$\mu$m$^2$. The two must be reconciled before fabrication.
+2~$\mu$m pitch. Rail junctions are $0.2\times0.1917~\mu$m$^2$ overlaps (0.0383~$\mu$m$^2$) and middle-rail junctions
+$0.18\times0.1348~\mu$m$^2$ (0.0243~$\mu$m$^2$); the coupler spans 360~$\mu$m and each beam splitter 82~$\mu$m.
+Coupling-capacitor crossovers are drawn on all three couplers (540), whereas the node and island shunts are not drawn.
+The layout has no design-rule check and no electromagnetic extraction of $k$, $c$, $E_S$ and the shunts, and the
+crossover dielectric of the coupling capacitors is an extra, unverified process step, so it is not fabrication-ready.
+The fabrication notes assume high-resistivity Si with a 150~nm Nb ground plane, Al/AlOx/Al double-angle junctions,
+20~nm granular-Al inductors and 0.4~$\mu$m thin-Al coupler strips.
 
 \begin{figure*}[t]
 \centering
@@ -811,8 +814,8 @@ low-risk test of the key physics; (6)~conditional phase, A in $\ket{+}$ and B in
 the difference of A's Mach--Zehnder phases, target $\pi$ at $v^*$; (7)~entanglement, two-qubit tomography from
 $\ket{+}\ket{+}$, Bell fidelity and a CHSH test; (8)~energy, time of flight before and after the gate and the braking
 efficiency. Milestone D would change with a coherent single-fluxon injector with thermal-limited speed spread and
-$\le10$~ps timing, junction arrays with $\le1$\% disorder over about 2,000 junctions (the netlist has 2172 rail
-junctions), electromagnetic extraction of $k$, $c$, $E_S$ with a DRC-clean layout, and a measured $\alpha\le10^{-6}$ at
+$\le10$~ps timing, a junction disorder of $\le1$\% across the 2,336 junctions of the chip (2172 rail, 160
+middle-rail and 4 injection junctions, about 1,170 per qubit), electromagnetic extraction of $k$, $c$, $E_S$ with a DRC-clean layout, and a measured $\alpha\le10^{-6}$ at
 20~mK.
 
 \section{Companion devices}
@@ -911,8 +914,8 @@ quantum emission probability is of order $E_{\rm rad}/\hbar\omega_p$.
 damping estimate; offset-charge drift of the beam-splitter islands; electromagnetic extraction of $k$, $c$ and $E_S$.
 The disorder model assumes independent static cell errors, and the damping channel is an upper bound.
 
-\emph{Design.} The layout is preliminary (no DRC, unverified crossover process, a junction area that differs between
-the fabrication notes and the drawn layout), and the coherent launcher, which sets the launch-speed spread on which the
+\emph{Design.} The layout is preliminary (no DRC, an unverified crossover process, node and island shunts not drawn
+and to be set by electromagnetic extraction), and the coherent launcher, which sets the launch-speed spread on which the
 whole budget depends, is unresolved.
 
 \emph{Criteria and scope.} Three acceptance criteria were changed after results were seen (Secs.~\ref{sec:resA},
@@ -995,8 +998,8 @@ thermal launch at 20 mK, sweet spot: intrinsic gate infidelity \textless{} 1e-2 
 two-velocity phase model validated against 2D (\textbar{}error\textbar{} \textless{} 0.05 rad) & yes & beta\_B 0.27: 3.143 vs 3.145, beta\_B 0.33: 3.143 vs 3.138\\
 \midrule
 \multicolumn{3}{@{}l}{\textbf{Milestone D (device feasibility): NOT MET}\quad(\texttt{results/D\_feasibility.json})}\\
-circuit parameters inside demonstrated fabrication ranges (junction \textgreater{}= 0.01 um\textasciicircum{}2, C\_c \textgreater{}= 0.1 fF, L\_s \textgreater{}= 1 pH, granular Al \textgreater{}= 1 square) & yes & rail JJ 0.048 um\textasciicircum{}2, middle JJ 0.031 um\textasciicircum{}2, C\_c 0.21 fF, L\_s 11.6 pH, grAl 1.31 sq\\
-complete netlist with no floating nodes; every logical row has an injector and a catcher & yes & 7922 elements, 2877 nodes, isolated 0\\
+circuit parameters inside demonstrated fabrication ranges (junction \textgreater{}= 0.01 um\textasciicircum{}2, C\_c \textgreater{}= 0.1 fF, L\_s \textgreater{}= 1 pH, granular Al \textgreater{}= 1 square) & yes & rail JJ 0.038 um\textasciicircum{}2, middle JJ 0.024 um\textasciicircum{}2, C\_c 0.21 fF, L\_s 11.6 pH, grAl 1.31 sq\\
+complete netlist with no floating nodes; every logical row has an injector and a catcher & yes & 8082 elements, 2877 nodes, isolated 0\\
 flight time \textless{}\textless{} coherence times reported for vortex qubits (us range) & yes & 1.01 ns per pass\\
 energy: kinetic energy retained through the gate (couplers + collision) \textgreater{} 99.9 \% without damping & yes & beta 0.30: gate 0.99998 (whole flight incl. launch transient 0.99877), beta 0.45: gate 0.99997 (whole flight incl. launch transient 0.99916)\\
 error budget at the optimum \textless{} 1 \% with 2 \% junction disorder, 20 mK launch, 10 ps jitter (realistic assumptions) & \textbf{no} & total 0.0191: gate\_thermal 1.3e-06, disorder\_dephasing 1.8e-02, damping 1.5e-03, timing 0.0e+00, coupler 0.0e+00\\
