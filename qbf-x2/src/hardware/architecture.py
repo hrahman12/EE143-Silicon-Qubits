@@ -12,7 +12,10 @@ self-inductance is unchanged) and facing nodes are joined by a coupling capacito
 reduced by C_c). Beam-splitter (BS) sections: rows 0 and 1 of one qubit merge into a ladder whose middle rail
 carries series junctions (E_J,M / E_C,M = 2); a vortex hops between the rows by a phase slip of a middle-rail
 junction (amplitude E_S). Along x (fluxon A moves +x, B moves -x):
-    [load | launch (trap) | accelerate | BS A-prep | gap | taper | coupler plateau | taper | gap | BS A-analysis | detect]
+    [load | launch (trap) | accelerate | BS A-prep | gap | taper | coupler plateau | taper | gap | BS A-analysis | idle | detect]
+B rows are the mirror image (n -> N-1-n). The idle stretch makes every row symmetric about the coupler centre, so
+the coupler (whose envelope is not mirrored) is at the same cells for A and B, and B's launcher and BS_prep lie on
+the far side of the coupler, mirroring A's.
 B mirrors this from the right. Everything here is a PROPOSAL: values marked 'validated' come from this repo's
 simulations, the rest are design assumptions (see FEASIBILITY.md).
 """
@@ -56,6 +59,7 @@ class Architecture:
     n_taper: int = 40
     n_plateau: int = 100
     n_detect: int = 10
+    n_idle: int = 0                  # set in from_results: symmetry about the coupler centre
     source: str = ""
     launcher: object = None          # hardware.launcher.LauncherDesign (sized in from_results)
 
@@ -85,6 +89,8 @@ class Architecture:
         from hardware.launcher import design
         a.launcher = design(m, a.beta)
         a.n_load, a.n_launch, a.n_accel = a.launcher.n_load, a.launcher.n_launch, a.launcher.n_accel
+        a.n_idle = a.n_load + a.n_launch + a.n_accel - a.n_detect             # post-coupler = pre-coupler length
+        assert a.n_idle >= 0
         return a
 
     # ---- sections along x (cells)
@@ -92,7 +98,7 @@ class Architecture:
         seq = [("load", self.n_load), ("launch", self.n_launch), ("accelerate", self.n_accel), ("BS_prep", self.n_bs),
                ("gap", self.n_gap),
                ("taper_in", self.n_taper), ("coupler", self.n_plateau), ("taper_out", self.n_taper), ("gap", self.n_gap),
-               ("BS_analysis", self.n_bs), ("detect", self.n_detect)]
+               ("BS_analysis", self.n_bs), ("idle", self.n_idle), ("detect", self.n_detect)]
         out, x = [], 0
         for name, n in seq:
             out.append(dict(name=name, start=x, cells=n))
@@ -154,3 +160,14 @@ class Architecture:
                     tau_ps=d.tau_ps, t_off_ns=d.t_off_ns, trap_frequency_GHz=d.f_trap_GHz,
                     trap_depth_GHz=d.notes.get("trap_depth_GHz"), force_GHz_per_cell=d.notes.get("F_GHz_per_cell"),
                     status="proposed; sized by simulation (simulations/D_launcher.py)")
+
+    def symmetry_report(self) -> dict:
+        """the coupler must sit at the row centre so that mirrored B rows meet it after their own BS_prep"""
+        s = {d["name"]: d for d in self.sections()}
+        N = self.n_cells
+        c0 = s["taper_in"]["start"]
+        c1 = s["taper_out"]["start"] + s["taper_out"]["cells"]
+        pre, post = c0, N - c1
+        b_prep = (N - (s["BS_prep"]["start"] + s["BS_prep"]["cells"]), N - s["BS_prep"]["start"])   # B's BS_prep range
+        return dict(n_cells=N, coupler_cells=[c0, c1], pre_coupler=pre, post_coupler=post, symmetric=pre == post,
+                    B_BS_prep_cells=list(b_prep), B_BS_prep_after_coupler=b_prep[0] >= c1)

@@ -70,3 +70,12 @@ def test_layout_builds(tmp_path):
     dims = LY.build(arch, str(tmp_path / "t.gds"))
     assert os.path.getsize(tmp_path / "t.gds") > 10000
     assert dims["cells_per_row"] == arch.n_cells and dims["status"].startswith("PRELIMINARY")
+
+
+def test_rows_symmetric_about_the_coupler():
+    """B rows mirror A's section list; the coupler must therefore be centred so B meets it after its BS_prep"""
+    arch = Architecture.from_results(ROOT)
+    rep = arch.symmetry_report()
+    assert rep["symmetric"] and rep["B_BS_prep_after_coupler"]
+    for n in range(arch.n_cells):
+        assert abs(NL._env(arch, n) - NL._env(arch, arch.n_cells - 1 - n)) < 1e-12

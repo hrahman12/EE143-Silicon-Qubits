@@ -98,7 +98,7 @@ Assumptions: 302 dual-rail cells per rail (beam splitter to beam splitter), 2 % 
   - rail inductors: 20 nm granular Al;
   - shared coupler strips: 0.4 µm thin Al;
   - coupling capacitors: a crossover dielectric (extra process, unverified).
-- **Disorder:** 2 % junction spread assumed across the 3,544 junctions of the chip (about 1,770 per qubit). With
+- **Disorder:** 2 % junction spread assumed across the 4,996 junctions of the chip (about 2,500 per qubit). With
   the launcher the gate stays below 1 % up to 5.7 %.
 
 ## 6. Cryogenic test requirements
