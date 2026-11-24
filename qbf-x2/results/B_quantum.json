@@ -1,0 +1,340 @@
+{
+ "design": {
+  "beta_star": 0.3,
+  "k": 0.012077249061207336,
+  "c": 0.1342112322786321
+ },
+ "validity": {
+  "beta2_quantum_sine_gordon": 0.5059644256269408,
+  "soliton_over_plasmon": 15.775869670340516,
+  "mass_renormalisation_estimate": 0.020131684841794818,
+  "de_broglie_cells": 3.1661100674290164,
+  "fluxon_size_cells": 2.5,
+  "kinetic_energy_GHz": 38.54109590809777,
+  "kT_GHz": 0.4167323824665515,
+  "peierls_nabarro_GHz": 2.9192264605626406e-06,
+  "interaction_depth_GHz": 19.266022393590212,
+  "thermal_velocity_spread_rel": 0.07096296740469138,
+  "passage_time_over_plasma_period": 1.6666666666666667
+ },
+ "single_wavepacket": {
+  "sigma0": 3.0,
+  "v_group_fit": 238.22389129294743,
+  "v_group_theory": 238.43011837910637,
+  "width_final_sim": 45.92973443924422,
+  "width_final_analytic": 45.94474333465568,
+  "norm_final": 1.000000000000202
+ },
+ "static_interaction": {
+  "r": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   6,
+   8,
+   10
+  ],
+  "V_relaxed_GHz": [
+   -9.693456011668502,
+   -9.43286514415405,
+   -8.710497362455385,
+   -7.673266756257249,
+   -6.492185150589762,
+   -4.229230902680854,
+   -2.5203393690554776,
+   -1.4171412171148745
+  ],
+  "V_first_order_GHz": [
+   -9.620578936095244,
+   -9.372162885196241,
+   -8.678039793068363,
+   -7.6696039167664445,
+   -6.5080985206529895,
+   -4.255054232844664,
+   -2.538089055290411,
+   -1.425866492617668
+  ],
+  "rel_err_r0": 0.00757512370693535
+ },
+ "sweet_spot_collision": {
+  "beta": 0.3,
+  "beta_B": 0.3,
+  "sigma": 10.0,
+  "n": 512,
+  "dx": 0.5,
+  "dt": 0.002,
+  "t_final": 0.588,
+  "omega": {
+   "re": -0.9915214860351812,
+   "im": -0.12993447778132908,
+   "abs": 0.9999989128922695,
+   "arg": -3.0112896141391983
+  },
+  "phase": -3.0112896141391983,
+  "overlap_abs": 0.9999989128922695,
+  "p11": 0.9999999286820919,
+  "reflection": 7.131790813463823e-08,
+  "norm_drift": -2.9821344726954635e-08,
+  "dXA_quantum": -0.017134642215410167,
+  "motional_purity_out": 0.999998816004695,
+  "motional_purity_in": 1.0,
+  "schmidt_top": [
+   0.999999408001997,
+   5.918969178883881e-07,
+   3.488752346587776e-11,
+   2.584312881806778e-11,
+   1.047570514263425e-11
+  ],
+  "meeting_point": 0.0,
+  "T": 0.5871741412190156
+ },
+ "inductive_collision": {
+  "beta": 0.3,
+  "beta_B": 0.3,
+  "sigma": 10.0,
+  "n": 512,
+  "dx": 0.5,
+  "dt": 0.002,
+  "t_final": 0.588,
+  "omega": {
+   "re": 0.028596380503610037,
+   "im": 0.9993031986629716,
+   "abs": 0.9997122765255779,
+   "arg": 1.542187813807654
+  },
+  "phase": 1.542187813807654,
+  "overlap_abs": 0.9997122765255779,
+  "p11": 0.9999999509663495,
+  "reflection": 4.903365047326247e-08,
+  "norm_drift": 6.217248937900877e-14,
+  "dXA_quantum": 0.33913733455197814,
+  "motional_purity_out": 0.9999997337630298,
+  "motional_purity_in": 1.0,
+  "schmidt_top": [
+   0.9999998668814971,
+   1.330718537611664e-07,
+   1.2509118965283513e-11,
+   9.363139791006108e-12,
+   6.0728531903156995e-12
+  ],
+  "meeting_point": 0.0,
+  "T": 0.5871741412190156
+ },
+ "convergence": [
+  {
+   "case": "reference dt=2ps dx=0.5 n=512",
+   "phase": -3.0112896141391983,
+   "overlap_abs": 0.9999989128922695,
+   "reflection": 7.131790813463823e-08,
+   "norm_drift": -2.9821344726954635e-08,
+   "seconds": 27.3971107006073
+  },
+  {
+   "case": "dt = 1 ps",
+   "phase": -3.010759691100838,
+   "overlap_abs": 0.9999989185903378,
+   "reflection": 3.759044364670672e-08,
+   "norm_drift": -9.36394517481176e-10,
+   "seconds": 54.069721698760986
+  },
+  {
+   "case": "dt = 0.5 ps",
+   "phase": -3.0106274629117054,
+   "overlap_abs": 0.999998915650942,
+   "reflection": 3.6682377912988784e-08,
+   "norm_drift": -2.9056757000489597e-11,
+   "seconds": 104.91842222213745
+  },
+  {
+   "case": "dx = 0.25 (k cut-off x2), n = 1024",
+   "phase": -3.011289614148363,
+   "overlap_abs": 0.9999989130818686,
+   "reflection": 7.10979014550972e-08,
+   "norm_drift": -2.982134372775391e-08,
+   "seconds": 120.98703861236572
+  },
+  {
+   "case": "domain x1.25 (n = 640)",
+   "phase": -3.0112896142328274,
+   "overlap_abs": 0.9999989548008285,
+   "reflection": 2.9847611160427334e-08,
+   "norm_drift": -2.982133140427834e-08,
+   "seconds": 37.424617767333984
+  },
+  {
+   "case": "Taylor order 6",
+   "phase": -3.0112893818162125,
+   "overlap_abs": 0.9999989277703716,
+   "reflection": 4.1491237001700654e-08,
+   "norm_drift": 5.31841237716435e-12,
+   "seconds": 35.289923667907715
+  }
+ ],
+ "quantum_classical": [
+  {
+   "coupler": "mixed",
+   "beta": 0.24,
+   "phase": -2.9566892298755234,
+   "overlap_abs": 0.9999273467372942,
+   "dXA_quantum": 0.16929788406379487,
+   "reflection": 1.1033829083739732e-07,
+   "phase_first_order": 3.2201324699287808,
+   "dX_first_order": 0.21349650431763006
+  },
+  {
+   "coupler": "inductive",
+   "beta": 0.24,
+   "phase": 1.9061155379801866,
+   "overlap_abs": 0.9992696067302544,
+   "dXA_quantum": 0.5403207604379929,
+   "reflection": 1.2451654896050712e-07,
+   "phase_first_order": 1.963495408492864,
+   "dX_first_order": 0.5930458453271564
+  },
+  {
+   "coupler": "mixed",
+   "beta": 0.27,
+   "phase": -3.0031790667354534,
+   "overlap_abs": 0.9999905328049282,
+   "dXA_quantum": 0.059696761460514836,
+   "reflection": 6.708342215056007e-08,
+   "phase_first_order": 3.159045946109064,
+   "dX_first_order": 0.08687079165107273
+  },
+  {
+   "coupler": "inductive",
+   "beta": 0.27,
+   "phase": 1.7054132893958411,
+   "overlap_abs": 0.9995490456719951,
+   "dXA_quantum": 0.4245709334679191,
+   "reflection": 6.538572450143221e-08,
+   "phase_first_order": 1.7453292519936567,
+   "dX_first_order": 0.4572146929011343
+  },
+  {
+   "coupler": "mixed",
+   "beta": 0.3,
+   "phase": -3.0112896141391983,
+   "overlap_abs": 0.9999989128922695,
+   "dXA_quantum": -0.017134642215410167,
+   "reflection": 7.131790813463823e-08,
+   "phase_first_order": 3.141592653589188,
+   "dX_first_order": -1.3883043889301355e-13
+  },
+  {
+   "coupler": "inductive",
+   "beta": 0.3,
+   "phase": 1.542187813807654,
+   "overlap_abs": 0.9997122765255779,
+   "dXA_quantum": 0.33913733455197814,
+   "reflection": 4.903365047326247e-08,
+   "phase_first_order": 1.5707963267942915,
+   "dX_first_order": 0.3601450201699118
+  },
+  {
+   "coupler": "mixed",
+   "beta": 0.33,
+   "phase": -2.9909530262115918,
+   "overlap_abs": 0.9999870605494735,
+   "dXA_quantum": -0.07124465686833048,
+   "reflection": 9.757658747666653e-08,
+   "phase_first_order": 3.1558726201964693,
+   "dX_first_order": -0.06056739784376739
+  },
+  {
+   "coupler": "inductive",
+   "beta": 0.33,
+   "phase": 1.406996984227445,
+   "overlap_abs": 0.9998115496448459,
+   "dXA_quantum": 0.2744708872244388,
+   "reflection": 3.2209303668651046e-08,
+   "phase_first_order": 1.4279966607220829,
+   "dX_first_order": 0.2884161802077754
+  },
+  {
+   "coupler": "mixed",
+   "beta": 0.36,
+   "phase": -2.94908153200706,
+   "overlap_abs": 0.9999700208741076,
+   "dXA_quantum": -0.10909984315240706,
+   "reflection": 1.7999629098319758e-07,
+   "phase_first_order": 3.1939525311491184,
+   "dX_first_order": -0.10293992167759537
+  },
+  {
+   "coupler": "inductive",
+   "beta": 0.36,
+   "phase": 1.2932830308114733,
+   "overlap_abs": 0.9998739658795608,
+   "dXA_quantum": 0.22446217412618807,
+   "reflection": 2.657658693117071e-08,
+   "phase_first_order": 1.3089969389952425,
+   "dX_first_order": 0.23395436744878548
+  }
+ ],
+ "milestone_B": {
+  "milestone": "B (quantum ballistic physics)",
+  "passed": true,
+  "checks": [
+   {
+    "check": "unitarity: norm conserved",
+    "passed": true,
+    "detail": "max drift 3.0e-08"
+   },
+   {
+    "check": "converged: phase within 0.01 rad under dt, dx (k cut-off), domain and Taylor-order changes",
+    "passed": true,
+    "detail": "phase spread 0.0007 rad over 6 runs"
+   },
+   {
+    "check": "coherent single-fluxon propagation: group velocity and dispersion match the relativistic E(k)",
+    "passed": true,
+    "detail": "v_g 238.22 vs 238.43 cells/ns, width 45.93 vs 45.94 cells"
+   },
+   {
+    "check": "topological charge: the collision is reflectionless (both fluxons transmitted)",
+    "passed": true,
+    "detail": "reflection 7.1e-08"
+   },
+   {
+    "check": "quantum-classical correspondence: conditional-delay zero crossing, quantum vs classical circuit, within 0.02 in beta",
+    "passed": true,
+    "detail": "quantum 0.2933, classical circuit 0.3020"
+   },
+   {
+    "check": "quantum corrections to the classical limit of the same model < 10 % of the delay scale (all 10 points)",
+    "passed": true,
+    "detail": "worst 8.9 %"
+   },
+   {
+    "check": "derived interaction: first-order potential vs constrained relaxation of the circuit within 5 % at contact",
+    "passed": true,
+    "detail": "+0.76 %"
+   },
+   {
+    "check": "effective-model regime: quantum (beta^2 ~ 0.5 < 8 pi), PN barrier << kinetic energy",
+    "passed": true,
+    "detail": "beta^2 = 0.506, PN = 2.92e-06 GHz vs KE = 38.5 GHz"
+   }
+  ]
+ },
+ "first_order_phase_error_at_design": 0.04147674565692083,
+ "breakdown": {
+  "first_order_phase_vs_exact": "exact phase exceeds the first-order design value by +0.130 rad (second order in the coupling): calibrated in C_gate.py",
+  "low_velocity": "first-order classical shift overestimates by >10 % below beta ~ 0.22 (interaction no longer weak vs kinetic energy)",
+  "high_velocity": "beyond beta ~ 0.35 lattice radiation and O(c^2) dragging corrections grow (A_classical first_order_accuracy)",
+  "neglected": [
+   "O(k^2, c^2) image terms (identical in all branches with dummy couplers)",
+   "coupling to plasma modes beyond the classical radiation estimate",
+   "dissipation and 1/f noise (FEASIBILITY.md)",
+   "quantum mass renormalisation ~ beta^2/8pi = 0.020"
+  ]
+ },
+ "runtime_s": 553.6242306232452,
+ "_generated": "2026-11-24 12:22:26",
+ "quantum_sweet_spot_beta": 0.2933095161370405,
+ "classical_sweet_spot_beta": 0.3020226345629949,
+ "superseded_check": "An earlier correspondence test compared quantum and classical shifts only where both scans had a point with |shift| > 0.05 cells: one point (5.8 %). Replaced by the two tests above."
+}

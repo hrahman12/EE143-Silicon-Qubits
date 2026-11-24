@@ -1,0 +1,49 @@
+{
+ "f01_QF2": 3.2084646399205905,
+ "f01_QF1": 3.6084646399205904,
+ "f12": 17.1938829020987,
+ "J_GHz": 0.018935536003834526,
+ "L_s_pH": 5.0,
+ "stagger_GHz": 0.4,
+ "QF2_pulse_flux": 0.06940557320679012,
+ "slope_at_pulse_GHz_per_Phi0": 11.80588871742243,
+ "Gamma_phi_during_pulse_per_s": 779842.7098632656,
+ "g12_over_g01": 0.33784694910571184,
+ "note": "both qubits idle at their own double sweet spots (first-order flux-insensitive); QF2 leaves its sweet spot only during the 6.6 ns resonant exchange pulse",
+ "results": [
+  {
+   "T1_us": 5.0,
+   "bell_fidelity": 0.9881839665367029,
+   "concurrence": 0.9868354149609186,
+   "leakage": 6.581402089977928e-13,
+   "t_swap_ns": 6.601344687295199
+  },
+  {
+   "T1_us": 20.0,
+   "bell_fidelity": 0.9956409971188398,
+   "concurrence": 0.9942956809027824,
+   "leakage": 6.610267888618182e-13,
+   "t_swap_ns": 6.601344687295199
+  },
+  {
+   "T1_us": 100.0,
+   "bell_fidelity": 0.9976390589216619,
+   "concurrence": 0.9962946396125201,
+   "leakage": 6.614708780716683e-13,
+   "t_swap_ns": 6.601344687295199
+  },
+  {
+   "T1_us": 1000000.0,
+   "bell_fidelity": 0.998139152691491,
+   "concurrence": 0.996794973204601,
+   "leakage": 6.618039449790558e-13,
+   "t_swap_ns": 6.601344687295199
+  }
+ ],
+ "protocol_ns": {
+  "pi_pulse": 20.0,
+  "swap": 6.601344687295199
+ },
+ "verdict": "Simulated Bell pair between two independently addressed quantum-fluxon (Josephson-vortex) qubits of the QFX-1 design. Prior art: single vortex qubits (KIT 2023; grAl vortex qubits, Nambisan et al. Nature 2026 with estimated 10-100 MHz vortex-vortex coupling); an addressable entangled two-vortex processor was not found in the searched literature. T1 values are assumptions bracketing the reported range.",
+ "_generated": "2026-11-24 12:27:58"
+}

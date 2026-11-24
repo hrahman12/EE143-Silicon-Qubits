@@ -1,0 +1,149 @@
+{
+ "scan": [
+  {
+   "mediator": "light quantum fluxon (QBF-X2 rail)",
+   "beta": 0.45,
+   "overlap": 0.0,
+   "theta": 0.7853981633974483,
+   "conditional_phase": -7.673243196393287e-08,
+   "concurrence": 0.0,
+   "cz_avg_fidelity": 0.599965491769318,
+   "coherence_single_qubit": 0.9999136913918935,
+   "logical_purity": 0.9998274126420474
+  },
+  {
+   "mediator": "light quantum fluxon (QBF-X2 rail)",
+   "beta": 0.45,
+   "overlap": 0.0,
+   "theta": 1.5707963267948966,
+   "conditional_phase": -3.000038582001707e-07,
+   "concurrence": 0.0,
+   "cz_avg_fidelity": 0.5998620294681495,
+   "coherence_single_qubit": 0.9996547913469407,
+   "logical_purity": 0.9993100598947391
+  },
+  {
+   "mediator": "light quantum fluxon (QBF-X2 rail)",
+   "beta": 0.45,
+   "overlap": 0.0,
+   "theta": 3.141592653589793,
+   "conditional_phase": -1.089132802611914e-06,
+   "concurrence": 0.0,
+   "cz_avg_fidelity": 0.5994491118886301,
+   "coherence_single_qubit": 0.998619578402641,
+   "logical_purity": 0.9972467715682521
+  },
+  {
+   "mediator": "light quantum fluxon (QBF-X2 rail)",
+   "beta": 0.45,
+   "overlap": 1.0,
+   "theta": 0.7853981633974483,
+   "conditional_phase": -0.004817099674820913,
+   "concurrence": 0.0023241190966994973,
+   "cz_avg_fidelity": 0.600928809726034,
+   "coherence_single_qubit": 0.9999126878987266,
+   "logical_purity": 0.9998274002772632
+  },
+  {
+   "mediator": "light quantum fluxon (QBF-X2 rail)",
+   "beta": 0.45,
+   "overlap": 1.0,
+   "theta": 1.5707963267948966,
+   "conditional_phase": -0.01926949236426978,
+   "concurrence": 0.009294507446634516,
+   "cz_avg_fidelity": 0.6037144357642795,
+   "coherence_single_qubit": 0.9996467026390283,
+   "logical_purity": 0.999309862278359
+  },
+  {
+   "mediator": "light quantum fluxon (QBF-X2 rail)",
+   "beta": 0.45,
+   "overlap": 1.0,
+   "theta": 3.141592653589793,
+   "conditional_phase": -0.0770954757810034,
+   "concurrence": 0.03713978996450578,
+   "cz_avg_fidelity": 0.6148421258468202,
+   "coherence_single_qubit": 0.9985539009055387,
+   "logical_purity": 0.9972436237632358
+  },
+  {
+   "mediator": "heavy classical fluxon (QFX-1 kick line)",
+   "beta": 0.05,
+   "overlap": 0.0,
+   "theta": 0.7853981633974483,
+   "conditional_phase": -3.94906951584062e-09,
+   "concurrence": 0.0,
+   "cz_avg_fidelity": 0.5999999124648714,
+   "coherence_single_qubit": 0.9999997791876231,
+   "logical_purity": 0.9999995583675418
+  },
+  {
+   "mediator": "heavy classical fluxon (QFX-1 kick line)",
+   "beta": 0.05,
+   "overlap": 0.0,
+   "theta": 1.5707963267948966,
+   "conditional_phase": -1.5796262076150924e-08,
+   "concurrence": 0.0,
+   "cz_avg_fidelity": 0.5999996498551876,
+   "coherence_single_qubit": 0.99999911673887,
+   "logical_purity": 0.9999982334729306
+  },
+  {
+   "mediator": "heavy classical fluxon (QFX-1 kick line)",
+   "beta": 0.05,
+   "overlap": 0.0,
+   "theta": 3.141592653589793,
+   "conditional_phase": -6.318498346757906e-08,
+   "concurrence": 2.9860458155799813e-07,
+   "cz_avg_fidelity": 0.5999985994228132,
+   "coherence_single_qubit": 0.9999964669468976,
+   "logical_purity": 0.9999929339359337
+  },
+  {
+   "mediator": "heavy classical fluxon (QFX-1 kick line)",
+   "beta": 0.05,
+   "overlap": 1.0,
+   "theta": 0.7853981633974483,
+   "conditional_phase": -0.00024357248859274705,
+   "concurrence": 0.00012154853519121307,
+   "cz_avg_fidelity": 0.6000486261618908,
+   "coherence_single_qubit": 0.9999997790846217,
+   "logical_purity": 0.9999995583674895
+  },
+  {
+   "mediator": "heavy classical fluxon (QFX-1 kick line)",
+   "beta": 0.05,
+   "overlap": 1.0,
+   "theta": 1.5707963267948966,
+   "conditional_phase": -0.0009742900480151917,
+   "concurrence": 0.0004862550199652062,
+   "cz_avg_fidelity": 0.6001945045255587,
+   "coherence_single_qubit": 0.9999991159145293,
+   "logical_purity": 0.9999982334720892
+  },
+  {
+   "mediator": "heavy classical fluxon (QFX-1 kick line)",
+   "beta": 0.05,
+   "overlap": 1.0,
+   "theta": 3.141592653589793,
+   "conditional_phase": -0.0038971616980933987,
+   "concurrence": 0.0019450438201703858,
+   "cz_avg_fidelity": 0.6007780158756205,
+   "coherence_single_qubit": 0.9999964603480608,
+   "logical_purity": 0.9999929339223881
+  }
+ ],
+ "best": {
+  "mediator": "light quantum fluxon (QBF-X2 rail)",
+  "beta": 0.45,
+  "overlap": 1.0,
+  "theta": 3.141592653589793,
+  "conditional_phase": -0.0770954757810034,
+  "concurrence": 0.03713978996450578,
+  "cz_avg_fidelity": 0.6148421258468202,
+  "coherence_single_qubit": 0.9985539009055387,
+  "logical_purity": 0.9972436237632358
+ },
+ "verdict": "Negative result (as modelled): with couplings linear in each qubit's Z, a single passing fluxon gives a conditional phase only at second order and only where the two coupling regions overlap. A light mediator carries away which-qubit timing information that destroys the coherence it would entangle; a heavy one keeps coherence but delivers a negligible conditional phase. Best concurrence found: 0.037 (light quantum fluxon (QBF-X2 rail), overlap 1.0, theta 3.14). A reusable entangler needs a coupling nonlinear in the qubit operators, a velocity-compensated (sweet-spot) mediator coupling, or a mediator that is itself a qubit - which is what the QBF-X2 collision gate does.",
+ "_generated": "2026-11-24 12:37:01"
+}

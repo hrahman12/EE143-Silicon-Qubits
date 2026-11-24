@@ -1,0 +1,626 @@
+{
+ "rail": {
+  "EJ_GHz": 40.0,
+  "EC_GHz": 8.0,
+  "Lambda": 2.5,
+  "pitch_um": 2.0,
+  "alpha": 0.0,
+  "T_K": 0.02,
+  "Ic_nA": 80.53418149004195,
+  "C_fF": 2.4212786655823906,
+  "LJ_nH": 4.0865378201695295,
+  "L_cell_nH": 0.6538460512271247,
+  "fp_GHz": 50.59644256269407,
+  "E0_GHz": 800.0,
+  "hc0_GHz_cell": 126.49110640673518,
+  "c0_um_per_ns": 1589.5341225273762,
+  "beta2_qsg": 0.5059644256269408,
+  "soliton_over_plasmon": 15.811388300841896,
+  "kT_GHz": 0.4167323824665515
+ },
+ "E0_numeric_EJ": 19.955072091298284,
+ "design": {
+  "beta_star": 0.3,
+  "k": 0.012077249061207336,
+  "c": 0.1342112322786321
+ },
+ "free_fluxon": [
+  {
+   "beta": 0.1,
+   "beta_measured": 0.0993054556731848,
+   "energy": 20.05597399918289,
+   "E0_gamma": 20.055602057978504,
+   "energy_drift": 5.063668787357486e-08
+  },
+  {
+   "beta": 0.2,
+   "beta_measured": 0.19856877708425627,
+   "energy": 20.365527671133783,
+   "E0_gamma": 20.36656016838917,
+   "energy_drift": 5.2518669813593786e-08
+  },
+  {
+   "beta": 0.3,
+   "beta_measured": 0.29773111258700174,
+   "energy": 20.914914458898686,
+   "E0_gamma": 20.91859948900073,
+   "energy_drift": 7.11385427640891e-08
+  },
+  {
+   "beta": 0.4,
+   "beta_measured": 0.3966948362042757,
+   "energy": 21.76456723236931,
+   "E0_gamma": 21.772768656351218,
+   "energy_drift": 1.1942903930678468e-07
+  },
+  {
+   "beta": 0.5,
+   "beta_measured": 0.49533622069517025,
+   "energy": 23.026257586489614,
+   "E0_gamma": 23.042132487218907,
+   "energy_drift": 3.053437285387393e-07
+  },
+  {
+   "beta": 0.6,
+   "beta_measured": 0.593178779538718,
+   "energy": 24.914195092169145,
+   "E0_gamma": 24.943840114122853,
+   "energy_drift": 1.20207191501373e-06
+  }
+ ],
+ "kink_antikink": [
+  {
+   "Lambda": 10.0,
+   "beta": 0.15,
+   "shift_cells": 37.45784635804685,
+   "exact_continuum": 37.51311926097165,
+   "energy_drift": 1.02600125741556e-10
+  },
+  {
+   "Lambda": 10.0,
+   "beta": 0.2,
+   "shift_cells": 31.46854697447759,
+   "exact_continuum": 31.538413265229593,
+   "energy_drift": 3.4099986195843815e-10
+  },
+  {
+   "Lambda": 10.0,
+   "beta": 0.3,
+   "shift_cells": 22.58762767406077,
+   "exact_continuum": 22.970337109728085,
+   "energy_drift": 7.268670522836366e-11
+  },
+  {
+   "Lambda": 10.0,
+   "beta": 0.4,
+   "shift_cells": 16.52966306797049,
+   "exact_continuum": 16.79588654959921,
+   "energy_drift": 1.106127104036892e-09
+  },
+  {
+   "Lambda": 10.0,
+   "beta": 0.5,
+   "shift_cells": 11.589570475486767,
+   "exact_continuum": 12.005661338529434,
+   "energy_drift": 2.1552502444623542e-09
+  },
+  {
+   "Lambda": 2.5,
+   "beta": 0.2,
+   "shift_cells": 3.8477084678127085,
+   "exact_continuum": 7.884603316307398,
+   "energy_drift": 1.5944394200393747e-07
+  },
+  {
+   "Lambda": 2.5,
+   "beta": 0.3,
+   "shift_cells": 2.1728851574023906,
+   "exact_continuum": 5.742584277432021,
+   "energy_drift": 1.969192157568148e-07
+  },
+  {
+   "Lambda": 2.5,
+   "beta": 0.4,
+   "shift_cells": 0.533136947955029,
+   "exact_continuum": 4.1989716373998025,
+   "energy_drift": 2.7675667937664063e-07
+  },
+  {
+   "Lambda": 2.5,
+   "beta": 0.5,
+   "shift_cells": -1.036308973786106,
+   "exact_continuum": 3.0014153346323584,
+   "energy_drift": 4.1609942422577044e-07
+  }
+ ],
+ "collision_scan": [
+  {
+   "coupler": "inductive",
+   "beta": 0.15,
+   "dxA": 1.3383300079156015,
+   "dxB": 1.3378662486294388,
+   "dx_theory": 1.6038009485030165,
+   "conditional_radiation_EJ": 2.3724885025444564e-06,
+   "kinetic_energy_pair_EJ": 0.4567107311474533,
+   "energy_drift": 4.3282803371137986e-08,
+   "winding": [
+    0.9999756814082612,
+    0.9999086377942445
+   ]
+  },
+  {
+   "coupler": "inductive",
+   "beta": 0.2,
+   "dxA": 0.7832003485027599,
+   "dxB": 0.7833798811074075,
+   "dx_theory": 0.8780205754225028,
+   "conditional_radiation_EJ": 6.402107892711228e-07,
+   "kinetic_energy_pair_EJ": 0.8229761541817756,
+   "energy_drift": 4.666934363375664e-08,
+   "winding": [
+    0.9997805450375238,
+    0.9997693799970866
+   ]
+  },
+  {
+   "coupler": "inductive",
+   "beta": 0.25,
+   "dxA": 0.5192945723119919,
+   "dxB": 0.5200122149540789,
+   "dx_theory": 0.5422939161771031,
+   "conditional_radiation_EJ": -0.00012864944995527594,
+   "kinetic_energy_pair_EJ": 1.3088754877856486,
+   "energy_drift": 5.0106264868952344e-08,
+   "winding": [
+    0.9999467162178426,
+    0.9999253452178454
+   ]
+  },
+  {
+   "coupler": "inductive",
+   "beta": 0.28,
+   "dxA": 0.4098848258418002,
+   "dxB": 0.40982432212518916,
+   "dx_theory": 0.4213621015738783,
+   "conditional_radiation_EJ": 7.782130752786998e-05,
+   "kinetic_energy_pair_EJ": 1.66292267427486,
+   "energy_drift": 5.2250131384533556e-08,
+   "winding": [
+    1.0003418878614836,
+    1.0001089636363707
+   ]
+  },
+  {
+   "coupler": "inductive",
+   "beta": 0.3,
+   "dxA": 0.36004515238209933,
+   "dxB": 0.3600234260207458,
+   "dx_theory": 0.3601450201699118,
+   "conditional_radiation_EJ": 3.005386863819126e-05,
+   "kinetic_energy_pair_EJ": 1.9270547954048884,
+   "energy_drift": 5.766001716104327e-08,
+   "winding": [
+    1.000039770808091,
+    1.0000442040684807
+   ]
+  },
+  {
+   "coupler": "inductive",
+   "beta": 0.32,
+   "dxA": 0.3170071212075527,
+   "dxB": 0.3165493211024568,
+   "dx_theory": 0.3100859895781576,
+   "conditional_radiation_EJ": -7.71320023318367e-06,
+   "kinetic_energy_pair_EJ": 2.21504601987113,
+   "energy_drift": 5.821537866803553e-08,
+   "winding": [
+    1.0000363564030441,
+    0.9999912050005161
+   ]
+  },
+  {
+   "coupler": "inductive",
+   "beta": 0.35,
+   "dxA": 0.21021435926809318,
+   "dxB": 0.209754552285915,
+   "dx_theory": 0.2505488617096258,
+   "conditional_radiation_EJ": 0.00026575123208516516,
+   "kinetic_energy_pair_EJ": 2.6947738577636113,
+   "energy_drift": 6.777920739943003e-08,
+   "winding": [
+    1.0002463851245822,
+    1.0002637628855149
+   ]
+  },
+  {
+   "coupler": "inductive",
+   "beta": 0.4,
+   "dxA": 0.13595253290009168,
+   "dxB": 0.13625766928930716,
+   "dx_theory": 0.17966222814362354,
+   "conditional_radiation_EJ": 0.0005694070883492941,
+   "kinetic_energy_pair_EJ": 3.635393130105867,
+   "energy_drift": 9.771697255441117e-08,
+   "winding": [
+    0.999935979175736,
+    0.9999509621844735
+   ]
+  },
+  {
+   "coupler": "inductive",
+   "beta": 0.45,
+   "dxA": 0.09407238327867162,
+   "dxB": 0.09338347590545482,
+   "dx_theory": 0.13131938647598834,
+   "conditional_radiation_EJ": 0.0007205280849902351,
+   "kinetic_energy_pair_EJ": 4.780637495411783,
+   "energy_drift": 1.463237748606088e-07,
+   "winding": [
+    1.0001290578249973,
+    1.0002526310018767
+   ]
+  },
+  {
+   "coupler": "inductive",
+   "beta": 0.5,
+   "dxA": 0.05387854150740168,
+   "dxB": 0.0525552689685469,
+   "dx_theory": 0.09700848482852596,
+   "conditional_radiation_EJ": 0.0013043999826507502,
+   "kinetic_energy_pair_EJ": 6.174120791841249,
+   "energy_drift": 2.2670358653036166e-07,
+   "winding": [
+    0.9997965635273035,
+    0.9999985601647965
+   ]
+  },
+  {
+   "coupler": "mixed",
+   "beta": 0.15,
+   "dxA": 0.9097395008568583,
+   "dxB": 0.9097234804291929,
+   "dx_theory": 1.2028507113771079,
+   "conditional_radiation_EJ": 1.9185924848841296e-06,
+   "kinetic_energy_pair_EJ": 0.4567107311474533,
+   "energy_drift": 4.012990912013664e-08,
+   "winding": [
+    0.9999241078694899,
+    0.9998997921483795
+   ]
+  },
+  {
+   "coupler": "mixed",
+   "beta": 0.2,
+   "dxA": 0.45661750177373506,
+   "dxB": 0.45608377686397716,
+   "dx_theory": 0.4877892085679067,
+   "conditional_radiation_EJ": -1.2390830704589462e-05,
+   "kinetic_energy_pair_EJ": 0.8229761541817756,
+   "energy_drift": 4.32198277555012e-08,
+   "winding": [
+    0.9997554531261841,
+    0.9997477619937811
+   ]
+  },
+  {
+   "coupler": "mixed",
+   "beta": 0.25,
+   "dxA": 0.19558804455755308,
+   "dxB": 0.195414569742411,
+   "dx_theory": 0.1657009188317475,
+   "conditional_radiation_EJ": -6.39478945601013e-05,
+   "kinetic_energy_pair_EJ": 1.3088754877856486,
+   "energy_drift": 4.9263165685748046e-08,
+   "winding": [
+    1.0003865241398255,
+    1.0003924200806884
+   ]
+  },
+  {
+   "coupler": "mixed",
+   "beta": 0.28,
+   "dxA": 0.05367033514949071,
+   "dxB": 0.054551071564560516,
+   "dx_theory": 0.05430889309160276,
+   "conditional_radiation_EJ": -3.539851806166894e-05,
+   "kinetic_energy_pair_EJ": 1.66292267427486,
+   "energy_drift": 5.5093338667008546e-08,
+   "winding": [
+    1.0002756498230172,
+    1.0003414310406145
+   ]
+  },
+  {
+   "coupler": "mixed",
+   "beta": 0.3,
+   "dxA": 0.003971166628616629,
+   "dxB": 0.004164691221376415,
+   "dx_theory": -1.3883043889301355e-13,
+   "conditional_radiation_EJ": -2.2967433633169776e-05,
+   "kinetic_energy_pair_EJ": 1.9270547954048884,
+   "energy_drift": 5.786101205878793e-08,
+   "winding": [
+    0.9999723667628104,
+    0.9999260589856248
+   ]
+  },
+  {
+   "coupler": "mixed",
+   "beta": 0.32,
+   "dxA": -0.03529610093687552,
+   "dxB": -0.03554732399186378,
+   "dx_theory": -0.04272295856423774,
+   "conditional_radiation_EJ": -1.1359186540715882e-05,
+   "kinetic_energy_pair_EJ": 2.21504601987113,
+   "energy_drift": 6.044359613116134e-08,
+   "winding": [
+    0.9997584945259486,
+    0.9998742597316502
+   ]
+  },
+  {
+   "coupler": "mixed",
+   "beta": 0.35,
+   "dxA": -0.07829584120077016,
+   "dxB": -0.07784279760636537,
+   "dx_theory": -0.09047597783971853,
+   "conditional_radiation_EJ": 1.695540944979257e-05,
+   "kinetic_energy_pair_EJ": 2.6947738577636113,
+   "energy_drift": 6.026217270912038e-08,
+   "winding": [
+    0.9999524630232108,
+    0.999946650383846
+   ]
+  },
+  {
+   "coupler": "mixed",
+   "beta": 0.4,
+   "dxA": -0.12950777247692713,
+   "dxB": -0.12965182251508622,
+   "dx_theory": -0.13973728855627474,
+   "conditional_radiation_EJ": 0.00013158093189957754,
+   "kinetic_energy_pair_EJ": 3.635393130105867,
+   "energy_drift": 7.995807006263889e-08,
+   "winding": [
+    1.0002877100639374,
+    1.000367093349432
+   ]
+  },
+  {
+   "coupler": "mixed",
+   "beta": 0.45,
+   "dxA": -0.16297948511396498,
+   "dxB": -0.16342992009106183,
+   "dx_theory": -0.16414923309509932,
+   "conditional_radiation_EJ": 0.0004095049613859203,
+   "kinetic_energy_pair_EJ": 4.780637495411783,
+   "energy_drift": 9.961604234748296e-08,
+   "winding": [
+    1.000311787751147,
+    1.0003939273197895
+   ]
+  },
+  {
+   "coupler": "mixed",
+   "beta": 0.5,
+   "dxA": -0.19805848975943263,
+   "dxB": -0.19797306854735552,
+   "dx_theory": -0.17245952858414995,
+   "conditional_radiation_EJ": 0.00136761550961495,
+   "kinetic_energy_pair_EJ": 6.174120791841249,
+   "energy_drift": 2.4240573077245353e-07,
+   "winding": [
+    1.0003317079258396,
+    1.0004532588708124
+   ]
+  }
+ ],
+ "damping_1000_cells": [
+  {
+   "alpha": 1e-06,
+   "energy_lost_EJ": 0.0024962134304828965,
+   "fraction_of_KE": 0.0025907031148623082,
+   "analytic_EJ": 0.0025158836081326033
+  },
+  {
+   "alpha": 1e-05,
+   "energy_lost_EJ": 0.02466849567144891,
+   "fraction_of_KE": 0.025602277351190604,
+   "analytic_EJ": 0.02515883608132604
+  },
+  {
+   "alpha": 0.0001,
+   "energy_lost_EJ": 0.22048428359983774,
+   "fraction_of_KE": 0.22883032088717783,
+   "analytic_EJ": 0.25158836081326036
+  },
+  {
+   "alpha": 0.001,
+   "energy_lost_EJ": 0.8914083669524935,
+   "fraction_of_KE": 0.9251510326308101,
+   "analytic_EJ": 2.515883608132604
+  }
+ ],
+ "milestone_A": {
+  "milestone": "A (classical ballistic physics)",
+  "passed": true,
+  "checks": [
+   {
+    "check": "energy conserved without damping",
+    "passed": true,
+    "detail": "max relative drift 1.2e-06"
+   },
+   {
+    "check": "free fluxon speed and E = E0 gamma",
+    "passed": true,
+    "detail": "speed within 2 %, energy within 1 % for beta 0.1-0.6"
+   },
+   {
+    "check": "exact sine-Gordon kink-antikink shift reproduced (Lambda = 10, beta 0.2-0.4)",
+    "passed": true,
+    "detail": "0.15: 0.999, 0.2: 0.998, 0.3: 0.983, 0.4: 0.984, 0.5: 0.965"
+   },
+   {
+    "check": "topological charge conserved (one fluxon per rail after the collision)",
+    "passed": true,
+    "detail": "windings 0.9997-1.0005 (end phases carry radiation)"
+   },
+   {
+    "check": "conditional shift of the mixed coupler crosses zero at beta* = 0.30 +- 0.02",
+    "passed": true,
+    "detail": "zero crossing at beta = 0.3020"
+   },
+   {
+    "check": "collision-induced radiation < 1e-3 of the pair kinetic energy (mixed coupler)",
+    "passed": true,
+    "detail": "max 2.2e-04"
+   }
+  ]
+ },
+ "first_order_accuracy": [
+  {
+   "coupler": "inductive",
+   "beta": 0.15,
+   "sim": 1.3383300079156015,
+   "theory": 1.6038009485030165,
+   "rel_error": -0.16552611521723118
+  },
+  {
+   "coupler": "inductive",
+   "beta": 0.2,
+   "sim": 0.7832003485027599,
+   "theory": 0.8780205754225028,
+   "rel_error": -0.10799317188451477
+  },
+  {
+   "coupler": "inductive",
+   "beta": 0.25,
+   "sim": 0.5192945723119919,
+   "theory": 0.5422939161771031,
+   "rel_error": -0.04241121498696658
+  },
+  {
+   "coupler": "inductive",
+   "beta": 0.28,
+   "sim": 0.4098848258418002,
+   "theory": 0.4213621015738783,
+   "rel_error": -0.02723850979764917
+  },
+  {
+   "coupler": "inductive",
+   "beta": 0.3,
+   "sim": 0.36004515238209933,
+   "theory": 0.3601450201699118,
+   "rel_error": -0.0002772988163638673
+  },
+  {
+   "coupler": "inductive",
+   "beta": 0.32,
+   "sim": 0.3170071212075527,
+   "theory": 0.3100859895781576,
+   "rel_error": 0.022320039801897066
+  },
+  {
+   "coupler": "inductive",
+   "beta": 0.35,
+   "sim": 0.21021435926809318,
+   "theory": 0.2505488617096258,
+   "rel_error": -0.16098457668619706
+  },
+  {
+   "coupler": "inductive",
+   "beta": 0.4,
+   "sim": 0.13595253290009168,
+   "theory": 0.17966222814362354,
+   "rel_error": -0.24328817300757255
+  },
+  {
+   "coupler": "inductive",
+   "beta": 0.45,
+   "sim": 0.09407238327867162,
+   "theory": 0.13131938647598834,
+   "rel_error": -0.2836367439481398
+  },
+  {
+   "coupler": "inductive",
+   "beta": 0.5,
+   "sim": 0.05387854150740168,
+   "theory": 0.09700848482852596,
+   "rel_error": -0.44459970071032023
+  },
+  {
+   "coupler": "mixed",
+   "beta": 0.15,
+   "sim": 0.9097395008568583,
+   "theory": 1.2028507113771079,
+   "rel_error": -0.24368045655863255
+  },
+  {
+   "coupler": "mixed",
+   "beta": 0.2,
+   "sim": 0.45661750177373506,
+   "theory": 0.4877892085679067,
+   "rel_error": -0.06390405168184882
+  },
+  {
+   "coupler": "mixed",
+   "beta": 0.25,
+   "sim": 0.19558804455755308,
+   "theory": 0.1657009188317475,
+   "rel_error": 0.18036789377223017
+  },
+  {
+   "coupler": "mixed",
+   "beta": 0.28,
+   "sim": 0.05367033514949071,
+   "theory": 0.05430889309160276,
+   "rel_error": -0.011757889099948897
+  },
+  {
+   "coupler": "mixed",
+   "beta": 0.3,
+   "sim": 0.003971166628616629,
+   "theory": -1.3883043889301355e-13,
+   "rel_error": null
+  },
+  {
+   "coupler": "mixed",
+   "beta": 0.32,
+   "sim": -0.03529610093687552,
+   "theory": -0.04272295856423774,
+   "rel_error": -0.1738376244752639
+  },
+  {
+   "coupler": "mixed",
+   "beta": 0.35,
+   "sim": -0.07829584120077016,
+   "theory": -0.09047597783971853,
+   "rel_error": -0.13462287924122718
+  },
+  {
+   "coupler": "mixed",
+   "beta": 0.4,
+   "sim": -0.12950777247692713,
+   "theory": -0.13973728855627474,
+   "rel_error": -0.07320534257560031
+  },
+  {
+   "coupler": "mixed",
+   "beta": 0.45,
+   "sim": -0.16297948511396498,
+   "theory": -0.16414923309509932,
+   "rel_error": -0.007126125167192523
+  },
+  {
+   "coupler": "mixed",
+   "beta": 0.5,
+   "sim": -0.19805848975943263,
+   "theory": -0.17245952858414995,
+   "rel_error": 0.14843460019544188
+  }
+ ],
+ "first_order_accuracy_worst_0.25_0.40": 0.24328817300757255,
+ "first_order_breakdown_note": "Below beta ~ 0.2 the first-order shift overestimates the simulation (beta 0.15: sim 1.338 vs theory 1.604 cells): the interaction time grows and higher orders in the coupling matter; on the Lambda = 2.5 lattice a same-rail kink-antikink collision deviates strongly from the continuum result.",
+ "runtime_s": 146.73645782470703,
+ "_generated": "2026-11-24 12:41:03"
+}

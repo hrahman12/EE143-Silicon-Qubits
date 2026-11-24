@@ -1,0 +1,117 @@
+{
+ "E0_EJ": 19.955072091298284,
+ "EJ_joule": 2.6504280599999997e-23,
+ "braking": [
+  {
+   "beta": 0.45,
+   "L_brake": 40,
+   "gamma0": 0.009510776106565543,
+   "alpha": 0.0,
+   "KE0": 2.3903187477058916,
+   "work_to_source_max": 2.3694605194342975,
+   "efficiency": 0.9912738716158199,
+   "work_final": -0.0051754166153158985,
+   "x_end": 19.39487410705869
+  },
+  {
+   "beta": 0.45,
+   "L_brake": 80,
+   "gamma0": 0.004755388053282772,
+   "alpha": 0.0,
+   "KE0": 2.3903187477058916,
+   "work_to_source_max": 2.3747368497642336,
+   "efficiency": 0.993481246818395,
+   "work_final": -0.004174781511036018,
+   "x_end": 19.39586471396059
+  },
+  {
+   "beta": 0.45,
+   "L_brake": 160,
+   "gamma0": 0.002377694026641386,
+   "alpha": 0.0,
+   "KE0": 2.3903187477058916,
+   "work_to_source_max": 2.3753751912382155,
+   "efficiency": 0.9937482996851286,
+   "work_final": -0.0019398975303143537,
+   "x_end": 19.398037402779035
+  },
+  {
+   "beta": 0.45,
+   "L_brake": 320,
+   "gamma0": 0.001188847013320693,
+   "alpha": 0.0,
+   "KE0": 2.3903187477058916,
+   "work_to_source_max": 2.376155696960397,
+   "efficiency": 0.9940748275688808,
+   "work_final": -0.00276071284642815,
+   "x_end": 19.397038006219027
+  },
+  {
+   "beta": 0.45,
+   "L_brake": 640,
+   "gamma0": 0.0005944235066603464,
+   "alpha": 0.0,
+   "KE0": 2.3903187477058916,
+   "work_to_source_max": 2.3765364648606817,
+   "efficiency": 0.99423412343712,
+   "work_final": 0.6721431530195914,
+   "x_end": 578.1503599800384
+  }
+ ],
+ "braking_damping": [
+  {
+   "beta": 0.45,
+   "L_brake": 320,
+   "gamma0": 0.001188847013320693,
+   "alpha": 1e-06,
+   "KE0": 2.3903187477058916,
+   "work_to_source_max": 2.3745130345657204,
+   "efficiency": 0.9933876127795338,
+   "work_final": -0.002760225241175374,
+   "x_end": 19.407353862457896
+  },
+  {
+   "beta": 0.45,
+   "L_brake": 320,
+   "gamma0": 0.001188847013320693,
+   "alpha": 1e-05,
+   "KE0": 2.3903187477058916,
+   "work_to_source_max": 2.3599407339208938,
+   "efficiency": 0.9872912289149081,
+   "work_final": -0.0027560792014836286,
+   "x_end": 19.500172721351387
+  },
+  {
+   "beta": 0.45,
+   "L_brake": 320,
+   "gamma0": 0.001188847013320693,
+   "alpha": 0.0001,
+   "KE0": 2.3903187477058916,
+   "work_to_source_max": 2.220697504202778,
+   "efficiency": 0.9290382323838996,
+   "work_final": -0.0027178510773452247,
+   "x_end": 20.48310800406107
+  }
+ ],
+ "energy_per_operation_J": {
+  "components": {
+   "fluxon rest energy (x2, dissipated at detection unless recycled)": 1.0577896602019969e-21,
+   "fluxon kinetic energy (x2, recoverable by braking)": 1.267073576252751e-22,
+   "collision radiation (circuit simulation, worst case)": 3.624766521974663e-26,
+   "injection junction switching, I_inj Phi0 (x2, estimate)": 6.661252257731396e-22,
+   "dispersive (non-latching) readout, ~10 photons at 7 GHz (x2)": 9.276498210000001e-23,
+   "latching detector alternative, 1 uA x 0.36 mV x 1 ns (x2)": 7.2e-19
+  },
+  "comparison": {
+   "QBF-X2 CZ, dispersive readout, no recycling": 1.8506584912656314e-21,
+   "QBF-X2 CZ, dispersive readout, kinetic energy recovered": 1.7239511336403563e-21,
+   "QBF-X2 CZ, latching detectors": 7.218506584912657e-19,
+   "classical reversible fluxon gate (3 % of a 50 uA, Lambda 3.7 fluxon)": 1.461230544431013e-20,
+   "RSFQ switching event (I_c Phi0, I_c = 100 uA)": 2.0678338484619296e-19,
+   "Landauer limit kT ln2 at 20 mK": 1.913985923385816e-25
+  },
+  "notes": "estimates; control electronics, refrigeration and amplifiers excluded for every entry"
+ },
+ "verdict": "Simulated, not measured: a collision CZ whose fluxons keep >99.99 % of their kinetic energy through the gate, and a braking section that returns most of that kinetic energy to the bias supply. The per-gate on-chip energy (~1e-21 J with dispersive readout) is set by creating and destroying two fluxons; recycling the rest energy needs fluxon storage and re-launch, not demonstrated here. Unitarity alone is not a thermodynamic advantage: measurement, reset and control dominate any real energy budget.",
+ "_generated": "2026-11-24 12:37:19"
+}
