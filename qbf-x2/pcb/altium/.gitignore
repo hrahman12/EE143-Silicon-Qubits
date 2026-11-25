@@ -1,0 +1,2 @@
+# altium-designer-mcp writes a timestamped backup before every write
+*.bak
