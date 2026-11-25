@@ -607,7 +607,7 @@ def EC_GHz_from_fF(C_fF):
 # ====================================================================================================================
 # layout-level extraction: periodic context windows taken from the drawn geometry (hardware/layout.py primitives)
 # ====================================================================================================================
-SIZING_VERSION = 9
+SIZING_VERSION = 11
 G_NOCAP = 0.12                   # below this envelope value no coupling capacitor is drawn (target < 0.025 fF)
 SIZING_MESH = dict(h0=0.04, hmax=0.40, hmax_ground=1.2)
 MESH = dict(h0=0.03, hmax=0.30, hmax_ground=1.0, growth=1.6, ymargin=12.0, delta_jj=0.10, delta_cap=0.30, K=20)
@@ -897,7 +897,7 @@ def column_xsec(block, n, extra=None, extra_slots=()):
         w_eq = (l_g * W_GRAL + (p - l_g) * block.pad_w(row, n)) / p
         strips.append((yc - w_eq / 2, yc + w_eq / 2, 0.0, row))
         k = block.ret[row][n]
-        d = RUNG_DIR[row][k]
+        d = block.rdir(row, n)
         if k == "S":
             ret[row] = f"S_{PAIR_OF[row]}"
         elif k == "M":
@@ -1059,6 +1059,46 @@ def _bracket_solve(f, lo, hi, x0, target, tol, maxit=7):
     return best
 
 
+def _cap_from_model(res_g, gs_sorted, gv, Cc):
+    """coupling-capacitor knob for a taper cell from the solved samples: C_c(g) = C_inplane(g) + c_ov(w_t) * l_ov,
+    with the in-plane part C_inplane = C_c - c_ov l_ov inferred from every sample (interpolated in g) and
+    c_ov = eps0 eps_d w_t / d + 2 x (top-edge term) per unit overlap length (l_ov < 0: in-plane end gap, where
+    the sample's own l_ov is interpolated instead). Avoids clamping where the plate width changes."""
+    wt = 0.20 if gv > 0.5 else 0.10
+    e_top = crossover_edge_term("top_edge")
+
+    def c_ov(w):
+        return diel_fF_per_um2() * w + 2 * e_top
+    xs, cin = [], []
+    for x in gs_sorted:
+        c = res_g[x]["cap"]
+        if not c:
+            continue
+        w_, l_ = c
+        xs.append(x)
+        cin.append(res_g[x]["C_c"] - (c_ov(w_) * l_ if l_ > 0 else 0.0))
+    if not xs:
+        return None
+    lo = [x for x in xs if x <= gv]
+    hi = [x for x in xs if x >= gv]
+    br = ([max(lo)] if lo else []) + ([min(hi)] if hi else [])
+    if any(res_g[x]["cap"][1] <= 0 for x in br):
+        # end-gap regime on either side: interpolate the knob itself between the bracketing samples
+        if len(br) == 2 and br[0] != br[1]:
+            l0, l1 = res_g[br[0]]["cap"][1], res_g[br[1]]["cap"][1]
+            return (0.10, float(np.interp(gv, br, [l0, l1])))
+        return tuple(res_g[br[0]]["cap"])
+    Cin = float(np.interp(gv, xs, cin))
+    need = Cc * gv - Cin
+    if need > 0:
+        return (wt, max(need / c_ov(wt), 0.02))
+    # in-plane regime: interpolate the end gap of the samples that used one
+    gx = [x for x in xs if res_g[x]["cap"][1] <= 0]
+    if gx:
+        return (0.10, float(np.interp(gv, gx, [res_g[x]["cap"][1] for x in gx])))
+    return (wt, 0.02)
+
+
 def _block(arch, sz):
     from hardware import layout as LY
     B = LY.Block(arch, sz)
@@ -1180,7 +1220,7 @@ def size_layout(arch, t=None, verbose=True):
         tgtC = Cc * gc
         tgtG = shunt - Cc * gc
         wt = 0.20 if gc > 0.5 else 0.10
-        S_MAX = 6.0
+        S_MAX = 3.5                                        # keeps >= 2.6 um of inner ground between two free sides
         u_lo = -0.30 - (S_MAX - LY.S_FREE)                  # u in [-0.3, 0.95]: trim knob; below: wider free gap
 
         def knobs(x):
@@ -1250,6 +1290,37 @@ def size_layout(arch, t=None, verbose=True):
             f"C_c {cv:.4f}/{tgtC:.4f}, C_gnd plate {gpv:.4f} cross {gcv:.4f} / {tgtG:.4f} "
             f"(trim p {kb['tp']} c {kb['tc']}, s_free p {kb['sp']:.2f} c {kb['sc']:.2f})")
     log["coupler_samples"] = res_g
+    sz = interpolate_coupler(arch, sz, res_g, Cc, W_MAX)
+    say("coupler knobs interpolated over", len(ncpl), "cells")
+    try:                                                    # checkpoint (lets the line / granular-Al steps rerun)
+        import json as _json
+        import tempfile as _tf
+        log["coupler_samples"] = {str(k): v for k, v in log.get("coupler_samples", {}).items()}
+        sz["log"] = log
+        _json.dump(sz, open(os.path.join(_tf.gettempdir(), "qbfx2_layout_sizing_partial.json"), "w"), default=float)
+    except Exception:
+        pass
+    # ---------------------------------------------------------------- 4. launcher control lines (if any)
+    sz, linfo = size_lines(arch, sz, t, say)
+    log["lines"] = linfo
+    # ---------------------------------------------------------------- 5. granular-Al lengths: L per cell
+    sz = size_gral(arch, sz, t, say)
+    sz["log"] = log
+    sz["targets"] = {k: v for k, v in t.items() if k not in ("launcher", "sections")}
+    sz["runtime_s"] = _time.time() - T0
+    return sz
+
+
+def interpolate_coupler(arch, sz, res_g, Cc, W_MAX=6.0):
+    """interpolate the solved coupler samples (strip width/material, capacitor, node knobs) over every coupler
+    cell in g and mirror them to the dummy pairs (their geometry is the gate coupler's mirror image)"""
+    from hardware import layout as LY
+    res_g = {float(k): v for k, v in res_g.items()}
+    N = arch.n_cells
+    g_all = [LY._env(arch, n) for n in range(N)]
+    ncpl = [n for n in range(N) if g_all[n] > 0]
+    ra, rb_ = LY.PAIRS["G"]
+    plate, cross = (ra, rb_) if LY.CPL_ROLE[ra] == "plate" else (rb_, ra)
     # interpolate the coupler knobs over all coupler cells (in g), and mirror to the dummy pairs
     gs_sorted = sorted(res_g)
     def interp(key, gv):
@@ -1273,14 +1344,11 @@ def size_layout(arch, t=None, verbose=True):
             nb_ = [x for x in gs_sorted if res_g[x]["mat"] == "NB"]
             xs = np.array(nb_); ys = np.log([res_g[x]["w_strip"] for x in nb_])
         w = float(np.exp(np.interp(gv, xs, ys))) if len(xs) > 1 else float(np.exp(ys[0]))
-        wt = 0.20 if gv > 0.5 else 0.10
-        with_cap = [x for x in gs_sorted if res_g[x]["cap"]]
-        capd = None
-        if with_cap and gv >= G_NOCAP and mat == "AL2":
-            same = [x for x in with_cap if res_g[x]["cap"][0] == wt]
-            xs = np.array(same if len(same) > 1 else with_cap)
-            lov = float(np.interp(gv, xs, [res_g[x]["cap"][1] for x in xs]))
-            capd = (wt, lov)
+        capd = _cap_from_model(res_g, gs_sorted, gv, Cc) if (gv >= G_NOCAP and mat == "AL2") else None
+        if mat == "NB":
+            gmin = min(gs_sorted)
+            if gv < gmin:                                  # coupler ends: widen the Nb strip toward W_MAX (L_s -> 0)
+                w = float(np.exp(np.interp(gv, [0.0, gmin], [math.log(W_MAX), math.log(res_g[gmin]["w_strip"])])))
         for pk, (a, b) in LY.PAIRS.items():
             sz["w_strip"][f"{pk}|{n}"] = w
             sz["strip_mat"][f"{pk}|{n}"] = mat
@@ -1295,15 +1363,199 @@ def size_layout(arch, t=None, verbose=True):
                     xs_ = [x for x in gs_sorted if res_g[x][key_t] is not None]
                     sz["trim"][f"{row}|{n}"] = float(np.interp(gv, xs_, [res_g[x][key_t] for x in xs_]))
                 sz["s_free"][f"{row}|{n}"] = interp("s_plate" if role == plate else "s_cross", gv)
-    say("coupler knobs interpolated over", len(ncpl), "cells")
-    # ---------------------------------------------------------------- 4. launcher control lines (if any)
+    return sz
+
+
+def resize_lines_and_gral(arch, sz, verbose=True):
+    """re-run the launcher-line and granular-Al steps on an existing sizing"""
+    import time as _time
+    from hardware import layout as LY
+    T0 = _time.time()
+    say = (lambda *a: print(f"[resize {(_time.time() - T0):6.1f}s]", *a, flush=True)) if verbose else (lambda *a: None)
+    t = LY.targets(arch)
     sz, linfo = size_lines(arch, sz, t, say)
-    log["lines"] = linfo
-    # ---------------------------------------------------------------- 5. granular-Al lengths: L per cell
+    sz.setdefault("log", {})["lines"] = linfo
     sz = size_gral(arch, sz, t, say)
-    sz["log"] = log
-    sz["targets"] = {k: v for k, v in t.items() if k not in ("launcher", "sections")}
-    sz["runtime_s"] = _time.time() - T0
+    return sz
+
+
+def size_gral(arch, sz, t, say=print):
+    """unshielded granular-Al length per mesh so that the extracted mesh self-inductance (kinetic rail + kinetic
+    return + 2D geometric loop) equals L. Columns are grouped by signature (return kinds, g, strip, line positions)
+    and the 2D solve is done once per group."""
+    from hardware import layout as LY
+    N, Lt = t["N"], t["L_pH"]
+    B = LY.Block(arch, sz)
+    sig_cache = {}
+    loopL = {}
+    for n in range(N - 1):
+        sig = (tuple(B.ret[r][n] for r in LY.ROWS), round(B.g[n], 3),
+               tuple(round(B.w_strip(pk, n), 4) for pk in LY.PAIRS) if B.g[n] > 0 else (),
+               tuple(round(B.s_free(r, n), 3) for r in LY.ROWS))
+        if sig not in sig_cache:
+            sig_cache[sig] = column_inductance(B, n)["self"]
+        loopL[n] = sig_cache[sig]
+    say(f"granular Al: {len(sig_cache)} distinct column cross-sections")
+    for it in range(3):
+        newl = {}
+        for row in LY.ROWS:
+            for n in range(N - 1):
+                Lk, info = rail_kinetic_pH(B, row, n)
+                Lg = Lk - info["squares_gral"] * gral_Lsq_pH()
+                need = Lt - loopL[n][row] - Lg
+                newl[f"{row}|{n}"] = need / gral_Lsq_pH() * LY.W_GRAL
+        sz["l_gral"] = newl
+        B = LY.Block(arch, sz)
+    return sz
+
+
+M_DRAW_MIN = 0.018                # pH: smallest control-line mutual the strip geometry reaches (gating threshold)
+
+
+def size_lines(arch, sz, t=None, say=print):
+    """control-line depths (line centre from the launch row's free-side ground edge, um) per rail cell. Both lines
+    run in one slot of the inner strip on the free side (trap on the inner track, accelerator on the outer track,
+    >= LINE_SEP apart); the 2D cross-section mutual M_n (line -> cell loop, all four launch rows have the same strip
+    geometry) is tabulated vs (d_trap, d_acc) and inverted per cell so that each line meets its target wherever the
+    target is >= M_DRAW_MIN; where a target is smaller the line is pushed as deep as the other line allows (its
+    as-drawn M_n is reported). Each line is truncated (shorted) one cell after its last cell >= M_DRAW_MIN.
+    Valid for slowly varying depth (2D cross-section per cell)."""
+    import copy
+    from hardware import layout as LY
+    lt = LY.launcher_targets(arch)
+    if not lt:
+        return sz, {}
+    s0 = copy.deepcopy(sz)
+    s0["lines"] = {}
+    s0["no_lines"] = True
+    B = LY.Block(arch, s0)
+    B.draw()
+    WL, GL, SEP = LY.Block.W_LINE, LY.Block.G_LINE, LY.LINE_SEP
+    dmin = B.depth_min()
+    row0 = "A1" if "A1" in lt else next(iter(lt))
+    c0 = 30 if not LY.mirrored(row0) else B.N - 32
+    df0 = -LY.RUNG_DIR[row0]["G"]
+    dmax = B.depth_max(row0, c0, df0)
+
+    def mutuals(dt, da):
+        y_near, _ = B.strip_bounds(row0, c0, df0)
+        extra, ys_ = [], []
+        for nm, dpt in (("TRL", dt), ("ACL", da)):
+            if dpt is None:
+                continue
+            y = y_near + df0 * dpt
+            extra.append((y - WL / 2, y + WL / 2, 0.0, nm))
+            ys_.append(y)
+        slot = (min(ys_) - WL / 2 - GL, max(ys_) + WL / 2 + GL)
+        r = column_inductance(B, c0, extra=extra, lines=("TRL", "ACL"), extra_slots=[slot])
+        return abs(r["lines"].get(f"{row0}~TRL", 0.0)), abs(r["lines"].get(f"{row0}~ACL", 0.0))
+    dts = np.linspace(dmin, dmax - SEP, 9)
+    das = np.linspace(dmin + SEP, dmax, 9)
+    T2t = np.full((len(dts), len(das)), np.nan); T2a = np.full_like(T2t, np.nan)
+    for i, dt in enumerate(dts):
+        for j, da in enumerate(das):
+            if da - dt < SEP - 1e-9:
+                continue
+            T2t[i, j], T2a[i, j] = mutuals(dt, da)
+    das1 = np.linspace(dmin, dmax, 12)
+    T1 = np.array([mutuals(None, da)[1] for da in das1])
+    say(f"line tables ({row0}, strip depth {dmin:.2f}..{dmax:.2f} um): trap (inner) {np.nanmin(T2t):.4f}..{np.nanmax(T2t):.4f} pH, "
+        f"acc (outer) {np.nanmin(T2a):.4f}..{np.nanmax(T2a):.4f} pH, single line {T1.min():.4f}..{T1.max():.4f} pH")
+    from scipy.interpolate import RegularGridInterpolator
+    for T in (T2t, T2a):
+        for i in range(T.shape[0]):
+            row_ = T[i]
+            good = ~np.isnan(row_)
+            if good.any():
+                row_[~good] = np.interp(np.nonzero(~good)[0], np.nonzero(good)[0], row_[good])
+    ft = RegularGridInterpolator((dts, das), T2t, bounds_error=False, fill_value=None)
+    fa = RegularGridInterpolator((dts, das), T2a, bounds_error=False, fill_value=None)
+    grid = np.array([(dt, da) for dt in np.linspace(dts[0], dts[-1], 60) for da in np.linspace(das[0], das[-1], 60)
+                     if da >= dt + SEP - 1e-9])
+    GT, GA = ft(grid), fa(grid)
+    lines, info = {}, {}
+    for row, tg in lt.items():
+        Mt, Ma = np.asarray(tg["trap"]), np.asarray(tg["acc"])
+        Bm = LY.Block(arch, dict(s0, no_lines=False))
+        cells_t = set(c for c in Bm.line_cells(row, "trap"))
+        cells_a = set(c for c in Bm.line_cells(row, "acc"))
+        dep = {"trap": {}, "acc": {}}
+        for n in sorted(cells_a | cells_t):
+            if n < 0 or n > B.N - 2:
+                continue
+            tt, ta = Mt[n], Ma[n]
+            if n in cells_t and n in cells_a:
+                sc = np.zeros(len(grid))
+                sc += np.where(tt >= M_DRAW_MIN, np.abs(GT - tt) / max(tt, 1e-9), 0.2 * GT / M_DRAW_MIN)
+                sc += np.where(ta >= M_DRAW_MIN, np.abs(GA - ta) / max(ta, 1e-9), 0.2 * GA / M_DRAW_MIN)
+                k = int(np.argmin(sc))
+                dep["trap"][str(n)] = float(grid[k, 0]); dep["acc"][str(n)] = float(grid[k, 1])
+            elif n in cells_a:
+                da = float(das1[-1]) if ta <= T1[-1] else float(np.interp(-ta, -T1, das1))
+                dep["acc"][str(n)] = da
+            else:
+                dt = float(das1[-1]) if tt <= T1[-1] else float(np.interp(-tt, -T1, das1))
+                dep["trap"][str(n)] = dt
+        lines[row] = dep
+        info[row] = dict(trap_cells=len(dep["trap"]), acc_cells=len(dep["acc"]))
+    sz["lines"] = lines
+    sz["line_tables"] = dict(row=row0, dts=dts.tolist(), das=das.tolist(), T2t=T2t.tolist(), T2a=T2a.tolist(),
+                             das1=das1.tolist(), T1=T1.tolist(), sep=SEP)
+    return sz, info
+
+
+def interpolate_coupler(arch, sz, res_g, Cc, W_MAX=6.0):
+    """interpolate the solved coupler samples (strip width/material, capacitor, node knobs) over every coupler
+    cell in g and mirror them to the dummy pairs (their geometry is the gate coupler's mirror image)"""
+    from hardware import layout as LY
+    res_g = {float(k): v for k, v in res_g.items()}
+    N = arch.n_cells
+    g_all = [LY._env(arch, n) for n in range(N)]
+    ncpl = [n for n in range(N) if g_all[n] > 0]
+    ra, rb_ = LY.PAIRS["G"]
+    plate, cross = (ra, rb_) if LY.CPL_ROLE[ra] == "plate" else (rb_, ra)
+    # interpolate the coupler knobs over all coupler cells (in g), and mirror to the dummy pairs
+    gs_sorted = sorted(res_g)
+    def interp(key, gv):
+        xs = np.array(gs_sorted); ys = np.array([res_g[x][key] for x in gs_sorted], float)
+        return float(np.interp(gv, xs, ys))
+    mirror = {"G": {plate: plate, cross: cross}}
+    for pk, (a, b) in LY.PAIRS.items():
+        if pk == "G":
+            continue
+        mirror[pk] = {(a if LY.CPL_ROLE[a] == "plate" else b): plate, (a if LY.CPL_ROLE[a] == "cross" else b): cross}
+    sz.setdefault("strip_mat", {})
+    for n in ncpl:
+        gv = g_all[n]
+        # nearest-sample material, interpolated width (in log) and knobs
+        gbelow = [x for x in gs_sorted if x <= gv + 1e-12]
+        mat = res_g[min(gs_sorted, key=lambda x: abs(x - gv))]["mat"]
+        mats_al = [x for x in gs_sorted if res_g[x]["mat"] == "AL2"]
+        if mat == "AL2":
+            xs = np.array(mats_al); ys = np.log([res_g[x]["w_strip"] for x in mats_al])
+        else:
+            nb_ = [x for x in gs_sorted if res_g[x]["mat"] == "NB"]
+            xs = np.array(nb_); ys = np.log([res_g[x]["w_strip"] for x in nb_])
+        w = float(np.exp(np.interp(gv, xs, ys))) if len(xs) > 1 else float(np.exp(ys[0]))
+        capd = _cap_from_model(res_g, gs_sorted, gv, Cc) if (gv >= G_NOCAP and mat == "AL2") else None
+        if mat == "NB":
+            gmin = min(gs_sorted)
+            if gv < gmin:                                  # coupler ends: widen the Nb strip toward W_MAX (L_s -> 0)
+                w = float(np.exp(np.interp(gv, [0.0, gmin], [math.log(W_MAX), math.log(res_g[gmin]["w_strip"])])))
+        for pk, (a, b) in LY.PAIRS.items():
+            sz["w_strip"][f"{pk}|{n}"] = w
+            sz["strip_mat"][f"{pk}|{n}"] = mat
+            sz["cap"][f"{pk}|{n}"] = capd
+            for row in (a, b):
+                role = mirror[pk][row]
+                key_t = "trim_plate" if role == plate else "trim_cross"
+                nearest = sorted(gs_sorted, key=lambda x: abs(x - gv))[:2]
+                if all(res_g[x][key_t] is None for x in nearest):
+                    sz["trim"][f"{row}|{n}"] = None
+                else:
+                    xs_ = [x for x in gs_sorted if res_g[x][key_t] is not None]
+                    sz["trim"][f"{row}|{n}"] = float(np.interp(gv, xs_, [res_g[x][key_t] for x in xs_]))
+                sz["s_free"][f"{row}|{n}"] = interp("s_plate" if role == plate else "s_cross", gv)
     return sz
 
 
@@ -1364,6 +1616,7 @@ def size_lines(arch, sz, t=None, say=print):
         return sz, {}
     s0 = copy.deepcopy(sz)
     s0["lines"] = {}
+    s0["no_lines"] = True                                   # tables: only the probe lines in the cross-section
     B = LY.Block(arch, s0)
     B.draw()
     WL, GL = LY.Block.W_LINE, LY.Block.G_LINE
@@ -1390,18 +1643,19 @@ def size_lines(arch, sz, t=None, say=print):
         c = 30
         df = -LY.RUNG_DIR[row0]["G"]
         dmax = B.depth_max(row0, c, df)
-        dts = np.linspace(dmin, dmax - 2.4, 6)
-        das2 = np.linspace(dmin + 2.4, dmax, 7)
+        sep = min(2.6, dmax - dmin)                         # line-to-line separation (>= 1 um of ground)
+        dts = np.linspace(dmin, dmax - sep, 6)
+        das2 = np.linspace(dmin + sep, dmax, 7)
         T2t = np.full((len(dts), len(das2)), np.nan); T2a = np.full_like(T2t, np.nan)
         for i, dt in enumerate(dts):
             for j, da in enumerate(das2):
-                if da - dt < 2.4 - 1e-9:
+                if da - dt < sep - 1e-9:
                     continue
                 mt, ma, _ = mutuals(row0, c, dt, da)
                 T2t[i, j], T2a[i, j] = mt, ma
         das1 = np.linspace(dmin, dmax, 9)
         T1 = np.array([mutuals(row0, c, None, da)[1] for da in das1])
-        tables[row0] = dict(dts=dts, das2=das2, T2t=T2t, T2a=T2a, das1=das1, T1=T1)
+        tables[row0] = dict(dts=dts, das2=das2, T2t=T2t, T2a=T2a, das1=das1, T1=T1, sep=sep)
         say(f"line tables {row0}: trap M {np.nanmin(T2t):.4f}..{np.nanmax(T2t):.4f} pH, acc M (both) "
             f"{np.nanmin(T2a):.4f}..{np.nanmax(T2a):.4f}, acc alone {T1.min():.4f}..{T1.max():.4f} pH")
     from scipy.interpolate import RegularGridInterpolator
@@ -1430,7 +1684,7 @@ def size_lines(arch, sz, t=None, say=print):
         ft = RegularGridInterpolator((tb["dts"], tb["das2"]), T2t, bounds_error=False, fill_value=None)
         fa = RegularGridInterpolator((tb["dts"], tb["das2"]), T2a, bounds_error=False, fill_value=None)
         grid = [(dt, da) for dt in np.linspace(tb["dts"][0], tb["dts"][-1], 45)
-                for da in np.linspace(tb["das2"][0], tb["das2"][-1], 45) if da >= dt + 2.4 - 1e-9]
+                for da in np.linspace(tb["das2"][0], tb["das2"][-1], 45) if da >= dt + tb["sep"] - 1e-9]
         G = np.array(grid)
         GT, GA = ft(G), fa(G)
         for n in sorted(cells_a | cells_t):
@@ -1448,6 +1702,15 @@ def size_lines(arch, sz, t=None, say=print):
                 else:
                     da = float(np.interp(-tgt_a, -np.asarray(tb["T1"]), tb["das1"]))
                 dep["acc"][str(n)] = da
+        # the accelerator line keeps the outer track for 3 cells beyond the trap line's end (its short and slot)
+        if dep["trap"]:
+            tcs = sorted(int(c) for c in dep["trap"])
+            edge_c = tcs[-1] if not m else tcs[0]
+            dt_edge = dep["trap"][str(edge_c)]
+            for j in range(1, 4):
+                c = edge_c + j if not m else edge_c - j
+                if str(c) in dep["acc"]:
+                    dep["acc"][str(c)] = max(dep["acc"][str(c)], dt_edge + tb["sep"])
         lines[row] = dep
         info[row] = dict(trap_cells=len(dep["trap"]), acc_cells=len(dep["acc"]),
                          residual_at_deepest_pH=dict(trap=float(np.min(GT)), acc_alone=float(np.min(tb["T1"]))))
@@ -1484,15 +1747,21 @@ def gds_consistency(block, gds_path):
     """area per layer of the GDS on disk vs the primitives used for the extraction (same geometry check)"""
     import gdstk
     from hardware.layout import build_block, L_NB, L_GRAL, L_AL1, L_AL2, L_DIEL
-    lib = gdstk.read_gds(gds_path)
-    top = lib.top_level()[0]
-    area = {}
-    for poly in top.polygons:
-        area[(poly.layer, poly.datatype)] = area.get((poly.layer, poly.datatype), 0.0) + poly.area()
+    import tempfile
+
+    def areas(path):
+        lib = gdstk.read_gds(path)
+        top = lib.top_level()[0]
+        a = {}
+        for poly in top.polygons:
+            a[(poly.layer, poly.datatype)] = a.get((poly.layer, poly.datatype), 0.0) + poly.area()
+        return a
+    area = areas(gds_path)
     lib2, cell2, _, _ = build_block(block.arch, block.sz)
-    area2 = {}
-    for poly in cell2.polygons:
-        area2[(poly.layer, poly.datatype)] = area2.get((poly.layer, poly.datatype), 0.0) + poly.area()
+    with tempfile.TemporaryDirectory() as td:            # same 1 nm rounding as the file on disk
+        p2 = os.path.join(td, "rebuilt.gds")
+        lib2.write_gds(p2)
+        area2 = areas(p2)
     out = {}
     for ly in (L_NB, L_GRAL, L_AL1, L_AL2, L_DIEL):
         a1, a2 = area.get(ly, 0.0), area2.get(ly, 0.0)
@@ -1641,6 +1910,7 @@ def verify(arch, gds_path: str, out_dir: str | None = None, sizing: dict | None 
     L_rows = {r: [] for r in LY.ROWS}
     Ls_list = []
     strayM = []
+    bs_ladder = []
     for n in range(N - 1):
         sig = (tuple(B.ret[r][n] for r in LY.ROWS), round(B.g[n], 4),
                tuple(round(B.w_strip(pk, n), 4) for pk in LY.PAIRS) if B.g[n] > 0 else (),
@@ -1661,6 +1931,9 @@ def verify(arch, gds_path: str, out_dir: str | None = None, sizing: dict | None 
         for key, M in ci["mutual"].items():
             a, b = key.split("~")
             if B.g[n] > 0 and {a, b} == set(LY.PAIRS[LY.PAIR_OF.get(a, "G")]) and B.ret[a][n] == "S":
+                continue
+            if B.ret[a][n] == "M" and B.ret[b][n] == "M":
+                bs_ladder.append((key, n, M))              # rows of one beam splitter share the middle rail: designed
                 continue
             strayM.append((key, n, M))
     say(f"inductance: {len(sig_cache)} distinct cross-sections over {N - 1} columns")
@@ -1700,6 +1973,7 @@ def verify(arch, gds_path: str, out_dir: str | None = None, sizing: dict | None 
                              k_plateau=[float(x) for x in (kp.min(), kp.max())] if pl else None,
                              taper=[dict(pair=x[0], n=x[1], g=x[2], M_pH=x[3], target_pH=Ls * x[2]) for x in tp[::4]],
                              stray_max_pH=float(Ms.max()) if strayM else 0.0,
+                             bs_ladder_shared_middle_rail_mutual_pH=float(max(abs(x[2]) for x in bs_ladder)) if bs_ladder else 0.0,
                              junction_lead_inductance_pH=junction_lead_inductance(B))
     # ---------------------------------------------------------------- launcher control lines
     if lt_rows:
@@ -1708,6 +1982,21 @@ def verify(arch, gds_path: str, out_dir: str | None = None, sizing: dict | None 
     res["sensitivity"] = sensitivity(B, ctx, res, t)
     if not fast:
         res["convergence"] = convergence_study(B, secs["coupler"]["start"] + secs["coupler"]["cells"] // 2, say)
+        mx = mesh_extrapolation(res["convergence"])
+        res["mesh_extrapolation"] = mx
+        # informational: plateau node capacitance and C_c with the mesh-converged estimate
+        pl = ctx.get("coupler plateau")
+        if pl and all("C_inf" in mx.get(k, {}) for k in ("C0_A1", "C0_B1", "C_c")):
+            for row in LY.ROWS:
+                role = LY.CPL_ROLE[row]
+                f = mx["C0_A1"]["rel"] if role == "plate" else mx["C0_B1"]["rel"]
+                chk("node capacitance, mesh-extrapolated [informational]", _pf(Cj + pl["rows"][row]["C0"] * (1 + f), Cn),
+                    f"{row} coupler plateau", informational=True)
+            a, b = LY.PAIRS["G"]
+            plate = a if LY.CPL_ROLE[a] == "plate" else b
+            cross = b if plate == a else a
+            chk("C_c, mesh-extrapolated [informational]",
+                _pf(pl["rows"][plate]["cross"][cross] * (1 + mx["C_c"]["rel"]), Cc), "coupler plateau", informational=True)
     # ---------------------------------------------------------------- summary
     res["contexts"] = {k: dict(n=v["n"], g=v["g"], panels=v["panels"], rows=v["rows"], islands=v.get("islands", {}),
                                analytic=v.get("analytic", {})) for k, v in ctx.items()}
@@ -1862,6 +2151,29 @@ def sensitivity(B, ctx, res, t):
                    "process inputs: they must be calibrated in situ on test structures of the same wafer, after which "
                    "the granular-Al length, strip width and plate overlaps are re-sized by regenerating the layout "
                    "with the measured values (extract.MATERIALS)")
+    return out
+
+
+def mesh_extrapolation(conv):
+    """Richardson-type estimate of the mesh-converged values from the three mesh levels of convergence_study
+    (scale 1.5, 1.0, 0.6): fit C(h) = C_inf - a h^p. Returns {quantity: dict(p, C_base, C_inf, rel)}"""
+    from scipy.optimize import brentq
+    out = {}
+    c15 = conv.get("mesh coarser (h0 x1.5, hmax x1.5)"); c10 = conv.get("base"); c06 = conv.get("mesh finer (h0 x0.6, hmax x0.6)")
+    if not (c15 and c10 and c06):
+        return out
+    for k in ("C0_A1", "C0_B1", "C_c"):
+        d1, d2 = c10[k] - c15[k], c06[k] - c10[k]
+        if d1 <= 0 or d2 <= 0:
+            out[k] = dict(note="non-monotone", C_base=c10[k])
+            continue
+        f = lambda p: (1.5 ** p - 1) / (1 - 0.6 ** p) - d1 / d2
+        try:
+            p = brentq(f, 0.05, 4.0)
+        except ValueError:
+            p = 1.0
+        a = d2 / (1 - 0.6 ** p)
+        out[k] = dict(p=p, C_base=c10[k], C_inf=c10[k] + a, rel=a / c10[k])
     return out
 
 

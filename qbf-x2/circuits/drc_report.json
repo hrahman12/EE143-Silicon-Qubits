@@ -1,0 +1,169 @@
+{
+ "gds": "/tmp/claude-0/-home-user-EE143-Silicon-Qubits/e02b47a9-8f0f-5e5b-82ed-775df6405697/scratchpad/qbfx2_block.gds",
+ "rules": {
+  "NB_W": 0.4,
+  "NB_S": 0.4,
+  "GRAL_W": 0.2,
+  "GRAL_S": 0.3,
+  "GRAL_C": 0.15,
+  "AL1_W": 0.1,
+  "AL1_S": 0.2,
+  "AL2_W": 0.1,
+  "AL2_S": 0.2,
+  "JJ_TOL": 0.05,
+  "CONTACT_MIN": 1.0,
+  "JJ_W": 0.1,
+  "JJ_S": 0.5,
+  "CT_A": 1.0,
+  "DIEL_W": 0.5,
+  "DIEL_S": 0.4,
+  "DIEL_EN": 0.2,
+  "DIEL_SJ": 0.2
+ },
+ "checks": {
+  "NB.W": {
+   "violations": 0,
+   "rule": "NB min width 0.4 um",
+   "examples": []
+  },
+  "NB.S": {
+   "violations": 0,
+   "rule": "NB min space 0.4 um",
+   "examples": []
+  },
+  "GRAL.W": {
+   "violations": 0,
+   "rule": "GRAL min width 0.2 um",
+   "examples": []
+  },
+  "GRAL.S": {
+   "violations": 0,
+   "rule": "GRAL min space 0.3 um",
+   "examples": []
+  },
+  "AL1.W": {
+   "violations": 0,
+   "rule": "AL1 min width 0.1 um",
+   "examples": []
+  },
+  "AL1.S": {
+   "violations": 0,
+   "rule": "AL1 min space 0.2 um",
+   "examples": []
+  },
+  "AL2.W": {
+   "violations": 0,
+   "rule": "AL2 min width 0.1 um",
+   "examples": []
+  },
+  "AL2.S": {
+   "violations": 0,
+   "rule": "AL2 min space 0.2 um",
+   "examples": []
+  },
+  "DIEL.W": {
+   "violations": 0,
+   "rule": "DIEL min width 0.5 um",
+   "examples": []
+  },
+  "DIEL.S": {
+   "violations": 0,
+   "rule": "DIEL min space 0.4 um",
+   "examples": []
+  },
+  "GRAL.C": {
+   "violations": 0,
+   "rule": "granular Al contact overlap width >= 0.15 um",
+   "examples": []
+  },
+  "JJ.CLASS": {
+   "violations": 0,
+   "rule": "AL1&AL2-DIEL: junction within +-5 % of target or contact >= 1 um^2",
+   "examples": []
+  },
+  "JJ.W": {
+   "violations": 0,
+   "rule": "junction sides >= 0.1 um",
+   "examples": []
+  },
+  "JJ.S": {
+   "violations": 0,
+   "rule": "junction to other junction/contact >= 0.5 um",
+   "examples": []
+  },
+  "JJ.N": {
+   "violations": 0,
+   "rule": "junction counts equal the netlist",
+   "examples": [
+    {
+     "found": {
+      "rail": 4836,
+      "middle": 160
+     },
+     "expected": {
+      "rail": 4836,
+      "middle": 160
+     }
+    }
+   ]
+  },
+  "CT.A": {
+   "violations": 0,
+   "rule": "Al-on-Nb contact regions >= 1.0 um^2",
+   "examples": []
+  },
+  "DIEL.EN": {
+   "violations": 0,
+   "rule": "capacitor overlaps enclosed by DIEL >= 0.2 um",
+   "examples": []
+  },
+  "DIEL.SJ": {
+   "violations": 0,
+   "rule": "DIEL to junctions/contacts >= 0.2 um",
+   "examples": []
+  },
+  "NB.FLOAT": {
+   "violations": 0,
+   "rule": "no floating Nb pieces (ground net or a line to a port)",
+   "examples": []
+  }
+ },
+ "process": "Design-rule check of the QBF-X2 row block (klayout.db Region checks) with a documented rule deck.\n\nAssumed process (all lithography e-beam; a research process, not a foundry PDK):\n  NB    150 nm sputtered Nb on high-resistivity Si, e-beam lithography (ZEP) + SF6/Ar RIE.\n        Ground plane, inner ground strips, low-g coupler strip ends, control/flux/gate CPW lines.\n  GRAL  20 nm granular Al (0.5 nH/sq), e-beam lift-off (PMMA), in-situ Ar mill of the Nb/Al contact areas.\n  AL1   30 nm Al bottom electrode, e-beam lift-off (PMMA/MMA): node pads, junction fingers, bottom plates.\n  DIEL  100 nm PECVD SiNx (eps_r 7), patterned by e-beam lithography + CF4 RIE; crossovers and plate capacitors.\n  AL2   30 nm Al top electrode, second e-beam lift-off: in-situ Ar ion mill (cleans AL1 and Nb contact areas),\n        static oxidation (sets Jc = 2.1 uA/um^2 on every AL1/AL2 overlap that is not under DIEL), evaporation.\n  The coupling capacitors need a dielectric BETWEEN AL1 and AL2, which a single-mask double-angle (shadow)\n  evaporation cannot provide; the junctions are therefore of the two-step overlap (\"cross-type\") kind: an AL1\n  finger crossed by an AL2 finger, area = product of the two drawn widths, insensitive to overlay error.\nConsequence for the rule deck: every AL1 & AL2 overlap outside DIEL is a tunnel junction with the chip-wide Jc, so\nit must either be an intended junction (area within +-5 % of its architecture target) or a contact large enough to\nact as a short (>= 1 um^2: I_c >= 2.1 uA >> 80 nA). The same oxidation also covers the ion-milled Nb under AL2 and\nunder AL1, so Al-on-Nb contacts obey the same >= 1 um^2 rule.",
+ "junctions": {
+  "found": {
+   "rail": 4836,
+   "middle": 160
+  },
+  "expected": {
+   "rail": 4836,
+   "middle": 160
+  },
+  "contacts": 704,
+  "targets_um2": {
+   "rail": 0.03834961023335331,
+   "middle": 0.02425612847259597
+  }
+ },
+ "violations_total": 0,
+ "summary": {
+  "NB.W": 0,
+  "NB.S": 0,
+  "GRAL.W": 0,
+  "GRAL.S": 0,
+  "AL1.W": 0,
+  "AL1.S": 0,
+  "AL2.W": 0,
+  "AL2.S": 0,
+  "DIEL.W": 0,
+  "DIEL.S": 0,
+  "GRAL.C": 0,
+  "JJ.CLASS": 0,
+  "JJ.W": 0,
+  "JJ.S": 0,
+  "JJ.N": 0,
+  "CT.A": 0,
+  "DIEL.EN": 0,
+  "DIEL.SJ": 0,
+  "NB.FLOAT": 0
+ }
+}

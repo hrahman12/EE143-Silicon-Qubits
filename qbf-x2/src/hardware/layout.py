@@ -40,6 +40,7 @@ LAYERS = dict(NB=L_NB, GRAL=L_GRAL, AL1=L_AL1, AL2=L_AL2, DIEL=L_DIEL, TEXT=L_TX
 ROW_PITCH = 10.0                 # rail-to-rail distance
 W_PAD = 0.35                     # node pad width (AL1)
 W_PAD_STACK = 0.70               # pad width of coupler 'plate' nodes (AL1 + AL2 stack >= 1 um^2)
+W_PAD_CROSS = 0.25               # pad width of coupler 'cross' nodes (= granular-Al width: least capacitance)
 W_GRAL = 0.25                    # granular-Al line width
 GRAL_OV = 0.20                   # granular Al under the pads at each end (contact)
 JJ_A = 0.20                      # AL1 finger width at the rail junction
@@ -55,9 +56,11 @@ X_RET = 0.05                     # AL2 return lead centre
 W_RET = 0.20                     # AL2 return lead width
 S_RET = 1.40                     # pad edge to ground edge on the return side (plain cells)
 S_FREE = 1.80                    # pad edge to ground edge on the free side (room for the trim capacitor)
+S_FREE_L = 1.00                  # free gap of the launch row and of the row facing its control-line strip
 X_TRIM = 0.05                    # trim capacitor on the free side (coupler, beam splitter), relative to the node
 X_TRIM_R = 0.62                  # trim capacitor on the return side (plain cells), relative to the node
 TRIM_WB, TRIM_WT = 0.50, 0.30    # trim AL1 plate width / AL2 ground-plate width (x)
+LINE_SEP = 1.00                  # trap / accelerator line centre-to-centre distance in their shared slot
 CONTACT = (1.0, 1.1)             # AL2-on-NB ground contact pad (x, y): 1.1 um^2
 X_CAP = 0.60                     # coupling-capacitor leads, relative to the node
 W_CL = 0.15                      # AL1 crossing lead / bottom plate width (crossing role)
@@ -65,7 +68,7 @@ DIEL_ENC = 0.25                  # dielectric enclosure of AL1 & AL2 overlaps (r
 ISL_W, ISL_H = 0.70, 1.50        # middle-rail island stack (AL1 + AL2): 1.05 um^2
 MARGIN = 120.0                   # block margin on all sides (fan-out of control, flux, gate and readout lines);
 MARGIN_X = MARGIN_Y = MARGIN     # node 0 is at x = MARGIN, the rail of D_A at y = H - MARGIN (D_feasibility previews)
-CPW_W, CPW_G = 0.8, 0.6          # in-block line CPW (NB): same as the in-strip lines; the floorplan tapers it
+CPW_W, CPW_G = 0.5, 0.5          # in-block line CPW (NB): same as the in-strip lines; the floorplan tapers it
 PORT_PITCH = 20.0
 
 
@@ -186,7 +189,7 @@ def targets(arch: Architecture) -> dict:
 
 def _key(t: dict) -> str:
     from hardware import extract as EX
-    blob = json.dumps(dict(t=t, mat=EX.MATERIALS, geo=[ROW_PITCH, W_PAD, W_PAD_STACK, W_GRAL, GRAL_OV, JJ_A, JJ_AM, J_RET, J_RET_BS, S_FREE, X_TRIM, X_TRIM_R, TRIM_WB, TRIM_WT, W_STRIP_X, L_NECK,
+    blob = json.dumps(dict(t=t, mat=EX.MATERIALS, geo=[ROW_PITCH, W_PAD, W_PAD_STACK, W_PAD_CROSS, W_GRAL, GRAL_OV, JJ_A, JJ_AM, J_RET, J_RET_BS, S_FREE, X_TRIM, X_TRIM_R, TRIM_WB, TRIM_WT, W_STRIP_X, L_NECK, S_FREE_L, LINE_SEP,
                                                           E1, X_JJ, X_RET, W_RET, S_RET, CONTACT, X_CAP, W_CL,
                                                           DIEL_ENC, ISL_W, ISL_H, EX.SIZING_VERSION]),
                       sort_keys=True, default=float)
@@ -264,7 +267,45 @@ class Block:
     def xn(self, n):
         return self.x0 + n * self.p
 
+    # ---- launcher spans: the launch row's lines run in the inner strip on its free side; there the launch row and
+    # the row on the far side of that strip both get a 1.0 um free gap, and a dummy far row returns to the outer side
+    def launch_spans(self):
+        if hasattr(self, "_spans"):
+            return self._spans
+        sp = {}
+        for row, tg in (self.lt or {}).items():
+            act = [n for n in range(self.N - 1) if tg["acc"][n] > 0 or tg["trap"][n] > 0]
+            if not act:
+                continue
+            if mirrored(row):
+                cells = set(range(min(act) - 2, self.N))
+            else:
+                cells = set(range(0, max(act) + 3))
+            df = -RUNG_DIR[row]["G"]
+            far = [r for r in ROWS if abs(self.yc[r] - self.yc[row] - df * ROW_PITCH) < 1e-6]
+            sp[row] = dict(cells=cells, far=far[0] if far else None, df=df)
+        self._spans = sp
+        return sp
+
+    def rdir(self, row, n):
+        """rung direction of (row, n): +1 up, -1 down. A dummy row returns to the outer side inside the launch span
+        of its neighbour, so that the launch strip is bounded by two free sides (room for both control lines)."""
+        k = self.ret[row][n]
+        d = RUNG_DIR[row][k]
+        if k == "G" and row in ("D_A", "D_B"):
+            for lr, spn in self.launch_spans().items():
+                if spn["far"] == row and n in spn["cells"]:
+                    return -d
+        return d
+
     def s_free(self, row, n):
+        key = f"{row}|{n}"
+        if key in self.sz.get("s_free", {}):
+            return self.sz["s_free"][key]
+        if self.ret[row][n] == "G":
+            for lr, spn in self.launch_spans().items():
+                if n in spn["cells"] and row in (lr, spn["far"]):
+                    return S_FREE_L
         return _get(self.sz, "s_free", row, n)
 
     def l_gral(self, row, n):
@@ -294,7 +335,9 @@ class Block:
         return v
 
     def pad_w(self, row, n):
-        return W_PAD_STACK if (self.ret[row][n] == "S" and CPL_ROLE[row] == "plate") else W_PAD
+        if self.ret[row][n] == "S":
+            return W_PAD_STACK if CPL_ROLE[row] == "plate" else W_PAD_CROSS
+        return W_PAD
 
     def pad_extent(self, row, n):
         """(left, right) x-extent of node pad n: shared grAl gaps set by the meshes n-1 and n"""
@@ -321,7 +364,7 @@ class Block:
         for row in ROWS:
             if row in done:
                 continue
-            yc, d, k = self.yc[row], RUNG_DIR[row][self.ret[row][n]], self.ret[row][n]
+            yc, d, k = self.yc[row], self.rdir(row, n), self.ret[row][n]
             if k in ("S", "M"):
                 partner = None
                 if k == "S":
@@ -384,7 +427,7 @@ class Block:
         yc = self.yc[row]
         nd = self.node(row, n)
         k = self.ret[row][n]
-        d = RUNG_DIR[row][k]
+        d = self.rdir(row, n)
         wp = self.pad_w(row, n)
         xl, xr = self.pad_extent(row, n)
         g.add(L_AL1, xl, yc - wp / 2, xr, yc + wp / 2, nd, "pad")
@@ -408,12 +451,26 @@ class Block:
         y_end = self._return_y(row, n, d)
         g.add(L_AL2, xr_ - W_RET / 2, y_j - d * b / 2, xr_ + W_RET / 2, y_end, rnet, "ret_lead")
         lt = self.trim(row, n)
+        if k == "S":
+            pk_ = PAIR_OF[row]
+            nb_here = self.strip_mat(pk_, n) == "NB"
+            nb_prev = n > 0 and self.g[n - 1] > 0 and self.strip_mat(pk_, n - 1) == "NB"
+            if nb_here or nb_prev:
+                ys_ = self.strip_y(pk_)
+                if nb_here and nb_prev:
+                    x0_, x1_ = xr_ - CONTACT[0] / 2, xr_ + CONTACT[0] / 2
+                elif nb_here:
+                    x0_, x1_ = xr_, xr_ + 1.1                      # segment n starts at the return lead
+                else:
+                    x0_, x1_ = xr_ - 1.1, xr_
+                g.add(L_AL2, x0_, ys_ - CONTACT[1] / 2, x1_, ys_ + CONTACT[1] / 2, rnet, "contact")
         if k == "G":
             # shared ground contact (AL2 on NB) for the rung and the return-side trim capacitor
             x_hi = xn + X_TRIM_R + TRIM_WT / 2 if lt is not None else xr_ + CONTACT[0] / 2
             g.add(L_AL2, xr_ - CONTACT[0] / 2, y_edge + d * 0.15, x_hi, y_edge + d * (0.15 + CONTACT[1]), "G", "contact")
             if lt is not None:
-                self._trim(row, n, d, lt, xt=xn + X_TRIM_R, contact=False)
+                stack_next = n + 1 < self.N and self.pad_w(row, n + 1) == W_PAD_STACK
+                self._trim(row, n, d, lt, xt=xn + X_TRIM_R - (0.10 if stack_next else 0.0), contact=False)
         elif lt is not None:
             # trim to ground on the free side (coupler and beam-splitter cells, whose return side is busy)
             self._trim(row, n, -d, lt)
@@ -448,7 +505,7 @@ class Block:
         return None if v is None else max(float(v), -0.30)
 
     def free_edge(self, row, n):
-        d = RUNG_DIR[row][self.ret[row][n]]
+        d = self.rdir(row, n)
         return self.yc[row] - d * (self.pad_w(row, n) / 2 + self.s_free(row, n))
 
     def _trim(self, row, n, df, lov, xt=None, contact=True):
@@ -460,21 +517,23 @@ class Block:
         yc, wp = self.yc[row], self.pad_w(row, n)
         xt = self.xn(n) + X_TRIM if xt is None else xt
         y_pe = yc + df * wp / 2
-        d_ret = RUNG_DIR[row][self.ret[row][n]]
+        d_ret = self.rdir(row, n)
         y_ge = self.free_edge(row, n) if df != d_ret else yc + d_ret * (wp / 2 + S_RET)
         y_p1 = y_ge - df * 0.40                             # AL1 plate ends 0.40 before the ground edge
-        y_p0 = y_pe - df * 0.05
+        y_p0 = y_pe
         g.add(L_AL1, xt - 0.12 / 2, y_p0, xt + 0.12 / 2, y_p1, nd, "trim_stub")
         y_pl0 = y_p1 - df * (max(lov, 0.0) + 0.30)          # the AL1 plate extends 0.30 beyond the overlap
+        if (y_pl0 - y_pe) * df < 0.25:                       # no notch narrower than the AL1 space rule
+            y_pl0 = y_pe
         g.add(L_AL1, xt - TRIM_WB / 2, y_pl0, xt + TRIM_WB / 2, y_p1, nd, "trim_bottom")
         if contact:
-            g.add(L_AL2, xt - CONTACT[0] / 2, y_ge + df * 0.15, xt + CONTACT[0] / 2, y_ge + df * (0.15 + CONTACT[1]),
+            g.add(L_AL2, xt - CONTACT[0] / 2, y_ge + df * 0.15, xt + CONTACT[0] / 2, y_ge + df * (0.15 + 1.0),
                   "G", "contact")
         if lov > 0:
             y_ov0 = y_p1 - df * lov                          # AL2 overlaps the AL1 plate from y_p1 to y_ov0
             g.add(L_AL2, xt - TRIM_WT / 2, y_ov0, xt + TRIM_WT / 2, y_ge + df * 0.15, "G", "trim_top")
             lo, hi = sorted((y_ov0, y_p1))
-            g.add(L_DIEL, xt - TRIM_WB / 2 - DIEL_ENC, lo - DIEL_ENC, xt + TRIM_WB / 2 + DIEL_ENC, hi + DIEL_ENC, None,
+            g.add(L_DIEL, xt - TRIM_WT / 2 - 0.22, lo - DIEL_ENC, xt + TRIM_WT / 2 + 0.22, hi + DIEL_ENC, None,
                   "diel_trim")
             g.caps = getattr(g, "caps", [])
             g.caps.append(dict(kind="trim", row=row, n=n, a=nd, b="G", w_x=TRIM_WT, w_y=hi - lo,
@@ -494,7 +553,8 @@ class Block:
             return yc + d * (wp / 2 + S_RET)
         if k == "S":
             pair = PAIR_OF[row]
-            return self.strip_y(pair) - d * self.w_strip(pair, n) / 2
+            w = max(self.w_strip(pair, n), self.w_strip(pair, n - 1) if n > 0 and self.g[n - 1] > 0 else 0.0)
+            return self.strip_y(pair) - d * w / 2
         q = "A" if row in QUBIT_ROWS["A"] else "B"
         return self.bs_y(q) - d * ISL_H / 2
 
@@ -505,9 +565,7 @@ class Block:
         if k == "G":
             return yc + d * (wp / 2 + S_RET + 0.15 + 0.5)
         if k == "S":
-            pair = PAIR_OF[row]
-            ws = self.w_strip(pair, n)
-            return self.strip_y(pair) - d * (ws / 2 - min(ws / 2, 0.1))
+            return self.strip_y(PAIR_OF[row])
         q = "A" if row in QUBIT_ROWS["A"] else "B"
         return self.bs_y(q) - d * (ISL_H / 2 - 0.2)
 
@@ -566,7 +624,7 @@ class Block:
         y_bp1 = y_bp0 + dc * (max(lov, 0.0) + 0.15)
         if BRANCH:
             b = self.A_jj / JJ_A
-            y_j = ys - dc * ws / 2 - dc * J_RET                   # junction of the cross row (dc = its rung dir)
+            y_j = self._return_edge(cross, n, dc) - dc * J_RET    # junction of the cross row (dc = its rung dir)
             y_br = y_j - dc * 0.45
             xf = self.xn(n) + X_JJ
             g.add(L_AL1, xf - JJ_A / 2, y_br - 0.06, xc + W_CL / 2, y_br + 0.06, self.node(cross, n), "cap_branch")
@@ -702,7 +760,7 @@ class Block:
                                              x_open_end + sgn * 4.0))
 
     # ---- launcher control lines: NB lines in slots of the inner ground strip on the free side of each launch row
-    W_LINE, G_LINE = 0.8, 0.6
+    W_LINE, G_LINE = 0.5, 0.5
 
     def strip_bounds(self, row, n, side):
         """(y_near, y_far) of the inner ground strip next to `row` on `side` (+1 above, -1 below) at column n"""
@@ -732,59 +790,82 @@ class Block:
         far_rows = [r for r in ROWS if r != row and abs(self.yc[r] - self.yc[row]) == ROW_PITCH
                     and np.sign(self.yc[r] - self.yc[row]) == df]
         for r in far_rows:
-            if self.ret[r][c] != "G" or self.ret[r][max(c - 1, 0)] != "G" or self.ret[r][min(c + 1, self.N - 1)] != "G":
-                reserve = 0.15 + CONTACT[1] + 0.40
+            for cc in (max(c - 1, 0), c, min(c + 1, self.N - 1)):
+                k = self.ret[r][cc]
+                faces_return = self.rdir(r, cc) == -df         # the far row's return side faces this strip
+                if k != "G" or faces_return:
+                    reserve = 0.15 + CONTACT[1] + 0.40
         return width - reserve - self.W_LINE / 2 - self.G_LINE
 
     def line_depths(self, row):
         return self.sz.get("lines", {}).get(row, {})
 
+    def line_cells(self, row, tag):
+        """rail cells a control line passes through: from the launch end to one cell past its last active cell"""
+        from hardware.extract import M_DRAW_MIN
+        tg = self.lt[row]
+        M = np.asarray(tg[tag])
+        act = np.nonzero(M >= M_DRAW_MIN)[0]                 # truncated after the last drawable target
+        if not len(act):
+            return []
+        if not mirrored(row):
+            return list(range(0, act.max() + 2))
+        return list(range(self.N - 2, act.min() - 2, -1))
+
+    def line_y(self, row, tag, c):
+        """centre y of a control line at cell c (depth from the row's free-side ground edge, quantized to 0.25 um
+        and clamped to the strip)"""
+        df = -RUNG_DIR[row]["G"]
+        dep = self.line_depths(row).get(tag, {})
+        y_near, _ = self.strip_bounds(row, c, df)
+        dpt = dep.get(str(c), self.sz["defaults"].get(f"depth_{tag}", 1.5 if tag == "trap" else 3.0))
+        dpt = min(max(dpt, self.depth_min()), self.depth_max(row, c, df))
+        dpt = self.depth_min() + round((dpt - self.depth_min()) / 0.25) * 0.25
+        return y_near + df * min(dpt, self.depth_max(row, c, df))
+
     def _launchers(self):
-        if not self.lt:
+        if not self.lt or self.sz.get("no_lines"):
             return
-        p = self.p
+        g = self.geo
+        W, G = self.W_LINE, self.G_LINE
         for row, tg in self.lt.items():
-            df = -RUNG_DIR[row]["G"]                       # free side
-            dep = self.line_depths(row)
             m = mirrored(row)
+            df = -RUNG_DIR[row]["G"]
+            ys = {}
             for tag in ("trap", "acc"):
-                M = np.asarray(tg[tag])
-                act = np.nonzero(M > 1e-6 * max(M.max(), 1e-30))[0]
-                if not len(act):
+                cells = [c for c in self.line_cells(row, tag) if 0 <= c <= self.N - 2]
+                if not cells:
                     continue
-                # cells from the launch end to one past the last active cell
-                last = act.max() if not m else act.min()
-                cells = list(range(0, last + 2)) if not m else list(range(self.N - 2, last - 2, -1))
-                depth = dep.get(tag, {})
+                ys[tag] = {c: self.line_y(row, tag, c) for c in cells}
+            for tag, yc_ in ys.items():
+                cells = list(yc_.keys())
                 pts = []
                 for c in cells:
-                    if c < 0 or c > self.N - 2:
-                        continue
-                    y_near, y_far = self.strip_bounds(row, c, df)
-                    dpt = depth.get(str(c), self.sz["defaults"].get(f"depth_{tag}", 1.5 if tag == "trap" else 4.5))
-                    dpt = min(max(dpt, self.depth_min()), self.depth_max(row, c, df))
-                    y = y_near + df * dpt
+                    y = yc_[c]
                     xa = self.xn(c) if not m else self.xn(c + 1)
                     xb = self.xn(c + 1) if not m else self.xn(c)
-                    if pts and abs(pts[-1][1] - y) > 1e-9:
-                        pts.append((xa, y))
-                    elif not pts:
+                    if not pts or abs(pts[-1][1] - y) > 1e-9:
                         pts.append((xa, y))
                     pts.append((xb, y))
-                # far end: shorted to the strip ground (current-driven flux line)
                 net_l = f"{'TR' if tag == 'trap' else 'AC'}_{row}"
-                self._cpw(pts, self.W_LINE, self.G_LINE, net_l)
+                self._cpw(pts, W, G, net_l)
                 end = pts[-1]
                 sgx = 1 if not m else -1
-                xa, xb = sorted((end[0], end[0] + sgx * (self.W_LINE / 2 + self.G_LINE + 0.6)))
-                self.geo.add(L_NB, xa, end[1] - self.W_LINE / 2, xb, end[1] + self.W_LINE / 2, net_l, "short")
-                self._port(f"{'TRAP' if tag == 'trap' else 'ACC'}_{row}_SHORT", end[0], end[1], L_NB, self.W_LINE,
+                xa, xb = sorted((end[0], end[0] + sgx * (W / 2 + G + 0.6)))
+                g.add(L_NB, xa, end[1] - W / 2, xb, end[1] + W / 2, net_l, "short")      # shorted to the strip
+                self._port(f"{'TRAP' if tag == 'trap' else 'ACC'}_{row}_SHORT", end[0], end[1], L_NB, W,
                            "E" if not m else "W", kind="internal_short",
                            note="line shorted to the inner ground strip here (inside the block; not routable)")
                 side = "L" if not m else "R"
                 self.end_lines[side].append((pts[0][1], f"{'TRAP' if tag == 'trap' else 'ACC'}_{row}", tag, pts[0][0]))
-                self.geo.lines = getattr(self.geo, "lines", [])
-                self.geo.lines.append(dict(row=row, tag=tag, cells=cells, net=f"{'TR' if tag == 'trap' else 'AC'}_{row}"))
+                g.lines = getattr(g, "lines", [])
+                g.lines.append(dict(row=row, tag=tag, cells=cells, net=net_l))
+            # one shared slot where both lines run (no Nb sliver between them)
+            if "trap" in ys and "acc" in ys:
+                for c in set(ys["trap"]) & set(ys["acc"]):
+                    y1, y2 = sorted((ys["trap"][c], ys["acc"][c]))
+                    x1, x2 = sorted((self.xn(c), self.xn(c + 1)))
+                    g.keepout.append((x1, y1 - W / 2 - G, x2, y2 + W / 2 + G))
 
     # ---- ground straps over the outer rail of each qubit: the inner strip between the two beam splitters of a
     # qubit is otherwise a floating NB island (it is cut by both BS sections)
@@ -916,7 +997,9 @@ def build_block(arch: Architecture, sizing: dict | None = None, cell_name: str =
     keep = getattr(geo, "keepout", [])
     by_layer = {}
     for r in geo.rects:
-        by_layer.setdefault(r[0], []).append(r)
+        x1, y1, x2, y2 = max(r[1], 0.0), max(r[2], 0.0), min(r[3], blk.W), min(r[4], blk.H)
+        if x2 - x1 > 1e-9 and y2 - y1 > 1e-9:
+            by_layer.setdefault(r[0], []).append((r[0], x1, y1, x2, y2) + tuple(r[5:]))
     # NB: ground (with slots and openings cut) united with the line conductors drawn inside the slots
     nb_ground = [r for r in by_layer.get(L_NB, []) if r[6] in ("ground", "load_gnd_nb", "catch_gnd_nb")]
     nb_other = [r for r in by_layer.get(L_NB, []) if r[6] not in ("ground", "load_gnd_nb", "catch_gnd_nb")]
