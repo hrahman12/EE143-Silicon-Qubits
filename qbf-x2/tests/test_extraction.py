@@ -166,8 +166,8 @@ def test_block_ports_on_boundary():
         assert min(abs(p["x"]), abs(p["x"] - blk.W), abs(p["y"]), abs(p["y"] - blk.H)) < 1e-6
 
 
-GATE_CRITICAL = ("C_c (coupling", "C_c taper", "L per cell", "L_s (shared", "k = M", "L_s taper", "C_M =", "E_C,M",
-                 "E_S", "stray")
+GATE_CRITICAL = ("C_c (coupling", "C_c taper", "C_c, mesh", "L per cell", "L_s (shared", "k = M", "L_s taper",
+                 "C_island,geo", "C_eff", "E_C,M", "E_S", "stray", "launcher", "trap-line Al/Nb")
 
 
 def _report():
@@ -178,9 +178,10 @@ def _report():
 
 
 def test_extraction_gate_quantities_pass():
-    """DRC clean, GDS on disk = extracted geometry, and every gate quantity within +-5 %: k, c (C_c and its taper),
-    L per cell, L_s, C_M, E_C,M, E_S, the stray couplings, and the node capacitance of every context except the
-    known outer-taper window (g < 0.2, see test_extraction_report_passes)"""
+    """DRC clean, GDS on disk = extracted geometry, and every gate quantity within +-5 %: k, c (C_c, its taper and its
+    mesh-converged estimate), L per cell, L_s, the network-loaded C_eff / E_C,M / E_S of the beam splitters, the
+    launcher M_n profiles and contacts, the stray couplings, and the node capacitance (production and mesh-converged)
+    of every context except the known outer-taper window (0 < g < 0.2, see test_extraction_report_passes)"""
     r = _report()
     from hardware.architecture import Architecture
     from hardware import layout as LY

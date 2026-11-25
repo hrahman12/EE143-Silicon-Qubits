@@ -47,8 +47,8 @@ JJ_A = 0.20                      # AL1 finger width at the rail junction
 JJ_AM = 0.11                     # AL1 finger width at the middle-rail junction (0.0129 um^2: 0.110 x 0.118)
 J_RET = 0.65                     # junction centre from the return edge (the long rung lead is at node potential)
 J_RET_BS = 0.75                  # same, beam-splitter rungs (from the island edge; >= 0.5 um from the island contact)
-W_STRIP_X = 0.15                 # minimum strip width where the crossing lead passes under it (neck)
-L_NECK = 0.55                    # neck length (crossing lead 0.15 + 2 x 0.20)
+W_STRIP_X = 0.10                 # minimum strip width where the crossing lead passes under it (neck; AL2.W)
+L_NECK = 0.50                    # neck length (crossing lead 0.10 + 2 x 0.20)
 BRANCH = True                    # crossing-role capacitor lead branches off the rung finger (no second long lead)
 E1 = 0.10                        # AL1 finger beyond the AL2 bar / AL2 bar beyond the AL1 finger
 X_JJ = -0.55                     # rung AL1 finger centre, relative to the node
@@ -61,12 +61,19 @@ X_TRIM = 0.05                    # trim capacitor on the free side (coupler, bea
 X_TRIM_R = 0.62                  # trim capacitor on the return side (plain cells), relative to the node
 TRIM_WB, TRIM_WT = 0.50, 0.30    # trim AL1 plate width / AL2 ground-plate width (x)
 LINE_SEP = 1.00                  # trap / accelerator line centre-to-centre distance in their shared slot
+TRAP_Z = 0.10                    # the trap line is AL2 on SiNx: height above the Nb plane (2D cross-section, um)
+SHIELD_FAR = 1.05                # shielded trap line (AL2 on SiNx over the Nb strip) centre from the strip's far edge
+TRAP_PAD = (28.0, 3.0)           # in-block end contact of the trap line, AL2 on the Nb strip (x, y): 84 um^2
+FEED_PAD = (20.5, 4.6)           # feed contact in the fan-out: Nb pad under an AL2 pad 0.25 inside it: 82 um^2
+J_CONTACT = 2.1                  # uA/um^2: Al/Nb contacts get the junction oxidation (rule CT.I: A >= 2 I / J)
 CONTACT = (1.0, 1.1)             # AL2-on-NB ground contact pad (x, y): 1.1 um^2
 X_CAP = 0.60                     # coupling-capacitor leads, relative to the node
-W_CL = 0.15                      # AL1 crossing lead / bottom plate width (crossing role)
+W_CL = 0.10                      # AL1 crossing lead / bottom plate width (crossing role; AL1.W)
 CAP_GAP = 0.40                   # strip (neck) edge to the bottom plate of a coupling capacitor
+NECK_FRAC = 0.50                 # AL2 strip neck under the crossing lead: this fraction of the strip width (>= W_STRIP_X)
 DIEL_ENC = 0.25                  # dielectric enclosure of AL1 & AL2 overlaps (rule 0.20)
 ISL_W, ISL_H = 0.70, 1.50        # middle-rail island stack (AL1 + AL2): 1.05 um^2
+ISL_W_MAX = 0.78                 # widest island: its junction stays >= 0.5 um (JJ.S) from both island stacks
 MARGIN = 120.0                   # block margin on all sides (fan-out of control, flux, gate and readout lines);
 MARGIN_X = MARGIN_Y = MARGIN     # node 0 is at x = MARGIN, the rail of D_A at y = H - MARGIN (D_feasibility previews)
 CPW_W, CPW_G = 0.5, 0.5          # in-block line CPW (NB): same as the in-strip lines; the floorplan tapers it
@@ -110,6 +117,24 @@ class Geo:
 # ====================================================================================================================
 # cell plan: what every (row, n) is, from the architecture and the netlist rules
 # ====================================================================================================================
+SLIVER = 0.40                    # Nb sliver between the two line slots when they are split (NB.W)
+
+
+def slot_intervals(ya, yt, w, gap, mode="merged", gt=None):
+    """ground openings (y_lo, y_hi) for the accelerator at ya and the trap line at yt (None: not in the slot):
+    'merged' one slot over both lines, its edge on the trap's side gt beyond the trap line (gt < 0: the AL2 trap
+    overlaps the Nb by -gt, insulated by its SiNx); 'split' two slots with a Nb sliver between them (needs
+    |yt - ya| >= w + 2 gap + SLIVER; otherwise merged)"""
+    if yt is None:
+        return [(ya - w / 2 - gap, ya + w / 2 + gap)]
+    if mode == "split" and abs(yt - ya) >= w + 2 * gap + SLIVER - 1e-9:
+        return [(ya - w / 2 - gap, ya + w / 2 + gap), (yt - w / 2 - gap, yt + w / 2 + gap)]
+    gt = gap if gt is None else gt
+    if yt >= ya:
+        return [(ya - w / 2 - gap, max(yt + w / 2 + gt, ya + w / 2 + gap))]
+    return [(min(yt - w / 2 - gt, ya - w / 2 - gap), ya + w / 2 + gap)]
+
+
 def mirrored(row: str) -> bool:
     return row.startswith("B") or row == "D_B"
 
@@ -321,7 +346,7 @@ class Block:
         ws = self.w_strip(pair, n)
         if self.strip_mat(pair, n) != "AL2" or not self.cap(pair, n):
             return ws
-        return min(ws, max(W_STRIP_X, ws / 2))
+        return min(ws, max(W_STRIP_X, NECK_FRAC * ws))
 
     def strip_mat(self, pair, n):
         return self.sz.get("strip_mat", {}).get(f"{pair}|{n}", "AL2")
@@ -411,7 +436,7 @@ class Block:
         self._gates()
         self._fanout()
         self._labels()
-        self._line_rects = [r for r in g.rects if r[6] == "line" and r[0] == L_NB and (r[4] - r[2]) < 1.5]
+        self._line_rects = [r for r in g.rects if r[6] == "line" and r[0] in (L_NB, L_AL2) and (r[4] - r[2]) < 1.5]
         return g
 
     def _ground_column(self, xa, xb, iv, net="G"):
@@ -667,6 +692,7 @@ class Block:
         ys = self.bs_y(q)
         bm = self.A_jjM / JJ_AM
         ov = _get(self.sz, "island", q, sec, default=self.sz["defaults"]["isl_ov"])
+        ISL_W = _get(self.sz, "island_w", q, sec, default=globals()["ISL_W"])     # sized island width
         for i, n in enumerate(ns):
             xn = self.xn(n)
             net = "G" if i in (0, len(ns) - 1) else f"M{q}_{n}"
@@ -704,17 +730,17 @@ class Block:
                                    box=(xm - ov / 2, yb0 + 0.10, xm + ov / 2, yb1 - 0.10), drop=nxt))
 
     # ---- CPW helper: a Manhattan centre line (NB) with its slot cut out of the ground (keep-out)
-    def _cpw(self, pts, w, gap, net, role="line"):
+    def _cpw(self, pts, w, gap, net, role="line", layer=L_NB):
         g = self.geo
         g.keepout = getattr(g, "keepout", [])
         for (xa, ya), (xb, yb) in zip(pts[:-1], pts[1:]):
             if abs(ya - yb) < 1e-9:
                 x1, x2 = sorted((xa, xb))
-                g.add(L_NB, x1 - w / 2, ya - w / 2, x2 + w / 2, ya + w / 2, net, role)
+                g.add(layer, x1 - w / 2, ya - w / 2, x2 + w / 2, ya + w / 2, net, role)
                 g.keepout.append((x1 - w / 2 - gap, ya - w / 2 - gap, x2 + w / 2 + gap, ya + w / 2 + gap))
             else:
                 y1, y2 = sorted((ya, yb))
-                g.add(L_NB, xa - w / 2, y1 - w / 2, xa + w / 2, y2 + w / 2, net, role)
+                g.add(layer, xa - w / 2, y1 - w / 2, xa + w / 2, y2 + w / 2, net, role)
                 g.keepout.append((xa - w / 2 - gap, y1 - w / 2 - gap, xa + w / 2 + gap, y2 + w / 2 + gap))
 
     def _port(self, name, x, y, layer, width, direction, **kw):
@@ -802,43 +828,107 @@ class Block:
     def line_depths(self, row):
         return self.sz.get("lines", {}).get(row, {})
 
-    def line_cells(self, row, tag):
-        """rail cells a control line passes through: from the launch end to one cell past its last active cell"""
+    def trap_window(self, row):
+        """rail cells (ascending) where the trap line runs in the slot: its target >= M_DRAW_MIN"""
         from hardware.extract import M_DRAW_MIN
-        tg = self.lt[row]
-        M = np.asarray(tg[tag])
-        act = np.nonzero(M >= M_DRAW_MIN)[0]                 # truncated after the last drawable target
+        if not hasattr(self, "_tw"):
+            self._tw = {}
+        if row not in self._tw:
+            M = np.asarray(self.lt[row]["trap"])
+            self._tw[row] = [int(c) for c in np.nonzero(M >= M_DRAW_MIN)[0] if 0 <= c <= self.N - 2]
+        return self._tw[row]
+
+    def trap_pad_cells(self, row):
+        """rail cells under the in-block end contact of the trap line (just past its window)"""
+        w = self.trap_window(row)
+        if not w:
+            return []
+        n_pad = int(math.ceil((TRAP_PAD[0] + 0.9) / self.p))
+        if not mirrored(row):
+            return list(range(w[-1] + 2, w[-1] + 2 + n_pad))
+        return list(range(w[0] - 2, w[0] - 2 - n_pad, -1))
+
+    def line_cells(self, row, tag):
+        """rail cells a control line passes through, from the launch end: the accelerator to one cell past its last
+        cell >= M_DRAW_MIN (truncated far-end ramp tail); the trap line to one (shielded) cell past its window"""
+        from hardware.extract import M_DRAW_MIN
+        if tag == "trap":
+            w = self.trap_window(row)
+            if not w:
+                return []
+            if not mirrored(row):
+                return list(range(0, w[-1] + 2))
+            return list(range(self.N - 2, w[0] - 2, -1))
+        M = np.asarray(self.lt[row][tag])
+        act = np.nonzero(M >= M_DRAW_MIN)[0]
         if not len(act):
             return []
         if not mirrored(row):
             return list(range(0, act.max() + 2))
         return list(range(self.N - 2, act.min() - 2, -1))
 
-    def line_y(self, row, tag, c):
-        """centre y of a control line at cell c (depth from the row's free-side ground edge, quantized to 0.25 um
-        and clamped to the strip)"""
+    def strip_width(self, row, c):
         df = -RUNG_DIR[row]["G"]
-        dep = self.line_depths(row).get(tag, {})
+        y_near, y_far = self.strip_bounds(row, c, df)
+        return abs(y_far - y_near)
+
+    def shield_depth(self, row, c):
+        return self.strip_width(row, c) - SHIELD_FAR
+
+    def acc_depth_max(self, row, c):
+        """deepest accelerator centre in cell c: clear of the far side of the strip, of the shielded trap line
+        (its AL2 edge 0.15 um over Nb beyond the slot) and of the trap's end contact"""
+        df = -RUNG_DIR[row]["G"]
+        d = self.depth_max(row, c, df)
+        if self.lt and row in self.lt and self.trap_window(row):
+            win = self.trap_window(row)
+            path = set(self.line_cells(row, "trap"))
+            if c in path and c not in set(win):
+                d = min(d, self.shield_depth(row, c) - self.W_LINE / 2 - 0.15 - self.W_LINE / 2 - self.G_LINE)
+            if c in set(self.trap_pad_cells(row)):
+                d = min(d, self.strip_width(row, c) - 0.3 - TRAP_PAD[1] - 0.40 - self.W_LINE / 2 - self.G_LINE)
+        return d
+
+    def line_y(self, row, tag, c):
+        """centre y of a control line at cell c: depth from the row's free-side ground edge (10 nm grid, clamped to
+        the strip); the trap line outside its window sits on SiNx over the far Nb part of the strip (shielded)"""
+        df = -RUNG_DIR[row]["G"]
         y_near, _ = self.strip_bounds(row, c, df)
+        if tag == "trap" and c not in set(self.trap_window(row)):
+            if c == (0 if not mirrored(row) else self.N - 2):
+                # launch end: on SiNx over the near Nb part, between the row and the accelerator slot (keeps the
+                # fan-out order trap / accelerator of the frozen block ports); it crosses the accelerator on SiNx
+                d_acc = abs(self.line_y(row, "acc", c) - y_near)
+                return y_near + df * round(0.5 * (d_acc - self.W_LINE / 2 - self.G_LINE), 2)
+            return y_near + df * round(self.shield_depth(row, c), 2)
+        dep = self.line_depths(row).get(tag, {})
         dpt = dep.get(str(c), self.sz["defaults"].get(f"depth_{tag}", 1.5 if tag == "trap" else 3.0))
-        dpt = min(max(dpt, self.depth_min()), self.depth_max(row, c, df))
-        dpt = self.depth_min() + round((dpt - self.depth_min()) / 0.25) * 0.25
-        return y_near + df * min(dpt, self.depth_max(row, c, df))
+        dmax = self.acc_depth_max(row, c) if tag == "acc" else self.depth_max(row, c, df)
+        dpt = min(max(dpt, self.depth_min()), dmax)
+        return y_near + df * round(dpt, 2)
 
     def _launchers(self):
+        """trap line: AL2 on SiNx (it can cross the Nb accelerator line, which it must at the two flanks of its
+        window, where the accelerator target exceeds the trap target); in its window it runs in the shared slot, outside
+        it lies on SiNx over the far Nb part of the strip (a shielded microstrip); fed through an 80 um^2 Al/Nb
+        contact in the fan-out, it ends on an 84 um^2 Al/Nb contact on the strip (contacts carry the 80 uA DC current
+        at <= J/2). Accelerator line: Nb in the slot, shorted to the strip after its last drawable cell."""
         if not self.lt or self.sz.get("no_lines"):
             return
         g = self.geo
         W, G = self.W_LINE, self.G_LINE
+        g.lines = getattr(g, "lines", [])
+        g.keepout = getattr(g, "keepout", [])
         for row, tg in self.lt.items():
             m = mirrored(row)
+            sgx = 1 if not m else -1
             df = -RUNG_DIR[row]["G"]
             ys = {}
             for tag in ("trap", "acc"):
                 cells = [c for c in self.line_cells(row, tag) if 0 <= c <= self.N - 2]
-                if not cells:
-                    continue
-                ys[tag] = {c: self.line_y(row, tag, c) for c in cells}
+                if cells:
+                    ys[tag] = {c: self.line_y(row, tag, c) for c in cells}
+            win = set(self.trap_window(row))
             for tag, yc_ in ys.items():
                 cells = list(yc_.keys())
                 pts = []
@@ -850,24 +940,67 @@ class Block:
                         pts.append((xa, y))
                     pts.append((xb, y))
                 net_l = f"{'TR' if tag == 'trap' else 'AC'}_{row}"
-                self._cpw(pts, W, G, net_l)
-                end = pts[-1]
-                sgx = 1 if not m else -1
-                xa, xb = sorted((end[0], end[0] + sgx * (W / 2 + G + 0.6)))
-                g.add(L_NB, xa, end[1] - W / 2, xb, end[1] + W / 2, net_l, "short")      # shorted to the strip
-                self._port(f"{'TRAP' if tag == 'trap' else 'ACC'}_{row}_SHORT", end[0], end[1], L_NB, W,
-                           "E" if not m else "W", kind="internal_short",
-                           note="line shorted to the inner ground strip here (inside the block; not routable)")
+                pname = f"{'TRAP' if tag == 'trap' else 'ACC'}_{row}"
+                if tag == "acc":
+                    self._cpw(pts, W, G, net_l)
+                    end = pts[-1]
+                    xa, xb = sorted((end[0], end[0] + sgx * (W / 2 + G + 0.6)))
+                    g.add(L_NB, xa, end[1] - W / 2, xb, end[1] + W / 2, net_l, "short")      # shorted to the strip
+                    self._port(f"{pname}_SHORT", end[0], end[1], L_NB, W, "E" if not m else "W", kind="internal_short",
+                               note="line shorted to the inner ground strip here (inside the block; not routable)")
+                else:
+                    self._trap_line(row, pts, net_l, pname, sgx, df)
                 side = "L" if not m else "R"
-                self.end_lines[side].append((pts[0][1], f"{'TRAP' if tag == 'trap' else 'ACC'}_{row}", tag, pts[0][0]))
-                g.lines = getattr(g, "lines", [])
-                g.lines.append(dict(row=row, tag=tag, cells=cells, net=net_l))
-            # one shared slot where both lines run (no Nb sliver between them)
-            if "trap" in ys and "acc" in ys:
-                for c in set(ys["trap"]) & set(ys["acc"]):
-                    y1, y2 = sorted((ys["trap"][c], ys["acc"][c]))
+                self.end_lines[side].append((pts[0][1], pname, tag, pts[0][0]))
+                g.lines.append(dict(row=row, tag=tag, cells=cells, net=net_l, layer="AL2" if tag == "trap" else "NB"))
+            # slots: every accelerator cell; in the trap window one shared slot when the lines are closer than
+            # W + 2 G + 0.4 um, else two slots with a Nb sliver between them (it carries return current)
+            if "acc" in ys:
+                for c, ya in ys["acc"].items():
                     x1, x2 = sorted((self.xn(c), self.xn(c + 1)))
-                    g.keepout.append((x1, y1 - W / 2 - G, x2, y2 + W / 2 + G))
+                    yt = ys["trap"][c] if ("trap" in ys and c in ys["trap"] and c in win) else None
+                    mode = self.line_depths(row).get("slot", {}).get(str(c), "merged")
+                    gt = self.line_depths(row).get("gt", {}).get(str(c), G)
+                    for (lo, hi) in slot_intervals(ya, yt, W, G, mode, gt):
+                        g.keepout.append((x1, lo, x2, hi))
+            if "trap" in ys:
+                for c in win:
+                    if "acc" not in ys or c not in ys["acc"]:
+                        y = ys["trap"][c]
+                        x1, x2 = sorted((self.xn(c), self.xn(c + 1)))
+                        g.keepout.append((x1, y - W / 2 - G, x2, y + W / 2 + G))
+
+    def _trap_line(self, row, pts, net, pname, sgx, df):
+        g = self.geo
+        W, e = self.W_LINE, DIEL_ENC
+        for (xa, ya), (xb, yb) in zip(pts[:-1], pts[1:]):
+            if abs(ya - yb) < 1e-9:
+                x1, x2 = sorted((xa, xb))
+                g.add(L_AL2, x1 - W / 2, ya - W / 2, x2 + W / 2, ya + W / 2, net, "line")
+                g.add(L_DIEL, x1 - W / 2 - e, ya - W / 2 - e, x2 + W / 2 + e, ya + W / 2 + e, None, "diel_line")
+            else:
+                y1, y2 = sorted((ya, yb))
+                g.add(L_AL2, xa - W / 2, y1 - W / 2, xa + W / 2, y2 + W / 2, net, "line_jog")
+                g.add(L_DIEL, xa - W / 2 - e, y1 - W / 2 - e, xa + W / 2 + e, y2 + W / 2 + e, None, "diel_line")
+        # end contact on the far Nb part of the strip: SiNx ends inside a 0.7 um Nb opening (>= 0.2 um from the
+        # contact), the AL2 line crosses the opening on bare Si and widens into the pad
+        xe, ye = pts[-1]
+        c_last = self.line_cells(row, "trap")[-1]
+        wid = self.strip_width(row, c_last)
+        y_near = ye - df * self.shield_depth(row, c_last)
+        x_op0, x_op1 = xe + sgx * 0.20, xe + sgx * 0.90
+        a, b = sorted((x_op0, x_op1))
+        g.keepout.append((a, ye - 0.60, b, ye + 0.60))
+        a, b = sorted((xe, x_op1 + sgx * 0.30))
+        g.add(L_AL2, a, ye - W / 2, b, ye + W / 2, net, "trap_lead")
+        yp0, yp1 = sorted((y_near + df * (wid - 0.30 - TRAP_PAD[1]), y_near + df * (wid - 0.30)))
+        a, b = sorted((x_op1, x_op1 + sgx * TRAP_PAD[0]))
+        g.add(L_AL2, a, yp0, b, yp1, net, "trap_contact")
+        g.trap_contacts = getattr(g, "trap_contacts", [])
+        g.trap_contacts.append(dict(row=row, kind="end", box=(a, yp0, b, yp1), area=(b - a) * (yp1 - yp0)))
+        self._port(f"{pname}_SHORT", 0.5 * (a + b), 0.5 * (yp0 + yp1), L_AL2, TRAP_PAD[1], "E" if sgx > 0 else "W",
+                   kind="internal_short", note=f"trap line lands on the inner ground strip here through an "
+                   f"{(b - a) * (yp1 - yp0):.0f} um^2 Al/Nb contact (inside the block; not routable)")
 
     # ---- ground straps over the outer rail of each qubit: the inner strip between the two beam splitters of a
     # qubit is otherwise a floating NB island (it is cut by both BS sections)
@@ -948,7 +1081,10 @@ class Block:
             for i, (y0, net, kind, xstart) in enumerate(lines):
                 xt = turns[i]
                 pts = [(xstart, y0), (xt, y0), (xt, yports[i]), (x_edge, yports[i])]
-                self._cpw(pts, CPW_W, CPW_G, net, "fanout")
+                if kind == "trap":
+                    self._trap_feed(pts, net, sgn, x_edge)
+                else:
+                    self._cpw(pts, CPW_W, CPW_G, net, "fanout")
                 if kind in ("load", "readout"):
                     # short the line's inner end to the ground next to the loop (current-driven flux line)
                     xa, xb = sorted((xstart, xstart - sgn * (CPW_W / 2 + CPW_G + 0.6)))
@@ -964,6 +1100,23 @@ class Block:
                              ("GND_W_TOP", 0.0, self.H - 20.0, "W"), ("GND_E_TOP", self.W, self.H - 20.0, "E"),
                              ("GND_W_BOT", 0.0, 20.0, "W"), ("GND_E_BOT", self.W, 20.0, "E")):
             self._port(nm, x, y, L_NB, 40.0, dr, kind="ground")
+
+    def _trap_feed(self, pts, net, sgn, x_edge):
+        """trap feed: Nb CPW from the port to an 80 um^2 Al/Nb contact (Nb pad under an AL2 pad), AL2 CPW from there
+        into the block (on bare Si in its ground opening)"""
+        g = self.geo
+        yp = pts[-1][1]
+        xa, xb = x_edge - sgn * 20.0, x_edge - sgn * (20.0 + FEED_PAD[0])        # pad from 20 um off the edge
+        self._cpw([(xa, yp), (x_edge, yp)], CPW_W, CPW_G, net, "fanout")
+        x1, x2 = sorted((xa, xb))
+        h = FEED_PAD[1] / 2
+        g.add(L_NB, x1, yp - h, x2, yp + h, net, "feed_pad")
+        g.keepout.append((x1 - CPW_G, yp - h - CPW_G, x2 + CPW_G, yp + h + CPW_G))
+        g.add(L_AL2, x1 + 0.25, yp - h + 0.25, x2 - 0.25, yp + h - 0.25, net, "feed_contact")
+        g.trap_contacts = getattr(g, "trap_contacts", [])
+        g.trap_contacts.append(dict(net=net, kind="feed", box=(x1 + 0.25, yp - h + 0.25, x2 - 0.25, yp + h - 0.25),
+                                    area=(x2 - x1 - 0.5) * (2 * h - 0.5)))
+        self._cpw(pts[:-1] + [(xb + sgn * 0.6, yp)], CPW_W, CPW_G, net, "fanout_al2", layer=L_AL2)
 
     def _labels(self):
         g = self.geo

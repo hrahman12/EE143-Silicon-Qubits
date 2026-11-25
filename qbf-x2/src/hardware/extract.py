@@ -228,7 +228,7 @@ def potential_matrix_periodic(panels: Panels, eps_eff: float, T: float, K: int =
         dy2 = dy * dy
         Pb = np.zeros((i1 - i0, n))
         lim = near * np.maximum(size[i0:i1, None], size[None, :])
-        for m in (-1, 0, 1):
+        for m in ((0,) if K < 0 else (-1, 0, 1)):          # K < 0: a finite (non-periodic) window
             dx = cx[i0:i1, None] - (cx[None, :] + m * T)
             r = np.sqrt(dx * dx + dy2)
             with np.errstate(divide="ignore"):
@@ -607,7 +607,7 @@ def EC_GHz_from_fF(C_fF):
 # ====================================================================================================================
 # layout-level extraction: periodic context windows taken from the drawn geometry (hardware/layout.py primitives)
 # ====================================================================================================================
-SIZING_VERSION = 11
+SIZING_VERSION = 12
 G_NOCAP = 0.12                   # below this envelope value no coupling capacitor is drawn (target < 0.025 fF)
 SIZING_MESH = dict(h0=0.04, hmax=0.40, hmax_ground=1.2)
 MESH = dict(h0=0.03, hmax=0.30, hmax_ground=1.0, growth=1.6, ymargin=12.0, delta_jj=0.10, delta_cap=0.30, K=20)
@@ -636,6 +636,20 @@ def context_panels(block, n0, P=2, rows=None, mesh=None):
     ys = [block.yc[r] for r in (rows or ROWS_ALL)]
     y_lo, y_hi = min(ys) - m["ymargin"], max(ys) + m["ymargin"]
     rects = [r for r in block.geo.window(xa, xb) if r[4] > y_lo and r[2] < y_hi]
+    # ground openings that the drawing cuts as keep-outs (control-line slots, gate pads, fan-out): cut them here too
+    from hardware.layout import L_NB as _LNB
+    kos = [k for k in getattr(block.geo, "keepout", []) if k[2] > xa and k[0] < xb and k[3] > y_lo and k[1] < y_hi]
+    if kos:
+        cut = []
+        for r in rects:
+            if r[0] == _LNB and r[5] == "G" and r[6] in ("ground", "load_gnd_nb", "catch_gnd_nb"):
+                sub = [(r[1], r[2], r[3], r[4])]
+                for k in kos:
+                    sub = [q for s_ in sub for q in _subtract(s_, k)]
+                cut += [(r[0], a_, b_, c_, d_, r[5], r[6]) for (a_, b_, c_, d_) in sub if c_ - a_ > 1e-6 and d_ - b_ > 1e-6]
+            else:
+                cut.append(r)
+        rects = cut
     excl = []                                              # (x1, y1, x2, y2, net_to_drop)
     for j in getattr(block.geo, "junctions", []):
         bx = j["box"]
@@ -924,9 +938,10 @@ def column_xsec(block, n, extra=None, extra_slots=()):
             strips.append((ys - ISL_H / 2, ys + ISL_H / 2, 0.0, f"M_{q}"))
     for ln in getattr(block.geo, "lines", []):
         pass
+    from hardware.layout import L_AL2, TRAP_Z
     for (ly_, x1, y1, x2, y2, net, role) in getattr(block, "_line_rects", []):
         if x1 <= xc <= x2 and net not in [s_[3] for s_ in strips]:
-            strips.append((y1, y2, 0.0, net))
+            strips.append((y1, y2, TRAP_Z if tuple(ly_) == tuple(L_AL2) else 0.0, net))    # AL2 trap on SiNx
     for s in (extra or []):
         strips.append(s)
     conds = []
@@ -1153,29 +1168,36 @@ def size_layout(arch, t=None, verbose=True):
     n_bs = ns0[len(ns0) // 2]
     rows_q = list(LY.QUBIT_ROWS[q0])
 
-    def bs_eval(l, ov):
+    def bs_eval(l, w):
         s = copy.deepcopy(sz)
+        s.setdefault("island_w", {})
         for (q, sec, ns) in bs:
-            s["island"][f"{q}|{sec}"] = ov
+            s["island"][f"{q}|{sec}"] = 0.0                    # no island shunt capacitor
+            s["island_w"][f"{q}|{sec}"] = w
             for r_ in LY.QUBIT_ROWS[q]:
                 for n in ns:
                     s["trim"][f"{r_}|{n}"] = l
         r = context_capacitance(_block(arch, s), n_bs, rows=rows_q, kpi=False)
         return r
-    r0 = bs_eval(0.0, 0.0)
+    W_ISL = (math.ceil(1.0 / LY.ISL_H * 100) / 100, LY.ISL_W_MAX)      # stack >= 1 um^2; junction >= 0.5 um away
+    r0 = bs_eval(0.0, LY.ISL_W)
     Cgnd0, C2t0, Cm0 = r0["rows"][rows_q[0]]["C_gnd"], r0["islands"]["C_2t"], r0["islands"]["C_m"]
     tgtM = t.get("C_island_geo_fF", t["shunt_M_fF"])         # island geometric (two-terminal) capacitance
-    ov = 0.0
-    if C2t0 < tgtM:
-        ov, _, _ = _secant(lambda o: bs_eval(0.0, o)["islands"]["C_2t"], 0.1, 0.3, tgtM, 0.0, 0.6, tolC)
-    l_bs, c_bs, h = _secant(lambda l: bs_eval(l, ov)["rows"][rows_q[0]]["C_gnd"], 0.2, 0.5, shunt, -0.3, 0.95, tolC)
-    rb = bs_eval(l_bs, ov)
-    say(f"BS: island shunt overlap {ov:.3f} (natural C_2t {C2t0:.4f}, C_m {Cm0:.4f}; target {tgtM:.4f}), "
-        f"trim {l_bs:.3f} -> C_gnd {rb['rows'][rows_q[0]]['C_gnd']:.4f}, C_2t {rb['islands']['C_2t']:.4f}")
-    log["bs"] = dict(island_overlap=ov, natural=r0["islands"], final=rb["islands"], trim=l_bs,
+    w_isl, l_bs = LY.ISL_W, 0.3
+    for _it in range(2):
+        w_isl, _, _ = _secant(lambda w: bs_eval(l_bs, w)["islands"]["C_2t"], w_isl, min(w_isl + 0.04, W_ISL[1]),
+                              tgtM, W_ISL[0], W_ISL[1], tolC / 2)
+        l_bs, c_bs, h = _secant(lambda l: bs_eval(l, w_isl)["rows"][rows_q[0]]["C_gnd"], l_bs, l_bs + 0.1, shunt,
+                                -0.3, 0.95, tolC)
+    rb = bs_eval(l_bs, w_isl)
+    say(f"BS: island width {w_isl:.3f} um (natural C_2t {C2t0:.4f} at {LY.ISL_W:.2f}, C_m {Cm0:.4f}; target "
+        f"{tgtM:.4f}), trim {l_bs:.3f} -> C_gnd {rb['rows'][rows_q[0]]['C_gnd']:.4f}, C_2t {rb['islands']['C_2t']:.4f}")
+    log["bs"] = dict(island_w=w_isl, island_overlap=0.0, natural=r0["islands"], final=rb["islands"], trim=l_bs,
                      C_gnd=rb["rows"][rows_q[0]]["C_gnd"])
+    sz.setdefault("island_w", {})
     for (q, sec, ns) in bs:
-        sz["island"][f"{q}|{sec}"] = ov
+        sz["island"][f"{q}|{sec}"] = 0.0
+        sz["island_w"][f"{q}|{sec}"] = w_isl
         for r_ in LY.QUBIT_ROWS[q]:
             for n in ns:
                 sz["trim"][f"{r_}|{n}"] = l_bs
@@ -1220,7 +1242,7 @@ def size_layout(arch, t=None, verbose=True):
         tgtC = Cc * gc
         tgtG = shunt - Cc * gc
         wt = 0.20 if gc > 0.5 else 0.10
-        S_MAX = 3.5                                        # keeps >= 2.6 um of inner ground between two free sides
+        S_MAX = 4.3                                        # keeps >= 0.7 um of inner ground between two free sides
         u_lo = -0.30 - (S_MAX - LY.S_FREE)                  # u in [-0.3, 0.95]: trim knob; below: wider free gap
 
         def knobs(x):
@@ -1356,8 +1378,8 @@ def interpolate_coupler(arch, sz, res_g, Cc, W_MAX=6.0):
             for row in (a, b):
                 role = mirror[pk][row]
                 key_t = "trim_plate" if role == plate else "trim_cross"
-                nearest = sorted(gs_sorted, key=lambda x: abs(x - gv))[:2]
-                if all(res_g[x][key_t] is None for x in nearest):
+                nearest = sorted(gs_sorted, key=lambda x: abs(x - gv))[:1]       # no trim where the nearest
+                if all(res_g[x][key_t] is None for x in nearest):                 # sample has none
                     sz["trim"][f"{row}|{n}"] = None
                 else:
                     xs_ = [x for x in gs_sorted if res_g[x][key_t] is not None]
@@ -1413,15 +1435,17 @@ M_DRAW_MIN = 0.018                # pH: smallest control-line mutual the strip g
 
 
 def size_lines(arch, sz, t=None, say=print):
-    """control-line depths (line centre from the launch row's free-side ground edge, um) per rail cell. Both lines
-    run in one slot of the inner strip on the free side (trap on the inner track, accelerator on the outer track,
-    >= LINE_SEP apart); the 2D cross-section mutual M_n (line -> cell loop, all four launch rows have the same strip
-    geometry) is tabulated vs (d_trap, d_acc) and inverted per cell so that each line meets its target wherever the
-    target is >= M_DRAW_MIN; where a target is smaller the line is pushed as deep as the other line allows (its
-    as-drawn M_n is reported). Each line is truncated (shorted) one cell after its last cell >= M_DRAW_MIN.
-    Valid for slowly varying depth (2D cross-section per cell)."""
+    """control-line depths per rail cell (line centre from the launch row's free-side ground edge, um). The
+    accelerator (Nb) runs in a slot of the inner strip on the free side; the trap line (AL2 on SiNx) runs in the same
+    slot in its window (target >= M_DRAW_MIN) and lies on SiNx over the far Nb part of the strip elsewhere (a shielded
+    microstrip). The trap line can cross the accelerator, so the two depths are independent: the 2D cross-section
+    mutuals M_n (line -> cell loop) are tabulated on a full (d_trap, d_acc) grid (either order; the trap 0.1 um above
+    the Nb plane, so overlaps are allowed) and inverted per window cell; outside the window the accelerator depth is
+    inverted from a 1D table (with the shielded trap line present where it is). All four launch rows have the same
+    strip geometry. Valid for slowly varying depth (2D cross-section per cell)."""
     import copy
     from hardware import layout as LY
+    from scipy.interpolate import RegularGridInterpolator
     lt = LY.launcher_targets(arch)
     if not lt:
         return sz, {}
@@ -1430,79 +1454,192 @@ def size_lines(arch, sz, t=None, say=print):
     s0["no_lines"] = True
     B = LY.Block(arch, s0)
     B.draw()
-    WL, GL, SEP = LY.Block.W_LINE, LY.Block.G_LINE, LY.LINE_SEP
+    WL, GL, Z = LY.Block.W_LINE, LY.Block.G_LINE, LY.TRAP_Z
     dmin = B.depth_min()
     row0 = "A1" if "A1" in lt else next(iter(lt))
     c0 = 30 if not LY.mirrored(row0) else B.N - 32
     df0 = -LY.RUNG_DIR[row0]["G"]
     dmax = B.depth_max(row0, c0, df0)
+    y_near, y_far = B.strip_bounds(row0, c0, df0)
+    d_sh = abs(y_far - y_near) - LY.SHIELD_FAR
+    da_sh = d_sh - WL / 2 - 0.15 - WL / 2 - GL                # deepest accelerator beside the shielded trap line
 
-    def mutuals(dt, da):
-        y_near, _ = B.strip_bounds(row0, c0, df0)
-        extra, ys_ = [], []
-        for nm, dpt in (("TRL", dt), ("ACL", da)):
-            if dpt is None:
-                continue
-            y = y_near + df0 * dpt
-            extra.append((y - WL / 2, y + WL / 2, 0.0, nm))
-            ys_.append(y)
-        slot = (min(ys_) - WL / 2 - GL, max(ys_) + WL / 2 + GL)
-        r = column_inductance(B, c0, extra=extra, lines=("TRL", "ACL"), extra_slots=[slot])
-        return abs(r["lines"].get(f"{row0}~TRL", 0.0)), abs(r["lines"].get(f"{row0}~ACL", 0.0))
-    dts = np.linspace(dmin, dmax - SEP, 9)
-    das = np.linspace(dmin + SEP, dmax, 9)
-    T2t = np.full((len(dts), len(das)), np.nan); T2a = np.full_like(T2t, np.nan)
-    for i, dt in enumerate(dts):
-        for j, da in enumerate(das):
-            if da - dt < SEP - 1e-9:
-                continue
+    _mc = {}
+
+    def mutuals(dt, da, shielded=False, mode="merged", gt=None):
+        key = (None if dt is None else round(dt, 3), None if da is None else round(da, 3), shielded, mode, gt)
+        if key in _mc:
+            return _mc[key]
+        extra = []
+        yt = None if dt is None else y_near + df0 * dt
+        ya = None if da is None else y_near + df0 * da
+        if yt is not None:
+            extra.append((yt - WL / 2, yt + WL / 2, Z, "TRL"))
+        if ya is not None:
+            extra.append((ya - WL / 2, ya + WL / 2, 0.0, "ACL"))
+            slots = LY.slot_intervals(ya, None if shielded else yt, WL, GL, mode, gt)
+        else:
+            slots = [] if (yt is None or shielded) else [(yt - WL / 2 - GL, yt + WL / 2 + GL)]
+        r = column_inductance(B, c0, extra=extra, lines=("TRL", "ACL"), extra_slots=slots)
+        _mc[key] = (abs(r["lines"].get(f"{row0}~TRL", 0.0)), abs(r["lines"].get(f"{row0}~ACL", 0.0)))
+        return _mc[key]
+    dg = np.linspace(dmin, dmax, 12)
+    T2t = np.zeros((len(dg), len(dg))); T2a = np.zeros_like(T2t)
+    for i, dt in enumerate(dg):
+        for j, da in enumerate(dg):
             T2t[i, j], T2a[i, j] = mutuals(dt, da)
-    das1 = np.linspace(dmin, dmax, 12)
-    T1 = np.array([mutuals(None, da)[1] for da in das1])
-    say(f"line tables ({row0}, strip depth {dmin:.2f}..{dmax:.2f} um): trap (inner) {np.nanmin(T2t):.4f}..{np.nanmax(T2t):.4f} pH, "
-        f"acc (outer) {np.nanmin(T2a):.4f}..{np.nanmax(T2a):.4f} pH, single line {T1.min():.4f}..{T1.max():.4f} pH")
-    from scipy.interpolate import RegularGridInterpolator
-    for T in (T2t, T2a):
-        for i in range(T.shape[0]):
-            row_ = T[i]
-            good = ~np.isnan(row_)
-            if good.any():
-                row_[~good] = np.interp(np.nonzero(~good)[0], np.nonzero(good)[0], row_[good])
-    ft = RegularGridInterpolator((dts, das), T2t, bounds_error=False, fill_value=None)
-    fa = RegularGridInterpolator((dts, das), T2a, bounds_error=False, fill_value=None)
-    grid = np.array([(dt, da) for dt in np.linspace(dts[0], dts[-1], 60) for da in np.linspace(das[0], das[-1], 60)
-                     if da >= dt + SEP - 1e-9])
+    d1s = np.linspace(dmin, da_sh, 12)
+    T1s = np.array([mutuals(d_sh, da, shielded=True) for da in d1s])     # (trap residual, acc)
+    d1 = np.linspace(dmin, dmax, 12)
+    T1 = np.array([mutuals(None, da)[1] for da in d1])
+    say(f"line tables ({row0}, strip depth {dmin:.2f}..{dmax:.2f} um, shielded trap at {d_sh:.2f}): trap in slot "
+        f"{T2t.min():.4f}..{T2t.max():.4f} pH, acc {T2a.min():.4f}..{T2a.max():.4f} pH, acc alone {T1.min():.4f}.."
+        f"{T1.max():.4f} pH, shielded-trap residual {T1s[:, 0].min():.5f}..{T1s[:, 0].max():.5f} pH")
+    ft = RegularGridInterpolator((dg, dg), T2t)
+    fa = RegularGridInterpolator((dg, dg), T2a)
+    fine = np.linspace(dmin, dmax, 108)
+    grid = np.array([(a_, b_) for a_ in fine for b_ in fine])
     GT, GA = ft(grid), fa(grid)
+
+    def inv1(dd, MM, m):
+        """depth giving M = m on a monotonically decreasing table (deepest if m is below the table)"""
+        if m <= MM[-1]:
+            return float(dd[-1])
+        if m >= MM[0]:
+            return float(dd[0])
+        return float(np.interp(-m, -MM, dd))
+    _ref = {}
+
+    def refine1(m, shielded, d0, dhi):
+        """accelerator depth for M = m by secant steps on direct 2D solves (cached by target)"""
+        key = (round(m, 6), shielded, round(dhi, 3))
+        if key in _ref:
+            return _ref[key]
+        f = (lambda d: mutuals(d_sh, d, True)[1]) if shielded else (lambda d: mutuals(None, d)[1])
+        if m <= 0.0:
+            _ref[key] = dhi
+            return dhi
+        x0 = min(max(d0, dmin), dhi); x1 = min(max(x0 + 0.05, dmin), dhi)
+        if abs(x1 - x0) < 1e-6:
+            x1 = x0 - 0.05
+        f0, f1 = f(x0), f(x1)
+        for _ in range(6):
+            if abs(f1 - m) <= 0.002 * m or f1 == f0:
+                break
+            x2 = min(max(x1 + (m - f1) * (x1 - x0) / (f1 - f0), dmin), dhi)
+            x0, f0, x1 = x1, f1, x2
+            f1 = f(x1)
+        _ref[key] = float(x1 if abs(f1 - m) <= abs(f0 - m) else x0)
+        return _ref[key]
+
+    dsplit = WL + 2 * GL + LY.SLIVER + 0.02                    # margin for the 10 nm drawing grid
+
+    def newton(tt, ta, x0, mode, gt=None):
+        x = np.array(x0, float)
+        tgt = np.array([tt, ta])
+        best = None
+        for _ in range(10):
+            if mode == "split" and abs(x[0] - x[1]) < dsplit:          # keep the split configuration valid
+                sgn_ = 1.0 if x[0] >= x[1] else -1.0
+                mid = 0.5 * (x[0] + x[1])
+                x = np.clip(np.array([mid + sgn_ * dsplit / 2, mid - sgn_ * dsplit / 2]), dmin, dmax)
+                if abs(x[0] - x[1]) < dsplit - 1e-6:
+                    break
+            F = np.array(mutuals(x[0], x[1], False, mode, gt)) - tgt
+            err = float(np.max(np.abs(F) / tgt))
+            if best is None or err < best[0]:
+                best = (err, x.copy())
+            if err <= 0.003:
+                break
+            J = np.zeros((2, 2))
+            for k in range(2):
+                h = 0.03 if x[k] + 0.03 <= dmax else -0.03
+                xh = x.copy(); xh[k] += h
+                J[:, k] = (np.array(mutuals(xh[0], xh[1], False, mode, gt)) - tgt - F) / h
+            try:
+                dx = -np.linalg.solve(J, F)
+            except np.linalg.LinAlgError:
+                break
+            x = np.clip(x + np.clip(dx, -0.5, 0.5), dmin, dmax)
+        return best
+
+    def refine2(tt, ta, dt0, da0):
+        """(d_trap, d_acc, slot mode) in the window by Newton steps on direct 2D solves, in both slot configurations
+        (merged slot / split slots with a Nb sliver), from the table optimum and from both line orders"""
+        key = (round(tt, 6), round(ta, 6))
+        if key in _ref:
+            return _ref[key]
+        cands = []
+        starts = [(dt0, da0), (min(dt0, da0), max(dt0, da0)), (max(dt0, da0), min(dt0, da0))]
+        for mode in ("merged", "split"):
+            for st in starts:
+                b = newton(tt, ta, st, mode)
+                if b is not None:
+                    cands.append((b[0], mode, b[1], None))
+                if cands and min(c_[0] for c_ in cands) <= 0.003:
+                    break
+            if cands and min(c_[0] for c_ in cands) <= 0.003:
+                break
+        if min(c_[0] for c_ in cands) > 0.01:                          # wider search: split slots, either order
+            for a_ in (2.2, 2.8, 3.4, 4.0):
+                for b_ in (a_ + dsplit + 0.3, a_ + dsplit + 1.3):
+                    for st in ((b_, a_), (a_, b_)):
+                        if max(st) <= dmax:
+                            b = newton(tt, ta, st, "split")
+                            if b is not None:
+                                cands.append((b[0], "split", b[1], None))
+                if min(c_[0] for c_ in cands) <= 0.003:
+                    break
+        if min(c_[0] for c_ in cands) > 0.01:                          # narrower slot edge on the trap's side
+            x0_ = min((c_ for c_ in cands if c_[1] == "merged"), key=lambda c_: c_[0])[2]
+            for gt_ in (0.30, 0.15, 0.0):
+                b = newton(tt, ta, x0_, "merged", gt_)
+                if b is not None:
+                    cands.append((b[0], "merged", b[1], gt_))
+                    if b[0] <= 0.003:
+                        break
+        err, mode, x, gt_ = min(cands, key=lambda c_: c_[0])
+        _ref[key] = (float(x[0]), float(x[1]), mode, err, gt_)
+        return _ref[key]
     lines, info = {}, {}
     for row, tg in lt.items():
         Mt, Ma = np.asarray(tg["trap"]), np.asarray(tg["acc"])
         Bm = LY.Block(arch, dict(s0, no_lines=False))
-        cells_t = set(c for c in Bm.line_cells(row, "trap"))
-        cells_a = set(c for c in Bm.line_cells(row, "acc"))
+        win = set(Bm.trap_window(row))
+        path = set(Bm.line_cells(row, "trap"))
+        pads = set(Bm.trap_pad_cells(row))
         dep = {"trap": {}, "acc": {}}
-        for n in sorted(cells_a | cells_t):
+        for n in Bm.line_cells(row, "acc"):
             if n < 0 or n > B.N - 2:
                 continue
             tt, ta = Mt[n], Ma[n]
-            if n in cells_t and n in cells_a:
-                sc = np.zeros(len(grid))
-                sc += np.where(tt >= M_DRAW_MIN, np.abs(GT - tt) / max(tt, 1e-9), 0.2 * GT / M_DRAW_MIN)
-                sc += np.where(ta >= M_DRAW_MIN, np.abs(GA - ta) / max(ta, 1e-9), 0.2 * GA / M_DRAW_MIN)
+            if n in win:
+                sc = np.abs(GT - tt) / max(tt, 1e-9)
+                sc = sc + (np.abs(GA - ta) / max(ta, 1e-9) if ta >= M_DRAW_MIN else 0.2 * GA / M_DRAW_MIN)
                 k = int(np.argmin(sc))
-                dep["trap"][str(n)] = float(grid[k, 0]); dep["acc"][str(n)] = float(grid[k, 1])
-            elif n in cells_a:
-                da = float(das1[-1]) if ta <= T1[-1] else float(np.interp(-ta, -T1, das1))
-                dep["acc"][str(n)] = da
+                dt_, da_, mode_, _e, gt_ = refine2(tt, ta, float(grid[k, 0]), float(grid[k, 1]))
+                dep["trap"][str(n)] = dt_; dep["acc"][str(n)] = da_
+                dep.setdefault("slot", {})[str(n)] = mode_
+                if gt_ is not None:
+                    dep.setdefault("gt", {})[str(n)] = gt_
+                dep.setdefault("fit_err", {})[str(n)] = _e
+            elif n in path:
+                m_ = ta if ta >= M_DRAW_MIN else 0.0
+                dep["acc"][str(n)] = refine1(m_, True, inv1(d1s, T1s[:, 1], m_), min(da_sh, Bm.acc_depth_max(row, n)))
             else:
-                dt = float(das1[-1]) if tt <= T1[-1] else float(np.interp(-tt, -T1, das1))
-                dep["trap"][str(n)] = dt
+                m_ = ta if ta >= M_DRAW_MIN else 0.0
+                dhi = Bm.acc_depth_max(row, n)
+                dep["acc"][str(n)] = refine1(m_, False, inv1(d1, T1, m_), dhi)
+        for n in win:
+            if str(n) not in dep["trap"]:                    # window cell without the accelerator (not the case here)
+                dep["trap"][str(n)] = inv1(d1, T1, Mt[n])
         lines[row] = dep
-        info[row] = dict(trap_cells=len(dep["trap"]), acc_cells=len(dep["acc"]))
+        info[row] = dict(trap_window=[min(win), max(win)] if win else None, trap_cells=len(path),
+                         acc_cells=len(dep["acc"]), shielded_trap_residual_pH=float(T1s[:, 0].max()))
     sz["lines"] = lines
-    sz["line_tables"] = dict(row=row0, dts=dts.tolist(), das=das.tolist(), T2t=T2t.tolist(), T2a=T2a.tolist(),
-                             das1=das1.tolist(), T1=T1.tolist(), sep=SEP)
+    sz["line_tables"] = dict(row=row0, d=dg.tolist(), T2t=T2t.tolist(), T2a=T2a.tolist(), d1s=d1s.tolist(),
+                             T1s=T1s.tolist(), d1=d1.tolist(), T1=T1.tolist(), d_shield=d_sh)
     return sz, info
-
 
 TOL = 0.05
 
@@ -1665,27 +1802,43 @@ def verify(arch, gds_path: str, out_dir: str | None = None, sizing: dict | None 
             isl = r["islands"]
             ctx[name]["E"] = {}
     # ---------------------------------------------------------------- beam splitter: C_M, E_C,M, E_S
-    bs_ctx = [v for k, v in ctx.items() if k.startswith("beam splitter")]
+    bs_ctx = [(k, v) for k, v in ctx.items() if k.startswith("beam splitter")]
     if bs_ctx:
-        isl = bs_ctx[0]["islands"]
-        C_M = CjM + isl["C_2t"]
-        EC = EC_GHz_from_fF(C_M)
-        ES = qps_amplitude_GHz(t["EJ_M_GHz"], EC)
-        chk("C_M = Cj,M + island two-terminal capacitance", _pf(C_M, t["C_M_fF"]), "beam-splitter middle junction")
-        chk("E_C,M", _pf(EC, t["EC_M_GHz"]), "beam-splitter middle junction")
-        chk("E_S (scqubits charge dispersion / 4, as companion 2)", _pf(ES, t["E_S_GHz"]), "beam-splitter middle junction")
-        # model gap: rail-junction capacitances seen by the middle junction (not in the single-junction estimate)
-        C_a = isl["diag"] - isl["C_m"] + 2 * Cj
-        C_sig = CjM + isl["C_m"] + C_a / 2
-        res["beam_splitter"] = dict(C_m_direct_fF=isl["C_m"], C_island_diag_fF=isl["diag"], C_2t_fF=isl["C_2t"],
-                                    C_M_fF=C_M, EC_M_GHz=EC, E_S_GHz=ES,
-                                    with_rail_junction_capacitances=dict(
-                                        C_sigma_fF=C_sig, EC_GHz=EC_GHz_from_fF(C_sig),
-                                        E_S_GHz=qps_amplitude_GHz(t["EJ_M_GHz"], EC_GHz_from_fF(C_sig)),
-                                        note="if the two rail junctions (2 x Cj) on each island are counted as "
-                                             "grounded capacitance; the architecture's single-junction estimate omits "
-                                             "them (vortex hopping beyond the single-junction estimate is unresolved)"),
-                                    gates=getattr(B, "gates", []))
+        Cnet = t.get("C_net_M_fF", 0.0)
+        Cgeo_t = t.get("C_island_geo_fF", t["shunt_M_fF"])
+        per = {}
+        for name, v in bs_ctx:
+            isl = v["islands"]
+            C_eff = CjM + isl["C_2t"] + Cnet                 # network-loaded: rail junctions on both rails
+            EC = EC_GHz_from_fF(C_eff)
+            ES = qps_amplitude_GHz(t["EJ_M_GHz"], EC)
+            w = f"{name} middle junction"
+            chk("C_island,geo (island two-terminal geometric capacitance)", _pf(isl["C_2t"], Cgeo_t), w)
+            chk("C_eff = Cj,M + C_island,geo + Cj,rail (network-loaded)", _pf(C_eff, t["C_M_fF"]), w)
+            chk("E_C,M = e^2 / 2 C_eff", _pf(EC, t["EC_M_GHz"]), w)
+            chk("E_S (scqubits charge dispersion / 4 at E_J,M, E_C,M)", _pf(ES, t["E_S_GHz"]), w)
+            per[name] = dict(C_island_geo_fF=isl["C_2t"], C_m_direct_fF=isl["C_m"], C_island_diag_fF=isl["diag"],
+                             C_eff_fF=C_eff, EC_M_GHz=EC, E_S_GHz=ES)
+        gates = gate_capacitance(B) if not fast else []
+        for gq in gates:
+            if gq.get("C_g_fF"):
+                chk("BS gate electrode C_g to its island [informational]",
+                    dict(extracted=gq["C_g_fF"], target=None, passed=True, dV_e_mV=gq["dV_e_mV"],
+                         dV_2e_mV=gq["dV_2e_mV"]), f"{gq['name']} -> {gq['island']}", informational=True)
+                for r_, v_ in gq["stray_to_rails_fF"].items():
+                    chk("BS gate electrode stray capacitance to a rail (window sum) [informational]",
+                        dict(extracted=v_, target=0.0, passed=True), f"{gq['name']} -> {r_}", informational=True)
+        k0 = bs_ctx[0][0]
+        res["beam_splitter"] = dict(per[k0], sections=per, C_jM_fF=CjM, C_j_rail_network_fF=Cnet,
+                                    island_width_um={k: v for k, v in B.sz.get("island_w", {}).items()},
+                                    targets=dict(C_island_geo_fF=Cgeo_t, C_eff_fF=t["C_M_fF"], EC_M_GHz=t["EC_M_GHz"],
+                                                 E_S_GHz=t["E_S_GHz"]),
+                                    gates=gates,
+                                    gate_note="C_g: island charge induced per volt on the gate electrode (finite-window "
+                                              "BEM, K = 0). dV_e = e / C_g changes the induced charge by e; a 2 pi "
+                                              "Aharonov-Casher phase for a vortex encircling the island needs q = 2e, "
+                                              "i.e. dV_2e = 2e / C_g. stray_to_rails: gate to each rail, summed over "
+                                              "the rail nodes in the window")
     # ---------------------------------------------------------------- inductance: every column (2D), grouped
     sig_cache = {}
     L_rows = {r: [] for r in LY.ROWS}
@@ -1758,7 +1911,13 @@ def verify(arch, gds_path: str, out_dir: str | None = None, sizing: dict | None 
                              junction_lead_inductance_pH=junction_lead_inductance(B))
     # ---------------------------------------------------------------- launcher control lines
     if lt_rows:
-        res["launcher"] = launcher_check(B, chk, say)
+        res["launcher"], res["launcher_as_drawn"] = launcher_check(B, chk, say)
+        I_tr = B.arch.element_values().get("launcher", {}).get("trap_line", {}).get("I_uA", 80.0)
+        for tc in getattr(B.geo, "trap_contacts", []):
+            need = 2 * I_tr / LY.J_CONTACT
+            chk("trap-line Al/Nb contact area (CT.I: >= 2 I_trap / J_c)",
+                dict(extracted=tc["area"], target=need, rel_dev=tc["area"] / need - 1, passed=bool(tc["area"] >= need)),
+                f"{tc.get('row', tc.get('net'))} {tc['kind']} contact")
     # ---------------------------------------------------------------- sensitivity, convergence
     res["sensitivity"] = sensitivity(B, ctx, res, t)
     if not fast:
@@ -1771,13 +1930,13 @@ def verify(arch, gds_path: str, out_dir: str | None = None, sizing: dict | None 
             for row in LY.ROWS:
                 role = LY.CPL_ROLE[row]
                 f = mx["C0_A1"]["rel"] if role == "plate" else mx["C0_B1"]["rel"]
-                chk("node capacitance, mesh-extrapolated [informational]", _pf(Cj + pl["rows"][row]["C0"] * (1 + f), Cn),
-                    f"{row} coupler plateau", informational=True)
+                chk("node capacitance, mesh-converged estimate (Richardson, C(h) = C_inf - a h^p)",
+                    _pf(Cj + pl["rows"][row]["C0"] * (1 + f), Cn), f"{row} coupler plateau")
             a, b = LY.PAIRS["G"]
             plate = a if LY.CPL_ROLE[a] == "plate" else b
             cross = b if plate == a else a
-            chk("C_c, mesh-extrapolated [informational]",
-                _pf(pl["rows"][plate]["cross"][cross] * (1 + mx["C_c"]["rel"]), Cc), "coupler plateau", informational=True)
+            chk("C_c, mesh-converged estimate (Richardson)",
+                _pf(pl["rows"][plate]["cross"][cross] * (1 + mx["C_c"]["rel"]), Cc), "coupler plateau")
     # ---------------------------------------------------------------- summary
     res["contexts"] = {k: dict(n=v["n"], g=v["g"], panels=v["panels"], rows=v["rows"], islands=v.get("islands", {}),
                                analytic=v.get("analytic", {})) for k, v in ctx.items()}
@@ -1832,42 +1991,114 @@ def junction_lead_inductance(B):
             Lk += Lsq * (x2 - x1) / (y2 - y1) / 2
         out[name] = dict(kinetic_pH=Lk, geometric_pH=Lg, total_pH=Lk + Lg, fraction_of_LJ=(Lk + Lg) / LJ,
                          note="in series with the junction: effective E_J lowered by this fraction (not in the model)")
+    # the AL2-on-Nb return contact of a ground- or Nb-strip-return rung is itself an oxidised (tunnel) contact with
+    # the junction J_c: its Josephson inductance is in series with the rail junction too
+    A_ct = LY.CONTACT[0] * LY.CONTACT[1]
+    L_ct = 2.067833848e-15 / (2 * math.pi * LY.J_CONTACT * 1e-6 * A_ct) * 1e12
+    out["return_contact"] = dict(area_um2=A_ct, J_c_uA_per_um2=LY.J_CONTACT, L_J_pH=L_ct, fraction_of_LJ=L_ct / LJ,
+                                 note="rung return contact (AL2 on Nb, ground- and Nb-strip-return cells): Josephson "
+                                      "inductance of the contact barrier in series with the rail junction (not in the "
+                                      "model); a larger contact scales it down as 1 / area")
     return out
 
 
-def launcher_check(B, chk, say, stride=2):
-    """M_n (2D cross-section per cell) of the drawn control lines vs the targets; tolerance 5 % of each line's peak
-    target (absolute; the profile tails are ~1e-5 pH). Also the cross-talk to the qubit's other rail and the dummy."""
+E_CHARGE_aC = 0.1602176634                # elementary charge in aC (fF x mV)
+
+
+def gate_capacitance(B, mesh=None, P=10):
+    """capacitance of each beam-splitter gate electrode to every island of its section (and its stray coupling to
+    the qubit's rails), from the interface BEM over a finite (non-periodic, K = 0) P-cell window that holds the gate
+    pad, its CPW stub and the first islands. Delta V = e / C_g is the gate voltage step that changes the island's
+    induced charge by e."""
     from hardware import layout as LY
-    out = {}
-    for row, tg in B.lt.items():
-        m = LY.mirrored(row)
-        Mt, Ma = np.asarray(tg["trap"]), np.asarray(tg["acc"])
-        dep = B.sz.get("lines", {}).get(row, {})
-        cells = sorted(set(int(c) for c in dep.get("trap", {})) | set(int(c) for c in dep.get("acc", {})))
-        cells = [c for i, c in enumerate(cells) if (str(c) in dep.get("trap", {})) or i % stride == 0]
-        rows_rec = []
-        for c in cells:
-            ci = column_inductance(B, c, lines=(f"TR_{row}", f"AC_{row}"))
-            mt = abs(ci["lines"].get(f"{row}~TR_{row}", 0.0))
-            ma = abs(ci["lines"].get(f"{row}~AC_{row}", 0.0))
-            xt = {r: ci["lines"].get(f"{r}~AC_{row}", 0.0) for r in LY.ROWS if r != row}
-            rows_rec.append((c, mt, Mt[c], ma, Ma[c], xt))
-        dt = np.array([r[1] - r[2] for r in rows_rec]); da = np.array([r[3] - r[4] for r in rows_rec])
-        it, ia = int(np.argmax(np.abs(dt))), int(np.argmax(np.abs(da)))
-        chk(f"launcher trap-line M_n (|M - M_target| <= 5 % of peak)", _pf(rows_rec[it][1], rows_rec[it][2], absolute=TOL * Mt.max()),
-            f"{row} cell n={rows_rec[it][0]}")
-        chk(f"launcher accelerator-line M_n (|M - M_target| <= 5 % of peak)",
-            _pf(rows_rec[ia][3], rows_rec[ia][4], absolute=TOL * Ma.max()), f"{row} cell n={rows_rec[ia][0]}")
-        q_other = [r for r in ("A0", "A1", "B1", "B0") if r != row and r[0] == row[0]]
-        xt_max = max(abs(r[5].get(q_other[0], 0.0)) for r in rows_rec) if q_other else 0.0
-        out[row] = dict(cells_checked=len(rows_rec), trap_peak_target_pH=float(Mt.max()), acc_peak_target_pH=float(Ma.max()),
-                        trap_max_dev_pH=float(dt[it]), acc_max_dev_pH=float(da[ia]),
-                        crosstalk_to_other_rail_max_pH=float(xt_max),
-                        profile=[dict(n=r[0], M_trap=r[1], target_trap=r[2], M_acc=r[3], target_acc=r[4]) for r in rows_rec[::3]])
-        say(f"launcher {row}: trap dev {dt[it]:+.4f} pH (peak {Mt.max():.4f}), acc dev {da[ia]:+.4f} pH "
-            f"(peak {Ma.max():.4f}), cross-talk to {q_other} {xt_max:.4f} pH")
+    out = []
+    m = dict(MESH)
+    m.update(SIZING_MESH)
+    m.update(mesh or {})
+    for gte in getattr(B, "gates", []):
+        q, sec = gte["q"], gte["sec"]
+        ns = [ns_ for (qq, ss, ns_) in B.bs if qq == q and ss == sec][0]
+        left = ns[0] < B.N // 2
+        n0 = ns[0] - 4 if left else ns[-1] - (P - 5)
+        rows = list(LY.QUBIT_ROWS[q])
+        pan, caps, box = context_panels(B, n0, P, rows, m)
+        nets = sorted({k for w in pan.w for k in w.keys() if k not in ("G", None)})
+        if gte["name"] not in nets:
+            out.append(dict(name=gte["name"], status="gate not in the window"))
+            continue
+        Q, info = periodic_charges(pan, nets, [{gte["name"]: 1.0}], (1 + EPS_SI) / 2, P * B.p, -1)
+        q_ = Q[0]
+        idx = {nd: i for i, nd in enumerate(nets)}
+        isl = {nd: float(-q_[idx[nd]]) for nd in nets if nd.startswith(f"M{q}|")}
+        # class of the gate's own island (the second island of the section on the gate side)
+        n_isl = int(gte["island"].rpartition("_")[2])
+        own = f"M{q}|{(n_isl - n0) % P}"
+        Cg = isl.get(own, 0.0)
+        rails = {r: float(-sum(q_[idx[nd]] for nd in nets if nd.startswith(f"{r}|"))) for r in rows}
+        out.append(dict(name=gte["name"], q=q, sec=sec, island=gte["island"], C_g_fF=Cg,
+                        C_g_aF=Cg * 1e3, dV_e_mV=(E_CHARGE_aC / Cg) if Cg > 0 else None,
+                        dV_2e_mV=(2 * E_CHARGE_aC / Cg) if Cg > 0 else None,
+                        C_to_other_islands_fF={k: v for k, v in isl.items() if k != own},
+                        stray_to_rails_fF=rails, C_gate_self_fF=float(q_[idx[gte["name"]]]),
+                        panels=info["panels"], window_cells=[n0, n0 + P - 1]))
     return out
+
+
+def launcher_check(B, chk, say, stride=1):
+    """as-drawn M_n (2D cross-section per rail cell) of both control lines of every launch row vs the targets:
+    +-5 % (relative) wherever the target is >= M_DRAW_MIN; below it (trap Gaussian tails, accelerator far-end tail)
+    the as-drawn value is reported. Cross-talk of each line to every other row is reported (informational).
+    Returns (summary per row, as-drawn profiles for circuits/extraction.json 'launcher_as_drawn')."""
+    from hardware import layout as LY
+    out, drawn = {}, {}
+    for row, tg in B.lt.items():
+        Mt, Ma = np.asarray(tg["trap"]), np.asarray(tg["acc"])
+        prof = {"trap": dict(cells=[], M_pH=[], M_target_pH=[]), "accelerator": dict(cells=[], M_pH=[], M_target_pH=[])}
+        xt = {"trap": {}, "accelerator": {}}
+        worst = {"trap": (0.0, None), "accelerator": (0.0, None)}
+        cells = sorted(set(B.line_cells(row, "trap")) | set(B.line_cells(row, "acc")))
+        ct, ca = set(B.line_cells(row, "trap")), set(B.line_cells(row, "acc"))
+        for c in cells[::stride]:
+            ci = column_inductance(B, c, lines=(f"TR_{row}", f"AC_{row}"))
+            for tag, key, net, Mtg, cs in (("trap", "trap", f"TR_{row}", Mt, ct), ("acc", "accelerator", f"AC_{row}", Ma, ca)):
+                if c not in cs:
+                    continue
+                m = abs(ci["lines"].get(f"{row}~{net}", 0.0))
+                prof[key]["cells"].append(int(c)); prof[key]["M_pH"].append(m); prof[key]["M_target_pH"].append(float(Mtg[c]))
+                for r in LY.ROWS:
+                    if r != row:
+                        v = abs(ci["lines"].get(f"{r}~{net}", 0.0))
+                        if v > xt[key].get(r, (0.0, None))[0]:
+                            xt[key][r] = (v, int(c))
+                if Mtg[c] >= M_DRAW_MIN:
+                    d = chk(f"launcher {'trap' if tag == 'trap' else 'accelerator'}-line M_n (+-5 % where the target is "
+                            f">= {M_DRAW_MIN} pH)", _pf(m, float(Mtg[c])), f"{row} cell n={c}")
+                    if abs(d["rel_dev"]) > abs(worst[key][0]):
+                        worst[key] = (d["rel_dev"], int(c))
+        for key in ("trap", "accelerator"):
+            peak = max(prof[key]["M_target_pH"]) if prof[key]["M_target_pH"] else 0.0
+            for r, (v, c) in xt[key].items():
+                chk(f"launcher {key}-line cross-talk to the other rows (max over the line) [informational]",
+                    dict(extracted=v, target=0.0, rel_to_peak=v / peak if peak else None, passed=True),
+                    f"{key} of {row} -> {r} (cell {c})", informational=True)
+        drawn[row] = dict(coords="rail", mirrored=LY.mirrored(row), trap=prof["trap"], accelerator=prof["accelerator"],
+                          crosstalk_max_pH={k: {r: v for r, (v, c) in d.items()} for k, d in xt.items()},
+                          note="M_n from the 2D cross-section of each rail cell of the drawn block (pH); cells are rail "
+                               "indices n; the trap line outside its window is a shielded microstrip (AL2 on SiNx over "
+                               "the Nb strip); targets below M_DRAW_MIN are not drawn (the lines are truncated there)")
+        q_other = [r for r in ("A0", "A1", "B1", "B0") if r != row and r[0] == row[0]]
+        out[row] = dict(cells_checked=len(cells[::stride]), trap_window=[min(B.trap_window(row)), max(B.trap_window(row))],
+                        trap_peak_target_pH=float(Mt.max()), acc_peak_target_pH=float(Ma.max()),
+                        trap_worst_rel_dev=worst["trap"][0], trap_worst_cell=worst["trap"][1],
+                        acc_worst_rel_dev=worst["accelerator"][0], acc_worst_cell=worst["accelerator"][1],
+                        trap_max_untargeted_pH=float(max([m for m, tgt in zip(prof["trap"]["M_pH"], prof["trap"]["M_target_pH"])
+                                                         if tgt < M_DRAW_MIN] or [0.0])),
+                        crosstalk_to_other_rail_max_pH=float(max([v for k in xt for r, (v, c) in xt[k].items()
+                                                                  if r in q_other] or [0.0])))
+        say(f"launcher {row}: trap worst {worst['trap'][0]:+.3%} (cell {worst['trap'][1]}), accelerator worst "
+            f"{worst['accelerator'][0]:+.3%} (cell {worst['accelerator'][1]}), cross-talk to {q_other} "
+            f"{out[row]['crosstalk_to_other_rail_max_pH']:.4f} pH")
+    return out, drawn
 
 
 def sensitivity(B, ctx, res, t):
