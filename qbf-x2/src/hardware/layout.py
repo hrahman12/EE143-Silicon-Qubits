@@ -64,6 +64,7 @@ LINE_SEP = 1.00                  # trap / accelerator line centre-to-centre dist
 CONTACT = (1.0, 1.1)             # AL2-on-NB ground contact pad (x, y): 1.1 um^2
 X_CAP = 0.60                     # coupling-capacitor leads, relative to the node
 W_CL = 0.15                      # AL1 crossing lead / bottom plate width (crossing role)
+CAP_GAP = 0.40                   # strip (neck) edge to the bottom plate of a coupling capacitor
 DIEL_ENC = 0.25                  # dielectric enclosure of AL1 & AL2 overlaps (rule 0.20)
 ISL_W, ISL_H = 0.70, 1.50        # middle-rail island stack (AL1 + AL2): 1.05 um^2
 MARGIN = 120.0                   # block margin on all sides (fan-out of control, flux, gate and readout lines);
@@ -621,7 +622,7 @@ class Block:
         # AL1 lead of the cross row: from its rung finger (branch) or its pad, under the strip, to the bottom plate
         y_cpad = self.yc[cross] + dc * W_PAD / 2
         wsx = self.neck_w(pair, n)
-        y_bp0 = ys + dc * (wsx / 2 + 0.40)                        # bottom plate starts beyond the (narrowed) strip
+        y_bp0 = ys + dc * (wsx / 2 + CAP_GAP)                     # bottom plate starts beyond the (narrowed) strip
         y_bp1 = y_bp0 + dc * (max(lov, 0.0) + 0.15)
         if BRANCH:
             b = self.A_jj / JJ_A
