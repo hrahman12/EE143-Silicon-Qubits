@@ -11,7 +11,7 @@ not deleted.
 | A. Classical ballistic physics | PASS | energy conservation; relativistic E = E0·γ on the lattice; exact sine-Gordon kink–antikink benchmark; topological charge; quasi-elastic collision; zero crossing of the conditional delay at the designed β* |
 | B. Quantum ballistic physics | PASS | unitarity; convergence (time step, momentum cut-off, domain, Taylor order); coherent single-fluxon dispersion; reflectionless collision; quantum–classical sweet-spot agreement; quantum corrections < 10 %; derived interaction vs circuit relaxation; regime of validity |
 | C. Genuine quantum gate | PASS | Δ = π ± 0.01; concurrence > 0.99; Bell fidelity > 0.99; CZ fidelity > 0.99; logical, not motional, entanglement; leakage < 10⁻⁴; control with the coupler off gives no entanglement; thermal launch error < 10⁻²; two-velocity phase model validated |
-| D. Device feasibility | **NOT MET** | passes: parameter ranges, complete netlist, flight time ≪ coherence, energy retention. Fails: realistic error budget < 1 % (disorder), coherent launcher derived, layout verified |
+| D. Device feasibility | **NOT MET (2 of 9 open)** | passes: parameter ranges, complete netlist, flight time ≪ coherence, energy retention, **realistic error budget 0.32 % < 1 %** (modelled launcher), **coherent launcher derived** (quantum + circuit + timing + 2D gate), carrier PCB checks. Open: layout re-verification after the beam-splitter redesign; die floorplan (unfinished, `wip/`) |
 
 Honesty notes. These are criteria I changed after seeing results; both the failure and the reasoning are kept in the
 result files.
@@ -139,9 +139,34 @@ Assumptions: 302 dual-rail cells per rail (beam splitter to beam splitter), 2 % 
    fidelity and a CHSH test.
 8. **Energy:** time of flight before and after the gate, and regenerative braking efficiency (companion 4).
 
-## 8. What would change the verdict on milestone D
+## 8. What is still open on milestone D
 
-- A demonstrated coherent single-fluxon injector with thermal-limited speed spread and ≤ 10 ps timing.
-- Junction arrays with ≤ 1 % disorder across the 2,336 junctions of the chip.
-- EM extraction of k, c and E_S for the drawn geometry, plus a DRC-clean layout.
-- A measured damping α ≤ 10⁻⁶ at 20 mK.
+- **Layout re-verification.** The EM extraction and DRC (`src/hardware/extract.py`, `drc.py`) were run on the
+  previous architecture revision. That revision was DRC-clean (4836 rail and 160 middle junctions, matching the
+  netlist), and k, c, L, L_s, C_M, E_S and the strays were all within ±5 %.
+
+  Three open items remained:
+  - the node capacitance of the outer-taper crossing nodes (+14.5 %);
+  - the plateau crossing nodes on a converged mesh (about +6.7 %);
+  - the launcher control-line mutual inductances.
+
+  The extraction also showed that the beam-splitter E_S was 8× optimistic. The architecture was redesigned for it
+  (network-loaded E_C,eff), so the layout must be re-verified against the new targets. That second pass was stopped
+  unfinished; its partial code is in `wip/`.
+- **Known DRC failure on the current revision.** The restored first-pass layout draws the redesigned middle-rail
+  junction (0.0129 µm²) with the old fixed finger width (0.15 µm). Its other side is then 0.086 µm, below the
+  0.10 µm rule, giving 608 violations (304 junctions × 2 rules). The fix is a square junction about 0.114 µm on a
+  side. `tests/test_extraction.py::test_layout_is_drc_clean` is marked as an expected failure for this reason.
+- **Die floorplan.** The 10 mm die (pads per `circuits/die_pads.json`, routing, readout resonators, frame, test
+  structures) was stopped unfinished; the partial code is `wip/floorplan.py`. The carrier PCB already follows the pad
+  map.
+- **Post-layout launch.** `D_launcher.py` back-annotates as-drawn control-line coupling once the extraction writes
+  `launcher_as_drawn`. With the sub-minimum tails truncated, as a layout must do, the launch is unchanged (1.01 %).
+- **Physics still not validated.**
+  - Damping α must be ≤ 1.2×10⁻⁵ at 20 mK; it is unknown until measured.
+  - Vortex hopping is still the single-junction phase-slip estimate, now with network-loaded E_C.
+  - Charge stability of the islands.
+  - Material parameters for the extraction (sheet inductances, SiNx thickness) need in-situ calibration.
+  - No EM simulation of the PCB launches, bonds or package.
+- **Bookkeeping.** `results/D_feasibility.json` predates the launcher and the redesign. Re-running
+  `simulations/D_feasibility.py` regenerates it (about 15 min, including the extraction).

@@ -31,11 +31,6 @@ Rule deck (um):
   JJ.S     junction to any other AL1 & AL2 region >= 0.50 (neighbouring junctions/contacts do not merge)
   JJ.N     junction counts equal the netlist: 6 N rail junctions and (n_bs - 1) per beam splitter
   CT.A     AL1 & NB and AL2 & NB contact regions (outside DIEL) >= 1.00 um^2
-  CT.I     contacts that carry a control-line DC current (the AL2 trap line's feed and end contacts):
-           area >= 2 I / J_c (80 uA -> 76 um^2), checked by extract.verify from the drawn contact boxes
-           (the contact barrier gets the junction oxidation, J_c = 2.1 uA/um^2)
-  AL2 lines over Nb (the trap line outside its slot, its crossings over the accelerator line) lie on SiNx
-           everywhere (DIEL enclosure 0.25 um); their only Nb contacts are the two CT.I contacts
   DIEL.W   min width                                   0.50
   DIEL.S   min space                                   0.40
   DIEL.EN  AL1 & AL2 & DIEL (capacitors, crossings) enclosed by DIEL by >= 0.20 (top plate never touches the

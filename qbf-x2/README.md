@@ -45,16 +45,34 @@ both per cell.
 | **A** Classical ballistic physics | **PASS** | Energy conserved to 1.2×10⁻⁶. Exact sine-Gordon kink–antikink shift reproduced within 3.5 % (Λ = 10). Topological charge conserved. Collision radiation ≤ 2.2×10⁻⁴ of the kinetic energy. Conditional delay crosses zero at β = 0.302. |
 | **B** Quantum ballistic physics | **PASS** | Norm conserved to 3×10⁻⁸. Phase converged to 7×10⁻⁴ rad (time step, momentum cut-off, domain, Taylor order). Reflection 7×10⁻⁸. Derived interaction within 0.8 % of a constrained relaxation of the full circuit. Quantum vs classical sweet spot 0.293 vs 0.302. |
 | **C** Genuine quantum gate | **PASS** | From \|+⟩\|+⟩, exact 2D scattering gives concurrence **1.000**, Bell fidelity **0.999999**, CZ process fidelity **0.999999** and Δ = π (error 0.0017 rad). Motional (position–position) purity 0.999999, so the entanglement is logical, not motional. Thermal launch at 20 mK: gate error 1.2×10⁻⁵ at the sweet spot vs 3.8×10⁻³ with an inductive-only coupler. |
-| **D** Device feasibility | **NOT MET** | Preliminary netlist, layout and schematic exist; flight time is ns, coherence μs. Not met: realistic error budget at the optimum β = 0.45 is 1.9 % for a 300-cell flight (2 % junction disorder dominates); coherent single-fluxon launcher unresolved; layout not DRC/EM verified. |
+| **D** Device feasibility | **NOT MET (2 of 9 checks open)** | **Fixed:** the realistic error budget is **0.32 %** (< 1 %) with a modelled coherent launcher. Speed spread is 1.02 % vs 4.3 % thermal, and the 2D gate with launched packets has F_avg 0.9999999. The carrier PCB passes DRC, schematic-vs-PCB, impedance and length checks. **Open:** (1) layout re-verification for the redesigned beam splitter (the previous revision was DRC-clean, with every gate quantity within ±5 % and 3 open items); (2) the 10 mm die floorplan (unfinished, in `wip/`). |
 
-**Why D is not met.** Fabrication disorder, not the collision, limits the device.
-- Each rail of a qubit accumulates a different random phase from junction disorder. The static part can be
-  calibrated, but it scales ∝ 1/v, so the thermal launch-speed spread turns it into dephasing.
-- Faster fluxons help a lot: the error falls roughly ∝ β⁻⁴. The optimiser (restricted to β ≤ 0.45, where the
-  effective model is validated) picks β = 0.45. It was validated there by a circuit zero-crossing check (0.454) and
-  an exact 2D calibration: Δ = π to 1.3×10⁻⁴ rad, CZ fidelity 1.000000.
-- A sub-1 % gate needs either junction disorder ≤ 1 % (0.73 % over the full 362-cell rows) or flights ≤ 150 cells at
-  2 % disorder (0.97 %). At 0.5 % disorder the total is 0.13–0.32 % (`results/D_feasibility.json`).
+**Milestone D status.** Fabrication disorder used to limit the device: a 1.9 % gate error, coming from a speed spread
+assumed to be thermal.
+- **The launcher.** `simulations/D_launcher.py` designs and simulates a coherent launcher.
+  - A flux-bias trap holds the fluxon in its motional ground state at 20 mK. A flux-gradient accelerator then shears
+    its phase space. Both are driven by control lines coupled by mutual inductance only, with no bias taps.
+  - Rms speed spread: 1.02 % against 4.3 % for a thermal source, and 1.39 % at 100 mK.
+  - Full-circuit launch: one fluxon at β = 0.4500, after a 1.5 % amplitude trim.
+  - Relative timing jitter: 3.2 ps, with an assumed 2 ps trigger.
+- **Error budget.** At the same assumptions (2 % disorder, 20 mK, 10 ps) the budget is 0.32 %; a thermal-source launch
+  on the same geometry would give 2.37 %. The gate now tolerates up to 5.7 % junction disorder. Damping is the largest
+  term and needs α ≤ 1.2×10⁻⁵.
+- **Design errors found and fixed by the hardware checks.**
+  - The rows were not symmetric about the coupler: B met the coupler before its own beam splitter.
+  - The beam-splitter phase-slip amplitude was 8× optimistic, because the rail-junction network loads the middle
+    junction. It was redesigned to E_J,M = 13.5 GHz, giving E_S = 0.58 GHz and 77-cell beam splitters.
+- **Still open.**
+  - The layout's second extraction pass for the redesigned beam splitter. The previous revision was DRC-clean, with
+    k, c, L, L_s, C_M, E_S and the strays all within ±5 %. Its 3 open items were the outer-taper node capacitance, the
+    mesh-converged plateau nodes and the launcher mutual inductances.
+  - The die-level floorplan. Both were stopped unfinished; the partial code is in `wip/`.
+  - `results/D_feasibility.json` predates these changes. The status above comes from `results/D_launcher.json`,
+    `pcb/reports/` and `circuits/extraction.json`.
+
+**Board and libraries.**
+- `pcb/`: a complete KiCad 7 carrier — schematic, 6-layer Rogers board, DRC, Gerbers, BOM and STEP.
+- `pcb/altium/`: native Altium `.PcbLib`/`.SchLib`/`.LibPkg`, written with altium-designer-mcp.
 
 ### Five companion devices (same codebase, one executed simulation each)
 
@@ -123,4 +141,4 @@ results/ figures/ circuits/ paper/ tests/
   unverified, and the node and island shunt capacitors are not drawn (EM extraction is to set them).
 
 See [FEASIBILITY.md](FEASIBILITY.md) for the parameter-status table, cryogenic test requirements and a staged
-measurement protocol, and `paper/main.pdf` for the full write-up.
+measurement protocol, and `paper/main.pdf` for the full write-up. The paper describes the state before the launcher and the beam-splitter redesign; for milestone D it still reports the 1.9 % budget and NOT MET with three failing checks. The current milestone-D status is the one above.
