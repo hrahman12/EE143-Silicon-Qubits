@@ -1,0 +1,549 @@
+{
+ "block_gds": "circuits/qbfx2_layout.gds",
+ "block_cell": "QBFX2_ROWS",
+ "width_um": 1994.0,
+ "height_um": 290.0,
+ "ports": [
+  {
+   "name": "TRAP_A0_SHORT",
+   "x": 202.0,
+   "y": 165.075,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "kind": "internal_short",
+   "note": "line shorted to the inner ground strip here (inside the block; not routable)"
+  },
+  {
+   "name": "ACC_A0_SHORT",
+   "x": 616.0,
+   "y": 165.325,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "kind": "internal_short",
+   "note": "line shorted to the inner ground strip here (inside the block; not routable)"
+  },
+  {
+   "name": "TRAP_A1_SHORT",
+   "x": 202.0,
+   "y": 144.925,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "kind": "internal_short",
+   "note": "line shorted to the inner ground strip here (inside the block; not routable)"
+  },
+  {
+   "name": "ACC_A1_SHORT",
+   "x": 616.0,
+   "y": 144.675,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "kind": "internal_short",
+   "note": "line shorted to the inner ground strip here (inside the block; not routable)"
+  },
+  {
+   "name": "TRAP_B1_SHORT",
+   "x": 1792.0,
+   "y": 145.075,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "kind": "internal_short",
+   "note": "line shorted to the inner ground strip here (inside the block; not routable)"
+  },
+  {
+   "name": "ACC_B1_SHORT",
+   "x": 1378.0,
+   "y": 145.325,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "kind": "internal_short",
+   "note": "line shorted to the inner ground strip here (inside the block; not routable)"
+  },
+  {
+   "name": "TRAP_B0_SHORT",
+   "x": 1792.0,
+   "y": 124.925,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "kind": "internal_short",
+   "note": "line shorted to the inner ground strip here (inside the block; not routable)"
+  },
+  {
+   "name": "ACC_B0_SHORT",
+   "x": 1378.0,
+   "y": 124.675,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "kind": "internal_short",
+   "note": "line shorted to the inner ground strip here (inside the block; not routable)"
+  },
+  {
+   "name": "ACC_A0",
+   "x": 0.0,
+   "y": 235.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "gap": 0.5,
+   "kind": "accelerator_line_feed"
+  },
+  {
+   "name": "TRAP_A0",
+   "x": 0.0,
+   "y": 215.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "gap": 0.5,
+   "kind": "trap_line_feed"
+  },
+  {
+   "name": "LOAD_A0_SHORT",
+   "x": 113.9618,
+   "y": 160.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "kind": "internal_short",
+   "note": "line shorted to ground next to the loop (inside the block; not routable)"
+  },
+  {
+   "name": "LOAD_A0",
+   "x": 0.0,
+   "y": 195.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "gap": 0.5,
+   "kind": "load_loop_flux_line"
+  },
+  {
+   "name": "GATE_BSA_PREP",
+   "x": 0.0,
+   "y": 175.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "gap": 0.5,
+   "kind": "bs_island_gate"
+  },
+  {
+   "name": "LOAD_A1_SHORT",
+   "x": 113.9618,
+   "y": 150.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "kind": "internal_short",
+   "note": "line shorted to ground next to the loop (inside the block; not routable)"
+  },
+  {
+   "name": "LOAD_A1",
+   "x": 0.0,
+   "y": 155.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "gap": 0.5,
+   "kind": "load_loop_flux_line"
+  },
+  {
+   "name": "TRAP_A1",
+   "x": 0.0,
+   "y": 135.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "gap": 0.5,
+   "kind": "trap_line_feed"
+  },
+  {
+   "name": "ACC_A1",
+   "x": 0.0,
+   "y": 115.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "gap": 0.5,
+   "kind": "accelerator_line_feed"
+  },
+  {
+   "name": "RO_CATCHER_B1_SHORT",
+   "x": 104.5618,
+   "y": 140.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "kind": "internal_short",
+   "note": "line shorted to ground next to the loop (inside the block; not routable)"
+  },
+  {
+   "name": "RO_CATCHER_B1",
+   "x": 0.0,
+   "y": 95.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "gap": 0.5,
+   "kind": "catcher_readout_coupling"
+  },
+  {
+   "name": "GATE_BSB_AN",
+   "x": 0.0,
+   "y": 75.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "gap": 0.5,
+   "kind": "bs_island_gate"
+  },
+  {
+   "name": "RO_CATCHER_B0_SHORT",
+   "x": 104.5618,
+   "y": 130.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "kind": "internal_short",
+   "note": "line shorted to ground next to the loop (inside the block; not routable)"
+  },
+  {
+   "name": "RO_CATCHER_B0",
+   "x": 0.0,
+   "y": 55.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "gap": 0.5,
+   "kind": "catcher_readout_coupling"
+  },
+  {
+   "name": "RO_CATCHER_A0_SHORT",
+   "x": 1889.4382,
+   "y": 160.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "kind": "internal_short",
+   "note": "line shorted to ground next to the loop (inside the block; not routable)"
+  },
+  {
+   "name": "RO_CATCHER_A0",
+   "x": 1994.0,
+   "y": 235.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "gap": 0.5,
+   "kind": "catcher_readout_coupling"
+  },
+  {
+   "name": "GATE_BSA_AN",
+   "x": 1994.0,
+   "y": 215.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "gap": 0.5,
+   "kind": "bs_island_gate"
+  },
+  {
+   "name": "RO_CATCHER_A1_SHORT",
+   "x": 1889.4382,
+   "y": 150.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "kind": "internal_short",
+   "note": "line shorted to ground next to the loop (inside the block; not routable)"
+  },
+  {
+   "name": "RO_CATCHER_A1",
+   "x": 1994.0,
+   "y": 195.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "gap": 0.5,
+   "kind": "catcher_readout_coupling"
+  },
+  {
+   "name": "ACC_B1",
+   "x": 1994.0,
+   "y": 175.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "gap": 0.5,
+   "kind": "accelerator_line_feed"
+  },
+  {
+   "name": "TRAP_B1",
+   "x": 1994.0,
+   "y": 155.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "gap": 0.5,
+   "kind": "trap_line_feed"
+  },
+  {
+   "name": "LOAD_B1_SHORT",
+   "x": 1880.0382,
+   "y": 140.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "kind": "internal_short",
+   "note": "line shorted to ground next to the loop (inside the block; not routable)"
+  },
+  {
+   "name": "LOAD_B1",
+   "x": 1994.0,
+   "y": 135.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "gap": 0.5,
+   "kind": "load_loop_flux_line"
+  },
+  {
+   "name": "GATE_BSB_PREP",
+   "x": 1994.0,
+   "y": 115.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "gap": 0.5,
+   "kind": "bs_island_gate"
+  },
+  {
+   "name": "LOAD_B0_SHORT",
+   "x": 1880.0382,
+   "y": 130.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "kind": "internal_short",
+   "note": "line shorted to ground next to the loop (inside the block; not routable)"
+  },
+  {
+   "name": "LOAD_B0",
+   "x": 1994.0,
+   "y": 95.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "gap": 0.5,
+   "kind": "load_loop_flux_line"
+  },
+  {
+   "name": "TRAP_B0",
+   "x": 1994.0,
+   "y": 75.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "gap": 0.5,
+   "kind": "trap_line_feed"
+  },
+  {
+   "name": "ACC_B0",
+   "x": 1994.0,
+   "y": 55.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "gap": 0.5,
+   "kind": "accelerator_line_feed"
+  },
+  {
+   "name": "GND_N",
+   "x": 997.0,
+   "y": 290.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 40.0,
+   "direction": "N",
+   "kind": "ground"
+  },
+  {
+   "name": "GND_S",
+   "x": 997.0,
+   "y": 0.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 40.0,
+   "direction": "S",
+   "kind": "ground"
+  },
+  {
+   "name": "GND_W_TOP",
+   "x": 0.0,
+   "y": 270.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 40.0,
+   "direction": "W",
+   "kind": "ground"
+  },
+  {
+   "name": "GND_E_TOP",
+   "x": 1994.0,
+   "y": 270.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 40.0,
+   "direction": "E",
+   "kind": "ground"
+  },
+  {
+   "name": "GND_W_BOT",
+   "x": 0.0,
+   "y": 20.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 40.0,
+   "direction": "W",
+   "kind": "ground"
+  },
+  {
+   "name": "GND_E_BOT",
+   "x": 1994.0,
+   "y": 20.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 40.0,
+   "direction": "E",
+   "kind": "ground"
+  }
+ ],
+ "note": "row-block interface for the die floorplan (block coordinates, um); regenerated by LY.build"
+}
