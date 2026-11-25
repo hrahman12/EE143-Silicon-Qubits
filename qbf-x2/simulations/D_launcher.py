@@ -9,6 +9,9 @@ L4 full classical circuit: hold, launch, final speed, radiation, one fluxon; tim
 L5 timing jitter budget (assumed trigger and amplitude noise) and loading time (intrinsic damping)
 L6 exact 2D collision of two launched wavepackets on the calibrated finite coupler (gate metrics)
 L7 error budget with the launcher's speed spread and packet length, against the thermal-source budget
+L8 post-layout: the as-drawn control-line mutual inductances (circuits/extraction.json, launcher_as_drawn) are
+   back-annotated into the launch (every launch row, with the in-situ accelerator trim), the circuit launch and the
+   2D gate with the as-drawn A0/B0 packets
 Writes results/D_launcher.json and figures/fig11_launcher.png.
 """
 import math
@@ -19,7 +22,10 @@ import numpy as np
 from _common import plt, save_json, load_json, savefig, ROOT, C_IND, C_MIX, C_TH, C_SIM
 from hardware.params import RailParams, CouplerParams
 from hardware.architecture import Architecture
-from hardware.launcher import design, potential
+import json
+import os
+from hardware.launcher import design, potential, back_annotate, accelerator_trim
+from _common import CIRCUITS
 from quantum.fluxon import FluxonModel
 from scattering.launch import quantum_launch, classical_launch
 from scattering.collide import run_collision_states
@@ -153,6 +159,55 @@ res["budget_assumptions"] = (f"{n_dual} dual-rail cells per rail, 2 % E_J/E_L/C 
                              f"classical amplitude noise) vs {b_thermal['velocity_spread_rel']:.4f} (thermal source)")
 print("budget launcher:", round(b_launch["total"], 5), {k: f"{v:.2e}" for k, v in b_launch["parts"].items()})
 print("budget thermal source:", round(b_thermal["total"], 5))
+
+# ---------------------------------------------------------------- L8 post-layout (back-annotated as-drawn coupling)
+post = dict(status="pending: circuits/extraction.json has no launcher_as_drawn profile")
+ext_path = os.path.join(CIRCUITS, "extraction.json")
+ext = json.load(open(ext_path)) if os.path.exists(ext_path) else {}
+drawn = ext.get("launcher_as_drawn")
+if drawn:
+    Nr = arch.n_cells
+    rows, packets = {}, {}
+    for row in ("A0", "A1", "B1", "B0"):
+        if row not in drawn:
+            continue
+        mir = row.startswith("B")
+        conv = (lambda cs: [Nr - 2 - int(c_) for c_ in cs]) if (mir and drawn[row].get("coords", "rail") == "rail") \
+            else (lambda cs: [int(c_) for c_ in cs])
+        tr_, ac_ = drawn[row]["trap"], drawn[row]["accelerator"]
+        dd = back_annotate(d, conv(tr_["cells"]), tr_["M_pH"], conv(ac_["cells"]), ac_["M_pH"], int(d.x_d) + 30)
+        trim_ = accelerator_trim(dd, model, int(d.x_d) + 30)
+        dd.theta_acc_drawn = dd.theta_acc_drawn * trim_                     # in-situ amplitude calibration
+        r_ = quantum_launch(dd, model, T_K=0.020, n_states=2, x_ref=x_coupler - X_START_2D, x_far=x_coupler,
+                            keep=row in ("A0", "B0"))
+        rows[row] = dict(accelerator_trim=trim_, dv_over_v=r_["dv_over_v"], beta_mean=r_["beta_mean"],
+                         sigma_x_at_far=r_["sigma_x_at_far"])
+        if row in ("A0", "B0"):
+            packets[row] = r_["psi_ref"][idx]
+        print("post-layout", row, {k_: round(v_, 5) for k_, v_ in rows[row].items()})
+    post = dict(status="done", rows=rows,
+                worst_dv_over_v=max(r_["dv_over_v"] for r_ in rows.values()),
+                trims=[r_["accelerator_trim"] for r_ in rows.values()])
+    if "A0" in packets and "B0" in packets:
+        pB = np.roll(packets["B0"][::-1].copy(), 1)
+        gp = run_collision_states(model, cp, packets["A0"], pB, n=n2, dx=dx2, dt=0.002, envelope=env)
+        repp = gate_report(gram_from_overlap(gp["omega"], gp["p11"]))
+        post["gate_with_as_drawn_packets"] = dict(report=repp, phase=gp["phase"], reflection=gp["reflection"],
+                                                 norm_drift=gp["norm_drift"])
+        print("post-layout 2D gate:", {k_: round(v_, 7) for k_, v_ in repp.items() if isinstance(v_, float)})
+    dA0 = back_annotate(d, drawn["A0"]["trap"]["cells"], drawn["A0"]["trap"]["M_pH"],
+                        drawn["A0"]["accelerator"]["cells"], drawn["A0"]["accelerator"]["M_pH"], 419)
+    cpl = classical_launch(dA0, rail, N=420, x_probe=x_probe, scale_acc=rows["A0"]["accelerator_trim"] * trim)
+    post["classical_A0"] = dict(beta=cpl["beta"], radiation_GHz=cpl["radiation_GHz"], winding=cpl["winding"])
+    s_post = math.sqrt(post["worst_dv_over_v"] ** 2 + dv_classical ** 2)
+    b_post = B.budget(model, None, BETA, n_cells=n_dual, velocity_spread_rel=s_post, sigma=q["sigma_x_at_far"],
+                      plateau=W, taper=TT, jitter_ps=10.0)
+    if "gate_with_as_drawn_packets" in post:
+        b_post["parts"]["launched_packet_2D"] = max(1 - post["gate_with_as_drawn_packets"]["report"]["average_gate_fidelity_CZ"], 0.0)
+        b_post["total"] = sum(b_post["parts"].values())
+    post["budget"] = b_post
+    print("post-layout budget:", round(b_post["total"], 5))
+res["post_layout"] = post
 
 # ---------------------------------------------------------------- figure
 fig, ax = plt.subplots(2, 3, figsize=(14.5, 7.6))

@@ -106,8 +106,9 @@ def build(arch: Architecture) -> tuple[str, dict]:
             for a_, b_ in zip(ns[:-1], ns[1:]):
                 lines.append(f"BM{q}_{a_} M{q}_{a_} M{q}_{b_} JJM area=1")
                 count["junction (BS middle rail)"] += 1
-                lines.append(f"CM{q}_{a_} M{q}_{a_} M{q}_{b_} {mj['shunt_fF'] * 1e-15:.4g}")
-                count["capacitor (BS middle-rail shunt)"] += 1
+                if mj["shunt_fF"] > 0:
+                    lines.append(f"CM{q}_{a_} M{q}_{a_} M{q}_{b_} {mj['shunt_fF'] * 1e-15:.4g}")
+                    count["capacitor (BS middle-rail shunt)"] += 1
             lines.append(f"LM{q}_{sec}_end M{q}_{ns[-1]} 0 1p")
             lines.append(f"LM{q}_{sec}_start M{q}_{ns[0]} 0 1p")
     # launchers: rail-end load loop (flux ramp inserts one fluxon), trap line (DC while holding, off at release),

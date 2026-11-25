@@ -48,9 +48,11 @@ class Architecture:
     beta: float = 0.45
     k: float = 0.0
     c: float = 0.0
-    E_S_GHz: float = 1.09
-    EJ_M_GHz: float = 25.3
-    EC_M_GHz: float = 12.7
+    E_S_GHz: float = 0.58                 # set by design_middle_junction()
+    EJ_M_GHz: float = 13.47
+    EC_M_GHz: float = 6.74                # effective, network-loaded charging energy of the middle junction
+    EJ_over_EC_M: float = 2.0             # beam-splitter design point (companion 2)
+    C_island_geo_fF: float = 0.31         # island two-terminal geometric capacitance (layout target, from extraction)
     n_load: int = 10
     n_launch: int = 40
     n_accel: int = 40
@@ -76,12 +78,7 @@ class Architecture:
             from classical.exact import coupler_for
             a.k, a.c = coupler_for(math.pi, a.beta, a.rail.Lambda, a.rail.EJ_over_hfp)
             a.source = "first-order design (C_gate.json not found)"
-        try:
-            R = json.load(open(os.path.join(root, "results", "companion2_router.json")))
-            es8 = R["qps_amplitude_GHz_vs_EJ_over_EC"]["2.0"]           # computed at E_C = 8 GHz, scales with E_C
-            a.E_S_GHz = es8 * a.EC_M_GHz / 8.0
-        except Exception:
-            pass
+        a.design_middle_junction()
         from quantum.fluxon import FluxonModel
         m = FluxonModel(a.rail)
         v = m.v_cells_per_ns(m.k_for_beta(a.beta))
@@ -117,8 +114,9 @@ class Architecture:
         C_node = r.C_F * 1e15                                             # total node capacitance (sets E_C)
         Cj = A * C_SPEC_FF_PER_UM2
         C_c = self.c * C_node
-        C_M = E_CHARGE ** 2 / (2 * H * self.EC_M_GHz * 1e9) * 1e15        # middle-rail capacitance for E_C,M
         CjM = AM * C_SPEC_FF_PER_UM2
+        C_net = Cj                                                        # rail-junction network seen across it
+        C_M = CjM + self.C_island_geo_fF + C_net                          # effective, network-loaded
         return dict(
             rail_junction=dict(EJ_GHz=r.EJ_GHz, Ic_nA=r.Ic_A * 1e9, area_um2=A, C_fF=C_node, Cj_fF=Cj,
                                shunt_fF=C_node - Cj, shunt_on_coupler_plateau_fF=C_node - Cj - C_c,
@@ -130,8 +128,11 @@ class Architecture:
             compensated_series_L_nH=(1 - self.k) * L * 1e9,
             compensated_node_C_fF=(1 - self.c) * r.C_F * 1e15,
             middle_rail_junction=dict(EJ_GHz=self.EJ_M_GHz, EC_GHz=self.EC_M_GHz, Ic_nA=AM * JC_UA_PER_UM2 * 1e3,
-                                      area_um2=AM, C_fF=C_M, Cj_fF=CjM, shunt_fF=C_M - CjM, E_S_GHz=self.E_S_GHz,
-                                      status="E_S from exact charge dispersion (scqubits); vortex hopping = single-junction estimate"),
+                                      area_um2=AM, Cj_fF=CjM, C_island_geo_fF=self.C_island_geo_fF, C_network_fF=C_net,
+                                      C_fF=C_M, shunt_fF=0.0, E_S_GHz=self.E_S_GHz, EJ_over_EC=self.EJ_M_GHz / self.EC_M_GHz,
+                                      status="E_C,eff counts the rail-junction network (each island couples to both rails "
+                                             "through rail junctions); E_S = charge dispersion / 4 (scqubits); vortex "
+                                             "hopping itself is still the single-junction phase-slip estimate"),
             launcher=self.launcher_values(),
             detector=dict(kind="fluxon catcher loop + dispersive lambda/4 readout (QFX-1 heritage)", status="proposed"),
         )
@@ -171,3 +172,22 @@ class Architecture:
         b_prep = (N - (s["BS_prep"]["start"] + s["BS_prep"]["cells"]), N - s["BS_prep"]["start"])   # B's BS_prep range
         return dict(n_cells=N, coupler_cells=[c0, c1], pre_coupler=pre, post_coupler=post, symmetric=pre == post,
                     B_BS_prep_cells=list(b_prep), B_BS_prep_after_coupler=b_prep[0] >= c1)
+
+    def design_middle_junction(self):
+        """Size the beam-splitter middle-rail junction so that E_J,M / E_C,eff = EJ_over_EC_M, where the effective
+        capacitance across it is network-loaded: C_eff = Cj,M + C_island_geo + Cj,rail. Each island couples to both rails
+        through a rail junction, and the two islands of a middle junction act in series, which puts about Cj,rail across
+        it; the EM extraction found this term. Leaving it out over-estimates E_S about 8x (0.14 GHz instead of 1.1 GHz
+        for the earlier 25.3 GHz junction). E_S = charge dispersion / 4 (scqubits), as in companion 2."""
+        import scqubits as scq
+        scq.settings.T1_DEFAULT_WARNING = False
+        e2_2h = E_CHARGE ** 2 / (2 * H) * 1e15 / 1e9                     # GHz * fF
+        alpha = jj_area_for(1.0) * C_SPEC_FF_PER_UM2                      # junction fF per GHz of E_J
+        b = jj_area_for(self.rail.EJ_GHz) * C_SPEC_FF_PER_UM2 + self.C_island_geo_fF
+        c = -self.EJ_over_EC_M * e2_2h
+        self.EJ_M_GHz = (-b + math.sqrt(b * b - 4 * alpha * c)) / (2 * alpha)
+        self.EC_M_GHz = e2_2h / (b + alpha * self.EJ_M_GHz)
+        t = scq.Transmon(EJ=self.EJ_M_GHz, EC=self.EC_M_GHz, ng=0.0, ncut=31, truncated_dim=2)
+        e0 = t.eigenvals(evals_count=1)[0]
+        t.ng = 0.5
+        self.E_S_GHz = abs(t.eigenvals(evals_count=1)[0] - e0) / 4

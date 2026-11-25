@@ -56,8 +56,8 @@ def draw(arch: Architecture, path_png: str, path_svg: str):
         d += elm.Dot().label("A1_n", loc="left")
         d += elm.Josephson().right(3.0).at(m.center)
         d += elm.Label().at((m.center[0] + 3.4, m.center[1] - 1.1)).label(
-            f"middle-rail JJ: E_J/E_C = 2, {mj['Ic_nA']:.0f} nA,\n{mj['Cj_fF']:.2f} fF + {mj['shunt_fF']:.2f} fF island shunt,\n"
-            f"E_S = {arch.E_S_GHz:.2f} GHz", fontsize=9)
+            f"middle-rail JJ: {mj['Ic_nA']:.0f} nA, {mj['Cj_fF']:.2f} fF; E_J/E_C,eff = 2\nwith C_eff = {mj['C_fF']:.2f} fF "
+            f"(incl. rail-junction network),\nE_S = {arch.E_S_GHz:.2f} GHz", fontsize=9)
         d += elm.Dot().label("M_n+1", loc="right")
         # (d) launcher and catcher
         lv = ev["launcher"]

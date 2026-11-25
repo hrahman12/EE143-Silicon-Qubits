@@ -70,12 +70,17 @@ class LauncherDesign:
     n_plateau: int = 120               # uniform-theta plateau, longer than the packet (+-4 sigma): switched off here
     n_return: int = 16                 # the accelerator line leaves the rail (theta back to 0)
     tau_ps: float = 20.0               # switching edge time of both control lines
-    I_trap_uA: float = 50.0            # control-line currents (set the mutual-inductance targets)
-    I_acc_uA: float = 200.0
+    I_trap_uA: float = 80.0             # control-line currents (set the mutual-inductance targets); chosen so
+    I_acc_uA: float = 450.0             # the targets fall in the drawable 0.018-0.084 pH per cell (extraction)
+    acc_floor: float = 0.30             # uniform theta (no force) from acc_start to the ramp: keeps every coupled
+    acc_start: float = 2.0              # cell above the drawable minimum mutual; the step at acc_start lies behind
+                                       # the trap, in the load section, where the fluxon never goes
     theta_trap: float = 0.0            # filled by design(): bump amplitude for f_trap
     theta_max: float = 0.0             # filled by design(): plateau value for the target kinetic energy
     t_off_ns: float = 0.0              # filled by design(): accelerator switch-off time (fluxon mid-plateau)
     notes: dict = field(default_factory=dict)
+    theta_trap_drawn: object = None    # back-annotation: per-cell external phase of the as-drawn trap line
+    theta_acc_drawn: object = None     # back-annotation: per-cell external phase of the as-drawn accelerator line
 
     # ---- geometry
     @property
@@ -109,23 +114,28 @@ class LauncherDesign:
 
     # ---- flux profiles (per cell, length n_cells)
     def theta_trap_profile(self, n_cells: int) -> np.ndarray:
+        if self.theta_trap_drawn is not None:
+            return _fit(self.theta_trap_drawn, n_cells)
         xc = np.arange(n_cells) + 0.5
         return self.theta_trap * np.exp(-0.5 * ((xc - self.X0) / self.w_trap) ** 2)
 
     def acc_shape(self, x):
-        """dimensionless accelerator profile s(x): 0 before x_a, linear ramp to 1 at x_b (corners smoothed over
-        `corner` cells), plateau, raised-cosine return to 0 between x_c and x_d"""
+        """dimensionless accelerator profile s(x): 0 before acc_start, a uniform floor up to x_a, a linear ramp to 1 at
+        x_b (corners smoothed over `corner` cells), a plateau, then a raised-cosine return to 0 between x_c and x_d"""
         x = np.asarray(x, float)
         fine = np.linspace(self.x_a - 2 * self.corner, self.x_b + 2 * self.corner, 20001)
         slope = (_smoothstep((fine - (self.x_a - self.corner / 2)) / self.corner)
                  - _smoothstep((fine - (self.x_b - self.corner / 2)) / self.corner))
         ramp = np.concatenate([[0.0], np.cumsum(0.5 * (slope[1:] + slope[:-1]) * np.diff(fine))])
         ramp /= ramp[-1]
-        s = np.interp(x, fine, ramp, left=0.0, right=1.0)
+        s = self.acc_floor + (1 - self.acc_floor) * np.interp(x, fine, ramp, left=0.0, right=1.0)
+        s = np.where(x >= self.acc_start, s, 0.0)
         ret = 1 - _smoothstep((x - self.x_c) / max(self.n_return, 1e-9))
         return s * ret
 
     def theta_acc_profile(self, n_cells: int) -> np.ndarray:
+        if self.theta_acc_drawn is not None:
+            return _fit(self.theta_acc_drawn, n_cells)
         return self.theta_max * self.acc_shape(np.arange(n_cells) + 0.5)
 
     def switches(self, t_ns):
@@ -145,6 +155,8 @@ class LauncherDesign:
 
     def summary(self) -> dict:
         d = asdict(self)
+        for k_ in ("theta_trap_drawn", "theta_acc_drawn"):
+            d[k_] = None if d[k_] is None else "as-drawn profile (back-annotated)"
         d.update(X0=self.X0, x_a=self.x_a, x_b=self.x_b, x_c=self.x_c, x_d=self.x_d, n_end=self.n_end,
                  n_accel=self.n_accel)
         return d
@@ -187,7 +199,7 @@ def design(model, beta: float = 0.45, **kw) -> LauncherDesign:
     d.theta_max = 1.0
     frac = 1.0 - float(d.acc_shape(d.X0))
     d.theta_max = KE / (F_per_theta * frac)
-    F = F_per_theta * d.theta_max / (d.x_b - d.x_a)
+    F = F_per_theta * d.theta_max * (1 - d.acc_floor) / (d.x_b - d.x_a)     # the floor exerts no force
     # switch-off time: classical relativistic motion under F from rest at X0 until the plateau middle
     m = model.E0_GHz
     xs, t, v, p = d.X0, 0.0, 0.0, 0.0
@@ -205,3 +217,34 @@ def design(model, beta: float = 0.45, **kw) -> LauncherDesign:
                    trap_depth_GHz=float(-potential(d.theta_trap_profile(200), [d.X0], sp)[0]),
                    f_trap_check_GHz=trap_frequency(d, model), kT_GHz_20mK=0.020 * 1.380649e-23 / 6.62607015e-34 / 1e9)
     return d
+
+
+def _fit(arr, n_cells):
+    a = np.zeros(n_cells)
+    v = np.asarray(arr, float)
+    a[:min(n_cells, len(v))] = v[:n_cells]
+    return a
+
+
+def back_annotate(d: LauncherDesign, cells_trap, M_trap_pH, cells_acc, M_acc_pH, n_cells: int) -> LauncherDesign:
+    """a copy of the design whose flux profiles come from as-drawn mutual inductances (launcher cell coordinates):
+    theta_n = 2 pi M_n I / Phi0 with the design currents. Timing (t_off, tau) is kept."""
+    import copy
+    dd = copy.deepcopy(d)
+    tt, ta = np.zeros(n_cells), np.zeros(n_cells)
+    for c, M in zip(cells_trap, M_trap_pH):
+        if 0 <= int(c) < n_cells:
+            tt[int(c)] = TWO_PI * M * 1e-12 * d.I_trap_uA * 1e-6 / PHI0
+    for c, M in zip(cells_acc, M_acc_pH):
+        if 0 <= int(c) < n_cells:
+            ta[int(c)] = TWO_PI * M * 1e-12 * d.I_acc_uA * 1e-6 / PHI0
+    dd.theta_trap_drawn, dd.theta_acc_drawn = tt, ta
+    return dd
+
+
+def accelerator_trim(d: LauncherDesign, model, n_cells: int) -> float:
+    """amplitude factor on the accelerator current that restores the design kinetic energy (energy gained from the
+    trap centre to the plateau centre); this is the in-situ calibration of the launch speed"""
+    th = d.theta_acc_profile(n_cells)
+    U = potential(th, [d.X0, 0.5 * (d.x_b + d.x_c)], model.rail)
+    return model.kinetic_energy(d.beta) / float(U[0] - U[1])
