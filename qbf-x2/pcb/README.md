@@ -277,6 +277,13 @@ The import was not tested here, because Altium does not run on Linux. Whether th
 depends on the Altium version. If it is not, open the project in KiCad 7, then use the Gerber/Excellon set or
 re-import.
 
+**Native Altium libraries** are in `altium/`: `QBFX2_Carrier.PcbLib`, `QBFX2_Carrier.SchLib` and
+`QBFX2_Carrier.LibPkg`. They were written by
+[altium-designer-mcp](https://github.com/embedded-society/altium-designer-mcp) from this board's own footprints,
+symbols, STEP models and BOM. They contain one component per BOM line, with its MPN, and embedded STEP models. They
+pass the tool's validator and an exact read-back round trip. See `altium/README.md`. After importing the board, use
+*Tools > Update From Libraries* against them to get managed Altium components.
+
 ## Not done, not verified, to confirm
 
 **Not verified (no full-wave EM simulation):**

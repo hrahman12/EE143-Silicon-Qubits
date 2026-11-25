@@ -1,0 +1,8 @@
+[Design]
+Version=1.0
+
+[Document1]
+DocumentPath=QBFX2_Carrier.SchLib
+
+[Document2]
+DocumentPath=QBFX2_Carrier.PcbLib

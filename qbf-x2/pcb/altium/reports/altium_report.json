@@ -1,0 +1,242 @@
+{
+ "tool": {
+  "repository": "https://github.com/embedded-society/altium-designer-mcp",
+  "server": {
+   "name": "altium-designer-mcp",
+   "version": "1.4.0"
+  }
+ },
+ "footprints": [
+  {
+   "name": "C_0603_1608Metric",
+   "pads": 2,
+   "round_trip_ok": true,
+   "max_dev_mm": 1.0000000000287557e-06,
+   "step_model_embedded": true,
+   "notes": []
+  },
+  {
+   "name": "Fiducial_1.0mm_Mask2.0mm",
+   "pads": 1,
+   "round_trip_ok": true,
+   "max_dev_mm": 9.999999999177334e-07,
+   "step_model_embedded": false,
+   "notes": [
+    "pad : local clearance 0.6 mm (set a rule in Altium)"
+   ]
+  },
+  {
+   "name": "MicroD_15P_Glenair_MWDM2L-15PCBRP",
+   "pads": 17,
+   "round_trip_ok": true,
+   "max_dev_mm": 1.000000000139778e-06,
+   "step_model_embedded": true,
+   "notes": []
+  },
+  {
+   "name": "MountingHole_2.7mm_M2.5_Pad",
+   "pads": 1,
+   "round_trip_ok": true,
+   "max_dev_mm": 0.0,
+   "step_model_embedded": false,
+   "notes": []
+  },
+  {
+   "name": "NPTH_Dowel_1.6mm",
+   "pads": 1,
+   "round_trip_ok": true,
+   "max_dev_mm": 1.000000000139778e-06,
+   "step_model_embedded": false,
+   "notes": []
+  },
+  {
+   "name": "QBFX2_DIE_BONDPADS",
+   "pads": 24,
+   "round_trip_ok": true,
+   "max_dev_mm": 1.000000000139778e-06,
+   "step_model_embedded": true,
+   "notes": []
+  },
+  {
+   "name": "R_0603_1608Metric",
+   "pads": 2,
+   "round_trip_ok": true,
+   "max_dev_mm": 1.0000000000287557e-06,
+   "step_model_embedded": true,
+   "notes": []
+  },
+  {
+   "name": "SMP_Amphenol_SMP-MSLD-PCS-NM",
+   "pads": 5,
+   "round_trip_ok": true,
+   "max_dev_mm": 1.0000000000287557e-06,
+   "step_model_embedded": true,
+   "notes": [
+    "pad 1: local clearance 0.45 mm (set a rule in Altium)"
+   ]
+  }
+ ],
+ "symbols": [
+  {
+   "name": "C_18p_C0G_0603",
+   "pins": 2,
+   "footprint": "C_0603_1608Metric",
+   "mpn": "VJ0603A180JCAAJ",
+   "round_trip_ok": true
+  },
+  {
+   "name": "C_10n_C0G_0603",
+   "pins": 2,
+   "footprint": "C_0603_1608Metric",
+   "mpn": "VJ0603A103JCAAJ",
+   "round_trip_ok": true
+  },
+  {
+   "name": "MountingHole_M2.5",
+   "pins": 1,
+   "footprint": "MountingHole_2.7mm_M2.5_Pad",
+   "mpn": "-",
+   "round_trip_ok": true
+  },
+  {
+   "name": "SMP-MSLD-PCS-NM",
+   "pins": 2,
+   "footprint": "SMP_Amphenol_SMP-MSLD-PCS-NM",
+   "mpn": "SMP-MSLD-PCS-NM",
+   "round_trip_ok": true
+  },
+  {
+   "name": "MWDM2L-15PCBRP-.110",
+   "pins": 16,
+   "footprint": "MicroD_15P_Glenair_MWDM2L-15PCBRP",
+   "mpn": "MWDM2L-15PCBRP-.110",
+   "round_trip_ok": true
+  },
+  {
+   "name": "R_1k_0603",
+   "pins": 2,
+   "footprint": "R_0603_1608Metric",
+   "mpn": "PNM0603E1001BST5",
+   "round_trip_ok": true
+  },
+  {
+   "name": "R_10k_0603",
+   "pins": 2,
+   "footprint": "R_0603_1608Metric",
+   "mpn": "PNM0603E1002BST5",
+   "round_trip_ok": true
+  },
+  {
+   "name": "QBF-X2_die",
+   "pins": 24,
+   "footprint": "QBFX2_DIE_BONDPADS",
+   "mpn": "QBF-X2 die rev per circuits/",
+   "round_trip_ok": true
+  }
+ ],
+ "write": {
+  "pcblib": {
+   "status": "success",
+   "warnings": [],
+   "bodies": [
+    {
+     "name": "C_0603_1608Metric",
+     "source": "step-embedded"
+    },
+    {
+     "name": "Fiducial_1.0mm_Mask2.0mm",
+     "note": "No 3D body written. Set component_bodies[].overall_height to the real part height, or pass auto_3d_body:true for a flagged 1.0 mm placeholder.",
+     "source": "none"
+    },
+    {
+     "name": "MicroD_15P_Glenair_MWDM2L-15PCBRP",
+     "source": "step-embedded"
+    },
+    {
+     "name": "MountingHole_2.7mm_M2.5_Pad",
+     "note": "No 3D body written. Set component_bodies[].overall_height to the real part height, or pass auto_3d_body:true for a flagged 1.0 mm placeholder.",
+     "source": "none"
+    },
+    {
+     "name": "NPTH_Dowel_1.6mm",
+     "note": "No 3D body written. Set component_bodies[].overall_height to the real part height, or pass auto_3d_body:true for a flagged 1.0 mm placeholder.",
+     "source": "none"
+    },
+    {
+     "name": "QBFX2_DIE_BONDPADS",
+     "source": "step-embedded"
+    },
+    {
+     "name": "R_0603_1608Metric",
+     "source": "step-embedded"
+    },
+    {
+     "name": "SMP_Amphenol_SMP-MSLD-PCS-NM",
+     "source": "step-embedded"
+    }
+   ]
+  },
+  "schlib": {
+   "status": "success"
+  },
+  "libpkg": {
+   "status": "success"
+  }
+ },
+ "validate": {
+  "pcblib": {
+   "component_count": 8,
+   "error_count": 0,
+   "file_type": "PcbLib",
+   "filepath": "/home/user/EE143-Silicon-Qubits/qbf-x2/pcb/altium/QBFX2_Carrier.PcbLib",
+   "issues": [
+    {
+     "component": "Fiducial_1.0mm_Mask2.0mm",
+     "issue": "Pad has empty designator (a fiducial, paste aperture or mounting hole has none; anything else needs one)",
+     "severity": "warning"
+    },
+    {
+     "component": "MicroD_15P_Glenair_MWDM2L-15PCBRP",
+     "issue": "Pads share designator 'SH' (Altium connects them as one pin, e.g. a split thermal pad; check it is intended)",
+     "severity": "warning"
+    },
+    {
+     "component": "NPTH_Dowel_1.6mm",
+     "issue": "Pad has empty designator (a fiducial, paste aperture or mounting hole has none; anything else needs one)",
+     "severity": "warning"
+    },
+    {
+     "component": "SMP_Amphenol_SMP-MSLD-PCS-NM",
+     "issue": "Pads share designator '2' (Altium connects them as one pin, e.g. a split thermal pad; check it is intended)",
+     "severity": "warning"
+    }
+   ],
+   "status": "warnings",
+   "warning_count": 4
+  },
+  "schlib": {
+   "component_count": 8,
+   "error_count": 0,
+   "file_type": "SchLib",
+   "filepath": "/home/user/EE143-Silicon-Qubits/qbf-x2/pcb/altium/QBFX2_Carrier.SchLib",
+   "issues": [],
+   "status": "valid",
+   "warning_count": 0
+  }
+ },
+ "summary": {
+  "footprints": 8,
+  "symbols": 8,
+  "round_trip_footprints_ok": true,
+  "round_trip_symbols_ok": true,
+  "validation_errors": {
+   "pcblib": 0,
+   "schlib": 0
+  },
+  "files": [
+   "QBFX2_Carrier.PcbLib",
+   "QBFX2_Carrier.SchLib",
+   "QBFX2_Carrier.LibPkg"
+  ]
+ }
+}

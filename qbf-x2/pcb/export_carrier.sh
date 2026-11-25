@@ -54,6 +54,13 @@ if [[ "${1:-}" != "--no-render" ]]; then
   fi
 fi
 python3 make_outputs.py manifest
+# native Altium libraries (optional: needs the altium-designer-mcp binary, see altium/README.md)
+ALTIUM_MCP_BIN="${ALTIUM_MCP_BIN:-/home/user/embedded-society/altium-designer-mcp/target/release/altium-designer-mcp}"
+if [[ -x "$ALTIUM_MCP_BIN" ]]; then
+  ALTIUM_MCP_BIN="$ALTIUM_MCP_BIN" python3 altium/build_altium_libs.py > reports/altium.log 2>&1 && echo "Altium libraries written" || { tail -20 reports/altium.log; exit 1; }
+else
+  echo "altium-designer-mcp not built: Altium libraries skipped"
+fi
 python3 make_readme.py
 rm -f qbfx2_carrier.kicad_prl   # pcbnew's local UI-state file, not part of the design
 python3 -c "import json; s=json.load(open('reports/check_summary.json')); print('ALL CHECKS PASSED' if s['all_passed'] else 'CHECKS FAILED'); raise SystemExit(0 if s['all_passed'] else 1)"
