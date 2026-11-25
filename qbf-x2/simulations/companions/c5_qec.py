@@ -107,13 +107,18 @@ def logical_error(p_mem, e_cz, p_m):
 
 try:
     C = json.load(open(os.path.join(ROOT, "results", "C_gate.json")))
-    e_opt = C["optimum_validation"]["budget"]["total"]
+    e_thermal = C["optimum_validation"]["budget"]["total"]          # thermal-source launch (old assumption)
 except Exception:
-    e_opt = 5e-3
-res = dict(e_cz_from_budget=e_opt)
+    e_thermal = 1.9e-2
+try:
+    Ld = json.load(open(os.path.join(ROOT, "results", "D_launcher.json")))
+    e_opt = Ld["budget_launcher"]["total"]                            # modelled coherent launcher (milestone D)
+except Exception:
+    e_opt = e_thermal
+res = dict(e_cz_from_budget=e_opt, e_cz_thermal_source_launch=e_thermal)
 ps = np.logspace(-4, -1, 13)
 curves = {}
-for e_cz in (0.0, 1e-3, e_opt, 2e-2):
+for e_cz in sorted({0.0, 1e-3, e_opt, e_thermal, 2e-2}):
     curves[f"{e_cz:.1e}"] = [logical_error(p, e_cz, p_m=1e-3) for p in ps]
     print(f"e_cz {e_cz:.1e}:", [f"{v:.1e}" for v in curves[f"{e_cz:.1e}"]])
 res["logical_error_per_cycle"] = dict(p_memory=ps, curves=curves, p_meas=1e-3)
@@ -151,7 +156,7 @@ ax[1].text(0.0, 0.95, "Syndrome-extraction cycle (simulated):\n"
            "racetrack dephasing per lap, measurement back-action timing.",
            va="top", family="monospace", fontsize=8)
 savefig(fig, "companion5_qec.png")
-be_opt, be_1e3 = be[f"{e_opt:.1e}"], be["1.0e-03"]
+be_opt, be_1e3, be_th = be[f"{e_opt:.1e}"], be["1.0e-03"], be[f"{e_thermal:.1e}"]
 res["verdict"] = (
     "Density-matrix simulation of one fluxon-driven syndrome-extraction cycle of a 3-qubit phase-flip code. "
     + (f"With the CZ error of the QBF-X2 budget ({e_opt:.1e}) the code beats an unencoded qubit for memory errors of "
@@ -160,6 +165,7 @@ res["verdict"] = (
        f"{ps[0]:.0e}-{ps[-1]:.0e} per cycle tested). ")
     + (f"With a 1e-3 CZ error it breaks even for memory errors of {be_1e3[0]:.2g}-{be_1e3[1]:.2g} per cycle (upper end = "
        f"edge of the tested range). " if be_1e3 else "")
+    + (f"With the thermal-source launch ({e_thermal:.1e}) it never breaks even. " if not be_th else "")
     + "A full QEC module (larger codes, repeated cycles, real-time decoding, leakage handling) is beyond this study; "
       "no fluxon-driven syndrome extraction has been reported experimentally.")
 save_json("companion5_qec.json", res)
