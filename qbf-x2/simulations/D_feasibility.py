@@ -54,7 +54,22 @@ xc = LY.MARGIN + secs["coupler"]["start"] * p
 LY.preview(gds, os.path.join(CIRCUITS, "layout_zoom_coupler.png"), box=(xc - 10, LY.MARGIN - 5, xc + 40, dims["height_um"] - LY.MARGIN + 12), size=(1400, 900))
 xb = LY.MARGIN + secs["BS_prep"]["start"] * p
 LY.preview(gds, os.path.join(CIRCUITS, "layout_zoom_beamsplitter.png"), box=(xb - 10, LY.MARGIN - 5, xb + 40, dims["height_um"] - LY.MARGIN + 12), size=(1400, 900))
-print("layout:", dims)
+print("layout:", {k_: v_ for k_, v_ in dims.items() if k_ != "ports"})
+
+# ---------------------------------------------------------------- D4 layout verification: DRC + EM extraction
+from hardware import extract as EX
+ver = EX.verify(arch, gds, fast=False, verbose=False)                 # writes circuits/extraction.json, drc_report.json
+res["layout_verification"] = dict(passed=ver["passed"], drc_violations=ver["drc"]["violations_total"],
+                                  junctions=ver["drc"]["junctions"], summary=ver["summary"],
+                                  failed=[c_ for c_ in ver["checks"] if not c_["passed"] and not c_.get("informational")])
+print("layout verification:", "PASS" if ver["passed"] else "FAIL", "| DRC violations", ver["drc"]["violations_total"])
+pcb_sum_path = os.path.join(ROOT, "pcb", "reports", "check_summary.json")
+pcb_sum = json.load(open(pcb_sum_path)) if os.path.exists(pcb_sum_path) else None
+drc_txt = os.path.join(ROOT, "pcb", "reports", "drc_report.txt")
+pcb_drc_clean = os.path.exists(drc_txt) and all(f"Found 0 {w}" in open(drc_txt).read()
+                                                for w in ("DRC violations", "unconnected pads", "Footprint errors"))
+die_drc_path = os.path.join(CIRCUITS, "die_drc_report.json")
+die_drc = json.load(open(die_drc_path)) if os.path.exists(die_drc_path) else None
 
 # ---------------------------------------------------------------- D2 energy retention through the gate (circuit model)
 Lam = arch.rail.Lambda
@@ -199,17 +214,36 @@ checks = [
      f"{(cl['accelerator_trim'] - 1) * 100:.1f} % amplitude trim, radiation {cl['trimmed']['radiation_GHz']:.3f} GHz; "
      f"relative timing jitter {tm['relative_jitter_ps']:.1f} ps (assumed {tm['assumed_trigger_jitter_ps']:.0f} ps trigger); "
      f"2D gate with launched packets F_avg {Lr['gate_with_launched_packets']['report']['average_gate_fidelity_CZ']:.6f}"),
-    ("layout verified (DRC, EM extraction of k, c, E_S)", False, "NOT DONE: preliminary layout only"),
+    ("layout verified (DRC, EM extraction of k, c, E_S)", ver["passed"],
+     f"DRC {ver['drc']['violations_total']} violations ({ver['drc']['junctions']}); extraction: "
+     + ", ".join(f"{q_}: {g_['failed']}/{g_['checked']} failed" for q_, g_ in ver["summary"].items())),
+    ("die floorplan complete and DRC-clean (10 mm die: pads per circuits/die_pads.json, CPW routing, readout, frame)",
+     bool(die_drc) and die_drc.get("violations_total", 1) == 0 and die_drc.get("pads_match_spec", False),
+     ("die DRC " + str(die_drc.get("violations_total")) + " violations, pads match spec: " + str(die_drc.get("pads_match_spec")))
+     if die_drc else "NOT DONE: die floorplan not built yet"),
+    ("carrier PCB: DRC clean, schematic = PCB netlist, 50 ohm +-5 %, A/B timing pairs matched, filter cut-offs met",
+     bool(pcb_sum) and pcb_drc_clean and pcb_sum["sch_vs_pcb"]["mismatches"] == 0 and pcb_sum["erc"]["passed"]
+     and pcb_sum["impedance"]["passed"] and pcb_sum["lengths"]["passed"]
+     and all(ch_["passed"] for ch_ in pcb_sum["filters"]["channels"]),
+     (f"pcbnew DRC clean: {pcb_drc_clean}; sch-vs-PCB mismatches {pcb_sum['sch_vs_pcb']['mismatches']} "
+      f"({pcb_sum['sch_vs_pcb']['components']} parts, {pcb_sum['sch_vs_pcb']['nets']} nets); "
+      f"GCPW {pcb_sum['impedance']['z_formula']:.1f} ohm (formula) / {pcb_sum['impedance']['z_fieldsolver']:.1f} ohm (field solve); "
+      f"max A/B skew {max(pp_['dL'] for pp_ in pcb_sum['lengths']['pairs']):.4f} mm") if pcb_sum else "NOT DONE"),
 ]
 res["milestone_D"] = milestone("D (device feasibility)", checks)
 res["parameter_status"] = dict(
     validated_by_simulation=["rail E_J, E_C, Lambda (quantum fluxon regime)", f"coupler k = {arch.k:.5f}, c = {arch.c:.4f} at beta = {arch.beta:.2f} (2D calibrated)",
-                             "conditional phase pi, sweet spot, reflection < 1e-6", "energy retention through the gate"],
-    proposed=["granular-Al rail inductors 0.66 nH/cell", "thin-Al shared strip", "crossover coupling capacitors",
-              "middle-rail junctions E_J/E_C = 2", "catcher loops with dispersive readout", "dummy couplers"],
-    unknown_or_unresolved=["coherent single-fluxon launcher (motional state, timing)", "junction disorder below 1 %",
-                           "charge stability of beam-splitter islands", "quasiparticle and dielectric damping alpha at 20 mK",
-                           "EM-extracted k, c, E_S of the drawn geometry", "vortex hopping beyond the single-junction phase-slip estimate"])
+                             "conditional phase pi, sweet spot, reflection < 1e-6", "energy retention through the gate",
+                             "coherent launcher: quantum + circuit launch, timing, 2D gate with launched packets (results/D_launcher.json)"],
+    validated_by_extraction=["drawn k, c, L, L_s, node capacitances, C_eff of the middle junction, E_S, strays (circuits/extraction.json)",
+                             "DRC of the drawn row block (circuits/drc_report.json)"],
+    proposed=["granular-Al rail inductors 0.65 nH/cell", "thin-Al shared strip", "AL1/SiNx/AL2 crossover coupling capacitors",
+              "middle-rail junctions E_J/E_C,eff = 2 (network-loaded)", "catcher loops with dispersive readout", "dummy couplers",
+              "flux-line control (trap / accelerator) with fast edges", "carrier PCB (pcb/)"],
+    unknown_or_unresolved=["quasiparticle and dielectric damping alpha at 20 mK (needs <= 1.2e-5)",
+                           "material parameters for the extraction (grAl and thin-Al sheet inductance, SiNx thickness): in-situ calibration",
+                           "charge stability of beam-splitter islands", "vortex hopping beyond the single-junction phase-slip estimate",
+                           "EM simulation of the PCB launches, wire bonds and package modes"])
 res["runtime_s"] = time.time() - t0
 save_json("D_feasibility.json", res)
 print(f"done in {res['runtime_s']:.0f} s")
