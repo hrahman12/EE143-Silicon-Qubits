@@ -44,7 +44,7 @@ W_PAD_CROSS = 0.25               # pad width of coupler 'cross' nodes (= granula
 W_GRAL = 0.25                    # granular-Al line width
 GRAL_OV = 0.20                   # granular Al under the pads at each end (contact)
 JJ_A = 0.20                      # AL1 finger width at the rail junction
-JJ_AM = 0.15                     # AL1 finger width at the middle-rail junction
+JJ_AM = 0.11                     # AL1 finger width at the middle-rail junction (0.0129 um^2: 0.110 x 0.118)
 J_RET = 0.65                     # junction centre from the return edge (the long rung lead is at node potential)
 J_RET_BS = 0.75                  # same, beam-splitter rungs (from the island edge; >= 0.5 um from the island contact)
 W_STRIP_X = 0.15                 # minimum strip width where the crossing lead passes under it (neck)
@@ -180,7 +180,8 @@ def targets(arch: Architecture) -> dict:
              C_node_fF=rj["C_fF"], Cj_fF=rj["Cj_fF"], shunt_fF=rj["shunt_fF"], C_c_fF=ev["coupler_capacitor"]["C_c_fF"],
              L_s_pH=ev["coupler_shared_inductor"]["L_s_pH"], k=arch.k, c=arch.c,
              A_jj_um2=rj["area_um2"], A_jjM_um2=mj["area_um2"], C_M_fF=mj["C_fF"], CjM_fF=mj["Cj_fF"],
-             shunt_M_fF=mj["shunt_fF"], EJ_M_GHz=mj["EJ_GHz"], EC_M_GHz=mj["EC_GHz"], E_S_GHz=mj["E_S_GHz"],
+             shunt_M_fF=mj["shunt_fF"], C_island_geo_fF=mj.get("C_island_geo_fF", mj["shunt_fF"]),
+             C_net_M_fF=mj.get("C_network_fF", 0.0), EJ_M_GHz=mj["EJ_GHz"], EC_M_GHz=mj["EC_GHz"], E_S_GHz=mj["E_S_GHz"],
              sections=arch.sections())
     lt = launcher_targets(arch)
     t["launcher"] = {r: {k: (v.tolist() if hasattr(v, "tolist") else v) for k, v in d.items()} for r, d in lt.items()}
