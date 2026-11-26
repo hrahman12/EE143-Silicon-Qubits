@@ -1978,6 +1978,8 @@ def verify(arch, gds_path: str, out_dir: str | None = None, sizing: dict | None 
     # ---------------------------------------------------------------- launcher control lines
     if lt_rows:
         res["launcher"] = launcher_check(B, chk, say)
+        if isinstance(res["launcher"], dict) and "as_drawn" in res["launcher"]:
+            res["launcher_as_drawn"] = res["launcher"].pop("as_drawn")      # simulations/D_launcher.py L8
     # ---------------------------------------------------------------- sensitivity, convergence
     res["sensitivity"] = sensitivity(B, ctx, res, t)
     if not fast:
@@ -2206,4 +2208,36 @@ def convergence_study(B, n0, say):
     out["max_rel_change"] = {k: max(abs(v[k] / b[k] - 1) for kk, v in out.items()
                                     if isinstance(v, dict) and k in v and kk not in ("base",))
                              for k in ("C0_A1", "C0_B1", "C_c")}
+    return out
+
+
+# ====================================================================================================================
+# rev B: differential (balanced) launcher lines. size_layout / resize_lines_and_gral call size_lines by name, so this
+# last definition makes every (re-)sizing use the pair model (hardware/diffpairs.py).
+# ====================================================================================================================
+def size_lines(arch, sz, t=None, say=print):
+    from hardware.diffpairs import size_lines_diff
+    return size_lines_diff(arch, sz, t, say)
+
+
+_launcher_check_se = launcher_check
+
+
+def launcher_check(B, chk, say, stride=2):
+    """differential lines: pair mutuals of the drawn legs per cell vs the targets scaled by the line's current
+    scale (only M * I matters), cross-talk into the other rail of the qubit; the profile is also returned as
+    'as_drawn' for the post-layout launch (simulations/D_launcher.py L8)"""
+    if B.sz.get("line_model") != "differential":
+        return _launcher_check_se(B, chk, say, stride)
+    from hardware.diffpairs import as_drawn
+    ad = as_drawn(B.arch, B.sz, stride=stride, say=say)
+    out = {}
+    for row, d in ad.items():
+        dv = d["max_dev_from_target_pH"]
+        chk("launcher trap-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
+            _pf(dv["trap"], 0.0, absolute=TOL * dv["trap_peak"]), f"{row}")
+        chk("launcher accelerator-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
+            _pf(dv["accelerator"], 0.0, absolute=TOL * dv["accelerator_peak"]), f"{row}")
+        out[row] = {k: v for k, v in d.items() if k != "profile"}
+    out["as_drawn"] = ad
     return out

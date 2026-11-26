@@ -159,7 +159,8 @@ def test_block_ports_on_boundary():
     lib, cell, ports, blk = LY.build_block(arch)
     names = {p["name"] for p in ports}
     for row in ("A0", "A1", "B1", "B0"):
-        assert {f"TRAP_{row}", f"ACC_{row}", f"LOAD_{row}", f"RO_CATCHER_{row}"} <= names
+        assert {f"TRAP_{row}_P", f"TRAP_{row}_N", f"ACC_{row}_P", f"ACC_{row}_N", f"LOAD_{row}",
+                f"RO_CATCHER_{row}"} <= names                       # rev B: the fast lines are P/N pairs
     assert {"GATE_BSA_PREP", "GATE_BSA_AN", "GATE_BSB_PREP", "GATE_BSB_AN"} <= names
     for p in ports:
         if p.get("kind") == "internal_short":

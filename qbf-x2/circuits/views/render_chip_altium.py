@@ -105,6 +105,17 @@ for _ in range(6):
     if not changed:
         break
 TRACKS = [(g, n) for g, n in zip(thin_parts, names) if n]
+from shapely.geometry import LineString as _LS
+LEGS = [(nm, _LS(pts)) for nm, pts in PORTS.get("leg_paths", {}).items() if len(pts) > 1]
+
+
+def leg_name(x, y, default):
+    """name of the P/N leg nearest to (x, y) on a differential loop, else the track's own name"""
+    if not LEGS:
+        return default
+    pt = Point(x, y)
+    d, nm = min((ls.distance(pt), nm) for nm, ls in LEGS)
+    return nm if d < 0.3 else default
 NB_WIDE = unary_union([NB_WIDE] + [g for g, n in zip(thin_parts, names) if not n])
 _gnd_pts = [Point(p["x"], p["y"]) for p in PORTS["ports"] if p["kind"] == "ground"]
 GND_COMPS = [g for g in (NB_WIDE.geoms if hasattr(NB_WIDE, "geoms") else [NB_WIDE])
@@ -262,10 +273,13 @@ def view(name, title, bx, width_in, *, node_labels=False, jj=False, designators=
         for (x, y, ang, L) in straight_runs(g.intersection(clip), track_min):
             if not (x0 < x < x1 and y0 < y < y1):
                 continue
-            if any(abs(x - px) < span / 10 and abs(y - py) < hgt / 40 and t == nm for px, py, t in placed):
+            lbl = leg_name(x, y, nm)
+            if any(abs(x - px) < span / 10 and abs(y - py) < hgt / 40 and t == lbl for px, py, t in placed):
                 continue
-            placed.append((x, y, nm))
-            ax.text(x, y, nm, color=COL["net"], fontsize=max(3.4, min(7.0, 0.5 * pt * 0.95)), rotation=ang,
+            if any(abs(x - px) < span / 22 and abs(y - py) < hgt / 22 for px, py, t in placed):
+                continue
+            placed.append((x, y, lbl))
+            ax.text(x, y, lbl, color=COL["net"], fontsize=max(3.4, min(7.0, 0.5 * pt * 0.95)), rotation=ang,
                     ha="center", va="center", zorder=8, family="DejaVu Sans Mono", clip_on=True,
                     bbox=dict(boxstyle="square,pad=0.1", fc="#000000", ec="none", alpha=0.6))
     # GND on the pour, a few times per view
@@ -326,9 +340,14 @@ def view(name, title, bx, width_in, *, node_labels=False, jj=False, designators=
                         ha="left", va="top", zorder=9, weight="bold", clip_on=True)
     # block pins (markers outside the block edge)
     plen = pin_len if pin_len else max(3.0, 0.035 * span) * pin_scale
+    nn = {}
+    for num, p in PINS:                                             # nearest pin on the same side (pitch)
+        along = (lambda q: q["y"]) if p["direction"] in ("W", "E") else (lambda q: q["x"])
+        d_ = [abs(along(q) - along(p)) for _, q in PINS if q is not p and q["direction"] == p["direction"]]
+        nn[num] = min(d_) if d_ else 1e9
     for num, p in PINS:
         px, py, side = p["x"], p["y"], p["direction"]
-        wpin = p["width"] if p["kind"] == "ground" else max(0.5, 0.022 * span * pin_scale)
+        wpin = p["width"] if p["kind"] == "ground" else min(max(0.5, 0.022 * span * pin_scale), 0.85 * nn[num])
         if side in ("W", "E"):
             rx = px - plen if side == "W" else px
             rect = (rx, py - wpin / 2, plen, wpin)
@@ -345,9 +364,9 @@ def view(name, title, bx, width_in, *, node_labels=False, jj=False, designators=
             continue
         ax.add_patch(Rectangle(rect[:2], rect[2], rect[3], facecolor=COL["pin"], edgecolor="#ffffff", lw=0.4,
                                zorder=9))
-        ax.text(tx, ty, str(num), color="#000000", fontsize=max(3.5, min(8, 0.6 * min(rect[2], rect[3]) * pt)),
+        ax.text(tx, ty, str(num), color="#000000", fontsize=max(2.6, min(8, 0.75 * min(rect[2], rect[3]) * pt)),
                 ha="center", va="center", zorder=9.5, weight="bold", clip_on=True)
-        ax.text(nx_, ny_, p["name"], color=COL["net"], fontsize=max(4.0, min(7.5, 0.016 * span * pt)), ha=ha,
+        ax.text(nx_, ny_, p["name"], color=COL["net"], fontsize=max(2.6, min(7.5, 0.016 * span * pt, 0.85 * nn[num] * pt)), ha=ha,
                 va=va, rotation=rot, zorder=9.5, family="DejaVu Sans Mono", clip_on=True)
     ax.set_xlim(x0, x1)
     ax.set_ylim(y0 - band, y1)
@@ -364,7 +383,7 @@ def view(name, title, bx, width_in, *, node_labels=False, jj=False, designators=
             solid_capstyle="butt")
     ax.text(x0 + span * 0.02 + nice / 2, yb + band * 0.12, f"{nice:g} um", color="white", fontsize=7, ha="center",
             va="bottom", zorder=11)
-    handles = [Patch(color=COL["track"], label="Top Layer  Nb lines (0.5 um)"),
+    handles = [Patch(color=COL["track"], label="Top Layer  Nb lines: P/N pairs + singles (0.5 um)"),
                Patch(color=COL["pour"], label="Top Layer  Nb ground pour (GND)"),
                Patch(color=COL["al2"], label="Mid-Layer 1  Al2 counter-electrode"),
                Patch(color=COL["gral"], label="Mid-Layer 2  grAl rail inductor"),
@@ -412,6 +431,14 @@ if __name__ == "__main__":
         view("coupler_overview", "coupler section with its tapers: all six rails, the three coupling strips",
              (800, 112, 1196, 178), 16, track_min=40,
              note="The envelope g(n) ramps the coupling up over taper_in and down over taper_out.")
+    if "diff_launcher" in which or not sys.argv[1:]:
+        view("diff_launcher", "differential launcher lines on rail A0: TRAP_A0_P/N turn round, ACC_A0_P/N move in",
+             (184.0, 158.6, 216.0, 171.4), 14, node_labels=True, track_min=1.2, max_node_labels=16,
+             note="Each pair is one floating Nb loop (P out along the rail, N back): no fast-line current in the ground.")
+    if "diff_fanout" in which or not sys.argv[1:]:
+        view("diff_fanout", "west fan-out: the launcher pairs leave the block side by side as P/N pins",
+             (-30.0, 128.0, 126.0, 232.0), 14, track_min=8, pin_scale=0.6, pin_len=6,
+             note="Pairs keep their spacing through both bends (bus turns); pins numbered counter-clockwise.")
     if "beamsplitter" in which:
         view("beamsplitter", "beam splitter (BS_prep) on qubit A: rails A0 / A1 and the middle rail with BM junctions",
              (640.2, 146.0, 656.2, 164.0), 12, node_labels=True, jj=True, designators=True, track_min=3,

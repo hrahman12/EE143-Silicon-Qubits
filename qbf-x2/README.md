@@ -70,6 +70,31 @@ assumed to be thermal.
   - `results/D_feasibility.json` predates these changes. The status above comes from `results/D_launcher.json`,
     `pcb/reports/` and `circuits/extraction.json`.
 
+**Rev B: differential launcher lines (chip and carrier).** Each of the 8 fast flux lines (trap and accelerator,
+rails A0, A1, B1, B0) is now one floating Nb loop. It leaves the chip as `<NAME>_P`, runs along its rail, turns
+round and comes back as `<NAME>_N` on the far side of the launch strip. No fast-line current returns through the
+ground. The carrier routes every loop as a length-matched differential pair from two SMP jacks.
+- **Geometry.** Going outward from the rail: TRAP_P, TRAP_N, ACC_P, ACC_N. Neither loop encloses a line of the
+  other, so both close without a crossing and the pins come out pair by pair (`circuits/views/altium_chip_diff_*.png`).
+- **Sizing.** `src/hardware/diffpairs.py` sizes the pair mutual M_P − M_N per rail cell on the drawing's own
+  0.25 µm grid, with the same 2D cross-section solver as before. Only M·I sets the flux, so each line gets one current
+  scale: the trap needs about 100 µA (was 80) and the accelerator stays at 450 µA.
+- **Checked on the drawn GDS** (`simulations/D_diffpairs.py` → `results/D_diffpairs.json`).
+  - All 8 loops are closed and floating: P and N are one Nb piece that touches no ground and no other line.
+  - DRC finds 608 violations, exactly the known beam-splitter junction ones; the new lines add none.
+- **Cross-talk into the other rail of the same qubit.** Same solver, worst value along the line, relative to the
+  launch rail's peak:
+  - trap: 13.4 % single-ended → 9.8 % differential;
+  - accelerator: 16.6 % → 10.4 %.
+- **Costs.**
+  - The dummy rail next to the return lines (D_A / D_B) takes more flux. It carries no fluxon, and its tilt stays
+    ≤ 0.13 rad/cell, below the ≈ 0.8 rad/cell vortex-entry gradient.
+  - The launch-end tail of each line keeps a residual coupling of ≤ 0.013 pH, about 16 % of the accelerator peak.
+    The single-ended layout had the same kind of floor.
+  - Twice the coax count for the fast lines.
+- **The netlist matches.** `src/hardware/netlist.py` drives each control line as a floating loop: the source sits
+  between P and N, with a 1 GΩ DC bleed.
+
 **Board and libraries.**
 - `pcb/`: a complete KiCad 7 carrier — schematic, 6-layer Rogers board, DRC, Gerbers, BOM and STEP.
 - `pcb/altium/`: native Altium `.PcbLib`/`.SchLib`/`.LibPkg`, written with altium-designer-mcp.

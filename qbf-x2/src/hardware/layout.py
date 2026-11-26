@@ -208,6 +208,11 @@ def get_sizing(arch: Architecture, cache_path: str | None = None, force: bool = 
         try:
             s = json.load(open(path))
             if s.get("key") == key:
+                from hardware.diffpairs import LINE_MODEL
+                if s.get("line_model") != LINE_MODEL and s.get("lines"):
+                    s = EX.resize_lines_and_gral(arch, s, verbose=False)
+                    s["key"] = key
+                    json.dump(s, open(path, "w"), indent=1, default=float)
                 return s
         except Exception:
             pass
@@ -826,6 +831,66 @@ class Block:
     def _launchers(self):
         if not self.lt or self.sz.get("no_lines"):
             return
+        if self.sz.get("line_model") == "differential":
+            return self._launchers_diff()
+        return self._launchers_se()
+
+    def _cell_path(self, cells, ys, m):
+        """Manhattan centre line through the cells (launch end first) at the per-cell y"""
+        pts = []
+        for c in cells:
+            y = ys[c]
+            xa = self.xn(c) if not m else self.xn(c + 1)
+            xb = self.xn(c + 1) if not m else self.xn(c)
+            if not pts or abs(pts[-1][1] - y) > 1e-9:
+                pts.append((xa, y))
+            pts.append((xb, y))
+        return pts
+
+    def _launchers_diff(self):
+        """rev B: every control line is one floating NB loop. <NAME>_P runs out along the rail, turns round after
+        its last cell and comes back as <NAME>_N further from the rail (hardware/diffpairs.py). From the row
+        outward: TRAP_P, TRAP_N, ACC_P, ACC_N, so neither loop encloses a line of the other and no line crosses."""
+        g = self.geo
+        W, G = self.W_LINE, self.G_LINE
+        g.lines = getattr(g, "lines", [])
+        g.line_paths = getattr(g, "line_paths", {})
+        for row, tg in self.lt.items():
+            m = mirrored(row)
+            legs, present = [], {}
+            for tag in ("trap", "acc"):
+                cells = [c for c in self.line_cells(row, tag) if 0 <= c <= self.N - 2]
+                if not cells:
+                    continue
+                ysP = {c: self.line_y(row, tag, c) for c in cells}
+                ysN = {c: self.line_y(row, tag + "_N", c) for c in cells}
+                pP, pN = self._cell_path(cells, ysP, m), self._cell_path(cells, ysN, m)
+                if tag == "trap":
+                    # the trap pair turns round in the middle of its last cell, so the accelerator legs can jog
+                    # inward at the next cell boundary (>= 1 um away) without touching the turn
+                    x_mid = 0.5 * (self.xn(cells[-1]) + self.xn(cells[-1] + 1))
+                    pP[-1], pN[-1] = (x_mid, pP[-1][1]), (x_mid, pN[-1][1])
+                net = f"{'TR' if tag == 'trap' else 'AC'}_{row}"
+                self._cpw(pP + pN[::-1], W, G, net)                  # out as P, U-turn, back as N: one loop
+                name = f"{'TRAP' if tag == 'trap' else 'ACC'}_{row}"
+                g.line_paths[name + "_P"], g.line_paths[name + "_N"] = list(pP), list(pN)
+                g.lines.append(dict(row=row, tag=tag, cells=cells, net=net, model="differential",
+                                    turn=dict(x=pP[-1][0], y_P=pP[-1][1], y_N=pN[-1][1])))
+                for c in cells:
+                    present.setdefault(c, []).extend([ysP[c], ysN[c]])
+                kind = "trap" if tag == "trap" else "acc"
+                legs += [(pP[0][1], name + "_P", kind, name, "P"), (pN[0][1], name + "_N", kind, name, "N")]
+                x_start = pP[0][0]
+            # one shared slot over all legs of a cell (no NB sliver between the lines)
+            for c, yl in present.items():
+                x1, x2 = sorted((self.xn(c), self.xn(c + 1)))
+                g.keepout.append((x1, min(yl) - W / 2 - G, x2, max(yl) + W / 2 + G))
+            if legs:
+                side = "L" if not m else "R"
+                yc = sum(l[0] for l in legs) / len(legs)
+                self.end_lines[side].append((yc, sorted(legs, key=lambda l: -l[0]), "group", x_start))
+
+    def _launchers_se(self):
         g = self.geo
         W, G = self.W_LINE, self.G_LINE
         for row, tg in self.lt.items():
@@ -926,6 +991,12 @@ class Block:
 
     # ---- fan-out in the margins: every line leaving a row end is routed as a CPW to a port on the block edge
     def _fanout(self):
+        def is_group(l):
+            return l[2] == "group"
+
+        def span(l):
+            return (max(g_[0] for g_ in l[1]) - min(g_[0] for g_ in l[1])) if is_group(l) else 0.0
+        self.geo.line_paths = getattr(self.geo, "line_paths", {})
         for side in ("L", "R"):
             lines = sorted(self.end_lines.get(side, []), key=lambda t: -t[0])
             if not lines:
@@ -938,12 +1009,30 @@ class Block:
             x_edge = 0.0 if side == "L" else self.W
             up = [(i, l) for i, l in enumerate(lines) if yports[i] >= l[0]]
             dn = [(i, l) for i, l in enumerate(lines) if yports[i] < l[0]]
-            turns = {}
-            for k, (i, l) in enumerate(up):                 # topmost upward line turns first
-                turns[i] = x_row + sgn * (self.END_EXT + 12.0 + 4.0 * k)
-            for k, (i, l) in enumerate(reversed(dn)):       # bottommost downward line turns first
-                turns[i] = x_row + sgn * (self.END_EXT + 12.0 + 4.0 * k)
-            for i, (y0, net, kind, xstart) in enumerate(lines):
+            turns, acc = {}, 0.0
+            for (i, l) in up:                               # topmost upward entry turns first
+                turns[i] = x_row + sgn * (self.END_EXT + 12.0 + acc)
+                acc += 4.0 + span(l)
+            acc = 0.0
+            for (i, l) in reversed(dn):                     # bottommost downward entry turns first
+                turns[i] = x_row + sgn * (self.END_EXT + 12.0 + acc)
+                acc += 4.0 + span(l)
+            for i, l in enumerate(lines):
+                if is_group(l):
+                    yc, legs, _, xstart = l
+                    offs = [y_ - yc for (y_, *_r) in legs]
+                    going_up = yports[i] >= yc
+                    for (y_, name, kind, pair, pol), o in zip(legs, offs):
+                        xt = turns[i] + sgn * ((max(offs) - o) if going_up else (o - min(offs)))
+                        yp = yports[i] + o
+                        pts = [(xstart, y_), (xt, y_), (xt, yp), (x_edge, yp)]
+                        self._cpw(pts, CPW_W, CPW_G, f"{'TR' if kind == 'trap' else 'AC'}_{name.split('_')[1]}", "fanout")
+                        self.geo.line_paths[name] = pts[::-1] + self.geo.line_paths.get(name, [])[1:]
+                        self._port(name, x_edge, yp, L_NB, CPW_W, "W" if side == "L" else "E", gap=CPW_G,
+                                   kind="trap_line_feed" if kind == "trap" else "accelerator_line_feed",
+                                   pair=pair, polarity=pol, model="differential")
+                    continue
+                y0, net, kind, xstart = l
                 xt = turns[i]
                 pts = [(xstart, y0), (xt, y0), (xt, yports[i]), (x_edge, yports[i])]
                 self._cpw(pts, CPW_W, CPW_G, net, "fanout")

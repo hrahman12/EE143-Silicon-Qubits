@@ -131,7 +131,12 @@ def build(arch: Architecture) -> tuple[str, dict]:
             line = lv[key]
             I = line["I_uA"] * 1e-6
             nodes = [f"{tag}{row}_{j}" for j in range(len(line["cells"]) + 1)]
-            lines.append(f"I{tag}_{row} 0 {nodes[0]} " + wave.format(I=f"{I:.4g}"))
+            # rev B: each control line is a floating loop (layout: <NAME>_P out along the rail, <NAME>_N back): the
+            # source sits between the two pins, so no line current returns through the ground. The K couplings carry
+            # the net pair mutual (P minus N, hardware/diffpairs.py); the return leg is an uncoupled chain.
+            n_ret = f"{tag}{row}_N"
+            lines.append(f"I{tag}_{row} {n_ret} {nodes[0]} " + wave.format(I=f"{I:.4g}"))
+            lines.append(f"R{tag}{row}_bleed {n_ret} 0 1e9")          # DC reference of the floating loop only
             count[f"{key.replace('_', ' ')} source"] += 1
             for j, (cell, M) in enumerate(zip(line["cells"], line["M_pH"])):
                 rail_ind = f"L{row}_{N - 2 - cell}" if mirrored else f"L{row}_{cell}"
@@ -142,8 +147,9 @@ def build(arch: Architecture) -> tuple[str, dict]:
                 lines.append(f"K{tag}{row}_{cell} L{tag}{row}_{cell} {rail_ind} {kc:.4g}")
                 count[f"{key.replace('_', ' ')} inductor"] += 1
                 count[f"{key.replace('_', ' ')} coupling (K)"] += 1
-            lines.append(f"L{tag}{row}_end {nodes[-1]} 0 {L_SEG:.3g}")
+            lines.append(f"L{tag}{row}_ret {nodes[-1]} {n_ret} {L_SEG * len(line['cells']):.3g}")   # the N leg
             count[f"{key.replace('_', ' ')} inductor"] += 1
+            count["control-loop bleed resistor (1 GOhm)"] += 1
     lines += [f"* release at t = {T_REL:.0f} ns; the transient below covers the launch and the gate",
               f".tran 0.1p {T_REL + 3:.0f}n {T_REL:.0f}n 0.1p",
               ".print phase BA1_" + str(N // 2), ".print phase BB1_" + str(N // 2), ".end"]
