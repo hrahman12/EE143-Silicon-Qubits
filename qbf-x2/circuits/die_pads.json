@@ -137,7 +137,7 @@
    "kind": "dc_ramp",
    "pad_center_um": [
     9680.0,
-    8000
+    8500.0
    ],
    "pad_size_um": [
     240.0,
@@ -150,12 +150,12 @@
   },
   {
    "id": 8,
-   "net": "TRAP_B1",
+   "net": "TRAP_B1_P",
    "side": "E",
-   "kind": "rf_fast",
+   "kind": "rf_fast_diff",
    "pad_center_um": [
     9680.0,
-    6800
+    7350.0
    ],
    "pad_size_um": [
     240.0,
@@ -164,16 +164,18 @@
    "outward": [
     1,
     0
-   ]
+   ],
+   "pair": "TRAP_B1",
+   "polarity": "P"
   },
   {
    "id": 9,
-   "net": "ACC_B1",
+   "net": "TRAP_B1_N",
    "side": "E",
-   "kind": "rf_fast",
+   "kind": "rf_fast_diff",
    "pad_center_um": [
     9680.0,
-    5600
+    6850.0
    ],
    "pad_size_um": [
     240.0,
@@ -182,16 +184,18 @@
    "outward": [
     1,
     0
-   ]
+   ],
+   "pair": "TRAP_B1",
+   "polarity": "N"
   },
   {
    "id": 10,
-   "net": "ACC_B0",
+   "net": "ACC_B1_P",
    "side": "E",
-   "kind": "rf_fast",
+   "kind": "rf_fast_diff",
    "pad_center_um": [
     9680.0,
-    4400
+    5950.0
    ],
    "pad_size_um": [
     240.0,
@@ -200,16 +204,18 @@
    "outward": [
     1,
     0
-   ]
+   ],
+   "pair": "ACC_B1",
+   "polarity": "P"
   },
   {
    "id": 11,
-   "net": "TRAP_B0",
+   "net": "ACC_B1_N",
    "side": "E",
-   "kind": "rf_fast",
+   "kind": "rf_fast_diff",
    "pad_center_um": [
     9680.0,
-    3200
+    5450.0
    ],
    "pad_size_um": [
     240.0,
@@ -218,16 +224,98 @@
    "outward": [
     1,
     0
-   ]
+   ],
+   "pair": "ACC_B1",
+   "polarity": "N"
   },
   {
    "id": 12,
+   "net": "ACC_B0_P",
+   "side": "E",
+   "kind": "rf_fast_diff",
+   "pad_center_um": [
+    9680.0,
+    4550.0
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    1,
+    0
+   ],
+   "pair": "ACC_B0",
+   "polarity": "P"
+  },
+  {
+   "id": 13,
+   "net": "ACC_B0_N",
+   "side": "E",
+   "kind": "rf_fast_diff",
+   "pad_center_um": [
+    9680.0,
+    4050.0
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    1,
+    0
+   ],
+   "pair": "ACC_B0",
+   "polarity": "N"
+  },
+  {
+   "id": 14,
+   "net": "TRAP_B0_P",
+   "side": "E",
+   "kind": "rf_fast_diff",
+   "pad_center_um": [
+    9680.0,
+    3150.0
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    1,
+    0
+   ],
+   "pair": "TRAP_B0",
+   "polarity": "P"
+  },
+  {
+   "id": 15,
+   "net": "TRAP_B0_N",
+   "side": "E",
+   "kind": "rf_fast_diff",
+   "pad_center_um": [
+    9680.0,
+    2650.0
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    1,
+    0
+   ],
+   "pair": "TRAP_B0",
+   "polarity": "N"
+  },
+  {
+   "id": 16,
    "net": "LOAD_B0",
    "side": "E",
    "kind": "dc_ramp",
    "pad_center_um": [
     9680.0,
-    2000
+    1500.0
    ],
    "pad_size_um": [
     240.0,
@@ -239,7 +327,7 @@
    ]
   },
   {
-   "id": 13,
+   "id": 17,
    "net": "RO_IN",
    "side": "S",
    "kind": "rf_readout",
@@ -257,7 +345,7 @@
    ]
   },
   {
-   "id": 14,
+   "id": 18,
    "net": "GATE_BSB_AN",
    "side": "S",
    "kind": "dc_gate",
@@ -275,7 +363,7 @@
    ]
   },
   {
-   "id": 15,
+   "id": 19,
    "net": "GND",
    "side": "S",
    "kind": "ground",
@@ -293,7 +381,7 @@
    ]
   },
   {
-   "id": 16,
+   "id": 20,
    "net": "GND",
    "side": "S",
    "kind": "ground",
@@ -311,7 +399,7 @@
    ]
   },
   {
-   "id": 17,
+   "id": 21,
    "net": "GATE_BSB_PREP",
    "side": "S",
    "kind": "dc_gate",
@@ -329,7 +417,7 @@
    ]
   },
   {
-   "id": 18,
+   "id": 22,
    "net": "RO_OUT",
    "side": "S",
    "kind": "rf_readout",
@@ -347,85 +435,13 @@
    ]
   },
   {
-   "id": 19,
+   "id": 23,
    "net": "LOAD_A0",
    "side": "W",
    "kind": "dc_ramp",
    "pad_center_um": [
     320.0,
-    8000
-   ],
-   "pad_size_um": [
-    240.0,
-    240.0
-   ],
-   "outward": [
-    -1,
-    0
-   ]
-  },
-  {
-   "id": 20,
-   "net": "TRAP_A0",
-   "side": "W",
-   "kind": "rf_fast",
-   "pad_center_um": [
-    320.0,
-    6800
-   ],
-   "pad_size_um": [
-    240.0,
-    240.0
-   ],
-   "outward": [
-    -1,
-    0
-   ]
-  },
-  {
-   "id": 21,
-   "net": "ACC_A0",
-   "side": "W",
-   "kind": "rf_fast",
-   "pad_center_um": [
-    320.0,
-    5600
-   ],
-   "pad_size_um": [
-    240.0,
-    240.0
-   ],
-   "outward": [
-    -1,
-    0
-   ]
-  },
-  {
-   "id": 22,
-   "net": "ACC_A1",
-   "side": "W",
-   "kind": "rf_fast",
-   "pad_center_um": [
-    320.0,
-    4400
-   ],
-   "pad_size_um": [
-    240.0,
-    240.0
-   ],
-   "outward": [
-    -1,
-    0
-   ]
-  },
-  {
-   "id": 23,
-   "net": "TRAP_A1",
-   "side": "W",
-   "kind": "rf_fast",
-   "pad_center_um": [
-    320.0,
-    3200
+    8500.0
    ],
    "pad_size_um": [
     240.0,
@@ -438,12 +454,172 @@
   },
   {
    "id": 24,
+   "net": "TRAP_A0_P",
+   "side": "W",
+   "kind": "rf_fast_diff",
+   "pad_center_um": [
+    320.0,
+    7350.0
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    -1,
+    0
+   ],
+   "pair": "TRAP_A0",
+   "polarity": "P"
+  },
+  {
+   "id": 25,
+   "net": "TRAP_A0_N",
+   "side": "W",
+   "kind": "rf_fast_diff",
+   "pad_center_um": [
+    320.0,
+    6850.0
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    -1,
+    0
+   ],
+   "pair": "TRAP_A0",
+   "polarity": "N"
+  },
+  {
+   "id": 26,
+   "net": "ACC_A0_P",
+   "side": "W",
+   "kind": "rf_fast_diff",
+   "pad_center_um": [
+    320.0,
+    5950.0
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    -1,
+    0
+   ],
+   "pair": "ACC_A0",
+   "polarity": "P"
+  },
+  {
+   "id": 27,
+   "net": "ACC_A0_N",
+   "side": "W",
+   "kind": "rf_fast_diff",
+   "pad_center_um": [
+    320.0,
+    5450.0
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    -1,
+    0
+   ],
+   "pair": "ACC_A0",
+   "polarity": "N"
+  },
+  {
+   "id": 28,
+   "net": "ACC_A1_P",
+   "side": "W",
+   "kind": "rf_fast_diff",
+   "pad_center_um": [
+    320.0,
+    4550.0
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    -1,
+    0
+   ],
+   "pair": "ACC_A1",
+   "polarity": "P"
+  },
+  {
+   "id": 29,
+   "net": "ACC_A1_N",
+   "side": "W",
+   "kind": "rf_fast_diff",
+   "pad_center_um": [
+    320.0,
+    4050.0
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    -1,
+    0
+   ],
+   "pair": "ACC_A1",
+   "polarity": "N"
+  },
+  {
+   "id": 30,
+   "net": "TRAP_A1_P",
+   "side": "W",
+   "kind": "rf_fast_diff",
+   "pad_center_um": [
+    320.0,
+    3150.0
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    -1,
+    0
+   ],
+   "pair": "TRAP_A1",
+   "polarity": "P"
+  },
+  {
+   "id": 31,
+   "net": "TRAP_A1_N",
+   "side": "W",
+   "kind": "rf_fast_diff",
+   "pad_center_um": [
+    320.0,
+    2650.0
+   ],
+   "pad_size_um": [
+    240.0,
+    240.0
+   ],
+   "outward": [
+    -1,
+    0
+   ],
+   "pair": "TRAP_A1",
+   "polarity": "N"
+  },
+  {
+   "id": 32,
    "net": "LOAD_A1",
    "side": "W",
    "kind": "dc_ramp",
    "pad_center_um": [
     320.0,
-    2000
+    1500.0
    ],
    "pad_size_um": [
     240.0,
@@ -456,18 +632,26 @@
   }
  ],
  "signal_kinds": {
-  "rf_fast": "50 ohm CPW, DC to >= 10 GHz (trap: DC hold + <= 100 ps off edge; accelerator: ~0.6 ns pulse), shorted to ground on chip after the coupled cells (current-driven flux line)",
   "rf_readout": "50 ohm CPW feedline for the four catcher-loop lambda/4 resonators (6-8 GHz)",
   "dc_ramp": "load-loop flux ramp (0 -> Phi0 in ~1 us): DC line, bandwidth >= 5 MHz",
   "dc_gate": "beam-splitter island gate voltage (Aharonov-Casher phase): DC line, heavy low-pass filtering",
-  "ground": "ground launcher (bonded to the carrier ground)"
+  "ground": "ground launcher (bonded to the carrier ground)",
+  "rf_fast_diff": "balanced fast flux line, one per trap/accelerator line: <name>_P and <name>_N are the two ends of ONE on-chip loop (the line runs out along its rail as P and comes back along the far side of the launch strip as N; no ground return). Driven by complementary AWG outputs through two 50-ohm coax, odd-mode 50 ohm per leg (Z_diff = 100 ohm), loose coupling so the even mode is also near 50 ohm. Intra-pair skew <= 0.5 ps on the carrier. DC to >= 10 GHz (trap: DC hold + <= 100 ps off edge; accelerator: ~0.6 ns pulse)"
  },
  "counts": {
-  "rf_fast": 8,
-  "rf_readout": 2,
-  "dc_ramp": 4,
+  "ground": 6,
   "dc_gate": 4,
-  "ground": 6
+  "dc_ramp": 4,
+  "rf_fast_diff": 16,
+  "rf_readout": 2
  },
- "status": "interface specification: the die layout and the carrier PCB both follow this file"
+ "status": "interface specification: the die layout and the carrier PCB both follow this file",
+ "revision": "B (differential fast flux lines)",
+ "diff_pair": {
+  "intra_pair_pitch_um": 500.0,
+  "pair_centre_pitch_um": 1400.0,
+  "polarity": "P = current out of the carrier into the chip for a positive drive, N = return",
+  "skew_max_ps": 0.5,
+  "why": "no ground return on chip: crosstalk into the other rail of the same qubit drops from 9-17 % (single-ended) to 5.5-7 % at equal or higher coupling (2D cross-section solve, src/hardware/extract.py column_inductance), and common-mode / ground-loop current cannot drive flux through a floating loop"
+ }
 }
