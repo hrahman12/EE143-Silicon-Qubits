@@ -10,8 +10,10 @@ footprint silkscreen and the board's own silkscreen text. KiCad 7.0's Python bin
 that TransformShapeToPolygon needs, so tracks, arcs, vias and silkscreen are rebuilt here from their primitives.
 The inner ground planes (In1, In3, In4, the In2 pour) and the bottom-side ground pour are hidden, as one would hide
 them in Altium to look at the routing.  Output: pcb/altium/views/altium_style_*.png"""
+import json
 import math
 import os
+import sys
 
 import matplotlib
 matplotlib.use("Agg")
@@ -25,6 +27,8 @@ from shapely.ops import unary_union, polygonize
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 BOARD = os.path.join(os.path.dirname(HERE), "qbfx2_carrier.kicad_pcb")
+sys.path.insert(0, os.path.dirname(HERE))
+import carrier_params as CP  # noqa: E402  (revision letter, pair names)
 OUT = os.path.join(HERE, "views")
 os.makedirs(OUT, exist_ok=True)
 MM = 1e-6
@@ -159,7 +163,8 @@ for fp in b.GetFootprints():
             labels.append((p[0], p[1], 0, pad.GetNumber(), "padnum", size, 0))
         if pad.GetNetname():
             labels.append((p[0], p[1], 0, pad.GetNetname(), "padnet", size, (bx1 - bx0, by1 - by0)))
-    labels.append((*xy(fp.Reference().GetPosition()), 0, fp.GetReference(), "ref", 0, 0))
+    if fp.Reference().IsVisible():                   # hidden references (SMP jacks: designator is in the silk)
+        labels.append((*xy(fp.Reference().GetPosition()), 0, fp.GetReference(), "ref", 0, 0))
 vias = [(*xy(t.GetPosition()), t.GetWidth() * MM / 2, t.GetDrillValue() * MM / 2)
         for t in b.GetTracks() if t.GetClass() == "PCB_VIA"]
 
@@ -215,7 +220,8 @@ def fill(ax, g, fc, ec="none", lw=0.0, z=1, clip=None, alpha=1.0):
 
 
 def view(name, title, bx, width_in, padnets=False, track_min=None, ref_size=6.5, show_track_labels=True,
-         padnum_min=None, notes=None):
+         padnum_min=None, notes=None, annot=None):
+    """annot: [(x, y, dx, dy, text)] call-outs (arrow from (x + dx, y + dy) to (x, y)) in board coordinates"""
     x0, y0, x1, y1 = bx
     span, hgt = x1 - x0, y1 - y0
     band = 0.075 * hgt
@@ -275,12 +281,18 @@ def view(name, title, bx, width_in, padnets=False, track_min=None, ref_size=6.5,
         elif kind == "ref":
             ax.text(x, y, txt, color=COL["silk"], fontsize=ref_size, ha="center", va="center", zorder=8,
                     weight="bold", clip_on=True)
+    for (ax_, ay_, dx_, dy_, txt) in (annot or []):
+        ax.annotate(txt, xy=(ax_, ay_), xytext=(ax_ + dx_, ay_ + dy_), color="#00e5ff", fontsize=6.8, zorder=9,
+                    ha="center", va="center", family="DejaVu Sans",
+                    bbox=dict(boxstyle="round,pad=0.25", fc="#0b1a22", ec="#00e5ff", lw=0.6, alpha=0.92),
+                    arrowprops=dict(arrowstyle="-|>", color="#00e5ff", lw=0.8, shrinkA=2, shrinkB=1))
     ax.set_xlim(x0, x1)
     ax.set_ylim(y0 - band, y1)
     ax.set_aspect("equal")
     ax.set_axis_off()
     ax.add_patch(plt.Rectangle((x0, y0 - band), span, band, facecolor=COL["work"], edgecolor="none", zorder=10))
-    fig.text(0.008, 0.992, "QBF-X2 carrier rev A   |   " + title, color="#ffffff", fontsize=8.8, va="top")
+    fig.text(0.008, 0.992, f"QBF-X2 carrier rev {CP.PROJECT['rev']}   |   " + title, color="#ffffff", fontsize=8.8,
+             va="top")
     if notes:
         fig.text(0.008, 0.992 - 0.5 * title_frac, notes, color="#bdbdbd", fontsize=6.4, va="top")
     handles = [Patch(color=COL["top"], label="Top Layer (F.Cu): RF GCPW, gate/DC lines, lands"),
@@ -315,11 +327,50 @@ if __name__ == "__main__":
     cx, cy = fp_pos("U1")
     view("board", "Top view (Top Layer + Mid-Layer 2 + Multi-Layer + Top Overlay); inner GND planes hidden",
          (X0 - 1.5, Y0 - 1.5, X1 + 1.5, Y1 + 1.5), 11, track_min=4.0, ref_size=6.0, padnum_min=1.0)
-    view("die_window", "Die window around U1: 24 bond lands, 50-ohm GCPW fan-out, GND ring, stitching vias",
-         (cx - 7.5, cy - 7.5, cx + 7.5, cy + 7.5), 11, padnets=True, track_min=1.0, padnum_min=0.25)
+    n_lands = sum(1 for f in b.GetFootprints() if f.GetReference() == "U1" for _ in f.Pads())
+    view("die_window", f"Die window around U1: {n_lands} bond lands (8 P/N pairs on the 0.5 mm die pitch), GCPW "
+         "fan-out, GND ring, stitching vias", (cx - 7.5, cy - 7.5, cx + 7.5, cy + 7.5), 11, padnets=True,
+         track_min=1.0, padnum_min=0.25)
     jx, jy = fp_pos("J1")
-    view("smp_launch", "J1 SMP edge launch (TRAP_A0): centre land, 4 GND legs, via cage, via fence along the GCPW",
-         (jx - 3.2, jy - 3.2, jx + 4.2, jy + 4.2), 9, padnets=True, track_min=0.5, padnum_min=0.2)
+    view("smp_launch", "J1 SMP launch (TRAP_A0_P): centre land, 4 GND legs, via cage, via fence along the GCPW",
+         (jx - 5.6, jy - 3.4, jx + 4.2, jy + 4.2), 9, padnets=True, track_min=0.5, padnum_min=0.2)
+
+    # close-up of one differential pair (ACC_A0): breakout, bend B1, opening, bump on the outer leg, diagonal,
+    # bend B2 and the bumps on the inner leg; call-outs from the build model (reports/build_model.json)
+    model = json.load(open(os.path.join(os.path.dirname(HERE), "reports", "build_model.json")))
+    pr = model["diff"]["pairs"]["ACC_A0"]
+    V = [(cx + v[0], cy + v[1]) for v in pr["vertices"]]
+    br = CP.DIFF["bump_r"]
+    arcs = []                                       # bump arcs of this pair: radius = bump_r, middle arc of 3
+    for t in b.GetTracks():
+        if t.GetClass() == "PCB_ARC" and t.GetNetname() in (pr["P"], pr["N"]) and \
+                abs(t.GetRadius() * MM - br) < 0.002 and abs(abs(t.GetAngle().AsDegrees()) - 2 * [
+                    q["arc_deg"] for q in pr["bumps"] if q["leg"] == t.GetNetname()][0]) < 0.5:
+            arcs.append((xy(t.GetMid()), t.GetNetname()))
+    extra = {q["leg"]: (q["extra_each"], q["n"]) for q in pr["bumps"]}
+    ann = []
+    for net in sorted({n_ for _, n_ in arcs}):     # one call-out per bumped leg, arrow to its first bump
+        pts = [p_ for p_, n_ in arcs if n_ == net]
+        e_, n_b = extra[net]
+        (mx, my) = min(pts, key=lambda q: -q[0])
+        lbl = (f"tuning bump on {net}\n+{e_:.3f} mm" if n_b == 1 else
+               f"{n_b} tuning bumps on {net}\n+{e_:.3f} mm each")
+        ann.append((mx, my, -2.4, -1.3) + (lbl,) if net.endswith("_P") else (mx, my, -0.6, -1.9) + (lbl,))
+    bends = pr["bends"]
+    ann.append((V[1][0], V[1][1] + 0.3, -1.6, -1.5, f"B1 {bends[0]['theta_deg']:+.0f} deg at pitch {bends[0]['c']:.2f}\n"
+                f"{bends[0]['inner_net']} -{bends[0]['mismatch']:.3f} mm"))
+    ann.append((V[2][0], V[2][1], 1.9, 1.3, f"B2 {bends[1]['theta_deg']:+.0f} deg at pitch {bends[1]['c']:.2f}\n"
+                f"{bends[1]['inner_net']} -{bends[1]['mismatch']:.3f} mm"))
+    xs_ = [v[0] for v in V[1:4]]
+    ys_ = [v[1] for v in V[:4]]
+    lp = model["rf"][pr["P"]]["length"]
+    ln_ = model["rf"][pr["N"]]["length"]
+    view("diff_pair", f"Differential pair ACC_A0: {pr['P']} / {pr['N']}, edge-coupled GCPW, no GND between the legs, "
+         "tuning bumps next to each bend",
+         (min(xs_) - 3.9, min(ys_) - 2.4, max(xs_) + 3.4, max(ys_) + 2.4), 11, padnets=False, track_min=0.9,
+         notes=(f"breakout w {CP.DIFF['w_bo']:.2f} / gap {CP.DIFF['s_bo']:.2f} mm (die pad pitch) -> opening -> routed "
+                f"w {CP.DIFF['w']:.2f} / gap {CP.DIFF['s']:.2f} mm; concentric bends; "
+                f"L_P {lp:.4f} mm, L_N {ln_:.4f} mm"), annot=ann)
     xs = [fp_pos(r)[0] for r in ("J11", "R1", "R16", "C1", "C12")]
     ys = [fp_pos(r)[1] for r in ("J11", "R1", "R16", "C1", "C12")]
     view("dc_filters", "DC filter bank: 0603 thin-film R and C0G C ladders between micro-D J11 and the gate/load lines",

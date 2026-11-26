@@ -1,111 +1,111 @@
 [
  {
   "path": "fab/qbfx2_carrier-assembly.pdf",
-  "bytes": 339821
+  "bytes": 404187
  },
  {
   "path": "fab/qbfx2_carrier-fab_drawing.pdf",
-  "bytes": 377142
+  "bytes": 421226
  },
  {
   "path": "fab/qbfx2_carrier-schematic.pdf",
-  "bytes": 478089
+  "bytes": 576914
  },
  {
   "path": "fab/qbfx2_carrier.net",
-  "bytes": 71921
+  "bytes": 85572
  },
  {
   "path": "fab/qbfx2_carrier.step",
-  "bytes": 3415520
+  "bytes": 4229525
  },
  {
   "path": "fab/qbfx2_carrier_bom.csv",
-  "bytes": 2325
+  "bytes": 2378
  },
  {
   "path": "fab/previews/_tex_B.png",
-  "bytes": 111109
+  "bytes": 148946
  },
  {
   "path": "fab/previews/_tex_B_metal.png",
-  "bytes": 31605
+  "bytes": 39726
  },
  {
   "path": "fab/previews/_tex_F.png",
-  "bytes": 180803
+  "bytes": 329105
  },
  {
   "path": "fab/previews/_tex_F_metal.png",
-  "bytes": 41940
+  "bytes": 76622
  },
  {
   "path": "fab/previews/assembly_drawing.png",
-  "bytes": 229478
+  "bytes": 258185
  },
  {
   "path": "fab/previews/bottom_view_mirrored.png",
-  "bytes": 96491
+  "bytes": 132813
  },
  {
   "path": "fab/previews/die_area_In2_dc_routing.png",
-  "bytes": 54982
+  "bytes": 48989
  },
  {
   "path": "fab/previews/die_area_top.png",
-  "bytes": 44753
+  "bytes": 44647
  },
  {
   "path": "fab/previews/fab_drawing_p1.png",
-  "bytes": 214494
+  "bytes": 228653
  },
  {
   "path": "fab/previews/layer_B_Cu.png",
-  "bytes": 80584
+  "bytes": 109557
  },
  {
   "path": "fab/previews/layer_F_Cu.png",
-  "bytes": 119785
+  "bytes": 210867
  },
  {
   "path": "fab/previews/layer_In1_Cu.png",
-  "bytes": 79621
+  "bytes": 108382
  },
  {
   "path": "fab/previews/layer_In2_Cu.png",
-  "bytes": 85285
+  "bytes": 113044
  },
  {
   "path": "fab/previews/layer_In3_Cu.png",
-  "bytes": 76375
+  "bytes": 104056
  },
  {
   "path": "fab/previews/layer_In4_Cu.png",
-  "bytes": 80384
+  "bytes": 109363
  },
  {
   "path": "fab/previews/render_3d_die_closeup.png",
-  "bytes": 1980968
+  "bytes": 1996892
  },
  {
   "path": "fab/previews/render_3d_top.png",
-  "bytes": 2556861
+  "bytes": 2687528
  },
  {
   "path": "fab/previews/schematic.png",
-  "bytes": 249340
+  "bytes": 289002
  },
  {
   "path": "fab/previews/top_view.png",
-  "bytes": 189758
+  "bytes": 301719
  },
  {
   "path": "fab/assembly/qbfx2_carrier-pos.csv",
-  "bytes": 3137
+  "bytes": 3849
  },
  {
   "path": "fab/gerbers/qbfx2_carrier-B_Cu.gbl",
-  "bytes": 69095
+  "bytes": 81934
  },
  {
   "path": "fab/gerbers/qbfx2_carrier-B_Mask.gbs",
@@ -117,7 +117,7 @@
  },
  {
   "path": "fab/gerbers/qbfx2_carrier-B_Silkscreen.gbo",
-  "bytes": 61235
+  "bytes": 62808
  },
  {
   "path": "fab/gerbers/qbfx2_carrier-Edge_Cuts.gm1",
@@ -125,39 +125,39 @@
  },
  {
   "path": "fab/gerbers/qbfx2_carrier-F_Cu.gtl",
-  "bytes": 181149
+  "bytes": 329046
  },
  {
   "path": "fab/gerbers/qbfx2_carrier-F_Mask.gts",
-  "bytes": 228794
+  "bytes": 415794
  },
  {
   "path": "fab/gerbers/qbfx2_carrier-F_Paste.gtp",
-  "bytes": 4568
+  "bytes": 5713
  },
  {
   "path": "fab/gerbers/qbfx2_carrier-F_Silkscreen.gto",
-  "bytes": 123631
+  "bytes": 226432
  },
  {
   "path": "fab/gerbers/qbfx2_carrier-In1_Cu.g2",
-  "bytes": 68868
+  "bytes": 81707
  },
  {
   "path": "fab/gerbers/qbfx2_carrier-In2_Cu.g3",
-  "bytes": 76550
+  "bytes": 89159
  },
  {
   "path": "fab/gerbers/qbfx2_carrier-In3_Cu.g4",
-  "bytes": 68868
+  "bytes": 81707
  },
  {
   "path": "fab/gerbers/qbfx2_carrier-In4_Cu.g5",
-  "bytes": 68868
+  "bytes": 81707
  },
  {
   "path": "fab/gerbers/qbfx2_carrier-User_Drawings.gbr",
-  "bytes": 1827927
+  "bytes": 1999031
  },
  {
   "path": "fab/gerbers/qbfx2_carrier-job.gbrjob",
@@ -165,7 +165,7 @@
  },
  {
   "path": "fab/drill/qbfx2_carrier-NPTH-drl_map.pdf",
-  "bytes": 5957
+  "bytes": 5975
  },
  {
   "path": "fab/drill/qbfx2_carrier-NPTH.drl",
@@ -173,43 +173,47 @@
  },
  {
   "path": "fab/drill/qbfx2_carrier-PTH-drl_map.pdf",
-  "bytes": 26894
+  "bytes": 34658
  },
  {
   "path": "fab/drill/qbfx2_carrier-PTH.drl",
-  "bytes": 11130
+  "bytes": 18218
+ },
+ {
+  "path": "reports/altium.log",
+  "bytes": 253
  },
  {
   "path": "reports/bom_intermediate.xml",
-  "bytes": 73090
+  "bytes": 86829
  },
  {
   "path": "reports/bom_summary.json",
-  "bytes": 3786
+  "bytes": 3839
  },
  {
   "path": "reports/build.log",
-  "bytes": 6606
+  "bytes": 7002
  },
  {
   "path": "reports/build_model.json",
-  "bytes": 25347
+  "bytes": 303659
  },
  {
   "path": "reports/check.log",
-  "bytes": 158
+  "bytes": 198
  },
  {
   "path": "reports/check_summary.json",
-  "bytes": 4821
+  "bytes": 10779
  },
  {
   "path": "reports/drc_report.txt",
-  "bytes": 240
+  "bytes": 282
  },
  {
   "path": "reports/drc_selftest.txt",
-  "bytes": 434
+  "bytes": 1516
  },
  {
   "path": "reports/drc_summary.json",
@@ -237,15 +241,15 @@
  },
  {
   "path": "reports/impedance_table.txt",
-  "bytes": 2908
+  "bytes": 6718
  },
  {
   "path": "reports/length_report.txt",
-  "bytes": 1248
+  "bytes": 6185
  },
  {
   "path": "reports/outputs_manifest.json",
-  "bytes": 4349
+  "bytes": 4424
  },
  {
   "path": "reports/pos.log",
@@ -253,7 +257,7 @@
  },
  {
   "path": "reports/sch_netlist.net",
-  "bytes": 71921
+  "bytes": 85572
  },
  {
   "path": "reports/sch_vs_pcb.txt",
@@ -261,6 +265,6 @@
  },
  {
   "path": "reports/step.log",
-  "bytes": 1102
+  "bytes": 1254
  }
 ]

@@ -2,11 +2,11 @@ ERC SUBSTITUTE (KiCad 7 kicad-cli has no ERC)
 rules: every net >= 2 pins; no floating pin unless NC-flagged; every U1 pin on its die_pads.json net;
        GND driven (PWR_FLAG); BOM fields present; unique references
 
-nets: 35; pins: 120
-pin types: {'passive': 120} (all passive -> no output/power conflicts possible)
+nets: 43; pins: 144
+pin types: {'passive': 144} (all passive -> no output/power conflicts possible)
 no-connect flags: 0 (none needed: every pin of every symbol is used)
-U1: 24/24 pins on their die_pads.json net
-GND power symbols: 34 positions, PWR_FLAG wired to GND: True
+U1: 32/32 pins on their die_pads.json net
+GND power symbols: 42 positions, PWR_FLAG wired to GND: True
 
 issues (0):
   (none)

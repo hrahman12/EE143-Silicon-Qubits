@@ -1,8 +1,25 @@
 DRC SELF-TEST: one fault injected per copy of the board, KiCad DRC must report it
 (shows that the 0-violation result of reports/drc_report.txt comes from live rules)
 
-F1_rf_width      expect ['RF_GCPW_width']: DETECTED
-F2_cpw_gap       expect ['clearance']: DETECTED
-F3_skew          expect ['TRAP_A_vs_TRAP_B_skew']: DETECTED
-F4_via_on_rf     expect ['RF_no_vias']: DETECTED
-F5_open_dc       expect ['Found 1 unconnected']: DETECTED
+F1_rf_width            expect ['RF_GCPW_width']: DETECTED
+F2_cpw_gap             expect ['RF_GCPW_gap']: DETECTED
+F3_skew                expect ['TRAP_B0_intra_pair_skew', 'TRAP_A_vs_B_length']: DETECTED
+F4_via_on_rf           expect ['RF_no_vias']: DETECTED
+F5_open_dc             expect ['Found 1 unconnected']: DETECTED
+F6_diff_width          expect ['rule DIFF_routed min width']: DETECTED
+F7_diff_pair_gap       expect ['(DIFF_routed minimum gap 0.6400 mm; actual']: DETECTED
+F8_via_between_legs    expect ["Items not allowed (keepout area 'DIFF_TRAP_A1_no_gnd_no_via')"]: DETECTED
+F9_uncoupled_probe     expect ['Differential uncoupled length too long']: DETECTED
+
+KiCad's own coupled / uncoupled bookkeeping (F9: same board, uncoupled limits set to 0, actual values read
+back). KiCad 7 counts straight segments only; the 0.25 mm coupling stubs next to arcs and lands count as
+uncoupled; in the routed section the split to the two jacks (6.5 mm apart) is uncoupled by design.
+pair       breakout (mm)  routed (mm)   limits 1.20 / 10.50 mm
+TRAP_A0           1.0000       9.8560
+ACC_A0            1.0000       9.7899
+ACC_A1            1.0000       9.7899
+TRAP_A1           1.0000       9.8560
+TRAP_B1           1.0000       9.8560
+ACC_B1            1.0000       9.7899
+ACC_B0            1.0000       9.7899
+TRAP_B0           1.0000       9.8560

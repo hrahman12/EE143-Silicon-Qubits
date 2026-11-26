@@ -23,19 +23,20 @@ RF_CALC_PY = os.environ.get("QBFX2_RF_CALC",
 PROJECT = dict(
     name="qbfx2_carrier",
     title="QBF-X2 carrier",
-    rev="A",
-    date="2026-11-24",
+    rev="B",
+    date="2026-11-26",
     author="QBF-X2 project",
     lib="qbfx2",                     # project-local symbol + footprint library nickname
-    board_text="QBF-X2 CARRIER  REV A  2026-11-24",
+    board_text="QBF-X2 CARRIER  REV B  2026-11-26",
+    change="rev B: the 8 fast flux lines are differential pairs (die_pads.json rev B: 32 pads, 18 SMP jacks)",
 )
 
 # ------------------------------------------------------------------------------------------------ board
 BOARD = dict(
-    x_min=-26.0, x_max=26.0, y_min=-26.0, y_max=26.0,   # 52 x 52 mm, die centred
+    x_min=-33.0, x_max=33.0, y_min=-33.0, y_max=33.0,   # 66 x 66 mm, die centred (rev A: 52 x 52)
     corner_r=1.0,
     page="A3",                      # fab / assembly drawings are plotted from the board page
-    page_origin=(85.0, 128.0),      # KiCad page position of the die centre (mm, y down)
+    page_origin=(88.0, 122.0),      # KiCad page position of the die centre (mm, y down)
     zone_inset=0.30,                # copper pour pull-back from the outer routed edge
     inner_window_pullback=0.30,     # inner-layer copper pull-back from the die window
     top_window_pullback=0.10,       # top copper (bond ring / bond pads) to the die-window edge
@@ -48,11 +49,12 @@ WINDOW = dict(
     relief_r=0.60,                  # corner relief radius (router <= 1.2 mm), clears the die corners
 )
 
-# PCB wire-bond pads (footprint U1 = the 24 landing pads, numbered as die_pads.json ids)
+# PCB wire-bond pads (footprint U1 = one landing pad per die pad, numbered as die_pads.json ids)
 BONDPAD = dict(
     setback=0.10,                   # window edge -> pad inner edge
     length=0.60,                    # radial
     width=0.39,                     # lateral (= GCPW centre conductor, so the line starts at the pad)
+    width_diff=0.29,                # lateral width of the differential-pair lands (= breakout leg width, see DIFF)
     mask_expansion=0.05,
     gnd_open_margin=0.27,           # exposed-ground (bond landing) openings keep this far from signal copper
     ring_open_out=0.95,             # exposed bond band: window edge -> outer edge of the mask opening
@@ -92,13 +94,41 @@ GCPW = dict(
 )
 VIA_FENCE = dict(pitch=1.00, offset=0.625, start_r=6.50)   # offset from line centre; first row radius at the die
 
-# fast flux lines: connector columns west (A lines) and east (B lines), 7 mm pitch
+# fast flux lines (rev B): one edge-coupled GCPW pair per line (<name>_P / <name>_N, die_pads.json rf_fast_diff).
+# Each leg is driven by its own 50-ohm coax (complementary AWG outputs), so the pair is LOOSELY coupled: odd mode
+# 50 ohm (Z_diff = 100 ohm) and the even mode close to 50 ohm too. No ground copper and no vias between P and N;
+# via fences on the outside only. Required: Z_odd 50 ohm +/-5 % with both the closed-form coupled CB-CPW estimate
+# (fd2d.closed_form_coupled, zero thickness) and the 2D field solve with 35 um copper (fd2d.solve_coupled).
+DIFF = dict(
+    w=0.39, s=0.65, g=0.17,         # routed pair: leg width, inner gap (P-N), outer ground gap
+    w_bo=0.29, s_bo=0.21, g_bo=0.17,    # breakout at the die: centre pitch w_bo + s_bo = 0.50 = die pad pitch
+    z_tol=0.05,
+    web=0.14,                       # F.Mask web on the pair centre line (each leg has its own mask-free corridor)
+    open_r=1.0,                     # breakout -> routed spacing: mirror-image S-jogs of this radius on both legs
+    bump_r=0.30,                    # tuning bumps: arcs +a, -2a, +a of this radius (centre line), arcs only
+    bump_gap=0.60,                  # straight run between successive bumps (>= 2 coupling stubs, KiCad 7 note)
+    split_r=1.00,                   # split to the two SMP jacks: 45-degree jogs, single-ended GCPW legs
+    skew_max=0.10,                  # intra-pair |L_P - L_N| (mm of track, ~0.54 ps)
+    # KiCad diff_pair_uncoupled limits. KiCad 7 counts straight segments only and calls every 0.25 mm coupling stub
+    # next to an arc "uncoupled"; the routed value is dominated by the split to the two jacks (uncoupled by design).
+    uncoupled_max=10.5,             # routed width (design: 9.86 mm TRAP, 9.79 mm ACC as measured by KiCad)
+    uncoupled_max_bo=1.20,          # breakout width (design: 1.00 mm = the four coupling stubs)
+)
+# W-top quadrant (TRAP_A0, ACC_A0) in the board frame; the other three quadrants are mirror images (x -> -x keeps
+# P/N, y -> -y swaps which polarity is the outer leg). Each pair: straight breakout from the lands, bend B1 away from
+# the die axis (breakout spacing), opening to the routed spacing, diagonal, bend B2 back to the die-normal direction
+# (routed spacing), straight to the split, split to two SMP jacks side by side (6.5 mm). B1 and B2 have different
+# spacings, so each leaves a mismatch c * theta on its inner leg: tuning bumps compensate each one next to its bend
+# (outer leg right after the opening, inner leg next to B2: before it for TRAP, after it for ACC).
 FAST = dict(
-    x_conn=18.0,                    # |x| of the SMP column
-    y_conn_acc=3.5,                 # |y| of the ACC connectors (inner pair)
-    y_conn_trap=10.5,               # |y| of the TRAP connectors (outer pair)
-    x_bend_trap=7.4,                # |x| where the TRAP lines leave the die-normal direction (45 deg)
-    x_bend_acc=8.4,                 # |x| where the ACC lines bend (diagonals 1.56 mm apart)
+    x_conn=26.5,                    # |x| of the SMP columns (8 jacks per side, 6.5 mm pitch)
+    y_jacks=dict(ACC=(3.25, 9.75), TRAP=(16.25, 22.75)),   # |y| of the inner / outer jack of each pair
+    # diagonal direction as an integer lattice vector (dx, dy): TRAP tan = 7/4 (60.26 deg), ACC 45 deg. KiCad 7 only
+    # treats two straights as coupled if they are parallel to 1 nm, so the legs are written on this lattice in nm.
+    TRAP=dict(x_b1=8.2, lattice=(4, 7), R1=1.2, R2=1.6, x_split=21.0, open_at=0.6, b1_gap=0.6, b2_before=0.6, n1=1,
+              n2=2),
+    ACC=dict(x_b1=10.2, lattice=(1, 1), R1=1.2, R2=1.6, x_split=21.0, open_at=0.6, b1_gap=0.6, b2_after=0.6, n1=1,
+             n2=2),
 )
 READOUT = dict(
     x_conn=7.0, y_conn=-18.0,       # RO_IN at (-x, y), RO_OUT at (+x, y)
@@ -110,7 +140,7 @@ DC = dict(
     fcu_width=0.20,                 # F.Cu stubs and filter wiring
     in2_width=0.15,                 # In2 stripline routing
     clearance=0.20,
-    via_r_from_die=7.10,            # LOAD-line via |x| (W/E rows); GATE-line via |y| (N/S rows) = gate_via_r
+    via_r_from_die=7.30,            # LOAD-line via |x| (W/E rows); GATE-line via |y| (N/S rows) = gate_via_r
     gate_via_r=7.00,
     load_via_dy=0.50,               # LOAD vias sit 0.5 mm further from the die axis than the pad (corner side)
     corridor=(5.55, 5.95),          # In2 corridor under the bond pads (|offset| from die centre), inner/outer
@@ -122,11 +152,11 @@ DC = dict(
 # filter bank (top side, between the die and the DC connector); channel order is fixed by the planar routing
 FILTER_BANK = dict(
     pitch=3.5,
-    y_out_via=9.0,                  # die-side via of every channel (F.Cu <-> In2)
+    y_out_via=16.0,                 # die-side via of every channel (F.Cu <-> In2); rev B: above the TRAP diagonals
     cap_dx=1.5,                     # shunt capacitor column offset (>= 0603 courtyard width 1.46 mm)
     rows=dict(R1=6.3, C1=4.7, R2=3.3, C2=1.7),   # part centres above the output via (courtyards 2.96 mm long)
     cap_via_dx=2.45,                # cap GND via offset from the resistor column
-    fanin_levels=[18.1, 17.65, 17.2, 16.85, 16.85, 17.2, 17.65, 18.1],  # J11 fan-in jog heights
+    fanin_levels=[25.1, 24.65, 24.2, 23.85, 23.85, 24.2, 24.65, 25.1],  # J11 fan-in jog heights
     channels=["LOAD_A0", "LOAD_A1", "GATE_BSB_AN", "GATE_BSA_PREP",
               "GATE_BSA_AN", "GATE_BSB_PREP", "LOAD_B0", "LOAD_B1"],
 )
@@ -154,19 +184,25 @@ RULES = dict(
 )
 
 # ------------------------------------------------------------------------------------------------ mechanics
-MOUNT = dict(holes=[(-22.5, -22.5), (22.5, -22.5), (22.5, 22.5), (-22.5, 22.5)], drill=2.7, pad=5.0,
+MOUNT = dict(holes=[(-29.5, -29.5), (29.5, -29.5), (29.5, 29.5), (-29.5, 29.5)], drill=2.7, pad=5.0,
              screw="M2.5 brass or Ti (non-magnetic) into the Cu sample-holder base")
-DOWELS = dict(holes=[(-12.5, -21.0), (16.5, 21.5)], drill=1.60, note="NPTH, for 1.5 mm dowel pins in the base")
-FIDUCIALS = [(-17.5, -23.5), (17.5, -23.5), (-23.5, 16.5)]
+DOWELS = dict(holes=[(-20.5, -26.5), (20.5, 28.5)], drill=1.60, note="NPTH, for 1.5 mm dowel pins in the base")
+FIDUCIALS = [(-16.5, -29.5), (16.5, -29.5), (-20.5, 28.5)]
 # DC connector (right-angle micro-D on the north edge). Land pattern drawn from typical data: TO CONFIRM.
-MICROD = dict(x=0.0, y_row1=19.0, pitch=2.54, row_dy=2.54, drill=0.70, pad=1.10,
-              mount_dx=12.6, mount_y=23.2, mount_drill=1.20, mount_pad=2.0)
+MICROD = dict(x=0.0, y_row1=26.0, pitch=2.54, row_dy=2.54, drill=0.70, pad=1.10,
+              mount_dx=12.6, mount_y=26.0 + 4.2, mount_drill=1.20, mount_pad=2.0)   # mount_y = y_row1 + 4.2 (board y)
 # J11 pin assignment (pins 1..8 = filtered DC inputs, row 1; 9..15 = GND returns, row 2)
 MICROD_PINS = {1: "LOAD_A0", 2: "LOAD_A1", 3: "GATE_BSB_AN", 4: "GATE_BSA_PREP",
                5: "GATE_BSA_AN", 6: "GATE_BSB_PREP", 7: "LOAD_B0", 8: "LOAD_B1"}
 
-# RF connector reference designators (J1..J10) in schematic order
-SMP_REFS = ["TRAP_A0", "ACC_A0", "ACC_A1", "TRAP_A1", "TRAP_B1", "ACC_B1", "ACC_B0", "TRAP_B0", "RO_IN", "RO_OUT"]
+# RF connector nets in schematic order (west column top -> bottom, east column top -> bottom, readout) and their
+# reference designators. J11 keeps its rev A meaning (micro-D DC connector), so the 18 SMP jacks are J1-J10, J12-J19.
+SMP_REFS = ["TRAP_A0_P", "TRAP_A0_N", "ACC_A0_P", "ACC_A0_N", "ACC_A1_P", "ACC_A1_N", "TRAP_A1_P", "TRAP_A1_N",
+            "TRAP_B1_P", "TRAP_B1_N", "ACC_B1_P", "ACC_B1_N", "ACC_B0_P", "ACC_B0_N", "TRAP_B0_P", "TRAP_B0_N",
+            "RO_IN", "RO_OUT"]
+SMP_DESIGNATORS = [f"J{k}" for k in list(range(1, 11)) + list(range(12, 20))]
+FAST_PAIRS = ["TRAP_A0", "ACC_A0", "ACC_A1", "TRAP_A1", "TRAP_B1", "ACC_B1", "ACC_B0", "TRAP_B0"]
+AB_PAIRS = [("TRAP_A0", "TRAP_B0"), ("TRAP_A1", "TRAP_B1"), ("ACC_A0", "ACC_B0"), ("ACC_A1", "ACC_B1")]
 
 # ------------------------------------------------------------------------------------------------ parts (BOM)
 # status: "confirmed" = part number seen in distributor / manufacturer listings during design (2026-11);
@@ -196,7 +232,7 @@ PARTS = dict(
               footprint="C_0603_1608Metric",
               note="code built from the VJ Non-Magnetic ordering scheme, not seen listed (W1BC parts have Ni barrier)"),
     DIE=dict(value="QBF-X2", mfr="QBF-X2 project", mpn="QBF-X2 die rev per circuits/", status="customer supplied",
-             descr="QBF-X2 superconducting die 10 x 10 x 0.525 mm, wire-bonded (24 launchers)",
+             descr="QBF-X2 superconducting die 10 x 10 x 0.525 mm, wire-bonded (32 launchers, die_pads.json rev B)",
              footprint="QBFX2_DIE_BONDPADS", note="not part of PCBA; die attach + Al wedge bonding after assembly"),
     MH=dict(value="M2.5", mfr="-", mpn="-", status="mechanical", descr="Mounting hole 2.7 mm plated, GND",
             footprint="MountingHole_2.7mm_M2.5_Pad", note="board feature, not purchased"),

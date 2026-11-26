@@ -1,0 +1,333 @@
+** Drc report for /home/user/EE143-Silicon-Qubits/.claude/worktrees/agent-a1a1586d91fadf1e0/qbf-x2/pcb/reports/_selftest/F8_via_between_legs.kicad_pcb **
+** Created on 2026-11-26 12:33:50 **
+
+** Found 81 DRC violations **
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(63.4795 mm, 144.3939 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(68.9554 mm, 140.6245 mm): Polygon on F.Mask
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+[clearance]: Clearance violation (rule RF_GCPW_gap clearance 0.1700 mm; actual 0.1000 mm)
+    Rule: RF_GCPW_gap; Severity: error
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+    @(78.0994 mm, 128.1242 mm): Track [TRAP_A1_N] on F.Cu, length 10.9422 mm
+[clearance]: Clearance violation (rule RF_GCPW_gap clearance 0.1700 mm; actual 0.1000 mm)
+    Rule: RF_GCPW_gap; Severity: error
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+    @(77.1964 mm, 127.6082 mm): Track [TRAP_A1_P] on F.Cu, length 10.9422 mm
+[items_not_allowed]: Items not allowed (keepout area 'DIFF_TRAP_A1_no_gnd_no_via')
+    Rule: keepout area 'DIFF_TRAP_A1_no_gnd_no_via'; Severity: error
+    @(74.9335 mm, 132.6165 mm): Via [GND] on F.Cu - B.Cu
+
+** Found 0 unconnected pads **
+
+** Found 0 Footprint errors **
+
+** End of Report **

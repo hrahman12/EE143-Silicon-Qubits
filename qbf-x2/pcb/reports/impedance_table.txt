@@ -7,9 +7,13 @@ dielectric: Rogers RO4003C, er = 3.55 (design Dk at 10 GHz), h = 0.203 mm (core 
 RF lines are mask-free (F.Mask opening over trace + gaps), copper 35 um finished
 design: w = 0.390 mm, gap = 0.170 mm -> Z0 = 51.98 ohm, eeff = 2.624 (exact 50.00 ohm needs w = 0.4169 mm)
 
+single-ended lines: RO_IN / RO_OUT and the split legs of the 8 fast pairs (from the end of the coupled section
+to the SMP pin, where each leg is an ordinary GCPW with ground on both sides). The coupled sections of the pairs
+are checked in the DIFFERENTIAL PAIRS section below.
+
 segment type                                 layer       w           gap      h    er        Z0 (ohm)  result
-GCPW straight runs (10 RF nets), drawn       F.Cu    0.390         0.170  0.203  3.55           51.98    PASS
-GCPW straight runs, as filled (min-max)      F.Cu    0.390  0.170-0.171  0.203  3.55   52.00-52.00    PASS
+GCPW straight runs (single-ended), drawn     F.Cu    0.390         0.170  0.203  3.55           51.98    PASS
+GCPW straight runs, as filled (min-max)      F.Cu    0.390  0.170-0.170  0.203  3.55   52.00-52.00    PASS
 GCPW arc bends R 1.0, as filled (min-max)    F.Cu    0.390  0.171-0.172  0.203  3.55   52.01-52.06    PASS
 bond landing pad 0.39 x 0.60 (line start)    F.Cu    0.390  0.170-0.170  0.203  3.55           52.00    PASS
 SMP launch: last ~0.8 mm inside the anti-pad F.Cu    0.390  0.170-0.546  0.203  3.55   52.00-56.79    info
@@ -17,7 +21,7 @@ SMP launch pad dia 0.75 / anti-pad dia 1.65  F.Cu        -             -      - 
 
 The launch rows are a transition, not a line: ~0.8 mm (0.04 wavelength at 10 GHz) of wider gap next to a
 capacitive pad. Its match is NOT verified (no EM simulation); it is reported, not counted in the 50-ohm check.
-as-built gap = distance from the RF centre line to the filled GND zone minus w/2 (1126 + 120 samples every 0.1 mm); raw min/max straight 0.170/0.171 mm, arcs 0.171/0.172 mm
+as-built gap = distance from the RF centre line to the filled GND zone minus w/2 (742 + 216 samples every 0.1 mm); raw min/max straight 0.170/0.170 mm, arcs 0.171/0.172 mm
 (samples within 1.07 mm of an SMP centre are the launch transition and are listed separately).
 In1 reference plane under every RF line (trace +/- (w/2 + g + 2h)): min coverage 100.00 %
 
@@ -29,3 +33,38 @@ ground plane, grounded lid 6 mm above, graded grid; C and C0 from the stored ene
   for reference, the same line fully covered by LPI (mask in the gaps): Z0 = 44.08 ohm -> this is why the RF lines are mask-free
 The required formula check and the field solve bracket 50 ohm; the fab tunes w (+/-0.02 mm) with its own solver
 and a TDR coupon (fab note 3). Not verified: full-wave EM of the SMP launch, the bond-wire transition, box modes.
+
+DIFFERENTIAL PAIRS (8 fast flux lines, <name>_P / <name>_N): edge-coupled GCPW on F.Cu over In1, no ground
+copper and no vias between P and N. Each leg is driven by its own 50-ohm coax -> requirement Z_odd 50 ohm +/-5 %
+(Z_diff = 2 Z_odd = 100 ohm) with loose coupling (Z_even close to 50 ohm). Z_cm = Z_even / 2,
+k = (Z_even - Z_odd) / (Z_even + Z_odd).
+closed form: carrier_lib/fd2d.closed_form_coupled - zero-thickness coupled conductor-backed CPW, partial
+  capacitances: air half space mapped by w = z^2 (odd: electric wall, even: magnetic wall on the symmetry plane),
+  substrate slab with the In1 plane mapped by t = cosh(pi z / h); C = eps K(k)/K(k') with k from the cross ratio
+  of the conductor edges. For s -> 0 its even mode equals rf_calc.gcpw_z0 of a 2w strip exactly.
+field solve: carrier_lib/fd2d.solve_coupled - half section, odd mode = V = 0 on the symmetry plane, even mode =
+  Neumann; 35 um copper; 20 um LPI on the outer grounds and on the centre-line web between the two leg
+  apertures (each leg has its own mask-free corridor because KiCad flags one aperture exposing two nets)
+
+ROUTED section: w 0.39 / P-N gap s 0.65 / gap to GND g 0.17 mm (leg pitch 1.04 mm), mask web half-width 0.165 mm, 131.8 mm of coupled straight runs sampled (1272 points)
+  as built: P-N gap 0.6500-0.6500 mm, gap to the filled GND 0.1705-0.1705 mm
+  closed form (design)               Z_odd  51.93  Z_even  57.08  Z_diff  103.9  Z_cm  28.5  k 0.0472  eeff odd/even 2.607/2.837
+  closed form at the as-built gaps   Z_odd  51.94-51.94
+  field solve, 35 um Cu (as built)   Z_odd  47.91  Z_even  51.42  Z_diff   95.8  Z_cm  25.7  k 0.0353  eeff odd/even 2.479/2.657
+  field solve, no centre web         Z_odd  48.00  Z_even  51.49  Z_diff   96.0  Z_cm  25.7  k 0.0351  eeff odd/even 2.470/2.650
+  field solve validation, ~0 um Cu   Z_odd  51.19  Z_even  54.41  Z_diff  102.4  Z_cm  27.2  k 0.0305  eeff odd/even 2.589/2.754
+
+BREAKOUT section: w 0.29 / P-N gap s 0.21 / gap to GND g 0.17 mm (leg pitch 0.50 mm), mask web half-width 0.070 mm, 37.7 mm of coupled straight runs sampled (352 points)
+  as built: P-N gap 0.2100-0.2100 mm, gap to the filled GND 0.1705-0.1705 mm
+  closed form (design)               Z_odd  54.95  Z_even  70.87  Z_diff  109.9  Z_cm  35.4  k 0.1265  eeff odd/even 2.434/2.773
+  closed form at the as-built gaps   Z_odd  54.96-54.96
+  field solve, 35 um Cu (as built)   Z_odd  48.15  Z_even  65.24  Z_diff   96.3  Z_cm  32.6  k 0.1507  eeff odd/even 2.337/2.645
+  field solve, no centre web         Z_odd  49.01  Z_even  65.37  Z_diff   98.0  Z_cm  32.7  k 0.1430  eeff odd/even 2.255/2.634
+  field solve validation, ~0 um Cu   Z_odd  54.36  Z_even  69.64  Z_diff  108.7  Z_cm  34.8  k 0.1232  eeff odd/even 2.419/2.746
+
+routed: Z_odd 51.93 (formula) / 47.91 (field) ohm -> PASS (both within 50 +/-5 %); Z_even 51.42 ohm (+2.8 %), k = 0.035 (field solve)
+breakout: Z_odd 48.15 ohm (field solve, 35 um Cu) -> PASS; the zero-thickness formula reads 54.9 ohm
+  because the 35 um sidewalls across the 0.21 mm P-N slot add capacitance (thin-copper limit: field 54.4 vs formula 54.9 ohm, i.e. the models agree there).
+  The breakout is forced by the die pad pitch (0.50 mm): it runs from the lands to the opening transition after the first bend; its even mode is high (tighter coupling there).
+differential lands (0.29 x 0.60 mm): P-N gap 0.210-0.210 mm, gap to GND 0.170-0.171 mm (min clearance 0.15 mm)
+Not verified: full-wave EM of the pair bends, bumps, the opening transition, the split and the SMP launches.

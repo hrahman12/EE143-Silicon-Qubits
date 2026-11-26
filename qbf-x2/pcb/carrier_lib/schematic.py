@@ -106,8 +106,11 @@ def library(lib, die_pins, microd_names):
                             [rect(-12.7, 20.32, 5.08, -22.86, "background")], "(pin_names (offset 1.016))",
                             (0, 21.59), (0, -24.13), descr="Micro-D 15-pin connector with shell")
     die = []
-    for num, name, side, k in die_pins:            # k = 0..5 along the side in die_pads order
-        t = -12.7 + 5.08 * k
+    per_side = {}
+    for _, _, side, _ in die_pins:
+        per_side[side] = per_side.get(side, 0) + 1
+    for num, name, side, k in die_pins:            # k = 0..n-1 along the side in die_pads order, centred
+        t = (k - (per_side[side] - 1) / 2) * 5.08
         if side == "N":
             die.append((str(num), name, t, 33.02, 270, 5.08, "passive", False))
         elif side == "S":
@@ -120,7 +123,7 @@ def library(lib, die_pins, microd_names):
                          [rect(-27.94, 27.94, 27.94, -27.94, "background"), rect(-8.89, 8.89, 8.89, -8.89, "none", 0.152),
                           stext("QBF-X2 die", -5.08, 1.27), stext("10 x 10 mm, top view", -6.35, -1.27)],
                          "(pin_names (offset 1.016))", (0, 36.83), (0, -36.83),
-                         descr="QBF-X2 superconducting die, 24 launchers (circuits/die_pads.json)")
+                         descr=f"QBF-X2 superconducting die, {len(die_pins)} launchers (circuits/die_pads.json)")
     S["MH"] = SymbolDef(f"{lib}:MountingHole_Pad", "H", "MountingHole", [("1", "1", 0, -2.54, 90, 1.27, "passive", False)],
                         [circ(0, 0, 1.27, 0.508)], "(pin_numbers hide) (pin_names (offset 1.016) hide)",
                         (2.54, 0.635), (2.54, -1.27), descr="Mounting hole, plated, GND")

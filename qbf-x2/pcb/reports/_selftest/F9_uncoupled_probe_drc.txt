@@ -1,0 +1,74 @@
+** Drc report for /home/user/EE143-Silicon-Qubits/.claude/worktrees/agent-a1a1586d91fadf1e0/qbf-x2/pcb/reports/_selftest/F9_uncoupled_probe.kicad_pcb **
+** Created on 2026-11-26 12:33:52 **
+
+** Found 16 DRC violations **
+[diff_pair_uncoupled_length_too_long]: Differential uncoupled length too long (DIFF_breakout maximum uncoupled length 0.0010 mm; actual 1.0000 mm)
+    Rule: DIFF_breakout; Severity: error
+    @(77.6253 mm, 120.7717 mm): Track [ACC_A0_P] on F.Cu, length 0.2500 mm
+    @(82.1500 mm, 121.5500 mm): Track [ACC_A0_N] on F.Cu, length 0.2500 mm
+[diff_pair_uncoupled_length_too_long]: Differential uncoupled length too long (DIFF_routed maximum uncoupled length 0.0010 mm; actual 9.7899 mm)
+    Rule: DIFF_routed; Severity: error
+    @(67.5713 mm, 114.9800 mm): Track [ACC_A0_P] on F.Cu, length 0.3213 mm
+    @(71.0873 mm, 116.0200 mm): Track [ACC_A0_N] on F.Cu, length 0.1000 mm
+[diff_pair_uncoupled_length_too_long]: Differential uncoupled length too long (DIFF_breakout maximum uncoupled length 0.0010 mm; actual 1.0000 mm)
+    Rule: DIFF_breakout; Severity: error
+    @(78.5471 mm, 122.4500 mm): Track [ACC_A1_P] on F.Cu, length 0.2500 mm
+    @(77.6253 mm, 123.2282 mm): Track [ACC_A1_N] on F.Cu, length 0.2500 mm
+[diff_pair_uncoupled_length_too_long]: Differential uncoupled length too long (DIFF_routed maximum uncoupled length 0.0010 mm; actual 9.7899 mm)
+    Rule: DIFF_routed; Severity: error
+    @(67.5713 mm, 127.9800 mm): Track [ACC_A1_P] on F.Cu, length 0.3213 mm
+    @(63.1916 mm, 131.7500 mm): Track [ACC_A1_N] on F.Cu, length 1.4416 mm
+[diff_pair_uncoupled_length_too_long]: Differential uncoupled length too long (DIFF_breakout maximum uncoupled length 0.0010 mm; actual 1.0000 mm)
+    Rule: DIFF_breakout; Severity: error
+    @(93.8500 mm, 122.4500 mm): Track [ACC_B0_P] on F.Cu, length 0.2500 mm
+    @(98.5515 mm, 123.4050 mm): Track [ACC_B0_N] on F.Cu, length 0.1000 mm
+[diff_pair_uncoupled_length_too_long]: Differential uncoupled length too long (DIFF_routed maximum uncoupled length 0.0010 mm; actual 9.7899 mm)
+    Rule: DIFF_routed; Severity: error
+    @(106.7707 mm, 127.9800 mm): Track [ACC_B0_P] on F.Cu, length 0.2500 mm
+    @(112.5584 mm, 131.7500 mm): Track [ACC_B0_N] on F.Cu, length 0.2500 mm
+[diff_pair_uncoupled_length_too_long]: Differential uncoupled length too long (DIFF_breakout maximum uncoupled length 0.0010 mm; actual 1.0000 mm)
+    Rule: DIFF_breakout; Severity: error
+    @(94.1000 mm, 121.0500 mm): Track [ACC_B1_P] on F.Cu, length 3.3529 mm
+    @(98.7283 mm, 121.1253 mm): Track [ACC_B1_N] on F.Cu, length 0.2500 mm
+[diff_pair_uncoupled_length_too_long]: Differential uncoupled length too long (DIFF_routed maximum uncoupled length 0.0010 mm; actual 9.7899 mm)
+    Rule: DIFF_routed; Severity: error
+    @(108.1787 mm, 114.9800 mm): Track [ACC_B1_P] on F.Cu, length 0.2500 mm
+    @(103.7223 mm, 116.5131 mm): Track [ACC_B1_N] on F.Cu, length 0.2500 mm
+[diff_pair_uncoupled_length_too_long]: Differential uncoupled length too long (DIFF_breakout maximum uncoupled length 0.0010 mm; actual 1.0000 mm)
+    Rule: DIFF_breakout; Severity: error
+    @(79.4979 mm, 118.8674 mm): Track [TRAP_A0_P] on F.Cu, length 0.2500 mm
+    @(79.1134 mm, 119.2023 mm): Track [TRAP_A0_N] on F.Cu, length 0.1000 mm
+[diff_pair_uncoupled_length_too_long]: Differential uncoupled length too long (DIFF_routed maximum uncoupled length 0.0010 mm; actual 9.8560 mm)
+    Rule: DIFF_routed; Severity: error
+    @(64.3255 mm, 99.7197 mm): Track [TRAP_A0_P] on F.Cu, length 0.2500 mm
+    @(71.7675 mm, 106.8913 mm): Track [TRAP_A0_N] on F.Cu, length 0.2500 mm
+[diff_pair_uncoupled_length_too_long]: Differential uncoupled length too long (DIFF_breakout maximum uncoupled length 0.0010 mm; actual 1.0000 mm)
+    Rule: DIFF_breakout; Severity: error
+    @(79.0638 mm, 124.8845 mm): Track [TRAP_A1_P] on F.Cu, length 0.2500 mm
+    @(79.5475 mm, 125.0457 mm): Track [TRAP_A1_N] on F.Cu, length 0.1000 mm
+[diff_pair_uncoupled_length_too_long]: Differential uncoupled length too long (DIFF_routed maximum uncoupled length 0.0010 mm; actual 9.8560 mm)
+    Rule: DIFF_routed; Severity: error
+    @(78.0834 mm, 126.0560 mm): Track [TRAP_A1_P] on F.Cu, length 0.1000 mm
+    @(71.6579 mm, 139.3968 mm): Track [TRAP_A1_N] on F.Cu, length 1.1910 mm
+[diff_pair_uncoupled_length_too_long]: Differential uncoupled length too long (DIFF_breakout maximum uncoupled length 0.0010 mm; actual 1.0000 mm)
+    Rule: DIFF_breakout; Severity: error
+    @(96.8866 mm, 124.7977 mm): Track [TRAP_B0_P] on F.Cu, length 0.1000 mm
+    @(96.5021 mm, 125.1326 mm): Track [TRAP_B0_N] on F.Cu, length 0.2500 mm
+[diff_pair_uncoupled_length_too_long]: Differential uncoupled length too long (DIFF_routed maximum uncoupled length 0.0010 mm; actual 9.8560 mm)
+    Rule: DIFF_routed; Severity: error
+    @(109.8839 mm, 140.5103 mm): Track [TRAP_B0_P] on F.Cu, length 2.5324 mm
+    @(112.5584 mm, 144.7500 mm): Track [TRAP_B0_N] on F.Cu, length 0.2500 mm
+[diff_pair_uncoupled_length_too_long]: Differential uncoupled length too long (DIFF_breakout maximum uncoupled length 0.0010 mm; actual 1.0000 mm)
+    Rule: DIFF_breakout; Severity: error
+    @(94.1000 mm, 119.6500 mm): Track [TRAP_B1_P] on F.Cu, length 1.1536 mm
+    @(95.2536 mm, 120.1500 mm): Track [TRAP_B1_N] on F.Cu, length 0.2500 mm
+[diff_pair_uncoupled_length_too_long]: Differential uncoupled length too long (DIFF_routed maximum uncoupled length 0.0010 mm; actual 9.8560 mm)
+    Rule: DIFF_routed; Severity: error
+    @(112.8084 mm, 99.2500 mm): Track [TRAP_B1_P] on F.Cu, length 1.4416 mm
+    @(109.8839 mm, 103.4897 mm): Track [TRAP_B1_N] on F.Cu, length 2.5324 mm
+
+** Found 0 unconnected pads **
+
+** Found 0 Footprint errors **
+
+** End of Report **

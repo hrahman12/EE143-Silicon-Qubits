@@ -1,19 +1,19 @@
-** Drc report for /home/user/EE143-Silicon-Qubits/qbf-x2/pcb/reports/_selftest/F5_open_dc.kicad_pcb **
-** Created on 2026-11-24 22:54:30 **
+** Drc report for /home/user/EE143-Silicon-Qubits/.claude/worktrees/agent-a1a1586d91fadf1e0/qbf-x2/pcb/reports/_selftest/F5_open_dc.kicad_pcb **
+** Created on 2026-11-26 12:33:44 **
 
 ** Found 2 DRC violations **
 [via_dangling]: Via is not connected or connected on only one layer
     Local override; Severity: warning
-    @(77.9000 mm, 131.5000 mm): Via [LOAD_A1] on F.Cu - B.Cu
+    @(80.7000 mm, 126.0000 mm): Via [LOAD_A1] on F.Cu - B.Cu
 [track_dangling]: Track has unconnected end
     Local override; Severity: warning
-    @(79.0500 mm, 131.5000 mm): Track [LOAD_A1] on In2.Cu, length 6.9000 mm
+    @(82.0500 mm, 124.6500 mm): Track [LOAD_A1] on In2.Cu, length 6.0500 mm
 
 ** Found 1 unconnected pads **
 [unconnected_items]: Missing connection between items
     Local override; Severity: error
-    @(79.0500 mm, 131.5000 mm): Track [LOAD_A1] on In2.Cu, length 6.9000 mm
-    @(79.1500 mm, 131.0000 mm): Track [LOAD_A1] on F.Cu, length 0.7500 mm
+    @(82.0500 mm, 124.6500 mm): Track [LOAD_A1] on In2.Cu, length 6.0500 mm
+    @(82.1500 mm, 125.5000 mm): Track [LOAD_A1] on F.Cu, length 0.9500 mm
 
 ** Found 0 Footprint errors **
 

@@ -1,0 +1,15 @@
+{
+ "footprints": 8,
+ "symbols": 8,
+ "round_trip_footprints_ok": true,
+ "round_trip_symbols_ok": true,
+ "validation_errors": {
+  "pcblib": 0,
+  "schlib": 0
+ },
+ "files": [
+  "QBFX2_Carrier.PcbLib",
+  "QBFX2_Carrier.SchLib",
+  "QBFX2_Carrier.LibPkg"
+ ]
+}
