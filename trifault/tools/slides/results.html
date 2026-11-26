@@ -1,0 +1,23 @@
+<!-- results -->
+<section class="light" data-title="It decides 3 in 4 and flags the hard ones.">
+  <div class="s">
+    <p class="eyebrow">Results · 120 statements</p>
+    <h2>It decides 3 in 4 and flags the hard ones.</h2>
+    <div class="body" style="flex-direction:column; gap:24px; margin-top:40px">
+      <table class="t" style="width:1300px">
+        <thead><tr><th></th><th style="text-align:right">Result</th></tr></thead>
+        <tbody>
+          <tr><td>Decided at confidence ≥ 0.9 (AI judges only, 5-fold)</td><td class="v">91 of 120</td></tr>
+          <tr><td>Agree with human majority, on those 91</td><td class="v">87 (95.6%)</td></tr>
+          <tr><td>Fixed rule (both judges ≥ 9), on the same 91</td><td class="v">84 (92.3%)</td></tr>
+          <tr><td>Sent to players</td><td class="v">29</td></tr>
+          <tr><td>Fixed rule, on those 29</td><td class="v">18 right (62%)</td></tr>
+          <tr><td>Humans split, on those 29</td><td class="v">19</td></tr>
+        </tbody>
+      </table>
+      <p class="t24 muted">On all 120: GPT-5.2 judge 87.5%, Gemini-2.5-Pro 75.0%, two-judge rule 85.0%.</p>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">TriFault engine on Beyond Compilation data (Zhang et al., 2026) · 5-fold · truth = human majority</span><span class="n"></span></div>
+  <aside class="notes">[36:00–37:30] Results, using only the two AI judges as inputs, with 5-fold cross-validation. The engine decides 91 of the 120 statements at confidence 0.9 or more. That's the "3 in 4". On those 91 it agrees with the human majority on 87, 95.6 percent. The simple fixed rule, call it faithful only if both judges give 9 or more, gets 84 of the same 91, 92.3 percent. So the gain on the decided items is small and I won't oversell it. The more useful part is the other 29, the ones the engine refuses to decide and sends to players. On those, the fixed rule is right only 18 times, 62 percent, and the humans themselves split on 19 of the 29. So the engine is flagging exactly the items where people disagree. For reference, on all 120: the GPT-5.2 judge alone matches the human majority 87.5 percent of the time, Gemini-2.5-Pro 75.0 percent, the two-judge rule 85.0 percent.</aside>
+</section>

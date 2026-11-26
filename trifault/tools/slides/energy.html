@@ -1,0 +1,22 @@
+<!-- energy -->
+<section class="light" data-title="Physical randomness is cheap. NbOₓ isn’t there yet.">
+  <div class="s">
+    <p class="eyebrow">Back end · energy per random bit</p>
+    <h2>Physical randomness is cheap. NbOₓ isn’t there yet.</h2>
+    <div class="body" style="flex-direction:column; gap:28px; margin-top:44px">
+      <table class="t" style="width:1400px">
+        <thead><tr><th>Random source</th><th style="text-align:right">Energy per random bit</th><th style="text-align:right">Transistors</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td><b>sMTJ p-bit</b> (7 nm estimate)</td><td class="v">2 fJ</td><td class="v">4</td><td>Singh et al. 2024</td></tr>
+          <tr><td>LFSR digital p-bit (7 nm)</td><td class="v">145 fJ</td><td class="v">5,150</td><td>Singh et al. 2024</td></tr>
+          <tr><td>Xoshiro digital p-bit (7 nm)</td><td class="v">293 fJ</td><td class="v">11,546</td><td>Singh et al. 2024</td></tr>
+          <tr><td>NbOₓ oscillator p-bit</td><td class="v">128 pJ</td><td class="v">—</td><td>Rhee et al. 2023</td></tr>
+          <tr><td><b>NbOₓ p-trit</b> (oscillator only)</td><td class="v">2.4 nJ per trit</td><td class="v">—</td><td>Rhee et al. 2026</td></tr>
+        </tbody>
+      </table>
+      <p class="t24 muted">Cheap randomness must also be good: LFSR p-bits get inference wrong (Singh et al. 2024).</p>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Singh et al., Nature Communications 2024 · Rhee et al., Nature Communications 2023 · Rhee et al., Advanced Science 2026</span><span class="n"></span></div>
+  <aside class="notes">Energy per random bit. Singh et al., Nature Communications 2024, synthesised p-bits in a 7 nanometre design kit. A stochastic magnetic tunnel junction p-bit: about 2 femtojoules and 4 transistors; that 2 fJ figure is from an earlier paper. A digital p-bit with an LFSR random source: 145 femtojoules, 5,150 transistors. With a good generator, Xoshiro: 293 femtojoules, 11,546 transistors. And quality matters: they show LFSR p-bits get the Boltzmann distribution wrong in inference, not just optimisation. Now the honest line. The NbOx devices are much worse today: the 2023 KAIST NbOx p-bit is 128 picojoules per bit, and the 2026 p-trit is 2.4 nanojoules per trit for the oscillator alone. That's the gap a hardware roadmap has to close, and it's why our next step is an FPGA, not a chip.</aside>
+</section>

@@ -1,0 +1,29 @@
+<!-- pbit -->
+<section class="light" data-title="A p-bit is a Gibbs sampler in one device.">
+  <div class="s">
+    <p class="eyebrow">Back end · algorithm</p>
+    <h2>A p-bit is a Gibbs sampler in one device.</h2>
+    <div class="body" style="gap:72px; margin-top:48px">
+      <div class="col" style="flex:1.2">
+        <p style="font-family:var(--mono); font-size:36px; color:var(--dark-blue)">m<sub>i</sub> = sgn(tanh(I<sub>i</sub>) − r), r ~ U(−1,1)</p>
+        <p style="font-family:var(--mono); font-size:36px; color:var(--dark-blue); margin-top:20px">I<sub>i</sub> = I<sub>0</sub>(h<sub>i</sub> + Σ<sub>j</sub> J<sub>ij</sub> m<sub>j</sub>)</p>
+        <p class="t32" style="margin-top:40px">Update one at a time and the chain samples P(m) ∝ e<sup>−E(m)</sup>.</p>
+        <p class="t32 ink w800" style="margin-top:28px">Our verdict model is bipartite: statements, then raters. Two colours, exact block Gibbs.</p>
+      </div>
+      <div class="col" style="flex:0 0 560px; justify-content:center">
+        <div class="card" style="border-left:6px solid var(--teal)">
+          <p class="k">The catch</p>
+          <p class="t32">“Updating the p-bits in parallel leads to incorrect results.”</p>
+          <p class="cite">Camsari et al., PRX 2017</p>
+        </div>
+        <div class="card" style="margin-top:24px">
+          <p class="k">The fix</p>
+          <p>Colour the graph. Unconnected p-bits update together, with no approximation.</p>
+          <p class="cite">Chowdhury et al., 2023</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Camsari, Faria, Sutton &amp; Datta, PRX 2017 · Chowdhury et al., arXiv 2023</span><span class="n"></span></div>
+  <aside class="notes">A p-bit is a binary unit that is randomly plus or minus 1, with its bias set by an input current. Camsari, Faria, Sutton and Datta, Physical Review X 2017: m_i equals the sign of tanh of I_i minus a uniform random number, and I_i is a weighted sum of the neighbours plus a bias, scaled by I_0, which acts as an inverse temperature. If you update the p-bits one at a time, the network samples the Boltzmann distribution of the energy. That is exactly Gibbs sampling. The catch, in their words: updating the p-bits in parallel leads to incorrect results. The fix, from the full-stack review by Chowdhury et al. 2023: colour the graph, and update all p-bits of one colour together. That is exact. Our verdict model is bipartite: statements only touch raters' confusion matrices, and raters only touch statements. So two colours suffice: sample all statements, then all raters. That's the block Gibbs I described earlier.</aside>
+</section>

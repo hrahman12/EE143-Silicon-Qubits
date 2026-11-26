@@ -1,0 +1,17 @@
+<!-- r1-reveal -->
+<section class="light" data-title="Round 1: the set is every matrix.">
+  <div class="s">
+    <p class="eyebrow">Round 1 · reveal</p>
+    <h2>The set is every matrix.</h2>
+    <div class="body" style="flex-direction:column; gap:40px; margin-top:44px">
+      <div class="grades">
+        <div class="gbox"><p class="k">AI judges (out of 10)</p><div class="g"><div><b>2</b>GPT-5.2</div><div><b>4</b>Gemini-2.5-Pro</div><div><b>1</b>Sonnet 5</div></div></div>
+        <div class="gbox"><p class="k">Human reviewers (out of 10)</p><div class="g"><div><b>4</b>reviewer</div><div><b>2</b>reviewer</div><div><b>2</b>reviewer</div></div></div>
+      </div>
+      <p class="fragment t32 ink" style="line-height:1.4"><code class="i">{E | True}</code> is every matrix, so the closure is everything. It's trivially true without <code class="i">hA</code>, even for the zero matrix.</p>
+      <div class="fragment verdict">p-trit verdict: <span class="chip doesnt">doesn't say it</span> confidence 1.00</div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Grades: Zhang et al., Beyond Compilation, 2026 (case A-002) · Verdict: TriFault engine on the released data</span><span class="n"></span></div>
+  <aside class="notes">[19:30–20:30] The graders mostly caught this one. AI judges: GPT-5.2 gave it 2, Gemini-2.5-Pro 4, Sonnet 5 gave 1. The three human reviewers: 4, 2, 2. Click: the set {E | True} is every matrix, not the elementary ones, so the closure is everything and the statement is trivially true. It doesn't even use hA. It holds for the zero matrix, which is certainly not a product of elementary matrices. Click: the p-trit engine says doesn't say it, with confidence 1.00. Easy one. They get harder.</aside>
+</section>

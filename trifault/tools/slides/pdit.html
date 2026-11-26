@@ -1,0 +1,25 @@
+<!-- pdit -->
+<section class="light" data-title="Our votes are trits, so the sampler should be ternary.">
+  <div class="s">
+    <p class="eyebrow">Back end · beyond binary</p>
+    <h2>Our votes are trits, so the sampler should be ternary.</h2>
+    <div class="body" style="gap:40px; margin-top:52px; align-items:flex-start">
+      <div class="card" style="flex:1">
+        <p class="k">p-dits vs one-hot p-bits</p>
+        <div class="big"><span class="num">~34×</span><span class="lab">fewer trials to solve 3-partition of 14 numbers: 14 three-state p-dits vs 42 p-bits, on a 130 nm chip</span></div>
+        <p class="cite">Duffee et al., PR Applied 2025</p>
+      </div>
+      <div class="card" style="flex:1">
+        <p class="k">Potts sampling in hardware</p>
+        <div class="big"><span class="num">KL 0.01</span><span class="lab">from the Boltzmann law, 4 Potts nodes with q = 4, 5 million samples, from single-photon detectors</span></div>
+        <p class="cite">Whitehead et al., Nature Electronics 2023</p>
+      </div>
+      <div class="card" style="flex:1">
+        <p class="k">Our model</p>
+        <p class="t32" style="margin-top:8px">Each statement z ∈ {0, 1, 2}. A one-hot binary encoding wastes 5 of 8 states.</p>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Duffee et al., PR Applied 2025 · Whitehead et al., Nature Electronics 2023</span><span class="n"></span></div>
+  <aside class="notes">Our variables have three values, so binary p-bits are the wrong shape. Encoding a trit in binary means one-hot, three p-bits with invalid states, or two bits with a wasted state. Duffee et al., Physical Review Applied 2025, built native multi-state p-dits on a 130 nanometre chip. For 3-partition of 14 numbers, 14 three-state p-dits needed about 34 times fewer trials to solution than 42 one-hot p-bits. And Whitehead et al., Nature Electronics 2023, sampled Potts models in hardware using single-photon avalanche diodes: 4 Potts nodes with 4 states each, 5 million samples, KL divergence 0.01 from the Boltzmann distribution. The cost of Potts: (q minus 1) squared weights per pair instead of 1. For us q is 3. A one-hot encoding of a trit in three bits uses 3 of 8 states; that's the 5 wasted states on the slide.</aside>
+</section>

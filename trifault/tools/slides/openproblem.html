@@ -1,0 +1,15 @@
+<!-- openproblem -->
+<section class="light" data-title="Open problem: prove the sampler samples.">
+  <div class="s">
+    <p class="eyebrow">Back end · open problem</p>
+    <h2>Open problem: prove the sampler samples.</h2>
+    <div class="body" style="flex-direction:column; gap:26px; margin-top:44px">
+      <p class="t32"><b class="ink">1.</b> Block Gibbs with a valid colouring leaves the Boltzmann law invariant. State it, and prove it, in Mathlib.</p>
+      <p class="t32"><b class="ink">2.</b> The p-trit rule drops the farthest state. What does it converge to?</p>
+      <p class="t32"><b class="ink">3.</b> Million-p-bit hardware with stale boundaries: its authors say it “does not establish convergence or unbiased sampling”.</p>
+      <p class="t32"><b class="ink">4.</b> We already have <code class="i">vote5_two_faults</code> and <code class="i">vote5_error_bound</code>. Help us go further.</p>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Camsari et al., PRX 2017 · Rhee et al., Advanced Science 2026 · Aadit et al., arXiv:2606.25313 (preprint)</span><span class="n"></span></div>
+  <aside class="notes">An open problem for this room, because hardware samplers make claims nobody has formally checked. One: block Gibbs with a valid graph colouring leaves the Boltzmann distribution invariant. It's textbook, but I don't know of a Mathlib statement of it for finite Markov chains; if you do, tell me. Two: the KAIST p-trit rule gives zero probability to the farthest state. What distribution does that chain actually converge to, and how far is it from Boltzmann? Three: the million-p-bit FPGA system runs with stale boundary information, and its own authors say the empirical agreement "does not establish convergence or unbiased sampling". Four: we already have fault-tolerance proofs in Lean, vote5_two_faults and vote5_error_bound. The game checks that statements mean what they say; we'd like the sampler under it to be checked too. If that interests you, come talk to me afterwards.</aside>
+</section>

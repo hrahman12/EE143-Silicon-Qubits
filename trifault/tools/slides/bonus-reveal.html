@@ -1,0 +1,17 @@
+<!-- bonus-reveal -->
+<section class="light" data-title="Bonus: a sorry inside a hypothesis.">
+  <div class="s">
+    <p class="eyebrow">Bonus · reveal</p>
+    <h2>A <span style="font-family:var(--mono); font-weight:400">sorry</span> inside a hypothesis.</h2>
+    <div class="body" style="flex-direction:column; gap:40px; margin-top:44px">
+      <div class="grades">
+        <div class="gbox"><p class="k">AI judges (out of 10)</p><div class="g"><div><b>5</b>GPT-5.2</div><div><b>6</b>Gemini-2.5-Pro</div></div></div>
+        <div class="gbox"><p class="k">Human reviewers (out of 10)</p><div class="g"><div><b>1</b>reviewer</div><div><b>7</b>reviewer</div><div><b>4</b>reviewer</div></div></div>
+      </div>
+      <p class="fragment t32 ink" style="line-height:1.4">The <code class="i">sorry</code> fakes ‖z‖ &lt; 1 for every complex z, z = 2 included. And it asks for differentiability on all of ℂ, not holomorphy on the disk.</p>
+      <div class="fragment verdict">p-trit verdict: <span class="chip doesnt">doesn't say it</span> confidence 0.98</div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Grades: Zhang et al., Beyond Compilation, 2026 (case A-011) · Verdict: TriFault engine on the released data</span><span class="n"></span></div>
+  <aside class="notes">[24:30–25:30] Grades: GPT-5.2 5, Gemini-2.5-Pro 6. Humans 1, 7 and 4, so the humans were all over the place. Click: the sorry sits inside the hypothesis hf, where it proves that ‖z‖ &lt; 1 for every complex z, including z = 2. That's false, but sorry doesn't care. And hf asks for f to be differentiable on all of ℂ, which is not what holomorphic on the disk means. Click: p-trit says doesn't say it, 0.98. Point for the room: a sorry in a statement is not the same as a sorry in a proof, and a "no sorry in proofs" check won't catch it.</aside>
+</section>

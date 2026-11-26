@@ -16,66 +16,7 @@
 <body>
 <div class="reveal"><div class="slides">
 
-<!-- 1 · cover -->
-<section class="dark" data-background-color="#00313C" data-title="Does Lean say that?">
-  <div class="s">
-    <div class="body" style="margin-top:0; gap:72px; align-items:center">
-      <div class="col" style="flex:0 0 860px; justify-content:center">
-        <div class="rule"></div>
-        <h1>Does Lean say that?</h1>
-        <p class="t44 on-dark" style="margin-top:36px">Lean checks the proof. We check the meaning.</p>
-        <p class="t24" style="margin-top:56px">Hanah Rahman · TriFault · SF Lean Meetup · [date]</p>
-      </div>
-      <div class="col fig" style="height:720px">
-        <div class="panel"><model-viewer src="assets/3d/nbo2_insulating.glb" poster="assets/renders/nbo2_insulating.png" alt="NbO2 crystal, insulating phase, rotating" camera-controls auto-rotate rotation-per-second="10deg" auto-rotate-delay="0" interaction-prompt="none" shadow-intensity="0"></model-viewer></div>
-        <p class="caption">NbO₂ crystal, insulating phase</p>
-        <p class="credit">Credit: TriFault model from COD 2106754 (Cheetham &amp; Rao 1976)</p>
-      </div>
-    </div>
-  </div>
-  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src"></span><span class="n"></span></div>
-  <aside class="notes">[00:00–00:45] Hi, I'm Hanah, I founded TriFault. Tonight is a talk and a game. The question in the title is the whole company: when Lean says a theorem is proved, does the Lean statement say what the English says? The crystal on the right is niobium dioxide. It will come back near the end, when we go from a verdict down to the atoms.</aside>
-</section>
-
-<!-- 2 · hook -->
-<section class="dark" data-background-color="#00313C" data-title="Hook: round 3's Lean">
-  <div class="s">
-    <div class="rule"></div>
-    <p class="eyebrow">An AI agent wrote this Lean for a textbook exercise</p>
-    <p class="t32 on-dark" style="margin-top:8px">English: if |G| = 2p, p an odd prime, then G ≅ ℤ<sub>2p</sub> or D<sub>p</sub>.</p>
-    <div style="margin-top:32px">{{lean:r3}}</div>
-    <div class="row" style="margin-top:48px; gap:72px; align-items:baseline">
-      <p class="fragment t44 on-dark w800">Gemini-2.5-Pro: 10/10.</p>
-      <p class="fragment t44 on-dark w800">Two of three human experts: 10/10.</p>
-      <p class="fragment t44 w800" style="color:#FF8A75">It's false.</p>
-    </div>
-  </div>
-  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Case A-094, Zhang et al., Beyond Compilation, 2026 · Statement: Doty, Lecture Notes on Abstract Algebra (CC BY 4.0)</span><span class="n"></span></div>
-  <aside class="notes">[00:45–03:00] Read the English out loud first: a group of order 2p, p an odd prime, is cyclic or dihedral. Now the Lean. It compiles, modulo the sorry. Give the room twenty seconds. Click: Gemini-2.5-Pro, used as a judge in the Beyond Compilation study, gave it 10 out of 10. Click: two of the three human expert reviewers also gave it 10 out of 10. Click: it's false. Don't explain why yet. This exact statement comes back as the boss round, round 3, and by then you'll have the tools to see it. If someone in the room already sees it, ask them to hold it until round 3.</aside>
-</section>
-
-<!-- 3 · gap -->
-<section class="light" data-title="Lean checks the proof, not the meaning.">
-  <div class="s">
-    <p class="eyebrow">The gap</p>
-    <h2>Lean checks the proof, not the meaning.</h2>
-    <div class="body" style="align-items:center">
-      <div class="flow" style="width:100%">
-        <div class="node">English<br>statement</div>
-        <div class="arrow teal"><span class="verb">formalize</span><span class="line"></span><span class="who teal">nobody checks this</span></div>
-        <div class="node">Lean<br>statement</div>
-        <div class="arrow"><span class="verb">prove</span><span class="line"></span><span class="who ink">the kernel checks this</span></div>
-        <div class="node">Proof</div>
-      </div>
-    </div>
-  </div>
-  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src"></span><span class="n"></span></div>
-  <aside class="notes">[03:00–04:30] Everyone here knows the right half of this picture. The kernel checks that the proof proves the Lean statement, and it is very good at that. The left arrow is the one nobody checks mechanically: does the Lean statement mean what the English means? Today that check is a person reading carefully, or a model acting as a judge. If the formal statement is wrong, a perfect proof of it is a perfect proof of the wrong thing. Everything else in this talk is about that left arrow.</aside>
-</section>
-
-<!--include:parts/b.html-->
-<!--include:parts/c.html-->
-<!--include:parts/d.html-->
+<!--slides-->
 
 </div></div>
 

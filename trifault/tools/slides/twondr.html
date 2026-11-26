@@ -1,0 +1,28 @@
+<!-- twondr -->
+<section class="light" data-title="Two negative-resistance regions give three states.">
+  <div class="s">
+    <p class="eyebrow">Back end · device physics</p>
+    <h2>Two negative-resistance regions give three states.</h2>
+    <div class="body" style="gap:64px; margin-top:44px">
+      <div class="col" style="flex:0 0 760px">
+        <table class="t">
+          <thead><tr><th>Applied V</th><th>Regime</th><th>Trit</th></tr></thead>
+          <tbody>
+            <tr><td class="v" style="text-align:left">1.290 V</td><td>off</td><td>0</td></tr>
+            <tr><td class="v" style="text-align:left">1.340 V</td><td>p-osc-1: random off ↔ oscillate</td><td>0 or 1</td></tr>
+            <tr><td class="v" style="text-align:left">1.500 V</td><td>oscillate</td><td>1</td></tr>
+            <tr><td class="v" style="text-align:left">1.785 V</td><td>p-osc-2: random oscillate ↔ on</td><td>1 or 2</td></tr>
+            <tr><td class="v" style="text-align:left">1.850 V</td><td>on</td><td>2</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col stack" style="justify-content:center">
+        <div class="card"><p class="k">Low-current NDR</p><p>“Field-triggered thermal runaway”, from Joule heating.</p></div>
+        <div class="card"><p class="k">High-current NDR</p><p>“A Mott-transition-related insulator–metal transition.”</p></div>
+        <div class="card"><p class="k">Randomness</p><p>Thermal and electrical noise at each boundary.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Rhee et al., Advanced Science 2026 (Fig. 2c; Introduction)</span><span class="n"></span></div>
+  <aside class="notes">Why three states. A current-swept I–V of this switch shows two negative differential resistance regions. The authors attribute the low-current one to "field-triggered thermal runaway", from Joule heating, and the high-current one to "a Mott-transition-related insulator–metal transition". In the oscillator circuit that gives five regimes as you raise the voltage. At 1.290 volts it stays off. At 1.340 it randomly either stays off or starts oscillating. At 1.500 it always oscillates. At 1.785 it randomly oscillates or latches on. At 1.850 it's on. Off, oscillating and on are the three states of the trit, and the two probabilistic boundaries are where the randomness lives. They attribute it to electrical and thermal noise. Note the path is ordinal: off to oscillating to on. There's no direct off-to-on transition, which comes back as a limitation.</aside>
+</section>

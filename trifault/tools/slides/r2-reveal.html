@@ -1,0 +1,17 @@
+<!-- r2-reveal -->
+<section class="light" data-title="Round 2: the interval never appears.">
+  <div class="s">
+    <p class="eyebrow">Round 2 · reveal</p>
+    <h2>The interval never appears.</h2>
+    <div class="body" style="flex-direction:column; gap:40px; margin-top:44px">
+      <div class="grades">
+        <div class="gbox"><p class="k">AI judges (out of 10)</p><div class="g"><div><b>4</b>GPT-5.2</div><div><b>5</b>Gemini-2.5-Pro</div><div><b>[__]</b>Sonnet 5</div></div></div>
+        <div class="gbox"><p class="k">Human reviewers (out of 10)</p><div class="g"><div><b>2</b>reviewer</div><div><b>4</b>reviewer</div><div><b>5</b>reviewer</div></div></div>
+      </div>
+      <p class="fragment t32 ink" style="line-height:1.4">The name says <code class="i">Ioo</code>, but x is never restricted to (−1, 1). At x = 1 the partial sums are n, and Mathlib's <code class="i">tsum</code> of a non-summable series is 0. So x = 1 alone proves it.</p>
+      <div class="fragment verdict">p-trit verdict: <span class="chip doesnt">doesn't say it</span> confidence 1.00</div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Grades: Zhang et al., Beyond Compilation, 2026 (case A-049) · Verdict: TriFault engine on the released data</span><span class="n"></span></div>
+  <aside class="notes">[22:00–23:30] Grades: GPT-5.2 gave 4, Gemini-2.5-Pro 5, Sonnet 5 [__]. Humans 2, 4 and 5. Everyone was unsure, nobody was confident it was right. Click: the theorem name says Ioo, but x ranges over all of ℝ. At x = 1 the partial sums are n, which go to infinity, while Mathlib's tsum of a non-summable series is defined to be 0. So the convergence fails at x = 1 alone, and the statement says nothing about the hard part of the exercise, which is behaviour near 1 inside the interval. Click: p-trit says doesn't say it, 1.00. This is a classic Lean trap: junk values for tsum.</aside>
+</section>

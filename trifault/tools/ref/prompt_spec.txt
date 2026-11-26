@@ -37,3 +37,14 @@
 36. sources 37. qa
 Gemini-2.5-Pro alone matches the human majority 75.0% of the time. study's 120 audited statements
 A-002 A-049 A-011 A-094 CC BY 4.0 CC BY-SA 4.0 GPT-5.2 Gemini-2.5-Pro Sonnet 5 Lean 4 Lean 4 / Mathlib
+--- research (agent reports, sources on slides 49–50) ---
+Camsari PRX 2017 r ~ U(−1,1) I0 1610.00377 Chowdhury 2023 2302.06457
+Aadit 2022 Table I: V100 11.37, TPU 12.88, Fermi 29.85, FPGA 143.8 flips/ns. 2110.02481
+Aadit 2026 preprint 2606.25313: 10⁶ p-bits 18 FPGAs 10¹² updates/s 17× 3.6× RTX 6000 Ada
+Singh 2024 7 nm: sMTJ 2 fJ 4 transistors; LFSR p-bit 145 fJ 5,150; Xoshiro p-bit 293 fJ 11,546. 2304.05949
+Rhee 2023 NbOx p-bit 128 pJ. Rhee 2026 p-trit 2.4 nJ per trit, t_mtr 2.5 µs, ±0.2 µs, 150 nm TiN via, 20 nm NbOx 100 °C Ar:O₂ = 50:4, 50 nm TiN, 750 °C 2 min, R_L = 800 Ω, V 1.290 1.340 1.500 1.785 1.850, comparator 1.5 V 0.8 V, Q0 Q1 00 01 11 10, 2π/3 4π/3, Max-3-Cut 20 graphs N = 14 MSE 4.35 vs 6.05, ~30% ~33%, 50 numbers 76754
+Duffee 2025 ~34× 3-partition 14 values 14 p-dits 42 p-bits 130 nm 2506.00269. Whitehead 2023 KL 0.01 4 Potts nodes q = 4 5 million samples 2211.12607. one-hot 3 of 8 states 5 wasted 2^3 = 8
+NbO2: I4₁/a a = 13.70 c = 5.98 Å 295 K 96 atoms 48 primitive; rutile P4₂/mnm a = 4.846 c = 3.032 Å 1300 K; 1081 K; 0.85 eV gap 4 K; 2.71 / 3.30 Å measured room T; 2.74 / 3.26 model; 3.03 Å; Nb–O 2.00–2.08 Å 1.91–2.25 Å; gaps LDA 0.35, DMFT 0.73, optical 0.85, STS 1.05 ± 0.29, HSE 1.48; Kumar 2017 ~400 K ~1000 K ~100 nm 1200 K; Zhang 2020 >10¹² cycles; 1976 1994 2002 2019 2017 2023 2020; 0106137 2311.16469 2601.22336
+Eyert 2002 Wahila 2019 Brito 2017 Berman 2023 Bolzan 1994 Pynn 1976 Kumar 2017 Zhang 2020 Pickett Williams 2012 810 °C 1070 K 30 nm 2.75 Å 400 °C 0.88 2√2 vote5
+slide refs 22 31 35–36 49 50 51 23 24 21 27–34 20 41 34 7 1 2 3 4 5 0 1 2 10 ten
+Eyert 2.7 3.3

@@ -16,7 +16,7 @@
 <body>
 <div class="reveal"><div class="slides">
 
-<!-- 1 · cover -->
+<!-- cover -->
 <section class="dark" data-background-color="#00313C" data-title="Does Lean say that?">
   <div class="s">
     <div class="body" style="margin-top:0; gap:72px; align-items:center">
@@ -24,7 +24,8 @@
         <div class="rule"></div>
         <h1>Does Lean say that?</h1>
         <p class="t44 on-dark" style="margin-top:36px">Lean checks the proof. We check the meaning.</p>
-        <p class="t24" style="margin-top:56px">Hanah Rahman · TriFault · SF Lean Meetup · [date]</p>
+        <p class="t32" style="margin-top:28px; color:#5FC4CC">A Lean game in front. A p-trit sampler behind.</p>
+        <p class="t24" style="margin-top:48px">Hanah Rahman · TriFault · SF Lean Meetup · [date]</p>
       </div>
       <div class="col fig" style="height:720px">
         <div class="panel"><model-viewer src="assets/3d/nbo2_insulating.glb" poster="assets/renders/nbo2_insulating.png" alt="NbO2 crystal, insulating phase, rotating" camera-controls auto-rotate rotation-per-second="10deg" auto-rotate-delay="0" interaction-prompt="none" shadow-intensity="0"></model-viewer></div>
@@ -34,10 +35,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src"></span><span class="n"></span></div>
-  <aside class="notes">[00:00–00:45] Hi, I'm Hanah, I founded TriFault. Tonight is a talk and a game. The question in the title is the whole company: when Lean says a theorem is proved, does the Lean statement say what the English says? The crystal on the right is niobium dioxide. It will come back near the end, when we go from a verdict down to the atoms.</aside>
+  <aside class="notes">[00:00–00:45] Hi, I'm Hanah, I founded TriFault. Tonight is a talk and a game. TriFault is a Lean game in front and a probabilistic-trit sampler behind it. The question in the title is the whole company: when Lean says a theorem is proved, does the Lean statement say what the English says? The crystal on the right is niobium dioxide. It will come back near the end, when we go from a verdict down to the atoms.</aside>
 </section>
 
-<!-- 2 · hook -->
+<!-- hook -->
 <section class="dark" data-background-color="#00313C" data-title="Hook: round 3's Lean">
   <div class="s">
     <div class="rule"></div>
@@ -56,10 +57,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Case A-094, Zhang et al., Beyond Compilation, 2026 · Statement: Doty, Lecture Notes on Abstract Algebra (CC BY 4.0)</span><span class="n"></span></div>
-  <aside class="notes">[00:45–03:00] Read the English out loud first: a group of order 2p, p an odd prime, is cyclic or dihedral. Now the Lean. It compiles, modulo the sorry. Give the room twenty seconds. Click: Gemini-2.5-Pro, used as a judge in the Beyond Compilation study, gave it 10 out of 10. Click: two of the three human expert reviewers also gave it 10 out of 10. Click: it's false. Don't explain why yet. This exact statement comes back as the boss round, round 3, and by then you'll have the tools to see it. If someone in the room already sees it, ask them to hold it until round 3.</aside>
+  <aside class="notes">[00:45–02:30] Read the English out loud first: a group of order 2p, p an odd prime, is cyclic or dihedral. Now the Lean. It compiles, modulo the sorry. Give the room twenty seconds. Click: Gemini-2.5-Pro, used as a judge in the Beyond Compilation study, gave it 10 out of 10. Click: two of the three human expert reviewers also gave it 10 out of 10. Click: it's false. Don't explain why yet. This exact statement comes back as the boss round, round 3, and by then you'll have the tools to see it. If someone in the room already sees it, ask them to hold it until round 3.</aside>
 </section>
 
-<!-- 3 · gap -->
+<!-- gap -->
 <section class="light" data-title="Lean checks the proof, not the meaning.">
   <div class="s">
     <p class="eyebrow">The gap</p>
@@ -75,10 +76,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src"></span><span class="n"></span></div>
-  <aside class="notes">[03:00–04:30] Everyone here knows the right half of this picture. The kernel checks that the proof proves the Lean statement, and it is very good at that. The left arrow is the one nobody checks mechanically: does the Lean statement mean what the English means? Today that check is a person reading carefully, or a model acting as a judge. If the formal statement is wrong, a perfect proof of it is a perfect proof of the wrong thing. Everything else in this talk is about that left arrow.</aside>
+  <aside class="notes">[02:30–03:30] Everyone here knows the right half of this picture. The kernel checks that the proof proves the Lean statement, and it is very good at that. The left arrow is the one nobody checks mechanically: does the Lean statement mean what the English means? Today that check is a person reading carefully, or a model acting as a judge. If the formal statement is wrong, a perfect proof of it is a perfect proof of the wrong thing. Everything else in this talk is about that left arrow.</aside>
 </section>
 
-<!-- 4 · study -->
+<!-- study -->
 <section class="light" data-title="Compiling isn't the same as faithful.">
   <div class="s">
     <p class="eyebrow">The evidence</p>
@@ -99,10 +100,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Zhang et al., Beyond Compilation, 2026</span><span class="n"></span></div>
-  <aside class="notes">[04:30–06:00] This is the Beyond Compilation study, Zhang et al., 2026. They gave a tool-augmented GPT-5.2 agent 227 graduate-level textbook statements to formalize. 87.2 percent compile: 198 of 227. Only 57.7 percent are faithful to the English: 131 of 227. So about 30 points of "it compiles" is not "it means the same thing". This is not one bad model. All 8 systems they tested have a gap, from 1.3 to 29.5 points. And this isn't judge noise: human review confirms at least 23.8 of those 29.5 points are real translation errors.</aside>
+  <aside class="notes">[03:30–04:45] This is the Beyond Compilation study, Zhang et al., 2026. They gave a tool-augmented GPT-5.2 agent 227 graduate-level textbook statements to formalize. 87.2 percent compile: 198 of 227. Only 57.7 percent are faithful to the English: 131 of 227. So about 30 points of "it compiles" is not "it means the same thing". This is not one bad model. All 8 systems they tested have a gap, from 1.3 to 29.5 points. And this isn't judge noise: human review confirms at least 23.8 of those 29.5 points are real translation errors.</aside>
 </section>
 
-<!-- 5 · benchmarks -->
+<!-- benchmarks -->
 <section class="light" data-title="Benchmarks have the same problem.">
   <div class="s">
     <p class="eyebrow">The evidence</p>
@@ -130,10 +131,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Ospanov et al., 2025 · Poiroux et al., 2024 · Formal Conjectures, 2026 · Alexeev &amp; Mixon, 2025</span><span class="n"></span></div>
-  <aside class="notes">[06:00–07:30] It's not just one study. miniF2F, the benchmark everyone reports on: Ospanov et al., 2025, found the formal and informal statements disagree on more than half the problems. And when you chain formalize-then-prove end to end you get about 36 percent, versus the 97 and 69 percent reported for the two steps separately. ProofNet#: Poiroux et al. found 31.8 percent of entries in the Lean 4 ports had formalization errors. Formal Conjectures has 2,615 Lean statements, 1,029 of them open problems. For the Erdős problem that Alexeev and Mixon resolved in 2025, the repo's Lean statement allowed modulus v equal to 0. These are careful teams. The problem is the task, not the people.</aside>
+  <aside class="notes">[04:45–05:45] It's not just one study. miniF2F, the benchmark everyone reports on: Ospanov et al., 2025, found the formal and informal statements disagree on more than half the problems. And when you chain formalize-then-prove end to end you get about 36 percent, versus the 97 and 69 percent reported for the two steps separately. ProofNet#: Poiroux et al. found 31.8 percent of entries in the Lean 4 ports had formalization errors. Formal Conjectures has 2,615 Lean statements, 1,029 of them open problems. For the Erdős problem that Alexeev and Mixon resolved in 2025, the repo's Lean statement allowed modulus v equal to 0. These are careful teams. The problem is the task, not the people.</aside>
 </section>
 
-<!-- 6 · judges -->
+<!-- judges -->
 <section class="light" data-title="The judges disagree too.">
   <div class="s">
     <p class="eyebrow">The evidence</p>
@@ -147,10 +148,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Counts from the Beyond Compilation released files (Zhang et al., 2026)</span><span class="n"></span></div>
-  <aside class="notes">[07:30–10:00] These are counts I pulled from the Beyond Compilation released files. First: 18 of the 54 compiling outputs that humans confirmed don't say what the English says got a perfect 10 out of 10 from Gemini-2.5-Pro. A perfect score on a wrong statement. Second: in the random audit, 15 of 53 items, 28 percent, the human reviewers didn't all agree. Experts disagree on meaning. Third: on those same 53 items, the two AI judges split on 5. So you can't just pick one judge, human or model, and call it ground truth. You need something that weighs judges against each other and knows how far to trust each one. Pause here for questions about the data if people want them.</aside>
+  <aside class="notes">[05:45–07:15] These are counts I pulled from the Beyond Compilation released files. First: 18 of the 54 compiling outputs that humans confirmed don't say what the English says got a perfect 10 out of 10 from Gemini-2.5-Pro. A perfect score on a wrong statement. Second: in the random audit, 15 of 53 items, 28 percent, the human reviewers didn't all agree. Experts disagree on meaning. Third: on those same 53 items, the two AI judges split on 5. So you can't just pick one judge, human or model, and call it ground truth. You need something that weighs judges against each other and knows how far to trust each one. Pause here for questions about the data if people want them.</aside>
 </section>
 
-<!-- 7 · flood -->
+<!-- flood -->
 <section class="light" data-title="AI writes formal math faster than we can read it.">
   <div class="s">
     <p class="eyebrow">Why now</p>
@@ -165,10 +166,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">OpenAI via Unite.AI, 2026 · ATLAS, 2026 · Goedel-Prover, 2025 · Math Inc via IEEE Spectrum, [__]</span><span class="n"></span></div>
-  <aside class="notes">[10:00–12:00] Why now. The volume is exploding. On 6 October 2026, OpenAI released 722 manuscripts in 372 result families from an unreleased model. Meta and NYU's ATLAS produced more than 45,000 Lean declarations from 26 textbooks. Goedel-Pset-v1 has 1.64 million autoformalized statements. Math Inc's Gauss produced about 200,000 lines for sphere packing in dimensions 8 and 24. The kernel can check every proof in all of that. Nobody can read every statement in all of that.</aside>
+  <aside class="notes">[07:15–08:15] Why now. The volume is exploding. On 6 October 2026, OpenAI released 722 manuscripts in 372 result families from an unreleased model. Meta and NYU's ATLAS produced more than 45,000 Lean declarations from 26 textbooks. Goedel-Pset-v1 has 1.64 million autoformalized statements. Math Inc's Gauss produced about 200,000 lines for sphere packing in dimensions 8 and 24. The kernel can check every proof in all of that. Nobody can read every statement in all of that.</aside>
 </section>
 
-<!-- 8 · bottleneck -->
+<!-- bottleneck -->
 <section class="light" data-title="Human review is the bottleneck.">
   <div class="s">
     <p class="eyebrow">Why now</p>
@@ -184,10 +185,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Lean Pool paper, 2026 · Mathlib structure, 2026 · Lean Zulip, 2025</span><span class="n"></span></div>
-  <aside class="notes">[12:00–14:00] Mathlib had 308,129 declarations in February 2026. The Lean Pool paper shows it grows linearly, and the reason is good: strict human review. That review is exactly what keeps Mathlib trustworthy, and it doesn't scale to the volume on the last slide. In September 2025 Jason Rute asked on the Lean Zulip, in the machine learning for theorem proving stream, how anyone knows a large AI-generated project's statement means what it seems to mean. That thread is linked on the sources slide. That's the question we're building for. Note: paraphrase only, not a quote.</aside>
+  <aside class="notes">[08:15–09:00] Mathlib had 308,129 declarations in February 2026. The Lean Pool paper shows it grows linearly, and the reason is good: strict human review. That review is exactly what keeps Mathlib trustworthy, and it doesn't scale to the volume on the last slide. In September 2025 Jason Rute asked on the Lean Zulip, in the machine learning for theorem proving stream, how anyone knows a large AI-generated project's statement means what it seems to mean. That thread is linked on the sources slide. That's the question we're building for. Note: paraphrase only, not a quote.</aside>
 </section>
 
-<!-- 9 · landscape -->
+<!-- landscape -->
 <section class="light" data-title="Today's tools are for experts.">
   <div class="s">
     <p class="eyebrow">Landscape</p>
@@ -206,10 +207,40 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Lean Atlas, 2026 · Numina Fuse, 2026 · LeanScorer comparison, 2026 · AWS, [__]</span><span class="n"></span></div>
-  <aside class="notes">[14:00–17:00] Who else is working on this, and they're good. Lean Atlas, 2026, builds a dependency graph for human meaning review. It cuts the nodes you have to check by 94 to 99 percent on proof-heavy projects, and 27.3 percent on a definition-heavy one. Numina Fuse, 2026: agents formalize, then reviewer agents and people check meaning. Automatic judges: LeanScorer reaches kappa 0.766 against human labels, versus 0.603 for a plain LLM judge. AWS Automated Reasoning checks turn natural-language policies into logic and can return a TRANSLATION_AMBIGUOUS finding. The gap column is my read of where each stops. All of these assume an expert, or one judge, is the last word. Bottom line: no game, and nothing that learns whom to trust. That's the space we take. Spend the extra time here on questions about these tools.</aside>
+  <aside class="notes">[09:00–10:30] Who else is working on this, and they're good. Lean Atlas, 2026, builds a dependency graph for human meaning review. It cuts the nodes you have to check by 94 to 99 percent on proof-heavy projects, and 27.3 percent on a definition-heavy one. Numina Fuse, 2026: agents formalize, then reviewer agents and people check meaning. Automatic judges: LeanScorer reaches kappa 0.766 against human labels, versus 0.603 for a plain LLM judge. AWS Automated Reasoning checks turn natural-language policies into logic and can return a TRANSLATION_AMBIGUOUS finding. The gap column is my read of where each stops. All of these assume an expert, or one judge, is the last word. Bottom line: no game, and nothing that learns whom to trust. That's the space we take. Spend the extra time here on questions about these tools.</aside>
 </section>
 
-<!-- 10 · howto -->
+<!-- company -->
+<section class="light" data-title="A Lean game in front. A p-trit sampler behind.">
+  <div class="s">
+    <p class="eyebrow">The company</p>
+    <h2>A Lean game in front. A p-trit sampler behind.</h2>
+    <div class="body" style="align-items:center; gap:0; margin-top:96px">
+      <div class="card" style="flex:1.1; align-self:center; min-height:300px">
+        <p class="k">Front end · lean4game</p>
+        <h3>Players and AI judges vote</h3>
+        <p>Three-way vote, tap the span, reason tag. Lean witnesses settle disputes.</p>
+      </div>
+      <div class="arrow teal" style="flex:0 0 190px"><span class="verb">votes as trits</span><span class="line"></span><span class="who teal">0 · 1 · 2</span></div>
+      <div class="card" style="flex:1.1; align-self:center; min-height:300px">
+        <p class="k">Engine</p>
+        <h3>Every statement is a p-trit</h3>
+        <p>Dawid–Skene energy over statements and raters, sampled by block Gibbs.</p>
+      </div>
+      <div class="arrow" style="flex:0 0 190px"><span class="verb">samples</span><span class="line"></span><span class="who ink">verdict + trust</span></div>
+      <div class="card" style="flex:1.2; align-self:center; min-height:300px">
+        <p class="k">Back end · sampler</p>
+        <p class="t24 ink"><b>Today:</b> software Gibbs</p>
+        <p class="t24 ink" style="margin-top:10px"><b>Next:</b> FPGA p-computer</p>
+        <p class="t24 ink" style="margin-top:10px"><b>Then:</b> NbOₓ p-trit hardware</p>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src"></span><span class="n"></span></div>
+  <aside class="notes">[10:30–12:00] The company in one picture. The front end is a game built on lean4game: people and AI judges vote on whether a Lean statement says what the English says. Every vote is a trit: 0 says it, 1 can't tell, 2 doesn't. The engine treats every statement as a probabilistic trit, a p-trit, and the whole thing as one energy function, Bayesian Dawid–Skene, which it samples with block Gibbs. The back end is the sampler. Today it runs in software. The plan is an FPGA p-computer next, and p-trit hardware after that, which is the second half of this talk. Be explicit: we have no hardware today. First, the game.</aside>
+</section>
+
+<!-- howto -->
 <section class="dark" data-background-color="#00313C" data-title="Let's play.">
   <div class="s">
     <div class="rule"></div>
@@ -225,10 +256,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src"></span><span class="n"></span></div>
-  <aside class="notes">[17:00–18:00] Here's the game. I show you an English statement and the Lean an AI agent wrote for it. You vote three ways. Says it: the Lean means what the English means. Can't tell: the English is ambiguous or you can't decide. Doesn't say it: the Lean means something else. Hands up for each option when I ask. In the product you also tap the exact span of Lean that's wrong and pick a reason, so a vote carries where and why, not just a verdict. Four rounds: a warm-up, round 2, a bonus, and the boss.</aside>
+  <aside class="notes">[12:00–12:45] Here's the game. I show you an English statement and the Lean an AI agent wrote for it. You vote three ways. Says it: the Lean means what the English means. Can't tell: the English is ambiguous or you can't decide. Doesn't say it: the Lean means something else. Hands up for each option when I ask. In the product you also tap the exact span of Lean that's wrong and pick a reason, so a vote carries where and why, not just a verdict. Four rounds: a warm-up, round 2, a bonus, and the boss.</aside>
 </section>
 
-<!-- 11 · r1 -->
+<!-- r1 -->
 <section class="light" data-title="Round 1 · warm-up">
   <div class="s">
     <p class="eyebrow">Round 1 · warm-up</p>
@@ -242,10 +273,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Case A-002, Zhang et al., Beyond Compilation, 2026 · Statement: Doty, Lecture Notes on Abstract Algebra (CC BY 4.0)</span><span class="n"></span></div>
-  <aside class="notes">[18:00–19:30] Warm-up. English: any nonsingular n by n real matrix can be written as a product of elementary matrices. Here's the Lean the GPT-5.2 agent wrote, case A-002 in the study. Read it for thirty seconds. Then: hands up for says it. Can't tell. Doesn't say it. Hint if the room is stuck: look at the set inside the closure.</aside>
+  <aside class="notes">[12:45–13:45] Warm-up. English: any nonsingular n by n real matrix can be written as a product of elementary matrices. Here's the Lean the GPT-5.2 agent wrote, case A-002 in the study. Read it for thirty seconds. Then: hands up for says it. Can't tell. Doesn't say it. Hint if the room is stuck: look at the set inside the closure.</aside>
 </section>
 
-<!-- 12 · r1-reveal -->
+<!-- r1-reveal -->
 <section class="light" data-title="Round 1: the set is every matrix.">
   <div class="s">
     <p class="eyebrow">Round 1 · reveal</p>
@@ -260,10 +291,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Grades: Zhang et al., Beyond Compilation, 2026 (case A-002) · Verdict: TriFault engine on the released data</span><span class="n"></span></div>
-  <aside class="notes">[19:30–20:30] The graders mostly caught this one. AI judges: GPT-5.2 gave it 2, Gemini-2.5-Pro 4, Sonnet 5 gave 1. The three human reviewers: 4, 2, 2. Click: the set {E | True} is every matrix, not the elementary ones, so the closure is everything and the statement is trivially true. It doesn't even use hA. It holds for the zero matrix, which is certainly not a product of elementary matrices. Click: the p-trit engine says doesn't say it, with confidence 1.00. Easy one. They get harder.</aside>
+  <aside class="notes">[13:45–14:30] The graders mostly caught this one. AI judges: GPT-5.2 gave it 2, Gemini-2.5-Pro 4, Sonnet 5 gave 1. The three human reviewers: 4, 2, 2. Click: the set {E | True} is every matrix, not the elementary ones, so the closure is everything and the statement is trivially true. It doesn't even use hA. It holds for the zero matrix, which is certainly not a product of elementary matrices. Click: the p-trit engine says doesn't say it, with confidence 1.00. Easy one. They get harder.</aside>
 </section>
 
-<!-- 13 · r2 -->
+<!-- r2 -->
 <section class="light" data-title="Round 2">
   <div class="s">
     <p class="eyebrow">Round 2</p>
@@ -277,10 +308,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Case A-049, Zhang et al., Beyond Compilation, 2026 · Statement: Lebl, Basic Analysis (CC BY-SA 4.0)</span><span class="n"></span></div>
-  <aside class="notes">[20:30–22:00] Round 2. English: the geometric series, sum of x to the k, does not converge uniformly on the open interval minus 1 to 1. Here's the Lean, case A-049. Thirty seconds. Hint if needed: read the theorem name, then look for where the interval shows up in the statement. Hands up: says it, can't tell, doesn't say it.</aside>
+  <aside class="notes">[14:30–15:30] Round 2. English: the geometric series, sum of x to the k, does not converge uniformly on the open interval minus 1 to 1. Here's the Lean, case A-049. Thirty seconds. Hint if needed: read the theorem name, then look for where the interval shows up in the statement. Hands up: says it, can't tell, doesn't say it.</aside>
 </section>
 
-<!-- 14 · r2-reveal -->
+<!-- r2-reveal -->
 <section class="light" data-title="Round 2: the interval never appears.">
   <div class="s">
     <p class="eyebrow">Round 2 · reveal</p>
@@ -295,10 +326,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Grades: Zhang et al., Beyond Compilation, 2026 (case A-049) · Verdict: TriFault engine on the released data</span><span class="n"></span></div>
-  <aside class="notes">[22:00–23:30] Grades: GPT-5.2 gave 4, Gemini-2.5-Pro 5, Sonnet 5 [__]. Humans 2, 4 and 5. Everyone was unsure, nobody was confident it was right. Click: the theorem name says Ioo, but x ranges over all of ℝ. At x = 1 the partial sums are n, which go to infinity, while Mathlib's tsum of a non-summable series is defined to be 0. So the convergence fails at x = 1 alone, and the statement says nothing about the hard part of the exercise, which is behaviour near 1 inside the interval. Click: p-trit says doesn't say it, 1.00. This is a classic Lean trap: junk values for tsum.</aside>
+  <aside class="notes">[15:30–16:30] Grades: GPT-5.2 gave 4, Gemini-2.5-Pro 5, Sonnet 5 [__]. Humans 2, 4 and 5. Everyone was unsure, nobody was confident it was right. Click: the theorem name says Ioo, but x ranges over all of ℝ. At x = 1 the partial sums are n, which go to infinity, while Mathlib's tsum of a non-summable series is defined to be 0. So the convergence fails at x = 1 alone, and the statement says nothing about the hard part of the exercise, which is behaviour near 1 inside the interval. Click: p-trit says doesn't say it, 1.00. This is a classic Lean trap: junk values for tsum.</aside>
 </section>
 
-<!-- 15 · bonus -->
+<!-- bonus -->
 <section class="light" data-title="Bonus · spot the sorry">
   <div class="s">
     <p class="eyebrow">Bonus · spot the sorry</p>
@@ -315,10 +346,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Case A-011, Zhang et al., 2026 · Statement: Lebl, Guide to Cultivating Complex Analysis (CC BY-SA 4.0)</span><span class="n"></span></div>
-  <aside class="notes">[23:30–24:30] Bonus round, quick. This is the Schwarz lemma, case A-011. There is a sorry that is not at the end of the proof. Find it and say what it does. Hands up when you see it, then vote.</aside>
+  <aside class="notes">[16:30–17:15] Bonus round, quick. This is the Schwarz lemma, case A-011. There is a sorry that is not at the end of the proof. Find it and say what it does. Hands up when you see it, then vote.</aside>
 </section>
 
-<!-- 16 · bonus-reveal -->
+<!-- bonus-reveal -->
 <section class="light" data-title="Bonus: a sorry inside a hypothesis.">
   <div class="s">
     <p class="eyebrow">Bonus · reveal</p>
@@ -333,10 +364,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Grades: Zhang et al., Beyond Compilation, 2026 (case A-011) · Verdict: TriFault engine on the released data</span><span class="n"></span></div>
-  <aside class="notes">[24:30–25:30] Grades: GPT-5.2 5, Gemini-2.5-Pro 6. Humans 1, 7 and 4, so the humans were all over the place. Click: the sorry sits inside the hypothesis hf, where it proves that ‖z‖ &lt; 1 for every complex z, including z = 2. That's false, but sorry doesn't care. And hf asks for f to be differentiable on all of ℂ, which is not what holomorphic on the disk means. Click: p-trit says doesn't say it, 0.98. Point for the room: a sorry in a statement is not the same as a sorry in a proof, and a "no sorry in proofs" check won't catch it.</aside>
+  <aside class="notes">[17:15–18:00] Grades: GPT-5.2 5, Gemini-2.5-Pro 6. Humans 1, 7 and 4, so the humans were all over the place. Click: the sorry sits inside the hypothesis hf, where it proves that ‖z‖ &lt; 1 for every complex z, including z = 2. That's false, but sorry doesn't care. And hf asks for f to be differentiable on all of ℂ, which is not what holomorphic on the disk means. Click: p-trit says doesn't say it, 0.98. Point for the room: a sorry in a statement is not the same as a sorry in a proof, and a "no sorry in proofs" check won't catch it.</aside>
 </section>
 
-<!-- 17 · r3 -->
+<!-- r3 -->
 <section class="dark" data-background-color="#00313C" data-title="Round 3 · boss">
   <div class="s">
     <div class="rule"></div>
@@ -353,10 +384,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Case A-094, Zhang et al., Beyond Compilation, 2026 · Statement: Doty, Lecture Notes on Abstract Algebra (CC BY 4.0)</span><span class="n"></span></div>
-  <aside class="notes">[25:30–27:30] The boss round, the statement from the start of the talk. Groups of order 2p, p an odd prime, are cyclic or dihedral. Case A-094. Take a full minute. Hint if needed: what does ≃* mean, and what is the multiplication on ZMod (2 * p)? Vote: says it, can't tell, doesn't say it. Count roughly and say the split out loud; it matters on the next slide.</aside>
+  <aside class="notes">[18:00–19:30] The boss round, the statement from the start of the talk. Groups of order 2p, p an odd prime, are cyclic or dihedral. Case A-094. Take a full minute. Hint if needed: what does ≃* mean, and what is the multiplication on ZMod (2 * p)? Vote: says it, can't tell, doesn't say it. Count roughly and say the split out loud; it matters on the next slide.</aside>
 </section>
 
-<!-- 18 · r3-reveal -->
+<!-- r3-reveal -->
 <section class="light" data-title="Round 3: ZMod's multiplication is the ring's.">
   <div class="s">
     <p class="eyebrow">Round 3 · reveal</p>
@@ -380,10 +411,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Grades: Zhang et al., Beyond Compilation, 2026 (case A-094) · Verdicts: TriFault engine on the released data</span><span class="n"></span></div>
-  <aside class="notes">[27:30–30:00] Grades. Gemini-2.5-Pro: 10. GPT-5.2: 5. Sonnet 5: 3. Human reviewers: 10, 10 and 4. So the human majority said "says it". Click: ≃* ZMod (2 * p) is a multiplicative equivalence with ZMod's ring multiplication, not with the cyclic group of order 2p. In that monoid 0 has no inverse, so no group can be multiplicatively isomorphic to it. The left disjunct is always impossible, and the statement really claims every group of order 2p is dihedral. That's false: the cyclic group of order 6 is abelian, and D_3 isn't. The study's own two-stage model review flagged it; the human majority missed it. Click: with only the AI judges, the p-trit engine says doesn't say it at 0.99. Add the human scores and it refuses to decide: 0.51 doesn't, 0.43 can't tell, 0.06 says it. That's the behaviour we want: when trusted raters disagree, don't guess, send it to more players. And note what this means for our own numbers: our "truth" is the human majority, and here the majority is wrong. That comes back on the caveats slide.</aside>
+  <aside class="notes">[19:30–21:30] Grades. Gemini-2.5-Pro: 10. GPT-5.2: 5. Sonnet 5: 3. Human reviewers: 10, 10 and 4. So the human majority said "says it". Click: ≃* ZMod (2 * p) is a multiplicative equivalence with ZMod's ring multiplication, not with the cyclic group of order 2p. In that monoid 0 has no inverse, so no group can be multiplicatively isomorphic to it. The left disjunct is always impossible, and the statement really claims every group of order 2p is dihedral. That's false: the cyclic group of order 6 is abelian, and D_3 isn't. The study's own two-stage model review flagged it; the human majority missed it. Click: with only the AI judges, the p-trit engine says doesn't say it at 0.99. Add the human scores and it refuses to decide: 0.51 doesn't, 0.43 can't tell, 0.06 says it. That's the behaviour we want: when trusted raters disagree, don't guess, send it to more players. And note what this means for our own numbers: our "truth" is the human majority, and here the majority is wrong. That comes back on the caveats slide.</aside>
 </section>
 
-<!-- 19 · proveit -->
+<!-- proveit -->
 <section class="light" data-title="Lean can't check meaning. It can check a witness.">
   <div class="s">
     <p class="eyebrow">Settling it</p>
@@ -397,59 +428,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src"></span><span class="n"></span></div>
-  <aside class="notes">[30:00–31:00] Here's how Lean comes back in. Lean can't check meaning. But a player who votes "doesn't say it" can often settle the question with a Lean proof: that the statement is false, or trivially true, or true in a case where the English says it isn't. The kernel checks that proof, so it's gold. For round 3 the witness is the cyclic group of order 6: plug it in and both disjuncts fail. For round 1 it's the one-line proof that the statement holds without hA. Note for Hanah: the Witness.lean file in deck/lean has not been compiled yet, so the slide shows only the sentence.</aside>
+  <aside class="notes">[21:30–22:15] Here's how Lean comes back in. Lean can't check meaning. But a player who votes "doesn't say it" can often settle the question with a Lean proof: that the statement is false, or trivially true, or true in a case where the English says it isn't. The kernel checks that proof, so it's gold. For round 3 the witness is the cyclic group of order 6: plug it in and both disjuncts fail. For round 1 it's the one-line proof that the statement holds without hA. Note for Hanah: the Witness.lean file in deck/lean has not been compiled yet, so the slide shows only the sentence.</aside>
 </section>
 
-<!-- 20 · ptrit -->
-<section class="light" data-title="A p-trit: three states, Boltzmann odds.">
-  <div class="s">
-    <p class="eyebrow">The engine</p>
-    <h2>A p-trit: three states, Boltzmann odds.</h2>
-    <div class="body" style="gap:72px">
-      <div class="col" style="flex:0 0 760px">
-        <p class="t44 ink" style="font-family:var(--mono); font-size:40px; margin-top:12px">P(z) = e<sup>−E(z)</sup> / Σ<sub>u</sub> e<sup>−E(u)</sup></p>
-        <p class="t24 muted" style="margin-top:12px">z ∈ {0, 1, 2}</p>
-        <p class="t32" style="margin-top:48px">Real hardware: KAIST built NbOₓ p-trits and a ternary Potts machine.</p>
-        <p class="t32" style="margin-top:20px">TiN via 150 nm wide, NbOₓ 20 nm, TiN top 50 nm.</p>
-        <p class="t32 ink w800" style="margin-top:36px">We run it in software.</p>
-      </div>
-      <div class="col fig">
-        <div class="panel"><model-viewer src="assets/3d/ptrit_device.glb" poster="assets/renders/ptrit_device.png" alt="TiN / NbOx / TiN p-trit device, rotating" camera-controls auto-rotate rotation-per-second="10deg" auto-rotate-delay="0" interaction-prompt="none" shadow-intensity="0"></model-viewer></div>
-        <p class="caption">TiN / NbOₓ / TiN p-trit. Substrate material and via depth weren't reported.</p>
-        <p class="credit">Credit: TriFault model after Rhee et al., Advanced Science 2026</p>
-      </div>
-    </div>
-  </div>
-  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Rhee et al., Advanced Science, 2026</span><span class="n"></span></div>
-  <aside class="notes">[31:00–32:30] How the engine works. A p-trit is a probabilistic trit: three states, 0, 1, 2, each with Boltzmann odds, P of z equals e to the minus E of z over the sum over u of e to the minus E of u. Change the energies and you change the odds. This isn't only math. A KAIST team, Rhee et al. in Advanced Science 2026, built NbOx p-trits and a ternary Potts machine out of them. The device: a titanium nitride via 150 nanometres wide, 20 nanometres of NbOx, and a 50-nanometre titanium nitride top electrode. The model on the right is that stack. The paper didn't report the substrate material or the via depth, so those parts of the model are not to scale. To be clear: we run p-trits in software today. We don't have hardware.</aside>
-</section>
-
-<!-- 21 · atoms -->
-<section class="light" data-title="Down at the atoms.">
-  <div class="s">
-    <p class="eyebrow">The engine</p>
-    <h2>Down at the atoms.</h2>
-    <div class="body" style="gap:40px; margin-top:40px">
-      <div class="col fig" style="flex:0 0 440px">
-        <div class="panel"><model-viewer src="assets/3d/chain_insulating.glb" poster="assets/renders/chain_insulating.png" alt="Nb chain, insulating: paired atoms, rotating" camera-controls auto-rotate rotation-per-second="10deg" auto-rotate-delay="0" interaction-prompt="none" shadow-intensity="0"></model-viewer></div>
-        <p class="caption two">Insulating: Nb atoms pair up, 2.74 Å pairs and 3.26 Å gaps</p>
-      </div>
-      <div class="col fig" style="flex:0 0 440px">
-        <div class="panel"><model-viewer src="assets/3d/chain_metallic.glb" poster="assets/renders/chain_metallic.png" alt="Nb chain, metallic: evenly spaced atoms, rotating" camera-controls auto-rotate rotation-per-second="10deg" auto-rotate-delay="0" interaction-prompt="none" shadow-intensity="0"></model-viewer></div>
-        <p class="caption two">Metallic: evenly spaced, 3.03 Å</p>
-      </div>
-      <div class="col" style="justify-content:center; padding-left:24px">
-        <p class="t32 ink" style="line-height:1.4">KAIST attributes the high-current switch to a Mott-related insulator–metal transition.</p>
-        <p class="t32" style="margin-top:28px">Bulk NbO₂ makes it at 1081 K.</p>
-        <p class="credit" style="margin-top:40px">Credit: COD 2106754 (Cheetham &amp; Rao 1976) and COD 1548821</p>
-      </div>
-    </div>
-  </div>
-  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Rhee et al., 2026 · COD 2106754 (Cheetham &amp; Rao, 1976) · COD 1548821</span><span class="n"></span></div>
-  <aside class="notes">[32:30–33:30] Down at the atoms, because this room likes to know what's underneath. NbO2 has chains of niobium atoms. In the insulating phase they pair up: 2.74 angstrom pairs with 3.26 angstrom gaps. In the metallic phase they're evenly spaced at 3.03 angstroms. The structures come from the Crystallography Open Database, entries 2106754, Cheetham and Rao 1976, and 1548821. The KAIST paper attributes the device's high-current switching to a Mott-related insulator–metal transition. Bulk NbO2 makes that transition at 1081 kelvin. Thirty seconds of fun; move on.</aside>
-</section>
-
-<!-- 22 · engine -->
+<!-- engine -->
 <section class="light" data-title="The verdict engine.">
   <div class="s">
     <p class="eyebrow">The engine</p>
@@ -464,10 +446,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Dawid &amp; Skene, 1979 · Rubric: Zhang et al., Beyond Compilation, 2026</span><span class="n"></span></div>
-  <aside class="notes">[33:30–35:00] The verdict engine. Every vote is a trit: 0 means says it, 1 can't tell, 2 doesn't. Every statement j is a p-trit whose energy for state z is minus log of the prior pi z, minus the sum over raters i of log theta i at row z, column v i j, where v i j is rater i's vote on statement j. Theta i is rater i's 3 by 3 confusion matrix: how likely they are to vote each way given the true answer. Block Gibbs sampling alternates: sample every statement given the raters, then every rater's confusion matrix given the statements. Statisticians will recognise this: it's Bayesian Dawid–Skene from 1979, written as p-trit physics. Judge and human scores out of 10 become trits by the study's own rubric: 9 to 10 says it, 7 to 8 can't tell, 0 to 6 doesn't.</aside>
+  <aside class="notes">[22:15–23:30] The verdict engine. Every vote is a trit: 0 means says it, 1 can't tell, 2 doesn't. Every statement j is a p-trit whose energy for state z is minus log of the prior pi z, minus the sum over raters i of log theta i at row z, column v i j, where v i j is rater i's vote on statement j. Theta i is rater i's 3 by 3 confusion matrix: how likely they are to vote each way given the true answer. Block Gibbs sampling alternates: sample every statement given the raters, then every rater's confusion matrix given the statements. Statisticians will recognise this: it's Bayesian Dawid–Skene from 1979, written as p-trit physics. Judge and human scores out of 10 become trits by the study's own rubric: 9 to 10 says it, 7 to 8 can't tell, 0 to 6 doesn't.</aside>
 </section>
 
-<!-- 23 · network -->
+<!-- network -->
 <section class="light" data-title="120 real statements, 655 real votes.">
   <div class="s">
     <p class="eyebrow">The engine on real data</p>
@@ -483,10 +465,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Votes: Beyond Compilation released files (Zhang et al., 2026) · Verdicts: TriFault engine</span><span class="n"></span></div>
-  <aside class="notes">[35:00–36:00] This is the engine run on real data: the 120 statements in the study's human-audited set, and 655 real votes on them. Using the AI judges only, the engine says 51 say it, 29 can't tell, 40 don't. Everything here is real data from the released files; nothing is simulated. You can rotate it; I'll show it live in Q&A if there's time.</aside>
+  <aside class="notes">[23:30–24:15] This is the engine run on real data: the 120 statements in the study's human-audited set, and 655 real votes on them. Using the AI judges only, the engine says 51 say it, 29 can't tell, 40 don't. Everything here is real data from the released files; nothing is simulated. You can rotate it; I'll show it live in Q&A if there's time.</aside>
 </section>
 
-<!-- 24 · results -->
+<!-- results -->
 <section class="light" data-title="It decides 3 in 4 and flags the hard ones.">
   <div class="s">
     <p class="eyebrow">Results · 120 statements</p>
@@ -507,10 +489,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">TriFault engine on Beyond Compilation data (Zhang et al., 2026) · 5-fold · truth = human majority</span><span class="n"></span></div>
-  <aside class="notes">[36:00–37:30] Results, using only the two AI judges as inputs, with 5-fold cross-validation. The engine decides 91 of the 120 statements at confidence 0.9 or more. That's the "3 in 4". On those 91 it agrees with the human majority on 87, 95.6 percent. The simple fixed rule, call it faithful only if both judges give 9 or more, gets 84 of the same 91, 92.3 percent. So the gain on the decided items is small and I won't oversell it. The more useful part is the other 29, the ones the engine refuses to decide and sends to players. On those, the fixed rule is right only 18 times, 62 percent, and the humans themselves split on 19 of the 29. So the engine is flagging exactly the items where people disagree. For reference, on all 120: the GPT-5.2 judge alone matches the human majority 87.5 percent of the time, Gemini-2.5-Pro 75.0 percent, the two-judge rule 85.0 percent.</aside>
+  <aside class="notes">[24:15–25:30] Results, using only the two AI judges as inputs, with 5-fold cross-validation. The engine decides 91 of the 120 statements at confidence 0.9 or more. That's the "3 in 4". On those 91 it agrees with the human majority on 87, 95.6 percent. The simple fixed rule, call it faithful only if both judges give 9 or more, gets 84 of the same 91, 92.3 percent. So the gain on the decided items is small and I won't oversell it. The more useful part is the other 29, the ones the engine refuses to decide and sends to players. On those, the fixed rule is right only 18 times, 62 percent, and the humans themselves split on 19 of the 29. So the engine is flagging exactly the items where people disagree. For reference, on all 120: the GPT-5.2 judge alone matches the human majority 87.5 percent of the time, Gemini-2.5-Pro 75.0 percent, the two-judge rule 85.0 percent.</aside>
 </section>
 
-<!-- 25 · trust -->
+<!-- trust -->
 <section class="light" data-title="It learns whom to trust.">
   <div class="s">
     <p class="eyebrow">Results · per rater</p>
@@ -527,10 +509,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">TriFault engine on Beyond Compilation data (Zhang et al., 2026), all raters, no labels</span><span class="n"></span></div>
-  <aside class="notes">[37:30–38:30] This is the part a fixed rule can't do. From the confusion matrices, here's how often each rater votes "says it" when the statement doesn't say it. Gemini-2.5-Pro: 21 percent. Human reviewer R2: 13.5 percent. GPT-5.2: 4.5 percent. Human R3: 4.4. Human R4: 3.1. Sonnet 5: 2.6. Two things. First, these were learned with all raters together and no labels at all: the engine never saw the answers. Second, it matches what we saw in round 3: Gemini gave the false statement a 10. The engine learns that and discounts it, and it does the same for people. In the game, that's how a new player earns weight.</aside>
+  <aside class="notes">[25:30–26:15] This is the part a fixed rule can't do. From the confusion matrices, here's how often each rater votes "says it" when the statement doesn't say it. Gemini-2.5-Pro: 21 percent. Human reviewer R2: 13.5 percent. GPT-5.2: 4.5 percent. Human R3: 4.4. Human R4: 3.1. Sonnet 5: 2.6. Two things. First, these were learned with all raters together and no labels at all: the engine never saw the answers. Second, it matches what we saw in round 3: Gemini gave the false statement a 10. The engine learns that and discounts it, and it does the same for people. In the game, that's how a new player earns weight.</aside>
 </section>
 
-<!-- 26 · caveats -->
+<!-- caveats -->
 <section class="light" data-title="What this doesn't show yet.">
   <div class="s">
     <p class="eyebrow">Caveats</p>
@@ -548,10 +530,369 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Data: Zhang et al., Beyond Compilation, 2026</span><span class="n"></span></div>
-  <aside class="notes">[38:30–39:00] Before anyone asks, the caveats. 120 statements is small, and half of them are a hard subset the study picked with its own check, so they are not a random sample. Our "truth" is the human majority, and round 3 just showed you the majority can be wrong. The 0.9 confidence threshold is a choice: other thresholds give other numbers. And none of this has been tested on new data or with real players. Next step: tonight's votes, then a public pilot.</aside>
+  <aside class="notes">[26:15–26:45] Before anyone asks, the caveats. 120 statements is small, and half of them are a hard subset the study picked with its own check, so they are not a random sample. Our "truth" is the human majority, and round 3 just showed you the majority can be wrong. The 0.9 confidence threshold is a choice: other thresholds give other numbers. And none of this has been tested on new data or with real players. Next step: tonight's votes, then a public pilot.</aside>
 </section>
 
-<!-- 27 · product -->
+<!-- backend -->
+<section class="dark" data-background-color="#00313C" data-title="The back end, down to the atom">
+  <div class="s">
+    <div class="body" style="flex-direction:column; justify-content:center; margin-top:0">
+      <div class="rule"></div>
+      <p class="eyebrow">Part 2</p>
+      <h1>The back end, down to the atom.</h1>
+      <p class="t32" style="margin-top:40px">Algorithm → p-bits → p-trits → device → crystal → Nb–Nb bond.</p>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src"></span><span class="n"></span></div>
+  <aside class="notes">[26:45–27:00] Part 2. The verdict engine is a sampler. Here is the hardware path for that sampler, from the algorithm down to a single niobium bond. Every number from here on has a paper behind it, and I'll say which results are preprints, simulations or abstract-only.</aside>
+</section>
+
+<!-- pbit -->
+<section class="light" data-title="A p-bit is a Gibbs sampler in one device.">
+  <div class="s">
+    <p class="eyebrow">Back end · algorithm</p>
+    <h2>A p-bit is a Gibbs sampler in one device.</h2>
+    <div class="body" style="gap:72px; margin-top:48px">
+      <div class="col" style="flex:1.2">
+        <p style="font-family:var(--mono); font-size:36px; color:var(--dark-blue)">m<sub>i</sub> = sgn(tanh(I<sub>i</sub>) − r), r ~ U(−1,1)</p>
+        <p style="font-family:var(--mono); font-size:36px; color:var(--dark-blue); margin-top:20px">I<sub>i</sub> = I<sub>0</sub>(h<sub>i</sub> + Σ<sub>j</sub> J<sub>ij</sub> m<sub>j</sub>)</p>
+        <p class="t32" style="margin-top:40px">Update one at a time and the chain samples P(m) ∝ e<sup>−E(m)</sup>.</p>
+        <p class="t32 ink w800" style="margin-top:28px">Our verdict model is bipartite: statements, then raters. Two colours, exact block Gibbs.</p>
+      </div>
+      <div class="col" style="flex:0 0 560px; justify-content:center">
+        <div class="card" style="border-left:6px solid var(--teal)">
+          <p class="k">The catch</p>
+          <p class="t32">“Updating the p-bits in parallel leads to incorrect results.”</p>
+          <p class="cite">Camsari et al., PRX 2017</p>
+        </div>
+        <div class="card" style="margin-top:24px">
+          <p class="k">The fix</p>
+          <p>Colour the graph. Unconnected p-bits update together, with no approximation.</p>
+          <p class="cite">Chowdhury et al., 2023</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Camsari, Faria, Sutton &amp; Datta, PRX 2017 · Chowdhury et al., arXiv 2023</span><span class="n"></span></div>
+  <aside class="notes">[27:00–28:30] A p-bit is a binary unit that is randomly plus or minus 1, with its bias set by an input current. Camsari, Faria, Sutton and Datta, Physical Review X 2017: m_i equals the sign of tanh of I_i minus a uniform random number, and I_i is a weighted sum of the neighbours plus a bias, scaled by I_0, which acts as an inverse temperature. If you update the p-bits one at a time, the network samples the Boltzmann distribution of the energy. That is exactly Gibbs sampling. The catch, in their words: updating the p-bits in parallel leads to incorrect results. The fix, from the full-stack review by Chowdhury et al. 2023: colour the graph, and update all p-bits of one colour together. That is exact. Our verdict model is bipartite: statements only touch raters' confusion matrices, and raters only touch statements. So two colours suffice: sample all statements, then all raters. That's the block Gibbs I described earlier.</aside>
+</section>
+
+<!-- speed -->
+<section class="light" data-title="Dedicated samplers beat GPUs on flips per second.">
+  <div class="s">
+    <p class="eyebrow">Back end · why hardware</p>
+    <h2>Dedicated samplers beat GPUs on flips per second.</h2>
+    <div class="body" style="flex-direction:column; gap:20px; margin-top:44px">
+      <p class="t24 ink w600">Spin flips per nanosecond, Ising sampling (Table I, Aadit et al. 2022)</p>
+      <div class="hbar" style="grid-template-columns:340px 1fr 140px"><span class="lab">V100 GPU</span><span class="track"><span class="fill alt" style="width:7.9%"></span></span><span class="val">11.37</span></div>
+      <div class="hbar" style="grid-template-columns:340px 1fr 140px"><span class="lab">Google TPU</span><span class="track"><span class="fill alt" style="width:9%"></span></span><span class="val">12.88</span></div>
+      <div class="hbar" style="grid-template-columns:340px 1fr 140px"><span class="lab">Fermi GPU</span><span class="track"><span class="fill alt" style="width:20.8%"></span></span><span class="val">29.85</span></div>
+      <div class="hbar" style="grid-template-columns:340px 1fr 140px"><span class="lab">FPGA p-computer</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="val">143.8</span></div>
+      <p class="t24 muted" style="margin-top:28px">Preprint, 2026: 10⁶ p-bits on 18 FPGAs at 10¹² updates/s; 17× faster, 3.6× less energy than an RTX 6000 Ada.</p>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Aadit et al., Nature Electronics 2022 · Aadit et al., arXiv:2606.25313 (preprint, 2026)</span><span class="n"></span></div>
+  <aside class="notes">[28:30–29:45] Why build hardware at all? Because sampling is the bottleneck, and dedicated samplers are much faster. Aadit et al., Nature Electronics 2022, Table I: flips per nanosecond for Ising sampling. A V100 GPU does 11.37, a TPU 12.88, the best GPU entry 29.85. Their sparse FPGA p-computer does 143.8, on irregular graphs, and the rate grows linearly with problem size because of graph colouring. A 2026 preprint from the same group runs a million p-bits on 18 FPGAs at 10 to the 12 updates per second: 17 times faster and 3.6 times less energy than an RTX 6000 Ada, at the same decay rate as exact Gibbs. Caveat, in their words: their fastest stale-boundary mode "does not establish convergence or unbiased sampling". For our label model today, software is fast enough at 120 statements. The hardware matters at the scale of slide 7: millions of statements and votes.</aside>
+</section>
+
+<!-- energy -->
+<section class="light" data-title="Physical randomness is cheap. NbOₓ isn’t there yet.">
+  <div class="s">
+    <p class="eyebrow">Back end · energy per random bit</p>
+    <h2>Physical randomness is cheap. NbOₓ isn’t there yet.</h2>
+    <div class="body" style="flex-direction:column; gap:28px; margin-top:44px">
+      <table class="t" style="width:1400px">
+        <thead><tr><th>Random source</th><th style="text-align:right">Energy per random bit</th><th style="text-align:right">Transistors</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td><b>sMTJ p-bit</b> (7 nm estimate)</td><td class="v">2 fJ</td><td class="v">4</td><td>Singh et al. 2024</td></tr>
+          <tr><td>LFSR digital p-bit (7 nm)</td><td class="v">145 fJ</td><td class="v">5,150</td><td>Singh et al. 2024</td></tr>
+          <tr><td>Xoshiro digital p-bit (7 nm)</td><td class="v">293 fJ</td><td class="v">11,546</td><td>Singh et al. 2024</td></tr>
+          <tr><td>NbOₓ oscillator p-bit</td><td class="v">128 pJ</td><td class="v">—</td><td>Rhee et al. 2023</td></tr>
+          <tr><td><b>NbOₓ p-trit</b> (oscillator only)</td><td class="v">2.4 nJ per trit</td><td class="v">—</td><td>Rhee et al. 2026</td></tr>
+        </tbody>
+      </table>
+      <p class="t24 muted">Cheap randomness must also be good: LFSR p-bits get inference wrong (Singh et al. 2024).</p>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Singh et al., Nature Communications 2024 · Rhee et al., Nature Communications 2023 · Rhee et al., Advanced Science 2026</span><span class="n"></span></div>
+  <aside class="notes">[29:45–30:45] Energy per random bit. Singh et al., Nature Communications 2024, synthesised p-bits in a 7 nanometre design kit. A stochastic magnetic tunnel junction p-bit: about 2 femtojoules and 4 transistors; that 2 fJ figure is from an earlier paper. A digital p-bit with an LFSR random source: 145 femtojoules, 5,150 transistors. With a good generator, Xoshiro: 293 femtojoules, 11,546 transistors. And quality matters: they show LFSR p-bits get the Boltzmann distribution wrong in inference, not just optimisation. Now the honest line. The NbOx devices are much worse today: the 2023 KAIST NbOx p-bit is 128 picojoules per bit, and the 2026 p-trit is 2.4 nanojoules per trit for the oscillator alone. That's the gap a hardware roadmap has to close, and it's why our next step is an FPGA, not a chip.</aside>
+</section>
+
+<!-- pdit -->
+<section class="light" data-title="Our votes are trits, so the sampler should be ternary.">
+  <div class="s">
+    <p class="eyebrow">Back end · beyond binary</p>
+    <h2>Our votes are trits, so the sampler should be ternary.</h2>
+    <div class="body" style="gap:40px; margin-top:52px; align-items:flex-start">
+      <div class="card" style="flex:1">
+        <p class="k">p-dits vs one-hot p-bits</p>
+        <div class="big"><span class="num">~34×</span><span class="lab">fewer trials to solve 3-partition of 14 numbers: 14 three-state p-dits vs 42 p-bits, on a 130 nm chip</span></div>
+        <p class="cite">Duffee et al., PR Applied 2025</p>
+      </div>
+      <div class="card" style="flex:1">
+        <p class="k">Potts sampling in hardware</p>
+        <div class="big"><span class="num">KL 0.01</span><span class="lab">from the Boltzmann law, 4 Potts nodes with q = 4, 5 million samples, from single-photon detectors</span></div>
+        <p class="cite">Whitehead et al., Nature Electronics 2023</p>
+      </div>
+      <div class="card" style="flex:1">
+        <p class="k">Our model</p>
+        <p class="t32" style="margin-top:8px">Each statement z ∈ {0, 1, 2}. A one-hot binary encoding wastes 5 of 8 states.</p>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Duffee et al., PR Applied 2025 · Whitehead et al., Nature Electronics 2023</span><span class="n"></span></div>
+  <aside class="notes">[30:45–31:45] Our variables have three values, so binary p-bits are the wrong shape. Encoding a trit in binary means one-hot, three p-bits with invalid states, or two bits with a wasted state. Duffee et al., Physical Review Applied 2025, built native multi-state p-dits on a 130 nanometre chip. For 3-partition of 14 numbers, 14 three-state p-dits needed about 34 times fewer trials to solution than 42 one-hot p-bits. And Whitehead et al., Nature Electronics 2023, sampled Potts models in hardware using single-photon avalanche diodes: 4 Potts nodes with 4 states each, 5 million samples, KL divergence 0.01 from the Boltzmann distribution. The cost of Potts: (q minus 1) squared weights per pair instead of 1. For us q is 3. A one-hot encoding of a trit in three bits uses 3 of 8 states; that's the 5 wasted states on the slide.</aside>
+</section>
+
+<!-- ptrit -->
+<section class="light" data-title="KAIST’s p-trit: a NbOₓ switch in an oscillator.">
+  <div class="s">
+    <p class="eyebrow">Back end · device</p>
+    <h2>KAIST’s p-trit: a NbOₓ switch in an oscillator.</h2>
+    <div class="body" style="gap:64px; margin-top:44px">
+      <div class="col" style="flex:0 0 720px">
+        <table class="t">
+          <tbody>
+            <tr><td><b>Top</b></td><td>50 nm TiN, reactive sputter, room temperature</td></tr>
+            <tr><td><b>Switch</b></td><td>20 nm NbOₓ, reactive sputter at 100 °C, Ar:O₂ = 50:4</td></tr>
+            <tr><td><b>Bottom</b></td><td>150 nm TiN via in a foundry-planarized substrate</td></tr>
+            <tr><td><b>Anneal</b></td><td>750 °C for 2 min, to crystallize NbOₓ</td></tr>
+            <tr><td><b>Circuit</b></td><td>Series R<sub>L</sub> = 800 Ω, parallel C<sub>P</sub>: a Pearson–Anson oscillator</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col fig">
+        <div class="panel"><model-viewer src="assets/3d/ptrit_device.glb" poster="assets/renders/ptrit_device.png" alt="TiN / NbOx / TiN p-trit device, rotating" camera-controls auto-rotate rotation-per-second="10deg" auto-rotate-delay="0" interaction-prompt="none" shadow-intensity="0"></model-viewer></div>
+        <p class="caption">TiN / NbOₓ / TiN stack. Substrate material and via depth weren't reported.</p>
+        <p class="credit">Credit: TriFault model after Rhee et al., Advanced Science 2026</p>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Rhee et al., “NbOx Mott memristor-based oscillatory p-trit for ternary Potts machine”, Advanced Science 2026</span><span class="n"></span></div>
+  <aside class="notes">[31:45–33:00] The device. Rhee and colleagues at KAIST, Advanced Science 2026, "NbOx Mott memristor-based oscillatory p-trit for ternary Potts machine". Bottom electrode: a 150 nanometre titanium nitride via in a planarized substrate from a commercial foundry. Switching layer: 20 nanometres of NbOx, reactively sputtered at 100 degrees C from a niobium target, argon to oxygen 50 to 4. Top: 50 nanometres of TiN, sputtered at room temperature. Then a rapid thermal anneal at 750 degrees for 2 minutes to crystallize the NbOx. The device sits in a Pearson–Anson oscillator: an 800 ohm series load resistor and a parallel capacitor. The model on the right is that stack; the paper doesn't report the substrate material or the via depth, so those parts are not to scale.</aside>
+</section>
+
+<!-- twondr -->
+<section class="light" data-title="Two negative-resistance regions give three states.">
+  <div class="s">
+    <p class="eyebrow">Back end · device physics</p>
+    <h2>Two negative-resistance regions give three states.</h2>
+    <div class="body" style="gap:64px; margin-top:44px">
+      <div class="col" style="flex:0 0 760px">
+        <table class="t">
+          <thead><tr><th>Applied V</th><th>Regime</th><th>Trit</th></tr></thead>
+          <tbody>
+            <tr><td class="v" style="text-align:left">1.290 V</td><td>off</td><td>0</td></tr>
+            <tr><td class="v" style="text-align:left">1.340 V</td><td>p-osc-1: random off ↔ oscillate</td><td>0 or 1</td></tr>
+            <tr><td class="v" style="text-align:left">1.500 V</td><td>oscillate</td><td>1</td></tr>
+            <tr><td class="v" style="text-align:left">1.785 V</td><td>p-osc-2: random oscillate ↔ on</td><td>1 or 2</td></tr>
+            <tr><td class="v" style="text-align:left">1.850 V</td><td>on</td><td>2</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col stack" style="justify-content:center">
+        <div class="card"><p class="k">Low-current NDR</p><p>“Field-triggered thermal runaway”, from Joule heating.</p></div>
+        <div class="card"><p class="k">High-current NDR</p><p>“A Mott-transition-related insulator–metal transition.”</p></div>
+        <div class="card"><p class="k">Randomness</p><p>Thermal and electrical noise at each boundary.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Rhee et al., Advanced Science 2026 (Fig. 2c; Introduction)</span><span class="n"></span></div>
+  <aside class="notes">[33:00–34:15] Why three states. A current-swept I–V of this switch shows two negative differential resistance regions. The authors attribute the low-current one to "field-triggered thermal runaway", from Joule heating, and the high-current one to "a Mott-transition-related insulator–metal transition". In the oscillator circuit that gives five regimes as you raise the voltage. At 1.290 volts it stays off. At 1.340 it randomly either stays off or starts oscillating. At 1.500 it always oscillates. At 1.785 it randomly oscillates or latches on. At 1.850 it's on. Off, oscillating and on are the three states of the trit, and the two probabilistic boundaries are where the randomness lives. They attribute it to electrical and thermal noise. Note the path is ordinal: off to oscillating to on. There's no direct off-to-on transition, which comes back as a limitation.</aside>
+</section>
+
+<!-- readout -->
+<section class="light" data-title="One trit every 2.5 µs: first time to oscillate.">
+  <div class="s">
+    <p class="eyebrow">Back end · readout</p>
+    <h2>One trit every 2.5 µs: first time to oscillate.</h2>
+    <div class="body" style="gap:72px; margin-top:52px">
+      <div class="col" style="flex:1.2">
+        <p style="font-family:var(--mono); font-size:40px; color:var(--dark-blue)">P = 1 − e<sup>−λ(V)·t<sub>mtr</sub></sup></p>
+        <p class="t32" style="margin-top:36px">Did the first oscillation arrive inside the window t<sub>mtr</sub> = 2.5 µs? One comparator and one flip-flop answer it.</p>
+        <p class="t32" style="margin-top:24px">V sets the odds. A longer window widens the probabilistic range.</p>
+      </div>
+      <div class="col" style="flex:0 0 560px">
+        <table class="t">
+          <thead><tr><th>Q0 Q1</th><th>State</th><th>Potts angle</th></tr></thead>
+          <tbody>
+            <tr><td class="v" style="text-align:left">0 0</td><td>off</td><td>0</td></tr>
+            <tr><td class="v" style="text-align:left">0 1, 1 1</td><td>oscillate</td><td>2π/3</td></tr>
+            <tr><td class="v" style="text-align:left">1 0</td><td>on</td><td>4π/3</td></tr>
+          </tbody>
+        </table>
+        <p class="t24 muted" style="margin-top:20px">2.4 nJ per trit, oscillator only. Same statistics with ±0.2 µs timing jitter.</p>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Rhee et al., Advanced Science 2026 (Figs. 2d–e, 3a–e)</span><span class="n"></span></div>
+  <aside class="notes">[34:15–35:15] How you read a trit without counting peaks. The metric is first-time-to-oscillate: from the start of the voltage pulse to the first oscillation peak. The readout only asks whether that first peak lands inside a monitoring window, t_mtr, which they set to 2.5 microseconds. Comparator 1 against a 1.5 volt reference says whether the base state is on or off; comparator 2 against 0.8 volts clocks a D flip-flop on the first oscillation edge. Two bits: 00 is off, 01 or 11 is oscillating, 10 is on, mapped to Potts angles 0, 2π/3 and 4π/3. The probability follows 1 minus e to the minus lambda t, where lambda is the transition rate at that bias. Voltage sets the odds; a longer window gives a wider probabilistic voltage range. 2.5 microseconds per trit, 2.4 nanojoules for the oscillator, and the statistics hold with plus or minus 0.2 microseconds of timing jitter. Their circuit was a breadboard prototype with discrete comparators and a microcontroller.</aside>
+</section>
+
+<!-- kaist -->
+<section class="light" data-title="What the p-trit paper shows, and what it doesn’t.">
+  <div class="s">
+    <p class="eyebrow">Back end · honest read</p>
+    <h2>What the p-trit paper shows, and what it doesn’t.</h2>
+    <div class="body" style="gap:56px; margin-top:44px">
+      <div class="col stack" style="flex:1">
+        <p class="label" style="margin-bottom:0">Shows</p>
+        <div class="card"><p class="k">Max-3-Cut, 20 random graphs, N = 14</p><p class="t32">Error vs brute force: MSE 4.35 vs 6.05 for a greedy p-bit machine</p></div>
+        <div class="card"><p>About 30% higher accuracy at about 33% of the operations of p-bit computing.</p></div>
+      </div>
+      <div class="col" style="flex:1.1">
+        <p class="label">Doesn’t show</p>
+        <ul class="stack t32">
+          <li>The Potts machine used <b class="ink">MCU-emulated</b> p-trits. One real device was measured.</li>
+          <li>Its update keeps two neighbouring states: an approximation to Gibbs.</li>
+          <li>No direct on ↔ off path.</li>
+          <li>No endurance or NIST numbers in the main text.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Rhee et al., Advanced Science 2026 (Figs. 4–5; Conclusions)</span><span class="n"></span></div>
+  <aside class="notes">[35:15–36:30] What the paper shows. A ternary Potts machine solving Max-3-Cut: on 20 random graphs with 14 vertices and 50 percent connectivity, the mean squared error against brute force was 4.35, versus 6.05 for a greedy p-bit Boltzmann machine that has to do three successive 2-cuts. Their abstract summarises it as about 30 percent higher accuracy at about 33 percent of the computational overhead. They also simulate ternary number partitioning with 50 numbers. What it does not show, and this room will ask. One: the Potts machine ran on microcontroller-emulated p-trits, because packaging and integration of the discrete NbOx devices aren't available yet; only the single p-trit was a real measured device. Two: their sampling rule, segmented probabilistic sampling, gives non-zero probability only to the two neighbouring states and sets the farthest to zero. That's an approximation to Gibbs, and the main text has no convergence proof for the ternary case. Three: the off-oscillate-on path is ordinal; there's no direct on-to-off transition, which they say slows convergence. Four: the main text reports no endurance or NIST randomness tests; those may be in the supplement, which I couldn't access.</aside>
+</section>
+
+<!-- crystal -->
+<section class="light" data-title="NbO₂ is a distorted rutile with a 0.85 eV gap.">
+  <div class="s">
+    <p class="eyebrow">Back end · crystal</p>
+    <h2>NbO₂ is a distorted rutile with a 0.85 eV gap.</h2>
+    <div class="body" style="gap:40px; margin-top:40px">
+      <div class="col fig">
+        <div class="panel"><model-viewer src="assets/3d/nbo2_insulating.glb" poster="assets/renders/nbo2_insulating.png" alt="NbO2 insulating phase, rotating" camera-controls auto-rotate rotation-per-second="10deg" auto-rotate-delay="0" interaction-prompt="none" shadow-intensity="0"></model-viewer></div>
+        <p class="caption">Insulating, 295 K: I4₁/a, a = 13.70 Å, c = 5.98 Å, 96 atoms (conventional cell)</p>
+      </div>
+      <div class="col fig">
+        <div class="panel"><model-viewer src="assets/3d/nbo2_metallic.glb" poster="assets/renders/nbo2_metallic.png" alt="NbO2 metallic rutile phase, rotating" camera-controls auto-rotate rotation-per-second="10deg" auto-rotate-delay="0" interaction-prompt="none" shadow-intensity="0"></model-viewer></div>
+        <p class="caption">Metallic, 1300 K: rutile P4₂/mnm, a = 4.846 Å, c = 3.032 Å</p>
+      </div>
+    </div>
+    <p class="t24 ink" style="margin-top:16px">Transition at 1081 K, second order and gradual. Indirect gap about 0.85 eV.</p>
+    <p class="credit">Credit: TriFault models from COD 2106754 (Cheetham &amp; Rao 1976) and COD 1548821</p>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Cheetham &amp; Rao 1976 · Bolzan et al. 1994 · Eyert 2002 · Wahila et al. 2019 · Berman et al. 2023</span><span class="n"></span></div>
+  <aside class="notes">[36:30–37:30] Down into the material. NbO2 at room temperature is body-centred tetragonal, space group I4_1/a, a = 13.70 and c = 5.98 angstroms: Cheetham and Rao 1976 by neutron powder diffraction, Bolzan et al. 1994 by Rietveld. It's a 2√2 by 2√2 by 2 superstructure of rutile. The conventional cell has 96 atoms; the primitive cell has 48. Above the transition it's plain rutile, P4_2/mnm; Bolzan measured a = 4.846 and c = 3.032 angstroms at 1300 K. The transition is at about 1081 K, 810 degrees C. Pynn and Wahila describe it as second order, with the distortion fading gradually over hundreds of degrees. The insulating phase has an indirect gap of about 0.85 to 0.88 eV, Berman et al. 2023's reading of optical and transport data; 0.85 eV is the 4 K optical onset. Note: the COD entries behind our models couldn't be opened from where this deck was built; the published papers above give these cells.</aside>
+</section>
+
+<!-- atoms -->
+<section class="light" data-title="Down at the atoms: Nb–Nb pairs.">
+  <div class="s">
+    <p class="eyebrow">Back end · bond</p>
+    <h2>Down at the atoms: Nb–Nb pairs.</h2>
+    <div class="body" style="gap:40px; margin-top:40px">
+      <div class="col fig" style="flex:0 0 440px">
+        <div class="panel"><model-viewer src="assets/3d/chain_insulating.glb" poster="assets/renders/chain_insulating.png" alt="Nb chain, insulating: paired atoms, rotating" camera-controls auto-rotate rotation-per-second="10deg" auto-rotate-delay="0" interaction-prompt="none" shadow-intensity="0"></model-viewer></div>
+        <p class="caption two">Insulating: Nb atoms pair up along c</p>
+      </div>
+      <div class="col fig" style="flex:0 0 440px">
+        <div class="panel"><model-viewer src="assets/3d/chain_metallic.glb" poster="assets/renders/chain_metallic.png" alt="Nb chain, metallic: evenly spaced atoms, rotating" camera-controls auto-rotate rotation-per-second="10deg" auto-rotate-delay="0" interaction-prompt="none" shadow-intensity="0"></model-viewer></div>
+        <p class="caption two">Metallic: evenly spaced, 3.03 Å</p>
+      </div>
+      <div class="col" style="justify-content:center; padding-left:16px">
+        <table class="t">
+          <thead><tr><th>Nb–Nb</th><th style="text-align:right">short / long</th></tr></thead>
+          <tbody>
+            <tr><td>Our model</td><td class="v">2.74 / 3.26 Å</td></tr>
+            <tr><td>Measured, room T</td><td class="v">2.71 / 3.30 Å</td></tr>
+            <tr><td>Rutile, 1300 K</td><td class="v">3.03 Å</td></tr>
+          </tbody>
+        </table>
+        <p class="t24" style="margin-top:24px">Nb–O spreads from 2.00–2.08 Å to 1.91–2.25 Å.</p>
+        <p class="credit" style="margin-top:24px">Credit: COD 2106754 (Cheetham &amp; Rao 1976) and COD 1548821</p>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Berman et al., arXiv 2023 · Eyert 2002 · Bolzan et al. 1994</span><span class="n"></span></div>
+  <aside class="notes">[37:30–38:30] One chain of niobium atoms along c. In rutile they're evenly spaced: the Nb–Nb distance along the chain equals c, 3.03 angstroms. In the insulating phase they pair up. Our model has 2.74 angstrom pairs and 3.26 angstrom gaps; the measured room-temperature values in Berman et al. 2023 are 2.71 and 3.30, and Eyert quotes 2.7 and 3.3. I've kept both so nobody catches a mismatch: our model's numbers need checking against the CIF. The same zigzag spreads the niobium–oxygen bonds from 2.00 to 2.08 angstroms in rutile to 1.91 to 2.25. Wahila's EXAFS shows the short bond lengthening only slightly with temperature, about 2.71 to 2.75 angstroms from 0 to 400 degrees C.</aside>
+</section>
+
+<!-- mechanism -->
+<section class="light" data-title="The gap is mostly Peierls, partly correlation.">
+  <div class="s">
+    <p class="eyebrow">Back end · mechanism</p>
+    <h2>The gap is mostly Peierls, partly correlation.</h2>
+    <div class="body" style="gap:56px; margin-top:44px">
+      <div class="col" style="flex:0 0 620px">
+        <table class="t">
+          <thead><tr><th>Band gap</th><th style="text-align:right">eV</th></tr></thead>
+          <tbody>
+            <tr><td>DFT, LDA</td><td class="v">0.35</td></tr>
+            <tr><td>DFT + cluster DMFT</td><td class="v">0.73</td></tr>
+            <tr><td>Optical absorption, 4 K</td><td class="v">0.85</td></tr>
+            <tr><td>Tunnelling spectroscopy</td><td class="v">1.05 ± 0.29</td></tr>
+            <tr><td>DFT, HSE</td><td class="v">1.48</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col stack">
+        <div class="card"><p class="k">Peierls</p><p>Nb–Nb pairing splits the d∥ band. DFT opens a gap with no correlations.</p><p class="cite">Eyert 2002 · Wahila et al. 2019</p></div>
+        <div class="card"><p class="k">Correlation-assisted</p><p>“Not a purely Peierls-type insulator.” Weaker correlation than VO₂.</p><p class="cite">Brito et al., PRB 2017</p></div>
+        <div class="card"><p class="k">Device papers</p><p>Call the high-current switch “Mott-related”.</p><p class="cite">Rhee et al. 2026</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Berman et al., arXiv 2023 (Table II) · Eyert 2002 · Wahila et al., PRM 2019 · Brito et al., PRB 2017</span><span class="n"></span></div>
+  <aside class="notes">[38:30–39:30] Why does pairing make an insulator? There's a real debate. Peierls: niobium has one d electron per atom; pairing along the chain splits the d-parallel band into bonding and antibonding halves and opens a gap. Eyert showed that plain DFT already opens one; Wahila et al. 2019 with hard X-ray photoemission and EXAFS conclude a second-order Peierls transition "with little to no contribution from electron correlations". On the other side, Brito, Aguiar, Haule and Kotliar, PRB 2017, with cluster DMFT: "not a purely Peierls-type insulator"; non-local correlations inside the dimers help open the gap, but correlations are weaker than in VO2. Berman et al. 2023 sit in the middle. The gap numbers show why it's contested: LDA 0.35 eV, DMFT 0.73, optical 0.85, tunnelling 1.05 plus or minus 0.29, HSE 1.48. The device papers, including KAIST's, call the switch Mott-related. For the hardware it doesn't change much; for this room it's a nice example of a statement whose meaning depends on who's saying it.</aside>
+</section>
+
+<!-- filament -->
+<section class="light" data-title="Inside the device, heat does the switching.">
+  <div class="s">
+    <p class="eyebrow">Back end · filament</p>
+    <h2>Inside the device, heat does the switching.</h2>
+    <div class="body" style="align-items:center; margin-top:44px">
+      <div class="bigrow" style="grid-template-columns:repeat(2,1fr); width:100%; gap:56px 120px">
+        <div class="big"><span class="num">~400 K</span><span class="lab">first NDR: Poole–Frenkel thermal runaway</span></div>
+        <div class="big"><span class="num">~1000 K</span><span class="lab">second NDR: the insulator–metal transition</span></div>
+        <div class="big"><span class="num">~100 nm</span><span class="lab">hot channel, above 1200 K, under voltage drive</span></div>
+        <div class="big"><span class="num">&gt;10¹²</span><span class="lab">switching cycles in a NbOₓ device</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Kumar et al., Nature Communications 2017 · Zhang et al., Nature Communications 2020</span><span class="n"></span></div>
+  <aside class="notes">[39:30–40:30] What happens inside a NbOx switch. Kumar et al., Nature Communications 2017, imaged devices while they operated, with X-ray microscopy at under 30 nanometre resolution. Both negative-resistance regions are driven by Joule heating, with temperature as the state variable. The first sets in around 400 K, a thermal runaway in Poole–Frenkel conduction through traps. The second is near 1000 K, the insulator–metal transition, which they model at 1070 K. Under voltage drive a hot spot above 1200 K forms and leaves a conducting channel roughly 100 nanometres across, while the rest of the device sits near 400 K. Endurance: Zhang et al., Nature Communications 2020, report over 10 to the 12 cycles for a NbOx neuron device. Pickett and Williams 2012 report sub-nanosecond switching, but I've only seen that abstract, so it's not on the slide.</aside>
+</section>
+
+<!-- zoom -->
+<section class="light" data-title="From a verdict to an atom.">
+  <div class="s">
+    <p class="eyebrow">The stack</p>
+    <h2>From a verdict to an atom.</h2>
+    <div class="body" style="gap:0; margin-top:48px; align-items:flex-start">
+      <div class="fig" style="flex:1"><div class="panel" style="height:420px; flex:none"><img src="assets/renders/verdict_network.png" alt="Verdict network"></div><p class="caption">Verdict network (software)</p></div>
+      <div class="teal w800 t32" style="padding:190px 14px 0">→</div>
+      <div class="fig" style="flex:1"><div class="panel" style="height:420px; flex:none"><img src="assets/renders/ptrit_device.png" alt="TiN / NbOx / TiN device"></div><p class="caption">TiN / NbOₓ / TiN device: 150 nm via, 20 nm film</p></div>
+      <div class="teal w800 t32" style="padding:190px 14px 0">→</div>
+      <div class="fig" style="flex:1"><div class="panel" style="height:420px; flex:none"><img src="assets/renders/nbo2_insulating.png" alt="NbO2 crystal"></div><p class="caption">NbO₂ crystal: 13.70 × 13.70 × 5.98 Å, 96-atom cell</p></div>
+      <div class="teal w800 t32" style="padding:190px 14px 0">→</div>
+      <div class="fig" style="flex:1"><div class="panel" style="height:420px; flex:none"><img src="assets/renders/chain_insulating.png" alt="One Nb chain"></div><p class="caption">One Nb chain: paired, 3.03 Å when metallic</p></div>
+    </div>
+    <p class="credit" style="margin-top:8px">Credit: TriFault renders · device after Rhee et al., Advanced Science 2026 · crystal from COD 2106754 (Cheetham &amp; Rao 1976) and COD 1548821</p>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Rhee et al., 2026 · COD 2106754 (Cheetham &amp; Rao, 1976) · COD 1548821</span><span class="n"></span></div>
+  <aside class="notes">[40:30–41:15] One picture of the whole stack. On the left, the verdict network, which is software today. A p-trit in hardware would be this TiN, NbOx, TiN device: a 150-nanometre via and a 20-nanometre film. The film is NbO2, whose crystal has a 13.70 by 13.70 by 5.98 angstrom cell with 96 atoms in the conventional cell. And inside the crystal, one niobium chain: paired when insulating, 3.03 angstroms evenly spaced when metallic. That was the last ten slides in one strip. From a verdict about a Lean statement down to an atom. We're at the left end today.</aside>
+</section>
+
+<!-- openproblem -->
+<section class="light" data-title="Open problem: prove the sampler samples.">
+  <div class="s">
+    <p class="eyebrow">Back end · open problem</p>
+    <h2>Open problem: prove the sampler samples.</h2>
+    <div class="body" style="flex-direction:column; gap:26px; margin-top:44px">
+      <p class="t32"><b class="ink">1.</b> Block Gibbs with a valid colouring leaves the Boltzmann law invariant. State it, and prove it, in Mathlib.</p>
+      <p class="t32"><b class="ink">2.</b> The p-trit rule drops the farthest state. What does it converge to?</p>
+      <p class="t32"><b class="ink">3.</b> Million-p-bit hardware with stale boundaries: its authors say it “does not establish convergence or unbiased sampling”.</p>
+      <p class="t32"><b class="ink">4.</b> We already have <code class="i">vote5_two_faults</code> and <code class="i">vote5_error_bound</code>. Help us go further.</p>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Camsari et al., PRX 2017 · Rhee et al., Advanced Science 2026 · Aadit et al., arXiv:2606.25313 (preprint)</span><span class="n"></span></div>
+  <aside class="notes">[41:15–42:45] An open problem for this room, because hardware samplers make claims nobody has formally checked. One: block Gibbs with a valid graph colouring leaves the Boltzmann distribution invariant. It's textbook, but I don't know of a Mathlib statement of it for finite Markov chains; if you do, tell me. Two: the KAIST p-trit rule gives zero probability to the farthest state. What distribution does that chain actually converge to, and how far is it from Boltzmann? Three: the million-p-bit FPGA system runs with stale boundary information, and its own authors say the empirical agreement "does not establish convergence or unbiased sampling". Four: we already have fault-tolerance proofs in Lean, vote5_two_faults and vote5_error_bound. The game checks that statements mean what they say; we'd like the sampler under it to be checked too. If that interests you, come talk to me afterwards.</aside>
+</section>
+
+<!-- product -->
 <section class="light" data-title="The game is the data engine.">
   <div class="s">
     <p class="eyebrow">Product</p>
@@ -566,10 +907,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src"></span><span class="n"></span></div>
-  <aside class="notes">[39:00–40:30] The product loop. One: you play. A three-way vote, you tap the span of Lean that's wrong, and you pick a reason tag. Two: the p-trit engine turns all votes into a verdict with a confidence. Three: anything with low confidence goes to more players, like round 3 did. Four: Lean witnesses, which the kernel checks, and expert-confirmed items become gold items. Gold items score everyone, players and AI judges alike, and that's what the trust on the last slide is learned against. Every round played makes the dataset bigger and the trust estimates sharper.</aside>
+  <aside class="notes">[42:45–43:45] The product loop. One: you play. A three-way vote, you tap the span of Lean that's wrong, and you pick a reason tag. Two: the p-trit engine turns all votes into a verdict with a confidence. Three: anything with low confidence goes to more players, like round 3 did. Four: Lean witnesses, which the kernel checks, and expert-confirmed items become gold items. Gold items score everyone, players and AI judges alike, and that's what the trust on the last slide is learned against. Every round played makes the dataset bigger and the trust estimates sharper.</aside>
 </section>
 
-<!-- 28 · worlds -->
+<!-- worlds -->
 <section class="light" data-title="Every area, everywhere.">
   <div class="s">
     <p class="eyebrow">Product</p>
@@ -598,30 +939,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">lean4game: Bentkamp &amp; Eugster</span><span class="n"></span></div>
-  <aside class="notes">[40:30–42:00] The game has worlds, like the Natural Number Game. Number theory, algebra, analysis, topology, combinatorics, probability, physics using Physlib, quantum, CS and crypto specs. Then, beyond formal math, plain-English policies. Levels go from competition math to undergrad, grad, and research level, using Formal Conjectures. We build on lean4game by Bentkamp and Eugster, which already runs the Natural Number Game and already supports translations, so "everywhere" means other languages too.</aside>
+  <aside class="notes">[43:45–44:30] The game has worlds, like the Natural Number Game. Number theory, algebra, analysis, topology, combinatorics, probability, physics using Physlib, quantum, CS and crypto specs. Then, beyond formal math, plain-English policies. Levels go from competition math to undergrad, grad, and research level, using Formal Conjectures. We build on lean4game by Bentkamp and Eugster, which already runs the Natural Number Game and already supports translations, so "everywhere" means other languages too.</aside>
 </section>
 
-<!-- 29 · zoom -->
-<section class="light" data-title="From a verdict to an atom.">
-  <div class="s">
-    <p class="eyebrow">The stack</p>
-    <h2>From a verdict to an atom.</h2>
-    <div class="body" style="gap:0; margin-top:48px; align-items:flex-start">
-      <div class="fig" style="flex:1"><div class="panel" style="height:420px; flex:none"><img src="assets/renders/verdict_network.png" alt="Verdict network"></div><p class="caption">Verdict network (software)</p></div>
-      <div class="teal w800 t32" style="padding:190px 14px 0">→</div>
-      <div class="fig" style="flex:1"><div class="panel" style="height:420px; flex:none"><img src="assets/renders/ptrit_device.png" alt="TiN / NbOx / TiN device"></div><p class="caption">TiN / NbOₓ / TiN device: 150 nm via, 20 nm film</p></div>
-      <div class="teal w800 t32" style="padding:190px 14px 0">→</div>
-      <div class="fig" style="flex:1"><div class="panel" style="height:420px; flex:none"><img src="assets/renders/nbo2_insulating.png" alt="NbO2 crystal"></div><p class="caption">NbO₂ crystal: 13.70 × 13.70 × 5.98 Å cell, 96 atoms</p></div>
-      <div class="teal w800 t32" style="padding:190px 14px 0">→</div>
-      <div class="fig" style="flex:1"><div class="panel" style="height:420px; flex:none"><img src="assets/renders/chain_insulating.png" alt="One Nb chain"></div><p class="caption">One Nb chain: 2.74 Å pairs, 3.03 Å when metallic</p></div>
-    </div>
-    <p class="credit" style="margin-top:8px">Credit: TriFault renders · device after Rhee et al., Advanced Science 2026 · crystal from COD 2106754 (Cheetham &amp; Rao 1976) and COD 1548821</p>
-  </div>
-  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Rhee et al., 2026 · COD 2106754 (Cheetham &amp; Rao, 1976) · COD 1548821</span><span class="n"></span></div>
-  <aside class="notes">[42:00–43:00] One picture of the whole stack. On the left, the verdict network, which is software today. A p-trit in hardware would be this TiN, NbOx, TiN device: a 150-nanometre via and a 20-nanometre film. The film is NbO2, whose crystal has a 13.70 by 13.70 by 5.98 angstrom cell with 96 atoms. And inside the crystal, one niobium chain: 2.74 angstrom pairs when insulating, 3.03 angstroms evenly spaced when metallic. From a verdict about a Lean statement down to an atom. We're at the left end today.</aside>
-</section>
-
-<!-- 30 · customers -->
+<!-- customers -->
 <section class="light" data-title="Who pays.">
   <div class="s">
     <p class="eyebrow">Plan</p>
@@ -636,10 +957,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">AI for Math Fund via EdTech Innovation Hub, 2026</span><span class="n"></span></div>
-  <aside class="notes">[43:00–44:30] This is a plan, not traction. Four groups. AI-for-math labs and formalization companies: they need labels, audits of their outputs, and a benchmark for their own judges. Verification teams in industry: the same question in a different setting, does the spec say what the requirement says. Universities: teaching formalization, where the game is the course material. And grants: the AI for Math Fund has committed 35.1 million dollars; its 2026 round gave 17.1 million to 22 projects out of more than 470 applications.</aside>
+  <aside class="notes">[44:30–45:15] This is a plan, not traction. Four groups. AI-for-math labs and formalization companies: they need labels, audits of their outputs, and a benchmark for their own judges. Verification teams in industry: the same question in a different setting, does the spec say what the requirement says. Universities: teaching formalization, where the game is the course material. And grants: the AI for Math Fund has committed 35.1 million dollars; its 2026 round gave 17.1 million to 22 projects out of more than 470 applications.</aside>
 </section>
 
-<!-- 31 · money -->
+<!-- money -->
 <section class="light" data-title="Labs pay a lot for human judgment.">
   <div class="s">
     <p class="eyebrow">Plan · business model</p>
@@ -666,10 +987,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Dealroom, 2026 · TechCrunch, 2025 and 2026 · BusinessWire, 2025 · SiliconANGLE, 2026</span><span class="n"></span></div>
-  <aside class="notes">[44:30–46:00] Business model. Players play free. Customers pay per audited statement, and pay subscriptions for labels and for the judge benchmark. Top players earn bounties. Prices: [__]. Why we think labs pay: they already pay a lot for human judgment. Mercor reached about 2 billion dollars in annualized gross revenue by June 2026, after a 350 million Series C at a 10 billion valuation in October 2025. LMArena raised a 150 million Series A at 1.7 billion in January 2026. In formal math specifically, Harmonic raised a 120 million Series C at 1.45 billion in November 2025, and Axiom Math a 200 million Series A at 1.6 billion in March 2026. These are comparables, not customers. The AI provers make the meaning check more urgent: a proof of the wrong statement is worth nothing to them. We see them as partners and potential customers, not competitors.</aside>
+  <aside class="notes">[45:15–46:15] Business model. Players play free. Customers pay per audited statement, and pay subscriptions for labels and for the judge benchmark. Top players earn bounties. Prices: [__]. Why we think labs pay: they already pay a lot for human judgment. Mercor reached about 2 billion dollars in annualized gross revenue by June 2026, after a 350 million Series C at a 10 billion valuation in October 2025. LMArena raised a 150 million Series A at 1.7 billion in January 2026. In formal math specifically, Harmonic raised a 120 million Series C at 1.45 billion in November 2025, and Axiom Math a 200 million Series A at 1.6 billion in March 2026. These are comparables, not customers. The AI provers make the meaning check more urgent: a proof of the wrong statement is worth nothing to them. We see them as partners and potential customers, not competitors.</aside>
 </section>
 
-<!-- 32 · moat -->
+<!-- moat -->
 <section class="light" data-title="What compounds.">
   <div class="s">
     <p class="eyebrow">Plan · moat</p>
@@ -692,10 +1013,10 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">University of Washington, 2011 · Naval Postgraduate School, 2014</span><span class="n"></span></div>
-  <aside class="notes">[46:00–47:30] What compounds, as a plan. The labeled set of real misformalizations. The reason tags, which say why each one is wrong. Every rater's learned trust, human and AI. And Lean-witnessed gold items, which the kernel has checked. Two lessons from earlier science games. Foldit, 2011: players solved the structure of a retroviral protease that had stumped scientists for over a decade, in three weeks. But DARPA's Verigames, which tried to turn software verification into games, got smaller audiences and more one-time players than regular games, per a 2014 Naval Postgraduate School study. So we don't design for the mass market. We design for power players: people like this room.</aside>
+  <aside class="notes">[46:15–47:00] What compounds, as a plan. The labeled set of real misformalizations. The reason tags, which say why each one is wrong. Every rater's learned trust, human and AI. And Lean-witnessed gold items, which the kernel has checked. Two lessons from earlier science games. Foldit, 2011: players solved the structure of a retroviral protease that had stumped scientists for over a decade, in three weeks. But DARPA's Verigames, which tried to turn software verification into games, got smaller audiences and more one-time players than regular games, per a 2014 Naval Postgraduate School study. So we don't design for the mass market. We design for power players: people like this room.</aside>
 </section>
 
-<!-- 33 · built -->
+<!-- built -->
 <section class="light" data-title="What I've built.">
   <div class="s">
     <p class="eyebrow">Team</p>
@@ -710,33 +1031,33 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Own work, Hanah Rahman, 2026 · github.com/hrahman12</span><span class="n"></span></div>
-  <aside class="notes">[47:30–48:30] What exists today. TriFault itself: a p-trit engine behind a Lean tactic called trifault. The p-trits propose, the kernel checks. It has found certificates for Schur S(3) at least 13, van der Waerden W(3,3) at least 27, and linear_combination certificates. Its fault tolerance is proved in Lean, in vote5_two_faults and vote5_error_bound. The verdict engine you just saw, and its run on the real study data. A quantum error correction library in Lean: 40 theorems, no sorry. My background: I benchmarked Ising models on quantum annealers at MIT Lincoln Lab. Team: [__].</aside>
+  <aside class="notes">[47:00–48:00] What exists today. TriFault itself: a p-trit engine behind a Lean tactic called trifault. The p-trits propose, the kernel checks. It has found certificates for Schur S(3) at least 13, van der Waerden W(3,3) at least 27, and linear_combination certificates. Its fault tolerance is proved in Lean, in vote5_two_faults and vote5_error_bound. The verdict engine you just saw, and its run on the real study data. A quantum error correction library in Lean: 40 theorems, no sorry. My background: I benchmarked Ising models on quantum annealers at MIT Lincoln Lab. Team: [__].</aside>
 </section>
 
-<!-- 34 · ask -->
+<!-- ask -->
 <section class="light" data-title="The plan and the ask.">
   <div class="s">
     <p class="eyebrow">Plan</p>
     <h2>The plan and the ask.</h2>
     <div class="body" style="flex-direction:column; gap:56px; margin-top:52px">
       <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:20px">
-        <div class="card" style="padding:28px"><p class="k">1</p><p class="t24 ink">Tonight's live round</p></div>
-        <div class="card" style="padding:28px"><p class="k">2</p><p class="t24 ink">Public beta on lean4game</p></div>
-        <div class="card" style="padding:28px"><p class="k">3</p><p class="t24 ink">p-trit engine as an open library</p></div>
-        <div class="card" style="padding:28px"><p class="k">4</p><p class="t24 ink">Paid audits for [__] design partners</p></div>
-        <div class="card" style="padding:28px"><p class="k">5</p><p class="t24 ink">Worlds beyond math</p></div>
+        <div class="card" style="padding:28px"><p class="k">1 · Front end</p><p class="t24 ink">Tonight's live round, then a public beta on lean4game</p></div>
+        <div class="card" style="padding:28px"><p class="k">2 · Engine</p><p class="t24 ink">p-trit engine as an open library</p></div>
+        <div class="card" style="padding:28px"><p class="k">3 · Customers</p><p class="t24 ink">Paid audits for [__] design partners</p></div>
+        <div class="card" style="padding:28px"><p class="k">4 · Back end</p><p class="t24 ink">FPGA p-computer, then NbOₓ p-trits with a hardware partner [__]</p></div>
+        <div class="card" style="padding:28px"><p class="k">5 · Worlds</p><p class="t24 ink">Worlds beyond math</p></div>
       </div>
       <div class="card" style="border-left:6px solid var(--teal)">
         <p class="k">The ask</p>
-        <p class="t44 ink">Raising $[__]. Looking for [__] design partners, [__] Lean engineers, and players.</p>
+        <p class="t44 ink">Raising $[__]. Looking for [__] design partners, [__] Lean engineers, hardware collaborators, and players.</p>
       </div>
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src"></span><span class="n"></span></div>
-  <aside class="notes">[48:30–50:00] The plan, in order, no dates. One: tonight's live round, which you've just played. Two: a public beta on lean4game. Three: release the p-trit engine as an open library. Four: paid audits for [__] design partners. Five: worlds beyond math, starting with plain-English policies. The ask. We're raising $[__]. We're looking for [__] design partners, especially AI-for-math labs and formalization teams. [__] Lean engineers. And players: if you enjoyed tonight, you're who we're building for.</aside>
+  <aside class="notes">[48:00–50:00] The plan, in order, no dates. One: tonight's live round, which you've just played. Two: a public beta on lean4game. Then the p-trit engine as an open library, and paid audits for [__] design partners. On the back end: move the sampler from software to an FPGA p-computer, then to NbOx p-trits with a hardware partner, [__]. And worlds beyond math, starting with plain-English policies. The ask. We're raising $[__]. We're looking for [__] design partners, especially AI-for-math labs and formalization teams. [__] Lean engineers. Hardware collaborators, for the open problem a few slides ago. And players: if you enjoyed tonight, you're who we're building for.</aside>
 </section>
 
-<!-- 35 · close -->
+<!-- close -->
 <section class="dark" data-background-color="#00313C" data-title="Close and questions">
   <div class="s">
     <div class="body" style="flex-direction:column; justify-content:center; margin-top:0">
@@ -747,14 +1068,14 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src"></span><span class="n"></span></div>
-  <aside class="notes">[50:00–60:00] Close: Lean checks the proof. We check the meaning. Thank you. Ten minutes of questions. If there's time, demo the live 3D page: open slide 23 and rotate the verdict network, or slide 20 for the device. Backup slides: 36 is sources, 37 is short answers to likely questions. Likely questions: Isn't this just LLM-as-judge? The judges are inputs; the engine learns how far to trust each from gold items and flags disagreement. Gemini-2.5-Pro alone matches the human majority 75.0 percent on the 120. Why p-trits? It is Bayesian Dawid–Skene; p-trits give the same sampler TriFault runs, which runs natively on p-trit hardware. Who labels gold? Lean witnesses plus expert-confirmed mismatches. Gaming? Gold items score every player; trust is learned per player. Bad English? That's what can't tell is for. Why would AI provers pay? Their outputs only count if the statements mean what they say.</aside>
+  <aside class="notes">[50:00–60:00] Close: Lean checks the proof. We check the meaning. Thank you. Ten minutes of questions. If there's time, demo the live 3D page: open slide 22 and rotate the verdict network, slide 31 for the device, or slides 35–36 for the crystal and chains. Backup slides: 49 and 50 are sources, 51 is short answers to likely questions. Likely questions: Isn't this just LLM-as-judge? The judges are inputs; the engine learns how far to trust each from gold items and flags disagreement. Gemini-2.5-Pro alone matches the human majority 75.0 percent on the 120. Why p-trits? It is Bayesian Dawid–Skene; p-trits give the same sampler TriFault runs, which runs natively on p-trit hardware. Who labels gold? Lean witnesses plus expert-confirmed mismatches. Gaming? Gold items score every player; trust is learned per player. Bad English? That's what can't tell is for. Why would AI provers pay? Their outputs only count if the statements mean what they say.</aside>
 </section>
 
-<!-- 36 · sources (backup) -->
-<section class="light" data-title="Sources">
+<!-- sources (backup) -->
+<section class="light" data-title="Sources: problem and game">
   <div class="s">
     <p class="eyebrow">Backup</p>
-    <h2>Sources</h2>
+    <h2>Sources: problem and game</h2>
     <div class="srcs" style="margin-top:28px; columns:2; column-gap:56px; font-size:20px; line-height:1.3; color:var(--dark-gray); overflow-wrap:anywhere">
       <p>Beyond Compilation: <a href="https://arxiv.org/abs/2606.31002">https://arxiv.org/abs/2606.31002</a> · data <a href="https://github.com/grenadeComing/beyond-compilation">https://github.com/grenadeComing/beyond-compilation</a></p>
       <p>miniF2F-Lean Revisited: <a href="https://arxiv.org/abs/2511.03108">https://arxiv.org/abs/2511.03108</a></p>
@@ -783,7 +1104,37 @@
   <aside class="notes">[backup, not timed] All sources. Every number on a slide has a short source line on that slide; the full links are here. Show only if asked.</aside>
 </section>
 
-<!-- 37 · qa (backup) -->
+<!-- sources2 -->
+<section class="light" data-title="Sources: hardware and materials">
+  <div class="s">
+    <p class="eyebrow">Backup</p>
+    <h2>Sources: hardware and materials</h2>
+    <div class="srcs" style="margin-top:28px; columns:2; column-gap:56px; font-size:20px; line-height:1.3; color:var(--dark-gray); overflow-wrap:anywhere">
+      <p>Rhee et al., Adv. Sci. 2026, NbOx p-trit: <a href="https://doi.org/10.1002/advs.76754">https://doi.org/10.1002/advs.76754</a></p>
+      <p>Rhee et al., Nat. Commun. 2023, NbOx p-bit: <a href="https://doi.org/10.1038/s41467-023-43085-6">https://doi.org/10.1038/s41467-023-43085-6</a></p>
+      <p>Camsari et al., PRX 2017, p-bits: <a href="https://arxiv.org/abs/1610.00377">https://arxiv.org/abs/1610.00377</a></p>
+      <p>Chowdhury et al. 2023, full-stack p-bits: <a href="https://arxiv.org/abs/2302.06457">https://arxiv.org/abs/2302.06457</a></p>
+      <p>Aadit et al., Nat. Electron. 2022, sparse Ising machines: <a href="https://arxiv.org/abs/2110.02481">https://arxiv.org/abs/2110.02481</a></p>
+      <p>Aadit et al. 2026, 1,000,000 p-bits (preprint): <a href="https://arxiv.org/abs/2606.25313">https://arxiv.org/abs/2606.25313</a></p>
+      <p>Singh et al., Nat. Commun. 2024, CMOS + sMTJ: <a href="https://arxiv.org/abs/2304.05949">https://arxiv.org/abs/2304.05949</a></p>
+      <p>Duffee et al., PR Applied 2025, p-dits: <a href="https://arxiv.org/abs/2506.00269">https://arxiv.org/abs/2506.00269</a></p>
+      <p>Whitehead et al., Nat. Electron. 2023, SPAD Potts: <a href="https://arxiv.org/abs/2211.12607">https://arxiv.org/abs/2211.12607</a></p>
+      <p>Cheetham &amp; Rao, Acta Cryst. B 1976: <a href="https://doi.org/10.1107/S0567740876005876">https://doi.org/10.1107/S0567740876005876</a></p>
+      <p>Bolzan et al., J. Solid State Chem. 1994: <a href="https://doi.org/10.1006/jssc.1994.1334">https://doi.org/10.1006/jssc.1994.1334</a></p>
+      <p>Eyert, NbO₂ Peierls instability: <a href="https://arxiv.org/abs/cond-mat/0106137">https://arxiv.org/abs/cond-mat/0106137</a></p>
+      <p>Wahila et al., PRM 2019: <a href="https://doi.org/10.1103/PhysRevMaterials.3.074602">https://doi.org/10.1103/PhysRevMaterials.3.074602</a></p>
+      <p>Brito et al., PRB 2017: <a href="https://doi.org/10.1103/PhysRevB.96.195102">https://doi.org/10.1103/PhysRevB.96.195102</a></p>
+      <p>Berman et al. 2023, NbO₂ gap: <a href="https://arxiv.org/abs/2311.16469">https://arxiv.org/abs/2311.16469</a></p>
+      <p>Kumar et al., Nat. Commun. 2017, NbO₂ NDR: <a href="https://doi.org/10.1038/s41467-017-00773-4">https://doi.org/10.1038/s41467-017-00773-4</a></p>
+      <p>Zhang et al., Nat. Commun. 2020, NbOx endurance: <a href="https://doi.org/10.1038/s41467-019-13827-6">https://doi.org/10.1038/s41467-019-13827-6</a></p>
+      <p>Label aggregation as Ising models (software): <a href="https://arxiv.org/abs/2601.22336">https://arxiv.org/abs/2601.22336</a></p>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src"></span><span class="n"></span></div>
+  <aside class="notes">[backup, not timed] Hardware and materials sources. Preprints: Aadit et al. 2026. Licence of the KAIST 2026 figures not yet confirmed, so none of their figures are reproduced; the device model is ours.</aside>
+</section>
+
+<!-- qa (backup) -->
 <section class="light" data-title="Short answers">
   <div class="s">
     <p class="eyebrow">Backup</p>
@@ -798,7 +1149,7 @@
     </div>
   </div>
   <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Zhang et al., Beyond Compilation, 2026</span><span class="n"></span></div>
-  <aside class="notes">[backup, not timed] Short answers to the six questions I expect. Use the line on the slide, then expand from the slide it points back to: judges and trust are slides 24 and 25; p-trits are slides 20 and 22; gold items are slides 19 and 27.</aside>
+  <aside class="notes">[backup, not timed] Short answers to the six questions I expect. Use the line on the slide, then expand from the slide it points back to: judges and trust are slides 23 and 24; p-trits are slides 21 and 27–34; gold items are slides 20 and 41. On "runs natively on p-trit hardware": be precise. KAIST's p-trit rule is an approximation to Gibbs and their Potts machine was emulated (slide 34).</aside>
 </section>
 
 

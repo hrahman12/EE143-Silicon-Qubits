@@ -1,0 +1,31 @@
+<!-- atoms -->
+<section class="light" data-title="Down at the atoms: Nb–Nb pairs.">
+  <div class="s">
+    <p class="eyebrow">Back end · bond</p>
+    <h2>Down at the atoms: Nb–Nb pairs.</h2>
+    <div class="body" style="gap:40px; margin-top:40px">
+      <div class="col fig" style="flex:0 0 440px">
+        <div class="panel"><model-viewer src="assets/3d/chain_insulating.glb" poster="assets/renders/chain_insulating.png" alt="Nb chain, insulating: paired atoms, rotating" camera-controls auto-rotate rotation-per-second="10deg" auto-rotate-delay="0" interaction-prompt="none" shadow-intensity="0"></model-viewer></div>
+        <p class="caption two">Insulating: Nb atoms pair up along c</p>
+      </div>
+      <div class="col fig" style="flex:0 0 440px">
+        <div class="panel"><model-viewer src="assets/3d/chain_metallic.glb" poster="assets/renders/chain_metallic.png" alt="Nb chain, metallic: evenly spaced atoms, rotating" camera-controls auto-rotate rotation-per-second="10deg" auto-rotate-delay="0" interaction-prompt="none" shadow-intensity="0"></model-viewer></div>
+        <p class="caption two">Metallic: evenly spaced, 3.03 Å</p>
+      </div>
+      <div class="col" style="justify-content:center; padding-left:16px">
+        <table class="t">
+          <thead><tr><th>Nb–Nb</th><th style="text-align:right">short / long</th></tr></thead>
+          <tbody>
+            <tr><td>Our model</td><td class="v">2.74 / 3.26 Å</td></tr>
+            <tr><td>Measured, room T</td><td class="v">2.71 / 3.30 Å</td></tr>
+            <tr><td>Rutile, 1300 K</td><td class="v">3.03 Å</td></tr>
+          </tbody>
+        </table>
+        <p class="t24" style="margin-top:24px">Nb–O spreads from 2.00–2.08 Å to 1.91–2.25 Å.</p>
+        <p class="credit" style="margin-top:24px">Credit: COD 2106754 (Cheetham &amp; Rao 1976) and COD 1548821</p>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Berman et al., arXiv 2023 · Eyert 2002 · Bolzan et al. 1994</span><span class="n"></span></div>
+  <aside class="notes">One chain of niobium atoms along c. In rutile they're evenly spaced: the Nb–Nb distance along the chain equals c, 3.03 angstroms. In the insulating phase they pair up. Our model has 2.74 angstrom pairs and 3.26 angstrom gaps; the measured room-temperature values in Berman et al. 2023 are 2.71 and 3.30, and Eyert quotes 2.7 and 3.3. I've kept both so nobody catches a mismatch: our model's numbers need checking against the CIF. The same zigzag spreads the niobium–oxygen bonds from 2.00 to 2.08 angstroms in rutile to 1.91 to 2.25. Wahila's EXAFS shows the short bond lengthening only slightly with temperature, about 2.71 to 2.75 angstroms from 0 to 400 degrees C.</aside>
+</section>

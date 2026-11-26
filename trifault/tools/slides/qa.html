@@ -1,0 +1,17 @@
+<!-- qa (backup) -->
+<section class="light" data-title="Short answers">
+  <div class="s">
+    <p class="eyebrow">Backup</p>
+    <h2>Short answers.</h2>
+    <div class="body" style="flex-direction:column; gap:22px; margin-top:36px">
+      <p class="t24"><b class="ink">Isn't this just LLM-as-judge?</b> The judges are inputs. The engine learns how far to trust each one from gold items and flags where they disagree. On the study's 120 audited statements, Gemini-2.5-Pro alone matches the human majority 75.0% of the time.</p>
+      <p class="t24"><b class="ink">Why p-trits and not a plain Bayesian model?</b> Mathematically it is Bayesian Dawid–Skene. Writing it as p-trits gives the same sampler TriFault runs, and that sampler runs natively on p-trit hardware.</p>
+      <p class="t24"><b class="ink">Who labels the gold items?</b> Lean witnesses, which the kernel checks, plus expert-confirmed mismatches.</p>
+      <p class="t24"><b class="ink">How do you stop players from gaming it?</b> Gold items score every player, and trust is learned per player.</p>
+      <p class="t24"><b class="ink">What if the English is the problem?</b> That's what “can't tell” is for: it flags the source, not the Lean.</p>
+      <p class="t24"><b class="ink">Why would AI provers pay?</b> Their outputs only count if the statements mean what they say. We see Harmonic and Axiom as potential partners and customers, not competitors.</p>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Zhang et al., Beyond Compilation, 2026</span><span class="n"></span></div>
+  <aside class="notes">[backup, not timed] Short answers to the six questions I expect. Use the line on the slide, then expand from the slide it points back to: judges and trust are slides 23 and 24; p-trits are slides 21 and 27–34; gold items are slides 20 and 41. On "runs natively on p-trit hardware": be precise. KAIST's p-trit rule is an approximation to Gibbs and their Potts machine was emulated (slide 34).</aside>
+</section>

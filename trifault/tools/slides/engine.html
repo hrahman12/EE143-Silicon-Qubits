@@ -1,0 +1,17 @@
+<!-- engine -->
+<section class="light" data-title="The verdict engine.">
+  <div class="s">
+    <p class="eyebrow">The engine</p>
+    <h2>The verdict engine.</h2>
+    <div class="body" style="flex-direction:column; gap:30px; margin-top:52px">
+      <p class="t32">Every vote is a trit: 0 says it, 1 can't tell, 2 doesn't.</p>
+      <p class="t32">Every statement is a p-trit with energy</p>
+      <p style="font-family:var(--mono); font-size:40px; color:var(--dark-blue); padding-left:48px">E<sub>j</sub>(z) = −log π<sub>z</sub> − Σ<sub>i</sub> log θ<sub>i</sub>[z, v<sub>ij</sub>]</p>
+      <p class="t32">θ<sub>i</sub> is rater i's 3×3 confusion matrix. Block Gibbs alternates statements and raters.</p>
+      <p class="t32 ink w800">It's Bayesian Dawid–Skene (1979) as p-trit physics.</p>
+      <p class="t24 muted">Grades map by the study's rubric: 9–10 says it, 7–8 can't tell, 0–6 doesn't.</p>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Dawid &amp; Skene, 1979 · Rubric: Zhang et al., Beyond Compilation, 2026</span><span class="n"></span></div>
+  <aside class="notes">[33:30–35:00] The verdict engine. Every vote is a trit: 0 means says it, 1 can't tell, 2 doesn't. Every statement j is a p-trit whose energy for state z is minus log of the prior pi z, minus the sum over raters i of log theta i at row z, column v i j, where v i j is rater i's vote on statement j. Theta i is rater i's 3 by 3 confusion matrix: how likely they are to vote each way given the true answer. Block Gibbs sampling alternates: sample every statement given the raters, then every rater's confusion matrix given the statements. Statisticians will recognise this: it's Bayesian Dawid–Skene from 1979, written as p-trit physics. Judge and human scores out of 10 become trits by the study's own rubric: 9 to 10 says it, 7 to 8 can't tell, 0 to 6 doesn't.</aside>
+</section>

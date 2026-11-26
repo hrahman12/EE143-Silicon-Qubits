@@ -1,0 +1,25 @@
+<!-- kaist -->
+<section class="light" data-title="What the p-trit paper shows, and what it doesn’t.">
+  <div class="s">
+    <p class="eyebrow">Back end · honest read</p>
+    <h2>What the p-trit paper shows, and what it doesn’t.</h2>
+    <div class="body" style="gap:56px; margin-top:44px">
+      <div class="col stack" style="flex:1">
+        <p class="label" style="margin-bottom:0">Shows</p>
+        <div class="card"><p class="k">Max-3-Cut, 20 random graphs, N = 14</p><p class="t32">Error vs brute force: MSE 4.35 vs 6.05 for a greedy p-bit machine</p></div>
+        <div class="card"><p>About 30% higher accuracy at about 33% of the operations of p-bit computing.</p></div>
+      </div>
+      <div class="col" style="flex:1.1">
+        <p class="label">Doesn’t show</p>
+        <ul class="stack t32">
+          <li>The Potts machine used <b class="ink">MCU-emulated</b> p-trits. One real device was measured.</li>
+          <li>Its update keeps two neighbouring states: an approximation to Gibbs.</li>
+          <li>No direct on ↔ off path.</li>
+          <li>No endurance or NIST numbers in the main text.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Rhee et al., Advanced Science 2026 (Figs. 4–5; Conclusions)</span><span class="n"></span></div>
+  <aside class="notes">What the paper shows. A ternary Potts machine solving Max-3-Cut: on 20 random graphs with 14 vertices and 50 percent connectivity, the mean squared error against brute force was 4.35, versus 6.05 for a greedy p-bit Boltzmann machine that has to do three successive 2-cuts. Their abstract summarises it as about 30 percent higher accuracy at about 33 percent of the computational overhead. They also simulate ternary number partitioning with 50 numbers. What it does not show, and this room will ask. One: the Potts machine ran on microcontroller-emulated p-trits, because packaging and integration of the discrete NbOx devices aren't available yet; only the single p-trit was a real measured device. Two: their sampling rule, segmented probabilistic sampling, gives non-zero probability only to the two neighbouring states and sets the farthest to zero. That's an approximation to Gibbs, and the main text has no convergence proof for the ternary case. Three: the off-oscillate-on path is ordinal; there's no direct on-to-off transition, which they say slows convergence. Four: the main text reports no endurance or NIST randomness tests; those may be in the supplement, which I couldn't access.</aside>
+</section>

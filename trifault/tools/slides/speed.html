@@ -1,0 +1,17 @@
+<!-- speed -->
+<section class="light" data-title="Dedicated samplers beat GPUs on flips per second.">
+  <div class="s">
+    <p class="eyebrow">Back end · why hardware</p>
+    <h2>Dedicated samplers beat GPUs on flips per second.</h2>
+    <div class="body" style="flex-direction:column; gap:20px; margin-top:44px">
+      <p class="t24 ink w600">Spin flips per nanosecond, Ising sampling (Table I, Aadit et al. 2022)</p>
+      <div class="hbar" style="grid-template-columns:340px 1fr 140px"><span class="lab">V100 GPU</span><span class="track"><span class="fill alt" style="width:7.9%"></span></span><span class="val">11.37</span></div>
+      <div class="hbar" style="grid-template-columns:340px 1fr 140px"><span class="lab">Google TPU</span><span class="track"><span class="fill alt" style="width:9%"></span></span><span class="val">12.88</span></div>
+      <div class="hbar" style="grid-template-columns:340px 1fr 140px"><span class="lab">Fermi GPU</span><span class="track"><span class="fill alt" style="width:20.8%"></span></span><span class="val">29.85</span></div>
+      <div class="hbar" style="grid-template-columns:340px 1fr 140px"><span class="lab">FPGA p-computer</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="val">143.8</span></div>
+      <p class="t24 muted" style="margin-top:28px">Preprint, 2026: 10⁶ p-bits on 18 FPGAs at 10¹² updates/s; 17× faster, 3.6× less energy than an RTX 6000 Ada.</p>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Aadit et al., Nature Electronics 2022 · Aadit et al., arXiv:2606.25313 (preprint, 2026)</span><span class="n"></span></div>
+  <aside class="notes">Why build hardware at all? Because sampling is the bottleneck, and dedicated samplers are much faster. Aadit et al., Nature Electronics 2022, Table I: flips per nanosecond for Ising sampling. A V100 GPU does 11.37, a TPU 12.88, the best GPU entry 29.85. Their sparse FPGA p-computer does 143.8, on irregular graphs, and the rate grows linearly with problem size because of graph colouring. A 2026 preprint from the same group runs a million p-bits on 18 FPGAs at 10 to the 12 updates per second: 17 times faster and 3.6 times less energy than an RTX 6000 Ada, at the same decay rate as exact Gibbs. Caveat, in their words: their fastest stale-boundary mode "does not establish convergence or unbiased sampling". For our label model today, software is fast enough at 120 statements. The hardware matters at the scale of slide 7: millions of statements and votes.</aside>
+</section>

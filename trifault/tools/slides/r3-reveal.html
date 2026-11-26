@@ -1,0 +1,26 @@
+<!-- r3-reveal -->
+<section class="light" data-title="Round 3: ZMod's multiplication is the ring's.">
+  <div class="s">
+    <p class="eyebrow">Round 3 · reveal</p>
+    <h2><span style="font-family:var(--mono); font-weight:400; font-size:56px">≃* ZMod (2 * p)</span> uses ring multiplication.</h2>
+    <div class="body" style="flex-direction:column; gap:28px; margin-top:36px">
+      <div class="grades">
+        <div class="gbox"><p class="k">AI judges (out of 10)</p><div class="g"><div><b class="hi">10</b>Gemini-2.5-Pro</div><div><b>5</b>GPT-5.2</div><div><b>3</b>Sonnet 5</div></div></div>
+        <div class="gbox"><p class="k">Human reviewers (out of 10) · majority: says it</p><div class="g"><div><b class="hi">10</b>reviewer</div><div><b class="hi">10</b>reviewer</div><div><b>4</b>reviewer</div></div></div>
+      </div>
+      <p class="fragment t32 ink" style="line-height:1.35">0 has no inverse, so no group is ≃* to it. The statement says every group of order 2p is dihedral: false for the cyclic group of order 6. The study's two-stage model review flagged it.</p>
+      <div class="fragment">
+        <div class="verdict" style="font-size:24px">AI judges only: <span class="chip doesnt">doesn't say it</span> 0.99</div>
+        <div class="verdict" style="font-size:24px; margin-top:16px">With human scores added: no decision, goes to more players</div>
+        <div style="display:flex; height:48px; margin-top:12px; border-radius:6px; overflow:hidden; font-size:24px; font-weight:800; color:#111">
+          <div style="width:51%; background:var(--doesnt); display:flex; align-items:center; padding-left:16px">doesn't 0.51</div>
+          <div style="width:43%; background:var(--cant); display:flex; align-items:center; padding-left:16px">can't tell 0.43</div>
+          <div style="width:6%; background:var(--says)"></div>
+        </div>
+        <p class="t24 muted" style="text-align:right; margin-top:6px">says it 0.06</p>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Grades: Zhang et al., Beyond Compilation, 2026 (case A-094) · Verdicts: TriFault engine on the released data</span><span class="n"></span></div>
+  <aside class="notes">[27:30–30:00] Grades. Gemini-2.5-Pro: 10. GPT-5.2: 5. Sonnet 5: 3. Human reviewers: 10, 10 and 4. So the human majority said "says it". Click: ≃* ZMod (2 * p) is a multiplicative equivalence with ZMod's ring multiplication, not with the cyclic group of order 2p. In that monoid 0 has no inverse, so no group can be multiplicatively isomorphic to it. The left disjunct is always impossible, and the statement really claims every group of order 2p is dihedral. That's false: the cyclic group of order 6 is abelian, and D_3 isn't. The study's own two-stage model review flagged it; the human majority missed it. Click: with only the AI judges, the p-trit engine says doesn't say it at 0.99. Add the human scores and it refuses to decide: 0.51 doesn't, 0.43 can't tell, 0.06 says it. That's the behaviour we want: when trusted raters disagree, don't guess, send it to more players. And note what this means for our own numbers: our "truth" is the human majority, and here the majority is wrong. That comes back on the caveats slide.</aside>
+</section>

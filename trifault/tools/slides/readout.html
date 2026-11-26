@@ -1,0 +1,27 @@
+<!-- readout -->
+<section class="light" data-title="One trit every 2.5 µs: first time to oscillate.">
+  <div class="s">
+    <p class="eyebrow">Back end · readout</p>
+    <h2>One trit every 2.5 µs: first time to oscillate.</h2>
+    <div class="body" style="gap:72px; margin-top:52px">
+      <div class="col" style="flex:1.2">
+        <p style="font-family:var(--mono); font-size:40px; color:var(--dark-blue)">P = 1 − e<sup>−λ(V)·t<sub>mtr</sub></sup></p>
+        <p class="t32" style="margin-top:36px">Did the first oscillation arrive inside the window t<sub>mtr</sub> = 2.5 µs? One comparator and one flip-flop answer it.</p>
+        <p class="t32" style="margin-top:24px">V sets the odds. A longer window widens the probabilistic range.</p>
+      </div>
+      <div class="col" style="flex:0 0 560px">
+        <table class="t">
+          <thead><tr><th>Q0 Q1</th><th>State</th><th>Potts angle</th></tr></thead>
+          <tbody>
+            <tr><td class="v" style="text-align:left">0 0</td><td>off</td><td>0</td></tr>
+            <tr><td class="v" style="text-align:left">0 1, 1 1</td><td>oscillate</td><td>2π/3</td></tr>
+            <tr><td class="v" style="text-align:left">1 0</td><td>on</td><td>4π/3</td></tr>
+          </tbody>
+        </table>
+        <p class="t24 muted" style="margin-top:20px">2.4 nJ per trit, oscillator only. Same statistics with ±0.2 µs timing jitter.</p>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Rhee et al., Advanced Science 2026 (Figs. 2d–e, 3a–e)</span><span class="n"></span></div>
+  <aside class="notes">How you read a trit without counting peaks. The metric is first-time-to-oscillate: from the start of the voltage pulse to the first oscillation peak. The readout only asks whether that first peak lands inside a monitoring window, t_mtr, which they set to 2.5 microseconds. Comparator 1 against a 1.5 volt reference says whether the base state is on or off; comparator 2 against 0.8 volts clocks a D flip-flop on the first oscillation edge. Two bits: 00 is off, 01 or 11 is oscillating, 10 is on, mapped to Potts angles 0, 2π/3 and 4π/3. The probability follows 1 minus e to the minus lambda t, where lambda is the transition rate at that bias. Voltage sets the odds; a longer window gives a wider probabilistic voltage range. 2.5 microseconds per trit, 2.4 nanojoules for the oscillator, and the statistics hold with plus or minus 0.2 microseconds of timing jitter. Their circuit was a breadboard prototype with discrete comparators and a microcontroller.</aside>
+</section>
