@@ -117,6 +117,12 @@ ground.
   `pcb/altium/views/altium_style_*.png` (carrier, from the routed KiCad board) and
   `circuits/views/altium_chip_*.png` (chip row block, from the GDS). Scripts: `pcb/altium/render_altium_style.py`,
   `circuits/views/render_chip_altium.py`.
+- Nanoscale views of the chip (`circuits/views/nano/`, `render_nanoscale.py` + `blender_nano.py`). They show:
+  - a rail junction (200 × 192 nm) and the beam-splitter junction (drawn 86 × 150 nm, below the 100 nm rule;
+    fix 114 × 114 nm) with nm dimensions;
+  - to-scale cross-sections deposited in process order (Nb 150 / grAl 20 / Al1 30 / SiNx 100 / AlOx ~1.5 / Al2
+    30 nm);
+  - a Blender render of one rail cell at true film thickness, with the Al2 cut away over the junction.
 
 ### Five companion devices (same codebase, one executed simulation each)
 
