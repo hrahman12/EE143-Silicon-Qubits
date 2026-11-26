@@ -1,0 +1,852 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Does Lean say that? · TriFault</title>
+<link rel="stylesheet" href="vendor/reveal/reset.css">
+<link rel="stylesheet" href="vendor/reveal/reveal.css">
+<link rel="stylesheet" href="css/deck.css">
+<script>
+  // ?export → static mode for decktape: 3D becomes its PNG poster, fragments are all shown.
+  window.DECK_EXPORT = /[?&]export\b/.test(location.search);
+</script>
+<script type="module" src="vendor/model-viewer/model-viewer.min.js"></script>
+</head>
+<body>
+<div class="reveal"><div class="slides">
+
+<!-- 1 · cover -->
+<section class="dark" data-background-color="#00313C" data-title="Does Lean say that?">
+  <div class="s">
+    <div class="body" style="margin-top:0; gap:72px; align-items:center">
+      <div class="col" style="flex:0 0 860px; justify-content:center">
+        <div class="rule"></div>
+        <h1>Does Lean say that?</h1>
+        <p class="t44 on-dark" style="margin-top:36px">Lean checks the proof. We check the meaning.</p>
+        <p class="t24" style="margin-top:56px">Hanah Rahman · TriFault · SF Lean Meetup · [date]</p>
+      </div>
+      <div class="col fig" style="height:720px">
+        <div class="panel"><model-viewer src="assets/3d/nbo2_insulating.glb" poster="assets/renders/nbo2_insulating.png" alt="NbO2 crystal, insulating phase, rotating" camera-controls auto-rotate rotation-per-second="10deg" auto-rotate-delay="0" interaction-prompt="none" shadow-intensity="0"></model-viewer></div>
+        <p class="caption">NbO₂ crystal, insulating phase</p>
+        <p class="credit">Credit: TriFault model from COD 2106754 (Cheetham &amp; Rao 1976)</p>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src"></span><span class="n"></span></div>
+  <aside class="notes">[00:00–00:45] Hi, I'm Hanah, I founded TriFault. Tonight is a talk and a game. The question in the title is the whole company: when Lean says a theorem is proved, does the Lean statement say what the English says? The crystal on the right is niobium dioxide. It will come back near the end, when we go from a verdict down to the atoms.</aside>
+</section>
+
+<!-- 2 · hook -->
+<section class="dark" data-background-color="#00313C" data-title="Hook: round 3's Lean">
+  <div class="s">
+    <div class="rule"></div>
+    <p class="eyebrow">An AI agent wrote this Lean for a textbook exercise</p>
+    <p class="t32 on-dark" style="margin-top:8px">English: if |G| = 2p, p an odd prime, then G ≅ ℤ<sub>2p</sub> or D<sub>p</sub>.</p>
+    <div style="margin-top:32px"><pre class="lean" data-lean="r3"><code>theorem group_order_two_mul_odd_prime_iso_cyclic_or_dihedral
+    {G : Type*} [Group G] [Fintype G] (p : ℕ)
+    (hp : Nat.Prime p) (hpodd : p % 2 = 1)
+    (hcard : Fintype.card G = 2 * p) :
+    Nonempty (G ≃* ZMod (2 * p)) ∨ Nonempty (G ≃* DihedralGroup p) := by
+  sorry</code></pre></div>
+    <div class="row" style="margin-top:48px; gap:72px; align-items:baseline">
+      <p class="fragment t44 on-dark w800">Gemini-2.5-Pro: 10/10.</p>
+      <p class="fragment t44 on-dark w800">Two of three human experts: 10/10.</p>
+      <p class="fragment t44 w800" style="color:#FF8A75">It's false.</p>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Case A-094, Zhang et al., Beyond Compilation, 2026 · Statement: Doty, Lecture Notes on Abstract Algebra (CC BY 4.0)</span><span class="n"></span></div>
+  <aside class="notes">[00:45–03:00] Read the English out loud first: a group of order 2p, p an odd prime, is cyclic or dihedral. Now the Lean. It compiles, modulo the sorry. Give the room twenty seconds. Click: Gemini-2.5-Pro, used as a judge in the Beyond Compilation study, gave it 10 out of 10. Click: two of the three human expert reviewers also gave it 10 out of 10. Click: it's false. Don't explain why yet. This exact statement comes back as the boss round, round 3, and by then you'll have the tools to see it. If someone in the room already sees it, ask them to hold it until round 3.</aside>
+</section>
+
+<!-- 3 · gap -->
+<section class="light" data-title="Lean checks the proof, not the meaning.">
+  <div class="s">
+    <p class="eyebrow">The gap</p>
+    <h2>Lean checks the proof, not the meaning.</h2>
+    <div class="body" style="align-items:center">
+      <div class="flow" style="width:100%">
+        <div class="node">English<br>statement</div>
+        <div class="arrow teal"><span class="verb">formalize</span><span class="line"></span><span class="who teal">nobody checks this</span></div>
+        <div class="node">Lean<br>statement</div>
+        <div class="arrow"><span class="verb">prove</span><span class="line"></span><span class="who ink">the kernel checks this</span></div>
+        <div class="node">Proof</div>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src"></span><span class="n"></span></div>
+  <aside class="notes">[03:00–04:30] Everyone here knows the right half of this picture. The kernel checks that the proof proves the Lean statement, and it is very good at that. The left arrow is the one nobody checks mechanically: does the Lean statement mean what the English means? Today that check is a person reading carefully, or a model acting as a judge. If the formal statement is wrong, a perfect proof of it is a perfect proof of the wrong thing. Everything else in this talk is about that left arrow.</aside>
+</section>
+
+<!-- 4 · study -->
+<section class="light" data-title="Compiling isn't the same as faithful.">
+  <div class="s">
+    <p class="eyebrow">The evidence</p>
+    <h2>Compiling isn't the same as faithful.</h2>
+    <div class="body" style="gap:96px">
+      <div class="col" style="flex:1.6; justify-content:center">
+        <p class="t24 muted" style="margin-bottom:40px">Tool-augmented GPT-5.2 agent, 227 graduate-level statements</p>
+        <div class="hbar" style="grid-template-columns:200px 1fr 300px"><span class="lab">Compiles</span><span class="track"><span class="fill alt" style="width:87.2%"></span></span><span class="val">87.2% <span class="t24 muted" style="font-weight:400">(198/227)</span></span></div>
+        <div class="hbar" style="grid-template-columns:200px 1fr 300px; margin-top:36px"><span class="lab">Faithful</span><span class="track"><span class="fill" style="width:57.7%"></span></span><span class="val">57.7% <span class="t24 muted" style="font-weight:400">(131/227)</span></span></div>
+      </div>
+      <div class="col" style="flex:0 0 520px; justify-content:center">
+        <div class="card">
+          <p class="k">All 8 systems tested</p>
+          <p class="t32 ink" style="font-size:32px; line-height:1.3">Every one has a gap: 1.3 to 29.5 points.</p>
+          <p style="margin-top:20px">Human review confirms at least 23.8 of the 29.5 are real translation errors.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Zhang et al., Beyond Compilation, 2026</span><span class="n"></span></div>
+  <aside class="notes">[04:30–06:00] This is the Beyond Compilation study, Zhang et al., 2026. They gave a tool-augmented GPT-5.2 agent 227 graduate-level textbook statements to formalize. 87.2 percent compile: 198 of 227. Only 57.7 percent are faithful to the English: 131 of 227. So about 30 points of "it compiles" is not "it means the same thing". This is not one bad model. All 8 systems they tested have a gap, from 1.3 to 29.5 points. And this isn't judge noise: human review confirms at least 23.8 of those 29.5 points are real translation errors.</aside>
+</section>
+
+<!-- 5 · benchmarks -->
+<section class="light" data-title="Benchmarks have the same problem.">
+  <div class="s">
+    <p class="eyebrow">The evidence</p>
+    <h2>Benchmarks have the same problem.</h2>
+    <div class="body">
+      <div class="cards" style="grid-template-columns:repeat(3,1fr); width:100%">
+        <div class="card">
+          <p class="k">miniF2F</p>
+          <h3>Formal and informal statements disagree on more than half the problems.</h3>
+          <p>Formalize-then-prove: about 36% end to end, vs 97% and 69% reported for the steps separately.</p>
+          <p class="cite">Ospanov et al., 2025</p>
+        </div>
+        <div class="card">
+          <p class="k">ProofNet#</p>
+          <h3>31.8% of entries in the Lean 4 ports had formalization errors.</h3>
+          <p class="cite">Poiroux et al., 2024</p>
+        </div>
+        <div class="card">
+          <p class="k">Formal Conjectures</p>
+          <h3>2,615 Lean statements, 1,029 open.</h3>
+          <p>For the Erdős problem Alexeev &amp; Mixon resolved, the repo's Lean statement allowed modulus v = 0.</p>
+          <p class="cite">Formal Conjectures, 2026 · Alexeev &amp; Mixon, 2025</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Ospanov et al., 2025 · Poiroux et al., 2024 · Formal Conjectures, 2026 · Alexeev &amp; Mixon, 2025</span><span class="n"></span></div>
+  <aside class="notes">[06:00–07:30] It's not just one study. miniF2F, the benchmark everyone reports on: Ospanov et al., 2025, found the formal and informal statements disagree on more than half the problems. And when you chain formalize-then-prove end to end you get about 36 percent, versus the 97 and 69 percent reported for the two steps separately. ProofNet#: Poiroux et al. found 31.8 percent of entries in the Lean 4 ports had formalization errors. Formal Conjectures has 2,615 Lean statements, 1,029 of them open problems. For the Erdős problem that Alexeev and Mixon resolved in 2025, the repo's Lean statement allowed modulus v equal to 0. These are careful teams. The problem is the task, not the people.</aside>
+</section>
+
+<!-- 6 · judges -->
+<section class="light" data-title="The judges disagree too.">
+  <div class="s">
+    <p class="eyebrow">The evidence</p>
+    <h2>The judges disagree too.</h2>
+    <div class="body" style="align-items:center">
+      <div class="bigrow" style="grid-template-columns:repeat(3,1fr); width:100%; gap:72px">
+        <div class="big"><span class="num">18</span><span class="lab">of 54 compiling outputs that humans confirmed don't say it got a perfect 10/10 from Gemini-2.5-Pro</span></div>
+        <div class="big"><span class="num">15 of 53</span><span class="lab">(28%) random-audit items where the human reviewers didn't all agree</span></div>
+        <div class="big"><span class="num">5 of 53</span><span class="lab">the same items where the two AI judges split</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Counts from the Beyond Compilation released files (Zhang et al., 2026)</span><span class="n"></span></div>
+  <aside class="notes">[07:30–10:00] These are counts I pulled from the Beyond Compilation released files. First: 18 of the 54 compiling outputs that humans confirmed don't say what the English says got a perfect 10 out of 10 from Gemini-2.5-Pro. A perfect score on a wrong statement. Second: in the random audit, 15 of 53 items, 28 percent, the human reviewers didn't all agree. Experts disagree on meaning. Third: on those same 53 items, the two AI judges split on 5. So you can't just pick one judge, human or model, and call it ground truth. You need something that weighs judges against each other and knows how far to trust each one. Pause here for questions about the data if people want them.</aside>
+</section>
+
+<!-- 7 · flood -->
+<section class="light" data-title="AI writes formal math faster than we can read it.">
+  <div class="s">
+    <p class="eyebrow">Why now</p>
+    <h2>AI writes formal math faster than we can read it.</h2>
+    <div class="body" style="align-items:center">
+      <div class="bigrow" style="grid-template-columns:repeat(2,1fr); width:100%; gap:56px 120px">
+        <div class="big"><span class="num">722</span><span class="lab">manuscripts in 372 result families from an unreleased OpenAI model (6 Oct 2026)</span></div>
+        <div class="big"><span class="num">45,000+</span><span class="lab">Lean declarations from 26 textbooks (Meta + NYU, ATLAS)</span></div>
+        <div class="big"><span class="num">1.64 million</span><span class="lab">autoformalized statements (Goedel-Pset-v1)</span></div>
+        <div class="big"><span class="num">~200,000</span><span class="lab">lines for sphere packing in dimensions 8 and 24 (Math Inc, Gauss)</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">OpenAI via Unite.AI, 2026 · ATLAS, 2026 · Goedel-Prover, 2025 · Math Inc via IEEE Spectrum, [__]</span><span class="n"></span></div>
+  <aside class="notes">[10:00–12:00] Why now. The volume is exploding. On 6 October 2026, OpenAI released 722 manuscripts in 372 result families from an unreleased model. Meta and NYU's ATLAS produced more than 45,000 Lean declarations from 26 textbooks. Goedel-Pset-v1 has 1.64 million autoformalized statements. Math Inc's Gauss produced about 200,000 lines for sphere packing in dimensions 8 and 24. The kernel can check every proof in all of that. Nobody can read every statement in all of that.</aside>
+</section>
+
+<!-- 8 · bottleneck -->
+<section class="light" data-title="Human review is the bottleneck.">
+  <div class="s">
+    <p class="eyebrow">Why now</p>
+    <h2>Human review is the bottleneck.</h2>
+    <div class="body" style="align-items:center; gap:120px">
+      <div class="big" style="flex:0 0 640px"><span class="num">308,129</span><span class="lab">Mathlib declarations (Feb 2026). Growth is linear, because of strict human review.</span></div>
+      <div class="col" style="justify-content:center">
+        <div class="card">
+          <p class="k">Lean Zulip, Sep 2025</p>
+          <p class="t32 ink" style="font-size:32px; line-height:1.35">Jason Rute asked how anyone knows a large AI project's statement means what it seems to mean.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Lean Pool paper, 2026 · Mathlib structure, 2026 · Lean Zulip, 2025</span><span class="n"></span></div>
+  <aside class="notes">[12:00–14:00] Mathlib had 308,129 declarations in February 2026. The Lean Pool paper shows it grows linearly, and the reason is good: strict human review. That review is exactly what keeps Mathlib trustworthy, and it doesn't scale to the volume on the last slide. In September 2025 Jason Rute asked on the Lean Zulip, in the machine learning for theorem proving stream, how anyone knows a large AI-generated project's statement means what it seems to mean. That thread is linked on the sources slide. That's the question we're building for. Note: paraphrase only, not a quote.</aside>
+</section>
+
+<!-- 9 · landscape -->
+<section class="light" data-title="Today's tools are for experts.">
+  <div class="s">
+    <p class="eyebrow">Landscape</p>
+    <h2>Today's tools are for experts.</h2>
+    <div class="body" style="flex-direction:column; gap:28px">
+      <table class="t">
+        <thead><tr><th style="width:24%">Tool</th><th style="width:48%">What it does</th><th>The gap</th></tr></thead>
+        <tbody>
+          <tr><td><b>Lean Atlas</b> (2026)</td><td>Dependency graph for human meaning review. Cuts nodes to check by 94–99% on proof-heavy projects, 27.3% on a definition-heavy one.</td><td>An expert still reads what's left</td></tr>
+          <tr><td><b>Numina Fuse</b> (2026)</td><td>Agents formalize; reviewer agents and people check meaning.</td><td>Review by a set team</td></tr>
+          <tr><td><b>Automatic judges</b></td><td>LeanScorer: κ = 0.766 against human labels, vs 0.603 for a plain LLM judge.</td><td>One judge; no per-rater trust</td></tr>
+          <tr><td><b>AWS Automated Reasoning checks</b></td><td>Natural-language policies to logic, with a TRANSLATION_AMBIGUOUS finding.</td><td>Flags it; doesn't resolve it</td></tr>
+        </tbody>
+      </table>
+      <p class="bottomline">No game. Nothing that learns whom to trust.</p>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Lean Atlas, 2026 · Numina Fuse, 2026 · LeanScorer comparison, 2026 · AWS, [__]</span><span class="n"></span></div>
+  <aside class="notes">[14:00–17:00] Who else is working on this, and they're good. Lean Atlas, 2026, builds a dependency graph for human meaning review. It cuts the nodes you have to check by 94 to 99 percent on proof-heavy projects, and 27.3 percent on a definition-heavy one. Numina Fuse, 2026: agents formalize, then reviewer agents and people check meaning. Automatic judges: LeanScorer reaches kappa 0.766 against human labels, versus 0.603 for a plain LLM judge. AWS Automated Reasoning checks turn natural-language policies into logic and can return a TRANSLATION_AMBIGUOUS finding. The gap column is my read of where each stops. All of these assume an expert, or one judge, is the last word. Bottom line: no game, and nothing that learns whom to trust. That's the space we take. Spend the extra time here on questions about these tools.</aside>
+</section>
+
+<!-- 10 · howto -->
+<section class="dark" data-background-color="#00313C" data-title="Let's play.">
+  <div class="s">
+    <div class="rule"></div>
+    <p class="eyebrow">The game</p>
+    <h1 style="font-size:96px">Let's play.</h1>
+    <div class="body" style="flex-direction:column; justify-content:center; gap:56px">
+      <div class="row" style="gap:40px">
+        <span class="chip xl says" style="flex:1">says it</span>
+        <span class="chip xl cant" style="flex:1">can't tell</span>
+        <span class="chip xl doesnt" style="flex:1">doesn't say it</span>
+      </div>
+      <p class="t44 on-dark">Hands up on each reveal.</p>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src"></span><span class="n"></span></div>
+  <aside class="notes">[17:00–18:00] Here's the game. I show you an English statement and the Lean an AI agent wrote for it. You vote three ways. Says it: the Lean means what the English means. Can't tell: the English is ambiguous or you can't decide. Doesn't say it: the Lean means something else. Hands up for each option when I ask. In the product you also tap the exact span of Lean that's wrong and pick a reason, so a vote carries where and why, not just a verdict. Four rounds: a warm-up, round 2, a bonus, and the boss.</aside>
+</section>
+
+<!-- 11 · r1 -->
+<section class="light" data-title="Round 1 · warm-up">
+  <div class="s">
+    <p class="eyebrow">Round 1 · warm-up</p>
+    <h2>Elementary matrices</h2>
+    <div class="body" style="flex-direction:column; gap:40px; margin-top:40px">
+      <div><p class="label">English</p><p class="english">Any nonsingular n×n real matrix A can be expressed as a product of elementary matrices.</p></div>
+      <div><p class="label">Lean</p><pre class="lean" data-lean="r1"><code>theorem nonsingular_matrix_prod_elementary {n : Type*} [Fintype n] [DecidableEq n]
+    (A : Matrix n n ℝ) (hA : IsUnit A.det) :
+    A ∈ Subsemigroup.closure ({E : Matrix n n ℝ | True} : Set (Matrix n n ℝ)) := by
+  sorry</code></pre></div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Case A-002, Zhang et al., Beyond Compilation, 2026 · Statement: Doty, Lecture Notes on Abstract Algebra (CC BY 4.0)</span><span class="n"></span></div>
+  <aside class="notes">[18:00–19:30] Warm-up. English: any nonsingular n by n real matrix can be written as a product of elementary matrices. Here's the Lean the GPT-5.2 agent wrote, case A-002 in the study. Read it for thirty seconds. Then: hands up for says it. Can't tell. Doesn't say it. Hint if the room is stuck: look at the set inside the closure.</aside>
+</section>
+
+<!-- 12 · r1-reveal -->
+<section class="light" data-title="Round 1: the set is every matrix.">
+  <div class="s">
+    <p class="eyebrow">Round 1 · reveal</p>
+    <h2>The set is every matrix.</h2>
+    <div class="body" style="flex-direction:column; gap:40px; margin-top:44px">
+      <div class="grades">
+        <div class="gbox"><p class="k">AI judges (out of 10)</p><div class="g"><div><b>2</b>GPT-5.2</div><div><b>4</b>Gemini-2.5-Pro</div><div><b>1</b>Sonnet 5</div></div></div>
+        <div class="gbox"><p class="k">Human reviewers (out of 10)</p><div class="g"><div><b>4</b>reviewer</div><div><b>2</b>reviewer</div><div><b>2</b>reviewer</div></div></div>
+      </div>
+      <p class="fragment t32 ink" style="line-height:1.4"><code class="i">{E | True}</code> is every matrix, so the closure is everything. It's trivially true without <code class="i">hA</code>, even for the zero matrix.</p>
+      <div class="fragment verdict">p-trit verdict: <span class="chip doesnt">doesn't say it</span> confidence 1.00</div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Grades: Zhang et al., Beyond Compilation, 2026 (case A-002) · Verdict: TriFault engine on the released data</span><span class="n"></span></div>
+  <aside class="notes">[19:30–20:30] The graders mostly caught this one. AI judges: GPT-5.2 gave it 2, Gemini-2.5-Pro 4, Sonnet 5 gave 1. The three human reviewers: 4, 2, 2. Click: the set {E | True} is every matrix, not the elementary ones, so the closure is everything and the statement is trivially true. It doesn't even use hA. It holds for the zero matrix, which is certainly not a product of elementary matrices. Click: the p-trit engine says doesn't say it, with confidence 1.00. Easy one. They get harder.</aside>
+</section>
+
+<!-- 13 · r2 -->
+<section class="light" data-title="Round 2">
+  <div class="s">
+    <p class="eyebrow">Round 2</p>
+    <h2>Uniform convergence</h2>
+    <div class="body" style="flex-direction:column; gap:40px; margin-top:40px">
+      <div><p class="label">English</p><p class="english">Show that the series ∑<sub>k=0</sub><sup>∞</sup> x<sup>k</sup> does not converge uniformly on (−1,1).</p></div>
+      <div><p class="label">Lean</p><pre class="lean" data-lean="r2"><code>theorem geometric_series_not_tendsto_uniformly_on_Ioo :
+    ¬ TendstoUniformly (fun n : ℕ =&gt; fun x : ℝ =&gt; (Finset.range n).sum (fun k =&gt; x ^ k))
+        (fun x : ℝ =&gt; ∑' k : ℕ, x ^ k) Filter.atTop := by
+  sorry</code></pre></div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Case A-049, Zhang et al., Beyond Compilation, 2026 · Statement: Lebl, Basic Analysis (CC BY-SA 4.0)</span><span class="n"></span></div>
+  <aside class="notes">[20:30–22:00] Round 2. English: the geometric series, sum of x to the k, does not converge uniformly on the open interval minus 1 to 1. Here's the Lean, case A-049. Thirty seconds. Hint if needed: read the theorem name, then look for where the interval shows up in the statement. Hands up: says it, can't tell, doesn't say it.</aside>
+</section>
+
+<!-- 14 · r2-reveal -->
+<section class="light" data-title="Round 2: the interval never appears.">
+  <div class="s">
+    <p class="eyebrow">Round 2 · reveal</p>
+    <h2>The interval never appears.</h2>
+    <div class="body" style="flex-direction:column; gap:40px; margin-top:44px">
+      <div class="grades">
+        <div class="gbox"><p class="k">AI judges (out of 10)</p><div class="g"><div><b>4</b>GPT-5.2</div><div><b>5</b>Gemini-2.5-Pro</div><div><b>[__]</b>Sonnet 5</div></div></div>
+        <div class="gbox"><p class="k">Human reviewers (out of 10)</p><div class="g"><div><b>2</b>reviewer</div><div><b>4</b>reviewer</div><div><b>5</b>reviewer</div></div></div>
+      </div>
+      <p class="fragment t32 ink" style="line-height:1.4">The name says <code class="i">Ioo</code>, but x is never restricted to (−1, 1). At x = 1 the partial sums are n, and Mathlib's <code class="i">tsum</code> of a non-summable series is 0. So x = 1 alone proves it.</p>
+      <div class="fragment verdict">p-trit verdict: <span class="chip doesnt">doesn't say it</span> confidence 1.00</div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Grades: Zhang et al., Beyond Compilation, 2026 (case A-049) · Verdict: TriFault engine on the released data</span><span class="n"></span></div>
+  <aside class="notes">[22:00–23:30] Grades: GPT-5.2 gave 4, Gemini-2.5-Pro 5, Sonnet 5 [__]. Humans 2, 4 and 5. Everyone was unsure, nobody was confident it was right. Click: the theorem name says Ioo, but x ranges over all of ℝ. At x = 1 the partial sums are n, which go to infinity, while Mathlib's tsum of a non-summable series is defined to be 0. So the convergence fails at x = 1 alone, and the statement says nothing about the hard part of the exercise, which is behaviour near 1 inside the interval. Click: p-trit says doesn't say it, 1.00. This is a classic Lean trap: junk values for tsum.</aside>
+</section>
+
+<!-- 15 · bonus -->
+<section class="light" data-title="Bonus · spot the sorry">
+  <div class="s">
+    <p class="eyebrow">Bonus · spot the sorry</p>
+    <h2>Schwarz lemma</h2>
+    <div class="body" style="gap:56px; margin-top:40px">
+      <div class="col" style="flex:0 0 520px"><p class="label">English</p><p class="english" style="font-size:44px">Suppose f: 𝔻 → 𝔻 is holomorphic and f(0) = 0; then |f(z)| ≤ |z| for all z ∈ 𝔻.</p></div>
+      <div class="col"><p class="label">Lean</p><pre class="lean" data-lean="bonus"><code>theorem holomorphic_maps_disk_abs_le_abs
+    (f : {z : ℂ // ‖z‖ &lt; 1} → {z : ℂ // ‖z‖ &lt; 1})
+    (hf : Differentiable ℂ fun z : ℂ =&gt; (f ⟨z, by
+      sorry⟩ : ℂ))
+    (h0 : (f ⟨0, by simp⟩ : ℂ) = 0) :
+    ∀ z : {z : ℂ // ‖z‖ &lt; 1}, ‖(f z : ℂ)‖ ≤ ‖(z : ℂ)‖ := by
+  sorry</code></pre></div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Case A-011, Zhang et al., 2026 · Statement: Lebl, Guide to Cultivating Complex Analysis (CC BY-SA 4.0)</span><span class="n"></span></div>
+  <aside class="notes">[23:30–24:30] Bonus round, quick. This is the Schwarz lemma, case A-011. There is a sorry that is not at the end of the proof. Find it and say what it does. Hands up when you see it, then vote.</aside>
+</section>
+
+<!-- 16 · bonus-reveal -->
+<section class="light" data-title="Bonus: a sorry inside a hypothesis.">
+  <div class="s">
+    <p class="eyebrow">Bonus · reveal</p>
+    <h2>A <span style="font-family:var(--mono); font-weight:400">sorry</span> inside a hypothesis.</h2>
+    <div class="body" style="flex-direction:column; gap:40px; margin-top:44px">
+      <div class="grades">
+        <div class="gbox"><p class="k">AI judges (out of 10)</p><div class="g"><div><b>5</b>GPT-5.2</div><div><b>6</b>Gemini-2.5-Pro</div></div></div>
+        <div class="gbox"><p class="k">Human reviewers (out of 10)</p><div class="g"><div><b>1</b>reviewer</div><div><b>7</b>reviewer</div><div><b>4</b>reviewer</div></div></div>
+      </div>
+      <p class="fragment t32 ink" style="line-height:1.4">The <code class="i">sorry</code> fakes ‖z‖ &lt; 1 for every complex z, z = 2 included. And it asks for differentiability on all of ℂ, not holomorphy on the disk.</p>
+      <div class="fragment verdict">p-trit verdict: <span class="chip doesnt">doesn't say it</span> confidence 0.98</div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Grades: Zhang et al., Beyond Compilation, 2026 (case A-011) · Verdict: TriFault engine on the released data</span><span class="n"></span></div>
+  <aside class="notes">[24:30–25:30] Grades: GPT-5.2 5, Gemini-2.5-Pro 6. Humans 1, 7 and 4, so the humans were all over the place. Click: the sorry sits inside the hypothesis hf, where it proves that ‖z‖ &lt; 1 for every complex z, including z = 2. That's false, but sorry doesn't care. And hf asks for f to be differentiable on all of ℂ, which is not what holomorphic on the disk means. Click: p-trit says doesn't say it, 0.98. Point for the room: a sorry in a statement is not the same as a sorry in a proof, and a "no sorry in proofs" check won't catch it.</aside>
+</section>
+
+<!-- 17 · r3 -->
+<section class="dark" data-background-color="#00313C" data-title="Round 3 · boss">
+  <div class="s">
+    <div class="rule"></div>
+    <p class="eyebrow">Round 3 · boss</p>
+    <h2>Groups of order 2p</h2>
+    <div class="body" style="flex-direction:column; gap:36px; margin-top:36px">
+      <div><p class="label">English</p><p class="english">Show that if |G| = 2p where p is an odd prime, then G is isomorphic to either ℤ<sub>2p</sub> or D<sub>p</sub>.</p></div>
+      <div><p class="label">Lean</p><pre class="lean" data-lean="r3"><code>theorem group_order_two_mul_odd_prime_iso_cyclic_or_dihedral
+    {G : Type*} [Group G] [Fintype G] (p : ℕ)
+    (hp : Nat.Prime p) (hpodd : p % 2 = 1)
+    (hcard : Fintype.card G = 2 * p) :
+    Nonempty (G ≃* ZMod (2 * p)) ∨ Nonempty (G ≃* DihedralGroup p) := by
+  sorry</code></pre></div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Case A-094, Zhang et al., Beyond Compilation, 2026 · Statement: Doty, Lecture Notes on Abstract Algebra (CC BY 4.0)</span><span class="n"></span></div>
+  <aside class="notes">[25:30–27:30] The boss round, the statement from the start of the talk. Groups of order 2p, p an odd prime, are cyclic or dihedral. Case A-094. Take a full minute. Hint if needed: what does ≃* mean, and what is the multiplication on ZMod (2 * p)? Vote: says it, can't tell, doesn't say it. Count roughly and say the split out loud; it matters on the next slide.</aside>
+</section>
+
+<!-- 18 · r3-reveal -->
+<section class="light" data-title="Round 3: ZMod's multiplication is the ring's.">
+  <div class="s">
+    <p class="eyebrow">Round 3 · reveal</p>
+    <h2><span style="font-family:var(--mono); font-weight:400; font-size:56px">≃* ZMod (2 * p)</span> uses ring multiplication.</h2>
+    <div class="body" style="flex-direction:column; gap:28px; margin-top:36px">
+      <div class="grades">
+        <div class="gbox"><p class="k">AI judges (out of 10)</p><div class="g"><div><b class="hi">10</b>Gemini-2.5-Pro</div><div><b>5</b>GPT-5.2</div><div><b>3</b>Sonnet 5</div></div></div>
+        <div class="gbox"><p class="k">Human reviewers (out of 10) · majority: says it</p><div class="g"><div><b class="hi">10</b>reviewer</div><div><b class="hi">10</b>reviewer</div><div><b>4</b>reviewer</div></div></div>
+      </div>
+      <p class="fragment t32 ink" style="line-height:1.35">0 has no inverse, so no group is ≃* to it. The statement says every group of order 2p is dihedral: false for the cyclic group of order 6. The study's two-stage model review flagged it.</p>
+      <div class="fragment">
+        <div class="verdict" style="font-size:24px">AI judges only: <span class="chip doesnt">doesn't say it</span> 0.99</div>
+        <div class="verdict" style="font-size:24px; margin-top:16px">With human scores added: no decision, goes to more players</div>
+        <div style="display:flex; height:48px; margin-top:12px; border-radius:6px; overflow:hidden; font-size:24px; font-weight:800; color:#111">
+          <div style="width:51%; background:var(--doesnt); display:flex; align-items:center; padding-left:16px">doesn't 0.51</div>
+          <div style="width:43%; background:var(--cant); display:flex; align-items:center; padding-left:16px">can't tell 0.43</div>
+          <div style="width:6%; background:var(--says)"></div>
+        </div>
+        <p class="t24 muted" style="text-align:right; margin-top:6px">says it 0.06</p>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Grades: Zhang et al., Beyond Compilation, 2026 (case A-094) · Verdicts: TriFault engine on the released data</span><span class="n"></span></div>
+  <aside class="notes">[27:30–30:00] Grades. Gemini-2.5-Pro: 10. GPT-5.2: 5. Sonnet 5: 3. Human reviewers: 10, 10 and 4. So the human majority said "says it". Click: ≃* ZMod (2 * p) is a multiplicative equivalence with ZMod's ring multiplication, not with the cyclic group of order 2p. In that monoid 0 has no inverse, so no group can be multiplicatively isomorphic to it. The left disjunct is always impossible, and the statement really claims every group of order 2p is dihedral. That's false: the cyclic group of order 6 is abelian, and D_3 isn't. The study's own two-stage model review flagged it; the human majority missed it. Click: with only the AI judges, the p-trit engine says doesn't say it at 0.99. Add the human scores and it refuses to decide: 0.51 doesn't, 0.43 can't tell, 0.06 says it. That's the behaviour we want: when trusted raters disagree, don't guess, send it to more players. And note what this means for our own numbers: our "truth" is the human majority, and here the majority is wrong. That comes back on the caveats slide.</aside>
+</section>
+
+<!-- 19 · proveit -->
+<section class="light" data-title="Lean can't check meaning. It can check a witness.">
+  <div class="s">
+    <p class="eyebrow">Settling it</p>
+    <h2>Lean can't check meaning. It can check a witness.</h2>
+    <div class="body" style="flex-direction:column; gap:48px; margin-top:72px">
+      <p class="t44 ink" style="max-width:1500px">A player who says “doesn't” can settle it with a Lean proof that the statement is false, trivially true, or true where the English says it isn't.</p>
+      <div class="card" style="max-width:1100px">
+        <p class="k">Round 3's witness</p>
+        <p class="t32 ink">The cyclic group of order 6.</p>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src"></span><span class="n"></span></div>
+  <aside class="notes">[30:00–31:00] Here's how Lean comes back in. Lean can't check meaning. But a player who votes "doesn't say it" can often settle the question with a Lean proof: that the statement is false, or trivially true, or true in a case where the English says it isn't. The kernel checks that proof, so it's gold. For round 3 the witness is the cyclic group of order 6: plug it in and both disjuncts fail. For round 1 it's the one-line proof that the statement holds without hA. Note for Hanah: the Witness.lean file in deck/lean has not been compiled yet, so the slide shows only the sentence.</aside>
+</section>
+
+<!-- 20 · ptrit -->
+<section class="light" data-title="A p-trit: three states, Boltzmann odds.">
+  <div class="s">
+    <p class="eyebrow">The engine</p>
+    <h2>A p-trit: three states, Boltzmann odds.</h2>
+    <div class="body" style="gap:72px">
+      <div class="col" style="flex:0 0 760px">
+        <p class="t44 ink" style="font-family:var(--mono); font-size:40px; margin-top:12px">P(z) = e<sup>−E(z)</sup> / Σ<sub>u</sub> e<sup>−E(u)</sup></p>
+        <p class="t24 muted" style="margin-top:12px">z ∈ {0, 1, 2}</p>
+        <p class="t32" style="margin-top:48px">Real hardware: KAIST built NbOₓ p-trits and a ternary Potts machine.</p>
+        <p class="t32" style="margin-top:20px">TiN via 150 nm wide, NbOₓ 20 nm, TiN top 50 nm.</p>
+        <p class="t32 ink w800" style="margin-top:36px">We run it in software.</p>
+      </div>
+      <div class="col fig">
+        <div class="panel"><model-viewer src="assets/3d/ptrit_device.glb" poster="assets/renders/ptrit_device.png" alt="TiN / NbOx / TiN p-trit device, rotating" camera-controls auto-rotate rotation-per-second="10deg" auto-rotate-delay="0" interaction-prompt="none" shadow-intensity="0"></model-viewer></div>
+        <p class="caption">TiN / NbOₓ / TiN p-trit. Substrate material and via depth weren't reported.</p>
+        <p class="credit">Credit: TriFault model after Rhee et al., Advanced Science 2026</p>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Rhee et al., Advanced Science, 2026</span><span class="n"></span></div>
+  <aside class="notes">[31:00–32:30] How the engine works. A p-trit is a probabilistic trit: three states, 0, 1, 2, each with Boltzmann odds, P of z equals e to the minus E of z over the sum over u of e to the minus E of u. Change the energies and you change the odds. This isn't only math. A KAIST team, Rhee et al. in Advanced Science 2026, built NbOx p-trits and a ternary Potts machine out of them. The device: a titanium nitride via 150 nanometres wide, 20 nanometres of NbOx, and a 50-nanometre titanium nitride top electrode. The model on the right is that stack. The paper didn't report the substrate material or the via depth, so those parts of the model are not to scale. To be clear: we run p-trits in software today. We don't have hardware.</aside>
+</section>
+
+<!-- 21 · atoms -->
+<section class="light" data-title="Down at the atoms.">
+  <div class="s">
+    <p class="eyebrow">The engine</p>
+    <h2>Down at the atoms.</h2>
+    <div class="body" style="gap:40px; margin-top:40px">
+      <div class="col fig" style="flex:0 0 440px">
+        <div class="panel"><model-viewer src="assets/3d/chain_insulating.glb" poster="assets/renders/chain_insulating.png" alt="Nb chain, insulating: paired atoms, rotating" camera-controls auto-rotate rotation-per-second="10deg" auto-rotate-delay="0" interaction-prompt="none" shadow-intensity="0"></model-viewer></div>
+        <p class="caption two">Insulating: Nb atoms pair up, 2.74 Å pairs and 3.26 Å gaps</p>
+      </div>
+      <div class="col fig" style="flex:0 0 440px">
+        <div class="panel"><model-viewer src="assets/3d/chain_metallic.glb" poster="assets/renders/chain_metallic.png" alt="Nb chain, metallic: evenly spaced atoms, rotating" camera-controls auto-rotate rotation-per-second="10deg" auto-rotate-delay="0" interaction-prompt="none" shadow-intensity="0"></model-viewer></div>
+        <p class="caption two">Metallic: evenly spaced, 3.03 Å</p>
+      </div>
+      <div class="col" style="justify-content:center; padding-left:24px">
+        <p class="t32 ink" style="line-height:1.4">KAIST attributes the high-current switch to a Mott-related insulator–metal transition.</p>
+        <p class="t32" style="margin-top:28px">Bulk NbO₂ makes it at 1081 K.</p>
+        <p class="credit" style="margin-top:40px">Credit: COD 2106754 (Cheetham &amp; Rao 1976) and COD 1548821</p>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Rhee et al., 2026 · COD 2106754 (Cheetham &amp; Rao, 1976) · COD 1548821</span><span class="n"></span></div>
+  <aside class="notes">[32:30–33:30] Down at the atoms, because this room likes to know what's underneath. NbO2 has chains of niobium atoms. In the insulating phase they pair up: 2.74 angstrom pairs with 3.26 angstrom gaps. In the metallic phase they're evenly spaced at 3.03 angstroms. The structures come from the Crystallography Open Database, entries 2106754, Cheetham and Rao 1976, and 1548821. The KAIST paper attributes the device's high-current switching to a Mott-related insulator–metal transition. Bulk NbO2 makes that transition at 1081 kelvin. Thirty seconds of fun; move on.</aside>
+</section>
+
+<!-- 22 · engine -->
+<section class="light" data-title="The verdict engine.">
+  <div class="s">
+    <p class="eyebrow">The engine</p>
+    <h2>The verdict engine.</h2>
+    <div class="body" style="flex-direction:column; gap:30px; margin-top:52px">
+      <p class="t32">Every vote is a trit: 0 says it, 1 can't tell, 2 doesn't.</p>
+      <p class="t32">Every statement is a p-trit with energy</p>
+      <p style="font-family:var(--mono); font-size:40px; color:var(--dark-blue); padding-left:48px">E<sub>j</sub>(z) = −log π<sub>z</sub> − Σ<sub>i</sub> log θ<sub>i</sub>[z, v<sub>ij</sub>]</p>
+      <p class="t32">θ<sub>i</sub> is rater i's 3×3 confusion matrix. Block Gibbs alternates statements and raters.</p>
+      <p class="t32 ink w800">It's Bayesian Dawid–Skene (1979) as p-trit physics.</p>
+      <p class="t24 muted">Grades map by the study's rubric: 9–10 says it, 7–8 can't tell, 0–6 doesn't.</p>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Dawid &amp; Skene, 1979 · Rubric: Zhang et al., Beyond Compilation, 2026</span><span class="n"></span></div>
+  <aside class="notes">[33:30–35:00] The verdict engine. Every vote is a trit: 0 means says it, 1 can't tell, 2 doesn't. Every statement j is a p-trit whose energy for state z is minus log of the prior pi z, minus the sum over raters i of log theta i at row z, column v i j, where v i j is rater i's vote on statement j. Theta i is rater i's 3 by 3 confusion matrix: how likely they are to vote each way given the true answer. Block Gibbs sampling alternates: sample every statement given the raters, then every rater's confusion matrix given the statements. Statisticians will recognise this: it's Bayesian Dawid–Skene from 1979, written as p-trit physics. Judge and human scores out of 10 become trits by the study's own rubric: 9 to 10 says it, 7 to 8 can't tell, 0 to 6 doesn't.</aside>
+</section>
+
+<!-- 23 · network -->
+<section class="light" data-title="120 real statements, 655 real votes.">
+  <div class="s">
+    <p class="eyebrow">The engine on real data</p>
+    <h2>120 real statements, 655 real votes.</h2>
+    <div class="body" style="flex-direction:column; gap:20px; margin-top:32px">
+      <div class="fig grow"><div class="panel"><model-viewer src="assets/3d/verdict_network.glb" poster="assets/renders/verdict_network.png" alt="Verdict network: statements and raters, rotating" camera-controls auto-rotate rotation-per-second="8deg" auto-rotate-delay="0" interaction-prompt="none" shadow-intensity="0"></model-viewer></div></div>
+      <div class="row t24" style="gap:48px; color:var(--dark-blue)">
+        <span><span class="dot says"></span>says it 51</span>
+        <span><span class="dot cant"></span>can't tell 29</span>
+        <span><span class="dot doesnt"></span>doesn't 40</span>
+        <span class="muted">Verdicts from the AI judges only</span>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Votes: Beyond Compilation released files (Zhang et al., 2026) · Verdicts: TriFault engine</span><span class="n"></span></div>
+  <aside class="notes">[35:00–36:00] This is the engine run on real data: the 120 statements in the study's human-audited set, and 655 real votes on them. Using the AI judges only, the engine says 51 say it, 29 can't tell, 40 don't. Everything here is real data from the released files; nothing is simulated. You can rotate it; I'll show it live in Q&A if there's time.</aside>
+</section>
+
+<!-- 24 · results -->
+<section class="light" data-title="It decides 3 in 4 and flags the hard ones.">
+  <div class="s">
+    <p class="eyebrow">Results · 120 statements</p>
+    <h2>It decides 3 in 4 and flags the hard ones.</h2>
+    <div class="body" style="flex-direction:column; gap:24px; margin-top:40px">
+      <table class="t" style="width:1300px">
+        <thead><tr><th></th><th style="text-align:right">Result</th></tr></thead>
+        <tbody>
+          <tr><td>Decided at confidence ≥ 0.9 (AI judges only, 5-fold)</td><td class="v">91 of 120</td></tr>
+          <tr><td>Agree with human majority, on those 91</td><td class="v">87 (95.6%)</td></tr>
+          <tr><td>Fixed rule (both judges ≥ 9), on the same 91</td><td class="v">84 (92.3%)</td></tr>
+          <tr><td>Sent to players</td><td class="v">29</td></tr>
+          <tr><td>Fixed rule, on those 29</td><td class="v">18 right (62%)</td></tr>
+          <tr><td>Humans split, on those 29</td><td class="v">19</td></tr>
+        </tbody>
+      </table>
+      <p class="t24 muted">On all 120: GPT-5.2 judge 87.5%, Gemini-2.5-Pro 75.0%, two-judge rule 85.0%.</p>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">TriFault engine on Beyond Compilation data (Zhang et al., 2026) · 5-fold · truth = human majority</span><span class="n"></span></div>
+  <aside class="notes">[36:00–37:30] Results, using only the two AI judges as inputs, with 5-fold cross-validation. The engine decides 91 of the 120 statements at confidence 0.9 or more. That's the "3 in 4". On those 91 it agrees with the human majority on 87, 95.6 percent. The simple fixed rule, call it faithful only if both judges give 9 or more, gets 84 of the same 91, 92.3 percent. So the gain on the decided items is small and I won't oversell it. The more useful part is the other 29, the ones the engine refuses to decide and sends to players. On those, the fixed rule is right only 18 times, 62 percent, and the humans themselves split on 19 of the 29. So the engine is flagging exactly the items where people disagree. For reference, on all 120: the GPT-5.2 judge alone matches the human majority 87.5 percent of the time, Gemini-2.5-Pro 75.0 percent, the two-judge rule 85.0 percent.</aside>
+</section>
+
+<!-- 25 · trust -->
+<section class="light" data-title="It learns whom to trust.">
+  <div class="s">
+    <p class="eyebrow">Results · per rater</p>
+    <h2>It learns whom to trust.</h2>
+    <div class="body" style="flex-direction:column; gap:8px; margin-top:40px">
+      <p class="t24 ink w600" style="margin-bottom:28px">Votes “says it” when the statement doesn't</p>
+      <div class="hbar"><span class="lab">Gemini-2.5-Pro</span><span class="track"><span class="fill" style="width:84%"></span></span><span class="val">21%</span></div>
+      <div class="hbar"><span class="lab">Human R2</span><span class="track"><span class="fill alt" style="width:54%"></span></span><span class="val">13.5%</span></div>
+      <div class="hbar"><span class="lab">GPT-5.2</span><span class="track"><span class="fill" style="width:18%"></span></span><span class="val">4.5%</span></div>
+      <div class="hbar"><span class="lab">Human R3</span><span class="track"><span class="fill alt" style="width:17.6%"></span></span><span class="val">4.4%</span></div>
+      <div class="hbar"><span class="lab">Human R4</span><span class="track"><span class="fill alt" style="width:12.4%"></span></span><span class="val">3.1%</span></div>
+      <div class="hbar"><span class="lab">Sonnet 5</span><span class="track"><span class="fill" style="width:10.4%"></span></span><span class="val">2.6%</span></div>
+      <p class="t24 muted" style="margin-top:32px">Learned with all raters together and no labels. Teal: AI judges. Dark blue: human reviewers.</p>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">TriFault engine on Beyond Compilation data (Zhang et al., 2026), all raters, no labels</span><span class="n"></span></div>
+  <aside class="notes">[37:30–38:30] This is the part a fixed rule can't do. From the confusion matrices, here's how often each rater votes "says it" when the statement doesn't say it. Gemini-2.5-Pro: 21 percent. Human reviewer R2: 13.5 percent. GPT-5.2: 4.5 percent. Human R3: 4.4. Human R4: 3.1. Sonnet 5: 2.6. Two things. First, these were learned with all raters together and no labels at all: the engine never saw the answers. Second, it matches what we saw in round 3: Gemini gave the false statement a 10. The engine learns that and discounts it, and it does the same for people. In the game, that's how a new player earns weight.</aside>
+</section>
+
+<!-- 26 · caveats -->
+<section class="light" data-title="What this doesn't show yet.">
+  <div class="s">
+    <p class="eyebrow">Caveats</p>
+    <h2>What this doesn't show yet.</h2>
+    <div class="body" style="gap:96px; margin-top:52px">
+      <ul class="col stack t32" style="flex:1.5">
+        <li>120 statements. Half are a hard subset picked by the study's own check.</li>
+        <li>“Truth” is the human majority. Round 3 shows it can be wrong.</li>
+        <li>Other thresholds give other numbers.</li>
+        <li>Not tested on new data or real players.</li>
+      </ul>
+      <div class="col" style="flex:0 0 480px">
+        <div class="card"><p class="k">Next</p><p class="t32 ink">Tonight's votes, then a public pilot.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Data: Zhang et al., Beyond Compilation, 2026</span><span class="n"></span></div>
+  <aside class="notes">[38:30–39:00] Before anyone asks, the caveats. 120 statements is small, and half of them are a hard subset the study picked with its own check, so they are not a random sample. Our "truth" is the human majority, and round 3 just showed you the majority can be wrong. The 0.9 confidence threshold is a choice: other thresholds give other numbers. And none of this has been tested on new data or with real players. Next step: tonight's votes, then a public pilot.</aside>
+</section>
+
+<!-- 27 · product -->
+<section class="light" data-title="The game is the data engine.">
+  <div class="s">
+    <p class="eyebrow">Product</p>
+    <h2>The game is the data engine.</h2>
+    <div class="body" style="align-items:center">
+      <div class="steps" style="width:100%">
+        <div class="step"><p class="no">1 · Play</p><h3>Vote three ways</h3><p>Tap the span. Pick a reason tag.</p></div>
+        <div class="step"><p class="no">2 · Verdict</p><h3>p-trit verdict</h3><p>With a confidence.</p></div>
+        <div class="step"><p class="no">3 · Route</p><h3>Low confidence</h3><p>Goes to more players.</p></div>
+        <div class="step"><p class="no">4 · Gold</p><h3>Witnesses and experts</h3><p>Lean witnesses and expert-confirmed items become gold that scores everyone.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src"></span><span class="n"></span></div>
+  <aside class="notes">[39:00–40:30] The product loop. One: you play. A three-way vote, you tap the span of Lean that's wrong, and you pick a reason tag. Two: the p-trit engine turns all votes into a verdict with a confidence. Three: anything with low confidence goes to more players, like round 3 did. Four: Lean witnesses, which the kernel checks, and expert-confirmed items become gold items. Gold items score everyone, players and AI judges alike, and that's what the trust on the last slide is learned against. Every round played makes the dataset bigger and the trust estimates sharper.</aside>
+</section>
+
+<!-- 28 · worlds -->
+<section class="light" data-title="Every area, everywhere.">
+  <div class="s">
+    <p class="eyebrow">Product</p>
+    <h2>Every area, everywhere.</h2>
+    <div class="body" style="flex-direction:column; gap:44px; margin-top:52px">
+      <div>
+        <p class="label">Worlds</p>
+        <div class="row" style="flex-wrap:wrap; gap:16px">
+          <span class="card t24 ink" style="padding:14px 24px">Number theory</span>
+          <span class="card t24 ink" style="padding:14px 24px">Algebra</span>
+          <span class="card t24 ink" style="padding:14px 24px">Analysis</span>
+          <span class="card t24 ink" style="padding:14px 24px">Topology</span>
+          <span class="card t24 ink" style="padding:14px 24px">Combinatorics</span>
+          <span class="card t24 ink" style="padding:14px 24px">Probability</span>
+          <span class="card t24 ink" style="padding:14px 24px">Physics (Physlib)</span>
+          <span class="card t24 ink" style="padding:14px 24px">Quantum</span>
+          <span class="card t24 ink" style="padding:14px 24px">CS and crypto specs</span>
+          <span class="card t24 teal w600" style="padding:14px 24px">then plain-English policies</span>
+        </div>
+      </div>
+      <div>
+        <p class="label">Levels</p>
+        <p class="t32 ink">Competition → undergrad → grad → research (Formal Conjectures)</p>
+      </div>
+      <p class="t32">Built on lean4game, which runs the Natural Number Game and already supports translations.</p>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">lean4game: Bentkamp &amp; Eugster</span><span class="n"></span></div>
+  <aside class="notes">[40:30–42:00] The game has worlds, like the Natural Number Game. Number theory, algebra, analysis, topology, combinatorics, probability, physics using Physlib, quantum, CS and crypto specs. Then, beyond formal math, plain-English policies. Levels go from competition math to undergrad, grad, and research level, using Formal Conjectures. We build on lean4game by Bentkamp and Eugster, which already runs the Natural Number Game and already supports translations, so "everywhere" means other languages too.</aside>
+</section>
+
+<!-- 29 · zoom -->
+<section class="light" data-title="From a verdict to an atom.">
+  <div class="s">
+    <p class="eyebrow">The stack</p>
+    <h2>From a verdict to an atom.</h2>
+    <div class="body" style="gap:0; margin-top:48px; align-items:flex-start">
+      <div class="fig" style="flex:1"><div class="panel" style="height:420px; flex:none"><img src="assets/renders/verdict_network.png" alt="Verdict network"></div><p class="caption">Verdict network (software)</p></div>
+      <div class="teal w800 t32" style="padding:190px 14px 0">→</div>
+      <div class="fig" style="flex:1"><div class="panel" style="height:420px; flex:none"><img src="assets/renders/ptrit_device.png" alt="TiN / NbOx / TiN device"></div><p class="caption">TiN / NbOₓ / TiN device: 150 nm via, 20 nm film</p></div>
+      <div class="teal w800 t32" style="padding:190px 14px 0">→</div>
+      <div class="fig" style="flex:1"><div class="panel" style="height:420px; flex:none"><img src="assets/renders/nbo2_insulating.png" alt="NbO2 crystal"></div><p class="caption">NbO₂ crystal: 13.70 × 13.70 × 5.98 Å cell, 96 atoms</p></div>
+      <div class="teal w800 t32" style="padding:190px 14px 0">→</div>
+      <div class="fig" style="flex:1"><div class="panel" style="height:420px; flex:none"><img src="assets/renders/chain_insulating.png" alt="One Nb chain"></div><p class="caption">One Nb chain: 2.74 Å pairs, 3.03 Å when metallic</p></div>
+    </div>
+    <p class="credit" style="margin-top:8px">Credit: TriFault renders · device after Rhee et al., Advanced Science 2026 · crystal from COD 2106754 (Cheetham &amp; Rao 1976) and COD 1548821</p>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Rhee et al., 2026 · COD 2106754 (Cheetham &amp; Rao, 1976) · COD 1548821</span><span class="n"></span></div>
+  <aside class="notes">[42:00–43:00] One picture of the whole stack. On the left, the verdict network, which is software today. A p-trit in hardware would be this TiN, NbOx, TiN device: a 150-nanometre via and a 20-nanometre film. The film is NbO2, whose crystal has a 13.70 by 13.70 by 5.98 angstrom cell with 96 atoms. And inside the crystal, one niobium chain: 2.74 angstrom pairs when insulating, 3.03 angstroms evenly spaced when metallic. From a verdict about a Lean statement down to an atom. We're at the left end today.</aside>
+</section>
+
+<!-- 30 · customers -->
+<section class="light" data-title="Who pays.">
+  <div class="s">
+    <p class="eyebrow">Plan</p>
+    <h2>Who pays.</h2>
+    <div class="body">
+      <div class="cards" style="grid-template-columns:repeat(4,1fr); width:100%; align-items:start; align-self:center">
+        <div class="card"><p class="k">AI-for-math labs</p><h3>Labs and formalization companies</h3><p>Labels, audits, a judge benchmark.</p></div>
+        <div class="card"><p class="k">Industry</p><h3>Verification teams</h3><p>Does the spec say what the requirement says?</p></div>
+        <div class="card"><p class="k">Education</p><h3>Universities</h3><p>Teaching formalization.</p></div>
+        <div class="card"><p class="k">Grants</p><h3>AI for Math Fund</h3><p>$35.1M committed. Its 2026 round gave $17.1M to 22 projects out of 470+ applications.</p><p class="cite">EdTech Innovation Hub, 2026</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">AI for Math Fund via EdTech Innovation Hub, 2026</span><span class="n"></span></div>
+  <aside class="notes">[43:00–44:30] This is a plan, not traction. Four groups. AI-for-math labs and formalization companies: they need labels, audits of their outputs, and a benchmark for their own judges. Verification teams in industry: the same question in a different setting, does the spec say what the requirement says. Universities: teaching formalization, where the game is the course material. And grants: the AI for Math Fund has committed 35.1 million dollars; its 2026 round gave 17.1 million to 22 projects out of more than 470 applications.</aside>
+</section>
+
+<!-- 31 · money -->
+<section class="light" data-title="Labs pay a lot for human judgment.">
+  <div class="s">
+    <p class="eyebrow">Plan · business model</p>
+    <h2>Labs pay a lot for human judgment.</h2>
+    <div class="body" style="gap:64px; margin-top:44px">
+      <div class="col stack" style="flex:0 0 560px">
+        <p class="t32 ink">Players play free.</p>
+        <p class="t32">Customers pay per audited statement, and for label and benchmark subscriptions.</p>
+        <p class="t32">Top players earn bounties.</p>
+        <p class="t32 ink w800">Prices: [__]</p>
+      </div>
+      <div class="col">
+        <table class="t">
+          <thead><tr><th>Comparable</th><th>Public figures</th></tr></thead>
+          <tbody>
+            <tr><td><b>Mercor</b></td><td>About $2B annualized gross revenue by June 2026; $350M Series C at $10B (Oct 2025)</td></tr>
+            <tr><td><b>LMArena</b></td><td>$150M Series A at $1.7B (Jan 2026)</td></tr>
+            <tr><td><b>Harmonic</b></td><td>$120M Series C at $1.45B (Nov 2025)</td></tr>
+            <tr><td style="white-space:nowrap"><b>Axiom Math</b></td><td>$200M Series A at $1.6B (Mar 2026)</td></tr>
+          </tbody>
+        </table>
+        <p class="t24 teal w600" style="margin-top:24px">AI provers make the meaning check more urgent. We see them as partners and potential customers, not competitors.</p>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Dealroom, 2026 · TechCrunch, 2025 and 2026 · BusinessWire, 2025 · SiliconANGLE, 2026</span><span class="n"></span></div>
+  <aside class="notes">[44:30–46:00] Business model. Players play free. Customers pay per audited statement, and pay subscriptions for labels and for the judge benchmark. Top players earn bounties. Prices: [__]. Why we think labs pay: they already pay a lot for human judgment. Mercor reached about 2 billion dollars in annualized gross revenue by June 2026, after a 350 million Series C at a 10 billion valuation in October 2025. LMArena raised a 150 million Series A at 1.7 billion in January 2026. In formal math specifically, Harmonic raised a 120 million Series C at 1.45 billion in November 2025, and Axiom Math a 200 million Series A at 1.6 billion in March 2026. These are comparables, not customers. The AI provers make the meaning check more urgent: a proof of the wrong statement is worth nothing to them. We see them as partners and potential customers, not competitors.</aside>
+</section>
+
+<!-- 32 · moat -->
+<section class="light" data-title="What compounds.">
+  <div class="s">
+    <p class="eyebrow">Plan · moat</p>
+    <h2>What compounds.</h2>
+    <div class="body" style="gap:64px; margin-top:52px">
+      <div class="col">
+        <p class="label">Moat (plan)</p>
+        <ul class="stack t32 ink">
+          <li>The labeled set of real misformalizations</li>
+          <li>Reason tags</li>
+          <li>Every rater's learned trust</li>
+          <li>Lean-witnessed gold items</li>
+        </ul>
+      </div>
+      <div class="col stack">
+        <p class="label" style="margin-bottom:0">Lessons from science games</p>
+        <div class="card"><p class="k">Foldit, 2011</p><p>Players solved a retroviral protease structure that had stumped scientists for over a decade, in three weeks.</p></div>
+        <div class="card"><p class="k">DARPA Verigames, NPS study 2014</p><p>Smaller audiences and more one-time players than regular games. So we design for power players.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">University of Washington, 2011 · Naval Postgraduate School, 2014</span><span class="n"></span></div>
+  <aside class="notes">[46:00–47:30] What compounds, as a plan. The labeled set of real misformalizations. The reason tags, which say why each one is wrong. Every rater's learned trust, human and AI. And Lean-witnessed gold items, which the kernel has checked. Two lessons from earlier science games. Foldit, 2011: players solved the structure of a retroviral protease that had stumped scientists for over a decade, in three weeks. But DARPA's Verigames, which tried to turn software verification into games, got smaller audiences and more one-time players than regular games, per a 2014 Naval Postgraduate School study. So we don't design for the mass market. We design for power players: people like this room.</aside>
+</section>
+
+<!-- 33 · built -->
+<section class="light" data-title="What I've built.">
+  <div class="s">
+    <p class="eyebrow">Team</p>
+    <h2>What I've built.</h2>
+    <div class="body" style="flex-direction:column; gap:26px; margin-top:44px">
+      <p class="t32"><b class="ink">TriFault:</b> a p-trit engine behind a <code class="i">trifault</code> tactic. P-trits propose, the kernel checks: Schur S(3) ≥ 13, van der Waerden W(3,3) ≥ 27, <code class="i">linear_combination</code> certificates.</p>
+      <p class="t32">Fault tolerance proved in Lean: <code class="i">vote5_two_faults</code>, <code class="i">vote5_error_bound</code>.</p>
+      <p class="t32">The verdict engine and its run on real data.</p>
+      <p class="t32">A QEC library in Lean: 40 theorems, no <code class="i">sorry</code>.</p>
+      <p class="t32">Background: benchmarked Ising models on annealers at MIT Lincoln Lab.</p>
+      <p class="t32 ink w800">Team: [__]</p>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Own work, Hanah Rahman, 2026 · github.com/hrahman12</span><span class="n"></span></div>
+  <aside class="notes">[47:30–48:30] What exists today. TriFault itself: a p-trit engine behind a Lean tactic called trifault. The p-trits propose, the kernel checks. It has found certificates for Schur S(3) at least 13, van der Waerden W(3,3) at least 27, and linear_combination certificates. Its fault tolerance is proved in Lean, in vote5_two_faults and vote5_error_bound. The verdict engine you just saw, and its run on the real study data. A quantum error correction library in Lean: 40 theorems, no sorry. My background: I benchmarked Ising models on quantum annealers at MIT Lincoln Lab. Team: [__].</aside>
+</section>
+
+<!-- 34 · ask -->
+<section class="light" data-title="The plan and the ask.">
+  <div class="s">
+    <p class="eyebrow">Plan</p>
+    <h2>The plan and the ask.</h2>
+    <div class="body" style="flex-direction:column; gap:56px; margin-top:52px">
+      <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:20px">
+        <div class="card" style="padding:28px"><p class="k">1</p><p class="t24 ink">Tonight's live round</p></div>
+        <div class="card" style="padding:28px"><p class="k">2</p><p class="t24 ink">Public beta on lean4game</p></div>
+        <div class="card" style="padding:28px"><p class="k">3</p><p class="t24 ink">p-trit engine as an open library</p></div>
+        <div class="card" style="padding:28px"><p class="k">4</p><p class="t24 ink">Paid audits for [__] design partners</p></div>
+        <div class="card" style="padding:28px"><p class="k">5</p><p class="t24 ink">Worlds beyond math</p></div>
+      </div>
+      <div class="card" style="border-left:6px solid var(--teal)">
+        <p class="k">The ask</p>
+        <p class="t44 ink">Raising $[__]. Looking for [__] design partners, [__] Lean engineers, and players.</p>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src"></span><span class="n"></span></div>
+  <aside class="notes">[48:30–50:00] The plan, in order, no dates. One: tonight's live round, which you've just played. Two: a public beta on lean4game. Three: release the p-trit engine as an open library. Four: paid audits for [__] design partners. Five: worlds beyond math, starting with plain-English policies. The ask. We're raising $[__]. We're looking for [__] design partners, especially AI-for-math labs and formalization teams. [__] Lean engineers. And players: if you enjoyed tonight, you're who we're building for.</aside>
+</section>
+
+<!-- 35 · close -->
+<section class="dark" data-background-color="#00313C" data-title="Close and questions">
+  <div class="s">
+    <div class="body" style="flex-direction:column; justify-content:center; margin-top:0">
+      <div class="rule"></div>
+      <h1 style="max-width:1500px">Lean checks the proof. We check the meaning.</h1>
+      <p class="t32 on-dark" style="margin-top:56px">github.com/hrahman12 · rahman.hanah@gmail.com</p>
+      <p class="t44 w800" style="margin-top:72px; color:#5FC4CC">Questions.</p>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src"></span><span class="n"></span></div>
+  <aside class="notes">[50:00–60:00] Close: Lean checks the proof. We check the meaning. Thank you. Ten minutes of questions. If there's time, demo the live 3D page: open slide 23 and rotate the verdict network, or slide 20 for the device. Backup slides: 36 is sources, 37 is short answers to likely questions. Likely questions: Isn't this just LLM-as-judge? The judges are inputs; the engine learns how far to trust each from gold items and flags disagreement. Gemini-2.5-Pro alone matches the human majority 75.0 percent on the 120. Why p-trits? It is Bayesian Dawid–Skene; p-trits give the same sampler TriFault runs, which runs natively on p-trit hardware. Who labels gold? Lean witnesses plus expert-confirmed mismatches. Gaming? Gold items score every player; trust is learned per player. Bad English? That's what can't tell is for. Why would AI provers pay? Their outputs only count if the statements mean what they say.</aside>
+</section>
+
+<!-- 36 · sources (backup) -->
+<section class="light" data-title="Sources">
+  <div class="s">
+    <p class="eyebrow">Backup</p>
+    <h2>Sources</h2>
+    <div class="srcs" style="margin-top:28px; columns:2; column-gap:56px; font-size:20px; line-height:1.3; color:var(--dark-gray); overflow-wrap:anywhere">
+      <p>Beyond Compilation: <a href="https://arxiv.org/abs/2606.31002">https://arxiv.org/abs/2606.31002</a> · data <a href="https://github.com/grenadeComing/beyond-compilation">https://github.com/grenadeComing/beyond-compilation</a></p>
+      <p>miniF2F-Lean Revisited: <a href="https://arxiv.org/abs/2511.03108">https://arxiv.org/abs/2511.03108</a></p>
+      <p>ProofNet#: <a href="https://arxiv.org/abs/2406.07222">https://arxiv.org/abs/2406.07222</a></p>
+      <p>Formal Conjectures: <a href="https://arxiv.org/abs/2605.13171">https://arxiv.org/abs/2605.13171</a> · Alexeev &amp; Mixon: <a href="https://arxiv.org/abs/2510.19804">https://arxiv.org/abs/2510.19804</a></p>
+      <p>OpenAI math release: <a href="https://www.unite.ai/openai-releases-722-math-manuscripts-from-an-unreleased-ai-model/">https://www.unite.ai/openai-releases-722-math-manuscripts-from-an-unreleased-ai-model/</a></p>
+      <p>ATLAS: <a href="https://arxiv.org/abs/2605.29955">https://arxiv.org/abs/2605.29955</a> · Goedel-Prover: <a href="https://arxiv.org/abs/2502.07640">https://arxiv.org/abs/2502.07640</a></p>
+      <p>Math Inc sphere packing: <a href="https://spectrum.ieee.org/ai-proof-verification">https://spectrum.ieee.org/ai-proof-verification</a></p>
+      <p>Mathlib structure: <a href="https://arxiv.org/abs/2604.24797">https://arxiv.org/abs/2604.24797</a> · Lean Pool: <a href="https://arxiv.org/abs/2609.25199">https://arxiv.org/abs/2609.25199</a></p>
+      <p>Jason Rute on Zulip: <a href="https://leanprover-community.github.io/archive/stream/219941-Machine-Learning-for-Theorem-Proving/topic/Checking.20large.20AI.20generated.20projects.html">https://leanprover-community.github.io/archive/stream/219941-Machine-Learning-for-Theorem-Proving/topic/Checking.20large.20AI.20generated.20projects.html</a></p>
+      <p>Lean Atlas: <a href="https://arxiv.org/abs/2604.16347">https://arxiv.org/abs/2604.16347</a> · Numina Fuse: <a href="https://arxiv.org/abs/2610.33860">https://arxiv.org/abs/2610.33860</a> · LeanScorer comparison: <a href="https://arxiv.org/abs/2604.19000">https://arxiv.org/abs/2604.19000</a></p>
+      <p>AWS Automated Reasoning checks: <a href="https://aws.amazon.com/blogs/machine-learning/automated-reasoning-policy-refinement-in-amazon-bedrock">https://aws.amazon.com/blogs/machine-learning/automated-reasoning-policy-refinement-in-amazon-bedrock</a></p>
+      <p>lean4game: <a href="https://github.com/leanprover-community/lean4game">https://github.com/leanprover-community/lean4game</a></p>
+      <p>KAIST p-trits: <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13403740/">https://pmc.ncbi.nlm.nih.gov/articles/PMC13403740/</a></p>
+      <p>NbO₂ structures: <a href="https://www.crystallography.net/cod/2106754.html">https://www.crystallography.net/cod/2106754.html</a> · <a href="https://www.crystallography.net/cod/1548821.html">https://www.crystallography.net/cod/1548821.html</a></p>
+      <p>Berkeley Lab visual identity: <a href="https://creative.lbl.gov/visual-identity/">https://creative.lbl.gov/visual-identity/</a></p>
+      <p>Foldit: <a href="https://www.washington.edu/news/2011/09/19/gamers-succeed-where-scientists-fail">https://www.washington.edu/news/2011/09/19/gamers-succeed-where-scientists-fail</a> · Verigames study: <a href="https://core.ac.uk/download/343439106.pdf">https://core.ac.uk/download/343439106.pdf</a></p>
+      <p>Mercor: <a href="https://dealroom.co/news/137121-mercor-doubles-to-2b-gross-revenue-run-rate-as-ai-labs-buy-expert-data/">https://dealroom.co/news/137121-mercor-doubles-to-2b-gross-revenue-run-rate-as-ai-labs-buy-expert-data/</a> · <a href="https://techcrunch.com/2025/10/27/mercor-quintuples-valuation-to-10b-with-350m-series-c/">https://techcrunch.com/2025/10/27/mercor-quintuples-valuation-to-10b-with-350m-series-c/</a></p>
+      <p>LMArena: <a href="https://techcrunch.com/2026/01/06/lmarena-lands-1-7b-valuation-four-months-after-launching-its-product">https://techcrunch.com/2026/01/06/lmarena-lands-1-7b-valuation-four-months-after-launching-its-product</a></p>
+      <p>Harmonic: <a href="https://www.businesswire.com/news/home/20251125727962/en">https://www.businesswire.com/news/home/20251125727962/en</a> · Axiom: <a href="https://siliconangle.com/2026/03/12/verifiable-ai-startup-axiom-raises-200m-prove-ai-generated-code-safe/">https://siliconangle.com/2026/03/12/verifiable-ai-startup-axiom-raises-200m-prove-ai-generated-code-safe/</a></p>
+      <p>AI for Math Fund: <a href="https://www.edtechinnovationhub.com/news/ai-for-math-fund-expands-to-351m-as-new-grants-back-open-tools-theorem-proving-and-ai-generated-proofs">https://www.edtechinnovationhub.com/news/ai-for-math-fund-expands-to-351m-as-new-grants-back-open-tools-theorem-proving-and-ai-generated-proofs</a></p>
+      <p>Statements: Stephen Doty, <i>Lecture Notes on Abstract Algebra</i> (CC BY 4.0) · Jiří Lebl, <i>Basic Analysis</i> and <i>Guide to Cultivating Complex Analysis</i> (CC BY-SA 4.0)</p>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src"></span><span class="n"></span></div>
+  <aside class="notes">[backup, not timed] All sources. Every number on a slide has a short source line on that slide; the full links are here. Show only if asked.</aside>
+</section>
+
+<!-- 37 · qa (backup) -->
+<section class="light" data-title="Short answers">
+  <div class="s">
+    <p class="eyebrow">Backup</p>
+    <h2>Short answers.</h2>
+    <div class="body" style="flex-direction:column; gap:22px; margin-top:36px">
+      <p class="t24"><b class="ink">Isn't this just LLM-as-judge?</b> The judges are inputs. The engine learns how far to trust each one from gold items and flags where they disagree. On the study's 120 audited statements, Gemini-2.5-Pro alone matches the human majority 75.0% of the time.</p>
+      <p class="t24"><b class="ink">Why p-trits and not a plain Bayesian model?</b> Mathematically it is Bayesian Dawid–Skene. Writing it as p-trits gives the same sampler TriFault runs, and that sampler runs natively on p-trit hardware.</p>
+      <p class="t24"><b class="ink">Who labels the gold items?</b> Lean witnesses, which the kernel checks, plus expert-confirmed mismatches.</p>
+      <p class="t24"><b class="ink">How do you stop players from gaming it?</b> Gold items score every player, and trust is learned per player.</p>
+      <p class="t24"><b class="ink">What if the English is the problem?</b> That's what “can't tell” is for: it flags the source, not the Lean.</p>
+      <p class="t24"><b class="ink">Why would AI provers pay?</b> Their outputs only count if the statements mean what they say. We see Harmonic and Axiom as potential partners and customers, not competitors.</p>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Zhang et al., Beyond Compilation, 2026</span><span class="n"></span></div>
+  <aside class="notes">[backup, not timed] Short answers to the six questions I expect. Use the line on the slide, then expand from the slide it points back to: judges and trust are slides 24 and 25; p-trits are slides 20 and 22; gold items are slides 19 and 27.</aside>
+</section>
+
+
+</div></div>
+
+<script src="vendor/reveal/reveal.js"></script>
+<script src="vendor/reveal/plugin/notes/notes.js"></script>
+<script>
+  // Self-hosted decoders so model-viewer never reaches a CDN.
+  customElements.whenDefined('model-viewer').then(() => {
+    const MV = customElements.get('model-viewer');
+    MV.dracoDecoderLocation = 'vendor/decoders/draco/';
+    MV.ktx2TranscoderLocation = 'vendor/decoders/basis/';
+  });
+
+  // Slide numbers in the footer.
+  document.querySelectorAll('.reveal .slides > section').forEach((s, i) => {
+    const n = s.querySelector('.ft .n'); if (n) n.textContent = i + 1;
+  });
+
+  // Mark any render or model that is missing (assets/ not unzipped yet).
+  function markMissing(panel, src) { panel.classList.add('missing'); panel.dataset.src = src; }
+  document.querySelectorAll('.panel img').forEach(img => {
+    img.addEventListener('error', () => markMissing(img.parentElement, img.getAttribute('src')));
+    if (img.complete && !img.naturalWidth) markMissing(img.parentElement, img.getAttribute('src'));
+  });
+  document.querySelectorAll('.panel model-viewer').forEach(mv => {
+    mv.addEventListener('error', () => markMissing(mv.parentElement, mv.getAttribute('src')));
+  });
+
+  if (window.DECK_EXPORT) {
+    // PDF: each 3D model becomes its PNG poster; every fragment is shown.
+    document.querySelectorAll('model-viewer').forEach(mv => {
+      const img = document.createElement('img');
+      img.src = mv.getAttribute('poster'); img.alt = mv.getAttribute('alt') || '';
+      img.addEventListener('error', () => img.parentElement && markMissing(img.parentElement, img.getAttribute('src')));
+      mv.replaceWith(img);
+    });
+    document.querySelectorAll('.fragment').forEach(f => f.classList.remove('fragment'));
+  }
+
+  Reveal.initialize({
+    width: 1920, height: 1080, margin: 0, minScale: 0.1, maxScale: 3,
+    center: false, transition: 'fade', backgroundTransition: 'fade',
+    controls: false, progress: false, slideNumber: false,
+    hash: true, history: false, pdfSeparateFragments: false,
+    plugins: [ RevealNotes ]
+  });
+</script>
+</body>
+</html>

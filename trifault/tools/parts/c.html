@@ -1,0 +1,240 @@
+<!-- 11 · r1 -->
+<section class="light" data-title="Round 1 · warm-up">
+  <div class="s">
+    <p class="eyebrow">Round 1 · warm-up</p>
+    <h2>Elementary matrices</h2>
+    <div class="body" style="flex-direction:column; gap:40px; margin-top:40px">
+      <div><p class="label">English</p><p class="english">Any nonsingular n×n real matrix A can be expressed as a product of elementary matrices.</p></div>
+      <div><p class="label">Lean</p>{{lean:r1}}</div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Case A-002, Zhang et al., Beyond Compilation, 2026 · Statement: Doty, Lecture Notes on Abstract Algebra (CC BY 4.0)</span><span class="n"></span></div>
+  <aside class="notes">[18:00–19:30] Warm-up. English: any nonsingular n by n real matrix can be written as a product of elementary matrices. Here's the Lean the GPT-5.2 agent wrote, case A-002 in the study. Read it for thirty seconds. Then: hands up for says it. Can't tell. Doesn't say it. Hint if the room is stuck: look at the set inside the closure.</aside>
+</section>
+
+<!-- 12 · r1-reveal -->
+<section class="light" data-title="Round 1: the set is every matrix.">
+  <div class="s">
+    <p class="eyebrow">Round 1 · reveal</p>
+    <h2>The set is every matrix.</h2>
+    <div class="body" style="flex-direction:column; gap:40px; margin-top:44px">
+      <div class="grades">
+        <div class="gbox"><p class="k">AI judges (out of 10)</p><div class="g"><div><b>2</b>GPT-5.2</div><div><b>4</b>Gemini-2.5-Pro</div><div><b>1</b>Sonnet 5</div></div></div>
+        <div class="gbox"><p class="k">Human reviewers (out of 10)</p><div class="g"><div><b>4</b>reviewer</div><div><b>2</b>reviewer</div><div><b>2</b>reviewer</div></div></div>
+      </div>
+      <p class="fragment t32 ink" style="line-height:1.4"><code class="i">{E | True}</code> is every matrix, so the closure is everything. It's trivially true without <code class="i">hA</code>, even for the zero matrix.</p>
+      <div class="fragment verdict">p-trit verdict: <span class="chip doesnt">doesn't say it</span> confidence 1.00</div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Grades: Zhang et al., Beyond Compilation, 2026 (case A-002) · Verdict: TriFault engine on the released data</span><span class="n"></span></div>
+  <aside class="notes">[19:30–20:30] The graders mostly caught this one. AI judges: GPT-5.2 gave it 2, Gemini-2.5-Pro 4, Sonnet 5 gave 1. The three human reviewers: 4, 2, 2. Click: the set {E | True} is every matrix, not the elementary ones, so the closure is everything and the statement is trivially true. It doesn't even use hA. It holds for the zero matrix, which is certainly not a product of elementary matrices. Click: the p-trit engine says doesn't say it, with confidence 1.00. Easy one. They get harder.</aside>
+</section>
+
+<!-- 13 · r2 -->
+<section class="light" data-title="Round 2">
+  <div class="s">
+    <p class="eyebrow">Round 2</p>
+    <h2>Uniform convergence</h2>
+    <div class="body" style="flex-direction:column; gap:40px; margin-top:40px">
+      <div><p class="label">English</p><p class="english">Show that the series ∑<sub>k=0</sub><sup>∞</sup> x<sup>k</sup> does not converge uniformly on (−1,1).</p></div>
+      <div><p class="label">Lean</p>{{lean:r2}}</div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Case A-049, Zhang et al., Beyond Compilation, 2026 · Statement: Lebl, Basic Analysis (CC BY-SA 4.0)</span><span class="n"></span></div>
+  <aside class="notes">[20:30–22:00] Round 2. English: the geometric series, sum of x to the k, does not converge uniformly on the open interval minus 1 to 1. Here's the Lean, case A-049. Thirty seconds. Hint if needed: read the theorem name, then look for where the interval shows up in the statement. Hands up: says it, can't tell, doesn't say it.</aside>
+</section>
+
+<!-- 14 · r2-reveal -->
+<section class="light" data-title="Round 2: the interval never appears.">
+  <div class="s">
+    <p class="eyebrow">Round 2 · reveal</p>
+    <h2>The interval never appears.</h2>
+    <div class="body" style="flex-direction:column; gap:40px; margin-top:44px">
+      <div class="grades">
+        <div class="gbox"><p class="k">AI judges (out of 10)</p><div class="g"><div><b>4</b>GPT-5.2</div><div><b>5</b>Gemini-2.5-Pro</div><div><b>[__]</b>Sonnet 5</div></div></div>
+        <div class="gbox"><p class="k">Human reviewers (out of 10)</p><div class="g"><div><b>2</b>reviewer</div><div><b>4</b>reviewer</div><div><b>5</b>reviewer</div></div></div>
+      </div>
+      <p class="fragment t32 ink" style="line-height:1.4">The name says <code class="i">Ioo</code>, but x is never restricted to (−1, 1). At x = 1 the partial sums are n, and Mathlib's <code class="i">tsum</code> of a non-summable series is 0. So x = 1 alone proves it.</p>
+      <div class="fragment verdict">p-trit verdict: <span class="chip doesnt">doesn't say it</span> confidence 1.00</div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Grades: Zhang et al., Beyond Compilation, 2026 (case A-049) · Verdict: TriFault engine on the released data</span><span class="n"></span></div>
+  <aside class="notes">[22:00–23:30] Grades: GPT-5.2 gave 4, Gemini-2.5-Pro 5, Sonnet 5 [__]. Humans 2, 4 and 5. Everyone was unsure, nobody was confident it was right. Click: the theorem name says Ioo, but x ranges over all of ℝ. At x = 1 the partial sums are n, which go to infinity, while Mathlib's tsum of a non-summable series is defined to be 0. So the convergence fails at x = 1 alone, and the statement says nothing about the hard part of the exercise, which is behaviour near 1 inside the interval. Click: p-trit says doesn't say it, 1.00. This is a classic Lean trap: junk values for tsum.</aside>
+</section>
+
+<!-- 15 · bonus -->
+<section class="light" data-title="Bonus · spot the sorry">
+  <div class="s">
+    <p class="eyebrow">Bonus · spot the sorry</p>
+    <h2>Schwarz lemma</h2>
+    <div class="body" style="gap:56px; margin-top:40px">
+      <div class="col" style="flex:0 0 520px"><p class="label">English</p><p class="english" style="font-size:44px">Suppose f: 𝔻 → 𝔻 is holomorphic and f(0) = 0; then |f(z)| ≤ |z| for all z ∈ 𝔻.</p></div>
+      <div class="col"><p class="label">Lean</p>{{lean:bonus}}</div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Case A-011, Zhang et al., 2026 · Statement: Lebl, Guide to Cultivating Complex Analysis (CC BY-SA 4.0)</span><span class="n"></span></div>
+  <aside class="notes">[23:30–24:30] Bonus round, quick. This is the Schwarz lemma, case A-011. There is a sorry that is not at the end of the proof. Find it and say what it does. Hands up when you see it, then vote.</aside>
+</section>
+
+<!-- 16 · bonus-reveal -->
+<section class="light" data-title="Bonus: a sorry inside a hypothesis.">
+  <div class="s">
+    <p class="eyebrow">Bonus · reveal</p>
+    <h2>A <span style="font-family:var(--mono); font-weight:400">sorry</span> inside a hypothesis.</h2>
+    <div class="body" style="flex-direction:column; gap:40px; margin-top:44px">
+      <div class="grades">
+        <div class="gbox"><p class="k">AI judges (out of 10)</p><div class="g"><div><b>5</b>GPT-5.2</div><div><b>6</b>Gemini-2.5-Pro</div></div></div>
+        <div class="gbox"><p class="k">Human reviewers (out of 10)</p><div class="g"><div><b>1</b>reviewer</div><div><b>7</b>reviewer</div><div><b>4</b>reviewer</div></div></div>
+      </div>
+      <p class="fragment t32 ink" style="line-height:1.4">The <code class="i">sorry</code> fakes ‖z‖ &lt; 1 for every complex z, z = 2 included. And it asks for differentiability on all of ℂ, not holomorphy on the disk.</p>
+      <div class="fragment verdict">p-trit verdict: <span class="chip doesnt">doesn't say it</span> confidence 0.98</div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Grades: Zhang et al., Beyond Compilation, 2026 (case A-011) · Verdict: TriFault engine on the released data</span><span class="n"></span></div>
+  <aside class="notes">[24:30–25:30] Grades: GPT-5.2 5, Gemini-2.5-Pro 6. Humans 1, 7 and 4, so the humans were all over the place. Click: the sorry sits inside the hypothesis hf, where it proves that ‖z‖ &lt; 1 for every complex z, including z = 2. That's false, but sorry doesn't care. And hf asks for f to be differentiable on all of ℂ, which is not what holomorphic on the disk means. Click: p-trit says doesn't say it, 0.98. Point for the room: a sorry in a statement is not the same as a sorry in a proof, and a "no sorry in proofs" check won't catch it.</aside>
+</section>
+
+<!-- 17 · r3 -->
+<section class="dark" data-background-color="#00313C" data-title="Round 3 · boss">
+  <div class="s">
+    <div class="rule"></div>
+    <p class="eyebrow">Round 3 · boss</p>
+    <h2>Groups of order 2p</h2>
+    <div class="body" style="flex-direction:column; gap:36px; margin-top:36px">
+      <div><p class="label">English</p><p class="english">Show that if |G| = 2p where p is an odd prime, then G is isomorphic to either ℤ<sub>2p</sub> or D<sub>p</sub>.</p></div>
+      <div><p class="label">Lean</p>{{lean:r3}}</div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Case A-094, Zhang et al., Beyond Compilation, 2026 · Statement: Doty, Lecture Notes on Abstract Algebra (CC BY 4.0)</span><span class="n"></span></div>
+  <aside class="notes">[25:30–27:30] The boss round, the statement from the start of the talk. Groups of order 2p, p an odd prime, are cyclic or dihedral. Case A-094. Take a full minute. Hint if needed: what does ≃* mean, and what is the multiplication on ZMod (2 * p)? Vote: says it, can't tell, doesn't say it. Count roughly and say the split out loud; it matters on the next slide.</aside>
+</section>
+
+<!-- 18 · r3-reveal -->
+<section class="light" data-title="Round 3: ZMod's multiplication is the ring's.">
+  <div class="s">
+    <p class="eyebrow">Round 3 · reveal</p>
+    <h2><span style="font-family:var(--mono); font-weight:400; font-size:56px">≃* ZMod (2 * p)</span> uses ring multiplication.</h2>
+    <div class="body" style="flex-direction:column; gap:28px; margin-top:36px">
+      <div class="grades">
+        <div class="gbox"><p class="k">AI judges (out of 10)</p><div class="g"><div><b class="hi">10</b>Gemini-2.5-Pro</div><div><b>5</b>GPT-5.2</div><div><b>3</b>Sonnet 5</div></div></div>
+        <div class="gbox"><p class="k">Human reviewers (out of 10) · majority: says it</p><div class="g"><div><b class="hi">10</b>reviewer</div><div><b class="hi">10</b>reviewer</div><div><b>4</b>reviewer</div></div></div>
+      </div>
+      <p class="fragment t32 ink" style="line-height:1.35">0 has no inverse, so no group is ≃* to it. The statement says every group of order 2p is dihedral: false for the cyclic group of order 6. The study's two-stage model review flagged it.</p>
+      <div class="fragment">
+        <div class="verdict" style="font-size:24px">AI judges only: <span class="chip doesnt">doesn't say it</span> 0.99</div>
+        <div class="verdict" style="font-size:24px; margin-top:16px">With human scores added: no decision, goes to more players</div>
+        <div style="display:flex; height:48px; margin-top:12px; border-radius:6px; overflow:hidden; font-size:24px; font-weight:800; color:#111">
+          <div style="width:51%; background:var(--doesnt); display:flex; align-items:center; padding-left:16px">doesn't 0.51</div>
+          <div style="width:43%; background:var(--cant); display:flex; align-items:center; padding-left:16px">can't tell 0.43</div>
+          <div style="width:6%; background:var(--says)"></div>
+        </div>
+        <p class="t24 muted" style="text-align:right; margin-top:6px">says it 0.06</p>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Grades: Zhang et al., Beyond Compilation, 2026 (case A-094) · Verdicts: TriFault engine on the released data</span><span class="n"></span></div>
+  <aside class="notes">[27:30–30:00] Grades. Gemini-2.5-Pro: 10. GPT-5.2: 5. Sonnet 5: 3. Human reviewers: 10, 10 and 4. So the human majority said "says it". Click: ≃* ZMod (2 * p) is a multiplicative equivalence with ZMod's ring multiplication, not with the cyclic group of order 2p. In that monoid 0 has no inverse, so no group can be multiplicatively isomorphic to it. The left disjunct is always impossible, and the statement really claims every group of order 2p is dihedral. That's false: the cyclic group of order 6 is abelian, and D_3 isn't. The study's own two-stage model review flagged it; the human majority missed it. Click: with only the AI judges, the p-trit engine says doesn't say it at 0.99. Add the human scores and it refuses to decide: 0.51 doesn't, 0.43 can't tell, 0.06 says it. That's the behaviour we want: when trusted raters disagree, don't guess, send it to more players. And note what this means for our own numbers: our "truth" is the human majority, and here the majority is wrong. That comes back on the caveats slide.</aside>
+</section>
+
+<!-- 19 · proveit -->
+<section class="light" data-title="Lean can't check meaning. It can check a witness.">
+  <div class="s">
+    <p class="eyebrow">Settling it</p>
+    <h2>Lean can't check meaning. It can check a witness.</h2>
+    <div class="body" style="flex-direction:column; gap:48px; margin-top:72px">
+      <p class="t44 ink" style="max-width:1500px">A player who says “doesn't” can settle it with a Lean proof that the statement is false, trivially true, or true where the English says it isn't.</p>
+      <div class="card" style="max-width:1100px">
+        <p class="k">Round 3's witness</p>
+        <p class="t32 ink">The cyclic group of order 6.</p>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src"></span><span class="n"></span></div>
+  <aside class="notes">[30:00–31:00] Here's how Lean comes back in. Lean can't check meaning. But a player who votes "doesn't say it" can often settle the question with a Lean proof: that the statement is false, or trivially true, or true in a case where the English says it isn't. The kernel checks that proof, so it's gold. For round 3 the witness is the cyclic group of order 6: plug it in and both disjuncts fail. For round 1 it's the one-line proof that the statement holds without hA. Note for Hanah: the Witness.lean file in deck/lean has not been compiled yet, so the slide shows only the sentence.</aside>
+</section>
+
+<!-- 20 · ptrit -->
+<section class="light" data-title="A p-trit: three states, Boltzmann odds.">
+  <div class="s">
+    <p class="eyebrow">The engine</p>
+    <h2>A p-trit: three states, Boltzmann odds.</h2>
+    <div class="body" style="gap:72px">
+      <div class="col" style="flex:0 0 760px">
+        <p class="t44 ink" style="font-family:var(--mono); font-size:40px; margin-top:12px">P(z) = e<sup>−E(z)</sup> / Σ<sub>u</sub> e<sup>−E(u)</sup></p>
+        <p class="t24 muted" style="margin-top:12px">z ∈ {0, 1, 2}</p>
+        <p class="t32" style="margin-top:48px">Real hardware: KAIST built NbOₓ p-trits and a ternary Potts machine.</p>
+        <p class="t32" style="margin-top:20px">TiN via 150 nm wide, NbOₓ 20 nm, TiN top 50 nm.</p>
+        <p class="t32 ink w800" style="margin-top:36px">We run it in software.</p>
+      </div>
+      <div class="col fig">
+        <div class="panel"><model-viewer src="assets/3d/ptrit_device.glb" poster="assets/renders/ptrit_device.png" alt="TiN / NbOx / TiN p-trit device, rotating" camera-controls auto-rotate rotation-per-second="10deg" auto-rotate-delay="0" interaction-prompt="none" shadow-intensity="0"></model-viewer></div>
+        <p class="caption">TiN / NbOₓ / TiN p-trit. Substrate material and via depth weren't reported.</p>
+        <p class="credit">Credit: TriFault model after Rhee et al., Advanced Science 2026</p>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Rhee et al., Advanced Science, 2026</span><span class="n"></span></div>
+  <aside class="notes">[31:00–32:30] How the engine works. A p-trit is a probabilistic trit: three states, 0, 1, 2, each with Boltzmann odds, P of z equals e to the minus E of z over the sum over u of e to the minus E of u. Change the energies and you change the odds. This isn't only math. A KAIST team, Rhee et al. in Advanced Science 2026, built NbOx p-trits and a ternary Potts machine out of them. The device: a titanium nitride via 150 nanometres wide, 20 nanometres of NbOx, and a 50-nanometre titanium nitride top electrode. The model on the right is that stack. The paper didn't report the substrate material or the via depth, so those parts of the model are not to scale. To be clear: we run p-trits in software today. We don't have hardware.</aside>
+</section>
+
+<!-- 21 · atoms -->
+<section class="light" data-title="Down at the atoms.">
+  <div class="s">
+    <p class="eyebrow">The engine</p>
+    <h2>Down at the atoms.</h2>
+    <div class="body" style="gap:40px; margin-top:40px">
+      <div class="col fig" style="flex:0 0 440px">
+        <div class="panel"><model-viewer src="assets/3d/chain_insulating.glb" poster="assets/renders/chain_insulating.png" alt="Nb chain, insulating: paired atoms, rotating" camera-controls auto-rotate rotation-per-second="10deg" auto-rotate-delay="0" interaction-prompt="none" shadow-intensity="0"></model-viewer></div>
+        <p class="caption two">Insulating: Nb atoms pair up, 2.74 Å pairs and 3.26 Å gaps</p>
+      </div>
+      <div class="col fig" style="flex:0 0 440px">
+        <div class="panel"><model-viewer src="assets/3d/chain_metallic.glb" poster="assets/renders/chain_metallic.png" alt="Nb chain, metallic: evenly spaced atoms, rotating" camera-controls auto-rotate rotation-per-second="10deg" auto-rotate-delay="0" interaction-prompt="none" shadow-intensity="0"></model-viewer></div>
+        <p class="caption two">Metallic: evenly spaced, 3.03 Å</p>
+      </div>
+      <div class="col" style="justify-content:center; padding-left:24px">
+        <p class="t32 ink" style="line-height:1.4">KAIST attributes the high-current switch to a Mott-related insulator–metal transition.</p>
+        <p class="t32" style="margin-top:28px">Bulk NbO₂ makes it at 1081 K.</p>
+        <p class="credit" style="margin-top:40px">Credit: COD 2106754 (Cheetham &amp; Rao 1976) and COD 1548821</p>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Rhee et al., 2026 · COD 2106754 (Cheetham &amp; Rao, 1976) · COD 1548821</span><span class="n"></span></div>
+  <aside class="notes">[32:30–33:30] Down at the atoms, because this room likes to know what's underneath. NbO2 has chains of niobium atoms. In the insulating phase they pair up: 2.74 angstrom pairs with 3.26 angstrom gaps. In the metallic phase they're evenly spaced at 3.03 angstroms. The structures come from the Crystallography Open Database, entries 2106754, Cheetham and Rao 1976, and 1548821. The KAIST paper attributes the device's high-current switching to a Mott-related insulator–metal transition. Bulk NbO2 makes that transition at 1081 kelvin. Thirty seconds of fun; move on.</aside>
+</section>
+
+<!-- 22 · engine -->
+<section class="light" data-title="The verdict engine.">
+  <div class="s">
+    <p class="eyebrow">The engine</p>
+    <h2>The verdict engine.</h2>
+    <div class="body" style="flex-direction:column; gap:30px; margin-top:52px">
+      <p class="t32">Every vote is a trit: 0 says it, 1 can't tell, 2 doesn't.</p>
+      <p class="t32">Every statement is a p-trit with energy</p>
+      <p style="font-family:var(--mono); font-size:40px; color:var(--dark-blue); padding-left:48px">E<sub>j</sub>(z) = −log π<sub>z</sub> − Σ<sub>i</sub> log θ<sub>i</sub>[z, v<sub>ij</sub>]</p>
+      <p class="t32">θ<sub>i</sub> is rater i's 3×3 confusion matrix. Block Gibbs alternates statements and raters.</p>
+      <p class="t32 ink w800">It's Bayesian Dawid–Skene (1979) as p-trit physics.</p>
+      <p class="t24 muted">Grades map by the study's rubric: 9–10 says it, 7–8 can't tell, 0–6 doesn't.</p>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Dawid &amp; Skene, 1979 · Rubric: Zhang et al., Beyond Compilation, 2026</span><span class="n"></span></div>
+  <aside class="notes">[33:30–35:00] The verdict engine. Every vote is a trit: 0 means says it, 1 can't tell, 2 doesn't. Every statement j is a p-trit whose energy for state z is minus log of the prior pi z, minus the sum over raters i of log theta i at row z, column v i j, where v i j is rater i's vote on statement j. Theta i is rater i's 3 by 3 confusion matrix: how likely they are to vote each way given the true answer. Block Gibbs sampling alternates: sample every statement given the raters, then every rater's confusion matrix given the statements. Statisticians will recognise this: it's Bayesian Dawid–Skene from 1979, written as p-trit physics. Judge and human scores out of 10 become trits by the study's own rubric: 9 to 10 says it, 7 to 8 can't tell, 0 to 6 doesn't.</aside>
+</section>
+
+<!-- 23 · network -->
+<section class="light" data-title="120 real statements, 655 real votes.">
+  <div class="s">
+    <p class="eyebrow">The engine on real data</p>
+    <h2>120 real statements, 655 real votes.</h2>
+    <div class="body" style="flex-direction:column; gap:20px; margin-top:32px">
+      <div class="fig grow"><div class="panel"><model-viewer src="assets/3d/verdict_network.glb" poster="assets/renders/verdict_network.png" alt="Verdict network: statements and raters, rotating" camera-controls auto-rotate rotation-per-second="8deg" auto-rotate-delay="0" interaction-prompt="none" shadow-intensity="0"></model-viewer></div></div>
+      <div class="row t24" style="gap:48px; color:var(--dark-blue)">
+        <span><span class="dot says"></span>says it 51</span>
+        <span><span class="dot cant"></span>can't tell 29</span>
+        <span><span class="dot doesnt"></span>doesn't 40</span>
+        <span class="muted">Verdicts from the AI judges only</span>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><span>TriFault · SF Lean Meetup</span><span class="src">Votes: Beyond Compilation released files (Zhang et al., 2026) · Verdicts: TriFault engine</span><span class="n"></span></div>
+  <aside class="notes">[35:00–36:00] This is the engine run on real data: the 120 statements in the study's human-audited set, and 655 real votes on them. Using the AI judges only, the engine says 51 say it, 29 can't tell, 40 don't. Everything here is real data from the released files; nothing is simulated. You can rotate it; I'll show it live in Q&A if there's time.</aside>
+</section>

@@ -1,0 +1,1 @@
+{"name":"trifault-deck","version":"1.0.0","private":true,"dependencies":{"@fontsource/jetbrains-mono":"^5.1.1","@fontsource/libre-franklin":"^5.1.0","@google/model-viewer":"^4.0.0","http-server":"^14.1.1","reveal.js":"^5.1.0"},"devDependencies":{"decktape":"^3.14.0"}}
