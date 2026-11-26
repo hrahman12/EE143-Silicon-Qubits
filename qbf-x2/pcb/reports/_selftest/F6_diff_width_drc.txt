@@ -1,5 +1,5 @@
-** Drc report for /home/user/EE143-Silicon-Qubits/.claude/worktrees/agent-a1a1586d91fadf1e0/qbf-x2/pcb/reports/_selftest/F6_diff_width.kicad_pcb **
-** Created on 2026-11-26 12:33:46 **
+** Drc report for /home/user/EE143-Silicon-Qubits/qbf-x2/pcb/reports/_selftest/F6_diff_width.kicad_pcb **
+** Created on 2026-11-26 12:53:00 **
 
 ** Found 5 DRC violations **
 [diff_pair_gap_out_of_range]: Differential pair gap out of range (DIFF_routed maximum gap 0.6600 mm; actual 0.6650 mm)

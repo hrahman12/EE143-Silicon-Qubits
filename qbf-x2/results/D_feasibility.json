@@ -1064,7 +1064,7 @@
    {
     "name": "TRAP_A1_P",
     "x": 0.0,
-    "y": 136.5,
+    "y": 137.0625,
     "layer": [
      1,
      0
@@ -1080,7 +1080,7 @@
    {
     "name": "TRAP_A1_N",
     "x": 0.0,
-    "y": 135.5,
+    "y": 135.3125,
     "layer": [
      1,
      0
@@ -1096,7 +1096,7 @@
    {
     "name": "ACC_A1_P",
     "x": 0.0,
-    "y": 134.5,
+    "y": 134.3125,
     "layer": [
      1,
      0
@@ -1112,7 +1112,7 @@
    {
     "name": "ACC_A1_N",
     "x": 0.0,
-    "y": 133.5,
+    "y": 133.3125,
     "layer": [
      1,
      0
@@ -1258,7 +1258,7 @@
    {
     "name": "ACC_B1_N",
     "x": 1994.0,
-    "y": 156.5,
+    "y": 156.6875,
     "layer": [
      1,
      0
@@ -1274,7 +1274,7 @@
    {
     "name": "ACC_B1_P",
     "x": 1994.0,
-    "y": 155.5,
+    "y": 155.6875,
     "layer": [
      1,
      0
@@ -1290,7 +1290,7 @@
    {
     "name": "TRAP_B1_N",
     "x": 1994.0,
-    "y": 154.5,
+    "y": 154.6875,
     "layer": [
      1,
      0
@@ -1306,7 +1306,7 @@
    {
     "name": "TRAP_B1_P",
     "x": 1994.0,
-    "y": 153.5,
+    "y": 152.9375,
     "layer": [
      1,
      0
@@ -1676,9 +1676,9 @@
     "checked": 1,
     "failed": 0,
     "worst": {
-     "extracted": 653.4496878174881,
+     "extracted": 653.4496894901632,
      "target": 653.8460512271247,
-     "rel_dev": -0.0006062029569387252,
+     "rel_dev": -0.0006062003987293082,
      "passed": true,
      "quantity": "L per cell (mesh self-inductance: kinetic + geometric), worst cell of all rows",
      "where": "B1 n=70",
@@ -1761,15 +1761,15 @@
    },
    "launcher trap-pair M_n (|M - M_target| <= 5 % of peak, at the design current)": {
     "checked": 4,
-    "failed": 4,
+    "failed": 0,
     "worst": {
-     "extracted": 0.008332941045005099,
+     "extracted": 0.003252806192561873,
      "target": 0.0,
-     "deviation": 0.008332941045005099,
+     "deviation": 0.003252806192561873,
      "tolerance_abs": 0.0033238419338701888,
-     "passed": false,
+     "passed": true,
      "quantity": "launcher trap-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
-     "where": "A0",
+     "where": "A1",
      "informational": false
     },
     "informational": false
@@ -1778,13 +1778,13 @@
     "checked": 4,
     "failed": 4,
     "worst": {
-     "extracted": 0.012542393191263278,
+     "extracted": 0.013878958811282371,
      "target": 0.0,
-     "deviation": 0.012542393191263278,
+     "deviation": 0.013878958811282371,
      "tolerance_abs": 0.003919210304273666,
      "passed": false,
      "quantity": "launcher accelerator-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
-     "where": "B0",
+     "where": "A1",
      "informational": false
     },
     "informational": false
@@ -1874,19 +1874,9 @@
     "informational": false
    },
    {
-    "extracted": 0.008332941045005099,
+    "extracted": 0.012930298952371142,
     "target": 0.0,
-    "deviation": 0.008332941045005099,
-    "tolerance_abs": 0.0033238419338701888,
-    "passed": false,
-    "quantity": "launcher trap-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
-    "where": "A0",
-    "informational": false
-   },
-   {
-    "extracted": 0.012542389983800008,
-    "target": 0.0,
-    "deviation": 0.012542389983800008,
+    "deviation": 0.012930298952371142,
     "tolerance_abs": 0.003919210304273666,
     "passed": false,
     "quantity": "launcher accelerator-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
@@ -1894,19 +1884,9 @@
     "informational": false
    },
    {
-    "extracted": 0.006062612415228581,
+    "extracted": 0.013878958811282371,
     "target": 0.0,
-    "deviation": 0.006062612415228581,
-    "tolerance_abs": 0.0033238419338701888,
-    "passed": false,
-    "quantity": "launcher trap-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
-    "where": "A1",
-    "informational": false
-   },
-   {
-    "extracted": 0.010207703477017951,
-    "target": 0.0,
-    "deviation": 0.010207703477017951,
+    "deviation": 0.013878958811282371,
     "tolerance_abs": 0.003919210304273666,
     "passed": false,
     "quantity": "launcher accelerator-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
@@ -1914,19 +1894,9 @@
     "informational": false
    },
    {
-    "extracted": 0.006062118808159201,
+    "extracted": 0.013878955297984066,
     "target": 0.0,
-    "deviation": 0.006062118808159201,
-    "tolerance_abs": 0.0033238419338701888,
-    "passed": false,
-    "quantity": "launcher trap-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
-    "where": "B1",
-    "informational": false
-   },
-   {
-    "extracted": 0.01020769933775659,
-    "target": 0.0,
-    "deviation": 0.01020769933775659,
+    "deviation": 0.013878955297984066,
     "tolerance_abs": 0.003919210304273666,
     "passed": false,
     "quantity": "launcher accelerator-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
@@ -1934,19 +1904,9 @@
     "informational": false
    },
    {
-    "extracted": 0.008332903835660783,
+    "extracted": 0.012930302259034307,
     "target": 0.0,
-    "deviation": 0.008332903835660783,
-    "tolerance_abs": 0.0033238419338701888,
-    "passed": false,
-    "quantity": "launcher trap-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
-    "where": "B0",
-    "informational": false
-   },
-   {
-    "extracted": 0.012542393191263278,
-    "target": 0.0,
-    "deviation": 0.012542393191263278,
+    "deviation": 0.012930302259034307,
     "tolerance_abs": 0.003919210304273666,
     "passed": false,
     "quantity": "launcher accelerator-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
@@ -2609,9 +2569,9 @@
     "detail": "beta 0.30: gate 0.99998 (whole flight incl. launch transient 0.99877), beta 0.45: gate 0.99997 (whole flight incl. launch transient 0.99916)"
    },
    {
-    "check": "error budget at the optimum < 1 % with 2 % junction disorder, 20 mK launch, 10 ps jitter (realistic assumptions)",
+    "check": "error budget at the optimum < 1 % with 2 % junction disorder, 20 mK launch, 10 ps jitter (realistic assumptions), post-layout (as-drawn launcher lines)",
     "passed": true,
-    "detail": "total 0.0032 with the modelled launcher (rms dv/v 0.0102, 374 dual-rail cells): gate_thermal 4.0e-09, disorder_dephasing 1.3e-03, damping 1.9e-03, timing 0.0e+00, coupler 0.0e+00, launched_packet_2D 1.1e-07; a thermal-source launch (dv/v 0.0429) would give 0.0236"
+    "detail": "post-layout total 0.0090 (as-drawn differential launcher lines, worst row dv/v 0.0210, 2D gate with as-drawn packets F_CZ 0.99784); design total 0.0032 with the modelled launcher (rms dv/v 0.0102, 374 dual-rail cells): gate_thermal 4.0e-09, disorder_dephasing 1.3e-03, damping 1.9e-03, timing 0.0e+00, coupler 0.0e+00, launched_packet_2D 1.1e-07; a thermal-source launch (dv/v 0.0429) would give 0.0236"
    },
    {
     "check": "coherent single-fluxon launcher derived (timing <= 10 ps, thermal-limited speed spread)",
@@ -2621,7 +2581,7 @@
    {
     "check": "layout verified (DRC, EM extraction of k, c, E_S)",
     "passed": false,
-    "detail": "DRC 608 violations ({'found': {'rail': 5268, 'middle': 304}, 'expected': {'rail': 5268, 'middle': 304}, 'contacts': 848, 'targets_um2': {'rail': 0.03834961023335331, 'middle': 0.012924735899042175}}); extraction: node capacitance (Cj + geometric, k = 0): 3/116 failed, node shunt to ground/return (geometric, excl. coupled partner) [informational: the requirement is the total node capacitance]: 64/114 failed, stray capacitance within a qubit / to a dummy (<= 5 % of C_node): 0/370 failed, stray capacitance between the qubits (A row - B row) (<= 5 % of C_c): 0/128 failed, C_c (coupling capacitance, k = 0 sum over partner nodes): 0/3 failed, C_c taper profile (|C_c - g C_c| <= 5 % of C_c): 0/33 failed, C_M = Cj,M + island two-terminal capacitance: 1/1 failed, E_C,M: 1/1 failed, E_S (scqubits charge dispersion / 4, as companion 2): 1/1 failed, L per cell (mesh self-inductance: kinetic + geometric), worst cell of all rows: 0/1 failed, L_s (shared-return mutual incl. direct magnetic coupling), plateau worst cell: 0/1 failed, k = M / L_self, plateau worst cell: 0/1 failed, L_s taper profile (|M - g L_s| <= 5 % of L_s), worst cell: 0/1 failed, stray mutual inductance between the qubits (<= 5 % of L_s), worst: 0/1 failed, stray mutual inductance within a qubit / to a dummy (<= 5 % of L_s), worst: 0/1 failed, launcher trap-pair M_n (|M - M_target| <= 5 % of peak, at the design current): 4/4 failed, launcher accelerator-pair M_n (|M - M_target| <= 5 % of peak, at the design current): 4/4 failed, node capacitance, mesh-extrapolated [informational]: 3/6 failed, C_c, mesh-extrapolated [informational]: 0/1 failed"
+    "detail": "DRC 608 violations ({'found': {'rail': 5268, 'middle': 304}, 'expected': {'rail': 5268, 'middle': 304}, 'contacts': 848, 'targets_um2': {'rail': 0.03834961023335331, 'middle': 0.012924735899042175}}); extraction: node capacitance (Cj + geometric, k = 0): 3/116 failed, node shunt to ground/return (geometric, excl. coupled partner) [informational: the requirement is the total node capacitance]: 64/114 failed, stray capacitance within a qubit / to a dummy (<= 5 % of C_node): 0/370 failed, stray capacitance between the qubits (A row - B row) (<= 5 % of C_c): 0/128 failed, C_c (coupling capacitance, k = 0 sum over partner nodes): 0/3 failed, C_c taper profile (|C_c - g C_c| <= 5 % of C_c): 0/33 failed, C_M = Cj,M + island two-terminal capacitance: 1/1 failed, E_C,M: 1/1 failed, E_S (scqubits charge dispersion / 4, as companion 2): 1/1 failed, L per cell (mesh self-inductance: kinetic + geometric), worst cell of all rows: 0/1 failed, L_s (shared-return mutual incl. direct magnetic coupling), plateau worst cell: 0/1 failed, k = M / L_self, plateau worst cell: 0/1 failed, L_s taper profile (|M - g L_s| <= 5 % of L_s), worst cell: 0/1 failed, stray mutual inductance between the qubits (<= 5 % of L_s), worst: 0/1 failed, stray mutual inductance within a qubit / to a dummy (<= 5 % of L_s), worst: 0/1 failed, launcher trap-pair M_n (|M - M_target| <= 5 % of peak, at the design current): 0/4 failed, launcher accelerator-pair M_n (|M - M_target| <= 5 % of peak, at the design current): 4/4 failed, node capacitance, mesh-extrapolated [informational]: 3/6 failed, C_c, mesh-extrapolated [informational]: 0/1 failed"
    },
    {
     "check": "die floorplan complete and DRC-clean (10 mm die: pads per circuits/die_pads.json, CPW routing, readout, frame)",
@@ -2631,7 +2591,7 @@
    {
     "check": "carrier PCB: DRC clean, schematic = PCB netlist, 50 ohm +-5 %, A/B timing pairs matched, filter cut-offs met",
     "passed": true,
-    "detail": "pcbnew DRC clean: True; sch-vs-PCB mismatches 0 (44 parts, 35 nets); GCPW 52.0 ohm (formula) / 47.7 ohm (field solve); max A/B skew 0.0000 mm"
+    "detail": "pcbnew DRC clean: True; sch-vs-PCB mismatches 0 (52 parts, 43 nets); GCPW 52.0 ohm (formula) / 47.7 ohm (field solve); max A/B skew 0.0000 mm"
    }
   ]
  },
@@ -2665,6 +2625,6 @@
    "EM simulation of the PCB launches, wire bonds and package modes"
   ]
  },
- "runtime_s": 1314.5198657512665,
- "_generated": "2026-11-26 11:55:43"
+ "runtime_s": 917.4831645488739,
+ "_generated": "2026-11-26 13:08:55"
 }

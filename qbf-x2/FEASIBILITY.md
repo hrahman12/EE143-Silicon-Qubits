@@ -160,13 +160,25 @@ Assumptions: 302 dual-rail cells per rail (beam splitter to beam splitter), 2 % 
 - **Die floorplan.** The 10 mm die (pads per `circuits/die_pads.json`, routing, readout resonators, frame, test
   structures) was stopped unfinished; the partial code is `wip/floorplan.py`. The carrier PCB already follows the pad
   map.
-- **Post-layout launch.** `D_launcher.py` back-annotates as-drawn control-line coupling once the extraction writes
-  `launcher_as_drawn`. With the sub-minimum tails truncated, as a layout must do, the launch is unchanged (1.01 %).
+- **Post-layout launch (rev B, done).** The extraction now writes `launcher_as_drawn`: the per-cell pair mutual of
+  the drawn differential lines, every cell. `D_launcher.py` L8 back-annotates it and calibrates the trap frequency and
+  the accelerator amplitude in situ, as an experiment would.
+  - Speed spread 1.1 % (A1/B1) and 2.1 % (A0/B0); F_CZ 0.9978 with the as-drawn packets.
+  - Budget 0.90 %, against 0.32 % for the ideal profiles.
+  - The difference comes from the line ends: the launch-end accelerator residual (≤ 17.7 % of peak) and the trap
+    tail.
+  - The single-ended rev-A check never ran: its launcher-M extraction read one rectangle per net and returned the
+    same value for every cell.
+- **Differential launcher lines (rev B).** Every fast line is a floating P/N loop on the chip
+  (`src/hardware/diffpairs.py`) and an edge-coupled pair on the carrier.
+  - Cross-talk into the other rail of the qubit: 13.4 → 10.9–11.1 % (trap), 16.6 → 10.4–10.6 % (accelerator).
+  - The loop topology, DRC (no new violations) and the per-cell targets are tested in `tests/test_diffpairs.py`.
+  - Not modelled: common-mode rejection at the package (bond-wire and SMP asymmetry), and the transient coupling
+    between the trap loop and the accelerator loop.
 - **Physics still not validated.**
   - Damping α must be ≤ 1.2×10⁻⁵ at 20 mK; it is unknown until measured.
   - Vortex hopping is still the single-junction phase-slip estimate, now with network-loaded E_C.
   - Charge stability of the islands.
   - Material parameters for the extraction (sheet inductances, SiNx thickness) need in-situ calibration.
   - No EM simulation of the PCB launches, bonds or package.
-- **Bookkeeping.** `results/D_feasibility.json` predates the launcher and the redesign. Re-running
-  `simulations/D_feasibility.py` regenerates it (about 15 min, including the extraction).
+- **Bookkeeping.** `results/D_feasibility.json` was regenerated for rev B (about 20 min, including the extraction).

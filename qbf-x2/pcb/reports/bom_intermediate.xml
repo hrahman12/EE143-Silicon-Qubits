@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <export version="E">
   <design>
-    <source>/home/user/EE143-Silicon-Qubits/.claude/worktrees/agent-a1a1586d91fadf1e0/qbf-x2/pcb/qbfx2_carrier.kicad_sch</source>
-    <date>Thu Nov 26 12:33:57 2026</date>
+    <source>/home/user/EE143-Silicon-Qubits/qbf-x2/pcb/qbfx2_carrier.kicad_sch</source>
+    <date>Thu Nov 26 12:53:11 2026</date>
     <tool>Eeschema 7.0.11+dfsg-1build4</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -1282,7 +1282,7 @@
   </libparts>
   <libraries>
     <library logical="qbfx2">
-      <uri>/home/user/EE143-Silicon-Qubits/.claude/worktrees/agent-a1a1586d91fadf1e0/qbf-x2/pcb/qbfx2.kicad_sym</uri>
+      <uri>/home/user/EE143-Silicon-Qubits/qbf-x2/pcb/qbfx2.kicad_sym</uri>
     </library>
   </libraries>
   <nets>

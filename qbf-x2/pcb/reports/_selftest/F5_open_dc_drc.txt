@@ -1,5 +1,5 @@
-** Drc report for /home/user/EE143-Silicon-Qubits/.claude/worktrees/agent-a1a1586d91fadf1e0/qbf-x2/pcb/reports/_selftest/F5_open_dc.kicad_pcb **
-** Created on 2026-11-26 12:33:44 **
+** Drc report for /home/user/EE143-Silicon-Qubits/qbf-x2/pcb/reports/_selftest/F5_open_dc.kicad_pcb **
+** Created on 2026-11-26 12:52:57 **
 
 ** Found 2 DRC violations **
 [via_dangling]: Via is not connected or connected on only one layer

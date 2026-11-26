@@ -188,7 +188,7 @@
    "component_count": 8,
    "error_count": 0,
    "file_type": "PcbLib",
-   "filepath": "/home/user/EE143-Silicon-Qubits/.claude/worktrees/agent-a1a1586d91fadf1e0/qbf-x2/pcb/altium/QBFX2_Carrier.PcbLib",
+   "filepath": "/home/user/EE143-Silicon-Qubits/qbf-x2/pcb/altium/QBFX2_Carrier.PcbLib",
    "issues": [
     {
      "component": "Fiducial_1.0mm_Mask2.0mm",
@@ -218,7 +218,7 @@
    "component_count": 8,
    "error_count": 0,
    "file_type": "SchLib",
-   "filepath": "/home/user/EE143-Silicon-Qubits/.claude/worktrees/agent-a1a1586d91fadf1e0/qbf-x2/pcb/altium/QBFX2_Carrier.SchLib",
+   "filepath": "/home/user/EE143-Silicon-Qubits/qbf-x2/pcb/altium/QBFX2_Carrier.SchLib",
    "issues": [],
    "status": "valid",
    "warning_count": 0

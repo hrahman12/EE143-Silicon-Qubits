@@ -45,7 +45,7 @@ both per cell.
 | **A** Classical ballistic physics | **PASS** | Energy conserved to 1.2×10⁻⁶. Exact sine-Gordon kink–antikink shift reproduced within 3.5 % (Λ = 10). Topological charge conserved. Collision radiation ≤ 2.2×10⁻⁴ of the kinetic energy. Conditional delay crosses zero at β = 0.302. |
 | **B** Quantum ballistic physics | **PASS** | Norm conserved to 3×10⁻⁸. Phase converged to 7×10⁻⁴ rad (time step, momentum cut-off, domain, Taylor order). Reflection 7×10⁻⁸. Derived interaction within 0.8 % of a constrained relaxation of the full circuit. Quantum vs classical sweet spot 0.293 vs 0.302. |
 | **C** Genuine quantum gate | **PASS** | From \|+⟩\|+⟩, exact 2D scattering gives concurrence **1.000**, Bell fidelity **0.999999**, CZ process fidelity **0.999999** and Δ = π (error 0.0017 rad). Motional (position–position) purity 0.999999, so the entanglement is logical, not motional. Thermal launch at 20 mK: gate error 1.2×10⁻⁵ at the sweet spot vs 3.8×10⁻³ with an inductive-only coupler. |
-| **D** Device feasibility | **NOT MET (2 of 9 checks open)** | **Fixed:** the realistic error budget is **0.32 %** (< 1 %) with a modelled coherent launcher. Speed spread is 1.02 % vs 4.3 % thermal, and the 2D gate with launched packets has F_avg 0.9999999. The carrier PCB passes DRC, schematic-vs-PCB, impedance and length checks. **Open:** (1) layout re-verification for the redesigned beam splitter (the previous revision was DRC-clean, with every gate quantity within ±5 % and 3 open items); (2) the 10 mm die floorplan (unfinished, in `wip/`). |
+| **D** Device feasibility | **NOT MET (2 of 9 checks open)** | **Fixed:** the realistic error budget is **0.32 %** (< 1 %) with a modelled coherent launcher, and **0.90 % post-layout** with the as-drawn rev-B differential launcher lines. Speed spread is 1.02 % vs 4.3 % thermal, and the 2D gate with launched packets has F_avg 0.9999999. The carrier PCB passes DRC, schematic-vs-PCB, impedance and length checks. **Open:** (1) layout re-verification for the redesigned beam splitter (the previous revision was DRC-clean, with every gate quantity within ±5 % and 3 open items); (2) the 10 mm die floorplan (unfinished, in `wip/`). |
 
 **Milestone D status.** Fabrication disorder used to limit the device: a 1.9 % gate error, coming from a speed spread
 assumed to be thermal.
@@ -67,33 +67,48 @@ assumed to be thermal.
     k, c, L, L_s, C_M, E_S and the strays all within ±5 %. Its 3 open items were the outer-taper node capacitance, the
     mesh-converged plateau nodes and the launcher mutual inductances.
   - The die-level floorplan. Both were stopped unfinished; the partial code is in `wip/`.
-  - `results/D_feasibility.json` predates these changes. The status above comes from `results/D_launcher.json`,
-    `pcb/reports/` and `circuits/extraction.json`.
+  - `results/D_feasibility.json` was regenerated for rev B; its budget check uses the post-layout budget.
 
 **Rev B: differential launcher lines (chip and carrier).** Each of the 8 fast flux lines (trap and accelerator,
 rails A0, A1, B1, B0) is now one floating Nb loop. It leaves the chip as `<NAME>_P`, runs along its rail, turns
 round and comes back as `<NAME>_N` on the far side of the launch strip. No fast-line current returns through the
-ground. The carrier routes every loop as a length-matched differential pair from two SMP jacks.
-- **Geometry.** Going outward from the rail: TRAP_P, TRAP_N, ACC_P, ACC_N. Neither loop encloses a line of the
+ground.
+- **Chip geometry.** Going outward from the rail: TRAP_P, TRAP_N, ACC_P, ACC_N. Neither loop encloses a line of the
   other, so both close without a crossing and the pins come out pair by pair (`circuits/views/altium_chip_diff_*.png`).
-- **Sizing.** `src/hardware/diffpairs.py` sizes the pair mutual M_P − M_N per rail cell on the drawing's own
-  0.25 µm grid, with the same 2D cross-section solver as before. Only M·I sets the flux, so each line gets one current
-  scale: the trap needs about 100 µA (was 80) and the accelerator stays at 450 µA.
+- **Chip sizing.** `src/hardware/diffpairs.py` sizes the pair mutual M_P − M_N per rail cell on the drawing's own
+  0.25 µm grid, with the same 2D cross-section solver as before.
+  - Only M·I sets the flux, so each line's drive current is chosen to minimise the worst error: trap 107–111 µA
+    (design 80), accelerator 450–464 µA.
+  - Along each line the drawn pair is within 5 % of the target peak. At the launch end the accelerator keeps a
+    ≤ 17.7 % residual, because the deepest pair cannot reach zero there.
 - **Checked on the drawn GDS** (`simulations/D_diffpairs.py` → `results/D_diffpairs.json`).
   - All 8 loops are closed and floating: P and N are one Nb piece that touches no ground and no other line.
   - DRC finds 608 violations, exactly the known beam-splitter junction ones; the new lines add none.
 - **Cross-talk into the other rail of the same qubit.** Same solver, worst value along the line, relative to the
   launch rail's peak:
-  - trap: 13.4 % single-ended → 9.8 % differential;
-  - accelerator: 16.6 % → 10.4 %.
-- **Costs.**
-  - The dummy rail next to the return lines (D_A / D_B) takes more flux. It carries no fluxon, and its tilt stays
-    ≤ 0.13 rad/cell, below the ≈ 0.8 rad/cell vortex-entry gradient.
-  - The launch-end tail of each line keeps a residual coupling of ≤ 0.013 pH, about 16 % of the accelerator peak.
-    The single-ended layout had the same kind of floor.
-  - Twice the coax count for the fast lines.
+  - trap: 13.4 % single-ended → 10.9–11.1 % differential;
+  - accelerator: 16.6 % → 10.4–10.6 %.
+
+  The dummy rail next to the return lines (D_A / D_B) takes more flux. It carries no fluxon, and its tilt stays
+  ≤ 0.15 rad/cell, below the ≈ 0.8 rad/cell vortex-entry gradient.
+- **Post-layout launch** (`D_launcher.py` L8, first run). The full as-drawn profiles are back-annotated, with in-situ
+  calibration of the trap frequency and the accelerator amplitude.
+  - Speed spread 1.1 % on A1/B1 and 2.1 % on A0/B0 (the ideal profile gives 1.0 %).
+  - The 2D gate with the as-drawn A0/B0 packets gives F_CZ 0.9978.
+  - **Post-layout error budget 0.90 % (< 1 %).** The ideal-profile design gives 0.32 %; the difference is the
+    as-drawn line ends.
+- **Carrier rev B** (`pcb/`, see its README).
+  - 66 × 66 mm board with 16 SMP jacks for the 8 pairs, P and N side by side.
+  - Edge-coupled GCPW pairs: Z_odd 47.9 Ω and Z_diff 95.8 Ω from the 2D field solve (closed form 51.9 / 103.9 Ω).
+  - Intra-pair skew ≤ 0.0011 ps end to end, using tuning bumps next to every bend. A/B pairs are matched.
+  - DRC 0, schematic-vs-PCB 0 mismatches, KiCad differential-pair rules in the DRC.
 - **The netlist matches.** `src/hardware/netlist.py` drives each control line as a floating loop: the source sits
-  between P and N, with a 1 GΩ DC bleed.
+  between P and N, with a 1 GΩ DC bleed. The regenerated netlist has the drawn 878 cells per rail.
+- **Costs and limits.**
+  - Twice the coax count for the fast lines, and a larger board.
+  - No full-wave EM model yet of the SMP launches, bonds and pair bends.
+  - The die-level fan-out still has to reorder the block pins to the die pads, as it already had to for the
+    LOAD/GATE/RO lines.
 
 **Board and libraries.**
 - `pcb/`: a complete KiCad 7 carrier — schematic, 6-layer Rogers board, DRC, Gerbers, BOM and STEP.

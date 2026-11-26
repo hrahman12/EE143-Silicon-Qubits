@@ -160,8 +160,8 @@
  },
  "gds_consistency": {
   "1/0": {
-   "gds_um2": 516245.6991999999,
-   "primitives_um2": 516245.6991999999,
+   "gds_um2": 516162.71795000025,
+   "primitives_um2": 516162.71795000025,
    "match": true
   },
   "2/0": {
@@ -235,9 +235,9 @@
  },
  "inductance": {
   "L_cell_pH": {
-   "min": 653.4496878174881,
+   "min": 653.4496894901632,
    "max": 653.8460512271248,
-   "mean": 653.6954547991377
+   "mean": 653.6952565480792
   },
   "L_s_plateau_pH": [
    11.64314825443009,
@@ -22410,12 +22410,12 @@
  },
  "sensitivity": {
   "grAl L_sq x0.9": {
-   "L_cell_rel": -0.09958837834873502,
+   "L_cell_rel": -0.09958845179077558,
    "k_rel": 0.10817337050746056,
    "passed_5pct": false
   },
   "grAl L_sq x1.1": {
-   "L_cell_rel": 0.0984371372657986,
+   "L_cell_rel": 0.09843706382375804,
    "k_rel": -0.08893300475915322,
    "passed_5pct": false
   },
@@ -25223,121 +25223,121 @@
   "launcher: trap + accelerator lines (A rows)": {
    "n": 30,
    "g": 0.0,
-   "panels": 6881,
+   "panels": 6809,
    "rows": {
     "D_A": {
-     "C0": 0.5052822965582066,
+     "C0": 0.5052823073455515,
      "C0_class": [
-      0.5061512813140855,
-      0.5044133118023276
+      0.5061512919962893,
+      0.5044133226948138
      ],
      "cross": {
-      "A0": 0.0017831859699635882,
-      "A1": 0.000557974074644323,
-      "B1": 0.00029514720524619737,
-      "B0": 0.00025474921025524016,
-      "D_B": 0.00023876681782890576
+      "A0": 0.001783216469329557,
+      "A1": 0.000557974356886253,
+      "B1": 0.00029514743880349386,
+      "B0": 0.00025474940908558244,
+      "D_B": 0.0002387668911862181
      },
      "toS": {},
      "toM": 0.0,
-     "C_gnd": 0.5021524732802684,
-     "Cpi": 0.7866967748850304,
-     "C_across_L": 0.07035361958170597
+     "C_gnd": 0.5021524527802603,
+     "Cpi": 0.7866967748099349,
+     "C_across_L": 0.07035361686609587
     },
     "A0": {
-     "C0": 0.5053586806019774,
+     "C0": 0.5053586864145101,
      "C0_class": [
-      0.5062284649551544,
-      0.5044888962488003
+      0.506228470557072,
+      0.5044889022719482
      ],
      "cross": {
-      "D_A": 0.0017831859699635744,
-      "A1": 0.0020787049895167253,
-      "B1": 0.0005231881590526445,
-      "B0": 0.0003316290600486418,
-      "D_B": 0.00025701208761897527
+      "D_A": 0.001783216469329564,
+      "A1": 0.002078699590304561,
+      "B1": 0.0005231883986199482,
+      "B0": 0.00033162858652324755,
+      "D_B": 0.00025701159040174027
      },
      "toS": {},
      "toM": 0.0,
-     "C_gnd": 0.5003849603357768,
-     "Cpi": 0.7866018864070392,
-     "C_across_L": 0.07031080145126545
+     "C_gnd": 0.500384941779331,
+     "Cpi": 0.7866018864107993,
+     "C_across_L": 0.0703107999990723
     },
     "A1": {
-     "C0": 0.5054274535354576,
+     "C0": 0.5054274640639055,
      "C0_class": [
-      0.5062967974769594,
-      0.5045581095939558
+      0.506296808039752,
+      0.504558120088059
      ],
      "cross": {
-      "D_A": 0.0005579740746442816,
-      "A0": 0.0020787049895166264,
-      "B1": 0.0017176572192885847,
-      "B0": 0.0006011292461212091,
-      "D_B": 0.0003488597670078952
+      "D_A": 0.0005579743568862322,
+      "A0": 0.0020786995903045143,
+      "B1": 0.0017177086532458238,
+      "B0": 0.0006011284586550916,
+      "D_B": 0.00034885899181544635
      },
      "toS": {},
      "toM": 0.0,
-     "C_gnd": 0.500123128238879,
-     "Cpi": 0.7867046814235186,
-     "C_across_L": 0.07031930697201524
+     "C_gnd": 0.5001230940129984,
+     "Cpi": 0.786704681432471,
+     "C_across_L": 0.07031930434214137
     },
     "B1": {
-     "C0": 0.5053775184510105,
+     "C0": 0.5053775289382056,
      "C0_class": [
-      0.5062473768672656,
-      0.5045076600347556
+      0.5062473874916944,
+      0.5045076703847168
      ],
      "cross": {
-      "D_A": 0.000295147205246168,
-      "A0": 0.0005231881590525959,
-      "A1": 0.0017176572192885695,
-      "B0": 0.0023437582788640734,
-      "D_B": 0.0006724860274916751
+      "D_A": 0.00029514743880348297,
+      "A0": 0.0005231883986199426,
+      "A1": 0.0017177086532458121,
+      "B0": 0.0023437552655669945,
+      "D_B": 0.0006724850400038507
      },
      "toS": {},
      "toM": 0.0,
-     "C_gnd": 0.4998252815610674,
-     "Cpi": 0.7866020932212281,
-     "C_across_L": 0.07030614369255439
+     "C_gnd": 0.49982524414196555,
+     "Cpi": 0.7866020930755091,
+     "C_across_L": 0.07030614103432586
     },
     "B0": {
-     "C0": 0.488430597974678,
+     "C0": 0.4884305977571772,
      "C0_class": [
-      0.48922232175027247,
-      0.4876388741990836
+      0.4892223215320197,
+      0.48763887398233463
      ],
      "cross": {
-      "D_A": 0.0002547492102552017,
-      "A0": 0.0003316290600486239,
-      "A1": 0.0006011292461211777,
-      "B1": 0.0023437582788640326,
-      "D_B": 0.0026830665379314403
+      "D_A": 0.0002547494090855459,
+      "A0": 0.0003316285865232546,
+      "A1": 0.0006011284586550711,
+      "B1": 0.00234375526556696,
+      "D_B": 0.0026830666600146
      },
      "toS": {},
      "toM": 0.0,
-     "C_gnd": 0.48221626564145753,
-     "Cpi": 0.7860647602049493,
-     "C_across_L": 0.07440854055756782
+     "C_gnd": 0.48221626937733175,
+     "Cpi": 0.7860647602042317,
+     "C_across_L": 0.07440854061176362
     },
     "D_B": {
-     "C0": 0.4882609833448863,
+     "C0": 0.48826098328139106,
      "C0_class": [
-      0.4890521816230484,
-      0.4874697850667242
+      0.48905218155934826,
+      0.48746978500343385
      ],
      "cross": {
-      "D_A": 0.00023876681782890037,
-      "A0": 0.0002570120876189433,
-      "A1": 0.0003488597670078655,
-      "B1": 0.0006724860274916692,
-      "B0": 0.0026830665379314073
+      "D_A": 0.0002387668911862002,
+      "A0": 0.0002570115904017271,
+      "A1": 0.0003488589918154339,
+      "B1": 0.0006724850400038616,
+      "B0": 0.0026830666600145643
      },
      "toS": {},
      "toM": 0.0,
-     "C_gnd": 0.48406079210700753,
-     "Cpi": 0.7860637103403517,
-     "C_across_L": 0.07445068174886635
+     "C_gnd": 0.48406079410796926,
+     "Cpi": 0.7860637103398256,
+     "C_across_L": 0.07445068176460863
     }
    },
    "islands": {},
@@ -25362,118 +25362,118 @@
    "panels": 6329,
    "rows": {
     "D_A": {
-     "C0": 0.5052791163130692,
+     "C0": 0.5052795275092405,
      "C0_class": [
-      0.506148084685662,
-      0.5044101479404764
+      0.506148500198281,
+      0.5044105548202003
      ],
      "cross": {
-      "A0": 0.001783093230754833,
-      "A1": 0.0005579458318173646,
-      "B1": 0.000295127513151953,
-      "B0": 0.0002547420973135721,
-      "D_B": 0.00023876096613209444
+      "A0": 0.0017831683023319211,
+      "A1": 0.000557946496422863,
+      "B1": 0.0002951260208509025,
+      "B0": 0.00025474028565439927,
+      "D_B": 0.00023875901496931746
      },
      "toS": {},
      "toM": 0.0,
-     "C_gnd": 0.5021494466738994,
-     "Cpi": 0.786696870683425,
-     "C_across_L": 0.07035443859258894
+     "C_gnd": 0.5021497873890112,
+     "Cpi": 0.786696789826979,
+     "C_across_L": 0.07035431557943461
     },
     "A0": {
-     "C0": 0.5053588786967284,
+     "C0": 0.5053588873184014,
      "C0_class": [
-      0.5062286779149565,
-      0.5044890794785002
+      0.5062286865677408,
+      0.5044890880690619
      ],
      "cross": {
-      "D_A": 0.0017830932307548678,
-      "A1": 0.0020786557868868807,
-      "B1": 0.0005231556940261847,
-      "B0": 0.000331624326421609,
-      "D_B": 0.0002570085500946048
+      "D_A": 0.0017831683023319246,
+      "A1": 0.0020786550070550297,
+      "B1": 0.0005231554929057873,
+      "B0": 0.0003316242219194425,
+      "D_B": 0.00025700848850444607
      },
      "toS": {},
      "toM": 0.0,
-     "C_gnd": 0.5003853411085442,
-     "Cpi": 0.7866017046622922,
-     "C_across_L": 0.07031070649139096
+     "C_gnd": 0.5003852758056848,
+     "Cpi": 0.7866017046624705,
+     "C_across_L": 0.07031070433601727
     },
     "A1": {
-     "C0": 0.505428260515303,
+     "C0": 0.5054282604430698,
      "C0_class": [
-      0.5062976099479032,
-      0.5045589110827028
+      0.5062976098753733,
+      0.5045589110107661
      ],
      "cross": {
-      "D_A": 0.0005579458318173557,
-      "A0": 0.0020786557868867745,
-      "B1": 0.0017175756063027045,
-      "B0": 0.0006011312699000322,
-      "D_B": 0.0003488606008483815
+      "D_A": 0.000557946496422847,
+      "A0": 0.0020786550070549204,
+      "B1": 0.0017175756642767489,
+      "B0": 0.0006011313245518346,
+      "D_B": 0.00034886065396289983
      },
      "toS": {},
      "toM": 0.0,
-     "C_gnd": 0.5001240914195477,
-     "Cpi": 0.7867045719329496,
-     "C_across_L": 0.07031907785441166
+     "C_gnd": 0.5001240912968005,
+     "Cpi": 0.7867045719328774,
+     "C_across_L": 0.0703190778724519
     },
     "B1": {
-     "C0": 0.5053747018753496,
+     "C0": 0.5053747018393788,
      "C0_class": [
-      0.5062445453440753,
-      0.504504858406624
+      0.506244545307978,
+      0.5045048583707797
      ],
      "cross": {
-      "D_A": 0.0002951275131519906,
-      "A0": 0.0005231556940261407,
-      "A1": 0.0017175756063026585,
-      "B0": 0.0023437665026982543,
-      "D_B": 0.0006724816531963713
+      "D_A": 0.00029512602085094786,
+      "A0": 0.0005231554929057522,
+      "A1": 0.001717575664276704,
+      "B0": 0.002343766534495316,
+      "D_B": 0.0006724816831072027
      },
      "toS": {},
      "toM": 0.0,
-     "C_gnd": 0.4998225949059742,
-     "Cpi": 0.7866021782044106,
-     "C_across_L": 0.07030686908226524
+     "C_gnd": 0.4998225964437429,
+     "Cpi": 0.7866021782043671,
+     "C_across_L": 0.07030686909124706
     },
     "B0": {
-     "C0": 0.48843059755043977,
+     "C0": 0.48843059752287854,
      "C0_class": [
-      0.48922232132529975,
-      0.4876388737755798
+      0.4892223212976432,
+      0.4876388737481139
      ],
      "cross": {
-      "D_A": 0.0002547420973135588,
-      "A0": 0.00033162432642160587,
-      "A1": 0.0006011312699000387,
-      "B1": 0.002343766502698138,
-      "D_B": 0.0026830667499295577
+      "D_A": 0.0002547402856543648,
+      "A0": 0.0003316242219194425,
+      "A1": 0.0006011313245518454,
+      "B1": 0.0023437665344952048,
+      "D_B": 0.002683066775582355
      },
      "toS": {},
      "toM": 0.0,
-     "C_gnd": 0.4822162666041769,
-     "Cpi": 0.7860647601979176,
-     "C_across_L": 0.07440854066186946
+     "C_gnd": 0.48221626838067533,
+     "Cpi": 0.7860647601978946,
+     "C_across_L": 0.07440854066875402
     },
     "D_B": {
-     "C0": 0.48826098319981753,
+     "C0": 0.4882609831760808,
      "C0_class": [
-      0.48905218147800866,
-      0.4874697849216264
+      0.48905218145419094,
+      0.48746978489797066
      ],
      "cross": {
-      "D_A": 0.00023876096613205627,
-      "A0": 0.0002570085500945944,
-      "A1": 0.00034886060084840314,
-      "B1": 0.0006724816531963872,
-      "B0": 0.0026830667499295946
+      "D_A": 0.00023875901496927892,
+      "A0": 0.0002570084885044312,
+      "A1": 0.0003488606539629219,
+      "B1": 0.0006724816831072234,
+      "B0": 0.002683066775582398
      },
      "toS": {},
      "toM": 0.0,
-     "C_gnd": 0.4840608046796165,
-     "Cpi": 0.7860637103346555,
-     "C_across_L": 0.07445068178370949
+     "C_gnd": 0.48406080655995454,
+     "Cpi": 0.7860637103346468,
+     "C_across_L": 0.07445068178964151
     }
    },
    "islands": {},
@@ -32376,27 +32376,27 @@
    "informational": false
   },
   {
-   "extracted": 2.422762808225872,
+   "extracted": 2.422762819013217,
    "target": 2.4212786655823906,
-   "rel_dev": 0.0006129582127733038,
+   "rel_dev": 0.0006129626679997708,
    "passed": true,
    "quantity": "node capacitance (Cj + geometric, k = 0)",
    "where": "D_A n=30 [launcher: trap + accelerator lines (A rows)]",
    "informational": false
   },
   {
-   "extracted": 0.5052822965582066,
+   "extracted": 0.5052823073455515,
    "target": 0.5037981539147252,
-   "rel_dev": 0.002945907268514153,
+   "rel_dev": 0.0029459286805515383,
    "passed": true,
    "quantity": "node shunt to ground/return (geometric, excl. coupled partner) [informational: the requirement is the total node capacitance]",
    "where": "D_A n=30 [launcher: trap + accelerator lines (A rows)]",
    "informational": true
   },
   {
-   "extracted": 0.0017831859699635882,
+   "extracted": 0.001783216469329557,
    "target": 0.0,
-   "deviation": 0.0017831859699635882,
+   "deviation": 0.001783216469329557,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32404,9 +32404,9 @@
    "informational": false
   },
   {
-   "extracted": 0.000557974074644323,
+   "extracted": 0.000557974356886253,
    "target": 0.0,
-   "deviation": 0.000557974074644323,
+   "deviation": 0.000557974356886253,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32414,9 +32414,9 @@
    "informational": false
   },
   {
-   "extracted": 0.00029514720524619737,
+   "extracted": 0.00029514743880349386,
    "target": 0.0,
-   "deviation": 0.00029514720524619737,
+   "deviation": 0.00029514743880349386,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32424,9 +32424,9 @@
    "informational": false
   },
   {
-   "extracted": 0.00025474921025524016,
+   "extracted": 0.00025474940908558244,
    "target": 0.0,
-   "deviation": 0.00025474921025524016,
+   "deviation": 0.00025474940908558244,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32434,9 +32434,9 @@
    "informational": false
   },
   {
-   "extracted": 0.00023876681782890576,
+   "extracted": 0.0002387668911862181,
    "target": 0.0,
-   "deviation": 0.00023876681782890576,
+   "deviation": 0.0002387668911862181,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32444,27 +32444,27 @@
    "informational": false
   },
   {
-   "extracted": 2.4228391922696426,
+   "extracted": 2.4228391980821753,
    "target": 2.4212786655823906,
-   "rel_dev": 0.0006445051986102913,
+   "rel_dev": 0.0006445075992148808,
    "passed": true,
    "quantity": "node capacitance (Cj + geometric, k = 0)",
    "where": "A0 n=30 [launcher: trap + accelerator lines (A rows)]",
    "informational": false
   },
   {
-   "extracted": 0.5053586806019774,
+   "extracted": 0.5053586864145101,
    "target": 0.5037981539147252,
-   "rel_dev": 0.003097523631490723,
+   "rel_dev": 0.003097535168914257,
    "passed": true,
    "quantity": "node shunt to ground/return (geometric, excl. coupled partner) [informational: the requirement is the total node capacitance]",
    "where": "A0 n=30 [launcher: trap + accelerator lines (A rows)]",
    "informational": true
   },
   {
-   "extracted": 0.0017831859699635744,
+   "extracted": 0.001783216469329564,
    "target": 0.0,
-   "deviation": 0.0017831859699635744,
+   "deviation": 0.001783216469329564,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32472,9 +32472,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0020787049895167253,
+   "extracted": 0.002078699590304561,
    "target": 0.0,
-   "deviation": 0.0020787049895167253,
+   "deviation": 0.002078699590304561,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32482,9 +32482,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0005231881590526445,
+   "extracted": 0.0005231883986199482,
    "target": 0.0,
-   "deviation": 0.0005231881590526445,
+   "deviation": 0.0005231883986199482,
    "tolerance_abs": 0.01058907736345818,
    "passed": true,
    "quantity": "stray capacitance between the qubits (A row - B row) (<= 5 % of C_c)",
@@ -32492,9 +32492,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0003316290600486418,
+   "extracted": 0.00033162858652324755,
    "target": 0.0,
-   "deviation": 0.0003316290600486418,
+   "deviation": 0.00033162858652324755,
    "tolerance_abs": 0.01058907736345818,
    "passed": true,
    "quantity": "stray capacitance between the qubits (A row - B row) (<= 5 % of C_c)",
@@ -32502,9 +32502,9 @@
    "informational": false
   },
   {
-   "extracted": 0.00025701208761897527,
+   "extracted": 0.00025701159040174027,
    "target": 0.0,
-   "deviation": 0.00025701208761897527,
+   "deviation": 0.00025701159040174027,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32512,27 +32512,27 @@
    "informational": false
   },
   {
-   "extracted": 2.422907965203123,
+   "extracted": 2.422907975731571,
    "target": 2.4212786655823906,
-   "rel_dev": 0.0006729087584557945,
+   "rel_dev": 0.0006729131067565667,
    "passed": true,
    "quantity": "node capacitance (Cj + geometric, k = 0)",
    "where": "A1 n=30 [launcher: trap + accelerator lines (A rows)]",
    "informational": false
   },
   {
-   "extracted": 0.5054274535354576,
+   "extracted": 0.5054274640639055,
    "target": 0.5037981539147252,
-   "rel_dev": 0.003234032534800078,
+   "rel_dev": 0.003234053432947103,
    "passed": true,
    "quantity": "node shunt to ground/return (geometric, excl. coupled partner) [informational: the requirement is the total node capacitance]",
    "where": "A1 n=30 [launcher: trap + accelerator lines (A rows)]",
    "informational": true
   },
   {
-   "extracted": 0.0005579740746442816,
+   "extracted": 0.0005579743568862322,
    "target": 0.0,
-   "deviation": 0.0005579740746442816,
+   "deviation": 0.0005579743568862322,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32540,9 +32540,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0020787049895166264,
+   "extracted": 0.0020786995903045143,
    "target": 0.0,
-   "deviation": 0.0020787049895166264,
+   "deviation": 0.0020786995903045143,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32550,9 +32550,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0017176572192885847,
+   "extracted": 0.0017177086532458238,
    "target": 0.0,
-   "deviation": 0.0017176572192885847,
+   "deviation": 0.0017177086532458238,
    "tolerance_abs": 0.01058907736345818,
    "passed": true,
    "quantity": "stray capacitance between the qubits (A row - B row) (<= 5 % of C_c)",
@@ -32560,9 +32560,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0006011292461212091,
+   "extracted": 0.0006011284586550916,
    "target": 0.0,
-   "deviation": 0.0006011292461212091,
+   "deviation": 0.0006011284586550916,
    "tolerance_abs": 0.01058907736345818,
    "passed": true,
    "quantity": "stray capacitance between the qubits (A row - B row) (<= 5 % of C_c)",
@@ -32570,9 +32570,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0003488597670078952,
+   "extracted": 0.00034885899181544635,
    "target": 0.0,
-   "deviation": 0.0003488597670078952,
+   "deviation": 0.00034885899181544635,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32580,27 +32580,27 @@
    "informational": false
   },
   {
-   "extracted": 2.422858030118676,
+   "extracted": 2.4228580406058713,
    "target": 2.4212786655823906,
-   "rel_dev": 0.0006522853229311027,
+   "rel_dev": 0.0006522896541942743,
    "passed": true,
    "quantity": "node capacitance (Cj + geometric, k = 0)",
    "where": "B1 n=30 [launcher: trap + accelerator lines (A rows)]",
    "informational": false
   },
   {
-   "extracted": 0.5053775184510105,
+   "extracted": 0.5053775289382056,
    "target": 0.5037981539147252,
-   "rel_dev": 0.003134915291001059,
+   "rel_dev": 0.0031349361072645385,
    "passed": true,
    "quantity": "node shunt to ground/return (geometric, excl. coupled partner) [informational: the requirement is the total node capacitance]",
    "where": "B1 n=30 [launcher: trap + accelerator lines (A rows)]",
    "informational": true
   },
   {
-   "extracted": 0.000295147205246168,
+   "extracted": 0.00029514743880348297,
    "target": 0.0,
-   "deviation": 0.000295147205246168,
+   "deviation": 0.00029514743880348297,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32608,9 +32608,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0005231881590525959,
+   "extracted": 0.0005231883986199426,
    "target": 0.0,
-   "deviation": 0.0005231881590525959,
+   "deviation": 0.0005231883986199426,
    "tolerance_abs": 0.01058907736345818,
    "passed": true,
    "quantity": "stray capacitance between the qubits (A row - B row) (<= 5 % of C_c)",
@@ -32618,9 +32618,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0017176572192885695,
+   "extracted": 0.0017177086532458121,
    "target": 0.0,
-   "deviation": 0.0017176572192885695,
+   "deviation": 0.0017177086532458121,
    "tolerance_abs": 0.01058907736345818,
    "passed": true,
    "quantity": "stray capacitance between the qubits (A row - B row) (<= 5 % of C_c)",
@@ -32628,9 +32628,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0023437582788640734,
+   "extracted": 0.0023437552655669945,
    "target": 0.0,
-   "deviation": 0.0023437582788640734,
+   "deviation": 0.0023437552655669945,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32638,9 +32638,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0006724860274916751,
+   "extracted": 0.0006724850400038507,
    "target": 0.0,
-   "deviation": 0.0006724860274916751,
+   "deviation": 0.0006724850400038507,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32648,27 +32648,27 @@
    "informational": false
   },
   {
-   "extracted": 2.4059111096423433,
+   "extracted": 2.4059111094248427,
    "target": 2.4212786655823906,
-   "rel_dev": -0.006346876201608492,
+   "rel_dev": -0.0063468762914373434,
    "passed": true,
    "quantity": "node capacitance (Cj + geometric, k = 0)",
    "where": "B0 n=30 [launcher: trap + accelerator lines (A rows)]",
    "informational": false
   },
   {
-   "extracted": 0.488430597974678,
+   "extracted": 0.4884305977571772,
    "target": 0.5037981539147252,
-   "rel_dev": -0.030503398673922693,
+   "rel_dev": -0.0305033991056449,
    "passed": true,
    "quantity": "node shunt to ground/return (geometric, excl. coupled partner) [informational: the requirement is the total node capacitance]",
    "where": "B0 n=30 [launcher: trap + accelerator lines (A rows)]",
    "informational": true
   },
   {
-   "extracted": 0.0002547492102552017,
+   "extracted": 0.0002547494090855459,
    "target": 0.0,
-   "deviation": 0.0002547492102552017,
+   "deviation": 0.0002547494090855459,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32676,9 +32676,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0003316290600486239,
+   "extracted": 0.0003316285865232546,
    "target": 0.0,
-   "deviation": 0.0003316290600486239,
+   "deviation": 0.0003316285865232546,
    "tolerance_abs": 0.01058907736345818,
    "passed": true,
    "quantity": "stray capacitance between the qubits (A row - B row) (<= 5 % of C_c)",
@@ -32686,9 +32686,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0006011292461211777,
+   "extracted": 0.0006011284586550711,
    "target": 0.0,
-   "deviation": 0.0006011292461211777,
+   "deviation": 0.0006011284586550711,
    "tolerance_abs": 0.01058907736345818,
    "passed": true,
    "quantity": "stray capacitance between the qubits (A row - B row) (<= 5 % of C_c)",
@@ -32696,9 +32696,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0023437582788640326,
+   "extracted": 0.00234375526556696,
    "target": 0.0,
-   "deviation": 0.0023437582788640326,
+   "deviation": 0.00234375526556696,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32706,9 +32706,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0026830665379314403,
+   "extracted": 0.0026830666600146,
    "target": 0.0,
-   "deviation": 0.0026830665379314403,
+   "deviation": 0.0026830666600146,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32716,27 +32716,27 @@
    "informational": false
   },
   {
-   "extracted": 2.4057414950125517,
+   "extracted": 2.4057414949490563,
    "target": 2.4212786655823906,
-   "rel_dev": -0.006416927878105957,
+   "rel_dev": -0.006416927904329882,
    "passed": true,
    "quantity": "node capacitance (Cj + geometric, k = 0)",
    "where": "D_B n=30 [launcher: trap + accelerator lines (A rows)]",
    "informational": false
   },
   {
-   "extracted": 0.4882609833448863,
+   "extracted": 0.48826098328139106,
    "target": 0.5037981539147252,
-   "rel_dev": -0.030840070470898776,
+   "rel_dev": -0.030840070596931918,
    "passed": true,
    "quantity": "node shunt to ground/return (geometric, excl. coupled partner) [informational: the requirement is the total node capacitance]",
    "where": "D_B n=30 [launcher: trap + accelerator lines (A rows)]",
    "informational": true
   },
   {
-   "extracted": 0.00023876681782890037,
+   "extracted": 0.0002387668911862002,
    "target": 0.0,
-   "deviation": 0.00023876681782890037,
+   "deviation": 0.0002387668911862002,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32744,9 +32744,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0002570120876189433,
+   "extracted": 0.0002570115904017271,
    "target": 0.0,
-   "deviation": 0.0002570120876189433,
+   "deviation": 0.0002570115904017271,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32754,9 +32754,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0003488597670078655,
+   "extracted": 0.0003488589918154339,
    "target": 0.0,
-   "deviation": 0.0003488597670078655,
+   "deviation": 0.0003488589918154339,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32764,9 +32764,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0006724860274916692,
+   "extracted": 0.0006724850400038616,
    "target": 0.0,
-   "deviation": 0.0006724860274916692,
+   "deviation": 0.0006724850400038616,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32774,9 +32774,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0026830665379314073,
+   "extracted": 0.0026830666600145643,
    "target": 0.0,
-   "deviation": 0.0026830665379314073,
+   "deviation": 0.0026830666600145643,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32784,27 +32784,27 @@
    "informational": false
   },
   {
-   "extracted": 2.4227596279807346,
+   "extracted": 2.422760039176906,
    "target": 2.4212786655823906,
-   "rel_dev": 0.0006116447558867985,
+   "rel_dev": 0.0006118145819283773,
    "passed": true,
    "quantity": "node capacitance (Cj + geometric, k = 0)",
    "where": "D_A n=180 [launcher: accelerator plateau (A rows)]",
    "informational": false
   },
   {
-   "extracted": 0.5052791163130692,
+   "extracted": 0.5052795275092405,
    "target": 0.5037981539147252,
-   "rel_dev": 0.0029395947302235013,
+   "rel_dev": 0.0029404109225182524,
    "passed": true,
    "quantity": "node shunt to ground/return (geometric, excl. coupled partner) [informational: the requirement is the total node capacitance]",
    "where": "D_A n=180 [launcher: accelerator plateau (A rows)]",
    "informational": true
   },
   {
-   "extracted": 0.001783093230754833,
+   "extracted": 0.0017831683023319211,
    "target": 0.0,
-   "deviation": 0.001783093230754833,
+   "deviation": 0.0017831683023319211,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32812,9 +32812,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0005579458318173646,
+   "extracted": 0.000557946496422863,
    "target": 0.0,
-   "deviation": 0.0005579458318173646,
+   "deviation": 0.000557946496422863,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32822,9 +32822,9 @@
    "informational": false
   },
   {
-   "extracted": 0.000295127513151953,
+   "extracted": 0.0002951260208509025,
    "target": 0.0,
-   "deviation": 0.000295127513151953,
+   "deviation": 0.0002951260208509025,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32832,9 +32832,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0002547420973135721,
+   "extracted": 0.00025474028565439927,
    "target": 0.0,
-   "deviation": 0.0002547420973135721,
+   "deviation": 0.00025474028565439927,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32842,9 +32842,9 @@
    "informational": false
   },
   {
-   "extracted": 0.00023876096613209444,
+   "extracted": 0.00023875901496931746,
    "target": 0.0,
-   "deviation": 0.00023876096613209444,
+   "deviation": 0.00023875901496931746,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32852,27 +32852,27 @@
    "informational": false
   },
   {
-   "extracted": 2.422839390364394,
+   "extracted": 2.422839398986067,
    "target": 2.4212786655823906,
-   "rel_dev": 0.0006445870127170626,
+   "rel_dev": 0.0006445905735104879,
    "passed": true,
    "quantity": "node capacitance (Cj + geometric, k = 0)",
    "where": "A0 n=180 [launcher: accelerator plateau (A rows)]",
    "informational": false
   },
   {
-   "extracted": 0.5053588786967284,
+   "extracted": 0.5053588873184014,
    "target": 0.5037981539147252,
-   "rel_dev": 0.0030979168341045017,
+   "rel_dev": 0.0030979339474523277,
    "passed": true,
    "quantity": "node shunt to ground/return (geometric, excl. coupled partner) [informational: the requirement is the total node capacitance]",
    "where": "A0 n=180 [launcher: accelerator plateau (A rows)]",
    "informational": true
   },
   {
-   "extracted": 0.0017830932307548678,
+   "extracted": 0.0017831683023319246,
    "target": 0.0,
-   "deviation": 0.0017830932307548678,
+   "deviation": 0.0017831683023319246,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32880,9 +32880,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0020786557868868807,
+   "extracted": 0.0020786550070550297,
    "target": 0.0,
-   "deviation": 0.0020786557868868807,
+   "deviation": 0.0020786550070550297,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32890,9 +32890,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0005231556940261847,
+   "extracted": 0.0005231554929057873,
    "target": 0.0,
-   "deviation": 0.0005231556940261847,
+   "deviation": 0.0005231554929057873,
    "tolerance_abs": 0.01058907736345818,
    "passed": true,
    "quantity": "stray capacitance between the qubits (A row - B row) (<= 5 % of C_c)",
@@ -32900,9 +32900,9 @@
    "informational": false
   },
   {
-   "extracted": 0.000331624326421609,
+   "extracted": 0.0003316242219194425,
    "target": 0.0,
-   "deviation": 0.000331624326421609,
+   "deviation": 0.0003316242219194425,
    "tolerance_abs": 0.01058907736345818,
    "passed": true,
    "quantity": "stray capacitance between the qubits (A row - B row) (<= 5 % of C_c)",
@@ -32910,9 +32910,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0002570085500946048,
+   "extracted": 0.00025700848850444607,
    "target": 0.0,
-   "deviation": 0.0002570085500946048,
+   "deviation": 0.00025700848850444607,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32920,27 +32920,27 @@
    "informational": false
   },
   {
-   "extracted": 2.4229087721829683,
+   "extracted": 2.422908772110735,
    "target": 2.4212786655823906,
-   "rel_dev": 0.0006732420451016649,
+   "rel_dev": 0.0006732420152689441,
    "passed": true,
    "quantity": "node capacitance (Cj + geometric, k = 0)",
    "where": "A1 n=180 [launcher: accelerator plateau (A rows)]",
    "informational": false
   },
   {
-   "extracted": 0.505428260515303,
+   "extracted": 0.5054282604430698,
    "target": 0.5037981539147252,
-   "rel_dev": 0.0032356343267858577,
+   "rel_dev": 0.0032356341834085573,
    "passed": true,
    "quantity": "node shunt to ground/return (geometric, excl. coupled partner) [informational: the requirement is the total node capacitance]",
    "where": "A1 n=180 [launcher: accelerator plateau (A rows)]",
    "informational": true
   },
   {
-   "extracted": 0.0005579458318173557,
+   "extracted": 0.000557946496422847,
    "target": 0.0,
-   "deviation": 0.0005579458318173557,
+   "deviation": 0.000557946496422847,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32948,9 +32948,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0020786557868867745,
+   "extracted": 0.0020786550070549204,
    "target": 0.0,
-   "deviation": 0.0020786557868867745,
+   "deviation": 0.0020786550070549204,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32958,9 +32958,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0017175756063027045,
+   "extracted": 0.0017175756642767489,
    "target": 0.0,
-   "deviation": 0.0017175756063027045,
+   "deviation": 0.0017175756642767489,
    "tolerance_abs": 0.01058907736345818,
    "passed": true,
    "quantity": "stray capacitance between the qubits (A row - B row) (<= 5 % of C_c)",
@@ -32968,9 +32968,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0006011312699000322,
+   "extracted": 0.0006011313245518346,
    "target": 0.0,
-   "deviation": 0.0006011312699000322,
+   "deviation": 0.0006011313245518346,
    "tolerance_abs": 0.01058907736345818,
    "passed": true,
    "quantity": "stray capacitance between the qubits (A row - B row) (<= 5 % of C_c)",
@@ -32978,9 +32978,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0003488606008483815,
+   "extracted": 0.00034886065396289983,
    "target": 0.0,
-   "deviation": 0.0003488606008483815,
+   "deviation": 0.00034886065396289983,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -32988,27 +32988,27 @@
    "informational": false
   },
   {
-   "extracted": 2.422855213543015,
+   "extracted": 2.4228552135070442,
    "target": 2.4212786655823906,
-   "rel_dev": 0.0006511220633273309,
+   "rel_dev": 0.000651122048471221,
    "passed": true,
    "quantity": "node capacitance (Cj + geometric, k = 0)",
    "where": "B1 n=180 [launcher: accelerator plateau (A rows)]",
    "informational": false
   },
   {
-   "extracted": 0.5053747018753496,
+   "extracted": 0.5053747018393788,
    "target": 0.5037981539147252,
-   "rel_dev": 0.003129324608226542,
+   "rel_dev": 0.003129324536827349,
    "passed": true,
    "quantity": "node shunt to ground/return (geometric, excl. coupled partner) [informational: the requirement is the total node capacitance]",
    "where": "B1 n=180 [launcher: accelerator plateau (A rows)]",
    "informational": true
   },
   {
-   "extracted": 0.0002951275131519906,
+   "extracted": 0.00029512602085094786,
    "target": 0.0,
-   "deviation": 0.0002951275131519906,
+   "deviation": 0.00029512602085094786,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -33016,9 +33016,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0005231556940261407,
+   "extracted": 0.0005231554929057522,
    "target": 0.0,
-   "deviation": 0.0005231556940261407,
+   "deviation": 0.0005231554929057522,
    "tolerance_abs": 0.01058907736345818,
    "passed": true,
    "quantity": "stray capacitance between the qubits (A row - B row) (<= 5 % of C_c)",
@@ -33026,9 +33026,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0017175756063026585,
+   "extracted": 0.001717575664276704,
    "target": 0.0,
-   "deviation": 0.0017175756063026585,
+   "deviation": 0.001717575664276704,
    "tolerance_abs": 0.01058907736345818,
    "passed": true,
    "quantity": "stray capacitance between the qubits (A row - B row) (<= 5 % of C_c)",
@@ -33036,9 +33036,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0023437665026982543,
+   "extracted": 0.002343766534495316,
    "target": 0.0,
-   "deviation": 0.0023437665026982543,
+   "deviation": 0.002343766534495316,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -33046,9 +33046,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0006724816531963713,
+   "extracted": 0.0006724816831072027,
    "target": 0.0,
-   "deviation": 0.0006724816531963713,
+   "deviation": 0.0006724816831072027,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -33056,27 +33056,27 @@
    "informational": false
   },
   {
-   "extracted": 2.4059111092181054,
+   "extracted": 2.405911109190544,
    "target": 2.4212786655823906,
-   "rel_dev": -0.006346876376820863,
+   "rel_dev": -0.006346876388203902,
    "passed": true,
    "quantity": "node capacitance (Cj + geometric, k = 0)",
    "where": "B0 n=180 [launcher: accelerator plateau (A rows)]",
    "informational": false
   },
   {
-   "extracted": 0.48843059755043977,
+   "extracted": 0.48843059752287854,
    "target": 0.5037981539147252,
-   "rel_dev": -0.03050339951600251,
+   "rel_dev": -0.0305033995707094,
    "passed": true,
    "quantity": "node shunt to ground/return (geometric, excl. coupled partner) [informational: the requirement is the total node capacitance]",
    "where": "B0 n=180 [launcher: accelerator plateau (A rows)]",
    "informational": true
   },
   {
-   "extracted": 0.0002547420973135588,
+   "extracted": 0.0002547402856543648,
    "target": 0.0,
-   "deviation": 0.0002547420973135588,
+   "deviation": 0.0002547402856543648,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -33084,9 +33084,9 @@
    "informational": false
   },
   {
-   "extracted": 0.00033162432642160587,
+   "extracted": 0.0003316242219194425,
    "target": 0.0,
-   "deviation": 0.00033162432642160587,
+   "deviation": 0.0003316242219194425,
    "tolerance_abs": 0.01058907736345818,
    "passed": true,
    "quantity": "stray capacitance between the qubits (A row - B row) (<= 5 % of C_c)",
@@ -33094,9 +33094,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0006011312699000387,
+   "extracted": 0.0006011313245518454,
    "target": 0.0,
-   "deviation": 0.0006011312699000387,
+   "deviation": 0.0006011313245518454,
    "tolerance_abs": 0.01058907736345818,
    "passed": true,
    "quantity": "stray capacitance between the qubits (A row - B row) (<= 5 % of C_c)",
@@ -33104,9 +33104,9 @@
    "informational": false
   },
   {
-   "extracted": 0.002343766502698138,
+   "extracted": 0.0023437665344952048,
    "target": 0.0,
-   "deviation": 0.002343766502698138,
+   "deviation": 0.0023437665344952048,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -33114,9 +33114,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0026830667499295577,
+   "extracted": 0.002683066775582355,
    "target": 0.0,
-   "deviation": 0.0026830667499295577,
+   "deviation": 0.002683066775582355,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -33124,27 +33124,27 @@
    "informational": false
   },
   {
-   "extracted": 2.405741494867483,
+   "extracted": 2.4057414948437463,
    "target": 2.4212786655823906,
-   "rel_dev": -0.006416927938020104,
+   "rel_dev": -0.006416927947823423,
    "passed": true,
    "quantity": "node capacitance (Cj + geometric, k = 0)",
    "where": "D_B n=180 [launcher: accelerator plateau (A rows)]",
    "informational": false
   },
   {
-   "extracted": 0.48826098319981753,
+   "extracted": 0.4882609831760808,
    "target": 0.5037981539147252,
-   "rel_dev": -0.030840070758848998,
+   "rel_dev": -0.030840070805964563,
    "passed": true,
    "quantity": "node shunt to ground/return (geometric, excl. coupled partner) [informational: the requirement is the total node capacitance]",
    "where": "D_B n=180 [launcher: accelerator plateau (A rows)]",
    "informational": true
   },
   {
-   "extracted": 0.00023876096613205627,
+   "extracted": 0.00023875901496927892,
    "target": 0.0,
-   "deviation": 0.00023876096613205627,
+   "deviation": 0.00023875901496927892,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -33152,9 +33152,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0002570085500945944,
+   "extracted": 0.0002570084885044312,
    "target": 0.0,
-   "deviation": 0.0002570085500945944,
+   "deviation": 0.0002570084885044312,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -33162,9 +33162,9 @@
    "informational": false
   },
   {
-   "extracted": 0.00034886060084840314,
+   "extracted": 0.0003488606539629219,
    "target": 0.0,
-   "deviation": 0.00034886060084840314,
+   "deviation": 0.0003488606539629219,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -33172,9 +33172,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0006724816531963872,
+   "extracted": 0.0006724816831072234,
    "target": 0.0,
-   "deviation": 0.0006724816531963872,
+   "deviation": 0.0006724816831072234,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -33182,9 +33182,9 @@
    "informational": false
   },
   {
-   "extracted": 0.0026830667499295946,
+   "extracted": 0.002683066775582398,
    "target": 0.0,
-   "deviation": 0.0026830667499295946,
+   "deviation": 0.002683066775582398,
    "tolerance_abs": 0.12106393327911953,
    "passed": true,
    "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
@@ -33237,9 +33237,9 @@
    "informational": false
   },
   {
-   "extracted": 653.4496878174881,
+   "extracted": 653.4496894901632,
    "target": 653.8460512271247,
-   "rel_dev": -0.0006062029569387252,
+   "rel_dev": -0.0006062003987293082,
    "passed": true,
    "quantity": "L per cell (mesh self-inductance: kinetic + geometric), worst cell of all rows",
    "where": "B1 n=70",
@@ -33294,19 +33294,19 @@
    "informational": false
   },
   {
-   "extracted": 0.008332941045005099,
+   "extracted": 0.002484724804614237,
    "target": 0.0,
-   "deviation": 0.008332941045005099,
+   "deviation": 0.002484724804614237,
    "tolerance_abs": 0.0033238419338701888,
-   "passed": false,
+   "passed": true,
    "quantity": "launcher trap-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
    "where": "A0",
    "informational": false
   },
   {
-   "extracted": 0.012542389983800008,
+   "extracted": 0.012930298952371142,
    "target": 0.0,
-   "deviation": 0.012542389983800008,
+   "deviation": 0.012930298952371142,
    "tolerance_abs": 0.003919210304273666,
    "passed": false,
    "quantity": "launcher accelerator-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
@@ -33314,19 +33314,19 @@
    "informational": false
   },
   {
-   "extracted": 0.006062612415228581,
+   "extracted": 0.003252806192561873,
    "target": 0.0,
-   "deviation": 0.006062612415228581,
+   "deviation": 0.003252806192561873,
    "tolerance_abs": 0.0033238419338701888,
-   "passed": false,
+   "passed": true,
    "quantity": "launcher trap-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
    "where": "A1",
    "informational": false
   },
   {
-   "extracted": 0.010207703477017951,
+   "extracted": 0.013878958811282371,
    "target": 0.0,
-   "deviation": 0.010207703477017951,
+   "deviation": 0.013878958811282371,
    "tolerance_abs": 0.003919210304273666,
    "passed": false,
    "quantity": "launcher accelerator-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
@@ -33334,19 +33334,19 @@
    "informational": false
   },
   {
-   "extracted": 0.006062118808159201,
+   "extracted": 0.0032516840343972606,
    "target": 0.0,
-   "deviation": 0.006062118808159201,
+   "deviation": 0.0032516840343972606,
    "tolerance_abs": 0.0033238419338701888,
-   "passed": false,
+   "passed": true,
    "quantity": "launcher trap-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
    "where": "B1",
    "informational": false
   },
   {
-   "extracted": 0.01020769933775659,
+   "extracted": 0.013878955297984066,
    "target": 0.0,
-   "deviation": 0.01020769933775659,
+   "deviation": 0.013878955297984066,
    "tolerance_abs": 0.003919210304273666,
    "passed": false,
    "quantity": "launcher accelerator-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
@@ -33354,19 +33354,19 @@
    "informational": false
   },
   {
-   "extracted": 0.008332903835660783,
+   "extracted": 0.002485886937725966,
    "target": 0.0,
-   "deviation": 0.008332903835660783,
+   "deviation": 0.002485886937725966,
    "tolerance_abs": 0.0033238419338701888,
-   "passed": false,
+   "passed": true,
    "quantity": "launcher trap-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
    "where": "B0",
    "informational": false
   },
   {
-   "extracted": 0.012542393191263278,
+   "extracted": 0.012930302259034307,
    "target": 0.0,
-   "deviation": 0.012542393191263278,
+   "deviation": 0.012930302259034307,
    "tolerance_abs": 0.003919210304273666,
    "passed": false,
    "quantity": "launcher accelerator-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
@@ -33571,9 +33571,9 @@
    "checked": 1,
    "failed": 0,
    "worst": {
-    "extracted": 653.4496878174881,
+    "extracted": 653.4496894901632,
     "target": 653.8460512271247,
-    "rel_dev": -0.0006062029569387252,
+    "rel_dev": -0.0006062003987293082,
     "passed": true,
     "quantity": "L per cell (mesh self-inductance: kinetic + geometric), worst cell of all rows",
     "where": "B1 n=70",
@@ -33656,15 +33656,15 @@
   },
   "launcher trap-pair M_n (|M - M_target| <= 5 % of peak, at the design current)": {
    "checked": 4,
-   "failed": 4,
+   "failed": 0,
    "worst": {
-    "extracted": 0.008332941045005099,
+    "extracted": 0.003252806192561873,
     "target": 0.0,
-    "deviation": 0.008332941045005099,
+    "deviation": 0.003252806192561873,
     "tolerance_abs": 0.0033238419338701888,
-    "passed": false,
+    "passed": true,
     "quantity": "launcher trap-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
-    "where": "A0",
+    "where": "A1",
     "informational": false
    },
    "informational": false
@@ -33673,13 +33673,13 @@
    "checked": 4,
    "failed": 4,
    "worst": {
-    "extracted": 0.012542393191263278,
+    "extracted": 0.013878958811282371,
     "target": 0.0,
-    "deviation": 0.012542393191263278,
+    "deviation": 0.013878958811282371,
     "tolerance_abs": 0.003919210304273666,
     "passed": false,
     "quantity": "launcher accelerator-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
-    "where": "B0",
+    "where": "A1",
     "informational": false
    },
    "informational": false
@@ -33715,6 +33715,5 @@
  },
  "drc_clean": false,
  "passed": false,
- "runtime_s": 1252.9601709842682,
- "launcher_as_drawn_note": "recomputed at every cell by hardware.diffpairs.as_drawn for the final rev-B sizing (same model as the verify; the rest of this file is from the full verify of rev B)"
+ "runtime_s": 854.1129851341248
 }

@@ -13,7 +13,7 @@
  },
  {
   "path": "fab/qbfx2_carrier.net",
-  "bytes": 85572
+  "bytes": 85488
  },
  {
   "path": "fab/qbfx2_carrier.step",
@@ -180,12 +180,8 @@
   "bytes": 18218
  },
  {
-  "path": "reports/altium.log",
-  "bytes": 253
- },
- {
   "path": "reports/bom_intermediate.xml",
-  "bytes": 86829
+  "bytes": 86745
  },
  {
   "path": "reports/bom_summary.json",
@@ -193,7 +189,7 @@
  },
  {
   "path": "reports/build.log",
-  "bytes": 7002
+  "bytes": 6792
  },
  {
   "path": "reports/build_model.json",
@@ -209,7 +205,7 @@
  },
  {
   "path": "reports/drc_report.txt",
-  "bytes": 282
+  "bytes": 240
  },
  {
   "path": "reports/drc_selftest.txt",
@@ -249,7 +245,7 @@
  },
  {
   "path": "reports/outputs_manifest.json",
-  "bytes": 4424
+  "bytes": 4358
  },
  {
   "path": "reports/pos.log",
@@ -257,7 +253,7 @@
  },
  {
   "path": "reports/sch_netlist.net",
-  "bytes": 85572
+  "bytes": 85488
  },
  {
   "path": "reports/sch_vs_pcb.txt",

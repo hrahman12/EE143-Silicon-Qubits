@@ -1,5 +1,5 @@
-** Drc report for /home/user/EE143-Silicon-Qubits/.claude/worktrees/agent-a1a1586d91fadf1e0/qbf-x2/pcb/reports/_selftest/F9_uncoupled_probe.kicad_pcb **
-** Created on 2026-11-26 12:33:52 **
+** Drc report for /home/user/EE143-Silicon-Qubits/qbf-x2/pcb/reports/_selftest/F9_uncoupled_probe.kicad_pcb **
+** Created on 2026-11-26 12:53:07 **
 
 ** Found 16 DRC violations **
 [diff_pair_uncoupled_length_too_long]: Differential uncoupled length too long (DIFF_breakout maximum uncoupled length 0.0010 mm; actual 1.0000 mm)
@@ -53,11 +53,11 @@
 [diff_pair_uncoupled_length_too_long]: Differential uncoupled length too long (DIFF_breakout maximum uncoupled length 0.0010 mm; actual 1.0000 mm)
     Rule: DIFF_breakout; Severity: error
     @(96.8866 mm, 124.7977 mm): Track [TRAP_B0_P] on F.Cu, length 0.1000 mm
-    @(96.5021 mm, 125.1326 mm): Track [TRAP_B0_N] on F.Cu, length 0.2500 mm
+    @(96.3284 mm, 124.8287 mm): Track [TRAP_B0_N] on F.Cu, length 0.2500 mm
 [diff_pair_uncoupled_length_too_long]: Differential uncoupled length too long (DIFF_routed maximum uncoupled length 0.0010 mm; actual 9.8560 mm)
     Rule: DIFF_routed; Severity: error
     @(109.8839 mm, 140.5103 mm): Track [TRAP_B0_P] on F.Cu, length 2.5324 mm
-    @(112.5584 mm, 144.7500 mm): Track [TRAP_B0_N] on F.Cu, length 0.2500 mm
+    @(97.9006 mm, 128.1242 mm): Track [TRAP_B0_N] on F.Cu, length 10.9422 mm
 [diff_pair_uncoupled_length_too_long]: Differential uncoupled length too long (DIFF_breakout maximum uncoupled length 0.0010 mm; actual 1.0000 mm)
     Rule: DIFF_breakout; Severity: error
     @(94.1000 mm, 119.6500 mm): Track [TRAP_B1_P] on F.Cu, length 1.1536 mm

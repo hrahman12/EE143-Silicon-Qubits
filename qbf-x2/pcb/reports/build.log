@@ -27,7 +27,7 @@
 [0m
 [32;1m** WorkSession : Sending all data
 [0m
-[32;1m Step File Name : /home/user/EE143-Silicon-Qubits/.claude/worktrees/agent-a1a1586d91fadf1e0/qbf-x2/pcb/3dmodels/SMP_MSLD_PCS_NM.step(2300 ents)  Write  Done
+[32;1m Step File Name : /home/user/EE143-Silicon-Qubits/qbf-x2/pcb/3dmodels/SMP_MSLD_PCS_NM.step(2300 ents)  Write  Done
 [0m
 [32;1m
 *******************************************************************
@@ -67,7 +67,7 @@
 [0m
 [32;1m** WorkSession : Sending all data
 [0m
-[32;1m Step File Name : /home/user/EE143-Silicon-Qubits/.claude/worktrees/agent-a1a1586d91fadf1e0/qbf-x2/pcb/3dmodels/MicroD_15P_RA.step(3516 ents)  Write  Done
+[32;1m Step File Name : /home/user/EE143-Silicon-Qubits/qbf-x2/pcb/3dmodels/MicroD_15P_RA.step(3516 ents)  Write  Done
 [0m
 [32;1m
 *******************************************************************
@@ -89,7 +89,7 @@
 [0m
 [32;1m** WorkSession : Sending all data
 [0m
-[32;1m Step File Name : /home/user/EE143-Silicon-Qubits/.claude/worktrees/agent-a1a1586d91fadf1e0/qbf-x2/pcb/3dmodels/R_0603.step(1049 ents)  Write  Done
+[32;1m Step File Name : /home/user/EE143-Silicon-Qubits/qbf-x2/pcb/3dmodels/R_0603.step(1049 ents)  Write  Done
 [0m
 [32;1m
 *******************************************************************
@@ -111,7 +111,7 @@
 [0m
 [32;1m** WorkSession : Sending all data
 [0m
-[32;1m Step File Name : /home/user/EE143-Silicon-Qubits/.claude/worktrees/agent-a1a1586d91fadf1e0/qbf-x2/pcb/3dmodels/C_0603.step(1049 ents)  Write  Done
+[32;1m Step File Name : /home/user/EE143-Silicon-Qubits/qbf-x2/pcb/3dmodels/C_0603.step(1049 ents)  Write  Done
 [0m
 [32;1m
 *******************************************************************
@@ -151,7 +151,7 @@
 [0m
 [32;1m** WorkSession : Sending all data
 [0m
-[32;1m Step File Name : /home/user/EE143-Silicon-Qubits/.claude/worktrees/agent-a1a1586d91fadf1e0/qbf-x2/pcb/3dmodels/QBFX2_die_bonded.step(65287 ents)  Write  Done
+[32;1m Step File Name : /home/user/EE143-Silicon-Qubits/qbf-x2/pcb/3dmodels/QBFX2_die_bonded.step(65287 ents)  Write  Done
 [0m
 board written: 57 footprints, 98 tracks, 1421 vias (1393 GND stitching), 43 nets
   ACC_A0_N 24.6292 mm
