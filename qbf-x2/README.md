@@ -149,6 +149,7 @@ ground.
 | `fig09_quantum_vs_classical.png` | Conditional phase, quantum ⟨ΔX⟩ vs classical shift, which-path distinguishability |
 | `fig10_energy_budget.png` | Energy retention, where the energy goes, cost per operation |
 | `fig11_launcher.png` | Coherent launcher: potentials, launch speed distribution vs a thermal source, temperature dependence, full-circuit launch, 2D gate with launched packets, error budget |
+| `fig12_error_budget.png` | CZ gate error budget by source: thermal source (2.36 %) vs coherent launcher as designed (0.32 %) and as drawn, post-layout (0.90 %); `simulations/fig12_error_budget.py` |
 | `companion1-5_*.png` | The five companion devices |
 | `circuits/` | `qbfx2_netlist.cir` (predates the launcher redesign: 362 cells per rail, the drawn block has 878), `schematic_unit_cells.png/.svg`, `qbfx2_layout.gds`, previews, `views/` (layer views and Altium-style views) |
 
