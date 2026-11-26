@@ -1,8 +1,10 @@
 sch_vs_pcb     PASS
 erc            PASS
 impedance      PASS
+diff_impedance PASS
 lengths        PASS
 filters        PASS
 drc_selftest   PASS
+diff_coupling  PASS
 drc            PASS
 ALL CHECKS PASSED

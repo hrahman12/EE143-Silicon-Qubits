@@ -263,10 +263,11 @@ def chip(name, kind):
 
 
 def die_bondpads(pads_local, die_half, win_half, pin_marker):
-    """U1: the 24 PCB wire-bond landing pads (numbered as die_pads.json ids). The die itself is wire bonded."""
+    """U1: one PCB wire-bond landing pad per die pad (numbered as die_pads.json ids). The die itself is wire bonded."""
     fp = Footprint("QBFX2_DIE_BONDPADS",
-                   "QBF-X2 10 x 10 mm die in a 10.30 mm through-window: 24 PCB wire-bond landing pads (Cu, no "
-                   "paste) numbered as circuits/die_pads.json. Die rests on the sample-holder pedestal.",
+                   f"QBF-X2 10 x 10 mm die in a {2 * win_half:.2f} mm through-window: {len(pads_local)} PCB wire-bond "
+                   "landing pads (Cu, no paste) numbered as circuits/die_pads.json (rev B: 0.29 mm lands for the "
+                   "differential pairs). Die rests on the sample-holder pedestal.",
                    "QBF-X2 die wirebond chip-on-board", "smd exclude_from_pos_files")
     for num, c, size in pads_local:
         fp.pad(num, "smd", "rect", c, size, ["F.Cu", "F.Mask"])

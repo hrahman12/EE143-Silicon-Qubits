@@ -3,10 +3,12 @@
 
   1. schematic vs PCB netlist comparison (Altium-style ECO list)  -> reports/sch_vs_pcb.txt
   2. ERC substitute (KiCad 7 has no CLI ERC)                       -> reports/erc_report.txt
-  3. impedance table: rf_calc.gcpw_z0 on the drawn and the as-built (zone-fill) geometry -> reports/impedance_table.txt
-  4. length matching from the board copper (pcbnew)               -> reports/length_report.txt
+  3. impedance table: rf_calc.gcpw_z0 on the drawn and the as-built (zone-fill) geometry of the single-ended lines;
+     differential pairs: as-built P-N and GND gaps, coupled closed form + 2D field solve (odd / even / diff / cm, k)
+                                                                    -> reports/impedance_table.txt
+  4. length matching from the board copper (pcbnew): intra-pair skew (mm, ps) and A/B -> reports/length_report.txt
   5. filter cut-offs from the schematic component values           -> reports/filter_report.txt
-  6. DRC self-test: injected faults must be caught                 -> reports/drc_selftest.txt
+  6. DRC self-test: injected faults must be caught; KiCad's own uncoupled lengths -> reports/drc_selftest.txt
 Everything is summarised in reports/check_summary.json; exit status 1 if any check fails.
 """
 import importlib.util
@@ -253,7 +255,14 @@ def track_lines(board):
     return out
 
 
+def web_half(D, k):
+    """half-width of the LPI web on the pair centre line (build_carrier: per-leg apertures, web DIFF['web'])"""
+    s, g = D[f"s{k}"], D[f"g{k}"]
+    return s / 2 - min(g - P.GCPW["corridor_inset"], s / 2 - D["web"] / 2)
+
+
 def impedance(board, rf, model):
+    """single-ended GCPW (readout lines and the split legs of the pairs): formula on the drawn and as-filled gaps"""
     gc = P.GCPW
     z_draw, e_draw = rf.gcpw_z0(gc["w"], gc["gap"], gc["h"], gc["er"])
     w_solve = rf.solve_gcpw_width(gc["gap"], gc["h"], gc["er"], gc["z_target"])
@@ -265,6 +274,10 @@ def impedance(board, rf, model):
     X0, Y0 = model["page_origin"]
     conns = [(X0 + r["conn"][0], Y0 - r["conn"][1]) for r in model["rf"].values()]
     r_launch = 0.75 / 2 + 0.45 + gc["w"] / 2 + 0.05
+    coupled = {}                     # coupled section of every pair leg (checked separately in diff_impedance)
+    for pr in model["diff"]["pairs"].values():
+        for lg in pr["legs"].values():
+            coupled[lg["net"]] = LineString([(X0 + p[0], Y0 - p[1]) for p in lg["coupled_polyline"]])
     gaps = {"seg": [], "arc": [], "launch": []}
     cover = []
     for net in rfn:
@@ -274,6 +287,8 @@ def impedance(board, rf, model):
             n = max(2, int(L / 0.1))
             for i in range(1, n):
                 p = ls.interpolate(i / n, normalized=True)
+                if net in coupled and coupled[net].distance(p) < 0.01:
+                    continue
                 g_ = p.distance(gnd_f) - w / 2
                 if min(math.dist((p.x, p.y), c) for c in conns) < r_launch:
                     gaps["launch"].append(g_)
@@ -298,11 +313,8 @@ def impedance(board, rf, model):
         if fp.GetReference() != "U1":
             continue
         for pd in fp.Pads():
-            if pd.GetNetname() in rfn:
-                c = pd.GetPosition()
-                sz = pd.GetSize()
-                poly = pd.GetEffectivePolygon()
-                shp = poly_from(poly)
+            if pd.GetNetname() in rfn and pd.GetNetname() not in coupled:     # single-ended (readout) lands
+                shp = poly_from(pd.GetEffectivePolygon())
                 pg.append(shp.distance(gnd_f))
     res["landing_pad_gap_min"], res["landing_pad_gap_max"] = min(pg), max(pg)
     # 2D field-solver cross-check: validation in the thin-copper limit, then the real cross-section
@@ -315,22 +327,98 @@ def impedance(board, rf, model):
     return res
 
 
+def diff_impedance(board, model):
+    """differential pairs: as-built inner (P-N) and outer (to GND) gaps measured on the coupled runs of every leg
+    (pcbnew copper + KiCad's own zone fill), closed-form coupled CB-CPW at the as-built extremes, and the 2D field
+    solve (35 um copper, mask on the outer grounds plus the centre-line web) at the design values"""
+    D, gc = P.DIFF, P.GCPW
+    X0, Y0 = model["page_origin"]
+    gnd_f = zone_copper(board, "F.Cu")
+    lines = track_lines(board)
+    wcut = (D["w"] + D["w_bo"]) / 2
+    meas = {k: dict(inner=[], outer=[], run_len=0.0) for k in ("routed", "breakout")}
+    land = dict(inner=[], outer=[])
+    for name, pr in model["diff"]["pairs"].items():
+        cu = {}
+        for pol in "PN":
+            net = pr["legs"][pol]["net"]
+            cu[pol] = unary_union([ls.buffer(w / 2) for kind, ls, w, L, lay in lines[net] if lay == "F.Cu"])
+        for pol, other in (("P", "N"), ("N", "P")):
+            for x0, y0, x1, y1, w in pr["legs"][pol]["runs"]:
+                seg = LineString([(X0 + x0, Y0 - y0), (X0 + x1, Y0 - y1)])
+                cls = "routed" if w >= wcut else "breakout"
+                meas[cls]["run_len"] += seg.length
+                n = max(2, int(seg.length / 0.1))
+                for i in range(1, n):
+                    p = seg.interpolate(i / n, normalized=True)
+                    meas[cls]["outer"].append(p.distance(gnd_f) - w / 2)
+                    meas[cls]["inner"].append(p.distance(cu[other]) - w / 2)
+    for fp in board.GetFootprints():                       # differential lands: P-N gap and gap to GND
+        if fp.GetReference() != "U1":
+            continue
+        shp = {pd.GetNetname(): poly_from(pd.GetEffectivePolygon()) for pd in fp.Pads()}
+        for pr in model["diff"]["pairs"].values():
+            a, b = shp[pr["P"]], shp[pr["N"]]
+            land["inner"].append(a.distance(b))
+            land["outer"] += [a.distance(gnd_f), b.distance(gnd_f)]
+    res = dict(land=dict(inner=[min(land["inner"]), max(land["inner"])], outer=[min(land["outer"]), max(land["outer"])]))
+    for cls, k in (("routed", ""), ("breakout", "_bo")):
+        w, s, g = D[f"w{k}"], D[f"s{k}"], D[f"g{k}"]
+        m = meas[cls]
+        si, sx_, gi, gx = min(m["inner"]), max(m["inner"]), min(m["outer"]), max(m["outer"])
+        corners = [fd2d.closed_form_coupled(w, s_, g_, gc["h"], gc["er"]) for s_ in (si, sx_) for g_ in (gi, gx)]
+        cf = fd2d.closed_form_coupled(w, s, g, gc["h"], gc["er"])
+        web = web_half(D, k)
+        fd = fd2d.solve_coupled(w, s, g, gc["h"], gc["er"], t=gc["t_cu"], mask_t=0.02, mask_mode="corridor",
+                                corridor_inset=gc["corridor_inset"], inner_web=web)
+        fd_thin = fd2d.solve_coupled(w, s, g, gc["h"], gc["er"], t=0.0, mask_t=0.0, cells_per_h=120)
+        fd_noweb = fd2d.solve_coupled(w, s, g, gc["h"], gc["er"], t=gc["t_cu"], mask_t=0.02, mask_mode="corridor",
+                                      corridor_inset=gc["corridor_inset"])
+        res[cls] = dict(w=w, s=s, g=g, web_half=web, samples=len(m["inner"]), run_len=m["run_len"],
+                        s_asbuilt=[si, sx_], g_asbuilt=[gi, gx],
+                        formula=cf, formula_asbuilt_zodd=[min(c["z_odd"] for c in corners), max(c["z_odd"] for c in corners)],
+                        field=fd, field_thin=fd_thin, field_without_web=fd_noweb)
+    tol, zt = D["z_tol"], gc["z_target"]
+    r, b_ = res["routed"], res["breakout"]
+    ok_routed = all(abs(z - zt) <= tol * zt for z in (r["formula"]["z_odd"], r["field"]["z_odd"], *r["formula_asbuilt_zodd"]))
+    ok_bo = abs(b_["field"]["z_odd"] - zt) <= tol * zt
+    res["passed"] = ok_routed and ok_bo
+    res["passed_routed_both_models"] = ok_routed
+    res["passed_breakout_field"] = ok_bo
+    return res
+
+
 # ------------------------------------------------------------------------------------------------ 4. lengths
 def lengths(board, model, eeff):
+    """copper length of every RF net from the board (pcbnew); intra-pair skew; A/B matching of the pairs"""
     lines = track_lines(board)
     L = {}
     for net in model["rf"]:
         L[net] = sum(x[3] for x in lines[net])
-    pairs = [("TRAP_A0", "TRAP_B0"), ("TRAP_A1", "TRAP_B1"), ("ACC_A0", "ACC_B0"), ("ACC_A1", "ACC_B1")]
     ps_per_mm = math.sqrt(eeff) / C0 * 1e-3 * 1e12
+    D = P.DIFF
+    prs = model["diff"]["pairs"]
+    intra = []
+    for name in P.FAST_PAIRS:
+        pr = prs[name]
+        d = L[pr["P"]] - L[pr["N"]]
+        intra.append(dict(pair=name, L_P=L[pr["P"]], L_N=L[pr["N"]], skew_mm=d, skew_ps=d * ps_per_mm,
+                          passed=abs(d) <= D["skew_max"], running_max=pr["running_skew_max"],
+                          longest_over_0p1mm=pr["longest_run_over_0p1mm"],
+                          bends=[(round(b["theta_deg"], 3), round(b["c"], 3), b["inner_net"], round(b["mismatch"], 4))
+                                 for b in pr["bends"]],
+                          bumps=[(b["leg"], b["n"], round(b["extra_each"], 4), round(b["height"], 3), round(b["span"], 3))
+                                 for b in pr["bumps"]]))
     rows = []
-    ok = True
-    for a, b in pairs:
-        d = abs(L[a] - L[b])
-        ok &= d <= P.RULES["skew_max"]
-        rows.append((a, b, L[a], L[b], d, d * ps_per_mm))
+    ok = all(r["passed"] for r in intra)
+    for a, b in P.AB_PAIRS:
+        ma, mb = (L[prs[a]["P"]] + L[prs[a]["N"]]) / 2, (L[prs[b]["P"]] + L[prs[b]["N"]]) / 2
+        dP, dN = abs(L[prs[a]["P"]] - L[prs[b]["P"]]), abs(L[prs[a]["N"]] - L[prs[b]["N"]])
+        d = abs(ma - mb)
+        ok &= max(d, dP, dN) <= P.RULES["skew_max"]
+        rows.append((a, b, ma, mb, d, d * ps_per_mm, dP, dN))
     groups = {g: max(L[n] for n in L if n.startswith(g)) - min(L[n] for n in L if n.startswith(g)) for g in ("TRAP", "ACC")}
-    return L, rows, ok, ps_per_mm, groups
+    return L, rows, ok, ps_per_mm, groups, intra
 
 
 # ------------------------------------------------------------------------------------------------ 5. filters
@@ -383,17 +471,21 @@ def drc_selftest():
         shutil.rmtree(d)
     os.makedirs(d)
     results = []
+    texts = {}
 
-    def run(tag, mutate, expect):
+    def run(tag, mutate, expect, dru_edit=None):
         base = os.path.join(d, tag)
         shutil.copy(PCB, base + ".kicad_pcb")
         shutil.copy(os.path.join(HERE, f"{NAME}.kicad_pro"), base + ".kicad_pro")
-        shutil.copy(os.path.join(HERE, f"{NAME}.kicad_dru"), base + ".kicad_dru")
+        dru = open(os.path.join(HERE, f"{NAME}.kicad_dru")).read()
+        with open(base + ".kicad_dru", "w") as fh:
+            fh.write(dru_edit(dru) if dru_edit else dru)
         shutil.copy(os.path.join(HERE, "fp-lib-table"), os.path.join(d, "fp-lib-table"))
         if not os.path.isdir(os.path.join(d, f"{P.PROJECT['lib']}.pretty")):
             shutil.copytree(os.path.join(HERE, f"{P.PROJECT['lib']}.pretty"), os.path.join(d, f"{P.PROJECT['lib']}.pretty"))
         b = pcbnew.LoadBoard(base + ".kicad_pcb")
-        mutate(b)
+        if mutate:
+            mutate(b)
         b.Save(base + ".kicad_pcb")
         b2 = pcbnew.LoadBoard(base + ".kicad_pcb")
         pcbnew.ZONE_FILLER(b2).Fill(b2.Zones())
@@ -402,26 +494,68 @@ def drc_selftest():
         txt = open(rep).read()
         hit = all(e in txt for e in expect)
         results.append((tag, expect, hit))
+        texts[tag] = txt
 
     def tracks_of(b, net, cls=None):
         return [t for t in b.GetTracks() if t.GetNetname() == net and (cls is None or t.GetClass() == cls)]
 
-    def narrow(b):
-        t = tracks_of(b, "TRAP_A0", "PCB_TRACK")[0]
-        t.SetWidth(pcbnew.FromMM(0.30))
+    def longest(b, net, wmin=0.0):
+        return max([t for t in tracks_of(b, net, "PCB_TRACK") if t.GetWidth() >= pcbnew.FromMM(wmin)],
+                   key=lambda s: s.GetLength())
 
-    def gap(b):
-        t = tracks_of(b, "ACC_B1", "PCB_TRACK")[-2]
-        m = (t.GetStart() + t.GetEnd()) / 2 if hasattr(t.GetStart(), "__add__") else t.GetStart()
+    def add_via(b, pos, net="GND"):
         v = pcbnew.PCB_VIA(b)
-        v.SetPosition(pcbnew.VECTOR2I(m.x, m.y + pcbnew.FromMM(0.45)))
+        v.SetPosition(pos)
         v.SetWidth(pcbnew.FromMM(0.45))
         v.SetDrill(pcbnew.FromMM(0.2))
-        v.SetNet(b.FindNet("GND"))
+        v.SetNet(b.FindNet(net))
         b.Add(v)
 
+    def side_points(t, off_mm):
+        """the two points off_mm either side of the middle of a straight track (KiCad nm)"""
+        s, e = t.GetStart(), t.GetEnd()
+        L = math.hypot(e.x - s.x, e.y - s.y)
+        mx, my = (s.x + e.x) / 2, (s.y + e.y) / 2
+        nx, ny = -(e.y - s.y) / L, (e.x - s.x) / L
+        o = pcbnew.FromMM(off_mm)
+        return [pcbnew.VECTOR2I(int(mx + sg * nx * o), int(my + sg * ny * o)) for sg in (1, -1)]
+
+    def partner(net):
+        return net[:-1] + ("N" if net.endswith("P") else "P")
+
+    def narrow(b):
+        t = tracks_of(b, "RO_IN", "PCB_TRACK")[0]
+        t.SetWidth(pcbnew.FromMM(0.30))
+
+    def narrow_diff(b):
+        longest(b, "TRAP_A0_P").SetWidth(pcbnew.FromMM(0.36))
+
+    def gap(b):                         # GND via 0.45 mm from a pair leg, on the outer side
+        t = longest(b, "ACC_B1_P")
+        other = longest(b, partner("ACC_B1_P"))
+        om = (other.GetStart() + other.GetEnd()) / 2
+        pts = side_points(t, 0.45)
+        add_via(b, max(pts, key=lambda q: math.hypot(q.x - om.x, q.y - om.y)))
+
+    def via_in_pair(b):                 # GND via in the middle of a pair (keepout: no vias between P and N)
+        t, o = longest(b, "TRAP_A1_P"), longest(b, "TRAP_A1_N")
+        m1, m2 = (t.GetStart() + t.GetEnd()) / 2, (o.GetStart() + o.GetEnd()) / 2
+        add_via(b, pcbnew.VECTOR2I(int((m1.x + m2.x) / 2), int((m1.y + m2.y) / 2)))
+
+    def pair_gap(b):                    # move the coupled diagonal of TRAP_B1_N 0.05 mm towards its partner
+        t, o = longest(b, "TRAP_B1_N", P.DIFF["w"] - 0.01), longest(b, "TRAP_B1_P", P.DIFF["w"] - 0.01)
+        om = (o.GetStart() + o.GetEnd()) / 2
+        s, e = t.GetStart(), t.GetEnd()
+        L = math.hypot(e.x - s.x, e.y - s.y)
+        nx, ny = -(e.y - s.y) / L, (e.x - s.x) / L
+        m = (s + e) / 2
+        sg = 1 if (om.x - m.x) * nx + (om.y - m.y) * ny > 0 else -1
+        dv = pcbnew.VECTOR2I(int(sg * nx * pcbnew.FromMM(0.05)), int(sg * ny * pcbnew.FromMM(0.05)))
+        t.SetStart(s + dv)
+        t.SetEnd(e + dv)
+
     def skew(b):
-        segs = tracks_of(b, "TRAP_B0", "PCB_TRACK")
+        segs = tracks_of(b, "TRAP_B0_P", "PCB_TRACK")
         t = max(segs, key=lambda s: s.GetLength())
         e = t.GetEnd()
         s = t.GetStart()
@@ -449,17 +583,30 @@ def drc_selftest():
         b.Remove(t)
 
     run("F1_rf_width", narrow, ["RF_GCPW_width"])
-    run("F2_cpw_gap", gap, ["clearance"])
-    run("F3_skew", skew, ["TRAP_A_vs_TRAP_B_skew"])
+    run("F2_cpw_gap", gap, ["RF_GCPW_gap"])
+    run("F3_skew", skew, ["TRAP_B0_intra_pair_skew", "TRAP_A_vs_B_length"])
     run("F4_via_on_rf", rfvia, ["RF_no_vias"])
     run("F5_open_dc", cut, ["Found 1 unconnected"])
+    run("F6_diff_width", narrow_diff, ["rule DIFF_routed min width"])
+    run("F7_diff_pair_gap", pair_gap, [f"(DIFF_routed minimum gap {P.DIFF['s'] - 0.01:.4f} mm; actual"])
+    run("F8_via_between_legs", via_in_pair, ["Items not allowed (keepout area 'DIFF_TRAP_A1_no_gnd_no_via')"])
+    # KiCad's own uncoupled-length measurement: same board, both uncoupled limits set to 0 -> every pair reports it
+    run("F9_uncoupled_probe", None, ["Differential uncoupled length too long"],
+        dru_edit=lambda t: re.sub(r"\(constraint diff_pair_uncoupled \(max [0-9.]+mm\)\)",
+                                  "(constraint diff_pair_uncoupled (max 0.001mm))", t))
+    unc = {}
+    for blk in texts["F9_uncoupled_probe"].split("[diff_pair_uncoupled_length_too_long]")[1:]:
+        m = re.search(r"\(([A-Za-z_]+) maximum uncoupled length [0-9.]+ mm; actual ([0-9.]+) mm\)", blk)
+        n = re.search(r"Track \[(\w+?)_[PN]\]", blk)
+        if m and n:
+            unc.setdefault(n.group(1), {})[m.group(1)] = float(m.group(2))
     for fn in os.listdir(d):                     # keep only the DRC reports of the faulted copies
         pth = os.path.join(d, fn)
         if os.path.isdir(pth):
             shutil.rmtree(pth)
         elif not fn.endswith("_drc.txt"):
             os.remove(pth)
-    return results
+    return results, unc
 
 
 # ------------------------------------------------------------------------------------------------ main
@@ -511,8 +658,11 @@ def main():
          "RF lines are mask-free (F.Mask opening over trace + gaps), copper 35 um finished",
          f"design: w = {gc['w']:.3f} mm, gap = {gc['gap']:.3f} mm -> Z0 = {imp['z_drawn']:.2f} ohm, eeff = {imp['eeff']:.3f}"
          f" (exact 50.00 ohm needs w = {imp['w_for_50']:.4f} mm)", "",
+         "single-ended lines: RO_IN / RO_OUT and the split legs of the 8 fast pairs (from the end of the coupled section",
+         "to the SMP pin, where each leg is an ordinary GCPW with ground on both sides). The coupled sections of the pairs",
+         "are checked in the DIFFERENTIAL PAIRS section below.", "",
          f"{'segment type':44s} {'layer':6s} {'w':>6s} {'gap':>13s} {'h':>6s} {'er':>5s} {'Z0 (ohm)':>15s} {'result':>7s}",
-         f"{'GCPW straight runs (10 RF nets), drawn':44s} {'F.Cu':6s} {gc['w']:6.3f} {gc['gap']:13.3f} {gc['h']:6.3f} "
+         f"{'GCPW straight runs (single-ended), drawn':44s} {'F.Cu':6s} {gc['w']:6.3f} {gc['gap']:13.3f} {gc['h']:6.3f} "
          f"{gc['er']:5.2f} {imp['z_drawn']:15.2f} {'PASS' if abs(imp['z_drawn'] - zt) <= tol * zt else 'FAIL':>7s}",
          f"{'GCPW straight runs, as filled (min-max)':44s} {'F.Cu':6s} {gc['w']:6.3f} "
          f"{s['gap_p01']:6.3f}-{s['gap_p99']:.3f} {gc['h']:6.3f} {gc['er']:5.2f} {s['z_p01']:7.2f}-{s['z_p99']:.2f} "
@@ -548,6 +698,49 @@ def main():
          "-> this is why the RF lines are mask-free",
          "The required formula check and the field solve bracket 50 ohm; the fab tunes w (+/-0.02 mm) with its own solver",
          "and a TDR coupon (fab note 3). Not verified: full-wave EM of the SMP launch, the bond-wire transition, box modes."]
+    dz = diff_impedance(board, model)
+    D = P.DIFF
+
+    def zrow(lbl, d):
+        return (f"  {lbl:34s} Z_odd {d['z_odd']:6.2f}  Z_even {d['z_even']:6.2f}  Z_diff {d['z_diff']:6.1f}  "
+                f"Z_cm {d['z_cm']:5.1f}  k {d['k']:.4f}  eeff odd/even {d['eeff_odd']:.3f}/{d['eeff_even']:.3f}")
+    L += ["", "DIFFERENTIAL PAIRS (8 fast flux lines, <name>_P / <name>_N): edge-coupled GCPW on F.Cu over In1, no ground",
+          "copper and no vias between P and N. Each leg is driven by its own 50-ohm coax -> requirement Z_odd 50 ohm +/-5 %",
+          "(Z_diff = 2 Z_odd = 100 ohm) with loose coupling (Z_even close to 50 ohm). Z_cm = Z_even / 2,",
+          "k = (Z_even - Z_odd) / (Z_even + Z_odd).",
+          "closed form: carrier_lib/fd2d.closed_form_coupled - zero-thickness coupled conductor-backed CPW, partial",
+          "  capacitances: air half space mapped by w = z^2 (odd: electric wall, even: magnetic wall on the symmetry plane),",
+          "  substrate slab with the In1 plane mapped by t = cosh(pi z / h); C = eps K(k)/K(k') with k from the cross ratio",
+          "  of the conductor edges. For s -> 0 its even mode equals rf_calc.gcpw_z0 of a 2w strip exactly.",
+          "field solve: carrier_lib/fd2d.solve_coupled - half section, odd mode = V = 0 on the symmetry plane, even mode =",
+          "  Neumann; 35 um copper; 20 um LPI on the outer grounds and on the centre-line web between the two leg",
+          "  apertures (each leg has its own mask-free corridor because KiCad flags one aperture exposing two nets)", ""]
+    for cls, k in (("routed", ""), ("breakout", "_bo")):
+        r = dz[cls]
+        L += [f"{cls.upper()} section: w {r['w']:.2f} / P-N gap s {r['s']:.2f} / gap to GND g {r['g']:.2f} mm "
+              f"(leg pitch {r['w'] + r['s']:.2f} mm), mask web half-width {r['web_half']:.3f} mm, {r['run_len']:.1f} mm of "
+              f"coupled straight runs sampled ({r['samples']} points)",
+              f"  as built: P-N gap {r['s_asbuilt'][0]:.4f}-{r['s_asbuilt'][1]:.4f} mm, gap to the filled GND "
+              f"{r['g_asbuilt'][0]:.4f}-{r['g_asbuilt'][1]:.4f} mm",
+              zrow("closed form (design)", r["formula"]),
+              f"  {'closed form at the as-built gaps':34s} Z_odd {r['formula_asbuilt_zodd'][0]:6.2f}-{r['formula_asbuilt_zodd'][1]:.2f}",
+              zrow("field solve, 35 um Cu (as built)", r["field"]),
+              zrow("field solve, no centre web", r["field_without_web"]),
+              zrow("field solve validation, ~0 um Cu", r["field_thin"]), ""]
+    r, b_ = dz["routed"], dz["breakout"]
+    L += [f"routed: Z_odd {r['formula']['z_odd']:.2f} (formula) / {r['field']['z_odd']:.2f} (field) ohm -> "
+          f"{'PASS' if dz['passed_routed_both_models'] else 'FAIL'} (both within 50 +/-5 %); Z_even {r['field']['z_even']:.2f} ohm "
+          f"({100 * (r['field']['z_even'] / 50 - 1):+.1f} %), k = {r['field']['k']:.3f} (field solve)",
+          f"breakout: Z_odd {b_['field']['z_odd']:.2f} ohm (field solve, 35 um Cu) -> "
+          f"{'PASS' if dz['passed_breakout_field'] else 'FAIL'}; the zero-thickness formula reads {b_['formula']['z_odd']:.1f} ohm",
+          f"  because the 35 um sidewalls across the {b_['s']:.2f} mm P-N slot add capacitance (thin-copper limit: field "
+          f"{b_['field_thin']['z_odd']:.1f} vs formula {b_['formula']['z_odd']:.1f} ohm, i.e. the models agree there).",
+          f"  The breakout is forced by the die pad pitch ({b_['w'] + b_['s']:.2f} mm): it runs from the lands to the opening "
+          "transition after the first bend; its even mode is high (tighter coupling there).",
+          f"differential lands ({P.BONDPAD['width_diff']:.2f} x {P.BONDPAD['length']:.2f} mm): P-N gap "
+          f"{dz['land']['inner'][0]:.3f}-{dz['land']['inner'][1]:.3f} mm, gap to GND {dz['land']['outer'][0]:.3f}-"
+          f"{dz['land']['outer'][1]:.3f} mm (min clearance {P.RULES['min_clearance']:.2f} mm)",
+          "Not verified: full-wave EM of the pair bends, bumps, the opening transition, the split and the SMP launches."]
     write("impedance_table.txt", L)
     okfd = abs(imp["fd_real"]["z0"] - zt) <= tol * zt
     summary["impedance"] = dict(z_formula=imp["z_drawn"], z_formula_asbuilt=[min(s["z_p01"], a["z_p01"]), max(s["z_p99"], a["z_p99"])],
@@ -556,24 +749,51 @@ def main():
                                 gap_asbuilt_straight=[s["gap_min"], s["gap_max"]], gap_asbuilt_arcs=[a["gap_min"], a["gap_max"]],
                                 in1_coverage_min=imp["in1_coverage_min"],
                                 passed=okz and okfd and imp["in1_coverage_min"] > 0.99)
+    summary["diff_impedance"] = dict(
+        routed=dict(w=r["w"], s=r["s"], g=r["g"], formula={k_: r["formula"][k_] for k_ in ("z_odd", "z_even", "z_diff", "z_cm", "k")},
+                    field={k_: r["field"][k_] for k_ in ("z_odd", "z_even", "z_diff", "z_cm", "k", "eeff_odd", "eeff_even")},
+                    formula_asbuilt_zodd=r["formula_asbuilt_zodd"], s_asbuilt=r["s_asbuilt"], g_asbuilt=r["g_asbuilt"]),
+        breakout=dict(w=b_["w"], s=b_["s"], g=b_["g"], formula={k_: b_["formula"][k_] for k_ in ("z_odd", "z_even", "z_diff", "z_cm", "k")},
+                      field={k_: b_["field"][k_] for k_ in ("z_odd", "z_even", "z_diff", "z_cm", "k", "eeff_odd", "eeff_even")},
+                      field_thin_zodd=b_["field_thin"]["z_odd"], s_asbuilt=b_["s_asbuilt"], g_asbuilt=b_["g_asbuilt"]),
+        land=dz["land"], passed=dz["passed"])
 
     # 4
-    Ls, rows, okl, psmm, groups = lengths(board, model, imp["eeff"])
+    eeff_odd = dz["routed"]["field"]["eeff_odd"]
+    Ls, rows, okl, psmm, groups, intra = lengths(board, model, eeff_odd)
+    D = P.DIFF
     L = ["RF LENGTH MATCHING (copper length per net read from the routed board with pcbnew: segments + arcs)",
          "length = landing-pad track start (0.30 mm outward of the pad centre) to the SMP centre pin; bond wires and the",
-         f"pad itself are identical for every launcher by construction. Delay {psmm:.3f} ps/mm (eeff {imp['eeff']:.3f}).",
-         f"requirement: every A line and its B partner within {P.RULES['skew_max']:.2f} mm (also enforced by KiCad DRC skew rules)", "",
+         "lands are identical for every launcher by construction (lands aligned with the die pads, straight bonds).",
+         f"Delay {psmm:.3f} ps/mm (odd mode of the routed pair, field solve: eeff {eeff_odd:.3f}).",
+         f"requirements: |L_P - L_N| <= {D['skew_max']:.2f} mm for every pair (KiCad skew rules '<pair>_intra_pair_skew');",
+         f"              corresponding A and B pairs within {P.RULES['skew_max']:.2f} mm (mean of the legs and each polarity;",
+         "              KiCad length windows 'TRAP_A_vs_B_length', 'ACC_A_vs_B_length')", "",
          f"{'net':10s} {'length (mm)':>12s}"] + [f"{n:10s} {Ls[n]:12.4f}" for n in sorted(Ls)] + ["",
-         f"{'pair':22s} {'A (mm)':>10s} {'B (mm)':>10s} {'|dL| (mm)':>10s} {'skew (ps)':>10s} result"] + \
-        [f"{a + ' / ' + b:22s} {la:10.4f} {lb:10.4f} {d:10.4f} {t:10.4f} {'PASS' if d <= P.RULES['skew_max'] else 'FAIL'}"
-         for a, b, la, lb, d, t in rows] + ["",
-         f"group spread: all four TRAP lines {groups['TRAP']:.4f} mm, all four ACC lines {groups['ACC']:.4f} mm",
-         f"TRAP vs ACC offset {Ls['TRAP_A0'] - Ls['ACC_A0']:.4f} mm = {(Ls['TRAP_A0'] - Ls['ACC_A0']) * psmm:.2f} ps "
+         "INTRA-PAIR (P vs N)",
+         f"{'pair':9s} {'L_P (mm)':>10s} {'L_N (mm)':>10s} {'P-N (mm)':>10s} {'skew (ps)':>10s}  result   compensation"]
+    for q in intra:
+        comp = "; ".join(f"bend {b[0]:+.1f} deg at c {b[1]:.2f}: {b[2]} short by {b[3]:.4f}" for b in q["bends"])
+        bmp = "; ".join(f"{bb[0]}: {bb[1]} bump(s) +{bb[2]:.4f} mm each (height {bb[3]:.3f}, span {bb[4]:.3f})"
+                        for bb in q["bumps"])
+        L.append(f"{q['pair']:9s} {q['L_P']:10.4f} {q['L_N']:10.4f} {q['skew_mm']:+10.4f} {q['skew_ps']:+10.4f}  "
+                 f"{'PASS' if q['passed'] else 'FAIL'}     {comp}")
+        L.append(f"{'':63s}-> {bmp}")
+        L.append(f"{'':63s}   running skew along the pair: max |P-N| {q['running_max']:.3f} mm right at a bend/bump, "
+                 f"longest stretch > 0.1 mm: {q['longest_over_0p1mm']:.2f} mm")
+    L += ["", "A / B MATCHING (mean of the two legs; also P vs P and N vs N)",
+          f"{'pairs':22s} {'A (mm)':>10s} {'B (mm)':>10s} {'|dL| (mm)':>10s} {'(ps)':>8s} {'|dP|':>8s} {'|dN|':>8s} result"] + \
+         [f"{a + ' / ' + b:22s} {la:10.4f} {lb:10.4f} {d:10.4f} {t:8.4f} {dp:8.4f} {dn:8.4f} "
+          f"{'PASS' if max(d, dp, dn) <= P.RULES['skew_max'] else 'FAIL'}" for a, b, la, lb, d, t, dp, dn in rows] + ["",
+         f"group spread: all 8 TRAP legs {groups['TRAP']:.4f} mm, all 8 ACC legs {groups['ACC']:.4f} mm",
+         f"TRAP vs ACC offset {Ls['TRAP_A0_P'] - Ls['ACC_A0_P']:.4f} mm = {(Ls['TRAP_A0_P'] - Ls['ACC_A0_P']) * psmm:.2f} ps "
          "(fixed, identical on both sides; not part of the A/B requirement)",
          f"RO_IN / RO_OUT: {Ls['RO_IN']:.4f} / {Ls['RO_OUT']:.4f} mm"]
     write("length_report.txt", L)
     summary["lengths"] = dict(nets={n: round(v, 4) for n, v in Ls.items()}, ps_per_mm=psmm,
-                              pairs=[dict(a=a, b=b, dL=d, ps=t) for a, b, _, _, d, t in rows], passed=okl)
+                              pairs=[dict(a=a, b=b, dL=d, ps=t, dP=dp, dN=dn) for a, b, _, _, d, t, dp, dn in rows],
+                              intra_pair=[{k_: v_ for k_, v_ in q.items() if k_ not in ("bends", "bumps")} for q in intra],
+                              passed=okl)
 
     # 5
     model["chan_parts"] = json.load(open(os.path.join(REP, "build_model.json")))["chan_parts"]
@@ -598,13 +818,28 @@ def main():
     summary["filters"] = dict(channels=fr, passed=okf)
 
     # 6
-    st = drc_selftest()
+    st, unc = drc_selftest()
     L = ["DRC SELF-TEST: one fault injected per copy of the board, KiCad DRC must report it",
          "(shows that the 0-violation result of reports/drc_report.txt comes from live rules)", ""]
     for tag, exp, hit in st:
-        L.append(f"{tag:16s} expect {exp}: {'DETECTED' if hit else 'MISSED'}")
+        L.append(f"{tag:22s} expect {exp}: {'DETECTED' if hit else 'MISSED'}")
+    L += ["", "KiCad's own coupled / uncoupled bookkeeping (F9: same board, uncoupled limits set to 0, actual values read",
+          "back). KiCad 7 counts straight segments only; the 0.25 mm coupling stubs next to arcs and lands count as",
+          "uncoupled; in the routed section the split to the two jacks (6.5 mm apart) is uncoupled by design.",
+          f"{'pair':9s} {'breakout (mm)':>14s} {'routed (mm)':>12s}   limits {P.DIFF['uncoupled_max_bo']:.2f} / "
+          f"{P.DIFF['uncoupled_max']:.2f} mm"]
+    for n in P.FAST_PAIRS:
+        u = unc.get(n, {})
+        L.append(f"{n:9s} {u.get('DIFF_breakout', float('nan')):14.4f} {u.get('DIFF_routed', float('nan')):12.4f}")
     write("drc_selftest.txt", L)
     summary["drc_selftest"] = dict(results=[dict(fault=t, detected=h) for t, _, h in st], passed=all(h for _, _, h in st))
+    ok_unc = len(unc) == len(P.FAST_PAIRS) and all(
+        u.get("DIFF_breakout", 1e9) <= P.DIFF["uncoupled_max_bo"] and u.get("DIFF_routed", 1e9) <= P.DIFF["uncoupled_max"]
+        for u in unc.values())
+    summary["diff_coupling"] = dict(kicad_uncoupled_mm=unc, limit_routed=P.DIFF["uncoupled_max"],
+                                    limit_breakout=P.DIFF["uncoupled_max_bo"],
+                                    split_len_mm={n: model["diff"]["pairs"][n]["split_len"] for n in P.FAST_PAIRS},
+                                    passed=ok_unc)
 
     drc = json.load(open(os.path.join(REP, "drc_summary.json")))
     summary["drc"] = dict(violations=drc["drc_violations"], unconnected=drc["unconnected_items"],

@@ -245,7 +245,8 @@ def main():
     sc.render.film_transparent = False
     sc.view_settings.view_transform = "Standard"
 
-    shots = [("render_3d_top", (cx - 62, cy - 78, z1 + 92), (cx, cy + 1.5, z1), 50, 1700, 1250, 64),
+    k = max(x1 - x0, y1 - y0) / 52.0             # camera distances were set up for the 52 mm rev A board
+    shots = [("render_3d_top", (cx - 62 * k, cy - 78 * k, z1 + 92 * k), (cx, cy + 1.5 * k, z1), 50, 1700, 1250, 64),
              ("render_3d_die_closeup", (cx - 9.5, cy - 13.0, z1 + 11.5), (cx + 0.2, cy + 0.6, z1), 50, 1500, 1050, 64)]
     for name, loc, tgt, lens, w, h, spp in shots:
         look(loc, tgt, lens)

@@ -1,17 +1,20 @@
-** Drc report for /home/user/EE143-Silicon-Qubits/qbf-x2/pcb/reports/_selftest/F3_skew.kicad_pcb **
-** Created on 2026-11-24 22:54:28 **
+** Drc report for /home/user/EE143-Silicon-Qubits/.claude/worktrees/agent-a1a1586d91fadf1e0/qbf-x2/pcb/reports/_selftest/F3_skew.kicad_pcb **
+** Created on 2026-11-26 12:33:40 **
 
-** Found 3 DRC violations **
-[skew_out_of_range]: Skew between traces out of range (rule TRAP_A_vs_TRAP_B_skew max skew 0.2000 mm; actual 0.3750 mm; average net length 15.7926 mm; actual 16.1676 mm)
-    Rule: TRAP_A_vs_TRAP_B_skew; Severity: error
-    @(101.5141 mm, 137.5004 mm): Track (arc) [TRAP_B0] on F.Cu, length 0.7854 mm
-[clearance]: Clearance violation (rule RF_GCPW_gap clearance 0.1700 mm; actual 0.0585 mm)
-    Rule: RF_GCPW_gap; Severity: error
-    @(100.8071 mm, 138.2071 mm): Track [TRAP_B0] on F.Cu, length 0.5000 mm
-    @(101.5500 mm, 137.0500 mm): Pad 2 [GND] of J8 on F.Cu
+** Found 4 DRC violations **
+[skew_out_of_range]: Skew between traces out of range (rule TRAP_B0_intra_pair_skew max skew 0.0500 mm; actual -0.2499 mm; average net length 32.5947 mm; actual 32.3448 mm)
+    Rule: TRAP_B0_intra_pair_skew; Severity: error
+    @(97.2956 mm, 127.4980 mm): Track (arc) [TRAP_B0_N] on F.Cu, length 0.8569 mm
+[skew_out_of_range]: Skew between traces out of range (rule TRAP_B0_intra_pair_skew max skew 0.0500 mm; actual 0.2499 mm; average net length 32.5947 mm; actual 32.8446 mm)
+    Rule: TRAP_B0_intra_pair_skew; Severity: error
+    @(109.0000 mm, 139.9799 mm): Track (arc) [TRAP_B0_P] on F.Cu, length 0.7854 mm
+[length_out_of_range]: Trace length out of range (rule TRAP_A_vs_B_length max length 32.4450 mm; actual 32.8446 mm)
+    Rule: TRAP_A_vs_B_length; Severity: error
+    @(109.8839 mm, 140.5103 mm): Track [TRAP_B0_P] on F.Cu, length 2.5324 mm
+    @(107.0714 mm, 140.9800 mm): Track [TRAP_B0_P] on F.Cu, length 0.2500 mm
 [track_dangling]: Track has unconnected end
     Local override; Severity: warning
-    @(100.8071 mm, 138.2071 mm): Track [TRAP_B0] on F.Cu, length 0.5000 mm
+    @(104.2325 mm, 137.1087 mm): Track [TRAP_B0_P] on F.Cu, length 0.5000 mm
 
 ** Found 0 unconnected pads **
 

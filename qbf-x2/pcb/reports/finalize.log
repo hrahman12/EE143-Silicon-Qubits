@@ -1,4 +1,4 @@
-loaded: 49 footprints, 1028 tracks/vias, 6 copper layers, 36 nets
+loaded: 57 footprints, 2171 tracks/vias, 6 copper layers, 44 nets
 {
  "report": "reports/drc_report.txt",
  "drc_violations": 0,

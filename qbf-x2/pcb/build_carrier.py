@@ -28,6 +28,7 @@ from carrier_lib import footprints as FPL  # noqa: E402
 from carrier_lib import schematic as SC  # noqa: E402
 from carrier_lib import drawings as DW  # noqa: E402
 from carrier_lib import filters as FL  # noqa: E402
+from carrier_lib import diffpair as DP  # noqa: E402
 from carrier_lib.sexpr import parse as sparse  # noqa: E402
 
 NAME = P.PROJECT["name"]
@@ -67,12 +68,14 @@ def load_die():
         c = (p["pad_center_um"][0] / 1000.0 - size / 2, p["pad_center_um"][1] / 1000.0 - size / 2)
         u = (int(p["outward"][0]), int(p["outward"][1]))
         pads.append(dict(id=int(p["id"]), net=p["net"], kind=p["kind"], side=p["side"], c=c, u=u,
-                         lat=c[1] if u[0] else c[0], size_um=tuple(p["pad_size_um"])))
+                         lat=c[1] if u[0] else c[0], size_um=tuple(p["pad_size_um"]), pair=p.get("pair"),
+                         polarity=p.get("polarity")))
     kinds = {}
     for p in pads:
         kinds[p["kind"]] = kinds.get(p["kind"], 0) + 1
     assert kinds == d["counts"], f"die_pads.json counts mismatch {kinds} vs {d['counts']}"
-    assert sorted(p["id"] for p in pads) == list(range(1, 25)), "24 launchers expected"
+    assert sorted(p["id"] for p in pads) == list(range(1, len(pads) + 1)), "die pad ids must be 1..N"
+    assert len(pads) == 32, "die_pads.json rev B (32 launchers) expected"
     return d, size, pads
 
 
@@ -85,28 +88,50 @@ def side_lists(pads):
     return S
 
 
-def check_topology(S):
+def side_pairs(L):
+    """fast-line pads of one W/E side (top -> bottom) grouped as [(pair, P pad, N pad)]"""
+    fast = [p for p in L if p["kind"] == "rf_fast_diff"]
+    out = []
+    for a, b in zip(fast[0::2], fast[1::2]):
+        out.append((a["pair"], a, b))
+    return out
+
+
+def check_topology(S, die):
     """the routing topology below is designed for this arrangement; fail loudly if the contract changes"""
     want = {"N": ["ground", "dc_gate", "ground", "ground", "dc_gate", "ground"],
             "S": ["rf_readout", "dc_gate", "ground", "ground", "dc_gate", "rf_readout"],
-            "W": ["dc_ramp", "rf_fast", "rf_fast", "rf_fast", "rf_fast", "dc_ramp"],
-            "E": ["dc_ramp", "rf_fast", "rf_fast", "rf_fast", "rf_fast", "dc_ramp"]}
+            "W": ["dc_ramp"] + ["rf_fast_diff"] * 8 + ["dc_ramp"],
+            "E": ["dc_ramp"] + ["rf_fast_diff"] * 8 + ["dc_ramp"]}
     for s, w in want.items():
         got = [p["kind"] for p in S[s]]
         assert got == w, f"side {s}: launcher kinds {got} differ from the routed topology {w}"
-    for s in "NESW":
+    for s in "NS":
         lats = [p["lat"] for p in S[s]]
         for a, b in zip(lats, lats[1:]):
-            assert abs(abs(a - b) - 1.2) < 1e-6, "1.2 mm launcher pitch expected"
-    for s in "WE":
-        assert all(p["net"].startswith(("TRAP_", "ACC_")) for p in S[s][1:5])
-        assert S[s][1]["net"].startswith("TRAP_") and S[s][4]["net"].startswith("TRAP_")
-        assert S[s][2]["net"].startswith("ACC_") and S[s][3]["net"].startswith("ACC_")
-    chans = [S["W"][0]["net"], S["W"][5]["net"], S["S"][1]["net"], S["N"][1]["net"],
-             S["N"][4]["net"], S["S"][4]["net"], S["E"][5]["net"], S["E"][0]["net"]]
+            assert abs(abs(a - b) - 1.2) < 1e-6, "1.2 mm launcher pitch expected on the N / S rows"
+    dp = die["diff_pair"]
+    intra, pitch = dp["intra_pair_pitch_um"] / 1000.0, dp["pair_centre_pitch_um"] / 1000.0
+    assert abs(P.DIFF["w_bo"] + P.DIFF["s_bo"] - intra) < 1e-9, "breakout leg pitch must equal the die pad pitch"
+    for s, names in (("W", P.FAST_PAIRS[:4]), ("E", P.FAST_PAIRS[4:])):
+        prs = side_pairs(S[s])
+        assert [q[0] for q in prs] == names, f"side {s}: pair order {[q[0] for q in prs]} != {names}"
+        for name, a, b in prs:
+            assert (a["polarity"], b["polarity"]) == ("P", "N") and a["pair"] == b["pair"] == name
+            assert (a["net"], b["net"]) == (f"{name}_P", f"{name}_N"), f"{name}: nets must be <pair>_P / <pair>_N"
+            assert abs(a["lat"] - b["lat"] - intra) < 1e-9, f"{name}: P above N, {intra} mm apart expected"
+        cs = [(a["lat"] + b["lat"]) / 2 for _, a, b in prs]
+        assert all(abs(c0 - c1 - pitch) < 1e-9 for c0, c1 in zip(cs, cs[1:])), "pair centre pitch"
+        assert abs(cs[0] + cs[3]) < 1e-9 and abs(cs[1] + cs[2]) < 1e-9, "pairs symmetric about the die axis"
+        assert S[s][0]["kind"] == S[s][-1]["kind"] == "dc_ramp" and abs(S[s][0]["lat"] + S[s][-1]["lat"]) < 1e-9
+    for a, b in zip(S["W"], S["E"]):
+        assert abs(a["lat"] - b["lat"]) < 1e-9, "W and E rows must be mirror images"
+    chans = [S["W"][0]["net"], S["W"][-1]["net"], S["S"][1]["net"], S["N"][1]["net"],
+             S["N"][4]["net"], S["S"][4]["net"], S["E"][-1]["net"], S["E"][0]["net"]]
     assert chans == P.FILTER_BANK["channels"], f"filter channel order must be {chans} (planar routing)"
     assert [P.MICROD_PINS[k] for k in range(1, 9)] == chans, "J11 pins 1..8 must follow the channel order"
     assert sorted(P.SMP_REFS) == sorted(p["net"] for p in pads_all if p["kind"].startswith("rf_"))
+    assert len(P.SMP_DESIGNATORS) == len(P.SMP_REFS) and "J11" not in P.SMP_DESIGNATORS
     return chans
 
 
@@ -118,8 +143,8 @@ def build_model(pads, chans):
         comps[ref] = dict(ref=ref, sym=key, value=value, footprint=fp, part=part, pins=pins, extra=extra or {})
 
     comp("U1", "DIE", "QBF-X2", P.PARTS["DIE"]["footprint"], "DIE", {str(p["id"]): p["net"] for p in pads})
-    for i, net in enumerate(P.SMP_REFS):
-        comp(f"J{i + 1}", "SMP", "SMP-MSLD-PCS-NM", P.PARTS["SMP"]["footprint"], "SMP", {"1": net, "2": "GND"})
+    for ref, net in zip(P.SMP_DESIGNATORS, P.SMP_REFS):
+        comp(ref, "SMP", "SMP-MSLD-PCS-NM", P.PARTS["SMP"]["footprint"], "SMP", {"1": net, "2": "GND"})
     jp = {str(k): f"{P.MICROD_PINS[k]}_IN" for k in range(1, 9)}
     jp.update({str(k): "GND" for k in range(9, 16)})
     jp["SH"] = "GND"
@@ -272,16 +297,16 @@ def write_schematic(comps, chans, chan_parts, side):
                 sh.gnd(S, b, 180 if s == "N" else 0)
             else:
                 sh.glabel(p["net"], b, {"N": 90, "S": 270, "W": 180, "E": 0}[s])
-    sh.text("U1 = QBF-X2 die (10 x 10 x 0.525 mm), wire bonded to the 24 PCB landing pads; pin = die_pads.json id",
-            (g(160), g(142)), 1.27)
-    sh.text("Every U1 pin net and number follows circuits/die_pads.json (checked in reports/erc_report.txt)",
-            (g(160), g(144)), 1.27)
+    sh.text(f"U1 = QBF-X2 die (10 x 10 x 0.525 mm), wire bonded to the {len(side['N']) + len(side['E']) + len(side['S']) + len(side['W'])}"
+            " PCB landing pads; pin = die_pads.json id", (g(160), g(148)), 1.27)
+    sh.text("Every U1 pin net and number follows circuits/die_pads.json rev B (checked in reports/erc_report.txt)",
+            (g(160), g(150)), 1.27)
 
-    # --- SMP connectors (far right)
-    for i, net in enumerate(P.SMP_REFS):
-        ref = f"J{i + 1}"
-        cx = g(252) if i < 5 else g(292)
-        cy = g(30) + (i % 5) * g(16)
+    # --- SMP connectors (far right): west pairs, east pairs, readout
+    for i, (ref, net) in enumerate(zip(P.SMP_DESIGNATORS, P.SMP_REFS)):
+        col, row = (0, i) if i < 8 else (1, i - 8) if i < 16 else (i - 16, 8)   # west pairs + RO_IN | east + RO_OUT
+        cx = g(252) + col * g(40)
+        cy = g(32) + row * g(12) + (row // 2) * g(3)
         c = comps[ref]
         pp, uuids[ref] = sh.place(S["SMP"], ref, c["value"], (cx, cy), 0, fields(c), fpid(c),
                                   ref_off=(g(2), -g(2)), val_off=(g(2), g(1)), justify="left")
@@ -290,19 +315,21 @@ def write_schematic(comps, chans, chan_parts, side):
         sh.wire(a, b)
         sh.glabel(net, b, 180)
         sh.gnd(S, pp["2"])
-    sh.text("RF: J1-J10 non-magnetic SMP (Amphenol RF SMP-MSLD-PCS-NM), DC-coupled 50-ohm GCPW to the die",
-            (g(232), g(22)), 1.27)
-    sh.text("TRAP_A* vs TRAP_B* and ACC_A* vs ACC_B* length matched <= 0.20 mm (reports/length_report.txt)",
-            (g(232), g(24)), 1.27)
+    sh.text("RF: 18 non-magnetic SMP jacks (Amphenol RF SMP-MSLD-PCS-NM); J11 is the DC micro-D, so J1-J10, J12-J19",
+            (g(226), g(20)), 1.27)
+    sh.text("Fast flux lines = 8 differential pairs <name>_P / <name>_N, one 50-ohm coax per leg (Z_odd 50, Z_diff 100)",
+            (g(226), g(22)), 1.27)
+    sh.text("Intra-pair skew <= 0.10 mm; A/B partner pairs matched <= 0.20 mm (reports/length_report.txt)",
+            (g(226), g(24)), 1.27)
 
     # --- mounting holes
     for i in range(4):
         ref = f"H{i + 1}"
         c = comps[ref]
-        pm, uuids[ref] = sh.place(S["MH"], ref, "M2.5", (g(236) + i * g(10), g(118)), 0, fields(c), fpid(c),
+        pm, uuids[ref] = sh.place(S["MH"], ref, "M2.5", (g(240) + i * g(10), g(162)), 0, fields(c), fpid(c),
                                   ref_off=(g(1.5), -g(0.5)), val_off=(g(1.5), g(1)), justify="left")
         sh.gnd(S, pm["1"])
-    sh.text("H1-H4: M2.5 plated mounting holes to the Cu sample-holder base (GND)", (g(232), g(112)), 1.27)
+    sh.text("H1-H4: M2.5 plated mounting holes to the Cu sample-holder base (GND)", (g(236), g(156)), 1.27)
 
     # --- notes
     gq = co["gate"]
@@ -318,10 +345,13 @@ def write_schematic(comps, chans, chan_parts, side):
         f"(bandwidth >= 5 MHz; tau = {lq['tau_current_ns']:.1f} ns).",
         "3. Parts for 10 mK: thin-film non-magnetic resistors (Vishay PNM), C0G/NP0 non-magnetic MLCC (Vishay VJ "
         "Non-Magnetic, Cu barrier), non-magnetic SMP. No ferrite, no X7R, no Ni-barrier terminations.",
-        "4. RF lines are DC-coupled; the fast flux lines are shorted to ground on chip (current-driven). No on-board "
-        "components on RF nets.",
-        "5. Net names = circuits/die_pads.json. Generated by pcb/build_carrier.py from pcb/carrier_params.py - "
-        "edit the parameters, not this sheet.",
+        "4. RF lines are DC-coupled, no on-board components on RF nets. Rev B: each fast flux line is a differential "
+        "pair <name>_P / <name>_N = the two ends of ONE floating on-chip loop (no ground return), driven by "
+        "complementary AWG outputs,",
+        "   one 50-ohm coax per leg: loosely coupled edge-coupled GCPW, Z_odd 50 ohm (Z_diff 100 ohm), Z_even close "
+        "to 50 ohm; intra-pair skew <= 0.10 mm (~0.5 ps). KiCad recognises the _P / _N suffix as a differential pair.",
+        "5. Net names = circuits/die_pads.json (rev B, 32 pads). Generated by pcb/build_carrier.py from "
+        "pcb/carrier_params.py - edit the parameters, not this sheet.",
     ]
     yy = g(196)
     for n in notes:
@@ -329,8 +359,9 @@ def write_schematic(comps, chans, chan_parts, side):
         yy += g(2.4)
     tb = {"title": P.PROJECT["title"], "date": P.PROJECT["date"], "rev": P.PROJECT["rev"],
           "company": P.PROJECT["author"], "comment1": f"Author: {P.PROJECT['author']}",
-          "comment2": "QBF-X2 cryogenic RF carrier: die U1, 10 SMP RF lines, 8 filtered DC lines on micro-D J11",
-          "comment3": "6-layer Rogers RO4003C / RO4450F, 52 x 52 mm",
+          "comment2": "Rev B: die U1, 8 diff. fast-flux pairs + 2 readout on 18 SMP, 8 DC on J11",
+          "comment3": f"6-layer Rogers RO4003C / RO4450F, {P.BOARD['x_max'] - P.BOARD['x_min']:.0f} x "
+                      f"{P.BOARD['y_max'] - P.BOARD['y_min']:.0f} mm",
           "comment4": "Generated by pcb/build_carrier.py (carrier_params.py = single source of truth)"}
     sh.write(os.path.join(HERE, f"{NAME}.kicad_sch"), tb)
     with open(os.path.join(HERE, f"{LIB}.kicad_sym"), "w") as fh:
@@ -365,22 +396,65 @@ class Board:
         self.rf = {}            # net -> dict(path, conn, rot)
 
 
+def diff_routes(B, side):
+    """8 fast-line differential pairs: the W-top pair of each kind (TRAP, ACC) is built once by
+    carrier_lib.diffpair.quadrant_pair; the other quadrants are its mirror images. Canonical legs: R = outer (away from
+    the die axis), L = inner. Top quadrants: outer = P; bottom quadrants (mirror in y): outer = N."""
+    W = HALF + P.WINDOW["clearance"]
+    x_start = W + P.BONDPAD["setback"] + P.BONDPAD["length"] / 2 + P.BOARD["track_start_in_pad"]
+    D, F = P.DIFF, P.FAST
+    pairs = {s: side_pairs(side[s]) for s in "WE"}
+    canon = {}
+    for kind in ("TRAP", "ACC"):
+        name, a, b = [q for q in pairs["W"] if q[0].startswith(kind) and q[1]["lat"] > 0][0]
+        yc = (a["lat"] + b["lat"]) / 2
+        jk = F["y_jacks"][kind]
+        canon[kind] = DP.quadrant_pair(x_start, yc, sum(jk) / 2, F["x_conn"], jk, F[kind], D)
+    B.pairs = {}
+    for s in "WE":
+        sx = 1 if s == "W" else -1                      # canonical frame is the west side
+        for name, a, b in pairs[s]:
+            sy = 1 if a["lat"] > 0 else -1
+            kind = "TRAP" if name.startswith("TRAP") else "ACC"
+            cp = canon[kind]
+            outer, inner = (a, b) if abs(a["lat"]) > abs(b["lat"]) else (b, a)
+            legs = {}
+            for leg, pad in (("R", outer), ("L", inner)):
+                t = cp["T"][leg]
+                path = DP.transform(t.path, sx, sy)
+                n_c = cp["coupled_end"][leg]
+                full, ws, tags, src = DP.add_stubs(path, t.widths, t.tags, pad_ends=(True, True))
+                n_cp = sum(1 for k in src if k < n_c)              # primitives of the coupled section
+                nm = DP.snap_nm(full, (X0, Y0), tags)
+                legs[pad["polarity"]] = dict(net=pad["net"], leg=leg, path=full, widths=ws, tags=tags,
+                                            n_coupled=n_cp, role="outer" if leg == "R" else "inner", nm=nm)
+                B.rf[pad["net"]] = dict(points=[full[0][1], full[-1][2]], path=full, conn=full[-1][2],
+                                        rot=180 if s == "W" else 0, side=s, pair=name, widths=ws,
+                                        n_coupled=n_cp, nm=nm)
+            centre = DP.transform(cp["T"]["C"].path, sx, sy)
+            # region between the leg centre lines over the coupled part: no ground copper, no vias (F.Cu keepout)
+            region = DP.coupled_region(DP.transform(cp["T"]["L"].path, sx, sy), DP.transform(cp["T"]["R"].path, sx, sy),
+                                       cp["coupled_end"]["L"], cp["coupled_end"]["R"])
+            B.pairs[name] = dict(kind=kind, side=s, sx=sx, sy=sy, legs=legs, centre=centre, region=region,
+                                 log=cp["log"], vertices=[(sx * v[0], sy * v[1]) for v in cp["vertices"]],
+                                 straights=cp["straights"])
+            for pol in ("P", "N"):
+                lg = legs[pol]
+                k = 0
+                while k < len(lg["path"]):                     # one track per run of equal width
+                    j = k
+                    while j + 1 < len(lg["path"]) and abs(lg["widths"][j + 1] - lg["widths"][k]) < 1e-9:
+                        j += 1
+                    B.tracks.append(dict(layer="F.Cu", net=lg["net"], w=lg["widths"][k], path=lg["path"][k:j + 1],
+                                         kind="rf", pair=name, nm=lg["nm"][k:j + 1]))
+                    k = j + 1
+
+
 def rf_routes(B, side):
     W = HALF + P.WINDOW["clearance"]
     rc = W + P.BONDPAD["setback"] + P.BONDPAD["length"] / 2 + P.BOARD["track_start_in_pad"]
-    F, R = P.FAST, P.READOUT
-    for s in "WE":
-        sx = -1 if s == "W" else 1
-        for p in side[s]:
-            if p["kind"] != "rf_fast":
-                continue
-            y0 = p["lat"]
-            outer = abs(y0) > 1.0
-            yc = math.copysign(F["y_conn_trap"] if outer else F["y_conn_acc"], y0)
-            xb = F["x_bend_trap"] if outer else F["x_bend_acc"]
-            pts = [(sx * rc, y0), (sx * xb, y0), (sx * (xb + abs(yc - y0)), yc), (sx * F["x_conn"], yc)]
-            B.rf[p["net"]] = dict(points=pts, path=G.fillet(pts, P.GCPW["bend_r"]), conn=pts[-1],
-                                  rot=0 if sx > 0 else 180, side=s)
+    R = P.READOUT
+    diff_routes(B, side)
     for p in side["S"]:
         if p["kind"] != "rf_readout":
             continue
@@ -390,8 +464,7 @@ def rf_routes(B, side):
         yb = -R["y_bend"]
         pts = [(x0, -rc), (x0, yb), (xc, yb - abs(xc - x0)), (xc, R["y_conn"])]
         B.rf[p["net"]] = dict(points=pts, path=G.fillet(pts, P.GCPW["bend_r"]), conn=pts[-1], rot=270, side="S")
-    for net, r in B.rf.items():
-        B.tracks.append(dict(layer="F.Cu", net=net, w=P.GCPW["w"], path=r["path"], kind="rf"))
+        B.tracks.append(dict(layer="F.Cu", net=p["net"], w=P.GCPW["w"], path=B.rf[p["net"]]["path"], kind="rf"))
 
 
 def dc_routes(B, side, chans):
@@ -413,7 +486,7 @@ def dc_routes(B, side, chans):
     B.dc_paths = {}
     for s in "WE":
         sx = -1 if s == "W" else 1
-        top, bot = side[s][0], side[s][5]
+        top, bot = side[s][0], side[s][-1]
         for p in (top, bot):
             y0 = p["lat"]
             sg = 1 if y0 > 0 else -1
@@ -424,9 +497,10 @@ def dc_routes(B, side, chans):
             xc = B.chan_x[p["net"]]
             if p is top:
                 pts = [v, (xc, v[1] + abs(xc - v[0])), (xc, yv)]
-            else:
-                pts = [v, (sx * o2, v[1]), (sx * o2, W - jo), (sx * (o2 + j), W - jo + j), (sx * (o2 + j), eyo),
-                       (xc, eyo + abs(xc - sx * (o2 + j))), (xc, yv)]
+            else:       # rev B: join the outer corridor with a 45-degree diagonal towards the die axis, so the join
+                #           stays clear of the GATE_BSB detour around the window corner (LOAD vias at |y| = 4.0)
+                pts = [v, (sx * o2, v[1] + (abs(v[0]) - o2)), (sx * o2, W - jo), (sx * (o2 + j), W - jo + j),
+                       (sx * (o2 + j), eyo), (xc, eyo + abs(xc - sx * (o2 + j))), (xc, yv)]
             B.tracks.append(dict(layer="In2.Cu", net=p["net"], w=wi, path=G.polyline_path(pts), kind="dc"))
             B.dc_paths[p["net"]] = pts
     for p in (side["N"][1], side["N"][4]):
@@ -501,12 +575,13 @@ def filter_bank(B, comps, chans, chan_parts, netof, fpl):
 
 
 # =============================================================================================== E. vias
-def stitching(B, window_poly, board_poly, pad_geoms):
-    """GND vias: bond-strip row, SMP launch cages, GCPW fences, hole rings, edge row, background grid"""
+def stitching(B, window_poly, board_poly, pad_geoms, no_via=()):
+    """GND vias: bond-strip row, SMP launch cages, GCPW fences, hole rings, edge row, background grid.
+    no_via: extra areas kept free of stitching vias (the board-level silkscreen texts)"""
     V = P.VIAS
     r = V["stitch_pad"] / 2
     eps = 0.005
-    forbid = []
+    forbid = [q.buffer(r + 0.02) for q in no_via]
     for t in B.tracks:
         line = LineString(G.path_to_polyline(t["path"], 0.05))
         if t["net"] == "GND":
@@ -528,6 +603,8 @@ def stitching(B, window_poly, board_poly, pad_geoms):
     forbid.append(window_poly.buffer(P.RULES["via_edge_clearance"] + r + eps))
     Wb = HALF + P.WINDOW["clearance"] + P.BONDPAD["ring_open_out"] + 0.2
     forbid.append(sbox(-Wb, -Wb, Wb, Wb))
+    for pr in getattr(B, "pairs", {}).values():                 # no vias between P and N of a coupled pair
+        forbid.append(pr["region"].buffer(r + eps))
     forbid.append(board_poly.difference(board_poly.buffer(-(P.RULES["via_edge_clearance"] + r + eps))))
     smp_bodies = [Point(rr["conn"]).buffer(2.45) for rr in B.rf.values()]
     hard = prep(unary_union(forbid))
@@ -553,7 +630,10 @@ def stitching(B, window_poly, board_poly, pad_geoms):
     rs = P.VIA_FENCE["start_r"]
     for s in "NESW":
         u = {"N": (0, 1), "S": (0, -1), "E": (1, 0), "W": (-1, 0)}[s]
-        lat = [-4.8, -4.2, -3.6, -2.4, -1.2, 0.0, 1.2, 2.4, 3.6, 4.2, 4.8]
+        if s in "NS":
+            lat = [-4.8, -4.2, -3.6, -2.4, -1.2, 0.0, 1.2, 2.4, 3.6, 4.2, 4.8]
+        else:       # rev B rows: between the pairs (rejected while the breakout strips are too narrow), TRAP | LOAD
+            lat = [-4.8, -4.2, -2.95, -1.4, 0.0, 1.4, 2.95, 4.2, 4.8]
         for rr in (rs, rs + 0.7):
             for t in lat:
                 take((u[0] * rr + (0 if u[0] else t), u[1] * rr + (t if u[0] else 0)), tag="bond")
@@ -571,16 +651,33 @@ def stitching(B, window_poly, board_poly, pad_geoms):
         for lp in loc:
             q = G.rot(lp, rot)
             take((c[0] + q[0], c[1] + q[1]), allow_body=True, tag="launch")
-    # 3. GCPW fences
+    # 3. GCPW fences: single-ended lines on both sides; pair legs on the outside of the pair only while coupled,
+    #    on both sides after the split (offset = w/2 + gap + via radius + 0.035, i.e. 0.625 mm for w = 0.39)
     off = P.VIA_FENCE["offset"]
     for net, rr in B.rf.items():
-        for pt, tan, s_ in G.sample(rr["path"], P.VIA_FENCE["pitch"]):
-            nrm = (-tan[1], tan[0])
-            for sd in (1, -1):
-                q = (pt[0] + sd * nrm[0] * off, pt[1] + sd * nrm[1] * off)
-                if max(abs(q[0]), abs(q[1])) < rs - 0.01:
-                    continue
-                take(q, tag="fence")
+        if "pair" not in rr:
+            parts = [(rr["path"], [P.GCPW["w"]] * len(rr["path"]), (1, -1), None)]
+        else:
+            nc = rr["n_coupled"]
+            cl = LineString(G.path_to_polyline(B.pairs[rr["pair"]]["centre"], 0.05))
+            parts = [(rr["path"][:nc], rr["widths"][:nc], "outer", cl), (rr["path"][nc:], rr["widths"][nc:], (1, -1), None)]
+        for path, widths, sides, cl in parts:
+            if not path:
+                continue
+            for pt, tan, s_ in G.sample(path, P.VIA_FENCE["pitch"]):
+                nrm = (-tan[1], tan[0])
+                k_near = min(range(len(path)), key=lambda i: G.dist_point_prim(pt, path[i]))
+                o = off - (P.GCPW["w"] - widths[k_near]) / 2           # width of the primitive under this sample
+                if sides == "outer":
+                    qa = (pt[0] + nrm[0] * o, pt[1] + nrm[1] * o)
+                    qb = (pt[0] - nrm[0] * o, pt[1] - nrm[1] * o)
+                    cand = [qa if cl.distance(Point(qa)) > cl.distance(Point(qb)) else qb]
+                else:
+                    cand = [(pt[0] + sd * nrm[0] * o, pt[1] + sd * nrm[1] * o) for sd in sides]
+                for q in cand:
+                    if max(abs(q[0]), abs(q[1])) < rs - 0.01:
+                        continue
+                    take(q, tag="fence")
     # 4. rings around mounting holes
     for (mx, my) in P.MOUNT["holes"]:
         for k in range(8):
@@ -652,6 +749,80 @@ def place_silk_refs(B, pad_geoms, openings, silk_boxes, board_poly, win):
         d = G.rot((cx - x, cy - y), -fp["rot"])
         out[ref] = dict(local=(d[0], -d[1]), rot=r, size=size)
     return out, missed
+
+
+# =============================================================================================== E2. pair bookkeeping
+def pair_report(B, lengths):
+    """per differential pair: leg lengths, skew, the mismatch of every bend and the bumps that compensate it, the
+    running skew along the coupled section (P - N at every command boundary) and the coupled / split lengths"""
+    out = {}
+    for name, pr in B.pairs.items():
+        legs = pr["legs"]
+        p_is = legs["P"]["leg"]                            # canonical leg (R = outer, L = inner) carrying P
+        sgn = -1.0 if p_is == "R" else 1.0                 # running skew is logged as L - R
+        rs = [(s, sgn * k) for s, k in DP.running_skew(pr["log"])]
+        # longest stretch of the pair (centre-line station) with |P - N| > 0.1 mm; between two marks the difference
+        # changes linearly (bends, single bumps) or not at all (straights), so interpolate linearly
+        longest, cur = 0.0, 0.0
+        for (s0, k0), (s1, k1) in zip(rs, rs[1:]):
+            ds = s1 - s0
+            if ds <= 0:
+                continue
+            a0, a1 = abs(k0) > 0.1, abs(k1) > 0.1
+            if a0 and a1 and k0 * k1 > 0:
+                part, ends_low = ds, False
+            elif not a0 and not a1:
+                part, ends_low = 0.0, True
+            else:                                           # crosses the 0.1 mm level inside the interval
+                lev = 0.1 if (k1 if a1 else k0) > 0 else -0.1
+                t = (lev - k0) / (k1 - k0) if k1 != k0 else 0.0
+                part, ends_low = (ds * (1 - t), False) if a1 else (ds * t, True)
+            cur += part
+            longest = max(longest, cur)
+            if ends_low:
+                cur = 0.0
+        leg_net = {legs[pol]["leg"]: legs[pol]["net"] for pol in ("P", "N")}
+        bends = [dict(b, inner_net=leg_net[b["inner"]]) for b in pr["log"]["bends"]]
+        bumps = [dict(leg=leg_net[b["leg"]], n=b["n"], extra_total=b["extra_total"], extra_each=b["each"]["extra"],
+                      height=b["each"]["height"], span=b["each"]["span"], arc_deg=math.degrees(b["each"]["alpha"]),
+                      r=b["each"]["r"], after_bend=b["after_bend"]) for b in pr["log"]["bumps"]]
+        LP, LN = lengths[legs["P"]["net"]], lengths[legs["N"]["net"]]
+        leg_geo = {}
+        for pol in ("P", "N"):
+            lg = legs[pol]
+            nc = lg["n_coupled"]
+            leg_geo[pol] = dict(
+                net=lg["net"], role=lg["role"],
+                runs=[[q[1][0], q[1][1], q[2][0], q[2][1], w] for q, w, tg in
+                      zip(lg["path"][:nc], lg["widths"][:nc], lg["tags"][:nc]) if q[0] == "seg" and tg == "run"],
+                coupled_polyline=[list(p_) for p_ in G.path_to_polyline(lg["path"][:nc], 0.05)],
+                split_polyline=[list(p_) for p_ in G.path_to_polyline(lg["path"][nc:], 0.05)],
+                n_primitives=len(lg["path"]), n_arcs=sum(1 for q in lg["path"] if q[0] == "arc"))
+        out[name] = dict(kind=pr["kind"], side=pr["side"], P=legs["P"]["net"], N=legs["N"]["net"], legs=leg_geo,
+                         outer=[pol for pol in ("P", "N") if legs[pol]["role"] == "outer"][0],
+                         L_P=LP, L_N=LN, skew_mm=LP - LN,
+                         coupled_len={pol: G.path_length(legs[pol]["path"][:legs[pol]["n_coupled"]]) for pol in "PN"},
+                         split_len={pol: G.path_length(legs[pol]["path"][legs[pol]["n_coupled"]:]) for pol in "PN"},
+                         bends=bends, bumps=bumps, running_skew=rs,
+                         running_skew_max=max(abs(k) for _, k in rs), running_skew_end=rs[-1][1],
+                         longest_run_over_0p1mm=longest, vertices=pr["vertices"], straights=pr["straights"])
+    return out
+
+
+def bond_report(pads, pcb_pad_board):
+    """wire-bond geometry: die pad centre -> bond foot on the PCB land (0.10 mm inside the land's inner half)"""
+    rows = []
+    for p in pads:
+        pc, u = pcb_pad_board[p["id"]]
+        foot = (pc[0] - u[0] * 0.10, pc[1] - u[1] * 0.10)
+        d = G.sub(foot, p["c"])
+        radial = abs(d[0] * u[0] + d[1] * u[1])
+        lateral = abs(d[0] * u[1] - d[1] * u[0])
+        rows.append(dict(id=p["id"], net=p["net"], span=math.hypot(*d), radial=radial, lateral=lateral,
+                         angle_deg=math.degrees(math.atan2(lateral, radial))))
+    return dict(per_pad=rows, span_min=min(r["span"] for r in rows), span_max=max(r["span"] for r in rows),
+                angle_max_deg=max(r["angle_deg"] for r in rows),
+                note="two 25 um Al-1%Si wedge bonds per land, 0.12 mm apart; lands aligned with the die pads")
 
 
 # =============================================================================================== F. writers
@@ -744,6 +915,19 @@ def keepout_sexpr(layers, outline, name, tracks=False, vias=False):
 
 def track_sexpr(t, code):
     out = []
+    if "nm" in t:                        # differential-pair legs: exact integer-nm page coordinates (diffpair.snap_nm)
+        def fn(v):
+            return f"{v / 1e6:.6f}".rstrip("0").rstrip(".")
+        for pr in t["nm"]:
+            if pr[0] == "seg":
+                a, b = pr[1], pr[2]
+                out.append(f'  (segment (start {fn(a[0])} {fn(a[1])}) (end {fn(b[0])} {fn(b[1])}) (width {f(t["w"])}) '
+                           f'(layer "{t["layer"]}") (net {code}) (tstamp {U()}))')
+            else:
+                a, m, b = pr[1], pr[2], pr[3]
+                out.append(f'  (arc (start {fn(a[0])} {fn(a[1])}) (mid {fn(m[0])} {fn(m[1])}) (end {fn(b[0])} '
+                           f'{fn(b[1])}) (width {f(t["w"])}) (layer "{t["layer"]}") (net {code}) (tstamp {U()}))')
+        return out
     for pr in t["path"]:
         if pr[0] == "seg":
             a, b = K(pr[1]), K(pr[2])
@@ -781,7 +965,7 @@ def main():
     pads_all = pads
     HALF = die_size / 2
     side = side_lists(pads)
-    chans = check_topology(side)
+    chans = check_topology(side, die)
     comps, lnets, chan_parts = build_model(pads, chans)
 
     # --- schematic + KiCad's own netlist -> net names for the board
@@ -806,7 +990,8 @@ def main():
     for p in pads:
         u = p["u"]
         c = (u[0] * rc + (0 if u[0] else p["lat"]), u[1] * rc + (p["lat"] if u[0] else 0))
-        size = (P.BONDPAD["length"], P.BONDPAD["width"]) if u[0] else (P.BONDPAD["width"], P.BONDPAD["length"])
+        bw = P.BONDPAD["width_diff"] if p["kind"] == "rf_fast_diff" else P.BONDPAD["width"]
+        size = (P.BONDPAD["length"], bw) if u[0] else (bw, P.BONDPAD["length"])
         bp_local.append((p["id"], (c[0], -c[1]), size))
         pcb_pad_board[p["id"]] = (c, u)
         die_pad_board[p["id"]] = p["c"]
@@ -844,10 +1029,13 @@ def main():
     B = Board()
     rf_routes(B, side)
     dc_routes(B, side, chans)
+    smp_ref = dict(zip(P.SMP_REFS, P.SMP_DESIGNATORS))
     for net, r in B.rf.items():
-        ref = f"J{P.SMP_REFS.index(net) + 1}"
+        ref = smp_ref[net]
+        # the designator + net are in the silkscreen beside each jack and ${REFERENCE} is inside the body on F.Fab, so
+        # the footprint's own reference field (F.Fab, 3.9 mm off-centre = next to the neighbouring jack) is hidden
         B.fps.append(dict(ref=ref, fp=fpl[P.PARTS["SMP"]["footprint"]], pos=r["conn"], rot=r["rot"],
-                          value=comps[ref]["value"], comp=comps[ref]))
+                          value=comps[ref]["value"], comp=comps[ref], ref_visible=False))
     B.fps.append(dict(ref="U1", fp=fpl[P.PARTS["DIE"]["footprint"]], pos=(0.0, 0.0), rot=0, value="QBF-X2",
                       comp=comps["U1"]))
     B.fps.append(dict(ref="J11", fp=fpl[P.PARTS["MICROD"]["footprint"]], pos=(P.MICROD["x"], P.MICROD["y_row1"]), rot=0,
@@ -885,7 +1073,33 @@ def main():
     win = sbox(-W, -W, W, W).union(unary_union([Point(cx, cy).buffer(R, 64) for cx in (-W, W) for cy in (-W, W)]))
     bd = P.BOARD
     board_poly = Polygon(G.rounded_rect(bd["x_min"], bd["y_min"], bd["x_max"], bd["y_max"], bd["corner_r"], 16))
-    stitch = stitching(B, win, board_poly, pad_geoms)
+    # board-level silkscreen texts (drawn below); stitching vias stay out from under them
+    silk = []
+    for net, r in B.rf.items():
+        ref = smp_ref[net]
+        c = r["conn"]
+        if r["side"] in "WE":           # two vertical lines outboard of the jack: designator, then the net name
+            sg = -1 if r["side"] == "W" else 1
+            silk.append((ref, (c[0] + sg * 3.7, c[1]), 90))
+            silk.append((net, (c[0] + sg * 4.75, c[1]), 90))
+        else:
+            silk.append((f"{ref} {net}", (c[0], c[1] - 3.75), 0))
+    silk.append(("J11 DC", (-15.2, P.MICROD["y_row1"] + 0.6), 0))
+    silk.append(("1", (P.MICROD["x"] - 3.5 * P.MICROD["pitch"] - 1.75, P.MICROD["y_row1"] + 0.0), 0))
+    yt = P.BOARD["y_min"] + 3.4
+    silk.append((P.PROJECT["board_text"], (0, yt), 0))
+    silk.append(("6L RO4003C/RO4450F 1.50MM  NI-FREE AU", (0, yt - 1.4), 0))
+    jrefs = set(smp_ref.values())
+
+    def silk_size(s_):
+        return 1.0 if s_ == P.PROJECT["board_text"] else 0.65 if s_ in B.rf else 0.75 if s_ in jrefs else 0.8
+
+    def text_box(s_, at, rot, grow=0.15):
+        size = silk_size(s_)
+        wd, ht = len(s_) * 0.82 * size + grow, size + grow
+        return (sbox(at[0] - wd / 2, at[1] - ht / 2, at[0] + wd / 2, at[1] + ht / 2) if rot == 0 else
+                sbox(at[0] - ht / 2, at[1] - wd / 2, at[0] + ht / 2, at[1] + wd / 2))
+    stitch = stitching(B, win, board_poly, pad_geoms, no_via=[text_box(s_, at, rot) for s_, at, rot in silk])
 
     # --- nets (KiCad codes)
     allnets = sorted(set(name_of.values()))
@@ -901,22 +1115,42 @@ def main():
         if p["net"] == "GND":
             continue
         c, u = pcb_pad_board[p["id"]]
-        hw = P.BONDPAD["width"] / 2 + m
+        hw = (P.BONDPAD["width_diff"] if p["kind"] == "rf_fast_diff" else P.BONDPAD["width"]) / 2 + m
         if u[0]:
             band = band.difference(sbox(min(u[0] * (W - 0.2), u[0] * (ro + 0.3)), p["lat"] - hw,
                                         max(u[0] * (W - 0.2), u[0] * (ro + 0.3)), p["lat"] + hw))
         else:
             band = band.difference(sbox(p["lat"] - hw, min(u[1] * (W - 0.2), u[1] * (ro + 0.3)),
                                         p["lat"] + hw, max(u[1] * (W - 0.2), u[1] * (ro + 0.3))))
-    # mask-free RF corridors: trace + gaps open, ending corridor_inset short of the ground copper (signal net only)
+    # mask-free RF corridors: trace + gaps open, ending corridor_inset short of the ground copper (signal net only).
+    # Differential pairs: one corridor per leg (KiCad flags an aperture that exposes two nets), separated by a mask web
+    # of DIFF["web"] centred on the pair centre line: the routed inner gap keeps 0.16 mm bare next to each leg (the
+    # middle 0.33 mm is masked), the breakout gap 0.035 mm.
     corridors = []
     if P.GCPW["mask_free"]:
-        hw = P.GCPW["w"] / 2 + P.GCPW["gap"] - P.GCPW["corridor_inset"]
+        ci = P.GCPW["corridor_inset"]
+        webs = {}
+        for name, pr in B.pairs.items():
+            cpts = G.path_to_polyline(pr["centre"], 0.02)
+            d0 = G.unit(G.sub(cpts[0], cpts[1]))
+            cpts = [G.add(cpts[0], G.mul(d0, 0.8))] + cpts          # web also between the two lands
+            webs[name] = LineString(cpts).buffer(P.DIFF["web"] / 2, 16, cap_style=2)
         for net, r in B.rf.items():
-            corridors.append(LineString(G.path_to_polyline(r["path"], 0.02)).buffer(hw, 32))
+            if "pair" not in r:
+                hw = P.GCPW["w"] / 2 + P.GCPW["gap"] - ci
+                corridors.append(LineString(G.path_to_polyline(r["path"], 0.02)).buffer(hw, 32))
+                continue
+            g_ = P.DIFF["g"]
+            parts = [LineString(G.path_to_polyline([q], 0.02)).buffer(w_ / 2 + g_ - ci, 32)
+                     for q, w_ in zip(r["path"], r["widths"])]
+            cor = unary_union(parts).difference(webs[r["pair"]])
+            if cor.geom_type != "Polygon":                             # keep the piece that carries the leg
+                cor = max(cor.geoms, key=lambda q: q.area)
+            corridors.append(cor)
         band = band.difference(unary_union(corridors).buffer(P.RULES["mask_min_web"] + 0.005, 32))
     band_polys = [band] if band.geom_type == "Polygon" else list(band.geoms)
-    band_polys = [bp.simplify(0.002) for bp in band_polys if bp.area > 0.01]
+    # drop openings too narrow to land a ground bond (between the differential pairs the ground strip is 0.27 mm)
+    band_polys = [bp.simplify(0.002) for bp in band_polys if bp.area > 0.01 and not bp.buffer(-0.08).is_empty]
     fw = 2.0
     frame = [sbox(bd["x_min"] - 0.5, bd["y_min"] - 0.5, bd["x_max"] + 0.5, bd["y_min"] + fw),
              sbox(bd["x_min"] - 0.5, bd["y_max"] - fw, bd["x_max"] + 0.5, bd["y_max"] + 0.5),
@@ -926,25 +1160,10 @@ def main():
     # --- silkscreen and drawings
     D = B.gfx
     edge_items(D, W, R)
-    silk = []
-    for net, r in B.rf.items():
-        ref = f"J{P.SMP_REFS.index(net) + 1}"
-        c = r["conn"]
-        lbl = f"{ref} {net}"
-        if r["side"] == "W":
-            silk.append((lbl, (c[0] - 3.75, c[1]), 90))
-        elif r["side"] == "E":
-            silk.append((lbl, (c[0] + 3.75, c[1]), 90))
-        else:
-            silk.append((lbl, (c[0], c[1] - 3.75), 0))
-    silk.append(("J11 DC", (-15.2, 19.6), 0))
-    silk.append(("1", (P.MICROD["x"] - 3.5 * P.MICROD["pitch"] - 1.75, P.MICROD["y_row1"] + 0.0), 0))
-    silk.append((P.PROJECT["board_text"], (0, -23.2), 0))
     for s, at, rot in silk:
-        size = 1.0 if s == P.PROJECT["board_text"] else 0.8
+        size = silk_size(s)
         D.text("F.SilkS", s, *K(at), size, round(size * 0.15, 3), "center", rot)
-    D.text("F.SilkS", "6L RO4003C/RO4450F 1.50MM  NI-FREE AU", *K((0, -24.6)), 0.8, 0.12, "center")
-    bl = ["QBF-X2 CARRIER REV A  (BOTTOM = GND, BASE CONTACT)", "J11 MICRO-D PINOUT:"] + \
+    bl = [f"QBF-X2 CARRIER REV {P.PROJECT['rev']}  (BOTTOM = GND, BASE CONTACT)", "J11 MICRO-D PINOUT:"] + \
          [f"{k} {P.MICROD_PINS[k]}" for k in range(1, 9)] + ["9-15, SHELL: GND"]
     yb = -7.6
     for s in bl:
@@ -955,7 +1174,7 @@ def main():
     from shapely.geometry import box as sb_
     silk_boxes = []
     for s_, at, rot in silk:
-        size = 1.0 if s_ == P.PROJECT["board_text"] else 0.8
+        size = silk_size(s_)
         wd, ht = len(s_) * 0.82 * size + 0.15, size + 0.15
         silk_boxes.append(sb_(at[0] - wd / 2, at[1] - ht / 2, at[0] + wd / 2, at[1] + ht / 2) if rot == 0 else
                           sb_(at[0] - ht / 2, at[1] - wd / 2, at[0] + ht / 2, at[1] + wd / 2))
@@ -977,7 +1196,12 @@ def main():
     gc = P.GCPW
     fd = fd2d.solve(gc["w"], gc["gap"], gc["h"], gc["er"], t=gc["t_cu"], mask_t=0.02,
                     mask_mode="corridor" if gc["mask_free"] else "full", corridor_inset=gc["corridor_inset"])
-    lengths = {n: G.path_length(r["path"]) for n, r in B.rf.items()}
+    Dp = P.DIFF
+    fd_pair = {k: fd2d.solve_coupled(Dp[f"w{k}"], Dp[f"s{k}"], Dp[f"g{k}"], gc["h"], gc["er"], t=gc["t_cu"], mask_t=0.02,
+                                     mask_mode="corridor", corridor_inset=gc["corridor_inset"]) for k in ("", "_bo")}
+    cf_pair = {k: fd2d.closed_form_coupled(Dp[f"w{k}"], Dp[f"s{k}"], Dp[f"g{k}"], gc["h"], gc["er"]) for k in ("", "_bo")}
+    lengths = {n: (DP.nm_length(r["nm"]) if "nm" in r else G.path_length(r["path"])) for n, r in B.rf.items()}
+    pairs_model = pair_report(B, lengths)
     drills = {}
     for v in B.vias:
         key = (round(v["drill"], 3), "PTH")
@@ -988,7 +1212,9 @@ def main():
             drills[key] = drills.get(key, 0) + 1
     info = dict(z=z, fd=fd, lengths=lengths, drills=drills, cutoffs=co, comps=comps, chans=chans, chan_parts=chan_parts,
                 W=W, R=R, die_size=die_size, fps=B.fps, pcb_pads=pcb_pad_board, die_pads=die_pad_board,
-                pad_nets={p["id"]: p["net"] for p in pads})
+                pad_nets={p["id"]: p["net"] for p in pads}, fd_pair=fd_pair, cf_pair=cf_pair, pairs=pairs_model,
+                smp_ref=smp_ref, land_w={p["id"]: (P.BONDPAD["width_diff"] if p["kind"] == "rf_fast_diff"
+                                                   else P.BONDPAD["width"]) for p in pads})
     fab_and_assembly(D, K, info)
 
     # --- write the board
@@ -1022,7 +1248,8 @@ def main():
                                          ref_at=sr["local"], ref_rot=sr["rot"], ref_layer="F.SilkS", ref_size=sr["size"]))
         else:
             L.append(fp["fp"].board_text(LIB, fp["ref"], fp["value"], K(fp["pos"]), fp["rot"], netmap,
-                                         uuids.get(fp["ref"]), f"{NAME}.kicad_sch" if comp else None))
+                                         uuids.get(fp["ref"]), f"{NAME}.kicad_sch" if comp else None,
+                                         ref_visible=fp.get("ref_visible", True)))
     L += D.items
     for bp in band_polys:
         L.append(poly_ring_sexpr(list(bp.exterior.coords)[:-1], "F.Mask"))
@@ -1042,12 +1269,15 @@ def main():
     kw = win.buffer(P.BOARD["inner_window_pullback"], 32).simplify(0.002)
     L.append(keepout_sexpr(["In1.Cu", "In2.Cu", "In3.Cu", "In4.Cu", "B.Cu"], list(kw.exterior.coords)[:-1],
                            "window_pullback_inner"))
+    for name, pr in B.pairs.items():        # between the legs of a coupled pair: no ground pour, no vias (F.Cu only)
+        reg = pr["region"].simplify(0.003)
+        L.append(keepout_sexpr(["F.Cu"], list(reg.exterior.coords)[:-1], f"DIFF_{name}_no_gnd_no_via", tracks=True))
     L.append(')')
     with open(os.path.join(HERE, f"{NAME}.kicad_pcb"), "w") as fh:
         fh.write("\n".join(L) + "\n")
 
     write_project(uuids_root=None)
-    write_dru()
+    write_dru(pairs_model)
 
     # --- design intent for the checks
     model = dict(
@@ -1070,6 +1300,9 @@ def main():
         drills={f"{k[0]:.2f} {k[1]}": n for k, n in sorted(drills.items())},
         gcpw=dict(P.GCPW), gcpw_fd_crosscheck=fd, stackup=P.STACKUP, filters=P.FILTERS, cutoffs=co,
         bond_band_openings=len(band_polys),
+        diff=dict(params=P.DIFF, fast=P.FAST, fd_pair=fd_pair, closed_form_pair=cf_pair, pairs=pairs_model,
+                  smp_designators=smp_ref, ab_pairs=P.AB_PAIRS),
+        bonds=bond_report(pads, pcb_pad_board),
     )
     with open(os.path.join(REPORTS, "build_model.json"), "w") as fh:
         json.dump(model, fh, indent=1, default=lambda o: list(o) if isinstance(o, (set, tuple)) else str(o))
@@ -1131,13 +1364,17 @@ def write_project(uuids_root=None):
                      via_drill=P.VIAS["stitch_drill"]),
                 dict(nc_common, name="RF_50", clearance=P.GCPW["gap"], track_width=P.GCPW["w"], via_diameter=P.VIAS["stitch_pad"],
                      via_drill=P.VIAS["stitch_drill"]),
+                dict(nc_common, name="RF_DIFF", clearance=P.DIFF["g"], track_width=P.DIFF["w"],
+                     via_diameter=P.VIAS["stitch_pad"], via_drill=P.VIAS["stitch_drill"], diff_pair_width=P.DIFF["w"],
+                     diff_pair_gap=P.DIFF["s"], diff_pair_via_gap=P.DIFF["s"]),
                 dict(nc_common, name="DC", clearance=P.DC["clearance"], track_width=P.DC["fcu_width"], via_diameter=P.VIAS["dc_pad"],
                      via_drill=P.VIAS["dc_drill"]),
             ],
             "meta": {"version": 3},
             "net_colors": None,
             "netclass_assignments": None,
-            "netclass_patterns": [{"netclass": "RF_50", "pattern": p} for p in ("TRAP_*", "ACC_*", "RO_*")] +
+            "netclass_patterns": [{"netclass": "RF_DIFF", "pattern": p} for p in ("TRAP_*", "ACC_*")] +
+                                 [{"netclass": "RF_50", "pattern": "RO_*"}] +
                                  [{"netclass": "DC", "pattern": p} for p in ("LOAD_*", "GATE_*", "Net-*")],
         },
         "pcbnew": {"last_paths": {"gencad": "", "idf": "", "netlist": "", "specctra_dsn": "", "step": "", "vrml": ""},
@@ -1156,43 +1393,22 @@ def write_project(uuids_root=None):
         json.dump(pro, fh, indent=2)
 
 
-def write_dru():
-    rl, gc = P.RULES, P.GCPW
-    trap = [n for n in P.SMP_REFS if n.startswith("TRAP_")]
-    acc = [n for n in P.SMP_REFS if n.startswith("ACC_")]
-    cond = lambda nets: " || ".join(f"A.NetName == '{n}'" for n in nets)  # noqa: E731
+def write_dru(pairs):
+    rl, gc, D = P.RULES, P.GCPW, P.DIFF
+    rf = "(A.NetClass == 'RF_50' || A.NetClass == 'RF_DIFF')"
+    wcut = (D["w"] + D["w_bo"]) / 2
+    nominal = {k: sum(pr[f"L_{pol}"] for pr in pairs.values() if pr["kind"] == k for pol in "PN") /
+               sum(2 for pr in pairs.values() if pr["kind"] == k) for k in ("TRAP", "ACC")}
+    half_ab = rl["skew_max"] / 2
+    skew_rules = "\n".join(
+        f'(rule "{n}_intra_pair_skew"\n  (condition "A.inDiffPair(\'{n}\')")\n'
+        f'  (constraint skew (max {D["skew_max"] / 2:.3f}mm)))' for n in P.FAST_PAIRS)
     txt = f"""(version 1)
-# QBF-X2 carrier design rules (generated by build_carrier.py from carrier_params.py).
+# QBF-X2 carrier design rules, rev {P.PROJECT['rev']} (generated by build_carrier.py from carrier_params.py).
 # Board-level minima live in qbfx2_carrier.kicad_pro (clearance {rl['min_clearance']}, track {rl['min_track']},
 # via {rl['min_via_diam']}/{rl['min_via_drill']}, annular {rl['min_annular']}, hole-hole {rl['min_hole_to_hole']},
 # copper-edge {rl['copper_edge_clearance']} for the wire-bond landing pads at the die window).
-
-# --- 50-ohm GCPW on F.Cu: w = {gc['w']} mm, gap = {gc['gap']} mm over {gc['h']} mm RO4003C (In1 = reference)
-(rule "RF_GCPW_width"
-  (layer "F.Cu")
-  (condition "A.NetClass == 'RF_50' && (A.Type == 'Track' || A.Type == 'Arc')")
-  (constraint track_width (min {gc['w'] - 0.01:.2f}mm) (opt {gc['w']:.2f}mm) (max {gc['w'] + 0.01:.2f}mm)))
-(rule "RF_GCPW_gap"
-  (condition "A.NetClass == 'RF_50' && B.NetName == 'GND'")
-  (constraint clearance (min {gc['gap']:.2f}mm)))
-(rule "RF_to_other_signals"
-  (condition "A.NetClass == 'RF_50' && B.NetName != 'GND' && A.NetName != B.NetName")
-  (constraint clearance (min 0.40mm)))
-(rule "RF_top_layer_only"
-  (layer inner)
-  (condition "A.NetClass == 'RF_50'")
-  (constraint disallow track via))
-(rule "RF_no_vias"
-  (condition "A.NetClass == 'RF_50' && A.Type == 'Via'")
-  (constraint disallow via))
-
-# --- length matching (A line vs B partner arrive within {rl['skew_max']} mm ~ 1.3 ps)
-(rule "TRAP_A_vs_TRAP_B_skew"
-  (condition "{cond(trap)}")
-  (constraint skew (max {rl['skew_max']:.2f}mm)))
-(rule "ACC_A_vs_ACC_B_skew"
-  (condition "{cond(acc)}")
-  (constraint skew (max {rl['skew_max']:.2f}mm)))
+# Rule order matters: when two rules give the same constraint, the later one wins (RF rules after the DC rules).
 
 # --- DC lines: stripline on In2 between the In1 / In3 GND planes
 (rule "DC_In2_width"
@@ -1202,6 +1418,63 @@ def write_dru():
 (rule "DC_clearance"
   (condition "A.NetClass == 'DC'")
   (constraint clearance (min {P.DC['clearance']:.2f}mm)))
+
+# --- 50-ohm GCPW on F.Cu (readout lines RF_50; also every leg of the fast pairs RF_DIFF): w = {gc['w']} mm,
+#     gap = {gc['gap']} mm over {gc['h']} mm RO4003C (In1 = reference)
+(rule "RF_GCPW_width"
+  (layer "F.Cu")
+  (condition "A.NetClass == 'RF_50' && (A.Type == 'Track' || A.Type == 'Arc')")
+  (constraint track_width (min {gc['w'] - 0.01:.2f}mm) (opt {gc['w']:.2f}mm) (max {gc['w'] + 0.01:.2f}mm)))
+(rule "RF_GCPW_gap"
+  (condition "{rf} && B.NetName == 'GND'")
+  (constraint clearance (min {gc['gap']:.2f}mm)))
+(rule "RF_to_other_signals"
+  (condition "{rf} && B.NetName != 'GND' && A.NetName != B.NetName && !AB.isCoupledDiffPair()")
+  (constraint clearance (min 0.40mm)))
+(rule "RF_top_layer_only"
+  (layer inner)
+  (condition "A.NetClass == 'RF_50' || A.NetClass == 'RF_DIFF'")
+  (constraint disallow track via))
+(rule "RF_no_vias"
+  (condition "{rf} && A.Type == 'Via'")
+  (constraint disallow via))
+
+# --- fast flux lines: 8 edge-coupled GCPW differential pairs <name>_P / <name>_N (KiCad pairs them by the suffix).
+#     Routed: w {D['w']} / gap {D['s']} (P-N) / {D['g']} to GND -> Z_odd 50 ohm, loosely coupled.
+#     Breakout at the die: w {D['w_bo']} / gap {D['s_bo']} (leg pitch {D['w_bo'] + D['s_bo']:.2f} mm = die pad pitch).
+#     Width and gap are checked per section (the two widths are the two allowed bands). Between the legs: no ground
+#     pour and no vias (F.Cu keepouts "DIFF_<pair>_no_gnd_no_via"). KiCad 7 measures the coupled length on straight
+#     segments only; every straight next to an arc or a pad begins with a {DP.STUB} mm coupling stub (diffpair.py).
+(rule "DIFF_intra_pair_clearance"
+  (condition "A.inDiffPair('*') && AB.isCoupledDiffPair()")
+  (constraint clearance (min {D['s_bo'] - 0.01:.2f}mm)))
+(rule "DIFF_routed"
+  (layer "F.Cu")
+  (condition "A.inDiffPair('*') && (A.Type == 'Track' || A.Type == 'Arc') && A.Width >= {wcut:.2f}mm")
+  (constraint track_width (min {D['w'] - 0.01:.2f}mm) (opt {D['w']:.2f}mm) (max {D['w'] + 0.01:.2f}mm))
+  (constraint diff_pair_gap (min {D['s'] - 0.01:.2f}mm) (opt {D['s']:.2f}mm) (max {D['s'] + 0.01:.2f}mm))
+  (constraint diff_pair_uncoupled (max {D['uncoupled_max']:.2f}mm)))
+(rule "DIFF_breakout"
+  (layer "F.Cu")
+  (condition "A.inDiffPair('*') && (A.Type == 'Track' || A.Type == 'Arc') && A.Width < {wcut:.2f}mm")
+  (constraint track_width (min {D['w_bo'] - 0.01:.2f}mm) (opt {D['w_bo']:.2f}mm) (max {D['w_bo'] + 0.01:.2f}mm))
+  (constraint diff_pair_gap (min {D['s_bo'] - 0.01:.2f}mm) (opt {D['s_bo']:.2f}mm) (max {D['s_bo'] + 0.01:.2f}mm))
+  (constraint diff_pair_uncoupled (max {D['uncoupled_max_bo']:.2f}mm)))
+
+# --- intra-pair skew |L_P - L_N| <= {D['skew_max']:.2f} mm (~0.5 ps). KiCad 7 defines skew as the net length minus the
+#     average length of the nets matched by the rule, so for two nets max {D['skew_max'] / 2:.3f} mm here means
+#     |L_P - L_N| <= {D['skew_max']:.2f} mm. One rule per pair, so each pair is its own group.
+{skew_rules}
+
+# --- A/B matching: every TRAP leg within +/-{half_ab:.2f} mm of the TRAP nominal and every ACC leg within
+#     +/-{half_ab:.2f} mm of the ACC nominal, so corresponding A and B pairs agree within {rl['skew_max']:.2f} mm
+#     (a length rule, because each net can belong to only one skew rule)
+(rule "TRAP_A_vs_B_length"
+  (condition "A.inDiffPair('TRAP_*')")
+  (constraint length (min {nominal['TRAP'] - half_ab:.3f}mm) (max {nominal['TRAP'] + half_ab:.3f}mm)))
+(rule "ACC_A_vs_B_length"
+  (condition "A.inDiffPair('ACC_*')")
+  (constraint length (min {nominal['ACC'] - half_ab:.3f}mm) (max {nominal['ACC'] + half_ab:.3f}mm)))
 
 # --- vias (single through-via process, aspect ratio <= 7.5)
 (rule "via_geometry"

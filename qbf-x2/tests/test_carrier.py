@@ -61,8 +61,10 @@ def test_carrier_builds_drc_clean_and_passes_checks(tmp_path):
             assert 10e6 <= ch["f3db_current"] <= 20e6 and ch["f3db_open"] >= 5e6
 
     # U1 pins follow the chip-to-board contract
-    pads = json.load(open(os.path.join(ROOT, "circuits", "die_pads.json")))["pads"]
+    contract = json.load(open(os.path.join(ROOT, "circuits", "die_pads.json")))
+    pads = contract["pads"]
     model = json.load(open(work / "reports" / "build_model.json"))
+    assert len(model["u1_pads"]) == len(pads)
     for p in pads:
         u1 = model["u1_pads"][str(p["id"])]
         assert u1["net"] == p["net"]
@@ -71,3 +73,33 @@ def test_carrier_builds_drc_clean_and_passes_checks(tmp_path):
             assert abs(u1["pcb"][0] - die[0]) < 1e-6
         else:                           # E/W launchers: aligned in y
             assert abs(u1["pcb"][1] - die[1]) < 1e-6
+    assert model["bonds"]["angle_max_deg"] < 1e-6
+
+    # rev B: the fast flux lines are differential pairs, one per die_pads.json "pair", nets <pair>_P / <pair>_N
+    pair_names = sorted({p["pair"] for p in pads if p["kind"] == "rf_fast_diff"})
+    assert len(pair_names) == 8
+    dz = s["diff_impedance"]
+    for sec in ("routed", "breakout"):
+        assert abs(dz[sec]["field"]["z_odd"] - 50.0) <= 2.5, (sec, dz[sec]["field"])
+    assert abs(dz["routed"]["formula"]["z_odd"] - 50.0) <= 2.5
+    assert abs(dz["routed"]["field"]["z_even"] - 50.0) <= 5.0 and dz["routed"]["field"]["k"] < 0.05   # loose coupling
+    intra = {q["pair"]: q for q in s["lengths"]["intra_pair"]}
+    assert sorted(intra) == pair_names
+    for name in pair_names:
+        assert abs(intra[name]["skew_mm"]) <= 0.10
+        assert abs(intra[name]["L_P"] - s["lengths"]["nets"][f"{name}_P"]) < 1e-3
+    for p in s["lengths"]["pairs"]:
+        assert max(p["dL"], p["dP"], p["dN"]) <= 0.2
+    assert s["diff_coupling"]["passed"] and len(s["diff_coupling"]["kicad_uncoupled_mm"]) == 8
+    # every pair has tuning bumps on its shorter legs and the bends' mismatch is compensated
+    for name in pair_names:
+        pr = model["diff"]["pairs"][name]
+        assert pr["bumps"] and abs(sum(b["mismatch"] for b in pr["bends"]) - sum(b["extra_total"] for b in pr["bumps"])) < 1e-6
+    # 18 SMP jacks (J11 stays the micro-D), KiCad diff-pair rules present
+    comps = model["comps"]
+    smp = [r for r, c in comps.items() if c["part"] == "SMP"]
+    assert len(smp) == 18 and "J11" not in smp and comps["J11"]["part"] == "MICROD"
+    dru = (work / "qbfx2_carrier.kicad_dru").read_text()
+    for key in ("A.inDiffPair('*')", "diff_pair_gap", "diff_pair_uncoupled", "AB.isCoupledDiffPair()"):
+        assert key in dru, key
+    assert all(f"A.inDiffPair('{n}')" in dru for n in pair_names)

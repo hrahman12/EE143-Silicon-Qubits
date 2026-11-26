@@ -1,26 +1,65 @@
 RF LENGTH MATCHING (copper length per net read from the routed board with pcbnew: segments + arcs)
 length = landing-pad track start (0.30 mm outward of the pad centre) to the SMP centre pin; bond wires and the
-pad itself are identical for every launcher by construction. Delay 5.403 ps/mm (eeff 2.624).
-requirement: every A line and its B partner within 0.20 mm (also enforced by KiCad DRC skew rules)
+lands are identical for every launcher by construction (lands aligned with the die pads, straight bonds).
+Delay 5.252 ps/mm (odd mode of the routed pair, field solve: eeff 2.479).
+requirements: |L_P - L_N| <= 0.10 mm for every pair (KiCad skew rules '<pair>_intra_pair_skew');
+              corresponding A and B pairs within 0.20 mm (mean of the legs and each polarity;
+              KiCad length windows 'TRAP_A_vs_B_length', 'ACC_A_vs_B_length')
 
 net         length (mm)
-ACC_A0          13.2652
-ACC_A1          13.2652
-ACC_B0          13.2652
-ACC_B1          13.2652
+ACC_A0_N        24.6293
+ACC_A0_P        24.6291
+ACC_A1_N        24.6292
+ACC_A1_P        24.6292
+ACC_B0_N        24.6291
+ACC_B0_P        24.6293
+ACC_B1_N        24.6292
+ACC_B1_P        24.6292
 RO_IN           13.7208
 RO_OUT          13.7208
-TRAP_A0         15.6676
-TRAP_A1         15.6676
-TRAP_B0         15.6676
-TRAP_B1         15.6676
+TRAP_A0_N       32.3446
+TRAP_A0_P       32.3448
+TRAP_A1_N       32.3449
+TRAP_A1_P       32.3447
+TRAP_B0_N       32.3448
+TRAP_B0_P       32.3446
+TRAP_B1_N       32.3447
+TRAP_B1_P       32.3449
 
-pair                       A (mm)     B (mm)  |dL| (mm)  skew (ps) result
-TRAP_A0 / TRAP_B0         15.6676    15.6676     0.0000     0.0000 PASS
-TRAP_A1 / TRAP_B1         15.6676    15.6676     0.0000     0.0000 PASS
-ACC_A0 / ACC_B0           13.2652    13.2652     0.0000     0.0000 PASS
-ACC_A1 / ACC_B1           13.2652    13.2652     0.0000     0.0000 PASS
+INTRA-PAIR (P vs N)
+pair        L_P (mm)   L_N (mm)   P-N (mm)  skew (ps)  result   compensation
+TRAP_A0      32.3448    32.3446    +0.0002    +0.0010  PASS     bend -60.3 deg at c 0.50: TRAP_A0_P short by 0.5258; bend +60.3 deg at c 1.04: TRAP_A0_N short by 1.0937
+                                                               -> TRAP_A0_P: 1 bump(s) +0.5258 mm each (height 0.515, span 1.188); TRAP_A0_N: 2 bump(s) +0.5469 mm each (height 0.527, span 1.191)
+                                                                  running skew along the pair: max |P-N| 1.094 mm right at a bend/bump, longest stretch > 0.1 mm: 4.89 mm
+ACC_A0       24.6291    24.6293    -0.0001    -0.0006  PASS     bend -45.0 deg at c 0.50: ACC_A0_P short by 0.3927; bend +45.0 deg at c 1.04: ACC_A0_N short by 0.8168
+                                                               -> ACC_A0_P: 1 bump(s) +0.3927 mm each (height 0.432, span 1.152); ACC_A0_N: 2 bump(s) +0.4084 mm each (height 0.443, span 1.158)
+                                                                  running skew along the pair: max |P-N| 0.817 mm right at a bend/bump, longest stretch > 0.1 mm: 4.34 mm
+ACC_A1       24.6292    24.6292    +0.0000    +0.0000  PASS     bend -45.0 deg at c 0.50: ACC_A1_N short by 0.3927; bend +45.0 deg at c 1.04: ACC_A1_P short by 0.8168
+                                                               -> ACC_A1_N: 1 bump(s) +0.3927 mm each (height 0.432, span 1.152); ACC_A1_P: 2 bump(s) +0.4084 mm each (height 0.443, span 1.158)
+                                                                  running skew along the pair: max |P-N| 0.817 mm right at a bend/bump, longest stretch > 0.1 mm: 4.34 mm
+TRAP_A1      32.3447    32.3449    -0.0002    -0.0011  PASS     bend -60.3 deg at c 0.50: TRAP_A1_N short by 0.5258; bend +60.3 deg at c 1.04: TRAP_A1_P short by 1.0937
+                                                               -> TRAP_A1_N: 1 bump(s) +0.5258 mm each (height 0.515, span 1.188); TRAP_A1_P: 2 bump(s) +0.5469 mm each (height 0.527, span 1.191)
+                                                                  running skew along the pair: max |P-N| 1.094 mm right at a bend/bump, longest stretch > 0.1 mm: 4.89 mm
+TRAP_B1      32.3449    32.3447    +0.0002    +0.0011  PASS     bend -60.3 deg at c 0.50: TRAP_B1_P short by 0.5258; bend +60.3 deg at c 1.04: TRAP_B1_N short by 1.0937
+                                                               -> TRAP_B1_P: 1 bump(s) +0.5258 mm each (height 0.515, span 1.188); TRAP_B1_N: 2 bump(s) +0.5469 mm each (height 0.527, span 1.191)
+                                                                  running skew along the pair: max |P-N| 1.094 mm right at a bend/bump, longest stretch > 0.1 mm: 4.89 mm
+ACC_B1       24.6292    24.6292    -0.0000    -0.0001  PASS     bend -45.0 deg at c 0.50: ACC_B1_P short by 0.3927; bend +45.0 deg at c 1.04: ACC_B1_N short by 0.8168
+                                                               -> ACC_B1_P: 1 bump(s) +0.3927 mm each (height 0.432, span 1.152); ACC_B1_N: 2 bump(s) +0.4084 mm each (height 0.443, span 1.158)
+                                                                  running skew along the pair: max |P-N| 0.817 mm right at a bend/bump, longest stretch > 0.1 mm: 4.34 mm
+ACC_B0       24.6293    24.6291    +0.0001    +0.0006  PASS     bend -45.0 deg at c 0.50: ACC_B0_N short by 0.3927; bend +45.0 deg at c 1.04: ACC_B0_P short by 0.8168
+                                                               -> ACC_B0_N: 1 bump(s) +0.3927 mm each (height 0.432, span 1.152); ACC_B0_P: 2 bump(s) +0.4084 mm each (height 0.443, span 1.158)
+                                                                  running skew along the pair: max |P-N| 0.817 mm right at a bend/bump, longest stretch > 0.1 mm: 4.34 mm
+TRAP_B0      32.3446    32.3448    -0.0002    -0.0010  PASS     bend -60.3 deg at c 0.50: TRAP_B0_N short by 0.5258; bend +60.3 deg at c 1.04: TRAP_B0_P short by 1.0937
+                                                               -> TRAP_B0_N: 1 bump(s) +0.5258 mm each (height 0.515, span 1.188); TRAP_B0_P: 2 bump(s) +0.5469 mm each (height 0.527, span 1.191)
+                                                                  running skew along the pair: max |P-N| 1.094 mm right at a bend/bump, longest stretch > 0.1 mm: 4.89 mm
 
-group spread: all four TRAP lines 0.0000 mm, all four ACC lines 0.0000 mm
-TRAP vs ACC offset 2.4024 mm = 12.98 ps (fixed, identical on both sides; not part of the A/B requirement)
+A / B MATCHING (mean of the two legs; also P vs P and N vs N)
+pairs                      A (mm)     B (mm)  |dL| (mm)     (ps)     |dP|     |dN| result
+TRAP_A0 / TRAP_B0         32.3447    32.3447     0.0000   0.0000   0.0002   0.0002 PASS
+TRAP_A1 / TRAP_B1         32.3448    32.3448     0.0000   0.0000   0.0002   0.0002 PASS
+ACC_A0 / ACC_B0           24.6292    24.6292     0.0000   0.0000   0.0001   0.0001 PASS
+ACC_A1 / ACC_B1           24.6292    24.6292     0.0000   0.0000   0.0000   0.0000 PASS
+
+group spread: all 8 TRAP legs 0.0002 mm, all 8 ACC legs 0.0001 mm
+TRAP vs ACC offset 7.7157 mm = 40.52 ps (fixed, identical on both sides; not part of the A/B requirement)
 RO_IN / RO_OUT: 13.7208 / 13.7208 mm

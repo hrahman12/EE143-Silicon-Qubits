@@ -5,17 +5,17 @@
       "Application": "Pcbnew",
       "Version": "7.0.11+dfsg-1build4"
     },
-    "CreationDate": "2026-11-24T22:54:30+00:00"
+    "CreationDate": "2026-11-26T12:33:53+00:00"
   },
   "GeneralSpecs": {
     "ProjectId": {
       "Name": "qbfx2_carrier",
       "GUID": "71626678-325f-4636-9172-726965722e6b",
-      "Revision": "A"
+      "Revision": "B"
     },
     "Size": {
-      "X": 52.1,
-      "Y": 52.1
+      "X": 66.1,
+      "Y": 66.1
     },
     "LayerNumber": 6,
     "BoardThickness": 1.502,

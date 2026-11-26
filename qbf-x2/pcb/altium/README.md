@@ -66,8 +66,10 @@ board was routed, DRC-checked and compared against.
 3. **Managed components:** in the imported schematic, *Tools > Update From Libraries* (or *Component Links*) pointed at
    `QBFX2_Carrier`. Every component then carries its MPN and an embedded STEP model.
 4. **Rules:** re-enter the design rules from `../README.md`, because KiCad's custom `.kicad_dru` rules are not
-   translated. These are the CPW gap and width, the 0.2 mm A/B matched-length rule, and the two local pad clearances
-   above.
+   translated. These are the CPW gap and width; the 8 differential pairs (`<name>_P` / `<name>_N`, define them in the
+   differential-pair editor) with their routed width/gap (0.39 / 0.65 mm) and breakout width/gap at the die
+   (0.29 / 0.21 mm); matched length within each pair (|L_P - L_N| <= 0.10 mm) and between A/B pairs (0.20 mm); and
+   the two local pad clearances above.
 
 Not tested here: opening the files in Altium Designer itself, which does not run on Linux. The tool's maintainers
 verify the format against Altium in their CI. Here the evidence is the validator plus the exact read-back.
@@ -84,8 +86,9 @@ from their primitives. Pads use `GetEffectivePolygon` and zones use their filled
 | View | What it shows |
 |---|---|
 | `views/altium_style_board.png` | The whole board, with the inner GND planes hidden |
-| `views/altium_style_die_window.png` | The die cavity, the 24 bond lands (numbers and nets), the GCPW fan-out and the via fence |
-| `views/altium_style_smp_launch.png` | The J1 SMP launch (TRAP_A0): centre land, ground legs and via cage |
+| `views/altium_style_die_window.png` | The die cavity, the 32 bond lands (numbers and nets; 8 P/N pairs on the 0.5 mm die pitch), the GCPW fan-out and the via fence |
+| `views/altium_style_smp_launch.png` | The J1 SMP launch (TRAP_A0_P): centre land, ground legs, via cage, silkscreen designator and net |
+| `views/altium_style_diff_pair.png` | Close-up of the ACC_A0 differential pair: both legs with their net names, the breakout at the die pad pitch, the concentric bends B1/B2, the opening to the routed spacing and the tuning bumps on the shorter leg next to each bend (call-outs from `../reports/build_model.json`) |
 | `views/altium_style_dc_filters.png` | The 0603 RC filter bank between micro-D J11 and the gate and load lines |
 
 The chip has its own views in the same colours: `../../circuits/views/altium_chip_*.png`.

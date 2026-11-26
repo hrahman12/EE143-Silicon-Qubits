@@ -1,0 +1,29 @@
+** Drc report for /home/user/EE143-Silicon-Qubits/.claude/worktrees/agent-a1a1586d91fadf1e0/qbf-x2/pcb/reports/_selftest/F6_diff_width.kicad_pcb **
+** Created on 2026-11-26 12:33:46 **
+
+** Found 5 DRC violations **
+[diff_pair_gap_out_of_range]: Differential pair gap out of range (DIFF_routed maximum gap 0.6600 mm; actual 0.6650 mm)
+    Rule: DIFF_routed; Severity: error
+    @(78.0994 mm, 115.8758 mm): Track [TRAP_A0_P] on F.Cu, length 10.9422 mm
+    @(77.1964 mm, 116.3918 mm): Track [TRAP_A0_N] on F.Cu, length 10.9422 mm
+[diff_pair_uncoupled_length_too_long]: Differential uncoupled length too long (DIFF_routed maximum uncoupled length 10.5000 mm; actual 20.7982 mm)
+    Rule: DIFF_routed; Severity: error
+    @(64.3255 mm, 99.7197 mm): Track [TRAP_A0_P] on F.Cu, length 0.2500 mm
+    @(71.7675 mm, 106.8913 mm): Track [TRAP_A0_N] on F.Cu, length 0.2500 mm
+[diff_pair_gap_out_of_range]: Differential pair gap out of range (DIFF_routed maximum gap 0.6600 mm; actual 0.6650 mm)
+    Rule: DIFF_routed; Severity: error
+    @(78.0994 mm, 115.8758 mm): Track [TRAP_A0_P] on F.Cu, length 10.9422 mm
+    @(77.1964 mm, 116.3918 mm): Track [TRAP_A0_N] on F.Cu, length 10.9422 mm
+[solder_mask_bridge]: Front solder mask aperture bridges items with different nets
+    Rule: board setup solder mask min width; Severity: error
+    @(77.9211 mm, 116.2789 mm): Polygon on F.Mask
+    @(64.3255 mm, 99.7197 mm): Track [TRAP_A0_P] on F.Cu, length 0.2500 mm
+[track_width]: Track width (rule DIFF_routed min width 0.3800 mm; actual 0.3600 mm)
+    Rule: DIFF_routed; Severity: error
+    @(78.0994 mm, 115.8758 mm): Track [TRAP_A0_P] on F.Cu, length 10.9422 mm
+
+** Found 0 unconnected pads **
+
+** Found 0 Footprint errors **
+
+** End of Report **

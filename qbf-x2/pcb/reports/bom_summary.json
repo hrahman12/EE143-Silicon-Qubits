@@ -37,8 +37,8 @@
    "Note": "board feature, not purchased"
   },
   {
-   "Qty": 10,
-   "References": "J1 J2 J3 J4 J5 J6 J7 J8 J9 J10",
+   "Qty": 18,
+   "References": "J1 J2 J3 J4 J5 J6 J7 J8 J9 J10 J12 J13 J14 J15 J16 J17 J18 J19",
    "Value": "SMP-MSLD-PCS-NM",
    "Description": "SMP straight PCB jack, surface mount, limited detent, non-magnetic (BeCu/Au, LCP)",
    "Footprint": "qbfx2:SMP_Amphenol_SMP-MSLD-PCS-NM",
@@ -88,7 +88,7 @@
    "Qty": 1,
    "References": "U1",
    "Value": "QBF-X2",
-   "Description": "QBF-X2 superconducting die 10 x 10 x 0.525 mm, wire-bonded (24 launchers)",
+   "Description": "QBF-X2 superconducting die 10 x 10 x 0.525 mm, wire-bonded (32 launchers, die_pads.json rev B)",
    "Footprint": "qbfx2:QBFX2_DIE_BONDPADS",
    "Manufacturer": "QBF-X2 project",
    "MPN": "QBF-X2 die rev per circuits/",
@@ -99,8 +99,8 @@
  ],
  "summary": {
   "lines": 8,
-  "parts": 44,
-  "pcba_parts": 39,
+  "parts": 52,
+  "pcba_parts": 47,
   "to_confirm": [
    "VJ0603A180JCAAJ",
    "VJ0603A103JCAAJ"

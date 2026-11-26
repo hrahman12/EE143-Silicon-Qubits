@@ -1,21 +1,13 @@
-** Drc report for /home/user/EE143-Silicon-Qubits/qbf-x2/pcb/reports/_selftest/F4_via_on_rf.kicad_pcb **
-** Created on 2026-11-24 22:54:29 **
+** Drc report for /home/user/EE143-Silicon-Qubits/.claude/worktrees/agent-a1a1586d91fadf1e0/qbf-x2/pcb/reports/_selftest/F4_via_on_rf.kicad_pcb **
+** Created on 2026-11-26 12:33:42 **
 
-** Found 4 DRC violations **
-[clearance]: Clearance violation (rule DC_clearance clearance 0.2000 mm; actual 0.0000 mm)
-    Rule: DC_clearance; Severity: error
-    @(83.2000 mm, 133.5500 mm): Track [GATE_BSB_AN] on In2.Cu, length 2.2000 mm
-    @(82.0000 mm, 133.8500 mm): Via [RO_IN] on F.Cu - B.Cu
-[hole_clearance]: Hole clearance violation (board setup constraints hole clearance 0.2000 mm; actual 0.1250 mm)
-    Rule: board setup constraints hole; Severity: error
-    @(83.2000 mm, 133.5500 mm): Track [GATE_BSB_AN] on In2.Cu, length 2.2000 mm
-    @(82.0000 mm, 133.8500 mm): Via [RO_IN] on F.Cu - B.Cu
+** Found 2 DRC violations **
 [via_dangling]: Via is not connected or connected on only one layer
     Local override; Severity: warning
-    @(82.0000 mm, 133.8500 mm): Via [RO_IN] on F.Cu - B.Cu
+    @(81.0000 mm, 133.9142 mm): Via [RO_IN] on F.Cu - B.Cu
 [items_not_allowed]: Items not allowed (rule RF_no_vias)
     Rule: RF_no_vias; Severity: error
-    @(82.0000 mm, 133.8500 mm): Via [RO_IN] on F.Cu - B.Cu
+    @(81.0000 mm, 133.9142 mm): Via [RO_IN] on F.Cu - B.Cu
 
 ** Found 0 unconnected pads **
 

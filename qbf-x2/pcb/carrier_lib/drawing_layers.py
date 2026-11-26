@@ -54,6 +54,8 @@ def fab_and_assembly(D, K, info):
         f"2  THICKNESS {thick:.2f} mm +/-10 %. Outer Cu 1 oz finished (incl. plating), inner Cu 0.5 oz.",
         f"3  IMPEDANCE: F.Cu GCPW {P.GCPW['z_target']:.0f} ohm +/-5 % (w {P.GCPW['w']:.2f} / gap {P.GCPW['gap']:.2f} mm,"
         f" ref. In1, no mask, 35 um Cu). Fab may trim w by +/-0.02 mm with its field solver. TDR coupon + report.",
+        f"   DIFF PAIRS (TRAP_*/ACC*_P/N): edge-coupled GCPW, Z_odd 50 ohm +/-5 % = Z_diff 100 ohm (w {P.DIFF['w']:.2f} /"
+        f" P-N gap {P.DIFF['s']:.2f} / GND gap {P.DIFF['g']:.2f}); coupon pair + TDR (odd mode).",
         "4  FINISH: NICKEL-FREE. Preferred EPAG (electroless Pd 0.1-0.3 um + immersion Au 0.05-0.1 um) or",
         "   electrolytic soft Au >= 0.5 um directly on Cu. Acceptable: immersion Ag (bond within 4 weeks) or ENEPIG",
         "   with high-P Ni (P >= 10 %) <= 1 um. DO NOT use ENIG or HASL.",
@@ -79,13 +81,23 @@ def fab_and_assembly(D, K, info):
     yn = D.notes(FAB, 205, 13, "FAB NOTES", notes, 1.2, 1.78)
 
     # impedance table
-    rf_note = "TRAP/ACC (8) and RO (2), all F.Cu"
+    rf_note = "RO (2) and the split legs of the pairs, F.Cu"
     gc = P.GCPW
     fd = info["fd"]
+    Dp, fdp, cfp = P.DIFF, info["fd_pair"], info["cf_pair"]
     cpad = 8.854e-12 * gc["er"] * (math.pi * 0.375 ** 2 - gc["w"] * 0.75) * 1e-6 / (gc["h"] * 1e-3)
     ok = lambda zz: "PASS" if abs(zz - 50) <= 2.5 else "FAIL"  # noqa: E731
     zrows = [["GCPW line, mask-free (" + rf_note + ")", "F.Cu", "In1", f"{gc['w']:.2f}", f"{gc['gap']:.2f}",
               f"{gc['h']:.3f}", f"{gc['er']:.2f}", f"{z0:.2f}", "50 +/-5 %", ok(z0)],
+             [f"Diff pair routed, Z_odd formula / field (s = {Dp['s']:.2f})", "F.Cu", "In1", f"{Dp['w']:.2f}",
+              f"{Dp['g']:.2f}", f"{gc['h']:.3f}", f"{gc['er']:.2f}",
+              f"{cfp['']['z_odd']:.1f} / {fdp['']['z_odd']:.1f}", "50 +/-5 %",
+              ok(cfp['']['z_odd']) if ok(cfp['']['z_odd']) == ok(fdp['']['z_odd']) else "FAIL"],
+             [f"  same, Z_even / Z_diff / Z_cm, field solve (k = {fdp['']['k']:.3f})", "F.Cu", "In1", "", "", "", "",
+              f"{fdp['']['z_even']:.1f}/{fdp['']['z_diff']:.0f}/{fdp['']['z_cm']:.1f}", "info", ""],
+             [f"Diff pair breakout at the die (s = {Dp['s_bo']:.2f}), Z_odd field", "F.Cu", "In1", f"{Dp['w_bo']:.2f}",
+              f"{Dp['g_bo']:.2f}", f"{gc['h']:.3f}", f"{gc['er']:.2f}", f"{fdp['_bo']['z_odd']:.1f}", "50 +/-5 %",
+              ok(fdp['_bo']['z_odd'])],
              ["GCPW arc bends R 1.00 (same cross-section)", "F.Cu", "In1", f"{gc['w']:.2f}", f"{gc['gap']:.2f}",
               f"{gc['h']:.3f}", f"{gc['er']:.2f}", f"{z0:.2f}", "50 +/-5 %", ok(z0)],
              [f"Bond landing pad {gc['w']:.2f} x 0.60 (line start)", "F.Cu", "In1", f"{gc['w']:.2f}",
@@ -117,9 +129,11 @@ def fab_and_assembly(D, K, info):
     an = [
         "1  SMT reflow, top side only: SAC305 (or Sn63Pb37), no-clean low-residue flux, then clean (IPA). No bottom parts.",
         "2  Use ONLY the BOM parts (non-magnetic): no Ni-barrier terminations, no X7R/X5R, no ferrite, no brass.",
-        "3  J1-J10 SMP: reflow with the land pattern of the vendor drawing; check centre-pin coplanarity < 0.1 mm.",
+        "3  J1-J10, J12-J19 SMP (18): reflow with the vendor land pattern; centre-pin coplanarity < 0.1 mm. The 16",
+        "   fast-line jacks are 8 differential pairs (P / N side by side): connect both coax legs of a pair together.",
         "4  J11 micro-D: hand-solder after reflow. Its tails + fillets (DC signals) reach the bottom: the Cu base NEEDS a",
-        "   relief pocket >= 1.5 mm deep under the J11 tail field (x -11..+11, y +17..+23 mm from the die centre).",
+        f"   relief pocket >= 1.5 mm deep under the J11 tail field (x -11..+11, y +{P.MICROD['y_row1'] - 2:.0f}.."
+        f"+{P.MICROD['y_row1'] + 4:.0f} mm from the die centre).",
         "5  Board to base: dowels in DW1/DW2, then 4 x M2.5 non-magnetic (brass / Ti) screws in H1-H4, 0.25 N m.",
         "6  Die U1 (customer supplied, after PCBA + cleaning): on the base pedestal, top flush with the PCB top",
         f"   (pedestal {thick - 0.525 - 0.02:.3f} mm above the base for 20 um varnish), GE 7031 varnish or Ag paint.",
@@ -135,10 +149,23 @@ def fab_and_assembly(D, K, info):
         k = c["part"]
         groups.setdefault(k, []).append(ref)
     brows = []
+    def ranges(refs):
+        """J1,J2,...,J10,J12,...,J19 -> 'J1-J10,J12-J19'"""
+        nums = [(r.rstrip("0123456789"), int("".join(ch for ch in r if ch.isdigit()) or 0)) for r in refs]
+        out, i = [], 0
+        while i < len(nums):
+            j = i
+            while j + 1 < len(nums) and nums[j + 1][0] == nums[i][0] and nums[j + 1][1] == nums[j][1] + 1:
+                j += 1
+            pre = nums[i][0]
+            out.append(f"{pre}{nums[i][1]}" if j == i else f"{pre}{nums[i][1]}-{pre}{nums[j][1]}" if j > i + 1
+                       else f"{pre}{nums[i][1]},{pre}{nums[j][1]}")
+            i = j + 1
+        return ",".join(out)
     for k, refs in groups.items():
         pt = P.PARTS[k]
         refs = sorted(refs, key=lambda r: (r.rstrip("0123456789"), int("".join(ch for ch in r if ch.isdigit()) or 0)))
-        rs = ",".join(refs) if len(refs) <= 6 else f"{refs[0]}...{refs[-1]} ({len(refs)})"
+        rs = ranges(refs) + (f" ({len(refs)})" if len(refs) > 6 else "")
         brows.append([rs, str(len(refs)), pt["value"], pt["mfr"], pt["mpn"], pt["status"]])
     y = D.table(ASM, 205, yn + 2, [("Ref", 44), ("Qty", 10), ("Value", 22), ("Manufacturer", 30), ("MPN", 42),
                                    ("Status", 28)], brows, "BOM SUMMARY (full BOM: fab/qbfx2_carrier_bom.csv)", 1.2)
@@ -148,12 +175,19 @@ def fab_and_assembly(D, K, info):
             "J11 MICRO-D PINOUT", 1.15)
     lrows = []
     L = info["lengths"]
-    for a, bb in (("TRAP_A0", "TRAP_B0"), ("TRAP_A1", "TRAP_B1"), ("ACC_A0", "ACC_B0"), ("ACC_A1", "ACC_B1")):
-        lrows.append([f"{a} / {bb}", f"{L[a]:.3f}", f"{L[bb]:.3f}", f"{abs(L[a] - L[bb]):.4f}", "<= 0.20 mm"])
+    prs = info["pairs"]
+    for name in P.FAST_PAIRS:
+        pr = prs[name]
+        lrows.append([name, f"{pr['L_P']:.3f}", f"{pr['L_N']:.3f}", f"{abs(pr['skew_mm']):.4f}", "<= 0.10 mm"])
+    for a, bb in P.AB_PAIRS:
+        ma = (prs[a]["L_P"] + prs[a]["L_N"]) / 2
+        mb = (prs[bb]["L_P"] + prs[bb]["L_N"]) / 2
+        lrows.append([f"{a} / {bb} (mean)", f"{ma:.3f}", f"{mb:.3f}", f"{abs(ma - mb):.4f}", "<= 0.20 mm"])
     lrows.append(["RO_IN / RO_OUT", f"{L['RO_IN']:.3f}", f"{L['RO_OUT']:.3f}", f"{abs(L['RO_IN'] - L['RO_OUT']):.4f}", "info"])
-    D.table(ASM, 16, 205, [("Pair (A / B)", 34), ("A (mm)", 16), ("B (mm)", 16), ("|dL| (mm)", 18), ("Limit", 20)], lrows,
-            "RF TRACK LENGTHS (KiCad DRC skew rules, reports/length_report.txt)", 1.15)
-    detail_view(D, info, (216.0, 174.0), 3.0)
+    D.table(ASM, 16, 200, [("Pair  (P / N, or A / B)", 40), ("P | A (mm)", 18), ("N | B (mm)", 18), ("|dL| (mm)", 18),
+                           ("Limit", 20)], lrows,
+            "RF TRACK LENGTHS (KiCad DRC skew + length rules, reports/length_report.txt)", 1.15)
+    detail_view(D, info, (218.0, 178.0), 2.0)
     bonding_diagram(D, info, (352.0, 168.0), 5.0)
 
 
@@ -238,7 +272,8 @@ def bonding_diagram(D, info, centre, scale, layer=ASM):
         dc = info["die_pads"][pid]
         net = info["pad_nets"][pid]
         sx, sy = (0.24, 0.24)
-        for (c, (w_, h_)) in ((dc, (sx, sy)), (pc, ((0.6, 0.4) if u[0] else (0.4, 0.6)))):
+        lw = info.get("land_w", {}).get(pid, 0.39)
+        for (c, (w_, h_)) in ((dc, (sx, sy)), (pc, ((0.6, lw) if u[0] else (lw, 0.6)))):
             pts = [(c[0] - w_ / 2, c[1] - h_ / 2), (c[0] + w_ / 2, c[1] - h_ / 2), (c[0] + w_ / 2, c[1] + h_ / 2),
                    (c[0] - w_ / 2, c[1] + h_ / 2)]
             for p0, p1 in zip(pts, pts[1:] + pts[:1]):
