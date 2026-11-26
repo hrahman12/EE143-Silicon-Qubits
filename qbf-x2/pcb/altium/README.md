@@ -72,6 +72,24 @@ board was routed, DRC-checked and compared against.
 Not tested here: opening the files in Altium Designer itself, which does not run on Linux. The tool's maintainers
 verify the format against Altium in their CI. Here the evidence is the validator plus the exact read-back.
 
+## PCB-editor views
+
+`render_altium_style.py` draws the routed board in Altium's 2D colours: Top Layer red (GND pour darker),
+Mid-Layer 2 (the In2 DC stripline) orange, Multi-Layer pads and vias silver, Top Overlay yellow, Top Solder purple and
+the outline magenta. Net names are printed on the tracks and pads, pad numbers on the pads and designators in the
+overlay colour. Every shape is read from `../qbfx2_carrier.kicad_pcb` through pcbnew. KiCad 7.0's bindings do not
+wrap the `ERROR_LOC` argument of `TransformShapeToPolygon`, so the script rebuilds tracks, arcs, vias and silkscreen
+from their primitives. Pads use `GetEffectivePolygon` and zones use their filled polygons.
+
+| View | What it shows |
+|---|---|
+| `views/altium_style_board.png` | The whole board, with the inner GND planes hidden |
+| `views/altium_style_die_window.png` | The die cavity, the 24 bond lands (numbers and nets), the GCPW fan-out and the via fence |
+| `views/altium_style_smp_launch.png` | The J1 SMP launch (TRAP_A0): centre land, ground legs and via cage |
+| `views/altium_style_dc_filters.png` | The 0603 RC filter bank between micro-D J11 and the gate and load lines |
+
+The chip has its own views in the same colours: `../../circuits/views/altium_chip_*.png`.
+
 ## Rebuild
 
 ```bash

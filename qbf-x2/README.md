@@ -73,6 +73,10 @@ assumed to be thermal.
 **Board and libraries.**
 - `pcb/`: a complete KiCad 7 carrier — schematic, 6-layer Rogers board, DRC, Gerbers, BOM and STEP.
 - `pcb/altium/`: native Altium `.PcbLib`/`.SchLib`/`.LibPkg`, written with altium-designer-mcp.
+- PCB-editor views in Altium's colours, with net names on every line, pin numbers and designators:
+  `pcb/altium/views/altium_style_*.png` (carrier, from the routed KiCad board) and
+  `circuits/views/altium_chip_*.png` (chip row block, from the GDS). Scripts: `pcb/altium/render_altium_style.py`,
+  `circuits/views/render_chip_altium.py`.
 
 ### Five companion devices (same codebase, one executed simulation each)
 
@@ -100,7 +104,7 @@ assumed to be thermal.
 | `fig10_energy_budget.png` | Energy retention, where the energy goes, cost per operation |
 | `fig11_launcher.png` | Coherent launcher: potentials, launch speed distribution vs a thermal source, temperature dependence, full-circuit launch, 2D gate with launched packets, error budget |
 | `companion1-5_*.png` | The five companion devices |
-| `circuits/` | `qbfx2_netlist.cir` (complete), `schematic_unit_cells.png/.svg`, `qbfx2_layout.gds` and previews |
+| `circuits/` | `qbfx2_netlist.cir` (predates the launcher redesign: 362 cells per rail, the drawn block has 878), `schematic_unit_cells.png/.svg`, `qbfx2_layout.gds`, previews, `views/` (layer views and Altium-style views) |
 
 ## Run it
 
