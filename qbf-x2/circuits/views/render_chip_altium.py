@@ -416,7 +416,7 @@ if __name__ == "__main__":
              (-62, -6, 252, 296), 13, track_min=14, pin_scale=0.9, pin_len=12,
              note="Each line ends on the inner ground strip next to its rail (the *_SHORT points in block_ports.json).")
     if "launcher" in which:
-        view("launcher", "launcher on rails D_A / A0 / A1: load loops, trap lines bending to the rail, node nets",
+        view("launcher", "launchers of A0 / A1: trap pairs (P next to the rail, N outside) turn round, accelerator pairs move in",
              (150, 140, 215, 177), 14, node_labels=True, track_min=5, max_node_labels=17,
              note="Node names are the netlist's: <rail>_<n> at x = 120 + 2n um.")
     if "cells" in which:

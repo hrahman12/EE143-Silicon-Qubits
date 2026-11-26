@@ -482,8 +482,98 @@
  },
  "budget_assumptions": "374 dual-rail cells per rail, 2 % E_J/E_L/C disorder, 20 mK, alpha 2e-6, 10 ps jitter, 100-cell plateau with 40-cell tapers; speed spread 0.0102 (launcher, quantum + classical amplitude noise) vs 0.0429 (thermal source)",
  "post_layout": {
-  "status": "pending: circuits/extraction.json has no launcher_as_drawn profile"
+  "status": "done",
+  "rows": {
+   "A0": {
+    "trap_trim": 0.9768369797020124,
+    "trap_frequency_as_drawn_GHz": 3.035360013638583,
+    "accelerator_trim": 0.9915513809655965,
+    "dv_over_v": 0.020963811404755714,
+    "beta_mean": 0.4504570253863332,
+    "sigma_x_at_far": 24.877832930511424
+   },
+   "A1": {
+    "trap_trim": 1.0450676038120645,
+    "trap_frequency_as_drawn_GHz": 2.9346010062544705,
+    "accelerator_trim": 0.988398300402755,
+    "dv_over_v": 0.011076166999249723,
+    "beta_mean": 0.4512810195328465,
+    "sigma_x_at_far": 19.83051327590725
+   },
+   "B1": {
+    "trap_trim": 1.0450425055846995,
+    "trap_frequency_as_drawn_GHz": 2.934636245414921,
+    "accelerator_trim": 0.9883978479090388,
+    "dv_over_v": 0.011076210326339797,
+    "beta_mean": 0.45128098538876726,
+    "sigma_x_at_far": 19.83071722528527
+   },
+   "B0": {
+    "trap_trim": 0.9768593527400823,
+    "trap_frequency_as_drawn_GHz": 3.035325253970371,
+    "accelerator_trim": 0.9915513470679916,
+    "dv_over_v": 0.02096397153436294,
+    "beta_mean": 0.45045704065897013,
+    "sigma_x_at_far": 24.87772085734118
+   }
+  },
+  "worst_dv_over_v": 0.02096397153436294,
+  "trims": [
+   0.9915513809655965,
+   0.988398300402755,
+   0.9883978479090388,
+   0.9915513470679916
+  ],
+  "gate_with_as_drawn_packets": {
+   "report": {
+    "conditional_phase_rad": 3.137135227790991,
+    "overlap_abs": 0.9945397870602695,
+    "leakage": 0.0017638996555718878,
+    "concurrence": 0.9977073798544982,
+    "entanglement_of_formation": 0.9966937132722828,
+    "entropy_A_bits": 0.999990911665243,
+    "logical_purity": 0.996574462401878,
+    "bell_fidelity": 0.9978384713956894,
+    "process_fidelity_CZ": 0.9978384713956896,
+    "average_gate_fidelity_CZ": 0.9982707771165517,
+    "distinguishability": 0.004581916654977536
+   },
+   "phase": 3.137135227790991,
+   "reflection": 0.0017638996555718878,
+   "norm_drift": -9.139861678608696e-08
+  },
+  "classical_A0": {
+   "beta": 0.4499737230741749,
+   "radiation_GHz": 0.12272598176400606,
+   "winding": 1.0003801743967158
+  },
+  "budget": {
+   "beta": 0.45,
+   "k": 0.01811257230155948,
+   "c": 0.08947415485242141,
+   "parts": {
+    "gate_thermal": 7.168366455978514e-08,
+    "disorder_dephasing": 0.005399581506578377,
+    "damping": 0.0019059427360712533,
+    "timing": 0.0,
+    "coupler": 0.0,
+    "launched_packet_2D": 0.0017292228834483447
+   },
+   "total": 0.009034818809762535,
+   "phi01_rms_rad": 5.574052884554708,
+   "p_dephase_disorder": 0.006760904340097129,
+   "p_dephase_damping": 0.002383849104227056,
+   "thermal_overlap": {
+    "re": -0.9999997610544517,
+    "im": -1.5201629774151352e-07,
+    "abs": 0.9999997610544632,
+    "arg": -3.1415925015734594
+   },
+   "velocity_spread_rel": 0.020968009435959653,
+   "v_cells_per_ns": 357.6451775686598,
+   "launch_model": "launcher model"
+  }
  },
- "runtime_s": 147.7855212688446,
- "_generated": "2026-11-25 00:13:58"
+ "runtime_s": 403.6057550907135,
+ "_generated": "2026-11-26 12:50:52"
 }

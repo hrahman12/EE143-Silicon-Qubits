@@ -1,23 +1,703 @@
 {
- "width_um": 844.0,
- "height_um": 182.0,
+ "width_um": 1994.0,
+ "height_um": 290.0,
  "rows": 6,
- "row_opening_um": 8.0,
- "strip_um": 2.0,
+ "row_pitch_um": 10.0,
  "pitch_um": 2.0,
- "cells_per_row": 362,
- "junction_overlap_um": [
+ "cells_per_row": 878,
+ "rail_junctions": 5268,
+ "middle_junctions": 304,
+ "junction_area_um2": 0.03835,
+ "middle_junction_area_um2": 0.01292,
+ "junction_cross_um": [
   0.2,
   0.1917
  ],
- "junction_area_um2": 0.0383,
- "middle_junction_overlap_um": [
-  0.18,
-  0.1348
+ "middle_junction_cross_um": [
+  0.15,
+  0.0862
  ],
- "middle_junction_area_um2": 0.0243,
- "coupling_capacitors_drawn": 540,
- "coupler_span_um": 360.0,
- "bs_length_um": 82.0,
- "status": "PRELIMINARY - not fabrication-ready"
+ "coupling_capacitors_drawn": 456,
+ "island_shunts_drawn": 0,
+ "trims_drawn": 4384,
+ "straps": [
+  {
+   "q": "A",
+   "row": "A0",
+   "n": 339
+  },
+  {
+   "q": "B",
+   "row": "B0",
+   "n": 339
+  }
+ ],
+ "gates": [
+  {
+   "name": "GATE_BSA_PREP",
+   "q": "A",
+   "sec": "BS_prep",
+   "x": 618.4,
+   "y": 155.0,
+   "island": "MA_253"
+  },
+  {
+   "name": "GATE_BSA_AN",
+   "q": "A",
+   "sec": "BS_analysis",
+   "x": 1375.6,
+   "y": 155.0,
+   "island": "MA_624"
+  },
+  {
+   "name": "GATE_BSB_PREP",
+   "q": "B",
+   "sec": "BS_prep",
+   "x": 1375.6,
+   "y": 135.0,
+   "island": "MB_624"
+  },
+  {
+   "name": "GATE_BSB_AN",
+   "q": "B",
+   "sec": "BS_analysis",
+   "x": 618.4,
+   "y": 135.0,
+   "island": "MB_253"
+  }
+ ],
+ "control_lines": [
+  {
+   "row": "A0",
+   "tag": "trap",
+   "net": "TR_A0"
+  },
+  {
+   "row": "A0",
+   "tag": "acc",
+   "net": "AC_A0"
+  },
+  {
+   "row": "A1",
+   "tag": "trap",
+   "net": "TR_A1"
+  },
+  {
+   "row": "A1",
+   "tag": "acc",
+   "net": "AC_A1"
+  },
+  {
+   "row": "B1",
+   "tag": "trap",
+   "net": "TR_B1"
+  },
+  {
+   "row": "B1",
+   "tag": "acc",
+   "net": "AC_B1"
+  },
+  {
+   "row": "B0",
+   "tag": "trap",
+   "net": "TR_B0"
+  },
+  {
+   "row": "B0",
+   "tag": "acc",
+   "net": "AC_B0"
+  }
+ ],
+ "ports": [
+  {
+   "name": "ACC_A0_N",
+   "x": 0.0,
+   "y": 216.625,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "gap": 0.5,
+   "kind": "accelerator_line_feed",
+   "pair": "ACC_A0",
+   "polarity": "N",
+   "model": "differential"
+  },
+  {
+   "name": "ACC_A0_P",
+   "x": 0.0,
+   "y": 215.625,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "gap": 0.5,
+   "kind": "accelerator_line_feed",
+   "pair": "ACC_A0",
+   "polarity": "P",
+   "model": "differential"
+  },
+  {
+   "name": "TRAP_A0_N",
+   "x": 0.0,
+   "y": 214.625,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "gap": 0.5,
+   "kind": "trap_line_feed",
+   "pair": "TRAP_A0",
+   "polarity": "N",
+   "model": "differential"
+  },
+  {
+   "name": "TRAP_A0_P",
+   "x": 0.0,
+   "y": 213.125,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "gap": 0.5,
+   "kind": "trap_line_feed",
+   "pair": "TRAP_A0",
+   "polarity": "P",
+   "model": "differential"
+  },
+  {
+   "name": "LOAD_A0_SHORT",
+   "x": 113.9618,
+   "y": 160.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "kind": "internal_short",
+   "note": "line shorted to ground next to the loop (inside the block; not routable)"
+  },
+  {
+   "name": "LOAD_A0",
+   "x": 0.0,
+   "y": 195.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "gap": 0.5,
+   "kind": "load_loop_flux_line"
+  },
+  {
+   "name": "GATE_BSA_PREP",
+   "x": 0.0,
+   "y": 175.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "gap": 0.5,
+   "kind": "bs_island_gate"
+  },
+  {
+   "name": "LOAD_A1_SHORT",
+   "x": 113.9618,
+   "y": 150.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "kind": "internal_short",
+   "note": "line shorted to ground next to the loop (inside the block; not routable)"
+  },
+  {
+   "name": "LOAD_A1",
+   "x": 0.0,
+   "y": 155.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "gap": 0.5,
+   "kind": "load_loop_flux_line"
+  },
+  {
+   "name": "TRAP_A1_P",
+   "x": 0.0,
+   "y": 136.5,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "gap": 0.5,
+   "kind": "trap_line_feed",
+   "pair": "TRAP_A1",
+   "polarity": "P",
+   "model": "differential"
+  },
+  {
+   "name": "TRAP_A1_N",
+   "x": 0.0,
+   "y": 135.5,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "gap": 0.5,
+   "kind": "trap_line_feed",
+   "pair": "TRAP_A1",
+   "polarity": "N",
+   "model": "differential"
+  },
+  {
+   "name": "ACC_A1_P",
+   "x": 0.0,
+   "y": 134.5,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "gap": 0.5,
+   "kind": "accelerator_line_feed",
+   "pair": "ACC_A1",
+   "polarity": "P",
+   "model": "differential"
+  },
+  {
+   "name": "ACC_A1_N",
+   "x": 0.0,
+   "y": 133.5,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "gap": 0.5,
+   "kind": "accelerator_line_feed",
+   "pair": "ACC_A1",
+   "polarity": "N",
+   "model": "differential"
+  },
+  {
+   "name": "RO_CATCHER_B1_SHORT",
+   "x": 104.5618,
+   "y": 140.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "kind": "internal_short",
+   "note": "line shorted to ground next to the loop (inside the block; not routable)"
+  },
+  {
+   "name": "RO_CATCHER_B1",
+   "x": 0.0,
+   "y": 115.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "gap": 0.5,
+   "kind": "catcher_readout_coupling"
+  },
+  {
+   "name": "GATE_BSB_AN",
+   "x": 0.0,
+   "y": 95.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "gap": 0.5,
+   "kind": "bs_island_gate"
+  },
+  {
+   "name": "RO_CATCHER_B0_SHORT",
+   "x": 104.5618,
+   "y": 130.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "kind": "internal_short",
+   "note": "line shorted to ground next to the loop (inside the block; not routable)"
+  },
+  {
+   "name": "RO_CATCHER_B0",
+   "x": 0.0,
+   "y": 75.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "gap": 0.5,
+   "kind": "catcher_readout_coupling"
+  },
+  {
+   "name": "RO_CATCHER_A0_SHORT",
+   "x": 1889.4382,
+   "y": 160.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "kind": "internal_short",
+   "note": "line shorted to ground next to the loop (inside the block; not routable)"
+  },
+  {
+   "name": "RO_CATCHER_A0",
+   "x": 1994.0,
+   "y": 215.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "gap": 0.5,
+   "kind": "catcher_readout_coupling"
+  },
+  {
+   "name": "GATE_BSA_AN",
+   "x": 1994.0,
+   "y": 195.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "gap": 0.5,
+   "kind": "bs_island_gate"
+  },
+  {
+   "name": "RO_CATCHER_A1_SHORT",
+   "x": 1889.4382,
+   "y": 150.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "kind": "internal_short",
+   "note": "line shorted to ground next to the loop (inside the block; not routable)"
+  },
+  {
+   "name": "RO_CATCHER_A1",
+   "x": 1994.0,
+   "y": 175.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "gap": 0.5,
+   "kind": "catcher_readout_coupling"
+  },
+  {
+   "name": "ACC_B1_N",
+   "x": 1994.0,
+   "y": 156.5,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "gap": 0.5,
+   "kind": "accelerator_line_feed",
+   "pair": "ACC_B1",
+   "polarity": "N",
+   "model": "differential"
+  },
+  {
+   "name": "ACC_B1_P",
+   "x": 1994.0,
+   "y": 155.5,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "gap": 0.5,
+   "kind": "accelerator_line_feed",
+   "pair": "ACC_B1",
+   "polarity": "P",
+   "model": "differential"
+  },
+  {
+   "name": "TRAP_B1_N",
+   "x": 1994.0,
+   "y": 154.5,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "gap": 0.5,
+   "kind": "trap_line_feed",
+   "pair": "TRAP_B1",
+   "polarity": "N",
+   "model": "differential"
+  },
+  {
+   "name": "TRAP_B1_P",
+   "x": 1994.0,
+   "y": 153.5,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "gap": 0.5,
+   "kind": "trap_line_feed",
+   "pair": "TRAP_B1",
+   "polarity": "P",
+   "model": "differential"
+  },
+  {
+   "name": "LOAD_B1_SHORT",
+   "x": 1880.0382,
+   "y": 140.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "kind": "internal_short",
+   "note": "line shorted to ground next to the loop (inside the block; not routable)"
+  },
+  {
+   "name": "LOAD_B1",
+   "x": 1994.0,
+   "y": 135.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "gap": 0.5,
+   "kind": "load_loop_flux_line"
+  },
+  {
+   "name": "GATE_BSB_PREP",
+   "x": 1994.0,
+   "y": 115.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "gap": 0.5,
+   "kind": "bs_island_gate"
+  },
+  {
+   "name": "LOAD_B0_SHORT",
+   "x": 1880.0382,
+   "y": 130.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "W",
+   "kind": "internal_short",
+   "note": "line shorted to ground next to the loop (inside the block; not routable)"
+  },
+  {
+   "name": "LOAD_B0",
+   "x": 1994.0,
+   "y": 95.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "gap": 0.5,
+   "kind": "load_loop_flux_line"
+  },
+  {
+   "name": "TRAP_B0_P",
+   "x": 1994.0,
+   "y": 76.875,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "gap": 0.5,
+   "kind": "trap_line_feed",
+   "pair": "TRAP_B0",
+   "polarity": "P",
+   "model": "differential"
+  },
+  {
+   "name": "TRAP_B0_N",
+   "x": 1994.0,
+   "y": 75.375,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "gap": 0.5,
+   "kind": "trap_line_feed",
+   "pair": "TRAP_B0",
+   "polarity": "N",
+   "model": "differential"
+  },
+  {
+   "name": "ACC_B0_P",
+   "x": 1994.0,
+   "y": 74.375,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "gap": 0.5,
+   "kind": "accelerator_line_feed",
+   "pair": "ACC_B0",
+   "polarity": "P",
+   "model": "differential"
+  },
+  {
+   "name": "ACC_B0_N",
+   "x": 1994.0,
+   "y": 73.375,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 0.5,
+   "direction": "E",
+   "gap": 0.5,
+   "kind": "accelerator_line_feed",
+   "pair": "ACC_B0",
+   "polarity": "N",
+   "model": "differential"
+  },
+  {
+   "name": "GND_N",
+   "x": 997.0,
+   "y": 290.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 40.0,
+   "direction": "N",
+   "kind": "ground"
+  },
+  {
+   "name": "GND_S",
+   "x": 997.0,
+   "y": 0.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 40.0,
+   "direction": "S",
+   "kind": "ground"
+  },
+  {
+   "name": "GND_W_TOP",
+   "x": 0.0,
+   "y": 270.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 40.0,
+   "direction": "W",
+   "kind": "ground"
+  },
+  {
+   "name": "GND_E_TOP",
+   "x": 1994.0,
+   "y": 270.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 40.0,
+   "direction": "E",
+   "kind": "ground"
+  },
+  {
+   "name": "GND_W_BOT",
+   "x": 0.0,
+   "y": 20.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 40.0,
+   "direction": "W",
+   "kind": "ground"
+  },
+  {
+   "name": "GND_E_BOT",
+   "x": 1994.0,
+   "y": 20.0,
+   "layer": [
+    1,
+    0
+   ],
+   "width": 40.0,
+   "direction": "E",
+   "kind": "ground"
+  }
+ ],
+ "sizing_key": "d1b8a1f2a7001e78",
+ "status": "PRELIMINARY - DRC + EM-extraction verified row block (hardware/drc.py, hardware/extract.py); not a full die"
 }

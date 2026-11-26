@@ -77,18 +77,26 @@ def test_netlist_control_lines_are_floating():
 
 
 def test_drawn_pairs_meet_targets():
-    """per-cell pair mutuals of the drawn legs vs the targets (at the design current): within 5 % of the peak
-    except at the launch-end tail, where even the deepest compact pair leaves a residual (documented)"""
+    """per-cell pair mutuals of the drawn legs vs the targets (at the design current). Body of every line: within
+    5 % of its peak. The two line ends are documented exceptions, within 20 % of the peak: the launch-end cells
+    (n <= 2, where the accelerator floor starts but the accelerator pair must stay outside the trap pair) and the
+    trap pair's turn-round cell (half covered). Their effect is checked where it matters, in the post-layout launch
+    (simulations/D_launcher.py L8)."""
     from hardware.architecture import Architecture
     from hardware import layout as LY
     from hardware.diffpairs import as_drawn
     arch = Architecture.from_results(ROOT)
     sz = LY.get_sizing(arch)
     lt = LY.launcher_targets(arch)
-    ad = as_drawn(arch, sz, stride=3, say=lambda *a: None)
+    ad = as_drawn(arch, sz, stride=1, say=lambda *a: None)
     for row in ("A0", "A1"):
         Mt, Ma = np.asarray(lt[row]["trap"]), np.asarray(lt[row]["acc"])
+        last_trap = max(ad[row]["trap"]["cells"])
         for key, M, cells, vals in (("trap", Mt, ad[row]["trap"]["cells"], ad[row]["trap"]["M_pH"]),
                                     ("acc", Ma, ad[row]["accelerator"]["cells"], ad[row]["accelerator"]["M_pH"])):
-            dev = np.array([abs(v - M[c]) for c, v in zip(cells, vals) if M[c] > 0.15 * M.max()])
-            assert dev.max() <= 0.05 * M.max() + 1e-12, (row, key, dev.max() / M.max())
+            ends = [abs(v - M[c]) for c, v in zip(cells, vals) if c <= 2 or (key == "trap" and c == last_trap)]
+            body = [abs(v - M[c]) for c, v in zip(cells, vals) if not (c <= 2 or (key == "trap" and c == last_trap))]
+            print(f"{row} {key}: body worst {100 * max(body) / M.max():.1f} % of peak, ends worst "
+                  f"{100 * max(ends) / M.max():.1f} %")
+            assert max(body) <= 0.05 * M.max(), (row, key, max(body) / M.max())
+            assert max(ends) <= 0.20 * M.max(), (row, key, max(ends) / M.max())

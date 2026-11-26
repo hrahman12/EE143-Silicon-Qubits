@@ -3,10 +3,10 @@
   "beta": 0.45,
   "k": 0.017778396467183658,
   "c": 0.08746682084948028,
-  "E_S_GHz": 1.095025074091242,
-  "n_bs": 41,
-  "n_cells_per_row": 362,
-  "length_um": 724.0,
+  "E_S_GHz": 0.5811805368579656,
+  "n_bs": 77,
+  "n_cells_per_row": 878,
+  "length_um": 1756.0,
   "rows": [
    "D_A",
    "A0",
@@ -17,53 +17,63 @@
   ],
   "sections": [
    {
-    "name": "inject",
+    "name": "load",
     "start": 0,
     "cells": 10
    },
    {
-    "name": "accelerate",
+    "name": "launch",
     "start": 10,
     "cells": 40
    },
    {
-    "name": "BS_prep",
+    "name": "accelerate",
     "start": 50,
-    "cells": 41
+    "cells": 202
+   },
+   {
+    "name": "BS_prep",
+    "start": 252,
+    "cells": 77
    },
    {
     "name": "gap",
-    "start": 91,
+    "start": 329,
     "cells": 20
    },
    {
     "name": "taper_in",
-    "start": 111,
+    "start": 349,
     "cells": 40
    },
    {
     "name": "coupler",
-    "start": 151,
+    "start": 389,
     "cells": 100
    },
    {
     "name": "taper_out",
-    "start": 251,
+    "start": 489,
     "cells": 40
    },
    {
     "name": "gap",
-    "start": 291,
+    "start": 529,
     "cells": 20
    },
    {
     "name": "BS_analysis",
-    "start": 311,
-    "cells": 41
+    "start": 549,
+    "cells": 77
+   },
+   {
+    "name": "idle",
+    "start": 626,
+    "cells": 242
    },
    {
     "name": "detect",
-    "start": 352,
+    "start": 868,
     "cells": 10
    }
   ],
@@ -96,20 +106,660 @@
    "compensated_series_L_nH": 0.6422217168999064,
    "compensated_node_C_fF": 2.2094971183132266,
    "middle_rail_junction": {
-    "EJ_GHz": 25.3,
-    "EC_GHz": 12.7,
-    "Ic_nA": 50.93786979245154,
-    "area_um2": 0.02425612847259597,
-    "C_fF": 1.5252149074534742,
-    "Cj_fF": 1.2128064236297986,
-    "shunt_fF": 0.3124084838236756,
-    "E_S_GHz": 1.095025074091242,
-    "status": "E_S from exact charge dispersion (scqubits); vortex hopping = single-junction estimate"
+    "EJ_GHz": 13.480956724614959,
+    "EC_GHz": 6.740478362307481,
+    "Ic_nA": 27.141945387988567,
+    "area_um2": 0.012924735899042175,
+    "Cj_fF": 0.6462367949521087,
+    "C_island_geo_fF": 0.31,
+    "C_network_fF": 1.9174805116676654,
+    "C_fF": 2.873717306619774,
+    "shunt_fF": 0.0,
+    "E_S_GHz": 0.5811805368579656,
+    "EJ_over_EC": 1.9999999999999996,
+    "status": "E_C,eff counts the rail-junction network (each island couples to both rails through rail junctions); E_S = charge dispersion / 4 (scqubits); vortex hopping itself is still the single-junction phase-slip estimate"
    },
-   "injection_junction": {
-    "Ic_nA": 161.0683629800839,
-    "area_um2": 0.07669922046670662,
-    "status": "UNRESOLVED: coherent single-fluxon launcher"
+   "launcher": {
+    "rows": [
+     "A0",
+     "A1",
+     "B1",
+     "B0"
+    ],
+    "mirrored_rows": [
+     "B1",
+     "B0"
+    ],
+    "trap_line": {
+     "I_uA": 80.0,
+     "cells": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55
+     ],
+     "M_pH": [
+      7.979143681599566e-06,
+      1.5979002906912084e-05,
+      3.112284790390424e-05,
+      5.895834028476724e-05,
+      0.0001086294129975481,
+      0.00019466410641151937,
+      0.00033928182277557806,
+      0.0005751373463039182,
+      0.0009482411764252965,
+      0.0015205556368976842,
+      0.0023714943007240715,
+      0.003597312107421253,
+      0.005307260658674737,
+      0.007615509791171764,
+      0.010628300087924083,
+      0.014426630207371121,
+      0.019045933161177194,
+      0.024455462263487413,
+      0.030541176388669575,
+      0.03709641236167691,
+      0.043824233023424884,
+      0.05035388714420406,
+      0.056271429068923816,
+      0.061161644127359895,
+      0.06465567092218412,
+      0.06647683867740377,
+      0.06647683867740377,
+      0.06465567092218412,
+      0.061161644127359895,
+      0.056271429068923816,
+      0.05035388714420406,
+      0.043824233023424884,
+      0.03709641236167691,
+      0.030541176388669575,
+      0.024455462263487413,
+      0.019045933161177194,
+      0.014426630207371121,
+      0.010628300087924083,
+      0.007615509791171764,
+      0.005307260658674737,
+      0.003597312107421253,
+      0.0023714943007240715,
+      0.0015205556368976842,
+      0.0009482411764252965,
+      0.0005751373463039182,
+      0.00033928182277557806,
+      0.00019466410641151937,
+      0.0001086294129975481,
+      5.895834028476724e-05,
+      3.112284790390424e-05,
+      1.5979002906912084e-05,
+      7.979143681599566e-06
+     ],
+     "waveform": "DC while loading/holding; off at release (edge tau)"
+    },
+    "accelerator_line": {
+     "I_uA": 450.0,
+     "cells": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      140,
+      141,
+      142,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151,
+      152,
+      153,
+      154,
+      155,
+      156,
+      157,
+      158,
+      159,
+      160,
+      161,
+      162,
+      163,
+      164,
+      165,
+      166,
+      167,
+      168,
+      169,
+      170,
+      171,
+      172,
+      173,
+      174,
+      175,
+      176,
+      177,
+      178,
+      179,
+      180,
+      181,
+      182,
+      183,
+      184,
+      185,
+      186,
+      187,
+      188,
+      189,
+      190,
+      191,
+      192,
+      193,
+      194,
+      195,
+      196,
+      197,
+      198,
+      199,
+      200,
+      201,
+      202,
+      203,
+      204,
+      205,
+      206,
+      207,
+      208,
+      209,
+      210,
+      211,
+      212,
+      213,
+      214,
+      215,
+      216,
+      217,
+      218,
+      219,
+      220,
+      221,
+      222,
+      223,
+      224,
+      225,
+      226,
+      227,
+      228,
+      229,
+      230,
+      231,
+      232,
+      233,
+      234,
+      235,
+      236,
+      237,
+      238,
+      239,
+      240,
+      241,
+      242,
+      243,
+      244,
+      245,
+      246,
+      247,
+      248,
+      249,
+      250,
+      251
+     ],
+     "M_pH": [
+      0.023515261825641995,
+      0.023515261825641995,
+      0.023515261825641995,
+      0.023515261825641995,
+      0.023515261825641995,
+      0.023515261825641995,
+      0.023518562922227763,
+      0.02359903678262764,
+      0.02385785254611365,
+      0.02429501023253466,
+      0.024809340699750604,
+      0.025326972249370548,
+      0.025844603798990486,
+      0.026362235348610426,
+      0.02687986689823037,
+      0.027397498447850308,
+      0.027915129997470253,
+      0.028432761547090197,
+      0.028950393096710134,
+      0.029468024646330082,
+      0.029985656195950026,
+      0.030503287745569964,
+      0.031020919295189908,
+      0.031538550844809846,
+      0.03205618239442979,
+      0.03257381394404973,
+      0.03309144549366968,
+      0.033609077043289616,
+      0.03412670859290956,
+      0.0346443401425295,
+      0.03516197169214944,
+      0.035679603241769386,
+      0.03619723479138933,
+      0.036714866341009275,
+      0.03723249789062922,
+      0.03775012944024916,
+      0.0382677609898691,
+      0.038785392539489046,
+      0.03930302408910897,
+      0.03982065563872893,
+      0.040338287188348865,
+      0.0408559187379688,
+      0.041373550287588746,
+      0.0418911818372087,
+      0.042408813386828635,
+      0.04292644493644857,
+      0.04344407648606852,
+      0.043961708035688454,
+      0.0444793395853084,
+      0.04499697113492835,
+      0.04551460268454829,
+      0.04603223423416824,
+      0.04654986578378817,
+      0.04706749733340811,
+      0.04758512888302806,
+      0.048102760432647995,
+      0.04862039198226794,
+      0.049138023531887884,
+      0.049655655081507814,
+      0.05017328663112777,
+      0.0506909181807477,
+      0.051208549730367654,
+      0.0517261812799876,
+      0.05224381282960753,
+      0.052761444379227494,
+      0.053279075928847404,
+      0.05379670747846736,
+      0.054314339028087306,
+      0.05483197057770725,
+      0.05534960212732719,
+      0.05586723367694713,
+      0.05638486522656706,
+      0.05690249677618701,
+      0.05742012832580695,
+      0.05793775987542689,
+      0.05845539142504684,
+      0.058973022974666764,
+      0.059490654524286715,
+      0.060008286073906666,
+      0.0605259176235266,
+      0.06104354917314655,
+      0.061561180722766486,
+      0.06207881227238642,
+      0.06259644382200637,
+      0.06311407537162633,
+      0.06363170692124627,
+      0.06414933847086621,
+      0.06466697002048614,
+      0.0651846015701061,
+      0.06570223311972602,
+      0.06621986466934597,
+      0.0667374962189659,
+      0.06725512776858585,
+      0.06777275931820578,
+      0.06829039086782573,
+      0.06880802241744569,
+      0.06932565396706562,
+      0.06984328551668556,
+      0.0703609170663055,
+      0.07087854861592545,
+      0.0713961801655454,
+      0.07191381171516532,
+      0.07243144326478528,
+      0.07294907481440523,
+      0.07346670636402515,
+      0.0739843379136451,
+      0.07450196946326505,
+      0.07501960101288499,
+      0.07553723256250493,
+      0.07605486411212488,
+      0.0765724956617448,
+      0.07709012721136475,
+      0.07760445767858071,
+      0.07804161536500172,
+      0.07830043112848767,
+      0.07838090498888756,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07838420608547332,
+      0.07819548539703113,
+      0.0766966072865044,
+      0.07375645211065798,
+      0.06948800838404164,
+      0.06405531000529838,
+      0.057667132526430985,
+      0.050568970025421094,
+      0.04303360090648719,
+      0.03535060517898614,
+      0.02781523606005223,
+      0.020717073559042343,
+      0.014328896080174958,
+      0.008896197701431695,
+      0.004627753974815336,
+      0.001687598798968918,
+      0.00018872068844220813
+     ],
+     "waveform": "on at release (edge tau), off at t_off while the fluxon is on the plateau"
+    },
+    "load_loop": {
+     "L_nH": 1.0,
+     "flux_ramp": "0 -> Phi0 in about 1 us (inserts one fluxon adiabatically)"
+    },
+    "tau_ps": 20.0,
+    "t_off_ns": 0.6229999999999477,
+    "trap_frequency_GHz": 3.0,
+    "trap_depth_GHz": 21.67753757211458,
+    "force_GHz_per_cell": 1.1117761617245843,
+    "status": "proposed; sized by simulation (simulations/D_launcher.py)"
    },
    "detector": {
     "kind": "fluxon catcher loop + dispersive lambda/4 readout (QFX-1 heritage)",
@@ -120,20 +770,25 @@
  },
  "netlist": {
   "elements": {
-   "junction (rail)": 2172,
-   "capacitor (node shunt)": 2172,
-   "inductor (rail, granular Al)": 2166,
-   "injector junction": 4,
-   "injector pulse source": 4,
+   "junction (rail)": 5268,
+   "capacitor (node shunt)": 5268,
+   "inductor (rail, granular Al)": 5262,
    "catcher loop inductor": 4,
-   "accelerator bias source": 160,
    "inductor (shared coupler strip)": 540,
    "capacitor (coupler)": 540,
-   "junction (BS middle rail)": 160,
-   "capacitor (BS middle-rail shunt)": 160
+   "junction (BS middle rail)": 304,
+   "launcher load loop inductor": 4,
+   "launcher load flux source": 4,
+   "trap line source": 4,
+   "trap line inductor": 212,
+   "trap line coupling (K)": 208,
+   "control-loop bleed resistor (1 GOhm)": 8,
+   "accelerator line source": 4,
+   "accelerator line inductor": 1004,
+   "accelerator line coupling (K)": 1000
   },
-  "total_elements": 8082,
-  "cells_per_row": 362,
+  "total_elements": 19634,
+  "cells_per_row": 878,
   "rows": [
    "D_A",
    "A0",
@@ -148,44 +803,1157 @@
    "shunt_fF": 0.5037981539147252
   },
   "junction_model_middle_rail": {
-   "Ic_nA": 50.93786979245154,
-   "Cj_fF": 1.2128064236297986,
-   "shunt_fF": 0.3124084838236756
+   "Ic_nA": 27.141945387988567,
+   "Cj_fF": 0.6462367949521087,
+   "shunt_fF": 0.0
   },
   "source": "results/C_gate.json optimum_validation (2D-calibrated)",
   "parse": {
    "kinds": {
-    "B": 2336,
-    "C": 2872,
-    "L": 2721,
-    "I": 164
+    "B": 5572,
+    "C": 5808,
+    "L": 7037,
+    "I": 12,
+    "R": 8,
+    "K": 1208
    },
-   "nodes": 2877,
+   "nodes": 7341,
    "isolated_nodes": 0
   }
  },
  "layout": {
-  "width_um": 844.0,
-  "height_um": 182.0,
+  "width_um": 1994.0,
+  "height_um": 290.0,
   "rows": 6,
-  "row_opening_um": 8.0,
-  "strip_um": 2.0,
+  "row_pitch_um": 10.0,
   "pitch_um": 2.0,
-  "cells_per_row": 362,
-  "junction_overlap_um": [
+  "cells_per_row": 878,
+  "rail_junctions": 5268,
+  "middle_junctions": 304,
+  "junction_area_um2": 0.03835,
+  "middle_junction_area_um2": 0.01292,
+  "junction_cross_um": [
    0.2,
    0.1917
   ],
-  "junction_area_um2": 0.0383,
-  "middle_junction_overlap_um": [
-   0.18,
-   0.1348
+  "middle_junction_cross_um": [
+   0.15,
+   0.0862
   ],
-  "middle_junction_area_um2": 0.0243,
-  "coupling_capacitors_drawn": 540,
-  "coupler_span_um": 360.0,
-  "bs_length_um": 82.0,
-  "status": "PRELIMINARY - not fabrication-ready"
+  "coupling_capacitors_drawn": 456,
+  "island_shunts_drawn": 0,
+  "trims_drawn": 4384,
+  "straps": [
+   {
+    "q": "A",
+    "row": "A0",
+    "n": 339
+   },
+   {
+    "q": "B",
+    "row": "B0",
+    "n": 339
+   }
+  ],
+  "gates": [
+   {
+    "name": "GATE_BSA_PREP",
+    "q": "A",
+    "sec": "BS_prep",
+    "x": 618.4,
+    "y": 155.0,
+    "island": "MA_253"
+   },
+   {
+    "name": "GATE_BSA_AN",
+    "q": "A",
+    "sec": "BS_analysis",
+    "x": 1375.6,
+    "y": 155.0,
+    "island": "MA_624"
+   },
+   {
+    "name": "GATE_BSB_PREP",
+    "q": "B",
+    "sec": "BS_prep",
+    "x": 1375.6,
+    "y": 135.0,
+    "island": "MB_624"
+   },
+   {
+    "name": "GATE_BSB_AN",
+    "q": "B",
+    "sec": "BS_analysis",
+    "x": 618.4,
+    "y": 135.0,
+    "island": "MB_253"
+   }
+  ],
+  "control_lines": [
+   {
+    "row": "A0",
+    "tag": "trap",
+    "net": "TR_A0"
+   },
+   {
+    "row": "A0",
+    "tag": "acc",
+    "net": "AC_A0"
+   },
+   {
+    "row": "A1",
+    "tag": "trap",
+    "net": "TR_A1"
+   },
+   {
+    "row": "A1",
+    "tag": "acc",
+    "net": "AC_A1"
+   },
+   {
+    "row": "B1",
+    "tag": "trap",
+    "net": "TR_B1"
+   },
+   {
+    "row": "B1",
+    "tag": "acc",
+    "net": "AC_B1"
+   },
+   {
+    "row": "B0",
+    "tag": "trap",
+    "net": "TR_B0"
+   },
+   {
+    "row": "B0",
+    "tag": "acc",
+    "net": "AC_B0"
+   }
+  ],
+  "ports": [
+   {
+    "name": "ACC_A0_N",
+    "x": 0.0,
+    "y": 216.625,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "W",
+    "gap": 0.5,
+    "kind": "accelerator_line_feed",
+    "pair": "ACC_A0",
+    "polarity": "N",
+    "model": "differential"
+   },
+   {
+    "name": "ACC_A0_P",
+    "x": 0.0,
+    "y": 215.625,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "W",
+    "gap": 0.5,
+    "kind": "accelerator_line_feed",
+    "pair": "ACC_A0",
+    "polarity": "P",
+    "model": "differential"
+   },
+   {
+    "name": "TRAP_A0_N",
+    "x": 0.0,
+    "y": 214.625,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "W",
+    "gap": 0.5,
+    "kind": "trap_line_feed",
+    "pair": "TRAP_A0",
+    "polarity": "N",
+    "model": "differential"
+   },
+   {
+    "name": "TRAP_A0_P",
+    "x": 0.0,
+    "y": 213.125,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "W",
+    "gap": 0.5,
+    "kind": "trap_line_feed",
+    "pair": "TRAP_A0",
+    "polarity": "P",
+    "model": "differential"
+   },
+   {
+    "name": "LOAD_A0_SHORT",
+    "x": 113.9618,
+    "y": 160.0,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "E",
+    "kind": "internal_short",
+    "note": "line shorted to ground next to the loop (inside the block; not routable)"
+   },
+   {
+    "name": "LOAD_A0",
+    "x": 0.0,
+    "y": 195.0,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "W",
+    "gap": 0.5,
+    "kind": "load_loop_flux_line"
+   },
+   {
+    "name": "GATE_BSA_PREP",
+    "x": 0.0,
+    "y": 175.0,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "W",
+    "gap": 0.5,
+    "kind": "bs_island_gate"
+   },
+   {
+    "name": "LOAD_A1_SHORT",
+    "x": 113.9618,
+    "y": 150.0,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "E",
+    "kind": "internal_short",
+    "note": "line shorted to ground next to the loop (inside the block; not routable)"
+   },
+   {
+    "name": "LOAD_A1",
+    "x": 0.0,
+    "y": 155.0,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "W",
+    "gap": 0.5,
+    "kind": "load_loop_flux_line"
+   },
+   {
+    "name": "TRAP_A1_P",
+    "x": 0.0,
+    "y": 136.5,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "W",
+    "gap": 0.5,
+    "kind": "trap_line_feed",
+    "pair": "TRAP_A1",
+    "polarity": "P",
+    "model": "differential"
+   },
+   {
+    "name": "TRAP_A1_N",
+    "x": 0.0,
+    "y": 135.5,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "W",
+    "gap": 0.5,
+    "kind": "trap_line_feed",
+    "pair": "TRAP_A1",
+    "polarity": "N",
+    "model": "differential"
+   },
+   {
+    "name": "ACC_A1_P",
+    "x": 0.0,
+    "y": 134.5,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "W",
+    "gap": 0.5,
+    "kind": "accelerator_line_feed",
+    "pair": "ACC_A1",
+    "polarity": "P",
+    "model": "differential"
+   },
+   {
+    "name": "ACC_A1_N",
+    "x": 0.0,
+    "y": 133.5,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "W",
+    "gap": 0.5,
+    "kind": "accelerator_line_feed",
+    "pair": "ACC_A1",
+    "polarity": "N",
+    "model": "differential"
+   },
+   {
+    "name": "RO_CATCHER_B1_SHORT",
+    "x": 104.5618,
+    "y": 140.0,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "E",
+    "kind": "internal_short",
+    "note": "line shorted to ground next to the loop (inside the block; not routable)"
+   },
+   {
+    "name": "RO_CATCHER_B1",
+    "x": 0.0,
+    "y": 115.0,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "W",
+    "gap": 0.5,
+    "kind": "catcher_readout_coupling"
+   },
+   {
+    "name": "GATE_BSB_AN",
+    "x": 0.0,
+    "y": 95.0,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "W",
+    "gap": 0.5,
+    "kind": "bs_island_gate"
+   },
+   {
+    "name": "RO_CATCHER_B0_SHORT",
+    "x": 104.5618,
+    "y": 130.0,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "E",
+    "kind": "internal_short",
+    "note": "line shorted to ground next to the loop (inside the block; not routable)"
+   },
+   {
+    "name": "RO_CATCHER_B0",
+    "x": 0.0,
+    "y": 75.0,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "W",
+    "gap": 0.5,
+    "kind": "catcher_readout_coupling"
+   },
+   {
+    "name": "RO_CATCHER_A0_SHORT",
+    "x": 1889.4382,
+    "y": 160.0,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "W",
+    "kind": "internal_short",
+    "note": "line shorted to ground next to the loop (inside the block; not routable)"
+   },
+   {
+    "name": "RO_CATCHER_A0",
+    "x": 1994.0,
+    "y": 215.0,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "E",
+    "gap": 0.5,
+    "kind": "catcher_readout_coupling"
+   },
+   {
+    "name": "GATE_BSA_AN",
+    "x": 1994.0,
+    "y": 195.0,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "E",
+    "gap": 0.5,
+    "kind": "bs_island_gate"
+   },
+   {
+    "name": "RO_CATCHER_A1_SHORT",
+    "x": 1889.4382,
+    "y": 150.0,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "W",
+    "kind": "internal_short",
+    "note": "line shorted to ground next to the loop (inside the block; not routable)"
+   },
+   {
+    "name": "RO_CATCHER_A1",
+    "x": 1994.0,
+    "y": 175.0,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "E",
+    "gap": 0.5,
+    "kind": "catcher_readout_coupling"
+   },
+   {
+    "name": "ACC_B1_N",
+    "x": 1994.0,
+    "y": 156.5,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "E",
+    "gap": 0.5,
+    "kind": "accelerator_line_feed",
+    "pair": "ACC_B1",
+    "polarity": "N",
+    "model": "differential"
+   },
+   {
+    "name": "ACC_B1_P",
+    "x": 1994.0,
+    "y": 155.5,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "E",
+    "gap": 0.5,
+    "kind": "accelerator_line_feed",
+    "pair": "ACC_B1",
+    "polarity": "P",
+    "model": "differential"
+   },
+   {
+    "name": "TRAP_B1_N",
+    "x": 1994.0,
+    "y": 154.5,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "E",
+    "gap": 0.5,
+    "kind": "trap_line_feed",
+    "pair": "TRAP_B1",
+    "polarity": "N",
+    "model": "differential"
+   },
+   {
+    "name": "TRAP_B1_P",
+    "x": 1994.0,
+    "y": 153.5,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "E",
+    "gap": 0.5,
+    "kind": "trap_line_feed",
+    "pair": "TRAP_B1",
+    "polarity": "P",
+    "model": "differential"
+   },
+   {
+    "name": "LOAD_B1_SHORT",
+    "x": 1880.0382,
+    "y": 140.0,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "W",
+    "kind": "internal_short",
+    "note": "line shorted to ground next to the loop (inside the block; not routable)"
+   },
+   {
+    "name": "LOAD_B1",
+    "x": 1994.0,
+    "y": 135.0,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "E",
+    "gap": 0.5,
+    "kind": "load_loop_flux_line"
+   },
+   {
+    "name": "GATE_BSB_PREP",
+    "x": 1994.0,
+    "y": 115.0,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "E",
+    "gap": 0.5,
+    "kind": "bs_island_gate"
+   },
+   {
+    "name": "LOAD_B0_SHORT",
+    "x": 1880.0382,
+    "y": 130.0,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "W",
+    "kind": "internal_short",
+    "note": "line shorted to ground next to the loop (inside the block; not routable)"
+   },
+   {
+    "name": "LOAD_B0",
+    "x": 1994.0,
+    "y": 95.0,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "E",
+    "gap": 0.5,
+    "kind": "load_loop_flux_line"
+   },
+   {
+    "name": "TRAP_B0_P",
+    "x": 1994.0,
+    "y": 76.875,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "E",
+    "gap": 0.5,
+    "kind": "trap_line_feed",
+    "pair": "TRAP_B0",
+    "polarity": "P",
+    "model": "differential"
+   },
+   {
+    "name": "TRAP_B0_N",
+    "x": 1994.0,
+    "y": 75.375,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "E",
+    "gap": 0.5,
+    "kind": "trap_line_feed",
+    "pair": "TRAP_B0",
+    "polarity": "N",
+    "model": "differential"
+   },
+   {
+    "name": "ACC_B0_P",
+    "x": 1994.0,
+    "y": 74.375,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "E",
+    "gap": 0.5,
+    "kind": "accelerator_line_feed",
+    "pair": "ACC_B0",
+    "polarity": "P",
+    "model": "differential"
+   },
+   {
+    "name": "ACC_B0_N",
+    "x": 1994.0,
+    "y": 73.375,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 0.5,
+    "direction": "E",
+    "gap": 0.5,
+    "kind": "accelerator_line_feed",
+    "pair": "ACC_B0",
+    "polarity": "N",
+    "model": "differential"
+   },
+   {
+    "name": "GND_N",
+    "x": 997.0,
+    "y": 290.0,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 40.0,
+    "direction": "N",
+    "kind": "ground"
+   },
+   {
+    "name": "GND_S",
+    "x": 997.0,
+    "y": 0.0,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 40.0,
+    "direction": "S",
+    "kind": "ground"
+   },
+   {
+    "name": "GND_W_TOP",
+    "x": 0.0,
+    "y": 270.0,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 40.0,
+    "direction": "W",
+    "kind": "ground"
+   },
+   {
+    "name": "GND_E_TOP",
+    "x": 1994.0,
+    "y": 270.0,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 40.0,
+    "direction": "E",
+    "kind": "ground"
+   },
+   {
+    "name": "GND_W_BOT",
+    "x": 0.0,
+    "y": 20.0,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 40.0,
+    "direction": "W",
+    "kind": "ground"
+   },
+   {
+    "name": "GND_E_BOT",
+    "x": 1994.0,
+    "y": 20.0,
+    "layer": [
+     1,
+     0
+    ],
+    "width": 40.0,
+    "direction": "E",
+    "kind": "ground"
+   }
+  ],
+  "sizing_key": "d1b8a1f2a7001e78",
+  "status": "PRELIMINARY - DRC + EM-extraction verified row block (hardware/drc.py, hardware/extract.py); not a full die"
+ },
+ "layout_verification": {
+  "passed": false,
+  "drc_violations": 608,
+  "junctions": {
+   "found": {
+    "rail": 5268,
+    "middle": 304
+   },
+   "expected": {
+    "rail": 5268,
+    "middle": 304
+   },
+   "contacts": 848,
+   "targets_um2": {
+    "rail": 0.03834961023335331,
+    "middle": 0.012924735899042175
+   }
+  },
+  "summary": {
+   "node capacitance (Cj + geometric, k = 0)": {
+    "checked": 116,
+    "failed": 3,
+    "worst": {
+     "extracted": 2.7577253169896223,
+     "target": 2.4212786655823906,
+     "rel_dev": 0.13895412212964184,
+     "passed": false,
+     "quantity": "node capacitance (Cj + geometric, k = 0)",
+     "where": "B0 n=359 [taper_in g=0.161]",
+     "informational": false
+    },
+    "informational": false
+   },
+   "node shunt to ground/return (geometric, excl. coupled partner) [informational: the requirement is the total node capacitance]": {
+    "checked": 114,
+    "failed": 64,
+    "worst": {
+     "extracted": 0.8063339519557676,
+     "target": 0.46978611636835743,
+     "rel_dev": 0.7163852311964118,
+     "passed": false,
+     "quantity": "node shunt to ground/return (geometric, excl. coupled partner) [informational: the requirement is the total node capacitance]",
+     "where": "B1 n=359 [taper_in g=0.161]",
+     "informational": true
+    },
+    "informational": true
+   },
+   "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)": {
+    "checked": 370,
+    "failed": 0,
+    "worst": {
+     "extracted": 0.025635324681774742,
+     "target": 0.0,
+     "deviation": 0.025635324681774742,
+     "tolerance_abs": 0.12106393327911953,
+     "passed": true,
+     "quantity": "stray capacitance within a qubit / to a dummy (<= 5 % of C_node)",
+     "where": "B1-B0 n=587 [beam splitter A BS_analysis]",
+     "informational": false
+    },
+    "informational": false
+   },
+   "stray capacitance between the qubits (A row - B row) (<= 5 % of C_c)": {
+    "checked": 128,
+    "failed": 0,
+    "worst": {
+     "extracted": 0.01013377084903995,
+     "target": 0.0,
+     "deviation": 0.01013377084903995,
+     "tolerance_abs": 0.01058907736345818,
+     "passed": true,
+     "quantity": "stray capacitance between the qubits (A row - B row) (<= 5 % of C_c)",
+     "where": "B1-A1 n=587 [beam splitter A BS_analysis]",
+     "informational": false
+    },
+    "informational": false
+   },
+   "C_c (coupling capacitance, k = 0 sum over partner nodes)": {
+    "checked": 3,
+    "failed": 0,
+    "worst": {
+     "extracted": 0.21440899644861228,
+     "target": 0.2117815472691636,
+     "rel_dev": 0.01240641223623382,
+     "passed": true,
+     "quantity": "C_c (coupling capacitance, k = 0 sum over partner nodes)",
+     "where": "D_B-B0 n=439",
+     "informational": false
+    },
+    "informational": false
+   },
+   "C_c taper profile (|C_c - g C_c| <= 5 % of C_c)": {
+    "checked": 33,
+    "failed": 0,
+    "worst": {
+     "extracted": 0.09168371442863289,
+     "target": 0.1017335213711029,
+     "deviation": -0.010049806942470013,
+     "tolerance_abs": 0.01058907736345818,
+     "passed": true,
+     "quantity": "C_c taper profile (|C_c - g C_c| <= 5 % of C_c)",
+     "where": "A1-B1 n=509 g=0.480",
+     "informational": false
+    },
+    "informational": false
+   },
+   "C_M = Cj,M + island two-terminal capacitance": {
+    "checked": 1,
+    "failed": 1,
+    "worst": {
+     "extracted": 0.9473791486364673,
+     "target": 2.873717306619774,
+     "rel_dev": -0.670329734085491,
+     "passed": false,
+     "quantity": "C_M = Cj,M + island two-terminal capacitance",
+     "where": "beam-splitter middle junction",
+     "informational": false
+    },
+    "informational": false
+   },
+   "E_C,M": {
+    "checked": 1,
+    "failed": 1,
+    "worst": {
+     "extracted": 20.44612165312914,
+     "target": 6.740478362307481,
+     "rel_dev": 2.0333339199578377,
+     "passed": false,
+     "quantity": "E_C,M",
+     "where": "beam-splitter middle junction",
+     "informational": false
+    },
+    "informational": false
+   },
+   "E_S (scqubits charge dispersion / 4, as companion 2)": {
+    "checked": 1,
+    "failed": 1,
+    "worst": {
+     "extracted": 3.6343311296283964,
+     "target": 0.5811805368579656,
+     "rel_dev": 5.253360013183974,
+     "passed": false,
+     "quantity": "E_S (scqubits charge dispersion / 4, as companion 2)",
+     "where": "beam-splitter middle junction",
+     "informational": false
+    },
+    "informational": false
+   },
+   "L per cell (mesh self-inductance: kinetic + geometric), worst cell of all rows": {
+    "checked": 1,
+    "failed": 0,
+    "worst": {
+     "extracted": 653.4496878174881,
+     "target": 653.8460512271247,
+     "rel_dev": -0.0006062029569387252,
+     "passed": true,
+     "quantity": "L per cell (mesh self-inductance: kinetic + geometric), worst cell of all rows",
+     "where": "B1 n=70",
+     "informational": false
+    },
+    "informational": false
+   },
+   "L_s (shared-return mutual incl. direct magnetic coupling), plateau worst cell": {
+    "checked": 1,
+    "failed": 0,
+    "worst": {
+     "extracted": 11.671472192653729,
+     "target": 11.624334327218298,
+     "rel_dev": 0.004055102348962736,
+     "passed": true,
+     "quantity": "L_s (shared-return mutual incl. direct magnetic coupling), plateau worst cell",
+     "where": "DB n=389",
+     "informational": false
+    },
+    "informational": false
+   },
+   "k = M / L_self, plateau worst cell": {
+    "checked": 1,
+    "failed": 0,
+    "worst": {
+     "extracted": 0.017850489684458525,
+     "target": 0.017778396467183658,
+     "rel_dev": 0.004055102348962722,
+     "passed": true,
+     "quantity": "k = M / L_self, plateau worst cell",
+     "where": "DB n=389",
+     "informational": false
+    },
+    "informational": false
+   },
+   "L_s taper profile (|M - g L_s| <= 5 % of L_s), worst cell": {
+    "checked": 1,
+    "failed": 0,
+    "worst": {
+     "extracted": 0.2858832994791611,
+     "target": 0.004480970246003023,
+     "deviation": 0.28140232923315806,
+     "tolerance_abs": 0.5812167163609149,
+     "passed": true,
+     "quantity": "L_s taper profile (|M - g L_s| <= 5 % of L_s), worst cell",
+     "where": "DA n=349 g=0.000",
+     "informational": false
+    },
+    "informational": false
+   },
+   "stray mutual inductance between the qubits (<= 5 % of L_s), worst": {
+    "checked": 1,
+    "failed": 0,
+    "worst": {
+     "extracted": 0.2003165304057054,
+     "target": 0.0,
+     "deviation": 0.2003165304057054,
+     "tolerance_abs": 0.5812167163609149,
+     "passed": true,
+     "quantity": "stray mutual inductance between the qubits (<= 5 % of L_s), worst",
+     "where": "A1~B1 n=627",
+     "informational": false
+    },
+    "informational": false
+   },
+   "stray mutual inductance within a qubit / to a dummy (<= 5 % of L_s), worst": {
+    "checked": 1,
+    "failed": 0,
+    "worst": {
+     "extracted": 0.2221218194717336,
+     "target": 0.0,
+     "deviation": 0.2221218194717336,
+     "tolerance_abs": 0.5812167163609149,
+     "passed": true,
+     "quantity": "stray mutual inductance within a qubit / to a dummy (<= 5 % of L_s), worst",
+     "where": "A0~A1 n=250",
+     "informational": false
+    },
+    "informational": false
+   },
+   "launcher trap-pair M_n (|M - M_target| <= 5 % of peak, at the design current)": {
+    "checked": 4,
+    "failed": 4,
+    "worst": {
+     "extracted": 0.008332941045005099,
+     "target": 0.0,
+     "deviation": 0.008332941045005099,
+     "tolerance_abs": 0.0033238419338701888,
+     "passed": false,
+     "quantity": "launcher trap-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
+     "where": "A0",
+     "informational": false
+    },
+    "informational": false
+   },
+   "launcher accelerator-pair M_n (|M - M_target| <= 5 % of peak, at the design current)": {
+    "checked": 4,
+    "failed": 4,
+    "worst": {
+     "extracted": 0.012542393191263278,
+     "target": 0.0,
+     "deviation": 0.012542393191263278,
+     "tolerance_abs": 0.003919210304273666,
+     "passed": false,
+     "quantity": "launcher accelerator-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
+     "where": "B0",
+     "informational": false
+    },
+    "informational": false
+   },
+   "node capacitance, mesh-extrapolated [informational]": {
+    "checked": 6,
+    "failed": 3,
+    "worst": {
+     "extracted": 2.5846689800119225,
+     "target": 2.4212786655823906,
+     "rel_dev": 0.06748100363335569,
+     "passed": false,
+     "quantity": "node capacitance, mesh-extrapolated [informational]",
+     "where": "B1 coupler plateau",
+     "informational": true
+    },
+    "informational": true
+   },
+   "C_c, mesh-extrapolated [informational]": {
+    "checked": 1,
+    "failed": 0,
+    "worst": {
+     "extracted": 0.22168890403928104,
+     "target": 0.2117815472691636,
+     "rel_dev": 0.046781019866313944,
+     "passed": true,
+     "quantity": "C_c, mesh-extrapolated [informational]",
+     "where": "coupler plateau",
+     "informational": true
+    },
+    "informational": true
+   }
+  },
+  "failed": [
+   {
+    "extracted": 2.757292689664076,
+    "target": 2.4212786655823906,
+    "rel_dev": 0.13877544491594654,
+    "passed": false,
+    "quantity": "node capacitance (Cj + geometric, k = 0)",
+    "where": "D_A n=359 [taper_in g=0.161]",
+    "informational": false
+   },
+   {
+    "extracted": 2.7576725274676117,
+    "target": 2.4212786655823906,
+    "rel_dev": 0.1389323197973614,
+    "passed": false,
+    "quantity": "node capacitance (Cj + geometric, k = 0)",
+    "where": "B1 n=359 [taper_in g=0.161]",
+    "informational": false
+   },
+   {
+    "extracted": 2.7577253169896223,
+    "target": 2.4212786655823906,
+    "rel_dev": 0.13895412212964184,
+    "passed": false,
+    "quantity": "node capacitance (Cj + geometric, k = 0)",
+    "where": "B0 n=359 [taper_in g=0.161]",
+    "informational": false
+   },
+   {
+    "extracted": 0.9473791486364673,
+    "target": 2.873717306619774,
+    "rel_dev": -0.670329734085491,
+    "passed": false,
+    "quantity": "C_M = Cj,M + island two-terminal capacitance",
+    "where": "beam-splitter middle junction",
+    "informational": false
+   },
+   {
+    "extracted": 20.44612165312914,
+    "target": 6.740478362307481,
+    "rel_dev": 2.0333339199578377,
+    "passed": false,
+    "quantity": "E_C,M",
+    "where": "beam-splitter middle junction",
+    "informational": false
+   },
+   {
+    "extracted": 3.6343311296283964,
+    "target": 0.5811805368579656,
+    "rel_dev": 5.253360013183974,
+    "passed": false,
+    "quantity": "E_S (scqubits charge dispersion / 4, as companion 2)",
+    "where": "beam-splitter middle junction",
+    "informational": false
+   },
+   {
+    "extracted": 0.008332941045005099,
+    "target": 0.0,
+    "deviation": 0.008332941045005099,
+    "tolerance_abs": 0.0033238419338701888,
+    "passed": false,
+    "quantity": "launcher trap-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
+    "where": "A0",
+    "informational": false
+   },
+   {
+    "extracted": 0.012542389983800008,
+    "target": 0.0,
+    "deviation": 0.012542389983800008,
+    "tolerance_abs": 0.003919210304273666,
+    "passed": false,
+    "quantity": "launcher accelerator-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
+    "where": "A0",
+    "informational": false
+   },
+   {
+    "extracted": 0.006062612415228581,
+    "target": 0.0,
+    "deviation": 0.006062612415228581,
+    "tolerance_abs": 0.0033238419338701888,
+    "passed": false,
+    "quantity": "launcher trap-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
+    "where": "A1",
+    "informational": false
+   },
+   {
+    "extracted": 0.010207703477017951,
+    "target": 0.0,
+    "deviation": 0.010207703477017951,
+    "tolerance_abs": 0.003919210304273666,
+    "passed": false,
+    "quantity": "launcher accelerator-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
+    "where": "A1",
+    "informational": false
+   },
+   {
+    "extracted": 0.006062118808159201,
+    "target": 0.0,
+    "deviation": 0.006062118808159201,
+    "tolerance_abs": 0.0033238419338701888,
+    "passed": false,
+    "quantity": "launcher trap-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
+    "where": "B1",
+    "informational": false
+   },
+   {
+    "extracted": 0.01020769933775659,
+    "target": 0.0,
+    "deviation": 0.01020769933775659,
+    "tolerance_abs": 0.003919210304273666,
+    "passed": false,
+    "quantity": "launcher accelerator-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
+    "where": "B1",
+    "informational": false
+   },
+   {
+    "extracted": 0.008332903835660783,
+    "target": 0.0,
+    "deviation": 0.008332903835660783,
+    "tolerance_abs": 0.0033238419338701888,
+    "passed": false,
+    "quantity": "launcher trap-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
+    "where": "B0",
+    "informational": false
+   },
+   {
+    "extracted": 0.012542393191263278,
+    "target": 0.0,
+    "deviation": 0.012542393191263278,
+    "tolerance_abs": 0.003919210304273666,
+    "passed": false,
+    "quantity": "launcher accelerator-pair M_n (|M - M_target| <= 5 % of peak, at the design current)",
+    "where": "B0",
+    "informational": false
+   }
+  ]
  },
  "energy_retention": [
   {
@@ -286,10 +2054,11 @@
   }
  ],
  "constraints": {
-  "flight_time_ns": 1.0121763767680165,
-  "cells_per_row": 362,
+  "flight_time_ns": 2.454947123763311,
+  "cells_per_row": 878,
+  "dual_rail_cells": 374,
   "speed_cells_per_ns": 357.6451775686598,
-  "budget_at_optimum": {
+  "budget_thermal_source_C": {
    "beta": 0.45,
    "k": 0.01811257230155948,
    "c": 0.08947415485242141,
@@ -313,8 +2082,64 @@
    "velocity_spread_rel": 0.04285065682388046,
    "v_cells_per_ns": 357.6451775686598
   },
+  "budget_launcher": {
+   "beta": 0.45,
+   "k": 0.01811257230155948,
+   "c": 0.08947415485242141,
+   "parts": {
+    "gate_thermal": 4.006322940064422e-09,
+    "disorder_dephasing": 0.0012890857474785467,
+    "damping": 0.0019059427360712533,
+    "timing": 0.0,
+    "coupler": 0.0,
+    "launched_packet_2D": 1.1167693902969233e-07
+   },
+   "total": 0.0031951441668117697,
+   "phi01_rms_rad": 5.574052884554708,
+   "p_dephase_disorder": 0.0016120068258498321,
+   "p_dephase_damping": 0.002383849104227056,
+   "thermal_overlap": {
+    "re": -0.9999999866455905,
+    "im": -8.500351786338807e-09,
+    "abs": 0.9999999866455905,
+    "arg": -3.141592645089441
+   },
+   "velocity_spread_rel": 0.010198890048302423,
+   "v_cells_per_ns": 357.6451775686598,
+   "launch_model": "launcher model"
+  },
+  "budget_thermal_source_same_geometry": {
+   "beta": 0.45,
+   "k": 0.01811257230155948,
+   "c": 0.08947415485242141,
+   "parts": {
+    "gate_thermal": 1.2582600110722097e-06,
+    "disorder_dephasing": 0.021738164951470074,
+    "damping": 0.0019059427360712533,
+    "timing": 0.0,
+    "coupler": 0.0
+   },
+   "total": 0.0236453659475524,
+   "phi01_rms_rad": 5.574052884554708,
+   "p_dephase_disorder": 0.02735984648931733,
+   "p_dephase_damping": 0.002383849104227056,
+   "thermal_overlap": {
+    "re": -0.9999958057999634,
+    "im": -2.662495875947586e-06,
+    "abs": 0.9999958058035079,
+    "arg": -3.1415899910827503
+   },
+   "velocity_spread_rel": 0.04285065682388046,
+   "v_cells_per_ns": 357.6451775686598,
+   "launch_model": "thermal source"
+  },
+  "launch_speed_spread": {
+   "launcher": 0.010198890048302423,
+   "thermal_source": 0.04285065682388046
+  },
   "disorder_length_scan": [
    {
+    "launch": "thermal source",
     "sigma": 0.005,
     "n_cells": 150,
     "total": 0.0013372593349919581,
@@ -327,30 +2152,33 @@
     }
    },
    {
+    "launch": "thermal source",
     "sigma": 0.005,
-    "n_cells": 300,
-    "total": 0.00267146888535863,
+    "n_cells": 374,
+    "total": 0.0033290207451206477,
     "parts": {
      "gate_thermal": 1.2582600110722097e-06,
-     "disorder_dephasing": 0.0011411991699334934,
-     "damping": 0.0015290114554140644,
+     "disorder_dephasing": 0.0014218197490383222,
+     "damping": 0.0019059427360712533,
      "timing": 0.0,
      "coupler": 0.0
     }
    },
    {
+    "launch": "thermal source",
     "sigma": 0.005,
-    "n_cells": 362,
-    "total": 0.003222420211952959,
+    "n_cells": 450,
+    "total": 0.004003892567817746,
     "parts": {
      "gate_thermal": 1.2582600110722097e-06,
-     "disorder_dephasing": 0.0013763371620368892,
-     "damping": 0.0018448247899049974,
+     "disorder_dephasing": 0.0017096655886353895,
+     "damping": 0.0022929687191712844,
      "timing": 0.0,
      "coupler": 0.0
     }
    },
    {
+    "launch": "thermal source",
     "sigma": 0.01,
     "n_cells": 150,
     "total": 0.0030426642171749174,
@@ -363,30 +2191,33 @@
     }
    },
    {
+    "launch": "thermal source",
     "sigma": 0.01,
-    "n_cells": 300,
-    "total": 0.006061159870799915,
+    "n_cells": 374,
+    "total": 0.007541953722159045,
     "parts": {
      "gate_thermal": 1.2582600110722097e-06,
-     "disorder_dephasing": 0.004530890155374778,
-     "damping": 0.0015290114554140644,
+     "disorder_dephasing": 0.005634752726076719,
+     "damping": 0.0019059427360712533,
      "timing": 0.0,
      "coupler": 0.0
     }
    },
    {
+    "launch": "thermal source",
     "sigma": 0.01,
-    "n_cells": 362,
-    "total": 0.007302196180893561,
+    "n_cells": 450,
+    "total": 0.009057098558170718,
     "parts": {
      "gate_thermal": 1.2582600110722097e-06,
-     "disorder_dephasing": 0.005456113130977491,
-     "damping": 0.0018448247899049974,
+     "disorder_dephasing": 0.006762871578988361,
+     "damping": 0.0022929687191712844,
      "timing": 0.0,
      "coupler": 0.0
     }
    },
    {
+    "launch": "thermal source",
     "sigma": 0.02,
     "n_cells": 150,
     "total": 0.00973895429864824,
@@ -399,25 +2230,144 @@
     }
    },
    {
+    "launch": "thermal source",
     "sigma": 0.02,
-    "n_cells": 300,
-    "total": 0.01913202962625926,
+    "n_cells": 374,
+    "total": 0.0236453659475524,
     "parts": {
      "gate_thermal": 1.2582600110722097e-06,
-     "disorder_dephasing": 0.017601759910834125,
-     "damping": 0.0015290114554140644,
+     "disorder_dephasing": 0.021738164951470074,
+     "damping": 0.0019059427360712533,
      "timing": 0.0,
      "coupler": 0.0
     }
    },
    {
+    "launch": "thermal source",
     "sigma": 0.02,
-    "n_cells": 362,
-    "total": 0.02291873194092331,
+    "n_cells": 450,
+    "total": 0.028201050879641865,
     "parts": {
      "gate_thermal": 1.2582600110722097e-06,
-     "disorder_dephasing": 0.02107264889100724,
-     "damping": 0.0018448247899049974,
+     "disorder_dephasing": 0.025906823900459508,
+     "damping": 0.0022929687191712844,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "launch": "launcher",
+    "sigma": 0.005,
+    "n_cells": 150,
+    "total": 0.0007970949323621301,
+    "parts": {
+     "gate_thermal": 4.006322940064422e-09,
+     "disorder_dephasing": 3.240237701551685e-05,
+     "damping": 0.0007646885490236732,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "launch": "launcher",
+    "sigma": 0.005,
+    "n_cells": 374,
+    "total": 0.0019867281186878305,
+    "parts": {
+     "gate_thermal": 4.006322940064422e-09,
+     "disorder_dephasing": 8.078137629363713e-05,
+     "damping": 0.0019059427360712533,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "launch": "launcher",
+    "sigma": 0.005,
+    "n_cells": 450,
+    "total": 0.002390166078611422,
+    "parts": {
+     "gate_thermal": 4.006322940064422e-09,
+     "disorder_dephasing": 9.719335311719757e-05,
+     "damping": 0.0022929687191712844,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "launch": "launcher",
+    "sigma": 0.01,
+    "n_cells": 150,
+    "total": 0.000894274509622095,
+    "parts": {
+     "gate_thermal": 4.006322940064422e-09,
+     "disorder_dephasing": 0.0001295819542754817,
+     "damping": 0.0007646885490236732,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "launch": "launcher",
+    "sigma": 0.01,
+    "n_cells": 374,
+    "total": 0.0022289010497774653,
+    "parts": {
+     "gate_thermal": 4.006322940064422e-09,
+     "disorder_dephasing": 0.0003229543073832719,
+     "damping": 0.0019059427360712533,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "launch": "launcher",
+    "sigma": 0.01,
+    "n_cells": 450,
+    "total": 0.00268149834025877,
+    "parts": {
+     "gate_thermal": 4.006322940064422e-09,
+     "disorder_dephasing": 0.0003885256147645455,
+     "damping": 0.0022929687191712844,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "launch": "launcher",
+    "sigma": 0.02,
+    "n_cells": 150,
+    "total": 0.0012825800087032935,
+    "parts": {
+     "gate_thermal": 4.006322940064422e-09,
+     "disorder_dephasing": 0.0005178874533566802,
+     "damping": 0.0007646885490236732,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "launch": "launcher",
+    "sigma": 0.02,
+    "n_cells": 374,
+    "total": 0.00319503248987274,
+    "parts": {
+     "gate_thermal": 4.006322940064422e-09,
+     "disorder_dephasing": 0.0012890857474785467,
+     "damping": 0.0019059427360712533,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "launch": "launcher",
+    "sigma": 0.02,
+    "n_cells": 450,
+    "total": 0.003843123792657166,
+    "parts": {
+     "gate_thermal": 4.006322940064422e-09,
+     "disorder_dephasing": 0.0015501510671629415,
+     "damping": 0.0022929687191712844,
      "timing": 0.0,
      "coupler": 0.0
     }
@@ -425,6 +2375,7 @@
   ],
   "required_for_99pct": [
    {
+    "launch": "thermal source",
     "sigma": 0.005,
     "n_cells": 150,
     "total": 0.0013372593349919581,
@@ -437,30 +2388,33 @@
     }
    },
    {
+    "launch": "thermal source",
     "sigma": 0.005,
-    "n_cells": 300,
-    "total": 0.00267146888535863,
+    "n_cells": 374,
+    "total": 0.0033290207451206477,
     "parts": {
      "gate_thermal": 1.2582600110722097e-06,
-     "disorder_dephasing": 0.0011411991699334934,
-     "damping": 0.0015290114554140644,
+     "disorder_dephasing": 0.0014218197490383222,
+     "damping": 0.0019059427360712533,
      "timing": 0.0,
      "coupler": 0.0
     }
    },
    {
+    "launch": "thermal source",
     "sigma": 0.005,
-    "n_cells": 362,
-    "total": 0.003222420211952959,
+    "n_cells": 450,
+    "total": 0.004003892567817746,
     "parts": {
      "gate_thermal": 1.2582600110722097e-06,
-     "disorder_dephasing": 0.0013763371620368892,
-     "damping": 0.0018448247899049974,
+     "disorder_dephasing": 0.0017096655886353895,
+     "damping": 0.0022929687191712844,
      "timing": 0.0,
      "coupler": 0.0
     }
    },
    {
+    "launch": "thermal source",
     "sigma": 0.01,
     "n_cells": 150,
     "total": 0.0030426642171749174,
@@ -473,30 +2427,33 @@
     }
    },
    {
+    "launch": "thermal source",
     "sigma": 0.01,
-    "n_cells": 300,
-    "total": 0.006061159870799915,
+    "n_cells": 374,
+    "total": 0.007541953722159045,
     "parts": {
      "gate_thermal": 1.2582600110722097e-06,
-     "disorder_dephasing": 0.004530890155374778,
-     "damping": 0.0015290114554140644,
+     "disorder_dephasing": 0.005634752726076719,
+     "damping": 0.0019059427360712533,
      "timing": 0.0,
      "coupler": 0.0
     }
    },
    {
+    "launch": "thermal source",
     "sigma": 0.01,
-    "n_cells": 362,
-    "total": 0.007302196180893561,
+    "n_cells": 450,
+    "total": 0.009057098558170718,
     "parts": {
      "gate_thermal": 1.2582600110722097e-06,
-     "disorder_dephasing": 0.005456113130977491,
-     "damping": 0.0018448247899049974,
+     "disorder_dephasing": 0.006762871578988361,
+     "damping": 0.0022929687191712844,
      "timing": 0.0,
      "coupler": 0.0
     }
    },
    {
+    "launch": "thermal source",
     "sigma": 0.02,
     "n_cells": 150,
     "total": 0.00973895429864824,
@@ -504,6 +2461,123 @@
      "gate_thermal": 1.2582600110722097e-06,
      "disorder_dephasing": 0.008973007489613494,
      "damping": 0.0007646885490236732,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "launch": "launcher",
+    "sigma": 0.005,
+    "n_cells": 150,
+    "total": 0.0007970949323621301,
+    "parts": {
+     "gate_thermal": 4.006322940064422e-09,
+     "disorder_dephasing": 3.240237701551685e-05,
+     "damping": 0.0007646885490236732,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "launch": "launcher",
+    "sigma": 0.005,
+    "n_cells": 374,
+    "total": 0.0019867281186878305,
+    "parts": {
+     "gate_thermal": 4.006322940064422e-09,
+     "disorder_dephasing": 8.078137629363713e-05,
+     "damping": 0.0019059427360712533,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "launch": "launcher",
+    "sigma": 0.005,
+    "n_cells": 450,
+    "total": 0.002390166078611422,
+    "parts": {
+     "gate_thermal": 4.006322940064422e-09,
+     "disorder_dephasing": 9.719335311719757e-05,
+     "damping": 0.0022929687191712844,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "launch": "launcher",
+    "sigma": 0.01,
+    "n_cells": 150,
+    "total": 0.000894274509622095,
+    "parts": {
+     "gate_thermal": 4.006322940064422e-09,
+     "disorder_dephasing": 0.0001295819542754817,
+     "damping": 0.0007646885490236732,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "launch": "launcher",
+    "sigma": 0.01,
+    "n_cells": 374,
+    "total": 0.0022289010497774653,
+    "parts": {
+     "gate_thermal": 4.006322940064422e-09,
+     "disorder_dephasing": 0.0003229543073832719,
+     "damping": 0.0019059427360712533,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "launch": "launcher",
+    "sigma": 0.01,
+    "n_cells": 450,
+    "total": 0.00268149834025877,
+    "parts": {
+     "gate_thermal": 4.006322940064422e-09,
+     "disorder_dephasing": 0.0003885256147645455,
+     "damping": 0.0022929687191712844,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "launch": "launcher",
+    "sigma": 0.02,
+    "n_cells": 150,
+    "total": 0.0012825800087032935,
+    "parts": {
+     "gate_thermal": 4.006322940064422e-09,
+     "disorder_dephasing": 0.0005178874533566802,
+     "damping": 0.0007646885490236732,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "launch": "launcher",
+    "sigma": 0.02,
+    "n_cells": 374,
+    "total": 0.00319503248987274,
+    "parts": {
+     "gate_thermal": 4.006322940064422e-09,
+     "disorder_dephasing": 0.0012890857474785467,
+     "damping": 0.0019059427360712533,
+     "timing": 0.0,
+     "coupler": 0.0
+    }
+   },
+   {
+    "launch": "launcher",
+    "sigma": 0.02,
+    "n_cells": 450,
+    "total": 0.003843123792657166,
+    "parts": {
+     "gate_thermal": 4.006322940064422e-09,
+     "disorder_dephasing": 0.0015501510671629415,
+     "damping": 0.0022929687191712844,
      "timing": 0.0,
      "coupler": 0.0
     }
@@ -517,17 +2591,17 @@
    {
     "check": "circuit parameters inside demonstrated fabrication ranges (junction >= 0.01 um^2, C_c >= 0.1 fF, L_s >= 1 pH, granular Al >= 1 square)",
     "passed": true,
-    "detail": "rail JJ 0.038 um^2, middle JJ 0.024 um^2, C_c 0.21 fF, L_s 11.6 pH, grAl 1.31 sq"
+    "detail": "rail JJ 0.038 um^2, middle JJ 0.013 um^2, C_c 0.21 fF, L_s 11.6 pH, grAl 1.31 sq"
    },
    {
-    "check": "complete netlist with no floating nodes; every logical row has an injector and a catcher",
+    "check": "complete netlist with no floating nodes; every logical row has a launcher (load loop, trap and accelerator flux lines) and a catcher",
     "passed": true,
-    "detail": "8082 elements, 2877 nodes, isolated 0"
+    "detail": "19634 elements, 7341 nodes, isolated 0"
    },
    {
     "check": "flight time << coherence times reported for vortex qubits (us range)",
     "passed": true,
-    "detail": "1.01 ns per pass"
+    "detail": "2.45 ns per pass"
    },
    {
     "check": "energy: kinetic energy retained through the gate (couplers + collision) > 99.9 % without damping",
@@ -536,18 +2610,28 @@
    },
    {
     "check": "error budget at the optimum < 1 % with 2 % junction disorder, 20 mK launch, 10 ps jitter (realistic assumptions)",
-    "passed": false,
-    "detail": "total 0.0191: gate_thermal 1.3e-06, disorder_dephasing 1.8e-02, damping 1.5e-03, timing 0.0e+00, coupler 0.0e+00"
+    "passed": true,
+    "detail": "total 0.0032 with the modelled launcher (rms dv/v 0.0102, 374 dual-rail cells): gate_thermal 4.0e-09, disorder_dephasing 1.3e-03, damping 1.9e-03, timing 0.0e+00, coupler 0.0e+00, launched_packet_2D 1.1e-07; a thermal-source launch (dv/v 0.0429) would give 0.0236"
    },
    {
     "check": "coherent single-fluxon launcher derived (timing <= 10 ps, thermal-limited speed spread)",
-    "passed": false,
-    "detail": "UNRESOLVED: injector pulse + accelerator proposed, motional-state preparation not modelled"
+    "passed": true,
+    "detail": "flux-bias trap (3.0 GHz) + flux-gradient accelerator, no bias taps: quantum launch at 20 mK dv/v 0.0102 (thermal source 0.0429), packet 13.8 cells; circuit: one fluxon (winding 1.0005), beta 0.4500 after a 1.5 % amplitude trim, radiation 0.127 GHz; relative timing jitter 3.2 ps (assumed 2 ps trigger); 2D gate with launched packets F_avg 1.000000"
    },
    {
     "check": "layout verified (DRC, EM extraction of k, c, E_S)",
     "passed": false,
-    "detail": "NOT DONE: preliminary layout only"
+    "detail": "DRC 608 violations ({'found': {'rail': 5268, 'middle': 304}, 'expected': {'rail': 5268, 'middle': 304}, 'contacts': 848, 'targets_um2': {'rail': 0.03834961023335331, 'middle': 0.012924735899042175}}); extraction: node capacitance (Cj + geometric, k = 0): 3/116 failed, node shunt to ground/return (geometric, excl. coupled partner) [informational: the requirement is the total node capacitance]: 64/114 failed, stray capacitance within a qubit / to a dummy (<= 5 % of C_node): 0/370 failed, stray capacitance between the qubits (A row - B row) (<= 5 % of C_c): 0/128 failed, C_c (coupling capacitance, k = 0 sum over partner nodes): 0/3 failed, C_c taper profile (|C_c - g C_c| <= 5 % of C_c): 0/33 failed, C_M = Cj,M + island two-terminal capacitance: 1/1 failed, E_C,M: 1/1 failed, E_S (scqubits charge dispersion / 4, as companion 2): 1/1 failed, L per cell (mesh self-inductance: kinetic + geometric), worst cell of all rows: 0/1 failed, L_s (shared-return mutual incl. direct magnetic coupling), plateau worst cell: 0/1 failed, k = M / L_self, plateau worst cell: 0/1 failed, L_s taper profile (|M - g L_s| <= 5 % of L_s), worst cell: 0/1 failed, stray mutual inductance between the qubits (<= 5 % of L_s), worst: 0/1 failed, stray mutual inductance within a qubit / to a dummy (<= 5 % of L_s), worst: 0/1 failed, launcher trap-pair M_n (|M - M_target| <= 5 % of peak, at the design current): 4/4 failed, launcher accelerator-pair M_n (|M - M_target| <= 5 % of peak, at the design current): 4/4 failed, node capacitance, mesh-extrapolated [informational]: 3/6 failed, C_c, mesh-extrapolated [informational]: 0/1 failed"
+   },
+   {
+    "check": "die floorplan complete and DRC-clean (10 mm die: pads per circuits/die_pads.json, CPW routing, readout, frame)",
+    "passed": false,
+    "detail": "NOT DONE: die floorplan not built yet"
+   },
+   {
+    "check": "carrier PCB: DRC clean, schematic = PCB netlist, 50 ohm +-5 %, A/B timing pairs matched, filter cut-offs met",
+    "passed": true,
+    "detail": "pcbnew DRC clean: True; sch-vs-PCB mismatches 0 (44 parts, 35 nets); GCPW 52.0 ohm (formula) / 47.7 ohm (field solve); max A/B skew 0.0000 mm"
    }
   ]
  },
@@ -556,25 +2640,31 @@
    "rail E_J, E_C, Lambda (quantum fluxon regime)",
    "coupler k = 0.01778, c = 0.0875 at beta = 0.45 (2D calibrated)",
    "conditional phase pi, sweet spot, reflection < 1e-6",
-   "energy retention through the gate"
+   "energy retention through the gate",
+   "coherent launcher: quantum + circuit launch, timing, 2D gate with launched packets (results/D_launcher.json)"
+  ],
+  "validated_by_extraction": [
+   "drawn k, c, L, L_s, node capacitances, C_eff of the middle junction, E_S, strays (circuits/extraction.json)",
+   "DRC of the drawn row block (circuits/drc_report.json)"
   ],
   "proposed": [
-   "granular-Al rail inductors 0.66 nH/cell",
+   "granular-Al rail inductors 0.65 nH/cell",
    "thin-Al shared strip",
-   "crossover coupling capacitors",
-   "middle-rail junctions E_J/E_C = 2",
+   "AL1/SiNx/AL2 crossover coupling capacitors",
+   "middle-rail junctions E_J/E_C,eff = 2 (network-loaded)",
    "catcher loops with dispersive readout",
-   "dummy couplers"
+   "dummy couplers",
+   "flux-line control (trap / accelerator) with fast edges",
+   "carrier PCB (pcb/)"
   ],
   "unknown_or_unresolved": [
-   "coherent single-fluxon launcher (motional state, timing)",
-   "junction disorder below 1 %",
+   "quasiparticle and dielectric damping alpha at 20 mK (needs <= 1.2e-5)",
+   "material parameters for the extraction (grAl and thin-Al sheet inductance, SiNx thickness): in-situ calibration",
    "charge stability of beam-splitter islands",
-   "quasiparticle and dielectric damping alpha at 20 mK",
-   "EM-extracted k, c, E_S of the drawn geometry",
-   "vortex hopping beyond the single-junction phase-slip estimate"
+   "vortex hopping beyond the single-junction phase-slip estimate",
+   "EM simulation of the PCB launches, wire bonds and package modes"
   ]
  },
- "runtime_s": 70.1430971622467,
- "_generated": "2026-11-24 13:57:52"
+ "runtime_s": 1314.5198657512665,
+ "_generated": "2026-11-26 11:55:43"
 }

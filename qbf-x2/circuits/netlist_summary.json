@@ -1,19 +1,24 @@
 {
  "elements": {
-  "junction (rail)": 2172,
-  "capacitor (node shunt)": 2172,
-  "inductor (rail, granular Al)": 2166,
-  "injector junction": 4,
-  "injector pulse source": 4,
+  "junction (rail)": 5268,
+  "capacitor (node shunt)": 5268,
+  "inductor (rail, granular Al)": 5262,
   "catcher loop inductor": 4,
-  "accelerator bias source": 160,
   "inductor (shared coupler strip)": 540,
   "capacitor (coupler)": 540,
-  "junction (BS middle rail)": 160,
-  "capacitor (BS middle-rail shunt)": 160
+  "junction (BS middle rail)": 304,
+  "launcher load loop inductor": 4,
+  "launcher load flux source": 4,
+  "trap line source": 4,
+  "trap line inductor": 212,
+  "trap line coupling (K)": 208,
+  "control-loop bleed resistor (1 GOhm)": 8,
+  "accelerator line source": 4,
+  "accelerator line inductor": 1004,
+  "accelerator line coupling (K)": 1000
  },
- "total_elements": 8082,
- "cells_per_row": 362,
+ "total_elements": 19634,
+ "cells_per_row": 878,
  "rows": [
   "D_A",
   "A0",
@@ -28,19 +33,21 @@
   "shunt_fF": 0.5037981539147252
  },
  "junction_model_middle_rail": {
-  "Ic_nA": 50.93786979245154,
-  "Cj_fF": 1.2128064236297986,
-  "shunt_fF": 0.3124084838236756
+  "Ic_nA": 27.141945387988567,
+  "Cj_fF": 0.6462367949521087,
+  "shunt_fF": 0.0
  },
  "source": "results/C_gate.json optimum_validation (2D-calibrated)",
  "parse": {
   "kinds": {
-   "B": 2336,
-   "C": 2872,
-   "L": 2721,
-   "I": 164
+   "B": 5572,
+   "C": 5808,
+   "L": 7037,
+   "I": 12,
+   "R": 8,
+   "K": 1208
   },
-  "nodes": 2877,
+  "nodes": 7341,
   "isolated_nodes": 0
  }
 }

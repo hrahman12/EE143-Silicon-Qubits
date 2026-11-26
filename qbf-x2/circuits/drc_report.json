@@ -1,5 +1,5 @@
 {
- "gds": "/tmp/claude-0/-home-user-EE143-Silicon-Qubits/e02b47a9-8f0f-5e5b-82ed-775df6405697/scratchpad/qbfx2_block.gds",
+ "gds": "/home/user/EE143-Silicon-Qubits/qbf-x2/circuits/qbfx2_layout.gds",
  "rules": {
   "NB_W": 0.4,
   "NB_S": 0.4,
@@ -52,9 +52,40 @@
    "examples": []
   },
   "AL2.W": {
-   "violations": 0,
+   "violations": 304,
    "rule": "AL2 min width 0.1 um",
-   "examples": []
+   "examples": [
+    [
+     1325.057,
+     155.175,
+     1325.143,
+     155.651
+    ],
+    [
+     1325.057,
+     135.175,
+     1325.143,
+     135.651
+    ],
+    [
+     1331.057,
+     155.175,
+     1331.143,
+     155.651
+    ],
+    [
+     1333.057,
+     155.175,
+     1333.143,
+     155.651
+    ],
+    [
+     1335.057,
+     155.175,
+     1335.143,
+     155.651
+    ]
+   ]
   },
   "AL2.S": {
    "violations": 0,
@@ -82,9 +113,40 @@
    "examples": []
   },
   "JJ.W": {
-   "violations": 0,
+   "violations": 304,
    "rule": "junction sides >= 0.1 um",
-   "examples": []
+   "examples": [
+    [
+     1327.057,
+     155.275,
+     1327.143,
+     155.425
+    ],
+    [
+     1329.057,
+     155.275,
+     1329.143,
+     155.425
+    ],
+    [
+     1331.057,
+     155.275,
+     1331.143,
+     155.425
+    ],
+    [
+     1333.057,
+     155.275,
+     1333.143,
+     155.425
+    ],
+    [
+     1335.057,
+     155.275,
+     1335.143,
+     155.425
+    ]
+   ]
   },
   "JJ.S": {
    "violations": 0,
@@ -97,12 +159,12 @@
    "examples": [
     {
      "found": {
-      "rail": 4836,
-      "middle": 160
+      "rail": 5268,
+      "middle": 304
      },
      "expected": {
-      "rail": 4836,
-      "middle": 160
+      "rail": 5268,
+      "middle": 304
      }
     }
    ]
@@ -131,20 +193,20 @@
  "process": "Design-rule check of the QBF-X2 row block (klayout.db Region checks) with a documented rule deck.\n\nAssumed process (all lithography e-beam; a research process, not a foundry PDK):\n  NB    150 nm sputtered Nb on high-resistivity Si, e-beam lithography (ZEP) + SF6/Ar RIE.\n        Ground plane, inner ground strips, low-g coupler strip ends, control/flux/gate CPW lines.\n  GRAL  20 nm granular Al (0.5 nH/sq), e-beam lift-off (PMMA), in-situ Ar mill of the Nb/Al contact areas.\n  AL1   30 nm Al bottom electrode, e-beam lift-off (PMMA/MMA): node pads, junction fingers, bottom plates.\n  DIEL  100 nm PECVD SiNx (eps_r 7), patterned by e-beam lithography + CF4 RIE; crossovers and plate capacitors.\n  AL2   30 nm Al top electrode, second e-beam lift-off: in-situ Ar ion mill (cleans AL1 and Nb contact areas),\n        static oxidation (sets Jc = 2.1 uA/um^2 on every AL1/AL2 overlap that is not under DIEL), evaporation.\n  The coupling capacitors need a dielectric BETWEEN AL1 and AL2, which a single-mask double-angle (shadow)\n  evaporation cannot provide; the junctions are therefore of the two-step overlap (\"cross-type\") kind: an AL1\n  finger crossed by an AL2 finger, area = product of the two drawn widths, insensitive to overlay error.\nConsequence for the rule deck: every AL1 & AL2 overlap outside DIEL is a tunnel junction with the chip-wide Jc, so\nit must either be an intended junction (area within +-5 % of its architecture target) or a contact large enough to\nact as a short (>= 1 um^2: I_c >= 2.1 uA >> 80 nA). The same oxidation also covers the ion-milled Nb under AL2 and\nunder AL1, so Al-on-Nb contacts obey the same >= 1 um^2 rule.",
  "junctions": {
   "found": {
-   "rail": 4836,
-   "middle": 160
+   "rail": 5268,
+   "middle": 304
   },
   "expected": {
-   "rail": 4836,
-   "middle": 160
+   "rail": 5268,
+   "middle": 304
   },
-  "contacts": 704,
+  "contacts": 848,
   "targets_um2": {
    "rail": 0.03834961023335331,
-   "middle": 0.02425612847259597
+   "middle": 0.012924735899042175
   }
  },
- "violations_total": 0,
+ "violations_total": 608,
  "summary": {
   "NB.W": 0,
   "NB.S": 0,
@@ -152,13 +214,13 @@
   "GRAL.S": 0,
   "AL1.W": 0,
   "AL1.S": 0,
-  "AL2.W": 0,
+  "AL2.W": 304,
   "AL2.S": 0,
   "DIEL.W": 0,
   "DIEL.S": 0,
   "GRAL.C": 0,
   "JJ.CLASS": 0,
-  "JJ.W": 0,
+  "JJ.W": 304,
   "JJ.S": 0,
   "JJ.N": 0,
   "CT.A": 0,

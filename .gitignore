@@ -11,3 +11,5 @@ quantum_chip/out/*.blend1
 quantum_chip/out/*-backups/
 quantum_chip/out/fp-info-cache
 __pycache__/
+.claude/worktrees/
+qbf-x2/results/logs/

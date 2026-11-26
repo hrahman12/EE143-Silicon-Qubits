@@ -24,7 +24,7 @@ from hardware.params import RailParams, CouplerParams
 from hardware.architecture import Architecture
 import json
 import os
-from hardware.launcher import design, potential, back_annotate, accelerator_trim
+from hardware.launcher import design, potential, back_annotate, accelerator_trim, trap_frequency
 from _common import CIRCUITS
 from quantum.fluxon import FluxonModel
 from scattering.launch import quantum_launch, classical_launch
@@ -176,12 +176,17 @@ if drawn:
             else (lambda cs: [int(c_) for c_ in cs])
         tr_, ac_ = drawn[row]["trap"], drawn[row]["accelerator"]
         dd = back_annotate(d, conv(tr_["cells"]), tr_["M_pH"], conv(ac_["cells"]), ac_["M_pH"], int(d.x_d) + 30)
+        # in-situ calibration 1: the trap current sets the measured trap frequency to the design value (the trap
+        # curvature is linear in the current); calibration 2 (below): the accelerator amplitude sets the launch speed
+        f_drawn = trap_frequency(dd, model, int(d.x_d) + 30)
+        ttrim_ = (d.f_trap_GHz / f_drawn) ** 2 if f_drawn > 0 else 1.0
+        dd.theta_trap_drawn = dd.theta_trap_drawn * ttrim_
         trim_ = accelerator_trim(dd, model, int(d.x_d) + 30)
         dd.theta_acc_drawn = dd.theta_acc_drawn * trim_                     # in-situ amplitude calibration
         r_ = quantum_launch(dd, model, T_K=0.020, n_states=2, x_ref=x_coupler - X_START_2D, x_far=x_coupler,
                             keep=row in ("A0", "B0"))
-        rows[row] = dict(accelerator_trim=trim_, dv_over_v=r_["dv_over_v"], beta_mean=r_["beta_mean"],
-                         sigma_x_at_far=r_["sigma_x_at_far"])
+        rows[row] = dict(trap_trim=ttrim_, trap_frequency_as_drawn_GHz=f_drawn, accelerator_trim=trim_,
+                         dv_over_v=r_["dv_over_v"], beta_mean=r_["beta_mean"], sigma_x_at_far=r_["sigma_x_at_far"])
         if row in ("A0", "B0"):
             packets[row] = r_["psi_ref"][idx]
         print("post-layout", row, {k_: round(v_, 5) for k_, v_ in rows[row].items()})
@@ -197,7 +202,8 @@ if drawn:
         print("post-layout 2D gate:", {k_: round(v_, 7) for k_, v_ in repp.items() if isinstance(v_, float)})
     dA0 = back_annotate(d, drawn["A0"]["trap"]["cells"], drawn["A0"]["trap"]["M_pH"],
                         drawn["A0"]["accelerator"]["cells"], drawn["A0"]["accelerator"]["M_pH"], 419)
-    cpl = classical_launch(dA0, rail, N=420, x_probe=x_probe, scale_acc=rows["A0"]["accelerator_trim"] * trim)
+    cpl = classical_launch(dA0, rail, N=420, x_probe=x_probe, scale_trap=rows["A0"]["trap_trim"],
+                           scale_acc=rows["A0"]["accelerator_trim"] * trim)
     post["classical_A0"] = dict(beta=cpl["beta"], radiation_GHz=cpl["radiation_GHz"], winding=cpl["winding"])
     s_post = math.sqrt(post["worst_dv_over_v"] ** 2 + dv_classical ** 2)
     b_post = B.budget(model, None, BETA, n_cells=n_dual, velocity_spread_rel=s_post, sigma=q["sigma_x_at_far"],

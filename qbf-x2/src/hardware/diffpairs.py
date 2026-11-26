@@ -151,57 +151,79 @@ def size_lines_diff(arch, sz, t=None, say=print):
         QT = np.array([q["Mt"] for q in quad])
         QA = np.array([q["Ma"] for q in quad])
         PA = np.array([q["Ma"] for q in pair])
-        # uniform scales: accelerator from its strongest reachable coupling, trap from the trap region given the acc
-        acc_only = [c for c in cells_a if c not in trap_set]
-        need_a = max([Ma[c] for c in acc_only] or [0.0])
-        s_a = min(1.0, 0.98 * PA.max() / need_a) if need_a > 0 else 1.0
-        s_t = 1.0
-        for c in cells_t:
-            ok = QA >= s_a * Ma[c] - 0.02 * Ma.max()
-            if not ok.any():
-                s_a = min(s_a, 0.98 * QA.max() / max(Ma[c], 1e-12))
-                ok = QA >= s_a * Ma[c] - 0.02 * Ma.max()
-            if Mt[c] > 0.05 * Mt.max():
-                s_t = min(s_t, 0.98 * QT[ok].max() / Mt[c])
         order = ("trap", "trap_N", "acc", "acc_N")             # from the row outward
+        QD = {t: np.array([q["d"][t] for q in quad]) for t in order}
+        PD = {t: np.array([q["d"][t] for q in pair]) for t in ("acc", "acc_N")}
+        launch_cells = sorted(set(cells_t) | set(cells_a), reverse=m)       # launch end first
+        end_cells = set(launch_cells[:3]) | ({cells_t[-1]} if cells_t else set())   # documented line ends
 
-        def clash(prev, cand):
-            """two lines jog at the same x at a cell boundary: neighbouring lines need PITCH_L between the inner
-            line's deeper position and the outer line's shallower position over both cells"""
-            tags = [t for t in order if t in prev and t in cand]
-            bad = 0.0
+        def clash_vec(prev, D):
+            """neighbouring lines need PITCH_L between the inner line's deeper and the outer line's shallower
+            position over both cells (they jog at the same x)"""
+            tags = [t for t in order if t in prev and t in D]
+            bad = np.zeros(len(next(iter(D.values()))))
             for i, ti in enumerate(tags):
                 for to in tags[i + 1:]:
-                    gap = min(prev[to], cand[to]) - max(prev[ti], cand[ti])
-                    bad += max(0.0, PITCH_L - gap - 1e-9)
+                    gap = np.minimum(prev[to], D[to]) - np.maximum(prev[ti], D[ti])
+                    bad += np.maximum(0.0, PITCH_L - gap - 1e-9)
             return bad
-        dep = {k: {} for k in TAGS}
-        resid = dict(trap=0.0, acc=0.0)
-        prev = None
-        for c in sorted(set(cells_t) | set(cells_a), reverse=m):     # launch end first
-            tt, ta = s_t * Mt[c], s_a * Ma[c]
-            if c in trap_set:
-                cands, err = quad, np.abs(QT - tt) / (s_t * Mt.max()) + np.abs(QA - ta) / (s_a * Ma.max())
-            else:
-                cands, err = pair, np.abs(PA - ta) / (s_a * Ma.max())
-            if prev is not None:
-                err = err + 100.0 * np.array([clash(prev, q["d"]) for q in cands])
-            q = cands[int(np.argmin(err))]
-            if prev is not None and clash(prev, q["d"]) > 0:
-                raise RuntimeError(f"{row} cell {c}: no jog-compatible line positions")
-            for k_, v_ in q["d"].items():
-                dep[k_][str(c)] = v_
-            if c in trap_set:
-                resid["trap"] = max(resid["trap"], abs(q["Mt"] - tt))
-            resid["acc"] = max(resid["acc"], abs(q["Ma"] - ta))
-            prev = dict(q["d"])
+
+        def select(s_t, s_a):
+            dep = {k: {} for k in TAGS}
+            body = dict(trap=0.0, acc=0.0)
+            ends = dict(trap=0.0, acc=0.0)
+            prev = None
+            for c in launch_cells:
+                half = 2.0 if (cells_t and c == cells_t[-1]) else 1.0      # the turn-round cell is half covered
+                tt, ta = s_t * Mt[c] * half, s_a * Ma[c]
+                if c in trap_set:
+                    D, err = QD, np.abs(QT - tt) / (s_t * Mt.max()) + np.abs(QA - ta) / (s_a * Ma.max())
+                else:
+                    D, err = PD, np.abs(PA - ta) / (s_a * Ma.max())
+                if prev is not None:
+                    err = err + 100.0 * clash_vec(prev, D)
+                k = int(np.argmin(err))
+                if prev is not None and clash_vec(prev, {t: D[t][k:k + 1] for t in D})[0] > 0:
+                    return None
+                cur = {t: float(D[t][k]) for t in D}
+                for t, v in cur.items():
+                    dep[t][str(c)] = v
+                bucket = ends if c in end_cells else body
+                if c in trap_set:
+                    bucket["trap"] = max(bucket["trap"], abs(QT[k] / half - tt / half) / (s_t * Mt.max()))
+                    bucket["acc"] = max(bucket["acc"], abs(QA[k] - ta) / (s_a * Ma.max()))
+                else:
+                    bucket["acc"] = max(bucket["acc"], abs(PA[k] - ta) / (s_a * Ma.max()))
+                prev = cur
+            return dep, body, ends
+        # starting scales, then a scan for the smallest worst body error (only M * I sets the flux)
+        acc_only = [c for c in cells_a if c not in trap_set]
+        need_a = max([Ma[c] for c in acc_only] or [0.0])
+        s_a0 = min(1.0, 0.98 * PA.max() / need_a) if need_a > 0 else 1.0
+        s_t0 = 1.0
+        for c in cells_t:
+            ok = QA >= s_a0 * Ma[c] - 0.02 * Ma.max()
+            if Mt[c] > 0.05 * Mt.max() and ok.any():
+                s_t0 = min(s_t0, 0.98 * QT[ok].max() / Mt[c])
+        best = None
+        for s_t in s_t0 * np.linspace(0.92, 1.06, 15):
+            for s_a in s_a0 * np.linspace(0.97, 1.02, 6):
+                r_ = select(s_t, s_a)
+                if r_ is None:
+                    continue
+                score = max(r_[1]["trap"], r_[1]["acc"])
+                if best is None or score < best[0]:
+                    best = (score, s_t, s_a, r_)
+        _, s_t, s_a, (dep, body, ends) = best
+        resid = dict(body_rel=body, ends_rel=ends)
         lines[row] = dep
         scale[row] = dict(trap=s_t, acc=s_a, I_trap_uA=tg["trap_I_uA"] / s_t, I_acc_uA=tg["acc_I_uA"] / s_a)
         info[row] = dict(trap_cells=len(cells_t), acc_cells=len(cells_a), scale_trap=s_t, scale_acc=s_a,
                          drive_I_trap_uA=tg["trap_I_uA"] / s_t, drive_I_acc_uA=tg["acc_I_uA"] / s_a,
-                         max_table_residual_pH=resid)
+                         table_error_rel_to_peak=resid)
         say(f"diff lines {row}: s_trap {s_t:.3f} (I {tg['trap_I_uA'] / s_t:.1f} uA), s_acc {s_a:.3f} "
-            f"(I {tg['acc_I_uA'] / s_a:.1f} uA), worst residual trap {resid['trap']:.4f} acc {resid['acc']:.4f} pH")
+            f"(I {tg['acc_I_uA'] / s_a:.1f} uA), worst body error trap {100 * body['trap']:.1f} % acc "
+            f"{100 * body['acc']:.1f} % of peak (ends {100 * ends['trap']:.1f} / {100 * ends['acc']:.1f} %)")
     sz["lines"] = lines
     sz["line_model"] = LINE_MODEL
     sz["line_scale"] = scale

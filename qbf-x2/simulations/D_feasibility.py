@@ -172,6 +172,9 @@ for launch, spread in (("thermal source", None), ("launcher", s_launch)):
                           velocity_spread_rel=spread, sigma=ql["sigma_x_at_far"] if spread else 10.0)
             scan_sigma.append(dict(launch=launch, sigma=sig, n_cells=ncell, total=b_["total"], parts=b_["parts"]))
 bud_l = Lr["budget_launcher"]
+post = Lr.get("post_layout", {})
+post_ok = post.get("status") == "done" and "budget" in post
+bud_check = post["budget"] if post_ok else bud_l                  # the as-drawn budget when the layout has it
 res["constraints"] = dict(flight_time_ns=flight_ns, cells_per_row=arch.n_cells, dual_rail_cells=n_dual,
                           speed_cells_per_ns=v_ns, budget_thermal_source_C=bud, budget_launcher=bud_l,
                           budget_thermal_source_same_geometry=Lr["budget_thermal_source"],
@@ -199,9 +202,14 @@ checks = [
      min(e["gate_retention"] for e in energy if e["alpha"] == 0) > 0.999,
      ", ".join(f"beta {e['beta']:.2f}: gate {e['gate_retention']:.5f} (whole flight incl. launch transient {e['retention_of_KE_absolute']:.5f})"
                for e in energy if e["alpha"] == 0)),
-    ("error budget at the optimum < 1 % with 2 % junction disorder, 20 mK launch, 10 ps jitter (realistic assumptions)",
-     bud_l["total"] < 0.01,
-     f"total {bud_l['total']:.4f} with the modelled launcher (rms dv/v {s_launch:.4f}, {n_dual} dual-rail cells): "
+    ("error budget at the optimum < 1 % with 2 % junction disorder, 20 mK launch, 10 ps jitter (realistic assumptions)"
+     + (", post-layout (as-drawn launcher lines)" if post_ok else ""),
+     bud_check["total"] < 0.01,
+     (f"post-layout total {bud_check['total']:.4f} (as-drawn differential launcher lines, worst row dv/v "
+      f"{post['worst_dv_over_v']:.4f}, 2D gate with as-drawn packets F_CZ "
+      f"{post.get('gate_with_as_drawn_packets', {}).get('report', {}).get('process_fidelity_CZ', float('nan')):.5f}); "
+      if post_ok else "")
+     + f"design total {bud_l['total']:.4f} with the modelled launcher (rms dv/v {s_launch:.4f}, {n_dual} dual-rail cells): "
      + ", ".join(f"{k} {v:.1e}" for k, v in bud_l["parts"].items())
      + f"; a thermal-source launch (dv/v {ql['thermal_source_spread_20mK']:.4f}) would give {Lr['budget_thermal_source']['total']:.4f}"),
     ("coherent single-fluxon launcher derived (timing <= 10 ps, thermal-limited speed spread)",

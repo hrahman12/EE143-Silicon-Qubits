@@ -2230,7 +2230,7 @@ def launcher_check(B, chk, say, stride=2):
     if B.sz.get("line_model") != "differential":
         return _launcher_check_se(B, chk, say, stride)
     from hardware.diffpairs import as_drawn
-    ad = as_drawn(B.arch, B.sz, stride=stride, say=say)
+    ad = as_drawn(B.arch, B.sz, stride=1, say=say)      # every cell: D_launcher L8 back-annotates the full profile
     out = {}
     for row, d in ad.items():
         dv = d["max_dev_from_target_pH"]

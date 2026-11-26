@@ -1022,8 +1022,23 @@ class Block:
                     yc, legs, _, xstart = l
                     offs = [y_ - yc for (y_, *_r) in legs]
                     going_up = yports[i] >= yc
-                    for (y_, name, kind, pair, pol), o in zip(legs, offs):
-                        xt = turns[i] + sgn * ((max(offs) - o) if going_up else (o - min(offs)))
+                    tx = [turns[i] + sgn * ((max(offs) - o) if going_up else (o - min(offs))) for o in offs]
+                    # legs closer than 1.9 um share one slot (otherwise a < 0.4 um NB sliver stays between them):
+                    # fill the gap of every such neighbour pair along both bends of the bus
+                    for k_ in range(len(legs) - 1):
+                        (yi, *_a), (yj, *_b) = legs[k_], legs[k_ + 1]          # yi above yj
+                        if yi - yj >= 1.9 - 1e-9:
+                            continue
+                        ti, tj = tx[k_], tx[k_ + 1]
+                        ypi, ypj = yports[i] + offs[k_], yports[i] + offs[k_ + 1]
+                        first, second = (ti, tj) if going_up else (tj, ti)
+                        for (xa_, xb_, ya_, yb_) in ((xstart, first, yj, yi),
+                                                     (first, second, yj if going_up else ypj, ypi if going_up else yi),
+                                                     (second, x_edge, ypj, ypi)):
+                            x1_, x2_ = sorted((xa_, xb_))
+                            y1_, y2_ = sorted((ya_, yb_))
+                            self.geo.keepout.append((x1_, y1_, x2_, y2_))
+                    for (y_, name, kind, pair, pol), o, xt in zip(legs, offs, tx):
                         yp = yports[i] + o
                         pts = [(xstart, y_), (xt, y_), (xt, yp), (x_edge, yp)]
                         self._cpw(pts, CPW_W, CPW_G, f"{'TR' if kind == 'trap' else 'AC'}_{name.split('_')[1]}", "fanout")
