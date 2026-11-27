@@ -1,0 +1,10 @@
+name = "QBFLean"
+version = "0.1.0"
+defaultTargets = ["QBFLean", "qbfcheck"]
+
+[[lean_lib]]
+name = "QBFLean"
+
+[[lean_exe]]
+name = "qbfcheck"
+root = "Main"

@@ -14,3 +14,4 @@ __pycache__/
 .claude/worktrees/
 qbf-x2/results/logs/
 qbf-x2/dist/
+qbf-x2/lean/.lake/
