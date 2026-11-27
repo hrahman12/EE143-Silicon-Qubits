@@ -13,3 +13,4 @@ quantum_chip/out/fp-info-cache
 __pycache__/
 .claude/worktrees/
 qbf-x2/results/logs/
+qbf-x2/dist/

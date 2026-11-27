@@ -35,7 +35,9 @@ result files.
   1.9 %, and the check **failed**. The launcher is now designed and simulated (`results/D_launcher.json`). Its speed
   spread at 20 mK is 1.02 %, set by the trap ground state and the accelerator's phase-space shear rather than by
   k_B T. The check keeps its assumptions (2 % disorder, 20 mK, 10 ps jitter) and now uses the computed spread, which
-  gives 0.26 %. The thermal-source value is still computed and reported: 1.93 % on the same geometry.
+  gives 0.32 % on the current 374-cell rails (0.26 % on the earlier 302-cell rails, before the beam-splitter
+  redesign lengthened them). The thermal-source value is still computed and reported: 2.36 % on the same geometry
+  (1.93 % on the 302-cell rails).
 
 ## 2. Parameter status
 
@@ -50,28 +52,29 @@ result files.
 | Launcher | flux-bias trap (3 GHz, 21.7 GHz deep) + flux-gradient accelerator (1.11 GHz/cell over 86 cells) + 120-cell plateau; control lines coupled by mutual inductance only (≤ 0.12 pH per cell at 50/200 µA); rail-end load loop | **validated by simulation**: quantum launch rms dv/v = 1.02 % at 20 mK; full circuit gives one fluxon at β = 0.4500 after a 1.5 % amplitude trim; relative timing jitter 3.2 ps with an assumed 2 ps trigger. Not measured |
 | Detector | catcher loop (20 nH) + dispersive λ/4 readout, as in QFX-1 | proposed |
 | Junction disorder | 2 % assumed. With the launcher the gate stays below 1 % up to 5.7 % disorder; with a thermal-source launch, only up to 1.4 % | fabrication input |
-| Damping α | 2×10⁻⁶ assumed (quasiparticle- and dielectric-limited at 20 mK) | unknown, and now the largest error term (0.15 %). Each emitted plasma quantum is counted as which-rail information (upper bound). The gate stays below 1 % for α ≤ 1.2×10⁻⁵ |
+| Damping α | 2×10⁻⁶ assumed (quasiparticle- and dielectric-limited at 20 mK) | unknown, and the largest term of the as-designed budget (0.19 %). Each emitted plasma quantum is counted as which-rail information (upper bound). The gate stays below 1 % for α ≤ 1.2×10⁻⁵ |
 
 ## 3. Error budget
 
-Assumptions: 302 dual-rail cells per rail (beam splitter to beam splitter), 2 % disorder in E_J/E_L/C, 20 mK,
-α = 2×10⁻⁶, 10 ps timing jitter, 100-cell coupler plateau with 40-cell tapers, β = 0.45. From
-`results/D_launcher.json`.
+Assumptions: 374 dual-rail cells per rail (beam splitter to beam splitter, after the beam-splitter redesign), 2 %
+disorder in E_J/E_L/C, 20 mK, α = 2×10⁻⁶, 10 ps timing jitter, 100-cell coupler plateau with 40-cell tapers,
+β = 0.45. From `results/D_launcher.json` (`budget_launcher`, `post_layout.budget`, `budget_thermal_source`); plotted in
+`figures/fig12_error_budget.png`.
 
-| Error source | Launcher (modelled) | Thermal-source launch (old assumption) |
-|---|---|---|
-| Disorder dephasing | 1.0×10⁻³ | 1.8×10⁻² |
-| Damping (upper bound) | 1.5×10⁻³ | 1.5×10⁻³ |
-| Speed spread at the sweet spot (gate) | 4×10⁻⁹ | 1.3×10⁻⁶ |
-| Timing (10 ps jitter; meeting-point spread of the launched packets) | < 10⁻⁹ | < 10⁻⁹ |
-| Exact 2D gate with the launched packets on the finite coupler | 1.6×10⁻⁷ | not run |
-| **Total** | **0.26 %** | **1.93 %** |
+| Error source | Launcher, as designed | Launcher, as drawn (post-layout) | Thermal-source launch |
+|---|---|---|---|
+| Disorder dephasing | 1.3×10⁻³ | 5.4×10⁻³ | 2.2×10⁻² |
+| Damping (upper bound) | 1.9×10⁻³ | 1.9×10⁻³ | 1.9×10⁻³ |
+| Speed spread at the sweet spot (gate) | 4×10⁻⁹ | 7×10⁻⁸ | 1.3×10⁻⁶ |
+| Timing (10 ps jitter; meeting-point spread of the launched packets) | < 10⁻⁹ | < 10⁻⁹ | < 10⁻⁹ |
+| Exact 2D gate with the launched packets on the finite coupler | 1.1×10⁻⁷ | 1.7×10⁻³ | not run |
+| **Total** | **0.32 %** | **0.90 %** | **2.36 %** |
 
 - Disorder dephasing arises because each rail of a qubit picks up a different random phase. The static part is a
   calibratable single-qubit phase. Because it scales ∝ 1/v, the launch speed spread turns it into dephasing ∝
   (dv/v)², which is why the launcher matters.
 - Launch speed spread: 1.02 % (quantum, 20 mK) combined in quadrature with 0.04 % (classical, from 10⁻³ amplitude
-  noise), against 4.29 % for a thermal source. The launcher's spread barely depends on temperature: 1.39 % at
+  noise), against 4.29 % for a thermal source. As drawn (post-layout): 1.1 % on A1/B1 and 2.1 % on A0/B0. The launcher's spread barely depends on temperature: 1.39 % at
   100 mK, where a thermal source gives 9.6 %.
 - Scans of disorder and length: `results/D_feasibility.json` (`constraints`), for both launch models.
 ## 4. Where the effective model breaks down
@@ -91,7 +94,9 @@ Assumptions: 302 dual-rail cells per rail (beam splitter to beam splitter), 2 % 
   50 fF/µm²). The higher Jc than QFX-1's leaves room for explicit shunts.
   - Rail junctions: about 0.038 µm² (1.92 fF), plus a 0.50 fF node shunt. The shunt is reduced to 0.29 fF on the
     coupler plateaus to compensate C_c.
-  - Middle-rail junctions: about 0.024 µm² (1.21 fF), plus a 0.31 fF island shunt (E_C,M = 12.7 GHz).
+  - Middle-rail junctions, after the beam-splitter redesign: about 0.0129 µm² (E_J,M = 13.5 GHz, 0.65 fF). The target
+    C_M = 2.87 fF (E_C,M = 6.74 GHz) needs an island shunt of about 2.2 fF, which the current layout does not draw yet
+    (extracted C_M 0.95 fF, `circuits/extraction.json`). Before the redesign: 0.024 µm² plus a 0.31 fF shunt.
   - The shunts are to come from the geometric capacitance of the node pads, lines and islands plus a trim. They are
     not drawn in the layout; EM extraction sets them.
 - **Inductors and couplers:**

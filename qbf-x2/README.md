@@ -56,7 +56,7 @@ assumed to be thermal.
   - Full-circuit launch: one fluxon at β = 0.4500, after a 1.5 % amplitude trim.
   - Relative timing jitter: 3.2 ps, with an assumed 2 ps trigger.
 - **Error budget.** At the same assumptions (2 % disorder, 20 mK, 10 ps) the budget is 0.32 %; a thermal-source launch
-  on the same geometry would give 2.37 %. The gate now tolerates up to 5.7 % junction disorder. Damping is the largest
+  on the same geometry would give 2.36 %. The gate now tolerates up to 5.7 % junction disorder. Damping is the largest
   term and needs α ≤ 1.2×10⁻⁵.
 - **Design errors found and fixed by the hardware checks.**
   - The rows were not symmetric about the coupler: B met the coupler before its own beam splitter.
@@ -151,14 +151,14 @@ ground.
 | `fig11_launcher.png` | Coherent launcher: potentials, launch speed distribution vs a thermal source, temperature dependence, full-circuit launch, 2D gate with launched packets, error budget |
 | `fig12_error_budget.png` | CZ gate error budget by source: thermal source (2.36 %) vs coherent launcher as designed (0.32 %) and as drawn, post-layout (0.90 %); `simulations/fig12_error_budget.py` |
 | `companion1-5_*.png` | The five companion devices |
-| `circuits/` | `qbfx2_netlist.cir` (predates the launcher redesign: 362 cells per rail, the drawn block has 878), `schematic_unit_cells.png/.svg`, `qbfx2_layout.gds`, previews, `views/` (layer views and Altium-style views) |
+| `circuits/` | `qbfx2_netlist.cir` (regenerated for rev B: the drawn 878 cells per rail, floating P/N control loops), `schematic_unit_cells.png/.svg`, `qbfx2_layout.gds`, previews, `views/` (layer views and Altium-style views) |
 
 ## Run it
 
 ```bash
 pip install -r requirements.txt      # numpy, scipy, matplotlib, qutip 5, scqubits, schemdraw, gdstk, klayout, pytest
 ./run_all.sh                          # all simulations, figures, circuits, tests and the paper (~45 min on 4 cores)
-python -m pytest                      # 18 tests: sine-Gordon benchmarks, unitarity, eikonal limit, sweet spot, metrics, netlist
+python -m pytest                      # 41 tests: physics, gate, launcher, netlist, layout, diff pairs, carrier (see START_HERE.md)
 ```
 
 Single stages: `cd simulations && python A_classical.py` (or `B_quantum.py`, `C_gate.py`, `D_launcher.py`,
@@ -187,9 +187,12 @@ results/ figures/ circuits/ paper/ tests/
   - preparing the launched fluxon's motional state;
   - quasiparticles and 1/f noise beyond a damping estimate;
   - offset-charge drift of the beam-splitter islands;
-  - EM extraction of k, c and E_S for the drawn geometry.
-- **Layout.** Preliminary, not fabrication-ready: no DRC, the crossover process for the coupling capacitors is
-  unverified, and the node and island shunt capacitors are not drawn (EM extraction is to set them).
+  - full-wave EM of the drawn geometry: k, c, L, C_M and E_S come from a 2D cross-section extraction
+    (`src/hardware/extract.py`).
+- **Layout.** Preliminary, not fabrication-ready. DRC finds 608 known violations: the redesigned beam-splitter
+  junction is drawn 86 nm wide, below the 100 nm rule (fix: a 114 nm square). The crossover process for the
+  coupling capacitors is unverified, and the node and island shunt capacitors are not drawn (the extraction sets
+  them).
 
 See [FEASIBILITY.md](FEASIBILITY.md) for the parameter-status table, cryogenic test requirements and a staged
 measurement protocol, and `paper/main.pdf` for the full write-up. The paper describes the state before the launcher and the beam-splitter redesign; for milestone D it still reports the 1.9 % budget and NOT MET with three failing checks. The current milestone-D status is the one above.

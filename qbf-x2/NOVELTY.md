@@ -66,10 +66,12 @@ launcher itself, so no novelty is claimed for it.
 ## 3. What this project does *not* claim
 
 - Not that fluxon qubits, fluxon readout, fluxon-mediated gates or flying-qubit collision gates are new; see section 1.
-- Not that the chip has been built or would work as drawn. The layout is preliminary, and milestone D is **not met**:
-  - a coherent single-fluxon launcher is unresolved;
-  - junction disorder must be at or below about 1 % for a gate error under 1 %;
-  - the coupler and beam-splitter values still need EM extraction.
+- Not that the chip has been built or would work as drawn. The layout is preliminary, and milestone D is **not met**
+  (2 of 9 checks open):
+  - the layout must be re-verified after the beam-splitter redesign (608 known DRC violations on the middle-rail
+    junction);
+  - the 10 mm die floorplan is unfinished;
+  - damping (α ≤ 1.2×10⁻⁵ needed) and coherent vortex hopping in the beam splitter are not validated.
 - Not a thermodynamic advantage from unitary evolution (see `results/companion4_reversible_cell.json`).
 
 ## 4. Follow-up before any novelty or patent claim
