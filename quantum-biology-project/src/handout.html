@@ -1,0 +1,109 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Quantum Biology Term Project</title>
+<style>
+@page { size: Letter; margin: 0.7in 0.9in 0.75in 0.9in; }
+body { font-family: "Latin Modern Roman","CMU Serif","Computer Modern","Times New Roman",serif; font-size: 10.3pt; line-height: 1.32; color:#000; }
+.hdr { display:flex; justify-content:space-between; font-weight:bold; border-bottom:0.8px solid #000; padding-bottom:4px; margin-bottom:18px; }
+h1 { text-align:center; font-size:15pt; margin:6px 0 2px; }
+.sub { text-align:center; margin-bottom:16px; }
+h2 { font-size:11.2pt; margin:10px 0 3px; }
+h1.pt { margin-top:2px; margin-bottom:8px; }
+.nt { position:relative; display:inline-block; }
+.nt::after { content:"~"; position:absolute; left:0.08em; top:-0.62em; font-style:normal; font-size:0.9em; }
+p { margin:0 0 6px; text-align:justify; }
+.page { page-break-after: always; position:relative; }
+.page:last-child { page-break-after: auto; }
+.fig { text-align:center; margin:12px 0 6px; }
+.fig img { width:100%; }
+.cap { font-size:9.4pt; text-align:justify; margin-bottom:12px; }
+.pn { text-align:center; margin-top:8px; }
+pre { font-family:"Latin Modern Mono","Courier New",monospace; font-size:9.6pt; line-height:1.35; margin:8px 0 12px; }
+table { border-collapse:collapse; margin:8px auto 12px; font-size:10pt; width:82%; }
+th, td { text-align:left; padding:3px 10px; }
+th { border-top:1.3px solid #000; border-bottom:0.7px solid #000; font-weight:normal; }
+tr:last-child td { border-bottom:1.3px solid #000; }
+td.v { white-space:nowrap; }
+.eq { text-align:center; margin:6px 0 8px; }
+code { font-family:"Latin Modern Mono","Courier New",monospace; font-size:9.6pt; }
+i.m { font-style:italic; }
+ol.refs { padding-left:22px; margin:4px 0; font-size:10pt; }
+ol.refs li { margin-bottom:3px; }
+</style></head><body>
+
+<div class="page">
+<div class="hdr"><span>EE118/218A</span><span>Fall 2026</span></div>
+<h1>Term Project: Quantum Biology</h1>
+<div class="sub">Individual Project · Python</div>
+
+<p>You will model how light energy moves through the Fenna–Matthews–Olson (FMO) pigment–protein complex of green sulfur bacteria, using the electronic Hamiltonian of Adolphs and Renger [1]. You will find its exciton states, simulate coherent and noisy transport to the reaction centre, and compare a quantum master equation with a classical hopping model.</p>
+
+<div class="fig"><img src="../figure1.png"></div>
+<p class="cap"><b>Figure 1.</b> Schematic of the seven bacteriochlorophyll (BChl) sites of one FMO monomer; line width shows coupling strength, and the layout is not the crystal geometry. Energy enters near BChl 1 and 6 from the baseplate and leaves from BChl 3 to the reaction centre (RC). (a) Classical picture: the excitation sits on one site and hops with incoherent rates. (b) Isolated quantum picture: the excitation spreads as a wave over delocalized exciton states, and site populations beat. (c) Open quantum picture: fluctuations of the protein dephase the wave. Some dephasing helps the excitation reach the trap; a lot of it freezes the excitation in place.</p>
+
+<h2>Individual work and AI</h2>
+<p>We encourage you to discuss the physics with classmates and to use AI tools as you work. Each student must implement the simulations in Python and write the report independently. A wrong unit conversion or a dephasing rate off by a factor of two can still produce a plausible curve. Check your results against physical principles: the trace of the density matrix stays 1, populations stay between 0 and 1, and beat frequencies match exciton energy gaps. Be ready to explain them in your individual discussion. The tasks and submission dates are on page 2.</p>
+</div>
+
+<div class="page">
+<div class="hdr"><span>EE118/218A</span><span>Fall 2026</span></div>
+<h1 class="pt">Project Tasks</h1>
+
+<h2>1. Find the exciton states</h2>
+<p>Load the 7&nbsp;×&nbsp;7 site Hamiltonian and diagonalize it. Report the exciton energies and, for each eigenstate <i class="m">k</i> with site amplitudes <i class="m">c<sub>jk</sub></i>, the participation number <i class="m">N<sub>k</sub></i>&nbsp;=&nbsp;1&nbsp;/&nbsp;Σ<sub><i class="m">j</i></sub>&nbsp;|<i class="m">c<sub>jk</sub></i>|<sup>4</sup>. Which pigments carry the lowest-energy exciton? How does that relate to where the reaction centre is attached?</p>
+
+<h2>2. Watch coherent transport</h2>
+<p>Solve the time-dependent Schrödinger equation with no environment, starting with the excitation on BChl 1 and then on BChl 6, from 0 to 1&nbsp;ps. Plot the site populations. Fourier transform the population of the starting site. Which frequencies appear, and which pairs of exciton energies from Part 1 explain them? Does the excitation ever settle on BChl 3? Why or why not?</p>
+
+<h2>3. Add the environment: quantum versus classical transport</h2>
+<p>Use the Lindblad master equation on page 3, with pure dephasing at rate <i class="m">γ</i> on every site, a trap that drains BChl 3 into a sink at rate <i class="m">κ</i>, and a loss to the ground state at rate <i class="m">Γ</i> from every site. Compute the transfer efficiency <i class="m">η</i>, the final population of the sink, as <i class="m">γ</i> sweeps from 0.1 to 10<sup>5</sup>&nbsp;cm<sup>−1</sup> on a log scale, for both starting sites. Then build a classical rate model with Haken–Strobl hopping rates</p>
+<div class="eq"><i class="m">k</i><sub><i class="m">i</i>←<i class="m">j</i></sub> = 2|<i class="m">J<sub>ij</sub></i>|<sup>2</sup> <i class="m">γ</i> / [<i class="m">γ</i><sup>2</sup> + (<i class="m">ε<sub>i</sub></i> − <i class="m">ε<sub>j</sub></i>)<sup>2</sup>]</div>
+<p>(all quantities as angular frequencies) and the same trap and loss. Why is <i class="m">η</i> low at both very small and very large <i class="m">γ</i>? Choose a dephasing regime where the quantum and classical models disagree. What accounts for the difference?</p>
+
+<h2>4. Replace the noise with a physical bath</h2>
+<p><i>Required for EE218A. Bonus for EE118.</i> White-noise dephasing ignores temperature and the memory of the protein. Give each site its own independent harmonic bath with a Drude–Lorentz spectral density <i class="m">J</i>(<i class="m">ω</i>)&nbsp;=&nbsp;2<i class="m">λγ<sub>c</sub>ω</i>&nbsp;/&nbsp;(<i class="m">ω</i><sup>2</sup>&nbsp;+&nbsp;<i class="m">γ<sub>c</sub></i><sup>2</sup>) and propagate the hierarchical equations of motion (HEOM) in the high-temperature approximation [3]. Start on BChl 1, leave out the trap and loss, and simulate 0–1&nbsp;ps at 77&nbsp;K and 300&nbsp;K. Increase the hierarchy depth until the populations stop changing.</p>
+<p>How long do the population beats last at each temperature? Compare them with Part 2 and with the beat lifetimes reported in experiments [4, 5].</p>
+<p><i>Hint.</i> Compare ħ<i class="m">γ<sub>c</sub></i> with <i class="m">k</i><sub>B</sub><i class="m">T</i> at each temperature. Where is the high-temperature approximation safe, and what would you add where it is not?</p>
+
+<h2>Discussion and submission</h2>
+<p>Email both submissions to the instructor and the GSI. Submit each report as a <b>PDF of at most three pages</b>.</p>
+<p><b>Monday, November 30, before 9:30 a.m.</b> Email your draft report with your computed figures. The draft is required for the discussion and is ungraded. Bring your laptop to class with your Python code ready to run. You will discuss your draft individually with the instructor for a few minutes. Your explanation of the method and interpretation of the results during that discussion count toward your project grade.</p>
+<p><b>Wednesday, December 2, before 9:30 a.m.</b> Email your final report as a PDF. Attach a separate ZIP containing your runnable Python code and its list of required packages (e.g., <code>requirements.txt</code>). In the report, explain how to install the packages and run your code on a new Hamiltonian, including how to specify the input file, the trap site and the starting site. Course staff may run your submitted code on a different light-harvesting complex and use the results in grading.</p>
+</div>
+
+<div class="page">
+<div class="hdr"><span>EE118/218A</span><span>Fall 2026</span></div>
+<h1 class="pt">Model Files and Parameters</h1>
+
+<h2>Working with the files</h2>
+<p>Unzip the project archive. The Hamiltonian is a comma-separated 7&nbsp;×&nbsp;7 array in cm<sup>−1</sup>, in the site basis (BChl 1–7 in order). Lines starting with <code>#</code> are comments. Off-diagonal entries are the couplings <i class="m">J<sub>ij</sub></i>; diagonal entries are the site energies <i class="m">ε<sub>j</sub></i> with a common offset removed. Your code should accept any <i class="m">N</i>&nbsp;×&nbsp;<i class="m">N</i> file in this format.</p>
+<pre>data/
+  fmo_hamiltonian_cm-1.csv    7 × 7 site Hamiltonian, cm<sup>−1</sup>, offset removed</pre>
+
+<h2>Model parameters</h2>
+<table>
+<tr><th>Quantity</th><th>Value</th></tr>
+<tr><td>Diagonal offset removed from the site energies</td><td class="v">12 210 cm<sup>−1</sup></td></tr>
+<tr><td>Trap site and trapping rate, <i class="m">κ</i></td><td class="v">BChl 3, 1 ps<sup>−1</sup></td></tr>
+<tr><td>Loss rate to the ground state, <i class="m">Γ</i> (every site)</td><td class="v">1 ns<sup>−1</sup></td></tr>
+<tr><td>Pure-dephasing rate, <i class="m">γ</i> (Part 3)</td><td class="v">0.1–10<sup>5</sup> cm<sup>−1</sup></td></tr>
+<tr><td>Reorganization energy, <i class="m">λ</i> (Part 4)</td><td class="v">35 cm<sup>−1</sup></td></tr>
+<tr><td>Bath correlation time, <i class="m">γ<sub>c</sub></i><sup>−1</sup> (Part 4)</td><td class="v">50 fs</td></tr>
+<tr><td>Temperatures (Part 4)</td><td class="v">77 K, 300 K</td></tr>
+</table>
+
+<h2>Units and conventions</h2>
+<p>Energies and the rate <i class="m">γ</i> are given in wavenumbers. Convert to angular frequency with <i class="m">ω</i>&nbsp;=&nbsp;2π<i class="m">c</i><i class="m nt">ν</i>, so 1&nbsp;cm<sup>−1</sup> corresponds to 1.884&nbsp;×&nbsp;10<sup>−4</sup>&nbsp;rad&nbsp;fs<sup>−1</sup>. A beat at Δ<i class="m nt">ν</i> has period 1/(<i class="m">c</i>Δ<i class="m nt">ν</i>); 100&nbsp;cm<sup>−1</sup> gives 333.6&nbsp;fs.</p>
+<p>For Part 3, use nine levels: sites |1⟩…|7⟩, a sink |s⟩ and a ground state |g⟩. Evolve</p>
+<div class="eq">d<i class="m">ρ</i>/d<i class="m">t</i> = −(<i class="m">i</i>/ħ)[<i class="m">H</i>, <i class="m">ρ</i>] + Σ<sub><i class="m">k</i></sub> ( <i class="m">L<sub>k</sub> ρ L<sub>k</sub></i><sup>†</sup> − ½{<i class="m">L<sub>k</sub></i><sup>†</sup><i class="m">L<sub>k</sub></i>, <i class="m">ρ</i>} )</div>
+<p>with dephasing operators <i class="m">L</i>&nbsp;=&nbsp;√<i class="m">γ</i>&nbsp;|<i class="m">j</i>⟩⟨<i class="m">j</i>|, so a site coherence <i class="m">ρ<sub>ij</sub></i> decays at rate <i class="m">γ</i>; a trap operator √<i class="m">κ</i>&nbsp;|s⟩⟨3|; and loss operators √<i class="m">Γ</i>&nbsp;|g⟩⟨<i class="m">j</i>|. At <i class="m">t</i>&nbsp;=&nbsp;0 the whole excitation sits on the starting site, <i class="m">ρ</i>(0)&nbsp;=&nbsp;|<i class="m">j</i>⟩⟨<i class="m">j</i>|. Run each simulation until less than 10<sup>−3</sup> of the population remains on the sites, and report the sink population at that time as <i class="m">η</i>.</p>
+
+<h2>Data sources</h2>
+<ol class="refs">
+<li>J. Adolphs and T. Renger. How proteins trigger excitation energy transfer in the FMO complex of green sulfur bacteria. <i>Biophysical Journal</i> <b>91</b>, 2778–2797 (2006).</li>
+<li>M. Mohseni, P. Rebentrost, S. Lloyd and A. Aspuru-Guzik. Environment-assisted quantum walks in photosynthetic energy transfer. <i>J. Chem. Phys.</i> <b>129</b>, 174106 (2008).</li>
+<li>A. Ishizaki and G. R. Fleming. Theoretical examination of quantum coherence in a photosynthetic system at physiological temperature. <i>PNAS</i> <b>106</b>, 17255–17260 (2009).</li>
+<li>G. S. Engel et al. Evidence for wavelike energy transfer through quantum coherence in photosynthetic systems. <i>Nature</i> <b>446</b>, 782–786 (2007).</li>
+<li>H.-G. Duan et al. Nature does not rely on long-lived electronic quantum coherence for photosynthetic energy transfer. <i>PNAS</i> <b>114</b>, 8493–8498 (2017).</li>
+</ol>
+</div>
+</body></html>
