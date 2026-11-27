@@ -8,3 +8,4 @@ schemdraw==0.23
 gdstk==1.0.2
 klayout==0.30.14
 pytest==9.1.1
+shapely==2.2.0     # GDS loop checks in D_diffpairs.py and tests/test_diffpairs.py; carrier scripts; Altium-style and nanoscale views

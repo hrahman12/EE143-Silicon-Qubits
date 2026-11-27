@@ -135,6 +135,17 @@ Two files from the repository's earlier QFX-1 project are read by QBF-X2. In a b
 `../quantum_chip/out/qfx_sim.json`, used by companion 1, and `../quantum_chip/src/rf_calc.py`, the CPW impedance
 formula used by the carrier scripts. The rest of that project, about 290 MB of CAD and renders, is not needed here.
 
+`requirements.txt` covers the simulations and the core tests. Three optional tools are not on PyPI:
+- KiCad 7 (`kicad-cli` and the `pcbnew` module) with `cadquery-ocp`, for the carrier scripts and
+  `tests/test_carrier.py`;
+- the altium-designer-mcp binary (set `ALTIUM_MCP_BIN`), for `tests/test_altium_libs.py`;
+- Blender with `bpy`, for the nanoscale 3D render.
+
+The two tests skip when their tools are missing, so a plain Python environment reports 2 skipped.
+
+`simulations/D_diffpairs.py` reads the rev-A sizing from git history for its before/after comparison. Outside a git
+checkout it records that comparison as unavailable; the committed `results/D_diffpairs.json` still holds it.
+
 Note that `tests/test_altium_libs.py` rewrites `pcb/altium/QBFX2_Carrier.PcbLib` and `.SchLib` in place, leaving
 timestamped `.bak` copies; the libraries' content is unchanged.
 

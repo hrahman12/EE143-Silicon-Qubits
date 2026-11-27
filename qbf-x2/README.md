@@ -156,7 +156,7 @@ ground.
 ## Run it
 
 ```bash
-pip install -r requirements.txt      # numpy, scipy, matplotlib, qutip 5, scqubits, schemdraw, gdstk, klayout, pytest
+pip install -r requirements.txt      # numpy, scipy, matplotlib, qutip 5, scqubits, schemdraw, gdstk, klayout, shapely, pytest
 ./run_all.sh                          # all simulations, figures, circuits, tests and the paper (~45 min on 4 cores)
 python -m pytest                      # 41 tests: physics, gate, launcher, netlist, layout, diff pairs, carrier (see START_HERE.md)
 ```
